@@ -4,6 +4,10 @@ TextureImporter:
   fileIDToRecycleName:
     21300000: stealth_ship_1
     21300002: fireball_1
+    21300004: boss_onyx_1
+    21300006: boss_onyx_2
+    21300008: boss_onyx_3
+    21300010: boss_onyx_4
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -89,14 +93,20 @@ TextureImporter:
       name: stealth_ship_1
       rect:
         serializedVersion: 2
-        x: 67
-        y: 384
+        x: 325
+        y: 442
         width: 57
         height: 64
       alignment: 9
       pivot: {x: 0.48947197, y: 0.4343648}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      outline:
+      - - {x: -3.5, y: 32}
+        - {x: -28.5, y: -20}
+        - {x: -28.5, y: -31}
+        - {x: 28.5, y: -31}
+        - {x: 28.5, y: -24}
+        - {x: 2.5, y: 32}
       physicsShape:
       - - {x: -8.348663, y: 5.4334717}
         - {x: -25.477295, y: -25.725403}
@@ -115,8 +125,8 @@ TextureImporter:
       name: fireball_1
       rect:
         serializedVersion: 2
-        x: 144
-        y: 387
+        x: 382
+        y: 449
         width: 32
         height: 53
       alignment: 9
@@ -127,6 +137,115 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 6b3a83f9e5f78574ba79aa240635eff8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_onyx_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 383
+        width: 159
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -78.5, y: 48.5}
+        - {x: -46.5, y: -64.5}
+        - {x: 20.5, y: -64.5}
+        - {x: 76.5, y: 48.5}
+        - {x: 76.5, y: 62.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d3c7ace1171f27408ed1758ae5e1883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_onyx_2
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 382
+        width: 161
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -80.5, y: 61.5}
+        - {x: -80.5, y: 29.5}
+        - {x: -51.5, y: -64.5}
+        - {x: 24.5, y: -64.5}
+        - {x: 80.5, y: 42.5}
+        - {x: 80.5, y: 61.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c381f4c535211d43ad9c92a048e6c83
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_onyx_3
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 265
+        width: 161
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 16.5, y: 52.5}
+        - {x: -76.5, y: 49.5}
+        - {x: -76.5, y: -8.5}
+        - {x: -48.5, y: -63.5}
+        - {x: 12.5, y: -63.5}
+        - {x: 62.5, y: 39.5}
+        - {x: 75.5, y: 49.5}
+        - {x: 78.5, y: 64.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4b4c3564d115d848ac473df9b4892c5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_onyx_4
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 261
+        width: 161
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 80.5, y: 47.5}
+        - {x: 80.5, y: 64.5}
+        - {x: 53.5, y: 64.5}
+        - {x: 30.5, y: 55.5}
+        - {x: -42.5, y: 53.5}
+        - {x: -72.5, y: 43.5}
+        - {x: -63.5, y: -6.5}
+        - {x: -39.5, y: -64.5}
+        - {x: 3.5, y: -63.5}
+        - {x: 25.5, y: -55.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99fed728397e1d44a8a7c19f150eb2c7
       vertices: []
       indices: 
       edges: []
