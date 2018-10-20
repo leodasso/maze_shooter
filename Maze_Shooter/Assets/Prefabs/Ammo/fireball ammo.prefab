@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 114862922114861194}
   - component: {fileID: 50909293905456280}
   - component: {fileID: 70467287394990268}
+  - component: {fileID: 114397640578496258}
+  - component: {fileID: 114274561218933464}
   m_Layer: 0
   m_Name: fireball ammo
   m_TagString: Untagged
@@ -37,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1341631613168128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.097091, y: -1.4134178, z: -0.056030985}
+  m_LocalPosition: {x: -0.91164064, y: -2.1519885, z: -0.056030985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,6 +80,34 @@ CapsuleCollider2D:
   m_Offset: {x: 0.006000817, y: -0.07}
   m_Size: {x: 0.25, y: 0.53}
   m_Direction: 0
+--- !u!114 &114274561218933464
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1341631613168128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0782ae9df3ff5ae4ab9e6e1985a49bf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 1855155040990096, guid: 6a819c7cb7cba434f8c5359cf0439289,
+    type: 2}
+  lifetime: 1
+--- !u!114 &114397640578496258
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1341631613168128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b97e8ed2baea5324b9e68bb303521efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 1738798903194492, guid: f5bce51fb78c31946b04d5f86c7f6a44,
+    type: 2}
+  lifetime: 2
 --- !u!114 &114862922114861194
 MonoBehaviour:
   m_ObjectHideFlags: 1
