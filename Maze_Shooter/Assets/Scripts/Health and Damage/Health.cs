@@ -4,13 +4,26 @@ using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour, IDestructible
 {
 	public IntReference hitPoints;
 	
-	[ShowInInspector, ReadOnly]
+	[ShowInInspector, DisplayAsString, Indent()]
 	int _currentHealth;
+
+	[ToggleLeft]
+	public bool createDamageEffect;
+	
+	[AssetsOnly, AssetList(Path = "Prefabs/Effects/"), ShowIf("createDamageEffect")]
+	public GameObject damagedEffect;
+
+	[ShowIf("createDamageEffect")]
+	public float damageEffectLifetime = 5;
+
+	[DrawWithUnity]
+	public UnityEvent onDamagedEvent;
 
 	public Action<int> onDamaged;
 
@@ -24,7 +37,17 @@ public class Health : MonoBehaviour, IDestructible
 	{
 		_currentHealth -= amount;
 		if (_currentHealth <= 0) Destruct();
-		else onDamaged?.Invoke(_currentHealth);
+		else
+		{
+			if (damagedEffect && createDamageEffect)
+			{
+				Quaternion effectRotation = Quaternion.LookRotation(dir);
+				Destroy(Instantiate(damagedEffect, pos, effectRotation), damageEffectLifetime);
+			}
+			
+			onDamaged?.Invoke(_currentHealth);
+			onDamagedEvent.Invoke();
+		}
 	}
 
 	public void Destruct()
