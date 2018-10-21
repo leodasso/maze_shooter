@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class Health : MonoBehaviour, IDestructible
 	[ShowInInspector, ReadOnly]
 	int _currentHealth;
 
+	public Action<int> onDamaged;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -21,6 +24,7 @@ public class Health : MonoBehaviour, IDestructible
 	{
 		_currentHealth -= amount;
 		if (_currentHealth <= 0) Destruct();
+		else onDamaged?.Invoke(_currentHealth);
 	}
 
 	public void Destruct()
