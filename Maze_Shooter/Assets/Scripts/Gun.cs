@@ -8,7 +8,7 @@ public enum GunType {Player, Enemy}
 
 public class Gun : MonoBehaviour
 {
-	[ToggleLeft, System.NonSerialized, ShowInInspector, ReadOnly]
+	[ToggleLeft]
 	public bool firing;
 	public FloatReference fireRate;
 	[AssetsOnly, PreviewField, AssetList(AutoPopulate = false, Path = "Prefabs/Ammo")]
