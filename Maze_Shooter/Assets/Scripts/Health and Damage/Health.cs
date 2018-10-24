@@ -16,14 +16,17 @@ public class Health : MonoBehaviour, IDestructible
 	[ToggleLeft]
 	public bool createDamageEffect;
 	
-	[AssetsOnly, AssetList(Path = "Prefabs/Effects/"), ShowIf("createDamageEffect")]
+	[AssetsOnly, AssetList(Path = "Prefabs/Effects/"), ShowIf("createDamageEffect"), Indent()]
 	public GameObject damagedEffect;
 
-	[ShowIf("createDamageEffect")]
+	[ShowIf("createDamageEffect"), Indent()]
 	public float damageEffectLifetime = 5;
 
 	[DrawWithUnity]
 	public UnityEvent onDamagedEvent;
+
+	[DrawWithUnity]
+	public UnityEvent onKilledEvent;
 
 	public Action<int> onDamaged;
 
@@ -52,6 +55,7 @@ public class Health : MonoBehaviour, IDestructible
 
 	public void Destruct()
 	{
+		onKilledEvent.Invoke();
 		Destroy(gameObject);
 	}
 }
