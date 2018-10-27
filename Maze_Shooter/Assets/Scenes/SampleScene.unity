@@ -158,7 +158,7 @@ MonoBehaviour:
     useConstant: 0
     constantValue: 15
     valueObject: {fileID: 0}
-  ammo: {fileID: 1341631613168128, guid: 0ce41fc6d4e879142904928d134b073c, type: 2}
+  ammo: {fileID: 1341631613168128, guid: 87a4d3b69935388409efe832955e4d0d, type: 2}
   gunType: 0
 --- !u!1 &32073425
 GameObject:
@@ -5099,6 +5099,10 @@ MonoBehaviour:
     useConstant: 0
     constantValue: 50
     valueObject: {fileID: 0}
+  invulnerableTime:
+    useConstant: 0
+    constantValue: 0
+    valueObject: {fileID: 0}
   createDamageEffect: 1
   damagedEffect: {fileID: 1861621852070230, guid: 12967c0110b77c243a38077c43ebae61,
     type: 2}
@@ -5425,6 +5429,7 @@ GameObject:
   - component: {fileID: 1984665183}
   - component: {fileID: 1984665185}
   - component: {fileID: 1984665186}
+  - component: {fileID: 1984665187}
   m_Layer: 9
   m_Name: ship
   m_TagString: Untagged
@@ -5531,6 +5536,10 @@ MonoBehaviour:
     useConstant: 1
     constantValue: 3
     valueObject: {fileID: 11400000, guid: 80df4c9b9fc5123429abdcd2b627898e, type: 2}
+  invulnerableTime:
+    useConstant: 0
+    constantValue: 3
+    valueObject: {fileID: 0}
   createDamageEffect: 1
   damagedEffect: {fileID: 1861621852070230, guid: 12967c0110b77c243a38077c43ebae61,
     type: 2}
@@ -5579,3 +5588,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collection: {fileID: 11400000, guid: 35831a8bfbcf71f4fb702f50d0ec7816, type: 2}
+--- !u!114 &1984665187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1984665179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63361a88b819fb140806962e1069b475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashingRenderers:
+  - {fileID: 487777801}
+  flashTime:
+    useConstant: 0
+    constantValue: 0.05
+    valueObject: {fileID: 0}

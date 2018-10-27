@@ -8,27 +8,35 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour, IDestructible
 {
+	[TabGroup("main")]
 	public IntReference hitPoints;
 	
-	[ShowInInspector, DisplayAsString, Indent()]
+	[ShowInInspector, DisplayAsString, Indent, TabGroup("main")]
 	int _currentHealth;
 
-	[ToggleLeft]
+	[Tooltip("How long after damaged will I be invulnerable?"), TabGroup("main")]
+	public FloatReference invulnerableTime;
+	
+	[ToggleLeft, TabGroup("main")]
 	public bool createDamageEffect;
 	
-	[AssetsOnly, AssetList(Path = "Prefabs/Effects/"), ShowIf("createDamageEffect"), Indent()]
+	[AssetsOnly, AssetList(Path = "Prefabs/Effects/"), ShowIf("createDamageEffect"), Indent, TabGroup("main")]
 	public GameObject damagedEffect;
 
-	[ShowIf("createDamageEffect"), Indent()]
+	[ShowIf("createDamageEffect"), Indent, TabGroup("main")]
 	public float damageEffectLifetime = 5;
 
-	[DrawWithUnity]
+	[DrawWithUnity, TabGroup("events")]
 	public UnityEvent onDamagedEvent;
 
-	[DrawWithUnity]
+	[DrawWithUnity, TabGroup("events")]
 	public UnityEvent onKilledEvent;
 
 	public Action<int> onDamaged;
+
+	float _invulnerableTimer;
+
+	public bool IsInvulnerable => _invulnerableTimer > 0;
 
 	// Use this for initialization
 	void Start ()
@@ -36,21 +44,35 @@ public class Health : MonoBehaviour, IDestructible
 		_currentHealth = hitPoints.Value;
 	}
 
+	void Update()
+	{
+		if (_invulnerableTimer > 0)
+			_invulnerableTimer -= Time.deltaTime;
+	}
+
 	public void DoDamage(int amount, Vector2 pos, Vector2 dir)
 	{
+		if (IsInvulnerable) return;
+		
 		_currentHealth -= amount;
-		if (_currentHealth <= 0) Destruct();
-		else
+		if (_currentHealth <= 0)
 		{
-			if (damagedEffect && createDamageEffect)
-			{
-				Quaternion effectRotation = Quaternion.LookRotation(dir);
-				Destroy(Instantiate(damagedEffect, pos, effectRotation), damageEffectLifetime);
-			}
-			
-			onDamaged?.Invoke(_currentHealth);
-			onDamagedEvent.Invoke();
+			Destruct();
+			return;
 		}
+
+		if (damagedEffect && createDamageEffect)
+		{
+			Quaternion effectRotation = Quaternion.LookRotation(dir);
+			Destroy(Instantiate(damagedEffect, pos, effectRotation), damageEffectLifetime);
+		}
+
+		if (invulnerableTime.Value > 0)
+			_invulnerableTimer = invulnerableTime.Value;
+		
+		onDamaged?.Invoke(_currentHealth);
+		onDamagedEvent.Invoke();
+		
 	}
 
 	public void Destruct()
