@@ -5,15 +5,6 @@ using UnityEngine;
 [CreateAssetMenu]
 public class GameMaster : ScriptableObject
 {
-    public float playerRespawnTime = 3;
-    
-    public void BeginGame() 
-    {
-
-    }
-
-    public void SpawnAnotherPlayer()
-    {
-        
-    }
+    public GameObject defaultPlayerShip;
+    public float defaultRespawnTime = 3;
 }
