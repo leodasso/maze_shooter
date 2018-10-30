@@ -7,6 +7,7 @@ The game is a series of fast paced, simple shooter stages with unique goals, suc
   "Kill the boss!"
   "Find the exit!"
   "Feed the space-cows!"
+  "Eat all the pellets!"
   
 The design goal is to stretch the envelope of what a twin-stick shooter is to the very absolute brink.
 The goal of each stage must be simple enough to fit in a sentence at the intro of the stage. 
