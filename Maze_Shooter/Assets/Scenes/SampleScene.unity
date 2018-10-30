@@ -203,8 +203,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NoiseProfile: {fileID: 11400000, guid: 1fadf45741dc545428d325b6deb102c1, type: 2}
-  m_AmplitudeGain: 0
-  m_FrequencyGain: 0
+  m_AmplitudeGain: 0.01388776
+  m_FrequencyGain: 0.00002479944
   mNoiseOffsets: {x: -873.57666, y: -911.7196, z: -328.48892}
 --- !u!114 &32073428
 MonoBehaviour:
@@ -1102,6 +1102,16 @@ Prefab:
         type: 2}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114733723451468592, guid: 9f2ca48858388f74dab3879c199108e0,
+        type: 2}
+      propertyPath: m_fontColor.a
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 114733723451468592, guid: 9f2ca48858388f74dab3879c199108e0,
+        type: 2}
+      propertyPath: m_fontColor32.rgba
+      value: 2801795071
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f2ca48858388f74dab3879c199108e0, type: 2}
@@ -5672,6 +5682,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1795510016}
+  - component: {fileID: 1795510017}
   m_Layer: 0
   m_Name: Stage Controller
   m_TagString: Untagged
@@ -5692,6 +5703,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1795510017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1795510015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec8dcf56f6f6370438fd37d5b2691cde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1984665179
 GameObject:
   m_ObjectHideFlags: 0
