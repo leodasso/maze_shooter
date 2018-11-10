@@ -12,3 +12,7 @@ The game is a series of fast paced, simple shooter stages with unique goals, suc
 The design goal is to stretch the envelope of what a twin-stick shooter is to the very absolute brink.
 The goal of each stage must be simple enough to fit in a sentence at the intro of the stage. 
 There is a 'Super Mario World' style world map.
+
+Challenges
+Each stage will have a number of additional challenges to complete and earn POWER MOONS! (just kidding they won't literally be moons but it's the same principal.
+The power moons could be found hidden in the stage, or from achieveing excellence like "Accuracy > 90%" or "No Damage"
