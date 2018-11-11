@@ -1429,6 +1429,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &930391425
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 930391427}
+  - component: {fileID: 930391426}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &930391426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 930391425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d30f831d9d1b84ba9603356f7a8290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioCollection: {fileID: 11400000, guid: 824debf4ecf123248bbf162b133abb87, type: 2}
+  playOnAwake: 0
+--- !u!4 &930391427
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 930391425}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.5892475, y: -0.9985797, z: -0.07806745}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &981616782
 GameObject:
   m_ObjectHideFlags: 0
@@ -2257,7 +2299,7 @@ Prefab:
     - target: {fileID: 212743861136614144, guid: edf6558a64e83354c89a725a3bba6e88,
         type: 2}
       propertyPath: m_SortingOrder
-      value: 56
+      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edf6558a64e83354c89a725a3bba6e88, type: 2}
@@ -2616,37 +2658,37 @@ MonoBehaviour:
     m_IsOpenEnded: 1
     m_ControlPoints:
     - position: {x: -5.1095715, y: -2.4753885, z: 0}
-      leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 0, y: 0, z: 0}
-      mode: 0
-      height: 1
+      leftTangent: {x: -0.08008738, y: 0.71649426, z: -0}
+      rightTangent: {x: 0.08008738, y: -0.71649426, z: 0}
+      mode: 1
+      height: 0.5
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
       corner: 0
     - position: {x: -2.925728, y: -2.5371313, z: 0}
-      leftTangent: {x: -1.3818791, y: -0.14361286, z: 0}
+      leftTangent: {x: -0.47500038, y: -0.049364805, z: -0}
       rightTangent: {x: 0.47500038, y: 0.049364805, z: 0}
-      mode: 0
-      height: 1
+      mode: 1
+      height: 0.5
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: -1.9003606, y: -1.430839, z: 0}
+    - position: {x: -2.1407595, y: -1.5980728, z: 0}
       leftTangent: {x: -1.1082895, y: -0.33197415, z: -0}
       rightTangent: {x: 1.1082895, y: 0.33197415, z: 0}
-      mode: 0
-      height: 1
+      mode: 1
+      height: 0.5
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
       corner: 0
     - position: {x: -0.61888397, y: -1.3244487, z: 0}
-      leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 0, y: 0, z: 0}
-      mode: 0
-      height: 1
+      leftTangent: {x: -0.07047888, y: 0.41844833, z: -0}
+      rightTangent: {x: 0.07047888, y: -0.41844833, z: 0}
+      mode: 1
+      height: 0.5
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
@@ -2698,7 +2740,6 @@ SpriteShapeRenderer:
   m_ShapeTexture: {fileID: 0}
   m_Sprites:
   - {fileID: 21300048, guid: d2e1031e0b14d0e4991eaa06641a6e2e, type: 3}
-  - {fileID: 21300046, guid: d2e1031e0b14d0e4991eaa06641a6e2e, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -2708,8 +2749,8 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: -2.8582385, y: -1.9311231, z: 0}
-    m_Extent: {x: 2.2575476, y: 0.8257867, z: 0}
+    m_Center: {x: -2.8636901, y: -1.9782176, z: 0}
+    m_Extent: {x: 2.351629, y: 0.95248693, z: 0}
 --- !u!4 &1850292660
 Transform:
   m_ObjectHideFlags: 0
