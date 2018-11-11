@@ -13,6 +13,8 @@ public class Gun : MonoBehaviour
 
 	public FloatReference startFiringDelay;
 	public FloatReference fireRate;
+	[AssetsOnly]
+	public FiringPattern firingPattern;
 	[AssetsOnly, PreviewField, AssetList(AutoPopulate = false, Path = "Prefabs/Ammo")]
 	public GameObject ammo;
 	public GunType gunType;
@@ -58,10 +60,42 @@ public class Gun : MonoBehaviour
 			return;
 		}
 
-		var newAmmo = Instantiate(ammo, transform.position, transform.rotation);
+		if (firingPattern)
+			StartCoroutine(FireRoutine());
+		else 
+			CreateBullet(Vector2.zero, 0);
 
-		if (gunType == GunType.Enemy) newAmmo.layer = LayerMask.NameToLayer("EnemyBullets");
-		else newAmmo.layer = LayerMask.NameToLayer("PlayerBullets");
 		_cooldownTimer = Cooldown;
+	}
+
+	IEnumerator FireRoutine()
+	{
+		float angle;
+		float x;
+		float y;
+		float progress = 0;
+			
+		for (int i = 0; i < firingPattern.bullets; i++)
+		{
+			int switcher = i % 2 == 0 ? 1 : -1;
+			progress = (float) i / (firingPattern.bullets - 1);
+			x = Mathf.Lerp(0, firingPattern.widthSpread, progress) * switcher;
+			y = Mathf.Lerp(0, firingPattern.heightSpread, progress);
+			angle = Mathf.Lerp(0, firingPattern.angleSpread, progress) * switcher;
+
+			CreateBullet(new Vector2(x, y), -Math.RoundToNearest(angle, firingPattern.snapAngle) );
+			yield return new WaitForSeconds(firingPattern.interval);
+		}
+	}
+
+	void CreateBullet(Vector2 offset, float angle)
+	{
+		Vector2 localOffset = transform.TransformPoint(offset);
+		Debug.DrawLine(transform.position, localOffset, Color.yellow, 1);
+		var newAmmo = Instantiate(ammo, localOffset, transform.rotation);
+		newAmmo.transform.Rotate(0, 0, angle, Space.World);
+		
+		newAmmo.layer = LayerMask.NameToLayer(gunType == GunType.Enemy ? 
+			"EnemyBullets" : "PlayerBullets");
 	}
 }
