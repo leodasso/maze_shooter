@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 
 public class StageController : MonoBehaviour
 {
-	[AssetsOnly]
+	[AssetsOnly, InlineEditor()]
 	public Stage stage;
 
 	// Use this for initialization
