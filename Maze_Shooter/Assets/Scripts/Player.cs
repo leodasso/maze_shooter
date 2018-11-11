@@ -14,10 +14,14 @@ public class Player : MonoBehaviour
 	public Vector2 moveInput;
 
 	public FloatReference fireThreshhold;
+	public FloatReference fireRateMultiplier;
 
 	bool _firing;
 	Rewired.Player _player;
 	Ship _ship;
+	// Adds up magnitude of 'fire' joystick. As it hits 1, it will fire a shot and reset. This allows for fire rate to be 
+	// controlled depending on how intensly the player is leaning the stick.
+	float _fireAmount;
 
 	// Use this for initialization
 	void Start ()
@@ -38,6 +42,10 @@ public class Player : MonoBehaviour
 
 		// check if the player is firing
 		_firing = fireInput.magnitude >= fireThreshhold.Value;
+		if (_firing)
+			_fireAmount += Time.deltaTime * fireInput.magnitude * fireRateMultiplier.Value;
+		else 
+			_fireAmount = 0;
 
 		// tell the ship how to move based on player's input
 		_ship.movementInput = moveInput;
@@ -49,6 +57,10 @@ public class Player : MonoBehaviour
 			gunRotator.transform.localEulerAngles = new Vector3(0, 0, angle);
 		}
 
-		gun.firing = _firing;
+		if (_fireAmount >= 1)
+		{
+			gun.Fire();
+			_fireAmount = 0;
+		}
 	}
 }

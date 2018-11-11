@@ -42,9 +42,16 @@ public class Gun : MonoBehaviour
 		else if (firing) Fire();
 	}
 
-	[Button]
-	void Fire()
+	bool IsCoolingDown()
 	{
+		return _cooldownTimer > 0;
+	}
+
+	[Button]
+	public void Fire()
+	{
+		if (IsCoolingDown()) return;
+		
 		if (!ammo)
 		{
 			Debug.LogError("No ammo ref is set on gun " + name, gameObject);
