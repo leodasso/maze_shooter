@@ -10,6 +10,8 @@ public class Gun : MonoBehaviour
 {
 	[ToggleLeft]
 	public bool firing;
+
+	public FloatReference startFiringDelay;
 	public FloatReference fireRate;
 	[AssetsOnly, PreviewField, AssetList(AutoPopulate = false, Path = "Prefabs/Ammo")]
 	public GameObject ammo;
@@ -17,15 +19,24 @@ public class Gun : MonoBehaviour
 
 	float Cooldown => 1f / fireRate.Value;
 	float _cooldownTimer;
+	float _startFiringTimer;
 
 	// Use this for initialization
-	void Start () {
-		
+	void Start ()
+	{
+		_startFiringTimer = startFiringDelay.Value;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+		// Starting delay
+		if (_startFiringTimer > 0)
+		{
+			_startFiringTimer -= Time.deltaTime;
+			return;
+		}
+		
 		if (_cooldownTimer >= 0) _cooldownTimer -= Time.deltaTime;
 		
 		else if (firing) Fire();
