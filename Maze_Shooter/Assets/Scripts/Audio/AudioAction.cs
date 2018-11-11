@@ -41,7 +41,9 @@ public class AudioAction : MonoBehaviour
 		newSource.clip = audioCollection.GetRandomClip();
 		newSource.playOnAwake = false;
 		newSource.outputAudioMixerGroup = audioCollection.mixerGroup;
+		newSource.volume = audioCollection.volume;
 		newSource.pitch = audioCollection.Pitch();
+		
 		newSource.Play();
 		Destroy(audioGO, audioCollection.audioLifetime);
 	}

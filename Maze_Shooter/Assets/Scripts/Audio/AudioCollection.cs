@@ -12,6 +12,7 @@ using UnityEngine.Audio;
 [CreateAssetMenu]
 public class AudioCollection : ScriptableObject
 {
+    public float volume = 1;
     [MinMaxSlider(.1f, 2, true)]
     public Vector2 pitchRange = new Vector2(1, 1);
     [AssetsOnly]
