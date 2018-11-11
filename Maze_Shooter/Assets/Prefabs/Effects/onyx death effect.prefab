@@ -36,6 +36,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4874337911804228}
+  - component: {fileID: 114713971376395424}
   m_Layer: 0
   m_Name: onyx death effect
   m_TagString: Untagged
@@ -132,6 +133,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114713971376395424
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1494256147286654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d30f831d9d1b84ba9603356f7a8290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioCollection: {fileID: 11400000, guid: 698e7ac571b068a4d9220a4712814f98, type: 2}
+  playOnAwake: 1
 --- !u!198 &198521055092745906
 ParticleSystem:
   m_ObjectHideFlags: 1

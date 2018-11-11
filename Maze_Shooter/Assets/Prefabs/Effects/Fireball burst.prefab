@@ -36,6 +36,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4741494261049674}
+  - component: {fileID: 114798555949953438}
   m_Layer: 0
   m_Name: Fireball burst
   m_TagString: Untagged
@@ -101,6 +102,19 @@ Transform:
   m_Father: {fileID: 4741494261049674}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114798555949953438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1738798903194492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d30f831d9d1b84ba9603356f7a8290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioCollection: {fileID: 11400000, guid: 663d0fd114e8173438fc031105ef6482, type: 2}
+  playOnAwake: 1
 --- !u!198 &198000261542787046
 ParticleSystem:
   m_ObjectHideFlags: 1
