@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 70467287394990268}
   - component: {fileID: 114397640578496258}
   - component: {fileID: 114274561218933464}
+  - component: {fileID: 114895949522635316}
   m_Layer: 0
   m_Name: onyx ammo
   m_TagString: Untagged
@@ -131,6 +132,19 @@ MonoBehaviour:
     useConstant: 0
     constantValue: 1
     valueObject: {fileID: 0}
+--- !u!114 &114895949522635316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1341631613168128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d30f831d9d1b84ba9603356f7a8290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioCollection: {fileID: 11400000, guid: a9d7bb5e4d1e43646b1c39d6619e8017, type: 2}
+  playOnAwake: 1
 --- !u!212 &212414296162946822
 SpriteRenderer:
   m_ObjectHideFlags: 1

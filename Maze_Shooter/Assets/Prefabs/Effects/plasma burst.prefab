@@ -36,6 +36,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4046862069093370}
+  - component: {fileID: 114045422826183342}
   m_Layer: 0
   m_Name: plasma burst
   m_TagString: Untagged
@@ -101,6 +102,19 @@ Transform:
   m_Father: {fileID: 4046862069093370}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114045422826183342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1625267135333434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d30f831d9d1b84ba9603356f7a8290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioCollection: {fileID: 11400000, guid: 6ad1040611da7f9449a7e49f99f4190f, type: 2}
+  playOnAwake: 1
 --- !u!198 &198397334451788848
 ParticleSystem:
   m_ObjectHideFlags: 1

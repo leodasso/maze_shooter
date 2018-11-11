@@ -36,6 +36,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4121772382870836}
+  - component: {fileID: 114558420288094400}
   m_Layer: 0
   m_Name: onyx damaged effect
   m_TagString: Untagged
@@ -70,6 +71,19 @@ Transform:
   m_Father: {fileID: 4121772382870836}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114558420288094400
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1861621852070230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d30f831d9d1b84ba9603356f7a8290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioCollection: {fileID: 11400000, guid: 33b25ba3908c8fb4082c34b4fc8ef88f, type: 2}
+  playOnAwake: 1
 --- !u!198 &198716408575362876
 ParticleSystem:
   m_ObjectHideFlags: 1

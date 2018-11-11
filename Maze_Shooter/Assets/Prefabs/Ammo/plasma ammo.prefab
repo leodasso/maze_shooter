@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 70467287394990268}
   - component: {fileID: 114397640578496258}
   - component: {fileID: 114274561218933464}
+  - component: {fileID: 114097700053149034}
   m_Layer: 0
   m_Name: plasma ammo
   m_TagString: Untagged
@@ -80,6 +81,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0010365099, y: -0.11768061}
   m_Size: {x: 0.1671963, y: 0.42220056}
   m_Direction: 0
+--- !u!114 &114097700053149034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1341631613168128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d30f831d9d1b84ba9603356f7a8290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioCollection: {fileID: 11400000, guid: 824debf4ecf123248bbf162b133abb87, type: 2}
+  playOnAwake: 1
 --- !u!114 &114274561218933464
 MonoBehaviour:
   m_ObjectHideFlags: 1
