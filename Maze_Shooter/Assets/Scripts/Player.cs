@@ -29,15 +29,23 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		// Don't take action if we're paused
+		if (Time.timeScale <= Mathf.Epsilon) return;
+		
+		// Get the player's inputs
 		moveInput = new Vector2(_player.GetAxis("moveX"), _player.GetAxis("moveY"));
 		Vector2 fireInput = new Vector2(_player.GetAxis("fireX"), _player.GetAxis("fireY"));
 
+		// check if the player is firing
 		_firing = fireInput.magnitude >= fireThreshhold.Value;
 
+		// tell the ship how to move based on player's input
 		_ship.movementInput = moveInput;
+		
+		// Tell the gun where to fire
 		if (_firing)
 		{
-			float angle =  Arachnid.Math.AngleFromVector2(new Vector2(fireInput.x, fireInput.y), -90);
+			float angle =  Math.AngleFromVector2(new Vector2(fireInput.x, fireInput.y), -90);
 			gunRotator.transform.localEulerAngles = new Vector3(0, 0, angle);
 		}
 
