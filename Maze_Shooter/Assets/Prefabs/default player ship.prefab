@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 114212757648509754}
   - component: {fileID: 114399187806725148}
   - component: {fileID: 114574507912984388}
+  - component: {fileID: 114704066472118946}
   m_Layer: 9
   m_Name: default player ship
   m_TagString: Untagged
@@ -334,6 +335,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectPrefab: {fileID: 1861621852070230, guid: 12967c0110b77c243a38077c43ebae61,
+    type: 2}
+  lifetime: 5
+--- !u!114 &114704066472118946
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1924984838417708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b97e8ed2baea5324b9e68bb303521efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 1494256147286654, guid: 6430543e73484db428a62cb6162c0311,
     type: 2}
   lifetime: 5
 --- !u!114 &114841701199717672
