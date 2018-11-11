@@ -745,6 +745,88 @@ Transform:
   m_Father: {fileID: 1584229139}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &863696450
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 863696451}
+  - component: {fileID: 863696453}
+  - component: {fileID: 863696452}
+  m_Layer: 11
+  m_Name: Hard Gun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &863696451
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 863696450}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.72, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1242055865}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &863696452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 863696450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83b5d72ab14f3f4c8442f76808cf317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - {fileID: 11400000, guid: 2da9139c4b9a7134bb198c5c26e23246, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 863696453}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &863696453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 863696450}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88ec9c2b0f19ce749b4879e8ae9d1c50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firing: 1
+  startFiringDelay:
+    useConstant: 0
+    constantValue: 1
+    valueObject: {fileID: 0}
+  fireRate:
+    useConstant: 0
+    constantValue: 0.25
+    valueObject: {fileID: 11400000, guid: 95eb1f508b3195f4ab952da8344f488a, type: 2}
+  firingPattern: {fileID: 11400000, guid: c13f9401df6850b40b4d8a03bfb09ea1, type: 2}
+  ammo: {fileID: 1341631613168128, guid: fc673370b839177468522e7fa71b21c9, type: 2}
+  gunType: 1
 --- !u!1001 &892776574
 Prefab:
   m_ObjectHideFlags: 0
@@ -1048,14 +1130,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1242055864}
-  m_LocalRotation: {x: -0, y: -0, z: -0.99984246, w: -0.017750848}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: -0.139, y: -0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1679080748}
+  - {fileID: 1530048815}
+  - {fileID: 863696451}
   m_Father: {fileID: 1681812398}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -182.034}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!114 &1242055866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5813,24 +5897,10 @@ CompositeCollider2D:
       - X: 59866668
         Y: 44611098
       - X: 59866668
-        Y: 28133336
-      - X: 60133328
-        Y: 28133336
-      - X: 60133328
-        Y: 16133335
-      - X: 59866668
-        Y: 16133335
-      - X: 59866668
-        Y: -7866667
-      - X: 60133328
-        Y: -7866667
-      - X: 60133328
-        Y: -11866666
-      - X: 59866668
-        Y: -11866666
-      - X: 59866668
         Y: -47866672
-    - - X: -37866668
+    - - X: -39866668
+        Y: 7992156
+      - X: -37866668
         Y: 8933333
       - X: -35866664
         Y: 11466668
@@ -5902,22 +5972,30 @@ CompositeCollider2D:
         Y: 12611119
       - X: 27866666
         Y: 7866667
-      - X: 43866668
+      - X: 44133328
         Y: 7866667
+      - X: 44133328
+        Y: 7992154
       - X: 46133332
         Y: 8933333
       - X: 48133332
         Y: 11466668
       - X: 48133332
-        Y: 31866668
+        Y: 32133334
+      - X: 48038093
+        Y: 32133334
       - X: 47799996
         Y: 32800000
       - X: 44733332
         Y: 35533336
-      - X: 43866668
+      - X: 44133328
+        Y: 35948725
+      - X: 44133328
         Y: 36133336
-      - X: -51866668
+      - X: -52133336
         Y: 36133336
+      - X: -52133336
+        Y: 36060608
       - X: -53333336
         Y: 35733336
       - X: -54800000
@@ -5928,7 +6006,7 @@ CompositeCollider2D:
         Y: 8133333
       - X: -55800000
         Y: 7866667
-      - X: -40133332
+      - X: -39866668
         Y: 7866667
     - - X: -23866666
         Y: -31866668
@@ -5937,12 +6015,16 @@ CompositeCollider2D:
       - X: -39866668
         Y: -29723330
       - X: -39866668
-        Y: -24133334
+        Y: -23866666
+      - X: -39961907
+        Y: -23866666
       - X: -40200004
         Y: -23200000
       - X: -43266668
         Y: -20466666
-      - X: -44133336
+      - X: -43866672
+        Y: -20051279
+      - X: -43866672
         Y: -19866666
       - X: -49345105
         Y: -19866666
@@ -5962,11 +6044,15 @@ CompositeCollider2D:
         Y: -34933332
       - X: -52400004
         Y: -35866668
-      - X: -51866668
+      - X: -52133336
+        Y: -36000002
+      - X: -52133336
         Y: -36133336
       - X: -23866666
         Y: -36133336
-    - - X: 46133332
+    - - X: 44133328
+        Y: -36007849
+      - X: 46133332
         Y: -35066668
       - X: 48133332
         Y: -32533334
@@ -6000,7 +6086,7 @@ CompositeCollider2D:
         Y: -31866668
       - X: 11866667
         Y: -36133336
-      - X: 43866668
+      - X: 44133328
         Y: -36133336
   m_CompositePaths:
     m_Paths:
@@ -6016,16 +6102,9 @@ CompositeCollider2D:
       - {x: -6.6000004, y: 4.786667}
       - {x: 5.83641, y: 4.786667}
       - {x: 5.9866667, y: 4.4611096}
-      - {x: 5.9866667, y: 2.8133337}
-      - {x: 6.013333, y: 2.8133337}
-      - {x: 6.013333, y: 1.6133335}
-      - {x: 5.9866667, y: 1.6133335}
-      - {x: 5.9866667, y: -0.7866667}
-      - {x: 6.013333, y: -0.7866667}
-      - {x: 6.013333, y: -1.1866666}
-      - {x: 5.9866667, y: -1.1866666}
       - {x: 5.9866667, y: -4.7866673}
-    - - {x: -3.7866669, y: 0.8933333}
+    - - {x: -3.986667, y: 0.7992156}
+      - {x: -3.7866669, y: 0.8933333}
       - {x: -3.5866663, y: 1.1466668}
       - {x: -3.5866663, y: 1.3133334}
       - {x: -3.58, y: 1.3133334}
@@ -6061,27 +6140,33 @@ CompositeCollider2D:
       - {x: 2.6364105, y: 1.5866667}
       - {x: 2.7866666, y: 1.2611119}
       - {x: 2.7866666, y: 0.7866667}
-      - {x: 4.386667, y: 0.7866667}
+      - {x: 4.413333, y: 0.7866667}
+      - {x: 4.413333, y: 0.79921544}
       - {x: 4.613333, y: 0.8933333}
       - {x: 4.813333, y: 1.1466668}
-      - {x: 4.813333, y: 3.1866667}
+      - {x: 4.813333, y: 3.2133334}
+      - {x: 4.803809, y: 3.2133334}
       - {x: 4.7799997, y: 3.28}
       - {x: 4.4733334, y: 3.5533338}
-      - {x: 4.386667, y: 3.6133337}
-      - {x: -5.186667, y: 3.6133337}
+      - {x: 4.413333, y: 3.5948725}
+      - {x: 4.413333, y: 3.6133337}
+      - {x: -5.2133336, y: 3.6133337}
+      - {x: -5.2133336, y: 3.6060607}
       - {x: -5.3333335, y: 3.5733337}
       - {x: -5.48, y: 3.5333335}
       - {x: -5.613333, y: 3.2866669}
       - {x: -5.613333, y: 0.81333333}
       - {x: -5.58, y: 0.7866667}
-      - {x: -4.0133333, y: 0.7866667}
+      - {x: -3.986667, y: 0.7866667}
     - - {x: -2.3866665, y: -3.1866667}
       - {x: -3.7345097, y: -3.1866667}
       - {x: -3.986667, y: -2.972333}
-      - {x: -3.986667, y: -2.4133334}
+      - {x: -3.986667, y: -2.3866665}
+      - {x: -3.9961908, y: -2.3866665}
       - {x: -4.0200005, y: -2.32}
       - {x: -4.326667, y: -2.0466666}
-      - {x: -4.4133334, y: -1.9866667}
+      - {x: -4.3866673, y: -2.005128}
+      - {x: -4.3866673, y: -1.9866667}
       - {x: -4.93451, y: -1.9866667}
       - {x: -5.186667, y: -1.7723334}
       - {x: -5.186667, y: -0.38666672}
@@ -6091,9 +6176,11 @@ CompositeCollider2D:
       - {x: -5.3133335, y: -3.3200002}
       - {x: -5.306667, y: -3.4933333}
       - {x: -5.2400002, y: -3.5866668}
-      - {x: -5.186667, y: -3.6133337}
+      - {x: -5.2133336, y: -3.6000001}
+      - {x: -5.2133336, y: -3.6133337}
       - {x: -2.3866665, y: -3.6133337}
-    - - {x: 4.613333, y: -3.506667}
+    - - {x: 4.413333, y: -3.6007848}
+      - {x: 4.613333, y: -3.506667}
       - {x: 4.813333, y: -3.2533333}
       - {x: 4.813333, y: -0.38666672}
       - {x: 4.386667, y: -0.38666672}
@@ -6110,7 +6197,7 @@ CompositeCollider2D:
       - {x: 2.8701072, y: -3.1866667}
       - {x: 1.1866667, y: -3.1866667}
       - {x: 1.1866667, y: -3.6133337}
-      - {x: 4.386667, y: -3.6133337}
+      - {x: 4.413333, y: -3.6133337}
   m_VertexDistance: 0.0005
 --- !u!50 &1489327315
 Rigidbody2D:
@@ -10133,6 +10220,88 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1530048814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1530048815}
+  - component: {fileID: 1530048817}
+  - component: {fileID: 1530048816}
+  m_Layer: 11
+  m_Name: Med Gun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1530048815
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1530048814}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.72, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1242055865}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1530048816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1530048814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83b5d72ab14f3f4c8442f76808cf317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - {fileID: 11400000, guid: 59940c7cec290744797ed5fd2c637568, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1530048817}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &1530048817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1530048814}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88ec9c2b0f19ce749b4879e8ae9d1c50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firing: 1
+  startFiringDelay:
+    useConstant: 0
+    constantValue: 1
+    valueObject: {fileID: 0}
+  fireRate:
+    useConstant: 0
+    constantValue: 2
+    valueObject: {fileID: 11400000, guid: 95eb1f508b3195f4ab952da8344f488a, type: 2}
+  firingPattern: {fileID: 11400000, guid: 6adbf5bc4da135e4fb1f6de005e772e9, type: 2}
+  ammo: {fileID: 1341631613168128, guid: fc673370b839177468522e7fa71b21c9, type: 2}
+  gunType: 1
 --- !u!1 &1584229138
 GameObject:
   m_ObjectHideFlags: 0
@@ -10173,8 +10342,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1679080748}
   - component: {fileID: 1679080749}
+  - component: {fileID: 1679080750}
   m_Layer: 11
-  m_Name: Gun
+  m_Name: Easy Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10187,7 +10357,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1679080747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.88, z: 0}
+  m_LocalPosition: {x: 0, y: 0.72, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1242055865}
@@ -10210,11 +10380,41 @@ MonoBehaviour:
     constantValue: 1
     valueObject: {fileID: 0}
   fireRate:
-    useConstant: 0
+    useConstant: 1
     constantValue: 1
-    valueObject: {fileID: 0}
+    valueObject: {fileID: 11400000, guid: 95eb1f508b3195f4ab952da8344f488a, type: 2}
+  firingPattern: {fileID: 0}
   ammo: {fileID: 1341631613168128, guid: fc673370b839177468522e7fa71b21c9, type: 2}
   gunType: 1
+--- !u!114 &1679080750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1679080747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83b5d72ab14f3f4c8442f76808cf317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - {fileID: 11400000, guid: 59940c7cec290744797ed5fd2c637568, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1679080749}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1681812395
 GameObject:
   m_ObjectHideFlags: 0
@@ -10503,6 +10703,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 59940c7cec290744797ed5fd2c637568, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1681812404
@@ -10548,6 +10759,17 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 11400000, guid: a3d4b5c14cc57554399db66491782fa9, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 2da9139c4b9a7134bb198c5c26e23246, type: 2}
         m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
