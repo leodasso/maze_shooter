@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 114132310788058872}
   - component: {fileID: 114212757648509754}
   - component: {fileID: 114399187806725148}
+  - component: {fileID: 114574507912984388}
   m_Layer: 9
   m_Name: default player ship
   m_TagString: Untagged
@@ -153,9 +154,9 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &58847463020561438
 CircleCollider2D:
@@ -198,7 +199,18 @@ MonoBehaviour:
   onDamagedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 05d8bd71b4707b04995200f41e73f00d, type: 2}
+      - m_Target: {fileID: 114574507912984388}
+        m_MethodName: InvokeEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: e66f1f621714cb14b948b5cd949db696, type: 2}
         m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
@@ -306,6 +318,20 @@ MonoBehaviour:
     useConstant: 0
     constantValue: 0.1
     valueObject: {fileID: 0}
+--- !u!114 &114574507912984388
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1924984838417708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de6c16f983620a4da43f9e72b293064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 1861621852070230, guid: 12967c0110b77c243a38077c43ebae61,
+    type: 2}
+  lifetime: 5
 --- !u!114 &114841701199717672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -318,6 +344,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firing: 0
+  startFiringDelay:
+    useConstant: 0
+    constantValue: 0
+    valueObject: {fileID: 0}
   fireRate:
     useConstant: 0
     constantValue: 15
