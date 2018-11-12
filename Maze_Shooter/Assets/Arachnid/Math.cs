@@ -57,5 +57,10 @@ namespace Arachnid
 				return input - roundingIncrement + remainder;
 			
 		}
+
+		public static bool LayerMaskContainsLayer(LayerMask layerMask, int layer)
+		{
+			return layerMask == (layerMask | (1 << layer));
+		}
 	}
 }
