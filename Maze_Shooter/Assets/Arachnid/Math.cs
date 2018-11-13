@@ -62,5 +62,17 @@ namespace Arachnid
 		{
 			return layerMask == (layerMask | (1 << layer));
 		}
+
+		/// <summary>
+		/// Given any arbitrary angle, returns that same angle but expressed as a number between 0 and 360
+		/// </summary>
+		public static float Angle0to360(float inputAngle)
+		{
+			if (inputAngle >= 0) return inputAngle % 360;
+
+			inputAngle = Mathf.Abs(inputAngle);
+			float remainder = inputAngle % 360;
+			return 360 - remainder;
+		}
 	}
 }
