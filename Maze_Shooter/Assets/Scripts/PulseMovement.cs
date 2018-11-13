@@ -11,7 +11,12 @@ public class PulseMovement : MonoBehaviour
 	public FloatReference startDelay;
 	[Tooltip("A random amount of this value will be added to start delay")]
 	public FloatReference randomStartDelay;
+	
+	[Tooltip("Multiplies the movement speed")]
 	public FloatReference speedMultiplier;
+
+	[Tooltip("Multiplies the rate at which the curve is evaluated. Something like 'doing the pulse more times per minte'")]
+	public float timeMultiplier = 1;
 	public CurveObject speedCurve;
 
 	[DrawWithUnity]
@@ -47,13 +52,13 @@ public class PulseMovement : MonoBehaviour
 			return;
 		}
 
-		_curveTime += Time.deltaTime;
+		_curveTime += Time.deltaTime * timeMultiplier;
 		if (_curveTime >= speedCurve.curve.Duration())
 		{
 			onPulse.Invoke();
 			_curveTime = 0;
 		}
-		_totalSpeed = speedMultiplier.Value * speedCurve.ValueFor(_curveTime);
+		_totalSpeed = speedMultiplier.Value * speedCurve.ValueFor(_curveTime) * timeMultiplier;
 	}
 
 	void FixedUpdate()
@@ -63,5 +68,10 @@ public class PulseMovement : MonoBehaviour
 
 		Vector2 dir = _targetFinder.currentTarget.position - transform.position;
 		_rigidbody2D.AddForce(dir.normalized * _totalSpeed);
+	}
+
+	public void IncreaseTimeMultiplier(float amt)
+	{
+		timeMultiplier += amt;
 	}
 }
