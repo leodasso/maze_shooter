@@ -24,7 +24,7 @@ namespace Arachnid
         public void Raise()
         {
             if (debug)
-                Debug.Log(name + " event was raised at " + Time.unscaledTime);
+                Debug.Log(name + " event was raised at " + Time.unscaledTime, this);
             
             onEventRaised.Invoke();
 
