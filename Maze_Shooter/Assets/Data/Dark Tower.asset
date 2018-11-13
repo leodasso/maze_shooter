@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e6292b2c06870d4495f009f912b9600, type: 3}
-  m_Name: default
+  m_Name: Dark Tower
   m_EditorClassIdentifier: 
   settings:
   - {fileID: 114784277988980450}
@@ -94,10 +94,10 @@ MonoBehaviour:
     value: 12
   threshold:
     overrideState: 1
-    value: 0.69
+    value: 0.85
   softKnee:
     overrideState: 1
-    value: 0.232
+    value: 0.461
   clamp:
     overrideState: 0
     value: 65472
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb84e30e02715445aeb9959894e3b4d, type: 3}
   m_Name: ColorGrading
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
@@ -174,23 +174,23 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   tint:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 33
   colorFilter:
     overrideState: 0
-    value: {r: 1, g: 1, b: 1, a: 1}
+    value: {r: 1, g: 0.5678327, b: 0.4481132, a: 1}
   hueShift:
     overrideState: 0
-    value: 0
+    value: 5
   saturation:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 33
   brightness:
     overrideState: 0
     value: 0
   postExposure:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 0.01
   contrast:
     overrideState: 0
     value: 0
@@ -222,14 +222,14 @@ MonoBehaviour:
     overrideState: 0
     value: 100
   lift:
-    overrideState: 0
-    value: {x: 1, y: 1, z: 1, w: 0}
+    overrideState: 1
+    value: {x: 0.7936847, y: 0.86086726, z: 1, w: 0.021141648}
   gamma:
     overrideState: 0
     value: {x: 1, y: 1, z: 1, w: 0}
   gain:
-    overrideState: 0
-    value: {x: 1, y: 1, z: 1, w: 0}
+    overrideState: 1
+    value: {x: 1, y: 0.6687368, z: 0.63340664, w: 0}
   masterCurve:
     overrideState: 0
     value:
