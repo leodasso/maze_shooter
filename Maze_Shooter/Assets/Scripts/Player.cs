@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
 	public FloatReference fireThreshhold;
 	public FloatReference fireRateMultiplier;
 
+	public SpriteRotation spriteRotation;
+
 	bool _firing;
 	Rewired.Player _player;
 	Ship _ship;
@@ -54,6 +56,7 @@ public class Player : MonoBehaviour
 		if (_firing)
 		{
 			float angle =  Math.AngleFromVector2(new Vector2(fireInput.x, fireInput.y), -90);
+			if (spriteRotation) spriteRotation.Rotation = angle;
 			gunRotator.transform.localEulerAngles = new Vector3(0, 0, angle);
 		}
 
