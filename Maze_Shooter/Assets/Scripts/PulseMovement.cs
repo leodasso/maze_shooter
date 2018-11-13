@@ -9,6 +9,8 @@ using UnityEngine.Events;
 public class PulseMovement : MonoBehaviour
 {
 	public FloatReference startDelay;
+	[Tooltip("A random amount of this value will be added to start delay")]
+	public FloatReference randomStartDelay;
 	public FloatReference speedMultiplier;
 	public CurveObject speedCurve;
 
@@ -28,7 +30,7 @@ public class PulseMovement : MonoBehaviour
 	{
 		_targetFinder = GetComponent<TargetFinder>();
 		_rigidbody2D = GetComponent<Rigidbody2D>();
-		_delayTimer = startDelay.Value;
+		_delayTimer = startDelay.Value + Random.Range(0, randomStartDelay.Value);
 		if (!speedCurve)
 		{
 			Debug.LogWarning(name + " has no speed curve defined, and it just don't work like that.");
