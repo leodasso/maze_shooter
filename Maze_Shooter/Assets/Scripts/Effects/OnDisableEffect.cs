@@ -6,6 +6,7 @@ public class OnDisableEffect : EffectsBase
 {
 	void OnDisable()
 	{
-		InstantiateEffect();
+		if (_lifetime > .1f)
+			InstantiateEffect();
 	}
 }

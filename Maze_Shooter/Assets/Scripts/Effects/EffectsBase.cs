@@ -14,8 +14,20 @@ public class EffectsBase : MonoBehaviour
 	static GameObject _effectsParent;
 	static GameObject _newInstance;
 
+	protected float _lifetime;
+
+	void Update()
+	{
+		_lifetime += Time.deltaTime;
+	}
+
 	protected virtual void InstantiateEffect()
 	{
+		if (Time.unscaledTime < Mathf.Epsilon)
+		{
+			return;
+		}
+		
 		if (effectPrefab == null)
 		{
 			Debug.LogWarning("Effect prefab is not set for " + name, gameObject);
