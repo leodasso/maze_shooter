@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 114645096158992958}
   - component: {fileID: 114380378931557296}
   - component: {fileID: 114630194874395596}
+  - component: {fileID: 114525479039373258}
   m_Layer: 11
   m_Name: Dark Orb
   m_TagString: Untagged
@@ -234,6 +235,36 @@ MonoBehaviour:
   effectPrefab: {fileID: 1181547791888404, guid: bb2d699b161ff94429c16fc83c016bd1,
     type: 2}
   lifetime: 2
+--- !u!114 &114525479039373258
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1380883303625714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83b5d72ab14f3f4c8442f76808cf317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - {fileID: 11400000, guid: 2f70adeed3bc4c549a62eb5244963e1b, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114963155886209364}
+        m_MethodName: IncreaseTimeMultiplier
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.15
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  comment: 
 --- !u!114 &114543359363089866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -266,6 +297,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: aab09b8da784a95408d91774eca91514, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 2f70adeed3bc4c549a62eb5244963e1b, type: 2}
         m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
@@ -333,10 +375,15 @@ MonoBehaviour:
     useConstant: 0
     constantValue: 2
     valueObject: {fileID: 0}
+  randomStartDelay:
+    useConstant: 0
+    constantValue: 0.7
+    valueObject: {fileID: 0}
   speedMultiplier:
     useConstant: 0
-    constantValue: 40
+    constantValue: 30
     valueObject: {fileID: 0}
+  timeMultiplier: 1
   speedCurve: {fileID: 11400000, guid: 805df53ce52112345a5a6db55cf54d45, type: 2}
   onPulse:
     m_PersistentCalls:
