@@ -17,7 +17,7 @@ public class Stage : ScriptableObject
     {
         get
         {
-            if (useDefaultPlayerShip && customShip != null) 
+            if (!useDefaultPlayerShip && customShip != null) 
                 return customShip;
 
             return GameMaster.Get().defaultPlayerShip;
