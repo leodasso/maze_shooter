@@ -4,6 +4,12 @@ TextureImporter:
   fileIDToRecycleName:
     21300000: stealth_ship_1
     21300002: fireball_1
+    21300004: fireball_2
+    21300006: plasma_bolt_1
+    21300008: onyx_0
+    21300010: onyx_1
+    21300012: onyx_2
+    21300014: onyx_3
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -53,7 +59,7 @@ TextureImporter:
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   maxTextureSizeSet: 0
@@ -89,14 +95,20 @@ TextureImporter:
       name: stealth_ship_1
       rect:
         serializedVersion: 2
-        x: 67
-        y: 384
+        x: 326
+        y: 442
         width: 57
         height: 64
       alignment: 9
       pivot: {x: 0.49999973, y: 0.41507435}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      outline:
+      - - {x: -7.5, y: 32}
+        - {x: -28.5, y: -4}
+        - {x: -28.5, y: -32}
+        - {x: 28.5, y: -31}
+        - {x: 28.5, y: -16}
+        - {x: 9.5, y: 32}
       physicsShape: []
       tessellationDetail: 0
       bones: []
@@ -109,8 +121,8 @@ TextureImporter:
       name: fireball_1
       rect:
         serializedVersion: 2
-        x: 144
-        y: 387
+        x: 383
+        y: 448
         width: 32
         height: 53
       alignment: 9
@@ -121,6 +133,161 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: ddb8d929ff3042d4b91a5a96e89ded1c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fireball_2
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 449
+        width: 32
+        height: 53
+      alignment: 9
+      pivot: {x: 0.49999905, y: 0.6937089}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3f5a89c982e81647afa911e091b5622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plasma_bolt_1
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 429
+        width: 16
+        height: 74
+      alignment: 9
+      pivot: {x: 0.46006012, y: 0.88571703}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 943014cf47959924c9aa0fcfe6f5350f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onyx_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 382
+        width: 156
+        height: 130
+      alignment: 9
+      pivot: {x: 0.41069114, y: 0.24993497}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -76, y: 49}
+        - {x: -76, y: 27}
+        - {x: -45, y: -65}
+        - {x: 21, y: -65}
+        - {x: 78, y: 49}
+        - {x: 78, y: 63}
+        - {x: 25, y: 56}
+        - {x: -75, y: 50}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a137caa76e2d5524bab4d3bd128c06e3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onyx_1
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 381
+        width: 163
+        height: 130
+      alignment: 9
+      pivot: {x: 0.41069114, y: 0.24993497}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -81.5, y: 36}
+        - {x: -43.5, y: -65}
+        - {x: 21.5, y: -65}
+        - {x: 39.5, y: -7}
+        - {x: 81.5, y: 41}
+        - {x: 81.5, y: 62}
+        - {x: 9.5, y: 50}
+        - {x: -80.5, y: 55}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8bf9c711f1b033438c48c75d8888b84
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onyx_2
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 265
+        width: 156
+        height: 130
+      alignment: 9
+      pivot: {x: 0.41069114, y: 0.24993497}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 8, y: 51}
+        - {x: -1, y: 43}
+        - {x: -74, y: 49}
+        - {x: -74, y: 0}
+        - {x: -66, y: -31}
+        - {x: -46, y: -64}
+        - {x: 18, y: -61}
+        - {x: 60, y: 35}
+        - {x: 78, y: 51}
+        - {x: 78, y: 65}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b71b0901a646024429d5cb30a393ba8f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: onyx_3
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 265
+        width: 156
+        height: 130
+      alignment: 9
+      pivot: {x: 0.41069114, y: 0.24993497}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 53, y: 61}
+        - {x: 22, y: 49}
+        - {x: -67, y: 46}
+        - {x: -78, y: 38}
+        - {x: -77, y: -9}
+        - {x: -53, y: -65}
+        - {x: 22, y: -65}
+        - {x: 77, y: 43}
+        - {x: 77, y: 60}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d842db7bdb8c41848bfc18da42987efa
       vertices: []
       indices: 
       edges: []
