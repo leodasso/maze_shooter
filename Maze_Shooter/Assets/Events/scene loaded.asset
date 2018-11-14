@@ -9,12 +9,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad82d867e45a0d54e820f85e0fae95d9, type: 3}
-  m_Name: Stage begin
+  m_Name: scene loaded
   m_EditorClassIdentifier: 
   debug: 0
   onEventRaised:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: c790b694fbd0b284b858b074c5ba9411, type: 2}
+        m_MethodName: SetTransitioning
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  description: The actual playable part of the stage has started
+  description: The scene has loaded

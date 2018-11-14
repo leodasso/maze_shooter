@@ -11,17 +11,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d364b781a758cb44dbf568095ac390cf, type: 3}
   m_Name: Survive 1
   m_EditorClassIdentifier: 
-  lives:
-    useConstant: 0
-    constantValue: 3
-    valueObject: {fileID: 0}
-  useDefaultPlayerShip: 0
+  sceneName: Survive1
+  useDefaultPlayerShip: 1
   customShip: {fileID: 1924984838417708, guid: 0f715f3a4faa7d24cac0830c8bce6c6f, type: 2}
   startingDelay:
     useConstant: 0
     constantValue: 3
     valueObject: {fileID: 0}
   immediateEvents:
+  - {fileID: 11400000, guid: 577ae8379b1145f4084ce4c0aa692b3f, type: 2}
   - {fileID: 11400000, guid: d59afbacd3a55d243a91bacaf0cb6478, type: 2}
   postStartingDelayEvents:
   - {fileID: 11400000, guid: 0127c1814841fdf499b6d3be9d3d2fd8, type: 2}

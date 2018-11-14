@@ -23,10 +23,10 @@ public class EffectsBase : MonoBehaviour
 
 	protected virtual void InstantiateEffect()
 	{
-		if (Time.unscaledTime < Mathf.Epsilon)
-		{
-			return;
-		}
+		if (Time.unscaledTime < Mathf.Epsilon) return;
+		
+		// If this is being disabled because we're loading a scene, we don't want it to create an effect.
+		if (GameMaster.transitioning) return;
 		
 		if (effectPrefab == null)
 		{
