@@ -10,6 +10,7 @@ TextureImporter:
     21300010: onyx_1
     21300012: onyx_2
     21300014: onyx_3
+    21300016: transparent_spike_bubble
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -197,7 +198,16 @@ TextureImporter:
         - {x: 78, y: 63}
         - {x: 25, y: 56}
         - {x: -75, y: 50}
-      physicsShape: []
+      physicsShape:
+      - - {x: -58, y: -7}
+        - {x: -42, y: -48}
+        - {x: -40, y: -61}
+        - {x: 20, y: -63}
+        - {x: 25, y: -30}
+        - {x: 43, y: 16}
+        - {x: 78, y: 62}
+        - {x: -13, y: 37}
+        - {x: -73, y: 47}
       tessellationDetail: 0
       bones: []
       spriteID: a137caa76e2d5524bab4d3bd128c06e3
@@ -288,6 +298,26 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: d842db7bdb8c41848bfc18da42987efa
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transparent_spike_bubble
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 100
+        width: 262
+        height: 146
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de9d2972890710142b97f2dfc208915e
       vertices: []
       indices: 
       edges: []
