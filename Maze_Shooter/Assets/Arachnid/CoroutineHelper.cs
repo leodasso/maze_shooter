@@ -13,6 +13,7 @@ namespace Arachnid
             if (_coroutineObject == null)
             {
                 GameObject coroutineHelper = new GameObject("Coroutine Helper");
+                DontDestroyOnLoad(coroutineHelper);
                 _coroutineObject = coroutineHelper.AddComponent<CoroutineHelper>();
             }
 
