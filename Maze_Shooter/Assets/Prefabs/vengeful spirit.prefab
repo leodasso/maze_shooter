@@ -138,7 +138,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1924984838417708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.348, y: -2.837, z: 0}
+  m_LocalPosition: {x: -2.1434426, y: -3.0649486, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4193263239196386}
@@ -353,10 +353,6 @@ MonoBehaviour:
     useConstant: 0
     constantValue: 0.15
     valueObject: {fileID: 0}
-  fireRateMultiplier:
-    useConstant: 0
-    constantValue: 14
-    valueObject: {fileID: 0}
   spriteRotation: {fileID: 114234481624092410}
 --- !u!114 &114286956793985412
 MonoBehaviour:
@@ -371,9 +367,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementInput: {x: 0, y: 0}
   enginePower:
-    useConstant: 0
+    useConstant: 1
     constantValue: 1333
-    valueObject: {fileID: 0}
+    valueObject: {fileID: 11400000, guid: 868a9604caea1ac49b853683a131f8c8, type: 2}
 --- !u!114 &114399187806725148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -435,13 +431,13 @@ MonoBehaviour:
     useConstant: 0
     constantValue: 0
     valueObject: {fileID: 0}
-  fireRate:
-    useConstant: 0
-    constantValue: 12
-    valueObject: {fileID: 0}
+  fireRateIntensity: 1
+  level: 0
+  gunType: 0
+  gunData: {fileID: 11400000, guid: ce663fd155f2ffb408c120a8dd9794c4, type: 2}
+  firingRate: {x: 0, y: 18.558037}
   firingPattern: {fileID: 0}
   ammo: {fileID: 1341631613168128, guid: 87a4d3b69935388409efe832955e4d0d, type: 2}
-  gunType: 0
 --- !u!198 &198033124916641892
 ParticleSystem:
   m_ObjectHideFlags: 1
