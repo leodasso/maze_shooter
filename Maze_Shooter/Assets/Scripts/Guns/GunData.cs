@@ -17,4 +17,6 @@ public class GunData : ScriptableObject
 	[AssetsOnly, PreviewField, AssetList(AutoPopulate = false, Path = "Prefabs/Ammo")]
 	public GameObject ammo;
 
+	public int MaxLevel => Mathf.Max(0, firingPatterns.Count - 1);
+
 }

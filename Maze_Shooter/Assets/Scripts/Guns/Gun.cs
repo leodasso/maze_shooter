@@ -13,8 +13,13 @@ public class Gun : MonoBehaviour
 	
 	[Range(0, 1)]
 	public float fireRateIntensity = 1;
+
 	[MinValue(0)]
-	public int level = 0;
+	public int Level
+	{
+		get { return _level; }
+		set { _level = Mathf.Clamp(value, 0, HasGunData ? gunData.MaxLevel : 0); }
+	}
 	public GunType gunType;
 	
 	public GunData gunData;
@@ -34,7 +39,7 @@ public class Gun : MonoBehaviour
 			if (!HasGunData) return firingPattern;
 			if (gunData.firingPatterns.Count < 1) return firingPattern;
 			int maxAvailableFiringPattern = gunData.firingPatterns.Count - 1;
-			int index = Mathf.Clamp(level, 0, maxAvailableFiringPattern);
+			int index = Mathf.Clamp(Level, 0, maxAvailableFiringPattern);
 			return gunData.firingPatterns[index];
 		}
 	}
@@ -47,6 +52,7 @@ public class Gun : MonoBehaviour
 	bool HasGunData => gunData != null;
 	GameObject Ammo => HasGunData ? gunData.ammo : ammo;
 	bool IsCoolingDown => _cooldownTimer < Cooldown;
+	int _level;
 
 	// Use this for initialization
 	void Start ()
