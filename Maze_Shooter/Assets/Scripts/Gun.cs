@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
 using Sirenix.OdinInspector;
@@ -10,23 +9,50 @@ public class Gun : MonoBehaviour
 {
 	[ToggleLeft]
 	public bool firing;
-
 	public FloatReference startFiringDelay;
-	public FloatReference fireRate;
-	[AssetsOnly]
-	public FiringPattern firingPattern;
-	[AssetsOnly, PreviewField, AssetList(AutoPopulate = false, Path = "Prefabs/Ammo")]
-	public GameObject ammo;
+	
+	[Range(0, 1)]
+	public float fireRateIntensity = 1;
+	[MinValue(0)]
+	public int level = 0;
 	public GunType gunType;
+	
+	public GunData gunData;
+	[HideIf("HasGunData"), BoxGroup("local gun")]
+	[MinMaxSlider(.1f, 60, true), Tooltip("Number of shots per second. The minimum is when the player is barely touching joystick," +
+	                                " and max is when they're at full tilt.")]
+	public Vector2 firingRate;
+	[AssetsOnly, HideIf("HasGunData"), BoxGroup("local gun")]
+	public FiringPattern firingPattern;
+	[AssetsOnly, PreviewField, AssetList(AutoPopulate = false, Path = "Prefabs/Ammo"), BoxGroup("local gun"), HideIf("HasGunData")]
+	public GameObject ammo;
+	
 
-	float Cooldown => 1f / fireRate.Value;
+	FiringPattern FiringPattern {
+		get
+		{
+			if (!HasGunData) return firingPattern;
+			if (gunData.firingPatterns.Count < 1) return firingPattern;
+			int maxAvailableFiringPattern = gunData.firingPatterns.Count - 1;
+			int index = Mathf.Clamp(level, 0, maxAvailableFiringPattern);
+			return gunData.firingPatterns[index];
+		}
+	}
+	
+	Vector2 FireRateRange => HasGunData ? gunData.firingRate : firingRate;
+	float FireRate => Mathf.Lerp(FireRateRange.x, FireRateRange.y, fireRateIntensity);
+	float Cooldown => 1f / FireRate;
 	float _cooldownTimer;
 	float _startFiringTimer;
+	bool HasGunData => gunData != null;
+	GameObject Ammo => HasGunData ? gunData.ammo : ammo;
+	bool IsCoolingDown => _cooldownTimer < Cooldown;
 
 	// Use this for initialization
 	void Start ()
 	{
 		_startFiringTimer = startFiringDelay.Value;
+		_cooldownTimer = 0;
 	}
 	
 	// Update is called once per frame
@@ -39,33 +65,27 @@ public class Gun : MonoBehaviour
 			return;
 		}
 		
-		if (_cooldownTimer >= 0) _cooldownTimer -= Time.deltaTime;
-		
+		if (_cooldownTimer <= Cooldown)
+			_cooldownTimer += Time.deltaTime;
 		else if (firing) Fire();
-	}
-
-	bool IsCoolingDown()
-	{
-		return _cooldownTimer > 0;
 	}
 
 	[Button]
 	public void Fire()
 	{
-		if (IsCoolingDown()) return;
-		
-		if (!ammo)
+		if (IsCoolingDown) return;
+		if (!Ammo)
 		{
 			Debug.LogError("No ammo ref is set on gun " + name, gameObject);
 			return;
 		}
 
-		if (firingPattern)
+		if (FiringPattern)
 			StartCoroutine(FireRoutine());
 		else 
 			CreateBullet(Vector2.zero, 0);
 
-		_cooldownTimer = Cooldown;
+		_cooldownTimer = 0;
 	}
 
 	IEnumerator FireRoutine()
@@ -75,16 +95,17 @@ public class Gun : MonoBehaviour
 		float y;
 		float progress = 0;
 			
-		for (int i = 0; i < firingPattern.bullets; i++)
+		for (int i = 0; i < FiringPattern.bullets; i++)
 		{
 			int switcher = i % 2 == 0 ? 1 : -1;
-			progress = (float) i / (firingPattern.bullets - 1);
-			x = Mathf.Lerp(0, firingPattern.widthSpread, progress) * switcher;
-			y = Mathf.Lerp(0, firingPattern.heightSpread, progress);
-			angle = Mathf.Lerp(0, firingPattern.angleSpread, progress) * switcher;
+			progress = (float) i / Mathf.Max(1, FiringPattern.bullets - 1);
+			
+			x = Mathf.Lerp(0, FiringPattern.widthSpread, progress) * switcher;
+			y = Mathf.Lerp(0, FiringPattern.heightSpread, progress);
+			angle = Mathf.Lerp(0, FiringPattern.angleSpread, progress) * switcher;
 
-			CreateBullet(new Vector2(x, y), -Math.RoundToNearest(angle, firingPattern.snapAngle) );
-			yield return new WaitForSeconds(firingPattern.interval);
+			CreateBullet(new Vector2(x, y), -Math.RoundToNearest(angle, FiringPattern.snapAngle) );
+			yield return new WaitForSeconds(FiringPattern.interval);
 		}
 	}
 
@@ -92,7 +113,7 @@ public class Gun : MonoBehaviour
 	{
 		Vector2 localOffset = transform.TransformPoint(offset);
 		Debug.DrawLine(transform.position, localOffset, Color.yellow, 1);
-		var newAmmo = Instantiate(ammo, localOffset, transform.rotation);
+		var newAmmo = Instantiate(Ammo, localOffset, transform.rotation);
 		newAmmo.transform.Rotate(0, 0, angle, Space.World);
 		
 		newAmmo.layer = LayerMask.NameToLayer(gunType == GunType.Enemy ? 
