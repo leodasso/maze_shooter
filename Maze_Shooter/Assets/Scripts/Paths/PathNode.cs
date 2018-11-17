@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Arachnid;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -8,17 +9,35 @@ namespace Paths
 	[ExecuteInEditMode]
 	public class PathNode : MonoBehaviour
 	{
-		[InfoBox("No pathway could be found in parents.", InfoMessageType.Warning, "NoPathway")]
-		public Pathway pathway;
+		public List<PathNode> connectedNodes = new List<PathNode>();
 
-		bool NoPathway => pathway == null;
 		SpriteRenderer _spriteRenderer;
-		
+
+		[Button]
+		void FixConnections()
+		{
+			foreach (var n in connectedNodes)
+			{
+				if (n == null) continue;
+				if (n.connectedNodes.Contains(this)) continue;
+				n.connectedNodes.Add(this);
+				EditorTools.SetDirty(n);
+			}
+		}
+
+		void OnDrawGizmos()
+		{
+			Gizmos.color = Color.yellow;
+			foreach (var n in connectedNodes)
+			{
+				if (n == null) continue;
+				Gizmos.DrawLine(transform.position, n.transform.position);
+			}
+		}
+
 		// Use this for initialization
 		void Start()
 		{
-			if (!pathway) GetPathway();
-			pathway?.RefreshPathNodes();
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 			
 			if (Application.isPlaying && _spriteRenderer) 
@@ -29,12 +48,6 @@ namespace Paths
 		public void GetSpriteRenderer()
 		{
 			_spriteRenderer = GetComponent<SpriteRenderer>();
-		}
-
-		[Button]
-		void GetPathway()
-		{
-			pathway = GetComponentInParent<Pathway>();
 		}
 
 		public string SortingLayer()
