@@ -13,14 +13,18 @@ public class TakeSortingOfParent : MonoBehaviour
 	void Start ()
 	{
 		_spriteRenderer = GetComponent<SpriteRenderer>();
-		_parentSpriteRenderer = GetComponentInParent<SpriteRenderer>();
+		_parentSpriteRenderer = transform.parent.GetComponent<SpriteRenderer>();
+		Execute();
+	}
+
+	void Update()
+	{
 		Execute();
 	}
 
 	void Execute()
 	{
 		if (!_spriteRenderer || !_parentSpriteRenderer) return;
-
 		_spriteRenderer.sortingLayerID = _parentSpriteRenderer.sortingLayerID;
 		_spriteRenderer.sortingOrder = _parentSpriteRenderer.sortingOrder + offset;
 	}
