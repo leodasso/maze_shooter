@@ -29,7 +29,7 @@ public class SENaturalBloomAndDirtyLens : MonoBehaviour
 		if (!material)
 			material = new Material(shader);
 
-		if (!SystemInfo.supportsImageEffects || !SystemInfo.supportsRenderTextures || !SystemInfo.SupportsRenderTextureFormat(RenderTextureFormat.ARGBHalf))
+		if (!SystemInfo.supportsImageEffects || !SystemInfo.SupportsRenderTextureFormat(RenderTextureFormat.ARGBHalf))
 		{
 			isSupported = false;
 		}
