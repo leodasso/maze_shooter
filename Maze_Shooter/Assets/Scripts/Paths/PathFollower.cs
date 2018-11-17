@@ -9,31 +9,32 @@ namespace Paths
 {
 	public class PathFollower : MonoBehaviour
 	{
-		[Range(0, 1)]
-		public float progress;
+
 		public FloatReference speed;
 		public Vector2 offset;
 		public Vector2 moveInput;
 
 		public PathNode beginningNode;
-
-		[ReadOnly]
-		public PathNode startNode;
-		[ReadOnly]
-		public PathNode endNode;
-		[ReadOnly]
-		public PathNode prevNode;
 		
-		[ToggleLeft, Toggle("Adopt the sorting order of the pathnodes as it traverses the path")]
+		[Toggle("Adopt the sorting order of the pathnodes as it traverses the path"), ToggleGroup("controlSortingOrder")]
 		public bool controlSortingOrder;
 		
-		[ShowIf("controlSortingOrder")]
+		[ToggleGroup("controlSortingOrder")]
 		public List<SpriteRenderer> spriteRenderers = new List<SpriteRenderer>();
 
+		[ToggleGroup("controlSortingOrder")]
 		public int sortingOrder;
+
+		[ReadOnly, HideLabel, HorizontalGroup("traversal/nodes", Title = "Start & End Nodes"), ShowInInspector]
+		PathNode _startNode;
+		[ReadOnly, HideLabel, HorizontalGroup("traversal/nodes"), ShowInInspector]
+		PathNode _endNode;
+		[Range(0, 1), BoxGroup("traversal"), ShowInInspector]
+		float _progress;
 
 		Player _player;
 		NodeChoice _pendingChoice;
+		PathNode _prevNode;
 		
 		// Use this for initialization
 		void Start()
@@ -53,15 +54,30 @@ namespace Paths
 				return;
 			}
 			
-			if (!startNode || !endNode) return;
-			if (progress < 1)
+			if (!_startNode || !_endNode) return;
+			if (_progress < 1)
 			{
-				float dist = Vector3.Distance(startNode.transform.position, endNode.transform.position);
-				progress += Time.deltaTime * speed.Value / dist;
-				transform.position = Vector3.Lerp(startNode.transform.position, endNode.transform.position, progress) + (Vector3)offset;
+				float dist = Vector3.Distance(_startNode.transform.position, _endNode.transform.position);
+				_progress += Time.deltaTime * speed.Value / dist;
+				transform.position = Vector3.Lerp(_startNode.transform.position, _endNode.transform.position, _progress) + (Vector3)offset;
 			}
 			else
-				NodeReached(endNode);
+				NodeReached(_endNode);
+			
+			if (controlSortingOrder) SetSorting(_progress);
+		}
+
+		void SetSorting(float progress)
+		{
+			if (!_startNode || !_endNode) return;
+			string sortingLayer = progress < .5f ? _startNode.SortingLayer() : _endNode.SortingLayer();
+			int order = Mathf.RoundToInt(Mathf.Lerp(_startNode.SortingOrder(), _endNode.SortingOrder(), progress));
+			
+			foreach (var r in spriteRenderers)
+			{
+				r.sortingOrder = order;
+				r.sortingLayerName = sortingLayer;
+			}
 		}
 
 		void NodeReached(PathNode node)
@@ -71,7 +87,7 @@ namespace Paths
 			{
 				foreach (var n in node.connectedNodes)
 				{
-					if (n == prevNode) continue;
+					if (n == _prevNode) continue;
 					BeginMovement(node, n);
 					return;
 				}
@@ -84,19 +100,18 @@ namespace Paths
 		public void PlaceAtNode(PathNode node)
 		{
 			transform.position = node.transform.position + (Vector3) offset;
-			startNode = prevNode = node;
+			_startNode = _prevNode = node;
 			_pendingChoice = new NodeChoice();
 			_pendingChoice.standingNode = node;
 			_pendingChoice.nodes.AddRange(node.connectedNodes);
 		}
 
-		[Button]
 		void BeginMovement(PathNode newStartNode, PathNode newEndNode)
 		{
-			startNode = newStartNode;
-			prevNode = startNode;
-			endNode = newEndNode;
-			progress = 0;
+			_startNode = newStartNode;
+			_prevNode = _startNode;
+			_endNode = newEndNode;
+			_progress = 0;
 			_pendingChoice = null;
 		}
 
