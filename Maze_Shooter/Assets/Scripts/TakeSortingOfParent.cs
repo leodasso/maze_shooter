@@ -1,20 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
-[RequireComponent(typeof(SpriteRenderer)), ExecuteInEditMode]
+[ExecuteInEditMode, RequireComponent(typeof(Renderer))]
 public class TakeSortingOfParent : MonoBehaviour
 {
 	public int offset;
 	SpriteRenderer _parentSpriteRenderer;
-	SpriteRenderer _spriteRenderer;
+	readonly List<Renderer> _myRenderers = new List<Renderer>();
+
+	[Button]
+	void Refresh()
+	{
+		_myRenderers.Clear();
+		_myRenderers.AddRange(GetComponents<Renderer>());
+		_parentSpriteRenderer = transform.parent.GetComponent<SpriteRenderer>();
+		Execute();
+	}
 	
 	// Use this for initialization
 	void Start ()
 	{
-		_spriteRenderer = GetComponent<SpriteRenderer>();
-		_parentSpriteRenderer = transform.parent.GetComponent<SpriteRenderer>();
-		Execute();
+		Refresh();
 	}
 
 	void Update()
@@ -24,8 +32,11 @@ public class TakeSortingOfParent : MonoBehaviour
 
 	void Execute()
 	{
-		if (!_spriteRenderer || !_parentSpriteRenderer) return;
-		_spriteRenderer.sortingLayerID = _parentSpriteRenderer.sortingLayerID;
-		_spriteRenderer.sortingOrder = _parentSpriteRenderer.sortingOrder + offset;
+		if ( !_parentSpriteRenderer) return;
+		foreach (var r in _myRenderers)
+		{
+			r.sortingLayerID = _parentSpriteRenderer.sortingLayerID;
+			r.sortingOrder = _parentSpriteRenderer.sortingOrder + offset;
+		}
 	}
 }
