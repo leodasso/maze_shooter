@@ -13,9 +13,9 @@ The design goal is to stretch the envelope of what a twin-stick shooter is to th
 The goal of each stage must be simple enough to fit in a sentence at the intro of the stage. 
 There is a 'Super Mario World' style world map.
 
-Story
+Story:
 Play as a hero who has dedicated life to defeating the dark overlord. This happens in world 1. The rest of the game is various ways the hero struggles to come to terms with a peaceful world.
 
-Challenges
+Challenges:
 Each stage will have a number of additional challenges to complete and earn POWER MOONS! (just kidding they won't literally be moons but it's the same principal.
 The power moons could be found hidden in the stage, or from achieveing excellence like "Accuracy > 90%" or "No Damage"
