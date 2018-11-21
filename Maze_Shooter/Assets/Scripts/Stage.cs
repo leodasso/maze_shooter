@@ -8,6 +8,8 @@ using Sirenix.OdinInspector;
 [CreateAssetMenu(menuName = "Stage")]
 public class Stage : ScriptableObject
 {
+    public string displayName;
+    public Color stageColor = Color.white;
     public string sceneName;
     public bool useDefaultPlayerShip = true;
     
