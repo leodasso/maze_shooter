@@ -40,7 +40,14 @@ namespace Paths
 		void Start()
 		{
 			_player = ReInput.players.GetPlayer(0);
-			if (beginningNode) PlaceAtNode(beginningNode);
+			if (beginningNode) SetInitialNode(beginningNode);
+		}
+
+		void SetInitialNode(PathNode node)
+		{
+			PlaceAtNode(beginningNode);
+			node.onNodeReached.Invoke();
+			node.linkedCrystal?.SetSelected(true);
 		}
 
 		void Update()
@@ -72,7 +79,12 @@ namespace Paths
 			if (!_startNode || !_endNode) return;
 			string sortingLayer = progress < .5f ? _startNode.SortingLayer() : _endNode.SortingLayer();
 			int order = Mathf.RoundToInt(Mathf.Lerp(_startNode.SortingOrder(), _endNode.SortingOrder(), progress));
-			
+			ApplySorting(sortingLayer, order);
+		}
+
+		void ApplySorting(string sortingLayer, int order)
+		{
+			sortingOrder = order;
 			foreach (var r in spriteRenderers)
 			{
 				r.sortingOrder = order;
@@ -113,6 +125,7 @@ namespace Paths
 			_pendingChoice = new NodeChoice();
 			_pendingChoice.standingNode = node;
 			_pendingChoice.nodes.AddRange(node.connectedNodes);
+			ApplySorting(node.SortingLayer(), node.SortingOrder());
 		}
 
 		void BeginMovement(PathNode newStartNode, PathNode newEndNode)
@@ -122,7 +135,7 @@ namespace Paths
 			_startNode = newStartNode;
 			_prevNode = _startNode;
 			_endNode = newEndNode;
-			_progress = 0;
+			_progress = 0.05f;
 			_pendingChoice = null;
 		}
 

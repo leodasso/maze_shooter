@@ -45,7 +45,7 @@ namespace Paths
 		}
 
 		// Use this for initialization
-		void Start()
+		void Awake() 
 		{
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 			
