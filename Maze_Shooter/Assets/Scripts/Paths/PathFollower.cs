@@ -32,7 +32,7 @@ namespace Paths
 		[Range(0, 1), BoxGroup("traversal"), ShowInInspector]
 		float _progress;
 
-		Player _player;
+		Rewired.Player _player;
 		NodeChoice _pendingChoice;
 		PathNode _prevNode;
 		
@@ -82,6 +82,15 @@ namespace Paths
 
 		void NodeReached(PathNode node)
 		{
+			node.onNodeReached.Invoke();
+			node.linkedCrystal?.SetSelected(true);
+			
+			if (node.requiresChoice)
+			{
+				PlaceAtNode(node);
+				return;
+			}
+			
 			// If there's less than 3 node connections, then a choice isn't necessary; just continue along the path
 			if (node.connectedNodes.Count < 3)
 			{
@@ -97,7 +106,7 @@ namespace Paths
 			PlaceAtNode(node);
 		}
 
-		public void PlaceAtNode(PathNode node)
+		void PlaceAtNode(PathNode node)
 		{
 			transform.position = node.transform.position + (Vector3) offset;
 			_startNode = _prevNode = node;
@@ -108,6 +117,8 @@ namespace Paths
 
 		void BeginMovement(PathNode newStartNode, PathNode newEndNode)
 		{
+			newStartNode.onNodeLeft.Invoke();
+			newStartNode.linkedCrystal?.SetSelected(false);
 			_startNode = newStartNode;
 			_prevNode = _startNode;
 			_endNode = newEndNode;
@@ -128,6 +139,7 @@ namespace Paths
 
 			foreach (var n in _pendingChoice.nodes)
 			{
+				if (!n.available) continue;
 				Vector2 dir = n.transform.position - _pendingChoice.standingNode.transform.position;
 				float dot = Vector2.Dot(normalizedInput, dir.normalized);
 				if (dot > closestDot)

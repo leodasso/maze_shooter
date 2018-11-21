@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
 
 namespace Paths
 {
@@ -10,6 +11,14 @@ namespace Paths
 	public class PathNode : MonoBehaviour
 	{
 		public List<PathNode> connectedNodes = new List<PathNode>();
+		[ToggleLeft]
+		public bool available;
+		[ToggleLeft] 
+		public bool requiresChoice;
+
+		public StageCrystal linkedCrystal;
+		public UnityEvent onNodeReached;
+		public UnityEvent onNodeLeft;
 
 		SpriteRenderer _spriteRenderer;
 
