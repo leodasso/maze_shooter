@@ -13,6 +13,10 @@ public class Stage : ScriptableObject
     
     [HideIf("useDefaultPlayerShip")]
     public GameObject customShip;
+    
+    public FloatReference startingDelay;
+    public List<GameEvent> immediateEvents;
+    public List<GameEvent> postStartingDelayEvents;
 
     public GameObject PlayerShip
     {
@@ -27,18 +31,6 @@ public class Stage : ScriptableObject
 
     public void Load(float delay)
     {
-        CoroutineHelper.NewCoroutine(DelayLoadScene(delay));
+        GameMaster.Get().LoadScene(sceneName, delay);
     }
-
-    IEnumerator DelayLoadScene(float delay)
-    {
-        yield return new WaitForSecondsRealtime(delay);
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public FloatReference startingDelay;
-    
-    public List<GameEvent> immediateEvents;
-    public List<GameEvent> postStartingDelayEvents;
-
 }

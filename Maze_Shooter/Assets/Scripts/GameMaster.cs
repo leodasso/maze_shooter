@@ -8,10 +8,11 @@ using UnityEngine.SceneManagement;
 public class GameMaster : ScriptableObject
 {
     public GameObject defaultPlayerShip;
-    public float defaultRespawnTime = 3;
     public Stage currentStage;
-
     static GameMaster _gameMaster;
+    public SaveDataAvatar currentAvatar;
+
+    public static string saveFilesDirectory = "saveFiles/";
     
     /// <summary>
     /// True when transitioning between scenes/stages
@@ -40,5 +41,48 @@ public class GameMaster : ScriptableObject
     {
         yield return new WaitForSecondsRealtime(delay);
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void VerifyMainSaveFile()
+    {
+        if (ES3.FileExists("main.es3"))
+            Debug.Log("Main save data exists.");
+        else
+        {
+            Debug.Log("Main save data does not exist.");
+        }
+
+        if (ES3.KeyExists("mostRecentStartup", "main.es3"))
+            Debug.Log("Welcome back! Last play session was " + ES3.Load<System.DateTime>("mostRecentStartup", "main.es3"));
+
+        ES3.Save<System.DateTime>("mostRecentStartup", System.DateTime.Now, "main.es3");
+
+        if (ES3.DirectoryExists(saveFilesDirectory))
+        {
+            foreach (var filename in ES3.GetFiles(saveFilesDirectory))
+            {
+                Debug.Log("Found save file: " + filename);
+            }
+        }
+        else Debug.Log("No save files exist.");
+    }
+
+    public void GotoWorldMap(float delay)
+    {
+        LoadScene("WorldMap", delay);
+    }
+
+    public static bool AvatarIsUsedBySaveFile(SaveDataAvatar avatar)
+    {
+        return ES3.FileExists(saveFilesDirectory + avatar.name + ".es3");
+    }
+
+    public bool TryGetSaveFileDirectory(out string file)
+    {
+        file = "";
+        if (!currentAvatar) return false;
+
+        file = saveFilesDirectory + currentAvatar.name + ".es3";
+        return true;
     }
 }
