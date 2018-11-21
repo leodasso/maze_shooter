@@ -52,6 +52,11 @@ namespace Paths
 
 		void Update()
 		{
+			// Entering a stage
+			if (_player.GetButtonDown("alpha") && _startNode != null)
+				_startNode.linkedCrystal?.EnterStage();
+			
+			// Waiting for a direction choice from the player
 			if (_pendingChoice != null)
 			{
 				moveInput = new Vector2(_player.GetAxis("moveX"), _player.GetAxis("moveY"));
@@ -60,7 +65,7 @@ namespace Paths
 				
 				return;
 			}
-			
+
 			if (!_startNode || !_endNode) return;
 			if (_progress < 1)
 			{

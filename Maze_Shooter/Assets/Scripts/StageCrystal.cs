@@ -11,16 +11,29 @@ public class StageCrystal : MonoBehaviour
 	public Stage stage;
 	[TabGroup("main"), Tooltip("Optional stage description UI.")]
 	public StageDescriptor stageDescriptor;
+
+	[ShowInInspector, SerializeField]
+	float _stageLoadDelay = 1;
 	
 	[TabGroup("events")]
-	public List<GameEvent> onSelected = new List<GameEvent>();
-	[TabGroup("events")]
-	public List<GameEvent> onDeselected = new List<GameEvent>();
+	[ShowInInspector, SerializeField]
+	List<GameEvent> _onStageEnter = new List<GameEvent>();
+	
+	[TabGroup("events"), Tooltip("Selected meaning when the player lands on this particular node in the world map.")]
+	[ShowInInspector, SerializeField]
+	List<GameEvent> _onSelected = new List<GameEvent>();
 	
 	[TabGroup("events")]
-	public UnityEvent onSelectedEvent;
+	[ShowInInspector, SerializeField]
+	List<GameEvent> _onDeselected = new List<GameEvent>();
+	
+	[TabGroup("events"), Tooltip("Selected meaning when the player lands on this particular node in the world map.")]
+	[ShowInInspector, SerializeField]
+	UnityEvent _onSelectedEvent;
+	
+	[ShowInInspector, SerializeField]
 	[TabGroup("events")]
-	public UnityEvent onDeselectedEvent;
+	UnityEvent _onDeselectedEvent;
 	
 	Animator _animator;
 	Animator Animator
@@ -33,6 +46,12 @@ public class StageCrystal : MonoBehaviour
 		}
 	}
 
+	public void EnterStage()
+	{
+		foreach (var e in _onStageEnter) e.Raise();
+		stage?.Load(_stageLoadDelay);
+	}
+
 	public void SetSelected(bool selected)
 	{
 		Animator.SetBool("selected", selected);
@@ -40,14 +59,14 @@ public class StageCrystal : MonoBehaviour
 		if (selected)
 		{
 			stageDescriptor?.Show();
-			onSelectedEvent.Invoke();
-			foreach (var e in onSelected) e.Raise();
+			_onSelectedEvent.Invoke();
+			foreach (var e in _onSelected) e.Raise();
 		}
 		else
 		{
 			stageDescriptor?.Hide();
-			onDeselectedEvent.Invoke();
-			foreach (var e in onDeselected) e.Raise();
+			_onDeselectedEvent.Invoke();
+			foreach (var e in _onDeselected) e.Raise();
 		}
 	}
 }

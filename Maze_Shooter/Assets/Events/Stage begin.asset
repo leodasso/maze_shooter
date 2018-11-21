@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Name: Stage begin
   m_EditorClassIdentifier: 
   debug: 0
+  delay: 0
   onEventRaised:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  description: The actual playable part of the stage has started
+  description: The actual playable part of the stage has started. This is often called
+    from awake on something in the stage's scene, but it can just as well be called
+    after a cutscene, for example.

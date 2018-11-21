@@ -165,10 +165,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stage: {fileID: 0}
-  onSelected:
+  stageDescriptor: {fileID: 0}
+  _stageLoadDelay: 1
+  _onStageEnter:
+  - {fileID: 11400000, guid: b59d8939d548fc746b299040e5383a1b, type: 2}
+  _onSelected:
   - {fileID: 11400000, guid: a36ad570f3d110b48ac1b755f915512c, type: 2}
-  onDeselected:
+  _onDeselected:
   - {fileID: 11400000, guid: 25c4ecdaadf8d5345bbd0300f022e80e, type: 2}
+  _onSelectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _onDeselectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114229844873779352
 MonoBehaviour:
   m_ObjectHideFlags: 1
