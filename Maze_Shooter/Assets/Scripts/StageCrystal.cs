@@ -5,17 +5,16 @@ using UnityEngine;
 public class StageCrystal : MonoBehaviour
 {
 	public Stage stage;
-
 	Animator _animator;
 
 	// Use this for initialization
-	void Start () 
+	void Start ()
 	{
-		
+		_animator = GetComponent<Animator>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void SetSelected(bool selected)
+	{
+		_animator.SetBool("selected", selected);
 	}
 }
