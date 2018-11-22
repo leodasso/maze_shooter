@@ -13,6 +13,7 @@ public class GameMaster : ScriptableObject
     public SaveDataAvatar currentAvatar;
 
     public static string saveFilesDirectory = "saveFiles/";
+    public static int cashThisSession;
     
     /// <summary>
     /// True when transitioning between scenes/stages
