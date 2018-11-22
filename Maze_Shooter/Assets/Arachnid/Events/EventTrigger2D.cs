@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
 
 namespace Arachnid {
 
@@ -10,6 +11,8 @@ namespace Arachnid {
     {
         [AssetsOnly]
         public List<GameEvent> events = new List<GameEvent>();
+
+        public UnityEvent uEvent;
 
         [ToggleLeft, Tooltip("Only allow triggers from objects of a particular collection")]
         public bool filterTriggers = true;
@@ -38,6 +41,7 @@ namespace Arachnid {
 
         void Trigger()
         {
+            uEvent.Invoke();
             foreach (var e in events) e.Raise();
         }
     }
