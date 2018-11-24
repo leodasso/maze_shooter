@@ -228,7 +228,7 @@ public class TalkyText : MonoBehaviour
         if (_textBox) _textBox.text = formattedOutput;
         if (_textBoxLegacy) _textBoxLegacy.text = formattedOutput;
         
-        _textBox.
+        //_textBox.
     }
 
     [Button]
