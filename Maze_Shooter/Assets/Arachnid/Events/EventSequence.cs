@@ -55,14 +55,19 @@ namespace Arachnid
 		IEnumerator DelayedAdvanceSequence(float delayTime)
 		{
 			yield return new WaitForSecondsRealtime(delayTime);
-			AdvanceSequence();
+			Instance_AdvanceSequence();
 		}
-		
+
+		public static void AdvanceSequence()
+		{
+			if (!currentSequence) return;
+			currentSequence.Instance_AdvanceSequence();
+		}
 		
 		/// <summary>
 		/// Moves the sequence to the next step. If it's at the last step already, ends the sequence.
 		/// </summary>
-		void AdvanceSequence()
+		void Instance_AdvanceSequence()
 		{
 			if (debug) Debug.Log(name + " is advancing from step index " + _index + " to step index " + (_index + 1), this);
 			_index++;

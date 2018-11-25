@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 224487291789434620}
   - component: {fileID: 222456794053259440}
   - component: {fileID: 114854500390314992}
+  - component: {fileID: 114268903261094098}
   m_Layer: 5
   m_Name: text
   m_TagString: Untagged
@@ -73,8 +74,9 @@ GameObject:
   - component: {fileID: 114489569884433446}
   - component: {fileID: 114689685433863198}
   - component: {fileID: 114000810633540942}
+  - component: {fileID: 114662870244019674}
   m_Layer: 5
-  m_Name: Generic Text Panel
+  m_Name: Generic Text Panel (screen space)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,8 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5517fc8e77dcec348a659c2d9e8fa419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingPpu: 2
-  oscillationAmount: 0.06
+  startingPpu: 100
+  oscillationAmount: 2
   oscillationFrequency: 12
 --- !u!114 &114118927532685816
 MonoBehaviour:
@@ -121,6 +123,25 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114268903261094098
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1214450926156564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 648af5a7a735be944838cafdd0592c4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  formattingData: {fileID: 11400000, guid: 0870cc3ec6898154c9a92bc85acf9fc6, type: 2}
+  charactersPerSecond: 60
+  delay: 0
+  inputText: <b>Hello <i>there son</i></b>, I'm a big <color=red>textbox</color>.
+    Would you like to know something about textboxes?
+  pauseCharacter: .
+  pauseTime: 0.2
+  formattedOutput: 
 --- !u!114 &114489569884433446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 2
+  m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
@@ -142,6 +163,21 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114662870244019674
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1858797030528934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b4b22f3416e5c948a65683714652fa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textOutput: {fileID: 114268903261094098}
+  background: {fileID: 114118927532685816}
+  textComponent: {fileID: 114854500390314992}
+  speaker: {fileID: 0}
 --- !u!114 &114689685433863198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,8 +215,9 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 'So, this is it. My revenge will finally be realized. '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4840e37c31d9636469256511d1517353, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: b97dda4edc4c72a4a8a77f0c719c9236, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3dc3e8c40db5a1b48862936fa3a9ef95, type: 2}
+  m_sharedMaterial: {fileID: 21465730590964758, guid: 3dc3e8c40db5a1b48862936fa3a9ef95,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -204,8 +241,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 0.5
-  m_fontSizeBase: 0.5
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -250,7 +287,7 @@ MonoBehaviour:
     spaceCount: 10
     wordCount: 10
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -293,7 +330,7 @@ Canvas:
   m_GameObject: {fileID: 1858797030528934}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -321,8 +358,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -2, y: -1}
+  m_AnchoredPosition: {x: 0, y: -5}
+  m_SizeDelta: {x: -80, y: -50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224378742656129822
 RectTransform:
@@ -338,10 +375,10 @@ RectTransform:
   m_Father: {fileID: 224384124639078426}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.38598633}
-  m_SizeDelta: {x: -2.910383e-11, y: -0.2634}
+  m_AnchorMin: {x: 0.20249337, y: 0}
+  m_AnchorMax: {x: 0.80387133, y: 0.34037024}
+  m_AnchoredPosition: {x: 0, y: 10}
+  m_SizeDelta: {x: 0, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224384124639078426
 RectTransform:
@@ -351,7 +388,7 @@ RectTransform:
   m_GameObject: {fileID: 1858797030528934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 224378742656129822}
   m_Father: {fileID: 0}
@@ -359,8 +396,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -7.48, y: -27.44}
-  m_SizeDelta: {x: 10.937, y: 5.003}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!224 &224487291789434620
 RectTransform:

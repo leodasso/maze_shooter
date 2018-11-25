@@ -27,11 +27,7 @@ public class TalkyText : MonoBehaviour
     public string pauseCharacter = ".";
     public float pauseTime = .2f;
 
-    /// <summary>
-    /// Does the text in the textbox match the text to be shown?
-    /// </summary>
-    [ReadOnly]
-    public bool fullyShowing;
+    public bool FullyShowing => formattedOutput.Length == inputText.Length;
 
     /// <summary>
     /// A single symbol. Formatting tags like <b>, </i>, and \n are all considered single symbols
@@ -55,8 +51,6 @@ public class TalkyText : MonoBehaviour
     TextMeshProUGUI _textBox;
     Text _textBoxLegacy;
     string _outputText = "";
-    int _memCharPerSec;
-    bool _resetWhenDone;
     
     /// <summary>
     /// How many characters have appeared since the last sfx
@@ -84,8 +78,8 @@ public class TalkyText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // If fully showing, the only case when we should update is if the input text changes. 
-        if (fullyShowing)
+        // If fully showing, only update if the input text changes. 
+        if (FullyShowing)
         {
             // If input text changes, clear the output text.
             if (_outputText != inputText) Clear();
@@ -107,18 +101,6 @@ public class TalkyText : MonoBehaviour
             _t += Time.unscaledDeltaTime;
             return;
         }
-
-        if (_outputText == inputText)
-        {
-            if (_resetWhenDone)
-            {
-                charactersPerSecond = _memCharPerSec;
-                _resetWhenDone = false;
-            }
-
-            fullyShowing = true;
-        }
-        else fullyShowing = false;
 
         //Determine when to add a new (text) character to active dialogue box
         _intervalTimer += Time.unscaledDeltaTime;
@@ -152,7 +134,6 @@ public class TalkyText : MonoBehaviour
     public void Clear()
     {
         _outputText = formattedOutput = "";
-        fullyShowing = false;
         _t = 0;
         _nextSymbolIndex = 0;
         _expectedClosingTags.Clear();
@@ -196,6 +177,7 @@ public class TalkyText : MonoBehaviour
     [Button]
     void UpdateText()
     {
+        if (FullyShowing) return;
         _nextSymbol = string.Empty;
 
         // Can't update text if the next symbol index is outside the range of our input text!
@@ -223,20 +205,21 @@ public class TalkyText : MonoBehaviour
         // add the formatters back into the text
         foreach (var s in _expectedClosingTags)
             formattedOutput += s;
+        
+        PushTextToComponents();
+    }
 
-
+    void PushTextToComponents()
+    {
         if (_textBox) _textBox.text = formattedOutput;
         if (_textBoxLegacy) _textBoxLegacy.text = formattedOutput;
-        
-        //_textBox.
     }
 
     [Button]
     public void ShowFull()
     {
-        if (fullyShowing) return;
-        _memCharPerSec = charactersPerSecond;
-        _resetWhenDone = true;
-        charactersPerSecond = 200;
+        if (FullyShowing) return;
+        _outputText = formattedOutput = inputText;
+        PushTextToComponents();
     }
 }
