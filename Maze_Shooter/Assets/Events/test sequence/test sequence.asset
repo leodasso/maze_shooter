@@ -11,10 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a852ef7f3062f4f84337f8f7105b0c, type: 3}
   m_Name: test sequence
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   sequence:
   - duration: 2
     events:
+    - {fileID: 11400000, guid: 5cb0095fa8a13fe40ae6e9d9927987a0, type: 2}
     - {fileID: 11400000, guid: e1471aa23135c8f4f8d177c6af61ef3e, type: 2}
     uEvent:
       m_PersistentCalls:
@@ -24,6 +25,7 @@ MonoBehaviour:
   - duration: 0.1
     events:
     - {fileID: 11400000, guid: bc68b269d6ebbfc4a8fbcf3ba4c29400, type: 2}
+    - {fileID: 11400000, guid: 91e7015166db5fb45a0ee7eff271496e, type: 2}
     uEvent:
       m_PersistentCalls:
         m_Calls: []

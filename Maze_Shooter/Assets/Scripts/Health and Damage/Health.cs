@@ -52,7 +52,7 @@ public class Health : MonoBehaviour, IDestructible
 
 	public void DoDamage(int amount, Vector2 pos, Vector2 dir)
 	{
-		if (IsInvulnerable) return;
+		if (IsInvulnerable || !enabled) return;
 		
 		_currentHealth -= amount;
 		if (_currentHealth <= 0)
