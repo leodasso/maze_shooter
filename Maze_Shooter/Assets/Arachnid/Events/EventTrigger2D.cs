@@ -14,11 +14,16 @@ namespace Arachnid {
 
         public UnityEvent uEvent;
 
+        [ToggleLeft, Tooltip("Will only trigger once.")]
+        public bool oneOff;
+
         [ToggleLeft, Tooltip("Only allow triggers from objects of a particular collection")]
         public bool filterTriggers = true;
 
         [ShowIf("filterTriggers"), Tooltip("Any object in one of these collections can trigger this."), AssetsOnly]
         public List<Collection> triggerers = new List<Collection>();
+
+        bool _triggered;
 
 
         void OnTriggerEnter2D(Collider2D other)
@@ -41,6 +46,9 @@ namespace Arachnid {
 
         void Trigger()
         {
+            if (_triggered && oneOff) return;
+            
+            _triggered = true;
             uEvent.Invoke();
             foreach (var e in events) e.Raise();
         }
