@@ -14,6 +14,13 @@ public class Instantiator : MonoBehaviour
 		OnDisable,
 		OnDestroy
 	}
+
+	public enum HierarchyType
+	{
+		World,
+		AsSibling,
+		AsChild
+	}
 	
 	[ToggleLeft]
 	public bool instantiateStagePlayer;
@@ -28,6 +35,9 @@ public class Instantiator : MonoBehaviour
 	public InstantiateBehavior createInstance = InstantiateBehavior.None;
 	[Space, Tooltip("Define when to destroy the created instance."), EnumToggleButtons, Title("Destroy Instance"), HideLabel]
 	public InstantiateBehavior destroyInstance = InstantiateBehavior.None;
+
+	[EnumToggleButtons, HideLabel, Title("Instance Place In Hierarchy")]
+	public HierarchyType instancePlaceInHierarchy = HierarchyType.World;
 
 	[ShowInInspector, ReadOnly]
 	GameObject _instance;
@@ -83,7 +93,19 @@ public class Instantiator : MonoBehaviour
 			return;
 		}
 
-		_instance = Instantiate(ToInstantiate, transform.position, transform.rotation);
+		// Determine where in the hierarchy to instantiate
+		Transform parent = null;
+		switch (instancePlaceInHierarchy)
+		{
+				case HierarchyType.AsChild:
+					parent = transform;
+					break;
+				case HierarchyType.AsSibling:
+					parent = transform.parent;
+					break;
+		}
+
+		_instance = Instantiate(ToInstantiate, transform.position, transform.rotation, parent);
 	}
 
 	// left public to be accesible from Unity Events
