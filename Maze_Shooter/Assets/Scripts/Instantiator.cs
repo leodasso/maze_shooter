@@ -31,12 +31,12 @@ public class Instantiator : MonoBehaviour
 	[AssetsOnly, HideIf("instantiateStagePlayer"), PreviewField]
 	public GameObject prefabToInstantiate;
 	
-	[Tooltip("Define when to create an instance of the selected prefab"), EnumToggleButtons, Title("Create Instance"), HideLabel]
+	[Tooltip("Define when to create an instance of the selected prefab"), EnumToggleButtons, Title("Create Instance", bold:false, horizontalLine:false), HideLabel]
 	public InstantiateBehavior createInstance = InstantiateBehavior.None;
-	[Space, Tooltip("Define when to destroy the created instance."), EnumToggleButtons, Title("Destroy Instance"), HideLabel]
+	[Space, Tooltip("Define when to destroy the created instance."), EnumToggleButtons, Title("Destroy Instance", bold:false, horizontalLine:false), HideLabel]
 	public InstantiateBehavior destroyInstance = InstantiateBehavior.None;
 
-	[EnumToggleButtons, HideLabel, Title("Instance Place In Hierarchy")]
+	[EnumToggleButtons, HideLabel, Title("Instance Place In Hierarchy", bold:false, horizontalLine:false)]
 	public HierarchyType instancePlaceInHierarchy = HierarchyType.World;
 
 	[ShowInInspector, ReadOnly]
