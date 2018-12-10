@@ -47,7 +47,7 @@ namespace Arachnid
 			sequence[unitIndex].Execute();
 			
 			// If this step is timed, then start the next step after a given amount of time
-			if (sequence[unitIndex].duration <= 0) return;
+			if (sequence[unitIndex].hold) return;
 			CoroutineHelper.NewCoroutine(DelayedAdvanceSequence(sequence[unitIndex].duration));
 		}
 
@@ -98,14 +98,17 @@ namespace Arachnid
 		[System.Serializable]
 		public class SequenceStep
 		{
-			[BoxGroup("s", centerLabel:true, GroupName = "Sequence Step"), 
-			 Tooltip("Duration of this step. If left at 0, sequence will remain at this step until it's told to move on."), MinValue(0)]
+			[FoldoutGroup("step", true), ToggleLeft, Tooltip("If true, this step will be held until the sequence is manually progressed by something" +
+			                     " (like a dialog being completed)")]
+			public bool hold;
+			
+			[Tooltip("Duration of this step of the sequence."), MinValue(0), HideIf("hold"), FoldoutGroup("step")]
 			public float duration = 2;
 			
-			[TabGroup("s/e", "game events")]
+			[TabGroup("step/e", "game events")]
 			public List<GameEvent> events = new List<GameEvent>();
 
-			[DrawWithUnity, TabGroup("s/e", "unity event")]
+			[DrawWithUnity, TabGroup("step/e", "unity event")]
 			public UnityEvent uEvent;
 
 			public void Execute()
