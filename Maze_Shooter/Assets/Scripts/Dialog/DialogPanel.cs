@@ -4,14 +4,20 @@ using Arachnid;
 using Rewired;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 public class DialogPanel : MonoBehaviour
 {
 	public TalkyText textOutput;
 	public Image background;
 	public TextMeshProUGUI textComponent;
+	
+	[System.NonSerialized, ShowInInspector, ReadOnly]
 	public GameObject speaker;
+
+	public UnityEvent onDialogComplete;
 
 	Dialog _dialog;
 	int _index = 0;
@@ -63,6 +69,8 @@ public class DialogPanel : MonoBehaviour
 	{
 		if (_dialog.progressCurrentSequenceWhenComplete)
 			EventSequence.AdvanceSequence();
+		
+		onDialogComplete.Invoke();
 		
 		Destroy(gameObject);
 	}
