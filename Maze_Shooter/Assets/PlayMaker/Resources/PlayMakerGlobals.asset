@@ -12,13 +12,31 @@ MonoBehaviour:
   m_Name: PlayMakerGlobals
   m_EditorClassIdentifier: 
   variables:
-    floatVariables: []
+    floatVariables:
+    - useVariable: 1
+      name: darkCastle_transitionTime
+      tooltip: Transition time between interior/exterior
+      showInInspector: 0
+      networkSync: 0
+      value: 0.25
     intVariables: []
     boolVariables: []
     stringVariables: []
     vector2Variables: []
     vector3Variables: []
-    colorVariables: []
+    colorVariables:
+    - useVariable: 1
+      name: exteriorBgColor
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: {r: 0.6792453, g: 0.54788184, b: 0.54788184, a: 1}
+    - useVariable: 1
+      name: interiorBgColor
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: {r: 0, g: 0, b: 0, a: 1}
     rectVariables: []
     quaternionVariables: []
     gameObjectVariables: []
@@ -29,7 +47,7 @@ MonoBehaviour:
     enumVariables: []
     categories:
     - 
-    variableCategoryIDs: 
+    - dark castle 1
+    variableCategoryIDs: 010000000100000001000000
   events:
   - dialogComplete
-  - beginCutscene
