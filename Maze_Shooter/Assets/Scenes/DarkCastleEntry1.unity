@@ -19249,7 +19249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &362175745
 Transform:
   m_ObjectHideFlags: 0
@@ -19959,8 +19959,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 192
-        y: 112
+        x: 64
+        y: 208
         width: 200
         height: 32
       isBreakpoint: 0
@@ -19973,7 +19973,7 @@ MonoBehaviour:
           isGlobal: 0
         toState: was triggered
         linkStyle: 1
-        linkConstraint: 1
+        linkConstraint: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -20031,8 +20031,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 592
-        y: 304
+        x: 464
+        y: 272
         width: 135
         height: 32
       isBreakpoint: 0
@@ -20106,8 +20106,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 413.76562
-        y: 531.9531
+        x: 672
+        y: 384
         width: 132
         height: 32
       isBreakpoint: 0
@@ -20190,8 +20190,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 240
-        y: 304
+        x: 464
+        y: 320
         width: 132
         height: 32
       isBreakpoint: 0
@@ -20265,8 +20265,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 400
-        y: 304
+        x: 464
+        y: 368
         width: 155
         height: 32
       isBreakpoint: 0
@@ -20340,8 +20340,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 413.76562
-        y: 435.95312
+        x: 672
+        y: 288
         width: 100
         height: 32
       isBreakpoint: 0
@@ -20457,8 +20457,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 80.17969
-        y: 245.50781
+        x: 284.82812
+        y: 226.625
         width: 122
         height: 48
       isBreakpoint: 0
@@ -20472,7 +20472,7 @@ MonoBehaviour:
         toState: exit
         linkStyle: 0
         linkConstraint: 0
-        colorIndex: 0
+        colorIndex: 6
       - fsmEvent:
           name: NO
           isSystemEvent: 0
@@ -20539,8 +20539,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 413.76562
-        y: 483.95312
+        x: 672
+        y: 336
         width: 119
         height: 32
       isBreakpoint: 0
@@ -20638,8 +20638,8 @@ MonoBehaviour:
       colorIndex: 6
       position:
         serializedVersion: 2
-        x: 413.76562
-        y: 675.9531
+        x: 672
+        y: 704
         width: 152
         height: 16
       isBreakpoint: 0
@@ -20699,8 +20699,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 413.76562
-        y: 627.9531
+        x: 672
+        y: 480
         width: 135
         height: 32
       isBreakpoint: 0
@@ -20813,8 +20813,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 413.76562
-        y: 579.9531
+        x: 672
+        y: 432
         width: 108
         height: 32
       isBreakpoint: 0
@@ -20926,13 +20926,14 @@ MonoBehaviour:
         paramDataPos: 00000000000000000000000000000000010000000100000001000000
         paramByteDataSize: 00000000000000000000000001000000000000000000000001000000
     - name: set as triggered
-      description: 
+      description: There's multiple ways to get to this part - we set 'triggered'
+        here so that they player can't go back and trigger it again on accident
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 413.76562
-        y: 387.95312
-        width: 134
+        x: 672
+        y: 144
+        width: 200
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -20944,7 +20945,7 @@ MonoBehaviour:
           isGlobal: 0
         toState: goes dark
         linkStyle: 0
-        linkConstraint: 1
+        linkConstraint: 2
         colorIndex: 0
       actionData:
         actionNames:
@@ -21007,8 +21008,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 415.52344
-        y: 111.53125
+        x: 64
+        y: 384
         width: 162
         height: 48
       isBreakpoint: 0
@@ -21022,7 +21023,7 @@ MonoBehaviour:
         toState: exit
         linkStyle: 0
         linkConstraint: 0
-        colorIndex: 0
+        colorIndex: 6
       - fsmEvent:
           name: NO
           isSystemEvent: 0
@@ -21089,8 +21090,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 620.91406
-        y: 112.609375
+        x: 64
+        y: 496
         width: 135
         height: 48
       isBreakpoint: 0
@@ -21104,7 +21105,7 @@ MonoBehaviour:
         toState: exit
         linkStyle: 0
         linkConstraint: 0
-        colorIndex: 0
+        colorIndex: 6
       - fsmEvent:
           name: NO
           isSystemEvent: 0
@@ -21171,8 +21172,8 @@ MonoBehaviour:
       colorIndex: 6
       position:
         serializedVersion: 2
-        x: 637.1797
-        y: 226.42188
+        x: 480
+        y: 704
         width: 100
         height: 16
       isBreakpoint: 0
@@ -21218,6 +21219,163 @@ MonoBehaviour:
         paramName: []
         paramDataPos: 
         paramByteDataSize: 
+    - name: was triggered 4
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 64
+        y: 624
+        width: 192
+        height: 48
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: YES
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: exit
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 6
+      - fsmEvent:
+          name: NO
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: dont sneak past me
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.BoolTest
+        customNames:
+        - 
+        actionEnabled: 01
+        actionIsOpen: 01
+        actionStartIndex: 00000000
+        actionHashCodes: a4c8bf00
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams: []
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams: []
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams: []
+        fsmObjectParams: []
+        fsmVarParams: []
+        fsmArrayParams: []
+        fsmEnumParams: []
+        fsmFloatParams: []
+        fsmIntParams: []
+        fsmBoolParams:
+        - useVariable: 1
+          name: alreadyTriggered
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        fsmVector2Params: []
+        fsmVector3Params: []
+        fsmColorParams: []
+        fsmRectParams: []
+        fsmQuaternionParams: []
+        stringParams:
+        - YES
+        - NO
+        byteData: 00
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 11000000170000001700000001000000
+        paramName:
+        - boolVariable
+        - isTrue
+        - isFalse
+        - everyFrame
+        paramDataPos: 00000000000000000100000000000000
+        paramByteDataSize: 00000000000000000000000001000000
+    - name: dont sneak past me
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 464
+        y: 416
+        width: 158
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: dialogComplete
+          isSystemEvent: 0
+          isGlobal: 1
+        toState: set as triggered
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - DisplayDialog
+        - VirtualCamSetPriority
+        - InvokeGameEvent
+        customNames:
+        - 
+        - 
+        - 
+        actionEnabled: 010101
+        actionIsOpen: 010101
+        actionStartIndex: 000000000200000004000000
+        actionHashCodes: d8409602b33fd9027f1a7103
+        unityObjectParams:
+        - {fileID: 11400000, guid: e84a65383013bf044b96a074a60ade5e, type: 2}
+        - {fileID: 588704236}
+        - {fileID: 1916680624}
+        - {fileID: 11400000, guid: 5cb0095fa8a13fe40ae6e9d9927987a0, type: 2}
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams: []
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams: []
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams: []
+        fsmObjectParams: []
+        fsmVarParams: []
+        fsmArrayParams: []
+        fsmEnumParams: []
+        fsmFloatParams: []
+        fsmIntParams: []
+        fsmBoolParams: []
+        fsmVector2Params: []
+        fsmVector3Params: []
+        fsmColorParams: []
+        fsmRectParams: []
+        fsmQuaternionParams: []
+        stringParams: []
+        byteData: 32000000
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 050000001b000000000000000500000005000000
+        paramName:
+        - dialog
+        - speaker
+        - priorityDelta
+        - virtualCamera
+        - gameEvent
+        paramDataPos: 0000000001000000000000000200000003000000
+        paramByteDataSize: 0000000000000000040000000000000000000000
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -21243,7 +21401,18 @@ MonoBehaviour:
     - name: playerTriedToLeave
       isSystemEvent: 0
       isGlobal: 0
+    - name: playerTriedToSneakPast
+      isSystemEvent: 0
+      isGlobal: 0
     globalTransitions:
+    - fsmEvent:
+        name: playerTriedToSneakPast
+        isSystemEvent: 0
+        isGlobal: 0
+      toState: was triggered 4
+      linkStyle: 0
+      linkConstraint: 0
+      colorIndex: 0
     - fsmEvent:
         name: guardSeesYou
         isSystemEvent: 0
@@ -43561,6 +43730,7 @@ Transform:
   - {fileID: 1621376409}
   - {fileID: 2121575928}
   - {fileID: 1678030522}
+  - {fileID: 2067246909}
   m_Father: {fileID: 226894769}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -43777,6 +43947,93 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4876534213201390, guid: 2c8d328a8e07de94f8d1e1ed2ed7ef69,
     type: 2}
   m_PrefabInternal: {fileID: 2064638170}
+--- !u!1 &2067246908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2067246909}
+  - component: {fileID: 2067246911}
+  - component: {fileID: 2067246910}
+  m_Layer: 13
+  m_Name: trying to get past skull guard trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2067246909
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2067246908}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.61, y: 12.48, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2014359018}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2067246910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2067246908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6250be75fee71d74c9e0503cc4f7cb73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oneOff: 1
+  filterTriggers: 1
+  triggerers:
+  - {fileID: 11400000, guid: 35831a8bfbcf71f4fb702f50d0ec7816, type: 2}
+  events: []
+  uEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 392611271}
+        m_MethodName: SendEvent
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: playerTriedToSneakPast
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!61 &2067246911
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2067246908}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.4549253, y: -0.28857946}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 13.114008, y: 3.9703932}
+  m_EdgeRadius: 0
 --- !u!1 &2082612826
 GameObject:
   m_ObjectHideFlags: 0
