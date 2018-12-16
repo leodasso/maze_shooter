@@ -10,6 +10,9 @@ namespace Arachnid
     public class GameEvent : ScriptableObject
     {
         [ToggleLeft]
+        public bool enabled = true;
+        
+        [ToggleLeft]
         public bool debug;
         [ShowInInspector]
         List<GameEventListener> listeners = new List<GameEventListener>();
@@ -25,6 +28,14 @@ namespace Arachnid
         [Button]
         public void Raise()
         {
+            if (!enabled)
+            {
+                if (debug) 
+                    Debug.Log(name + " event was raised, but it is not enabled.");
+                
+                return;
+            }
+            
             if (debug)
                 Debug.Log(name + " event was raised at " + Time.unscaledTime, this);
 
