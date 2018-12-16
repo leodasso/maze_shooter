@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class DisplayDialog : FsmStateAction
 {
-    public Dialog dialog;
     [RequiredField]
+    public Dialog dialog;
     public GameObject speaker;
 
     public override void Reset()
