@@ -10,14 +10,14 @@ public class StageController : MonoBehaviour
 	public Stage stage;
 
 	// Use this for initialization
-	IEnumerator Start ()
+	void Start ()
 	{
 		// Make sure we have a stage, and throw an error if we dont
 		if (stage == null)
 		{
 			Debug.LogError("No stage is referenced in stage controller!");
 			enabled = false;
-			yield break;
+			return;
 		}
 
 		GameMaster.Get().currentStage = stage;
@@ -25,14 +25,5 @@ public class StageController : MonoBehaviour
 		// Raise the immediate events
 		foreach (var e in stage.immediateEvents)
 			e.Raise();
-		
-		Time.timeScale = 0;
-		yield return new WaitForSecondsRealtime(stage.startingDelay.Value);
-		
-		// Raise the delayed events
-		foreach (var e in stage.postStartingDelayEvents)
-			e.Raise();
-		
-		Time.timeScale = 1;
 	}
 }

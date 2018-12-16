@@ -16,9 +16,11 @@ public class Stage : ScriptableObject
     [HideIf("useDefaultPlayerShip")]
     public GameObject customShip;
     
-    public FloatReference startingDelay;
+    [Tooltip("Events that will take place immediately when stage is loaded")]
     public List<GameEvent> immediateEvents;
-    public List<GameEvent> postStartingDelayEvents;
+
+    [FoldoutGroup("data")]
+    public bool stageComplete;
 
     public GameObject PlayerShip
     {
@@ -34,5 +36,11 @@ public class Stage : ScriptableObject
     public void Load(float delay)
     {
         GameMaster.Get().LoadScene(sceneName, delay);
+    }
+
+    public void CompleteStage()
+    {
+        // TODO probably saving
+        stageComplete = true;
     }
 }
