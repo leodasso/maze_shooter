@@ -58,7 +58,13 @@ public class StageCrystal : MonoBehaviour
 
 		if (selected)
 		{
-			stageDescriptor?.Show();
+			if (stageDescriptor)
+			{
+				stageDescriptor.stage = stage;
+				stageDescriptor.Refresh();
+				stageDescriptor.Show();
+			}
+
 			_onSelectedEvent.Invoke();
 			foreach (var e in _onSelected) e.Raise();
 		}

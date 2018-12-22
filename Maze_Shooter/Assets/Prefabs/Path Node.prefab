@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4940049812115736}
   - component: {fileID: 114089243424493698}
   - component: {fileID: 212990398920615490}
+  - component: {fileID: 114770733503515280}
   m_Layer: 0
   m_Name: Path Node
   m_TagString: Untagged
@@ -67,6 +68,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114770733503515280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1259829144830552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 219da9824ea70fd4882cd1b0bb8203cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collection: {fileID: 11400000, guid: 89bf0925194c17841aedc3224f79143f, type: 2}
 --- !u!212 &212990398920615490
 SpriteRenderer:
   m_ObjectHideFlags: 1

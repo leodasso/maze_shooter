@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 public class StageDescriptor : MonoBehaviour
 {
@@ -17,13 +18,18 @@ public class StageDescriptor : MonoBehaviour
 	{
 		canvasGroup.alpha = 0;
 		_alpha = 0;
-		title.text = stage.displayName;
-		background.color = stage.stageColor;
+		Refresh();
 	}
 
 	void Update()
 	{
 		canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, _alpha, Time.unscaledDeltaTime * 10);
+	}
+
+	public void Refresh()
+	{
+		title.text = stage.displayName;
+		background.color = stage.stageColor;
 	}
 
 	public void Show()

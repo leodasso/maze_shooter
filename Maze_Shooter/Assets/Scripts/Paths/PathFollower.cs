@@ -43,9 +43,9 @@ namespace Paths
 			if (beginningNode) SetInitialNode(beginningNode);
 		}
 
-		void SetInitialNode(PathNode node)
+		public void SetInitialNode(PathNode node)
 		{
-			PlaceAtNode(beginningNode);
+			PlaceAtNode(node);
 			node.onNodeReached.Invoke();
 			node.linkedCrystal?.SetSelected(true);
 		}
