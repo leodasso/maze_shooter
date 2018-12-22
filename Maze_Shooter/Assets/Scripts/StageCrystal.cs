@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
+[TypeInfoBox("Links nodes in the world map to actual stages. Also, grabs the Animator component on this object and sends 'selected'" +
+             " bool events based on if the player is on this node or not.")]
 public class StageCrystal : MonoBehaviour
 {
 	[TabGroup("main")]
@@ -12,7 +14,7 @@ public class StageCrystal : MonoBehaviour
 	[TabGroup("main"), Tooltip("Optional stage description UI.")]
 	public StageDescriptor stageDescriptor;
 
-	[ShowInInspector, SerializeField]
+	[ShowInInspector, SerializeField, TabGroup("main")]
 	float _stageLoadDelay = 1;
 	
 	[TabGroup("events")]
