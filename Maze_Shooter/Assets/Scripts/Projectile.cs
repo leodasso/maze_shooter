@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class Projectile : MonoBehaviour
 {
 	public FloatReference speed;
 	public FloatReference lifetime;
-	public IntReference damage;
+
+	[ToggleGroup("addForceOverLifetime")]
+	public bool addForceOverLifetime;
+	[ToggleGroup("addForceOverLifetime")]
+	public Vector2 forceOverLifetime;
 
 	Gun _whoFiredMe;
 	float _lifetimeTimer;
-
-	// Use this for initialization
-	void Start () 
-	{
-		
-	}
+	Vector2 _velocity;
 
 	void OnEnable()
 	{
@@ -27,16 +27,16 @@ public class Projectile : MonoBehaviour
 	void Update () 
 	{
 		transform.Translate(0, speed.Value * Time.deltaTime, 0, Space.Self);
-		_lifetimeTimer += Time.deltaTime;
+		
 
+		if (addForceOverLifetime)
+		{
+			_velocity += forceOverLifetime * Time.deltaTime;
+			transform.Translate(_velocity * Time.deltaTime, Space.World);
+		}
+
+		_lifetimeTimer += Time.deltaTime;
 		if (_lifetimeTimer >= lifetime.Value)
 			Destroy(gameObject);
-	}
-
-	void OnTriggerEnter2D(Collider2D other)
-	{
-		IDestructible iDestructible = other.GetComponent<IDestructible>();
-		iDestructible?.DoDamage(damage.Value, transform.position, transform.right);
-		Destroy(gameObject);
 	}
 }
