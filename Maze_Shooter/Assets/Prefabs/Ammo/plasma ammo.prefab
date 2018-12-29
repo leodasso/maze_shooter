@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114397640578496258}
   - component: {fileID: 114274561218933464}
   - component: {fileID: 114097700053149034}
+  - component: {fileID: 114971726572545910}
   m_Layer: 0
   m_Name: plasma ammo
   m_TagString: Untagged
@@ -141,10 +142,25 @@ MonoBehaviour:
     useConstant: 0
     constantValue: 0.75
     valueObject: {fileID: 0}
+--- !u!114 &114971726572545910
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1341631613168128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b850ca5193a88b24abe718b120607d81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   damage:
     useConstant: 0
     constantValue: 1
     valueObject: {fileID: 0}
+  layersToDamage:
+    serializedVersion: 2
+    m_Bits: 2048
+  destroyOnHit: 1
 --- !u!212 &212414296162946822
 SpriteRenderer:
   m_ObjectHideFlags: 1

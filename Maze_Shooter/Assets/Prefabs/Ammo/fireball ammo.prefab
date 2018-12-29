@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 70467287394990268}
   - component: {fileID: 114397640578496258}
   - component: {fileID: 114274561218933464}
+  - component: {fileID: 114293371760546330}
   m_Layer: 0
   m_Name: fireball ammo
   m_TagString: Untagged
@@ -94,6 +95,25 @@ MonoBehaviour:
   effectPrefab: {fileID: 1855155040990096, guid: 6a819c7cb7cba434f8c5359cf0439289,
     type: 2}
   lifetime: 1
+--- !u!114 &114293371760546330
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1341631613168128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b850ca5193a88b24abe718b120607d81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage:
+    useConstant: 0
+    constantValue: 1
+    valueObject: {fileID: 0}
+  layersToDamage:
+    serializedVersion: 2
+    m_Bits: 2048
+  destroyOnHit: 1
 --- !u!114 &114397640578496258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,10 +144,6 @@ MonoBehaviour:
     constantValue: 15
     valueObject: {fileID: 0}
   lifetime:
-    useConstant: 0
-    constantValue: 1
-    valueObject: {fileID: 0}
-  damage:
     useConstant: 0
     constantValue: 1
     valueObject: {fileID: 0}
