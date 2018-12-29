@@ -19,8 +19,10 @@ public class Stage : ScriptableObject
     [Tooltip("Events that will take place immediately when stage is loaded")]
     public List<GameEvent> immediateEvents;
 
-    [FoldoutGroup("data")]
-    public bool stageComplete;
+    [Tooltip("Event that gets called when this stage has been completed while in the world map")]
+    public GameEvent onComplete_worldMap;
+
+    const string _key_complete = "complete";
 
     public GameObject PlayerShip
     {
@@ -38,9 +40,37 @@ public class Stage : ScriptableObject
         GameMaster.Get().LoadScene(sceneName, delay);
     }
 
+    public bool TryGetStageKey(out string key)
+    {
+        key = "";
+        string saveDir = "";
+        if (GameMaster.Get().TryGetSaveFileDirectory(out saveDir))
+        {
+            key = saveDir + "_" + name + "_";
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool IsComplete()
+    {
+        string key = "";
+        if (TryGetStageKey(out key))
+        {
+            return ES3.Load<bool>(key + _key_complete, false);
+        }
+
+        return false;
+    }
+
     public void CompleteStage()
     {
         // TODO probably saving
-        stageComplete = true;
+        string key = "devbaby";
+        if (TryGetStageKey(out key))
+        {
+            ES3.Save<bool>(key + _key_complete, true);
+        }
     }
 }

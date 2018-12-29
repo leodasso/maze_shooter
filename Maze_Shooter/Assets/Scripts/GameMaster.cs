@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Sirenix.OdinInspector;
 
 [CreateAssetMenu]
 public class GameMaster : ScriptableObject
 {
     public GameObject defaultPlayerShip;
     public Stage currentStage;
+    [ReadOnly]
+    public Stage justCompletedStage;
     static GameMaster _gameMaster;
     public SaveDataAvatar currentAvatar;
 

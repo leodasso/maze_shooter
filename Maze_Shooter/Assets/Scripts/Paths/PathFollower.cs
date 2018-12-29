@@ -171,6 +171,7 @@ namespace Paths
 			BeginMovement(_pendingChoice.standingNode, nearestNode);
 		}
 		
+		
 		class NodeChoice
 		{
 			public PathNode standingNode;

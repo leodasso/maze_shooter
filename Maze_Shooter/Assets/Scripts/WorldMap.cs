@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Arachnid;
 using Paths;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class WorldMap : MonoBehaviour
 {
@@ -10,12 +11,37 @@ public class WorldMap : MonoBehaviour
 	[Tooltip("If there's no previous stage defined, the player will load here")]
 	public PathNode defaultPathNode;
 	public PathFollower player;
+	
+	public List<PathRenderer> paths = new List<PathRenderer>();
+
+	[Button]
+	void GetPaths()
+	{
+		paths.Clear();
+		paths.AddRange(GetComponentsInChildren<PathRenderer>());
+	}
 
 	// Use this for initialization
 	IEnumerator Start () 
 	{
+		// place the player at the correct node
 		yield return new WaitForSecondsRealtime(.1f);
 		SelectCurrentNode();
+		
+		// Turn on/off all the paths
+		foreach (var path in paths)
+		{
+			if (path.PrerequisitesComplete())
+				path.SetPathVisible();
+			else 
+				path.SetPathInvisible();
+		}
+
+		if (GameMaster.Get().justCompletedStage)
+		{
+			GameMaster.Get().justCompletedStage.onComplete_worldMap?.Raise();
+			GameMaster.Get().justCompletedStage = null;
+		}
 	}
 
 	void SelectCurrentNode()

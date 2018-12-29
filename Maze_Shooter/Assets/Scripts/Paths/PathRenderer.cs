@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Arachnid;
 using Paths;
 using UnityEngine;
 using Sirenix.OdinInspector;
@@ -7,8 +8,17 @@ using Sirenix.OdinInspector;
 [TypeInfoBox("Uses attached Line Renderer to show a pathway along Path Nodes."), ExecuteInEditMode]
 public class PathRenderer : MonoBehaviour
 {
+	public enum PathDirection
+	{
+		StartToEnd, EndToStart
+	}
+	
+	public List<Stage> prerequesiteStages = new List<Stage>();
+
+	public FloatReference createPathSpeed;
 	[MinMaxSlider(0, 1, true)]
 	public Vector2 pathCoverage = new Vector2(0, 1);
+	public PathDirection pathDirection;
 	public List<PathNode> pathNodes = new List<PathNode>();
 	public LineRenderer foregroundLine;
 	public LineRenderer backgroundLine;
@@ -20,7 +30,7 @@ public class PathRenderer : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		Refresh();
+		SetPathInvisible();
 	}
 
 	void Update()
@@ -28,6 +38,15 @@ public class PathRenderer : MonoBehaviour
 		Refresh();
 	}
 
+	public bool PrerequisitesComplete()
+	{
+		foreach (var s in prerequesiteStages)
+		{
+			if (!s.IsComplete()) return false;
+		}
+
+		return true;
+	}
 
 	void Refresh()
 	{
@@ -39,15 +58,72 @@ public class PathRenderer : MonoBehaviour
 		if (foregroundLine)
 			SetLineRendererPositions(foregroundLine, pathCoverage.x, pathCoverage.y);
 	}
+	
 
-	/// <summary>
+	IEnumerator CreatePath()
+	{
+		if (pathDirection == PathDirection.StartToEnd)
+		{
+			while (pathCoverage.y < 1)
+			{
+				pathCoverage = new Vector2(pathCoverage.x, pathCoverage.y + Time.unscaledDeltaTime * createPathSpeed.Value);
+				yield return null;
+			}
+
+			pathCoverage.y = 1;
+		}
+
+		else
+		{
+			while (pathCoverage.x > 0)
+			{
+				pathCoverage = new Vector2( pathCoverage.x - Time.unscaledDeltaTime * createPathSpeed.Value, pathCoverage.y);
+				yield return null;
+			}
+
+			pathCoverage.x = 0;
+		}
+		
+		SetPathVisible();
+	}
+
+	public void RevealPath()
+	{
+		StartCoroutine(CreatePath());
+	}
+
+	public void SetPathVisible()
+	{
+		pathCoverage = new Vector2(0, 1);
+		Refresh();
+
+		SetNodes(true);
+	}
+
+	public void SetPathInvisible()
+	{
+		pathCoverage = Vector2.zero;
+		Refresh();
+		
+		SetNodes(false);
+	}
+
+	void SetNodes(bool available)
+	{
+		for (int i = 1; i < pathNodes.Count; i++)
+		{
+			pathNodes[i].available = available;
+		}
+	}
+
+	/// <summary> 
 	/// Set positions of vertexes for the line renderer. 
 	/// </summary>
 	/// <param name="start">Where along the path to start rendering the line (normalized, 0 is beginning of path, 1 is end)</param>
 	/// <param name="end">Where along the path to stop rendering the line (normalized, 0 is beginning of path, 1 is end)</param>
 	void SetLineRendererPositions(LineRenderer lineRenderer, float start = 0, float end = 1)
 	{
-		if (end <= start) return;
+		if (end < start) return;
 
 		float pathProgress = 0;
 		
