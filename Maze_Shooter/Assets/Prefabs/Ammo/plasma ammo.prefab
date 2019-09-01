@@ -142,6 +142,8 @@ MonoBehaviour:
     useConstant: 0
     constantValue: 0.75
     valueObject: {fileID: 0}
+  addForceOverLifetime: 0
+  forceOverLifetime: {x: 0, y: 0}
 --- !u!114 &114971726572545910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,14 +155,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b850ca5193a88b24abe718b120607d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layersThatDestroyThis:
+    serializedVersion: 2
+    m_Bits: 2305
+  layersToDamage:
+    serializedVersion: 2
+    m_Bits: 2048
   damage:
     useConstant: 0
     constantValue: 1
     valueObject: {fileID: 0}
-  layersToDamage:
-    serializedVersion: 2
-    m_Bits: 2048
-  destroyOnHit: 1
 --- !u!212 &212414296162946822
 SpriteRenderer:
   m_ObjectHideFlags: 1

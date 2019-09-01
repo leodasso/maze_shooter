@@ -25,7 +25,6 @@ GameObject:
   - component: {fileID: 50909293905456280}
   - component: {fileID: 70467287394990268}
   - component: {fileID: 114397640578496258}
-  - component: {fileID: 114274561218933464}
   - component: {fileID: 114097700053149034}
   m_Layer: 0
   m_Name: water ammo
@@ -41,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1341631613168128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.51, y: -5.03, z: -0.056030985}
+  m_LocalPosition: {x: -1.2744372, y: -5.3717837, z: -0.056030985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -95,20 +94,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioCollection: {fileID: 11400000, guid: aeb95a80459e3f94bbbd3c25371753f2, type: 2}
   playOnAwake: 1
---- !u!114 &114274561218933464
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1341631613168128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0782ae9df3ff5ae4ab9e6e1985a49bf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectPrefab: {fileID: 1350632062081934, guid: 1cb2cec89670a8d469eeee3b80433f20,
-    type: 2}
-  lifetime: 1
 --- !u!114 &114359373485692220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126,7 +111,7 @@ MonoBehaviour:
   destroyOnHit: 1
   wetness:
     useConstant: 0
-    constantValue: 1
+    constantValue: 0.3
     valueObject: {fileID: 0}
 --- !u!114 &114397640578496258
 MonoBehaviour:
@@ -139,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97e8ed2baea5324b9e68bb303521efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectPrefab: {fileID: 1625267135333434, guid: d188682e4264b3b4e9e4e56aba3e9553,
+  effectPrefab: {fileID: 1625267135333434, guid: e772d12485860164ebd0ae15f54c255a,
     type: 2}
   lifetime: 2
 --- !u!114 &114862922114861194
@@ -161,7 +146,7 @@ MonoBehaviour:
     useConstant: 0
     constantValue: 0.45
     valueObject: {fileID: 0}
-  addForceOverLifetime: 1
+  addForceOverLifetime: 0
   forceOverLifetime: {x: 0, y: -12}
 --- !u!212 &212414296162946822
 SpriteRenderer:

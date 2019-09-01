@@ -9,31 +9,27 @@ using Arachnid;
 /// </summary>
 public class ContactBase : MonoBehaviour 
 {
-	public LayerMask layersToDamage;
-
-	[ToggleLeft, Tooltip("Destroy this gameObject after colliding with an object. Damages object first")]
-	public bool destroyOnHit;
+	[Tooltip("Layers that will destroy this object. Any inheriting class's behavior will happen before this is destroyed.")]
+	public LayerMask layersThatDestroyThis;
 
 	void OnCollisionEnter2D(Collision2D other)
 	{
 		Collider2D otherCol = other.GetContact(0).collider;
-		if (!Math.LayerMaskContainsLayer(layersToDamage, otherCol.gameObject.layer)) 
-			return;
+		
+		// Don't collide with myself
+		if (otherCol.gameObject == gameObject) return;
         
 		OnCollisionAction(other, otherCol);
 		
-		if (destroyOnHit) 
+		if (Math.LayerMaskContainsLayer(layersThatDestroyThis, otherCol.gameObject.layer)) 
 			Destroy(gameObject);
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (!Math.LayerMaskContainsLayer(layersToDamage, other.gameObject.layer)) 
-			return;
-        
 		OnTriggerAction(other);
 		
-		if (destroyOnHit) 
+		if (Math.LayerMaskContainsLayer(layersThatDestroyThis, other.gameObject.layer)) 
 			Destroy(gameObject);
 	}
 

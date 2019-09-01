@@ -155,8 +155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NoiseProfile: {fileID: 11400000, guid: 1fadf45741dc545428d325b6deb102c1, type: 2}
-  m_AmplitudeGain: 7.84183e-15
-  m_FrequencyGain: 2.144442e-30
+  m_AmplitudeGain: 1e-44
+  m_FrequencyGain: 1e-45
   mNoiseOffsets: {x: -873.57666, y: -911.7196, z: -328.48892}
 --- !u!114 &32073428
 MonoBehaviour:
@@ -43270,10 +43270,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 997b69907ee6a7244944c6de53f6f4af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instantiateOnStart: 0
   instantiateStagePlayer: 1
   stage: {fileID: 11400000, guid: c5d0808d23d9d044885c7305f2bb8cb2, type: 2}
   prefabToInstantiate: {fileID: 0}
+  createInstance: 0
+  destroyInstance: 0
+  instancePlaceInHierarchy: 0
 --- !u!114 &1932108488
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,16 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Arachnid;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Arachnid;
 
-public class GunPowerup : MonoBehaviour
+public class GunZone : MonoBehaviour 
 {
-	[ToggleLeft, Tooltip("Set to true if this should just be a general level up for any gun the player has equipped")]
-	public bool anyGun;
-
-	[HideIf("anyGun")]
-	public GunData gun;
+	public GunData gunData;
 
 	public List<Collection> triggerers = new List<Collection>();
 
@@ -18,24 +14,19 @@ public class GunPowerup : MonoBehaviour
 	{
 		CollectionElement c = other.GetComponent<CollectionElement>();
 		if (c == null) return;
-		
 		if (!triggerers.Contains(c.collection)) return;
 
 		foreach (var g in other.gameObject.GetComponentsInChildren<Gun>())
-			LevelUpGun(g);
-		
-		Destroy(gameObject);
+			g.AddOverride(gunData);
 	}
 
-	void LevelUpGun(Gun g)
+	void OnTriggerExit2D(Collider2D other)
 	{
-		if (anyGun)
-		{
-			g.Level++;
-			return;
-		}
+		CollectionElement c = other.GetComponent<CollectionElement>();
+		if (c == null) return;
+		if (!triggerers.Contains(c.collection)) return;
 
-		if (g.gunData == gun) g.Level++;
-		else g.gunData = gun;
+		foreach (var g in other.gameObject.GetComponentsInChildren<Gun>())
+			g.RemoveOverride(gunData);
 	}
 }

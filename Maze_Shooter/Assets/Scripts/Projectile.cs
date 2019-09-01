@@ -14,6 +14,8 @@ public class Projectile : MonoBehaviour
 	[ToggleGroup("addForceOverLifetime")]
 	public Vector2 forceOverLifetime;
 
+	
+	
 	Gun _whoFiredMe;
 	float _lifetimeTimer;
 	Vector2 _velocity;

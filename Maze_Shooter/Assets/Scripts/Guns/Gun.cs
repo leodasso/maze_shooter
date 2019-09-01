@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
 using Sirenix.OdinInspector;
@@ -18,11 +19,23 @@ public class Gun : MonoBehaviour
 	public int Level
 	{
 		get { return _level; }
-		set { _level = Mathf.Clamp(value, 0, HasGunData ? gunData.MaxLevel : 0); }
+		set { _level = Mathf.Clamp(value, 0, HasGunData ? GunData.MaxLevel : 0); }
 	}
 	public GunType gunType;
 	
+	
+	public List<GunData> overrideGuns = new List<GunData>();
 	public GunData gunData;
+
+	public GunData GunData
+	{
+		get
+		{
+			if (overrideGuns.Count > 0) return overrideGuns[0];
+			return gunData;
+		}
+	}
+	
 	[HideIf("HasGunData"), BoxGroup("local gun")]
 	[MinMaxSlider(.1f, 60, true), Tooltip("Number of shots per second. The minimum is when the player is barely touching joystick," +
 	                                " and max is when they're at full tilt.")]
@@ -37,20 +50,20 @@ public class Gun : MonoBehaviour
 		get
 		{
 			if (!HasGunData) return firingPattern;
-			if (gunData.firingPatterns.Count < 1) return firingPattern;
-			int maxAvailableFiringPattern = gunData.firingPatterns.Count - 1;
+			if (GunData.firingPatterns.Count < 1) return firingPattern;
+			int maxAvailableFiringPattern = GunData.firingPatterns.Count - 1;
 			int index = Mathf.Clamp(Level, 0, maxAvailableFiringPattern);
-			return gunData.firingPatterns[index];
+			return GunData.firingPatterns[index];
 		}
 	}
 	
-	Vector2 FireRateRange => HasGunData ? gunData.firingRate : firingRate;
+	Vector2 FireRateRange => HasGunData ? GunData.firingRate : firingRate;
 	float FireRate => Mathf.Lerp(FireRateRange.x, FireRateRange.y, fireRateIntensity);
 	float Cooldown => 1f / FireRate;
 	float _cooldownTimer;
 	float _startFiringTimer;
-	bool HasGunData => gunData != null;
-	GameObject Ammo => HasGunData ? gunData.ammo : ammo;
+	bool HasGunData => GunData != null;
+	GameObject Ammo => HasGunData ? GunData.ammo : ammo;
 	bool IsCoolingDown => _cooldownTimer < Cooldown;
 	int _level;
 
@@ -124,5 +137,15 @@ public class Gun : MonoBehaviour
 		
 		newAmmo.layer = LayerMask.NameToLayer(gunType == GunType.Enemy ? 
 			"EnemyBullets" : "PlayerBullets");
+	}
+
+	public void AddOverride(GunData newData)
+	{
+		overrideGuns.Insert(0, newData);
+	}
+
+	public void RemoveOverride(GunData newData)
+	{
+		overrideGuns.Remove(newData);
 	}
 }

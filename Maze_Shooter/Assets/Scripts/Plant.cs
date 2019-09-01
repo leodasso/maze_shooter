@@ -38,6 +38,8 @@ public class Plant : MonoBehaviour, IWettable
 		else
 			development -= drain.Value * Time.deltaTime;
 		
+		if (development <= 0) Destroy(gameObject);
+		
 		cactusScale.localScale = new Vector3(1, development, 1);
 		float gradientEvaluate = (hydration + 1) / 2;
 		cactusSprite.color = hydrationColors.Evaluate(gradientEvaluate);

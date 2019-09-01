@@ -8,6 +8,8 @@ using Sirenix.OdinInspector;
              "that it comes into contact with.")]
 public class Hazard : ContactBase
 {
+    [Tooltip("Layers that this hazard will do damage to")]
+    public LayerMask layersToDamage;
 	public IntReference damage;
 
     protected override void OnCollisionAction(Collision2D collision, Collider2D otherCol)

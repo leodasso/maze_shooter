@@ -73,7 +73,7 @@ public class GameMaster : ScriptableObject
 
     public void GotoWorldMap(float delay)
     {
-        LoadScene("WorldMap B", delay);
+        LoadScene("WorldMap_B", delay);
     }
 
     public static bool AvatarIsUsedBySaveFile(SaveDataAvatar avatar)
