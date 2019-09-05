@@ -7,12 +7,16 @@ using UnityEngine;
 
 public class CameraZone : MonoBehaviour
 {
+	
 	public CinemachineVirtualCamera vCam;
 	[Tooltip("An object that belongs to any of these collections will trigger this")]
 	public List<Collection> triggeringCollections;
 
 	[ToggleLeft]
 	public bool adjustPriority;
+
+	[ToggleLeft, Tooltip("Set whatever triggers this as the follow target on the virtual camera.")]
+	public bool overwriteFollowTarget = true;
 
 	[ShowIf("adjustPriority")]
 	public int priorityDelta = 1;
@@ -39,7 +43,7 @@ public class CameraZone : MonoBehaviour
 
 	void EnterAction(Collider2D other)
 	{
-		vCam.Follow = other.transform;
+		if (overwriteFollowTarget) vCam.Follow = other.transform;
 		if (adjustPriority) vCam.Priority += priorityDelta;
 	}
 
