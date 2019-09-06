@@ -19249,7 +19249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &362175745
 Transform:
   m_ObjectHideFlags: 0
@@ -21924,13 +21924,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b850ca5193a88b24abe718b120607d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layersThatDestroyThis:
+    serializedVersion: 2
+    m_Bits: 0
+  layersToDamage:
+    serializedVersion: 2
+    m_Bits: 32567
   damage:
     useConstant: 0
     constantValue: 50
     valueObject: {fileID: 0}
-  layersToDamage:
-    serializedVersion: 2
-    m_Bits: 32567
 --- !u!50 &533441527
 Rigidbody2D:
   serializedVersion: 4
@@ -25586,8 +25589,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 182.17969
-        y: 232.58594
+        x: 194.17969
+        y: 223.58594
         width: 119
         height: 32
       isBreakpoint: 0
@@ -26130,8 +26133,8 @@ MonoBehaviour:
       colorIndex: 3
       position:
         serializedVersion: 2
-        x: 545.25
-        y: 265.39844
+        x: 557.25
+        y: 279.39844
         width: 152
         height: 32
       isBreakpoint: 0
@@ -42726,13 +42729,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b850ca5193a88b24abe718b120607d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layersThatDestroyThis:
+    serializedVersion: 2
+    m_Bits: 0
+  layersToDamage:
+    serializedVersion: 2
+    m_Bits: 32567
   damage:
     useConstant: 0
     constantValue: 50
     valueObject: {fileID: 0}
-  layersToDamage:
-    serializedVersion: 2
-    m_Bits: 32567
 --- !u!50 &1677603895
 Rigidbody2D:
   serializedVersion: 4
