@@ -14,12 +14,16 @@ public class Hazard : ContactBase
 
     protected override void OnCollisionAction(Collision2D collision, Collider2D otherCol)
     {
+        if (!Math.LayerMaskContainsLayer(layersToDamage, otherCol.gameObject.layer)) return;
+        
         IDestructible destructible = otherCol.GetComponent<IDestructible>();
         destructible?.DoDamage(damage.Value, collision.GetContact(0).point, collision.GetContact(0).normal);
     }
 
     protected override void OnTriggerAction(Collider2D other)
     {
+        if (!Math.LayerMaskContainsLayer(layersToDamage, other.gameObject.layer)) return;
+        
         IDestructible destructible = other.GetComponent<IDestructible>();
         destructible?.DoDamage(damage.Value, ((Vector2)transform.position + (Vector2)other.transform.position)/2, 
             (transform.position - other.transform.position).normalized);
