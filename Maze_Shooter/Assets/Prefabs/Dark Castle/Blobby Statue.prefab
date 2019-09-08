@@ -126,15 +126,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoints:
     useConstant: 0
-    constantValue: 18
+    constantValue: 5
     valueObject: {fileID: 0}
   invulnerableTime:
     useConstant: 0
     constantValue: 0
     valueObject: {fileID: 0}
-  createDamageEffect: 0
-  damagedEffect: {fileID: 0}
-  damageEffectLifetime: 5
+  createDamageEffect: 1
+  damagedEffect: {fileID: 2241363109336683233, guid: c058a0d7179b3b74b94a79fa66fc8f46,
+    type: 3}
+  damageEffectLifetime: 3
   onDamagedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -158,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 4609726560887974340}
-  hitPointsOfEvent: 12
+  hitPointsOfEvent: 4
   healthEvent:
     m_PersistentCalls:
       m_Calls:
@@ -200,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 4609726560887974340}
-  hitPointsOfEvent: 5
+  hitPointsOfEvent: 2
   healthEvent:
     m_PersistentCalls:
       m_Calls:

@@ -10,6 +10,8 @@ public class AudioAction : MonoBehaviour
 
 	[ToggleLeft]
 	public bool playOnAwake = false;
+	[ToggleLeft]
+	public bool playOnEnable = false;
 
 	static GameObject _audioParent;
 
@@ -26,9 +28,20 @@ public class AudioAction : MonoBehaviour
 		if (playOnAwake) Play();
 	}
 
+	void OnEnable()
+	{
+		if (playOnEnable) Play();
+	}
+
 	[Button]
 	public void Play()
 	{
+		if (!Application.isPlaying)
+		{
+			Debug.LogWarning("Audio playing is only supporting while game is running.");
+			return;
+		}
+
 		if (audioCollection == null)
 		{
 			Debug.LogWarning(name + " has no audio connection referenced!");
@@ -45,6 +58,7 @@ public class AudioAction : MonoBehaviour
 		newSource.pitch = audioCollection.Pitch();
 		
 		newSource.Play();
+		
 		Destroy(audioGO, audioCollection.audioLifetime);
 	}
 }
