@@ -92,7 +92,7 @@ public class Gun : MonoBehaviour
 	[Button]
 	public void Fire()
 	{
-		if (IsCoolingDown) return;
+		if (IsCoolingDown || !enabled) return;
 		if (!Ammo)
 		{
 			Debug.LogError("No ammo ref is set on gun " + name, gameObject);

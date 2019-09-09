@@ -13,6 +13,8 @@ public class CameraShaker : MonoBehaviour
 	public float frequencyDecay = 1;
 	public float amplitudeDecay = 2;
 
+	public float frequencyMultiplier = 1;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -31,6 +33,6 @@ public class CameraShaker : MonoBehaviour
 	public void Shake(float intensity)
 	{
 		_noise.m_AmplitudeGain = Mathf.Max(_noise.m_AmplitudeGain, intensity);
-		_noise.m_FrequencyGain = Mathf.Max(_noise.m_FrequencyGain, intensity);
+		_noise.m_FrequencyGain = Mathf.Max(_noise.m_FrequencyGain, intensity * frequencyMultiplier);
 	}
 }
