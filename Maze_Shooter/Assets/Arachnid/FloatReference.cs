@@ -16,11 +16,15 @@ namespace Arachnid
     [System.Serializable]
     public class FloatReference
     {
+        [HorizontalGroup, LabelText("Value"), LabelWidth(60)]
         public PropertyType useConstant = PropertyType.Local;
+        
+        [HideIf("isGlobal"), HorizontalGroup, HideLabel]
         public float constantValue;
-        [AssetsOnly]
+        [AssetsOnly, ShowIf("isGlobal"), HorizontalGroup, HideLabel]
         public FloatValue valueObject;
 
+        bool isGlobal => useConstant == PropertyType.Global;
         
         public float Value
         {
@@ -35,8 +39,8 @@ namespace Arachnid
     
 #if UNITY_EDITOR
 
-    [OdinDrawer]
-    public class FloatRefDrawer : OdinValueDrawer<FloatReference>
+    /*
+    public sealed class FloatRefDrawer : OdinValueDrawer<FloatReference>
     {
         protected override void DrawPropertyLayout(IPropertyValueEntry<FloatReference> entry, GUIContent label)
         {
@@ -71,6 +75,7 @@ namespace Arachnid
             entry.SmartValue = value;
         }
     }
+    */
 
 #endif
 }

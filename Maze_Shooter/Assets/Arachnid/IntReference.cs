@@ -17,12 +17,18 @@ namespace Arachnid
 	[System.Serializable]
 	public class IntReference
 	{
+		[HorizontalGroup, LabelText("Value"), LabelWidth(60)]
 		public PropertyType useConstant = PropertyType.Local;
+		
+		[HideIf("isGlobal"), HorizontalGroup, HideLabel]
 		public int constantValue;
-		[AssetsOnly]
+		
+		[AssetsOnly, ShowIf("isGlobal"), HorizontalGroup, HideLabel]
 		public IntValue valueObject;
 
-        
+
+		bool isGlobal => useConstant == PropertyType.Global;
+		
 		public int Value
 		{
 			get { return useConstant == PropertyType.Local ? constantValue : valueObject.Value; }
@@ -36,6 +42,7 @@ namespace Arachnid
     
 #if UNITY_EDITOR
 
+	/*
 	[OdinDrawer]
 	public class IntRefDrawer : OdinValueDrawer<IntReference>
 	{
@@ -72,6 +79,7 @@ namespace Arachnid
 			entry.SmartValue = value;
 		}
 	}
+	*/
 
 #endif
 }
