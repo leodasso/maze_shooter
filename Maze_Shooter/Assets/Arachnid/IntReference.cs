@@ -1,14 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 #if UNITY_EDITOR
-
-using Sirenix.OdinInspector.Editor;
 using UnityEditor;
-using Sirenix.Utilities;
-
 #endif
 
 namespace Arachnid
@@ -42,44 +36,43 @@ namespace Arachnid
     
 #if UNITY_EDITOR
 
-	/*
-	[OdinDrawer]
-	public class IntRefDrawer : OdinValueDrawer<IntReference>
+	[CustomPropertyDrawer(typeof(IntReference))]
+	public class IntRefDrawer : PropertyDrawer
 	{
-		protected override void DrawPropertyLayout(IPropertyValueEntry<IntReference> entry, GUIContent label)
+		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
-			IntReference value = entry.SmartValue;
+			// Using BeginProperty / EndProperty on the parent property means that
+			// prefab override logic works on the entire property.
+			EditorGUI.BeginProperty(position, label, property);
 
-			var rect = EditorGUILayout.GetControlRect();
+			// Draw label
+			position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
 
-			// In Odin, labels are optional and can be null, so we have to account for that.
-			if (label != null)
-			{
-				rect = EditorGUI.PrefixLabel(rect, label);
-			}
+			// Don't make child fields be indented
+			var indent = EditorGUI.indentLevel;
+			EditorGUI.indentLevel = 0;
 
-			var prev = EditorGUIUtility.labelWidth;
-			EditorGUIUtility.labelWidth = 0;
+			float remainingWidth = position.width - EditorGlobals.propTypeEnumWidth;
 
-			value.useConstant = (PropertyType)EditorGUI.EnumPopup(rect.AlignLeft(rect.width * 0.4f), "", value.useConstant);
+			// Calculate rects
+			var enumRect = new Rect(position.x, position.y, EditorGlobals.propTypeEnumWidth, position.height);
+			var valueRect = new Rect(position.x + EditorGlobals.propTypeEnumWidth + 5, position.y, remainingWidth - 8, position.height);
+            
+			// get the enum index. 0 = local, 1 = global
+			SerializedProperty enumProperty = property.FindPropertyRelative("useConstant");
+			int enumIndex = enumProperty.enumValueIndex;
 
-			Rect rightRect = rect.AlignRight(rect.width * 0.6f);
+			// Draw fields - passs GUIContent.none to each so they are drawn without labels
+			EditorGUI.PropertyField(enumRect, property.FindPropertyRelative("useConstant"), GUIContent.none);
+			if (enumIndex == 0)
+				EditorGUI.PropertyField(valueRect, property.FindPropertyRelative("constantValue"), GUIContent.none);
+			if (enumIndex == 1)
+				EditorGUI.PropertyField(valueRect, property.FindPropertyRelative("valueObject"), GUIContent.none);
 
-			if (value.useConstant == PropertyType.Global)
-			{
-				value.valueObject =
-					(IntValue) EditorGUI.ObjectField(rightRect, "", value.valueObject, typeof(IntValue), false);
-			}
-			else
-			{
-				value.constantValue = EditorGUI.IntField(rightRect, value.constantValue);
-			}
-
-			EditorGUIUtility.labelWidth = prev;
-			entry.SmartValue = value;
+			// Set indent back to what it was
+			EditorGUI.indentLevel = indent;
+			EditorGUI.EndProperty();
 		}
 	}
-	*/
-
 #endif
 }
