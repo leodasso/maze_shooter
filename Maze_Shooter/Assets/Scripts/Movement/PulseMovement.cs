@@ -50,7 +50,12 @@ public class PulseMovement : MonoBehaviour
 			enabled = false;
 		}
 	}
-	
+
+	void OnDisable()
+	{
+		float _curveTime = 999;
+	}
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -74,6 +79,14 @@ public class PulseMovement : MonoBehaviour
 			e.TryEvent(normalizedProgress);
 		
 		_totalSpeed = speedMultiplier.Value * speedCurve.ValueFor(_curveTime) * timeMultiplier;
+	}
+
+	/// <summary>
+	/// Performs the pulse unity function stuff. This is so other objects can call the pulse
+	/// </summary>
+	public void DoPulse()
+	{
+		onPulse.Invoke();
 	}
 
 	void FixedUpdate()
