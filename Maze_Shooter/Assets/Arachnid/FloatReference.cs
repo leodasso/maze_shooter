@@ -22,7 +22,11 @@ namespace Arachnid
         
         public float Value
         {
-            get { return useConstant == PropertyType.Local ? constantValue : valueObject.Value; }
+            get
+            {
+                if (!valueObject) return constantValue;
+                return useConstant == PropertyType.Local ? constantValue : valueObject.Value;
+            }
 
             set {
                 if ( useConstant == PropertyType.Global) valueObject.Value = value;
