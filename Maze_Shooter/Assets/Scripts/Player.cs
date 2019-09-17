@@ -30,6 +30,8 @@ public class Player : MonoBehaviour
 	{
 		// Don't take action if we're paused
 		if (Time.timeScale <= Mathf.Epsilon) return;
+
+		if (_player == null) return;
 		
 		// Get the player's inputs
 		moveInput = new Vector2(_player.GetAxis("moveX"), _player.GetAxis("moveY"));
