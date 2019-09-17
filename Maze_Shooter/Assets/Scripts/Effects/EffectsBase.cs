@@ -14,6 +14,14 @@ public class EffectsBase : MonoBehaviour
 	static GameObject _effectsParent;
 	static GameObject _newInstance;
 
+	public static GameObject EffectsParent()
+	{
+		if (_effectsParent == null)
+			_effectsParent = new GameObject("Effects");
+
+		return _effectsParent;
+	}
+
 	protected float _lifetime;
 
 	void Update()
@@ -33,11 +41,8 @@ public class EffectsBase : MonoBehaviour
 			Debug.LogWarning("Effect prefab is not set for " + name, gameObject);
 			return;
 		}
-
-		if (_effectsParent == null)
-			_effectsParent = new GameObject("Effects");
 		
 		Destroy(Instantiate(
-			effectPrefab, transform.position, transform.rotation, _effectsParent.transform), lifetime);
+			effectPrefab, transform.position, transform.rotation, EffectsParent().transform), lifetime);
 	}
 }
