@@ -1,51 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Arachnid;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Math = Arachnid.Math;
 
-public enum GunType {Player, Enemy}
 
-public class Gun : MonoBehaviour
+public class Gun : GunBase
 {
-	[ToggleLeft]
-	public bool firing;
-	public FloatReference startFiringDelay;
-	
 	[Range(0, 1)]
+	[Tooltip("Determines how intense the fire rate is. 0 is the lowest fire rate of the selected gun," +
+	         " and 1 is the highest rate.")]
 	public float fireRateIntensity = 1;
-
-	[MinValue(0)]
-	public int Level
-	{
-		get { return _level; }
-		set { _level = Mathf.Clamp(value, 0, HasGunData ? GunData.MaxLevel : 0); }
-	}
-	public GunType gunType;
 	
-	
-	public List<GunData> overrideGuns = new List<GunData>();
-	public GunData gunData;
-
-	public GunData GunData
-	{
-		get
-		{
-			if (overrideGuns.Count > 0) return overrideGuns[0];
-			return gunData;
-		}
-	}
-	
-	[HideIf("HasGunData"), BoxGroup("local gun")]
-	[MinMaxSlider(.1f, 60, true), Tooltip("Number of shots per second. The minimum is when the player is barely touching joystick," +
-	                                " and max is when they're at full tilt.")]
-	public Vector2 firingRate;
-	[AssetsOnly, HideIf("HasGunData"), BoxGroup("local gun")]
-	public FiringPattern firingPattern;
-	[AssetsOnly, PreviewField, AssetList(AutoPopulate = false, Path = "Prefabs/Ammo"), BoxGroup("local gun"), HideIf("HasGunData")]
-	public GameObject ammo;
-	
-
 	FiringPattern FiringPattern {
 		get
 		{
@@ -60,29 +26,22 @@ public class Gun : MonoBehaviour
 	Vector2 FireRateRange => HasGunData ? GunData.firingRate : firingRate;
 	float FireRate => Mathf.Lerp(FireRateRange.x, FireRateRange.y, fireRateIntensity);
 	float Cooldown => 1f / FireRate;
-	float _cooldownTimer;
-	float _startFiringTimer;
-	bool HasGunData => GunData != null;
-	GameObject Ammo => HasGunData ? GunData.ammo : ammo;
 	bool IsCoolingDown => _cooldownTimer < Cooldown;
-	int _level;
 
-	// Use this for initialization
-	void Start ()
+	float _cooldownTimer;
+
+	protected override void Start()
 	{
-		_startFiringTimer = startFiringDelay.Value;
+		base.Start();
 		_cooldownTimer = 0;
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	protected override void Update ()
 	{
-		// Starting delay
-		if (_startFiringTimer > 0)
-		{
-			_startFiringTimer -= Time.deltaTime;
-			return;
-		}
+		base.Update();
+
+		if (!AllowFiring) return;
 		
 		if (_cooldownTimer <= Cooldown)
 			_cooldownTimer += Time.deltaTime;
@@ -126,26 +85,5 @@ public class Gun : MonoBehaviour
 			CreateBullet(new Vector2(x, y), -Math.RoundToNearest(angle, FiringPattern.snapAngle) );
 			yield return new WaitForSeconds(FiringPattern.interval);
 		}
-	}
-
-	void CreateBullet(Vector2 offset, float angle)
-	{
-		Vector2 localOffset = transform.TransformPoint(offset);
-		Debug.DrawLine(transform.position, localOffset, Color.yellow, 1);
-		var newAmmo = Instantiate(Ammo, localOffset, transform.rotation);
-		newAmmo.transform.Rotate(0, 0, angle, Space.World);
-		
-		newAmmo.layer = LayerMask.NameToLayer(gunType == GunType.Enemy ? 
-			"EnemyBullets" : "PlayerBullets");
-	}
-
-	public void AddOverride(GunData newData)
-	{
-		overrideGuns.Insert(0, newData);
-	}
-
-	public void RemoveOverride(GunData newData)
-	{
-		overrideGuns.Remove(newData);
 	}
 }
