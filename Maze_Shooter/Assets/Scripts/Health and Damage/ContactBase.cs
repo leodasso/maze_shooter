@@ -12,11 +12,39 @@ public class ContactBase : MonoBehaviour
 	[Tooltip("Layers that will destroy this object. Any inheriting class's behavior will happen before this is destroyed.")]
 	public LayerMask layersThatDestroyThis;
 
+	[Tooltip("Is this hazard expected to move at high velocity? If so, does a raycast check to make sure it doesn't go through" +
+	         " any colliders.")]
+	[PropertyOrder(-100)]
+	public bool highVelocity = false;
+
+	[ShowIf("highVelocity"), PropertyOrder(-99)]
+	[Tooltip("Layers that will be checked against for the high velocity raycasting.")]
+	public LayerMask castingLayerMask;
+
+	protected Vector3 _prevPosition;
+
 	protected PseudoDepth _pseudoDepth;
 
 	void Awake()
 	{
 		_pseudoDepth = GetComponent<PseudoDepth>();
+		_prevPosition = transform.position;
+	}
+
+	void Update()
+	{
+		if (!highVelocity) return;
+		
+		// Raycast from previous to current position
+		Vector3 direction = transform.position - _prevPosition;
+		RaycastHit2D hit = Physics2D.Raycast(_prevPosition, direction.normalized, direction.magnitude, castingLayerMask);
+		if ( hit.collider != null)
+		{
+			transform.position = hit.point;
+			Triggered(hit.collider);
+		}
+		// Reset previous position for next frame
+		_prevPosition = transform.position;
 	}
 
 	void OnCollisionEnter2D(Collision2D other)
@@ -35,6 +63,11 @@ public class ContactBase : MonoBehaviour
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
+	{
+		Triggered(other);
+	}
+
+	void Triggered(Collider2D other)
 	{
 		if (!DepthsOverlap(other)) return;
 		
