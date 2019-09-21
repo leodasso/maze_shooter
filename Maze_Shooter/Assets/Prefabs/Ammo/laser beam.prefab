@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 1692683205}
   - component: {fileID: 1692683204}
   - component: {fileID: 8875663597477085551}
+  - component: {fileID: 8700739631641925824}
   - component: {fileID: 821937813}
   m_Layer: 0
   m_Name: visuals
@@ -176,6 +177,21 @@ MonoBehaviour:
   effectPrefab: {fileID: 4914085790383446312, guid: 96d271fe1d562fc4b9bb53fff4cee63b,
     type: 3}
   lifetime: 1
+--- !u!114 &8700739631641925824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692683203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b97e8ed2baea5324b9e68bb303521efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 4914085790383446312, guid: 673035fbe6bda0e458e4492f828596f7,
+    type: 3}
+  lifetime: 2
 --- !u!95 &821937813
 Animator:
   serializedVersion: 3
