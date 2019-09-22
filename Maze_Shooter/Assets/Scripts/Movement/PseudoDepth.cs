@@ -116,9 +116,8 @@ public class PseudoDepth : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        
         float floor = myFloor();
         
         // calculate velocity from gravity

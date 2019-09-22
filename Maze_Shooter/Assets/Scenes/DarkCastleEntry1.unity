@@ -33627,7 +33627,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1200010352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38636,11 +38636,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114922546256464862, guid: b1a2a0c85709f0142b637e8ced29d5ea,
-        type: 3}
-      propertyPath: onDamagedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 392611271}
     - target: {fileID: 212932469533596488, guid: b1a2a0c85709f0142b637e8ced29d5ea,
         type: 3}
       propertyPath: m_SortingOrder
@@ -38656,6 +38651,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114922546256464862, guid: b1a2a0c85709f0142b637e8ced29d5ea,
+        type: 3}
+      propertyPath: onDamagedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 392611271}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1a2a0c85709f0142b637e8ced29d5ea, type: 3}
 --- !u!1 &1277949745
@@ -50542,7 +50542,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1932108485}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7, y: 21.1, z: 0}
+  m_LocalPosition: {x: -0.7, y: -35.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 226894769}
