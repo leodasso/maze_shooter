@@ -5,17 +5,21 @@ using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
-[TypeInfoBox("Links nodes in the world map to actual stages. Also, grabs the Animator component on this object and sends 'selected'" +
-             " bool events based on if the player is on this node or not.")]
+[TypeInfoBox("Links nodes in the world map to actual stages.")]
 public class StageCrystal : MonoBehaviour
 {
 	[TabGroup("main")]
 	public Stage stage;
 	[TabGroup("main"), Tooltip("Optional stage description UI.")]
 	public StageDescriptor stageDescriptor;
+	
+	[TabGroup("main"), Tooltip("Optional masker - will reveal interior when the stage is selected")]
+	public WorldMapMask linkedMask;
 
 	[ShowInInspector, SerializeField, TabGroup("main")]
 	float _stageLoadDelay = 1;
+
+
 	
 	[TabGroup("events")]
 	[ShowInInspector, SerializeField]
@@ -37,16 +41,6 @@ public class StageCrystal : MonoBehaviour
 	[TabGroup("events")]
 	UnityEvent _onDeselectedEvent;
 	
-	Animator _animator;
-	Animator Animator
-	{
-		get
-		{
-			if (_animator) return _animator;
-			_animator = GetComponent<Animator>();
-			return _animator;
-		}
-	}
 
 	public void EnterStage()
 	{
@@ -56,10 +50,10 @@ public class StageCrystal : MonoBehaviour
 
 	public void SetSelected(bool selected)
 	{
-		Animator.SetBool("selected", selected);
-
 		if (selected)
 		{
+			linkedMask?.Appear();
+			
 			if (stageDescriptor)
 			{
 				stageDescriptor.stage = stage;
@@ -72,6 +66,8 @@ public class StageCrystal : MonoBehaviour
 		}
 		else
 		{
+			linkedMask?.Disappear();
+			
 			stageDescriptor?.Hide();
 			_onDeselectedEvent.Invoke();
 			foreach (var e in _onDeselected) e.Raise();
