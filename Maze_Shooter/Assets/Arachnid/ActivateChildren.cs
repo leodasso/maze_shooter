@@ -10,16 +10,20 @@ public class ActivateChildren : MonoBehaviour
 
     [ToggleLeft]
     public bool activateOnEnable = false;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     void OnEnable()
     {
         if (activateOnEnable) ActivateMyChildren();
+    }
+
+    public void ActivateMyChildrenImmediately()
+    {
+        foreach (Transform t in transform)
+        {
+            // Only add children that aren't already active
+            if (t.gameObject.activeSelf) continue;
+            t.gameObject.SetActive(true);
+        }
     }
 
     [Button]

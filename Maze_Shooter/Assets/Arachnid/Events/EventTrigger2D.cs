@@ -14,10 +14,17 @@ namespace Arachnid {
         public List<GameEvent> events = new List<GameEvent>();
         public UnityEvent uEvent;
 
+        public UnityEvent uEventOnTriggerExit;
+
         protected override void OnTriggered(Collider2D triggerer)
         {
             uEvent.Invoke();
             foreach (var e in events) e.Raise();
+        }
+
+        protected override void OnTriggerExited(Collider2D triggerer)
+        {
+            uEventOnTriggerExit.Invoke();
         }
     }
 }

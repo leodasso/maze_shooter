@@ -39,11 +39,41 @@ namespace Arachnid
 			}
 		}
 
+		void OnTriggerExit2D(Collider2D other)
+		{
+			if (!filterTriggers)
+			{
+				TriggerExit(other);
+				return;
+			}
+
+			foreach (var c in triggerers)
+			{
+				if (c.ContainsGameObject(other.gameObject))
+				{
+					TriggerExit(other);
+					return;
+				}
+			}
+		}
+
 		void Trigger(Collider2D other)
 		{
 			if (_triggered && oneOff) return;
 			_triggered = true;
 			OnTriggered(other);
+		}
+
+		void TriggerExit(Collider2D other)
+		{
+			if (_triggered && oneOff) return;
+			_triggered = true;
+			OnTriggerExited(other);
+		}
+
+		protected virtual void OnTriggerExited(Collider2D triggerer)
+		{
+			
 		}
 
 		protected virtual void OnTriggered(Collider2D triggerer)
