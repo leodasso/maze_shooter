@@ -13,7 +13,7 @@ public class PathRenderer : MonoBehaviour
 		StartToEnd, EndToStart
 	}
 	
-	public List<Stage> prerequesiteStages = new List<Stage>();
+	//public List<Stage> prerequesiteStages = new List<Stage>();
 
 	public FloatReference createPathSpeed;
 	[MinMaxSlider(0, 1, true)]
@@ -38,6 +38,7 @@ public class PathRenderer : MonoBehaviour
 		Refresh();
 	}
 
+	/*
 	public bool PrerequisitesComplete()
 	{
 		foreach (var s in prerequesiteStages)
@@ -47,6 +48,7 @@ public class PathRenderer : MonoBehaviour
 
 		return true;
 	}
+	*/
 
 	void Refresh()
 	{

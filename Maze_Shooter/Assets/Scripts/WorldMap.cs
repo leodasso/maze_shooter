@@ -28,6 +28,7 @@ public class WorldMap : MonoBehaviour
 		yield return new WaitForSecondsRealtime(.1f);
 		SelectCurrentNode();
 		
+		/*
 		// Turn on/off all the paths
 		foreach (var path in paths)
 		{
@@ -36,6 +37,7 @@ public class WorldMap : MonoBehaviour
 			else 
 				path.SetPathInvisible();
 		}
+		*/
 
 		if (GameMaster.Get().justCompletedStage)
 		{
@@ -46,12 +48,13 @@ public class WorldMap : MonoBehaviour
 
 	void SelectCurrentNode()
 	{
+		// Place the player at the default starting node
 		if (GameMaster.Get().currentStage == null)
 		{
 			PlacePlayer(defaultPathNode);
 			return;
 		}
-
+		
 		foreach (var n in pathNodes.GetElementsOfType<PathNode>())
 		{
 			if (!n.linkedCrystal) continue;

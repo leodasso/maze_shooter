@@ -19,7 +19,7 @@ public class Stage : ScriptableObject
     [Tooltip("Events that will take place immediately when stage is loaded")]
     public List<GameEvent> immediateEvents;
 
-    [Tooltip("Event that gets called when this stage has been completed while in the world map")]
+    [Tooltip("If this stage was just completed, this event will be called as soon as the world map is loaded.")]
     public GameEvent onComplete_worldMap;
 
     const string _key_complete = "complete";
@@ -67,7 +67,7 @@ public class Stage : ScriptableObject
     public void CompleteStage()
     {
         // TODO probably saving
-        string key = "devbaby";
+        string key;
         if (TryGetStageKey(out key))
         {
             ES3.Save<bool>(key + _key_complete, true);

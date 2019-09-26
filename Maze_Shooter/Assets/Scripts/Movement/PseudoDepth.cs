@@ -111,8 +111,10 @@ public class PseudoDepth : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        // Update the visuals on awake so any effects/other stuff on the visuals objects spawns at correct position
+        UpdateVisuals();
     }
 
     // Update is called once per frame

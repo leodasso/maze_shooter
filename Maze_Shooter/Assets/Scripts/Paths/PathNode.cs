@@ -53,6 +53,15 @@ namespace Paths
 				_spriteRenderer.enabled = false;
 		}
 
+		
+		/// <summary>
+		/// Sets this node as available or not. This is here to be used by unity events.
+		/// </summary>
+		public void SetAvailable(bool isAvailable)
+		{
+			available = isAvailable;
+		}
+
 		[Button]
 		public void GetSpriteRenderer()
 		{
