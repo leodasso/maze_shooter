@@ -22,7 +22,7 @@ public class AimAtObjects : MonoBehaviour
 		if (_targetFinder == null) return;
 		if (_targetFinder.currentTarget == null) return;
 
-		float z = Math.AngleFromVector2(_targetFinder.currentTarget.position - transform.position, -90);
+		float z = Math.AngleFromVector2(_targetFinder.currentTarget.transform.position - transform.position, -90);
 		transform.eulerAngles = new Vector3(0, 0, z);
 	}
 }

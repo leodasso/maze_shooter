@@ -7,12 +7,17 @@ using System.Linq;
 
 [TypeInfoBox("Finds a target from the selected collection based on the given logic. Used by other components" +
              " which need a target specified.")]
-public class TargetFinder : MonoBehaviour 
+public class TargetFinder : MonoBehaviour
 {
+	public bool autoAcquire = true;
+	
+	[ShowIf("autoAcquire")]
 	public Collection targets;
+	
+	[ShowIf("autoAcquire")]
 	public TargetType targetToAimAt;
 
-	public Transform currentTarget;
+	public GameObject currentTarget;
 	
 	// Use this for initialization
 	void Start () 
@@ -27,13 +32,13 @@ public class TargetFinder : MonoBehaviour
 	
 	void TryFindTarget()
 	{
-		if (currentTarget != null) return;
+		if (currentTarget != null || !autoAcquire) return;
 		FindTarget();
 	}
 
 	void FindTarget()
 	{
-		if (targets == null) return;
+		if (targets == null || !autoAcquire) return;
 		if (targets.elements.Count < 1) return;
 
 		if (targetToAimAt == TargetType.Random)
@@ -41,7 +46,7 @@ public class TargetFinder : MonoBehaviour
 			CollectionElement randomTarget;
 			if (targets.GetRandom(out randomTarget))
 			{
-				currentTarget = randomTarget.transform;
+				currentTarget = randomTarget.gameObject;
 				return;
 			}
 		}
@@ -51,11 +56,16 @@ public class TargetFinder : MonoBehaviour
 		
 		if (targetToAimAt == TargetType.Farthest)
 		{
-			currentTarget = orderedTargets.Last();
+			currentTarget = orderedTargets.Last().gameObject;
 			return;
 		}
 
 		if (targetToAimAt == TargetType.Nearest)
-			currentTarget = orderedTargets.First();
+			currentTarget = orderedTargets.First().gameObject;
+	}
+
+	public void SetTarget(GameObject newTarget)
+	{
+		currentTarget = newTarget;
 	}
 }

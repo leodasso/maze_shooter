@@ -22,6 +22,15 @@ public class PulseMovement : MonoBehaviour
 	
 	[TabGroup("main")]
 	public CurveObject speedCurve;
+	
+	[TabGroup("main")]
+	[Tooltip("The thing I'll move towards. Keep in mind if there's a tergetFinder referenced, it will overwrite" +
+	         " whatever you put in here.")]
+	public GameObject target;
+    
+	[TabGroup("main")]
+	[Tooltip("(optional) Will just use whatever target the targetfinder has if this is set.")]
+	public TargetFinder targetFinder;
 
 	[TabGroup("Events")]
 	[DrawWithUnity, Tooltip("A pulse is a run through the speed curve. This event will be called at the beginning of each pulse.")]
@@ -31,7 +40,6 @@ public class PulseMovement : MonoBehaviour
 	public List<PulseEvent> pulseEvents = new List<PulseEvent>();
 	
 	float _totalSpeed;
-	TargetFinder _targetFinder;
 	Rigidbody2D _rigidbody2D;
 	float _delayTimer;
 	
@@ -41,7 +49,6 @@ public class PulseMovement : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		_targetFinder = GetComponent<TargetFinder>();
 		_rigidbody2D = GetComponent<Rigidbody2D>();
 		_delayTimer = startDelay.Value + Random.Range(0, randomStartDelay.Value);
 		if (!speedCurve)
@@ -59,6 +66,8 @@ public class PulseMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		if (targetFinder && targetFinder.currentTarget) target = targetFinder.currentTarget.gameObject;
+		
 		if (_delayTimer > 0)
 		{
 			_delayTimer -= Time.deltaTime;
@@ -91,10 +100,9 @@ public class PulseMovement : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if (!_targetFinder) return;
-		if (!_targetFinder.currentTarget) return;
+		if (!target) return;
 
-		Vector2 dir = _targetFinder.currentTarget.position - transform.position;
+		Vector2 dir = target.transform.position - transform.position;
 		_rigidbody2D.AddForce(dir.normalized * _totalSpeed);
 	}
 

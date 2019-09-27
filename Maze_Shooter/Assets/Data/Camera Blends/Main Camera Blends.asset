@@ -24,8 +24,19 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: skull guard focus
-    m_To: trapdoor focus
+  - m_From: '**ANY CAMERA**'
+    m_To: (none)
+    m_Blend:
+      m_Style: 1
+      m_Time: 0.25
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: hallway vCam
+    m_To: main hall vCam
     m_Blend:
       m_Style: 1
       m_Time: 0.25

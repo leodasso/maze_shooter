@@ -5059,6 +5059,10 @@ MonoBehaviour:
   layersThatDestroyThis:
     serializedVersion: 2
     m_Bits: 0
+  highVelocity: 0
+  castingLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   layersToDamage:
     serializedVersion: 2
     m_Bits: 512
@@ -5178,6 +5182,8 @@ MonoBehaviour:
     valueObject: {fileID: 0}
   timeMultiplier: 1.15
   speedCurve: {fileID: 11400000, guid: 805df53ce52112345a5a6db55cf54d45, type: 2}
+  target: {fileID: 0}
+  targetFinder: {fileID: 1392745907270490623}
   onPulse:
     m_PersistentCalls:
       m_Calls:
@@ -5251,6 +5257,8 @@ MonoBehaviour:
     useConstant: 0
     constantValue: 65
     valueObject: {fileID: 0}
+  target: {fileID: 0}
+  targetFinder: {fileID: 1392745907270490623}
 --- !u!114 &1392745907270490623
 MonoBehaviour:
   m_ObjectHideFlags: 0
