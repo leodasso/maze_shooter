@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Arachnid;
@@ -66,6 +67,7 @@ public class TargetFinder : MonoBehaviour
 
 	public void SetTarget(GameObject newTarget)
 	{
+		Debug.Log("Setting new target", newTarget);
 		currentTarget = newTarget;
 	}
 }

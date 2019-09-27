@@ -5076,7 +5076,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8209207714224161521}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 902687024}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1384774831, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
@@ -5638,28 +5638,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d700eac8e17a8c44b719ae549e33d69, type: 3}
---- !u!1 &902687024 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8209207712539849684, guid: b3f9211ba7241b54386f50038a040ddb,
-    type: 3}
-  m_PrefabInstance: {fileID: 8209207714224161521}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &902687025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 902687024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3eb66a31e11e9a468b0c71082522cc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoAcquire: 0
-  targets: {fileID: 0}
-  targetToAimAt: 0
-  currentTarget: {fileID: 0}
 --- !u!1 &948079700
 GameObject:
   m_ObjectHideFlags: 0
@@ -13979,11 +13957,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4544171246489010, guid: a043c82ae9431c74f8f2768adfd7aa99, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.12
+      value: -3.72
       objectReference: {fileID: 0}
     - target: {fileID: 4544171246489010, guid: a043c82ae9431c74f8f2768adfd7aa99, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.0199995
+      value: -36.75
       objectReference: {fileID: 0}
     - target: {fileID: 4544171246489010, guid: a043c82ae9431c74f8f2768adfd7aa99, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14012,7 +13990,7 @@ PrefabInstance:
     - target: {fileID: 20584564907188678, guid: a043c82ae9431c74f8f2768adfd7aa99,
         type: 3}
       propertyPath: orthographic size
-      value: 4.78
+      value: 4.57
       objectReference: {fileID: 0}
     - target: {fileID: 20584564907188678, guid: a043c82ae9431c74f8f2768adfd7aa99,
         type: 3}
@@ -99569,7 +99547,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1625192101}
   - component: {fileID: 1625192100}
-  - component: {fileID: 1625192099}
   - component: {fileID: 1625192102}
   m_Layer: 13
   m_Name: vision trigger (1)
@@ -99578,55 +99555,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1625192099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1625192098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6250be75fee71d74c9e0503cc4f7cb73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  oneOff: 0
-  filterTriggers: 1
-  triggerers:
-  - {fileID: 11400000, guid: 35831a8bfbcf71f4fb702f50d0ec7816, type: 2}
-  events: []
-  uEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 502629475}
-        m_MethodName: SendEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: enemySeen
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 902687024}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  uEventOnTriggerExit:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!60 &1625192100
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -99685,13 +99613,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oneOff: 0
   filterTriggers: 1
-  triggerers: []
-  eyes: {fileID: 0}
-  visibleTarget: {fileID: 0}
+  triggerers:
+  - {fileID: 11400000, guid: 35831a8bfbcf71f4fb702f50d0ec7816, type: 2}
+  eyes: {fileID: 1625192101}
   onTriggeredByObject:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 902687025}
+      - m_Target: {fileID: 8209207714224161522}
         m_MethodName: SetTarget
         m_Mode: 0
         m_Arguments:
@@ -99700,6 +99628,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 502629475}
+        m_MethodName: SendEvent
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: enemySeen
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: Arachnid.UnityEventGameObjectParam, Arachnid, Version=0.0.0.0, Culture=neutral,
@@ -100804,7 +100743,7 @@ PrefabInstance:
     - target: {fileID: 8209207712539849689, guid: b3f9211ba7241b54386f50038a040ddb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.9
+      value: -14.4
       objectReference: {fileID: 0}
     - target: {fileID: 8209207712539849689, guid: b3f9211ba7241b54386f50038a040ddb,
         type: 3}
@@ -100858,3 +100797,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3f9211ba7241b54386f50038a040ddb, type: 3}
+--- !u!114 &8209207714224161522 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 902687025, guid: b3f9211ba7241b54386f50038a040ddb,
+    type: 3}
+  m_PrefabInstance: {fileID: 8209207714224161521}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3eb66a31e11e9a468b0c71082522cc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

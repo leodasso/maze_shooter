@@ -12,9 +12,6 @@ namespace Arachnid
     {
         [UnityEngine.Tooltip("The transform representing the eyes. This will be used to determine if the triggerer can be seen.")]
         public Transform eyes;
-
-        public GameObject visibleTarget;
-
         public UnityEventGameObjectParam onTriggeredByObject;
 
         //public TargetHolder targetHolder;
@@ -24,7 +21,8 @@ namespace Arachnid
             // TODO raycast
             base.OnTriggered(triggerer);
 
-            visibleTarget = triggerer.gameObject;
+            Debug.Log("invoking ontriggered with ", triggerer.gameObject);
+            onTriggeredByObject.Invoke(triggerer.gameObject);
         }
     }
 }
