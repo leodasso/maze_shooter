@@ -183,7 +183,7 @@ public class PseudoDepth : MonoBehaviour
     void OnHitGround()
     {
         _grounded = true;
-        Debug.Log(name + " hit the ground!");
+        //Debug.Log(name + " hit the ground!");
         zVelocity = -zVelocity * bounce;
         onGroundHitEvent.Invoke();
     }
@@ -191,7 +191,7 @@ public class PseudoDepth : MonoBehaviour
     void OnLeaveGround()
     {
         _grounded = false;
-        Debug.Log(name + " left the ground!");
+        //Debug.Log(name + " left the ground!");
     }
 
     /// <summary>
