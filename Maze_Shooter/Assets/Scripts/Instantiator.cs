@@ -25,6 +25,9 @@ public class Instantiator : MonoBehaviour
 	[ToggleLeft]
 	public bool instantiateStagePlayer;
 
+	[ToggleLeft, Tooltip("Allow for instantiation of multiple instances of the prefab?")]
+	public bool allowMultipleInstances;
+
 	[ShowIf("instantiateStagePlayer")]
 	public Stage stage;
 	
@@ -85,7 +88,7 @@ public class Instantiator : MonoBehaviour
 	// left public to be accesible from Unity Events
 	public void Instantiate()
 	{
-		if (_instance != null) return;
+		if (_instance != null && !allowMultipleInstances) return;
 		
 		if (ToInstantiate == null)
 		{

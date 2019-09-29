@@ -5040,7 +5040,7 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.16981131, g: 0.14017443, b: 0.14017443, a: 1}
+      minColor: {r: 0, g: 0, b: 0, a: 1}
       maxColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
       maxGradient:
         serializedVersion: 2
@@ -5479,7 +5479,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 20.91
+    angle: 12.17
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -7448,7 +7448,7 @@ ParticleSystem:
     drag:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.35
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -9708,6 +9708,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f420d112edee13048bcb69786c525ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prerequisiteStages: []
+  notCompleteYet: []
   eventToInvoke:
     m_PersistentCalls:
       m_Calls: []
