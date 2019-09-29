@@ -9,5 +9,11 @@ using Sirenix.OdinInspector;
 public class SaveDataAvatar : ScriptableObject
 {
              [PreviewField]
-             public Sprite sprite;             
+             public Sprite sprite;
+
+             [Button]
+             public void DeleteData()
+             {
+                          GameMaster.DeleteSaveData(this);
+             }
 }

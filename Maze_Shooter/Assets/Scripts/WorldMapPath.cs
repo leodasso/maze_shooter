@@ -19,12 +19,16 @@ public class WorldMapPath : MonoBehaviour
     public UnityEvent pathOpenAnimation;
 
     public UnityEvent onPathOpen;
+
+    const string saveKeyPrefix = "mapPathway_";
    
     bool PathIsOpen()
     {
         foreach (var stage in prerequisites)
         {
-            if (!stage.IsComplete()) return false;
+            bool isComplete = stage.IsComplete();
+            Debug.Log("Stage " + stage + " is seen as complete: " + isComplete, gameObject);
+            if (!isComplete) return false;
         }
         return true;
     }
@@ -42,7 +46,7 @@ public class WorldMapPath : MonoBehaviour
         }
     }
 
-    void OpenPathWithAnimation()
+    public void OpenPathWithAnimation()
     {
         StartCoroutine(DoPathOpenAnimation());
     }
@@ -69,9 +73,9 @@ public class WorldMapPath : MonoBehaviour
     /// </summary>
     void SaveAnimationShown()
     {
-        string key;
-        if (TryGetSaveKey(out key))
-            ES3.Save<bool>(key, true);
+        string saveDir;
+        if (GameMaster.Get().TryGetSaveFileDirectory(out saveDir))
+            ES3.Save<bool>(saveKeyPrefix + uniqueSaveKey, true, saveDir);
         
         else 
             Debug.LogWarning("Error saving " + name, gameObject);
@@ -82,30 +86,13 @@ public class WorldMapPath : MonoBehaviour
     /// </summary>
     bool PathOpenShown()
     {
-        string key;
-        if (TryGetSaveKey(out key))
-        {
-            return ES3.Load<bool>(key, false);
-        }
-            
-        Debug.LogWarning("Error getting save key for " + name, gameObject);
-        return false;
-    }
-
-    /// <summary>
-    /// Tries to get the save key for this path. If successful, returns true.
-    /// </summary>
-    /// <param name="key">The ES3 save key for this particular path</param>
-    bool TryGetSaveKey(out string key)
-    {
-        key = "";
         string saveDir;
         if (GameMaster.Get().TryGetSaveFileDirectory(out saveDir))
         {
-            key = saveDir + "_mapPathway_" + uniqueSaveKey;
-            return true;
+            return ES3.Load<bool>(saveKeyPrefix + uniqueSaveKey, saveDir, false);
         }
-
+            
+        Debug.LogError("Unable to find save file directory. " + name, gameObject);
         return false;
     }
 }

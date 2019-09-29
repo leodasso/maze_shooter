@@ -81,6 +81,24 @@ public class GameMaster : ScriptableObject
         return ES3.FileExists(saveFilesDirectory + avatar.name + ".es3");
     }
 
+    public static void DeleteSaveData(SaveDataAvatar avatar)
+    {
+        if (!avatar) return;
+        Debug.Log("Deleting save data for " + avatar.name);
+
+        if (!AvatarIsUsedBySaveFile(avatar))
+        {
+            Debug.Log("Avatar doesn't have any save data.");
+            return;
+        }
+        
+        ES3.DeleteFile(saveFilesDirectory + avatar.name + ".es3");
+    }
+
+    /// <summary>
+    /// Returns true if the directory was found. 
+    /// </summary>
+    /// <param name="file">Contains the save file directory for the current avatar.</param>
     public bool TryGetSaveFileDirectory(out string file)
     {
         file = "";
