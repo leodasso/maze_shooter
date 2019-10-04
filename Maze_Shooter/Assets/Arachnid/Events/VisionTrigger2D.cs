@@ -13,8 +13,6 @@ namespace Arachnid
         [UnityEngine.Tooltip("The transform representing the eyes. This will be used to determine if the triggerer can be seen.")]
         public Transform eyes;
         public UnityEventGameObjectParam onTriggeredByObject;
-        
-        public List<GameObject> visibleDudes = new List<GameObject>();
 
         //public TargetHolder targetHolder;
 

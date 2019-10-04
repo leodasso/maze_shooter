@@ -28,6 +28,9 @@ public class Instantiator : MonoBehaviour
 	[ToggleLeft, Tooltip("Allow for instantiation of multiple instances of the prefab?")]
 	public bool allowMultipleInstances;
 
+	[ToggleLeft, Tooltip("Apply my scale to the new instance")]
+	public bool applyScale;
+
 	[ShowIf("instantiateStagePlayer")]
 	public Stage stage;
 	
@@ -109,6 +112,7 @@ public class Instantiator : MonoBehaviour
 		}
 
 		_instance = Instantiate(ToInstantiate, transform.position, transform.rotation, parent);
+		if (applyScale) _instance.transform.localScale = transform.localScale;
 	}
 
 	// left public to be accesible from Unity Events

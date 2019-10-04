@@ -186,7 +186,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Arachnid.UnityEventGameObjectParam, Arachnid, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  visibleDudes: []
 --- !u!114 &8211583377058590675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,6 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instantiateStagePlayer: 0
   allowMultipleInstances: 1
+  applyScale: 0
   stage: {fileID: 0}
   prefabToInstantiate: {fileID: 2503079541973067156, guid: 80a1abb9ae58701418313d2cb8ffd33c,
     type: 3}
@@ -398,6 +398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instantiateStagePlayer: 0
   allowMultipleInstances: 1
+  applyScale: 0
   stage: {fileID: 0}
   prefabToInstantiate: {fileID: 2503079541973067156, guid: 0ea67d147a7364c42ac241550cc55bf2,
     type: 3}
@@ -449,6 +450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instantiateStagePlayer: 0
   allowMultipleInstances: 1
+  applyScale: 0
   stage: {fileID: 0}
   prefabToInstantiate: {fileID: 7033909125077254994, guid: 017850168fdec7e499056acb9390c2a2,
     type: 3}
@@ -1858,7 +1860,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -1892,7 +1894,7 @@ MonoBehaviour:
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
+  eventHandlerComponentsAdded: 1
 --- !u!114 &3390876843143092561
 MonoBehaviour:
   m_ObjectHideFlags: 0

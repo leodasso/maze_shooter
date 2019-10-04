@@ -16,22 +16,22 @@ public class SimpleMovement : MonoBehaviour
     [Tooltip("(optional) Will just use whatever target the targetfinder has if this is set.")]
     public TargetFinder targetFinder;
     
-    Rigidbody2D _rigidbody2D;
+    protected Rigidbody2D _rigidbody2D;
     
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (targetFinder && targetFinder.currentTarget) 
             target = targetFinder.currentTarget.gameObject;
     }
     
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (!target) return;
         

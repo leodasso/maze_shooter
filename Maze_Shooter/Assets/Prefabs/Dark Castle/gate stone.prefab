@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 6772091731550764323}
   - component: {fileID: 5132861010680990518}
   - component: {fileID: 771112296287854031}
+  - component: {fileID: -4438826003568265363}
   m_Layer: 11
   m_Name: gate stone
   m_TagString: Untagged
@@ -222,7 +223,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 6490586708799913285}
+  mode: 0
   hitPointsOfEvent: 10
+  percentageOfEvent: 0.5
   healthEvent:
     m_PersistentCalls:
       m_Calls:
@@ -264,7 +267,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 6490586708799913285}
+  mode: 0
   hitPointsOfEvent: 5
+  percentageOfEvent: 0.5
   healthEvent:
     m_PersistentCalls:
       m_Calls:
@@ -308,3 +313,24 @@ MonoBehaviour:
   effectPrefab: {fileID: 1494256147286654, guid: 3ee5282f1c673474b813b78b8d5e9f5c,
     type: 3}
   lifetime: 5
+--- !u!114 &-4438826003568265363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6490586708799913287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 997b69907ee6a7244944c6de53f6f4af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instantiateStagePlayer: 0
+  allowMultipleInstances: 0
+  applyScale: 0
+  stage: {fileID: 0}
+  prefabToInstantiate: {fileID: 854948348882471598, guid: 5b5e3ed047f4875439da061fa29d3c49,
+    type: 3}
+  createInstance: 4
+  destroyInstance: 0
+  instancePlaceInHierarchy: 1

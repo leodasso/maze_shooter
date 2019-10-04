@@ -20,6 +20,8 @@ public class ContactBase : MonoBehaviour
 	[ShowIf("highVelocity"), PropertyOrder(-99)]
 	[Tooltip("Layers that will be checked against for the high velocity raycasting.")]
 	public LayerMask castingLayerMask;
+	
+	public List<Collider2D> ignoredColliders = new List<Collider2D>();
 
 	protected Vector3 _prevPosition;
 
@@ -38,7 +40,7 @@ public class ContactBase : MonoBehaviour
 		// Raycast from previous to current position
 		Vector3 direction = transform.position - _prevPosition;
 		RaycastHit2D hit = Physics2D.Raycast(_prevPosition, direction.normalized, direction.magnitude, castingLayerMask);
-		if ( hit.collider != null)
+		if ( hit.collider != null && !ignoredColliders.Contains(hit.collider))
 		{
 			transform.position = hit.point;
 			Triggered(hit.collider);
@@ -53,7 +55,10 @@ public class ContactBase : MonoBehaviour
 		
 		// Don't collide with myself
 		if (otherCol.gameObject == gameObject) return;
-
+		
+		// don't collide with ignored colliders
+		if (ignoredColliders.Contains(otherCol)) return;
+		
 		if (!DepthsOverlap(otherCol)) return;
         
 		OnCollisionAction(other, otherCol);
@@ -71,8 +76,11 @@ public class ContactBase : MonoBehaviour
 	{
 		if (!DepthsOverlap(other)) return;
 		
-		OnTriggerAction(other);
+		// don't collide with ignored colliders
+		if (ignoredColliders.Contains(other)) return;
 		
+		OnTriggerAction(other);
+
 		if (Math.LayerMaskContainsLayer(layersThatDestroyThis, other.gameObject.layer)) 
 			Destroy(gameObject);
 	}

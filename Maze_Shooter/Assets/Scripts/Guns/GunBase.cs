@@ -32,7 +32,11 @@ public class GunBase : MonoBehaviour
     public FiringPattern firingPattern;
     [AssetsOnly, PreviewField, AssetList(AutoPopulate = false, Path = "Prefabs/Ammo"), BoxGroup("local gun"), HideIf("HasGunData")]
     public GameObject ammo;
-    
+    [Tooltip("This list is referenced by any ammo fired by this gun. The ammo will know " +
+             "not to interact with these colliders. Prevents ammo from hitting the thing that " +
+             "fired it on the very first frame.")]
+    public List<Collider2D> collidersToIgnore = new List<Collider2D>();
+
     [MinValue(0)]
     public int Level
     {
@@ -68,9 +72,15 @@ public class GunBase : MonoBehaviour
         Debug.DrawLine(transform.position, localOffset, Color.yellow, 1);
         var newAmmo = Instantiate(Ammo, localOffset, transform.rotation);
         newAmmo.transform.Rotate(0, 0, angle, Space.World);
-		
         newAmmo.layer = LayerMask.NameToLayer(gunType == GunType.Enemy ? 
             "EnemyBullets" : "PlayerBullets");
+        
+        Hazard hazard = newAmmo.GetComponent<Hazard>();
+        if (hazard)
+        {
+            hazard.ignoredColliders = new List<Collider2D>(collidersToIgnore);
+            hazard.enabled = true;
+        }
     }
     
     public void AddOverride(GunData newData)

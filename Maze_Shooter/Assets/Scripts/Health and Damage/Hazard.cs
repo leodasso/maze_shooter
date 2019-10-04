@@ -14,6 +14,7 @@ public class Hazard : ContactBase
 
     protected override void OnCollisionAction(Collision2D collision, Collider2D otherCol)
     {
+        if (!enabled) return;
         if (!Math.LayerMaskContainsLayer(layersToDamage, otherCol.gameObject.layer)) return;
         
         IDestructible destructible = otherCol.GetComponent<IDestructible>();
@@ -22,6 +23,7 @@ public class Hazard : ContactBase
 
     protected override void OnTriggerAction(Collider2D other)
     {
+        if (!enabled) return;
         if (!Math.LayerMaskContainsLayer(layersToDamage, other.gameObject.layer)) return;
         
         IDestructible destructible = other.GetComponent<IDestructible>();
