@@ -18,6 +18,7 @@ public class AudioCollection : ScriptableObject
     [AssetsOnly]
     public List<AudioClip> clips = new List<AudioClip>();
     public float audioLifetime = 5;
+    public float maxDistance = 50;
 
     [DrawWithUnity]
     public AudioMixerGroup mixerGroup;

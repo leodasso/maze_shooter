@@ -4853,6 +4853,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c78f991193d348a40b36403f041b5998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useRotationOfObject: 0
+  objectToUse: {fileID: 0}
   rotationOffset: -160
   _rotation: 0
   sprites:
@@ -4919,6 +4921,7 @@ MonoBehaviour:
   firingRate: {x: 0, y: 18.558037}
   firingPattern: {fileID: 0}
   ammo: {fileID: 1341631613168128, guid: 87a4d3b69935388409efe832955e4d0d, type: 3}
+  collidersToIgnore: []
   fireRateIntensity: 1
 --- !u!114 &114996978557731556
 MonoBehaviour:
@@ -10118,6 +10121,7 @@ GameObject:
   - component: {fileID: 70042267832684334}
   - component: {fileID: 114437556235319648}
   - component: {fileID: -8461540707669882475}
+  - component: {fileID: 5844886035140846238}
   m_Layer: 9
   m_Name: vengeful spirit
   m_TagString: Untagged
@@ -10386,6 +10390,14 @@ MonoBehaviour:
     useConstant: 1
     constantValue: 0
     valueObject: {fileID: 11400000, guid: a172aa1166137fb4b831df41ca8c2977, type: 2}
+--- !u!81 &5844886035140846238
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924984838417708}
+  m_Enabled: 1
 --- !u!1 &1983655120054090
 GameObject:
   m_ObjectHideFlags: 0

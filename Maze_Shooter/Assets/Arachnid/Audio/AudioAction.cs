@@ -50,12 +50,17 @@ public class AudioAction : MonoBehaviour
 		
 		GameObject audioGO = new GameObject(audioCollection.name);
 		audioGO.transform.parent = AudioParent().transform;
+		audioGO.transform.position = transform.position;
 		AudioSource newSource = audioGO.AddComponent<AudioSource>();
+		newSource.spread = 25;
+		newSource.rolloffMode = AudioRolloffMode.Linear;
 		newSource.clip = audioCollection.GetRandomClip();
 		newSource.playOnAwake = false;
 		newSource.outputAudioMixerGroup = audioCollection.mixerGroup;
 		newSource.volume = audioCollection.volume;
 		newSource.pitch = audioCollection.Pitch();
+		newSource.spatialBlend = 1;
+		newSource.maxDistance = audioCollection.maxDistance;
 		
 		newSource.Play();
 		
