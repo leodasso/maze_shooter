@@ -4,7 +4,7 @@ using Arachnid;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(SpriteRenderer)), ExecuteAlways]
 public class SpriteRotation : MonoBehaviour
 {
 	public float Rotation
@@ -13,12 +13,19 @@ public class SpriteRotation : MonoBehaviour
 		set { _rotation = Math.Angle0to360(value + rotationOffset); }
 	}
 
+	[ToggleLeft]
+	public bool useRotationOfObject;
+
+	[ShowIf("useRotationOfObject"), Tooltip("The rotation of this object will be used to select which sprite to show.")]
+	public GameObject objectToUse;
+
 	[Range(-180, 180)]
 	public float rotationOffset;
 	
-	[Range(0, 360), OnValueChanged("UpdateSprite"), SerializeField, ShowInInspector]
+	[Range(0, 360), SerializeField, ShowInInspector]
 	float _rotation;
 	
+	[PreviewField]
 	public List<Sprite> sprites = new List<Sprite>();
 
 	SpriteRenderer _spriteRenderer;
@@ -30,8 +37,9 @@ public class SpriteRotation : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void Update ()
 	{
+		if (useRotationOfObject && objectToUse) Rotation = objectToUse.transform.eulerAngles.z;
 		UpdateSprite();
 	}
 

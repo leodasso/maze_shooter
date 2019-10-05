@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Arachnid;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -10,6 +11,18 @@ public class ActivateChildren : MonoBehaviour
 
     [ToggleLeft]
     public bool activateOnEnable = false;
+
+    [ToggleLeft, Tooltip("Markers can be placed to give notice that something is about to spawn here, to make it " +
+                         "fair to players. ")]
+    public bool placePreSpawnMarkers = false;
+
+    [ShowIf("placePreSpawnMarkers")]
+    [AssetsOnly, Tooltip("The marker to show that something is about to spawn. This will be placed wherever children are")]
+    public GameObject preSpawnMarker;
+
+    [ShowIf("placePreSpawnMarkers")]
+    [Tooltip("How long will pre-spawn markers be shown before the actual objects instantiate?")]
+    public FloatReference preSpawnDuration;
 
     void OnEnable()
     {
@@ -45,8 +58,27 @@ public class ActivateChildren : MonoBehaviour
 
         foreach (GameObject go in childrenToBeActivated)
         {
-            go.SetActive(true);
+            ActivateChild(go);
             yield return new WaitForSeconds(delayBetweenActivations);
         }
+    }
+
+    void ActivateChild(GameObject child)
+    {
+        if (!placePreSpawnMarkers)
+            child.SetActive(true);
+
+        else 
+            StartCoroutine(SpawnSequence(child));
+    }
+
+    IEnumerator SpawnSequence(GameObject child)
+    {
+        // create the pre-spawn marker at the right place
+        GameObject newPreSpawnMarker = Instantiate(preSpawnMarker, child.transform.position, Quaternion.identity);
+        Destroy(newPreSpawnMarker, preSpawnDuration.Value);
+        
+        yield return new WaitForSeconds(preSpawnDuration.Value);
+        child.SetActive(true);
     }
 }
