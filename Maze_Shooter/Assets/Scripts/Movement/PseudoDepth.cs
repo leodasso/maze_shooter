@@ -194,6 +194,11 @@ public class PseudoDepth : MonoBehaviour
         //Debug.Log(name + " left the ground!");
     }
 
+    public void ApplyVelocity(float newVelocity)
+    {
+        zVelocity = newVelocity;
+    }
+
     /// <summary>
     /// Returns whether or not this height is overlapping the other pseudodepth's height
     /// </summary>
@@ -204,7 +209,7 @@ public class PseudoDepth : MonoBehaviour
 
     public bool OverlapWith(float depth)
     {
-        return globalTop >= depth && globalBottom < depth;
+        return globalTop >= depth && globalBottom <= depth;
     }
 
     public bool DefaultOverlap()

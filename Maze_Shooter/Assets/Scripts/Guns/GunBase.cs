@@ -14,6 +14,7 @@ public class GunBase : MonoBehaviour
     public FloatReference startFiringDelay;
     public List<GunData> overrideGuns = new List<GunData>();
     public GunData gunData;
+    PseudoDepth _pseudoDepth;
 
     public GunData GunData
     {
@@ -53,6 +54,7 @@ public class GunBase : MonoBehaviour
     // Use this for initialization
     protected virtual void Start()
     {
+        _pseudoDepth = GetComponent<PseudoDepth>();
         _startFiringTimer = startFiringDelay.Value;
     }
 
@@ -74,6 +76,11 @@ public class GunBase : MonoBehaviour
         newAmmo.transform.Rotate(0, 0, angle, Space.World);
         newAmmo.layer = LayerMask.NameToLayer(gunType == GunType.Enemy ? 
             "EnemyBullets" : "PlayerBullets");
+
+        // Apply my height to the ammo's height (if it uses pseudo depth)
+        PseudoDepth ammoDepth = newAmmo.GetComponent<PseudoDepth>();
+        if (ammoDepth && _pseudoDepth)
+            ammoDepth.z = _pseudoDepth.z;
         
         Hazard hazard = newAmmo.GetComponent<Hazard>();
         if (hazard)

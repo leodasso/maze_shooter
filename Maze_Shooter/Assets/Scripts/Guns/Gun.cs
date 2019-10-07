@@ -27,7 +27,6 @@ public class Gun : GunBase
 	float FireRate => Mathf.Lerp(FireRateRange.x, FireRateRange.y, fireRateIntensity);
 	float Cooldown => 1f / FireRate;
 	bool IsCoolingDown => _cooldownTimer < Cooldown;
-
 	float _cooldownTimer;
 
 	protected override void Start()

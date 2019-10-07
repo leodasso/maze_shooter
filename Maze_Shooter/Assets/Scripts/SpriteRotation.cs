@@ -7,10 +7,15 @@ using Sirenix.OdinInspector;
 [RequireComponent(typeof(SpriteRenderer)), ExecuteAlways]
 public class SpriteRotation : MonoBehaviour
 {
+	[ShowInInspector, OnValueChanged("UpdateSprite"), PropertyRange(0, 360)]
 	public float Rotation
 	{
-		get { return _rotation; }
-		set { _rotation = Math.Angle0to360(value + rotationOffset); }
+		get { return _rawRotation; }
+		set
+		{
+			_rawRotation = value;
+			_rotation = Math.Angle0to360(value + rotationOffset);
+		}
 	}
 
 	[ToggleLeft]
@@ -19,10 +24,10 @@ public class SpriteRotation : MonoBehaviour
 	[ShowIf("useRotationOfObject"), Tooltip("The rotation of this object will be used to select which sprite to show.")]
 	public GameObject objectToUse;
 
-	[Range(-180, 180)]
+	[Range(-180, 180), OnValueChanged("UpdateRotationOffset")]
 	public float rotationOffset;
-	
-	[Range(0, 360), SerializeField, ShowInInspector]
+
+	float _rawRotation;
 	float _rotation;
 	
 	[PreviewField]
@@ -40,6 +45,12 @@ public class SpriteRotation : MonoBehaviour
 	void Update ()
 	{
 		if (useRotationOfObject && objectToUse) Rotation = objectToUse.transform.eulerAngles.z;
+		UpdateSprite();
+	}
+
+	void UpdateRotationOffset()
+	{
+		_rotation = Math.Angle0to360(Rotation + rotationOffset);
 		UpdateSprite();
 	}
 

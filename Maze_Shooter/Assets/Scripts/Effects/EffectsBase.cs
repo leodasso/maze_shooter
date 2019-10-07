@@ -11,6 +11,9 @@ public class EffectsBase : MonoBehaviour
 	[Tooltip("How long the instantiated effect will last until it's destroyed")]
 	public float lifetime = 5;
 
+	[Tooltip("Delay between the triggering event and the actual spawn of the effect (in seconds)")]
+	public float delay = 0;
+
 	static GameObject _effectsParent;
 	static GameObject _newInstance;
 
@@ -41,7 +44,18 @@ public class EffectsBase : MonoBehaviour
 			Debug.LogWarning("Effect prefab is not set for " + name, gameObject);
 			return;
 		}
+
+		if (delay > Mathf.Epsilon)
+			StartCoroutine(DelayedInstantiate());
 		
+		else
+			Destroy(Instantiate(
+				effectPrefab, transform.position, transform.rotation, EffectsParent().transform), lifetime);
+	}
+
+	IEnumerator DelayedInstantiate()
+	{
+		yield return new WaitForSeconds(delay);
 		Destroy(Instantiate(
 			effectPrefab, transform.position, transform.rotation, EffectsParent().transform), lifetime);
 	}
