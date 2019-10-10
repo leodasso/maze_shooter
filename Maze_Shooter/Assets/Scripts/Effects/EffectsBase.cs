@@ -32,7 +32,12 @@ public class EffectsBase : MonoBehaviour
 		_lifetime += Time.deltaTime;
 	}
 
-	protected virtual void InstantiateEffect()
+	protected void InstantiateEffect()
+	{
+		InstantiateEffect(transform.position);
+	}
+
+	protected virtual void InstantiateEffect(Vector3 position)
 	{
 		if (Time.unscaledTime < Mathf.Epsilon) return;
 		
@@ -50,7 +55,7 @@ public class EffectsBase : MonoBehaviour
 		
 		else
 			Destroy(Instantiate(
-				effectPrefab, transform.position, transform.rotation, EffectsParent().transform), lifetime);
+				effectPrefab, position, transform.rotation, EffectsParent().transform), lifetime);
 	}
 
 	IEnumerator DelayedInstantiate()
