@@ -39,6 +39,11 @@ public class Flasher : MonoBehaviour
         _flashing = isFlashing;
         if (!isFlashing) SetRenderers(true);
     }
+
+    public bool GetFlashing()
+    {
+        return _flashing;
+    }
     
     void ToggleRenderers()
     {
