@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
 
-public class NoiseMovement : SimpleMovement
-{
-    [Tooltip("How much effect the noise has on movement")]
-    public FloatReference noiseIntensity;
-    
+public class NoiseMovement : MovementBase
+{    
     [Tooltip("The frequency or size of the noise. Larger frequency will result in smaller, jittery movements")]
     public FloatReference noiseFrequency;
     
     [Tooltip("The scroll speed of the perlin noise.")]
     public FloatReference scrollSpeed;
-    public float noiseMultiplier = 1;
     
     [Tooltip("If the group tends to bunch up in one corner or another after a while, use this to adjust their overall movement.")]
     public Vector2 noiseCalibration = new Vector2(-.5f, -.5f);
@@ -27,11 +23,11 @@ public class NoiseMovement : SimpleMovement
         Gizmos.DrawLine(transform.position, (Vector2)transform.position + GeneratedPerlinVector());
     }
     
-    protected override void FixedUpdate()
+    void FixedUpdate()
     {
         _noiseScrollOffset += Time.fixedDeltaTime * scrollSpeed.Value;
-        _rigidbody2D.AddForce(GeneratedPerlinVector() * noiseIntensity.Value * noiseMultiplier);
-        base.FixedUpdate();
+        _direction = GeneratedPerlinVector();
+        _rigidbody2D.AddForce(_direction * speed.Value * speedMultiplier);
     }
     
     

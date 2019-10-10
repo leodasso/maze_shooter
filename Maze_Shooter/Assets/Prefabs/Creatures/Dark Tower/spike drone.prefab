@@ -289,12 +289,6 @@ MonoBehaviour:
   speedMultiplier: 1
   speed:
     useConstant: 0
-    constantValue: 5
-    valueObject: {fileID: 0}
-  target: {fileID: 0}
-  targetFinder: {fileID: 0}
-  noiseIntensity:
-    useConstant: 0
     constantValue: 80
     valueObject: {fileID: 0}
   noiseFrequency:
@@ -305,7 +299,6 @@ MonoBehaviour:
     useConstant: 1
     constantValue: 2
     valueObject: {fileID: 11400000, guid: ac46fd467015ff54080092458fd384bc, type: 2}
-  noiseMultiplier: 1
   noiseCalibration: {x: -0.48, y: -0.48}
 --- !u!114 &614581730537775856
 MonoBehaviour:
@@ -369,6 +362,7 @@ MonoBehaviour:
   effectPrefab: {fileID: 1494256147286654, guid: 331635162449e0049af8280bec7cb13b,
     type: 3}
   lifetime: 5
+  delay: 0
 --- !u!114 &3816014834067363734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,6 +378,7 @@ MonoBehaviour:
   effectPrefab: {fileID: 1181547791888404, guid: bb2d699b161ff94429c16fc83c016bd1,
     type: 3}
   lifetime: 5
+  delay: 0
 --- !u!114 &286009076291206697
 MonoBehaviour:
   m_ObjectHideFlags: 0
