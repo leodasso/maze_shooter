@@ -9,8 +9,7 @@ public class StageController : MonoBehaviour
 	[AssetsOnly, InlineEditor()]
 	public Stage stage;
 
-	// Use this for initialization
-	void Start ()
+	void Awake()
 	{
 		// Make sure we have a stage, and throw an error if we dont
 		if (stage == null)
@@ -21,7 +20,11 @@ public class StageController : MonoBehaviour
 		}
 
 		GameMaster.Get().currentStage = stage;
-		
+	}
+
+	// Use this for initialization
+	void Start ()
+	{
 		// Raise the immediate events
 		foreach (var e in stage.immediateEvents)
 			e.Raise();

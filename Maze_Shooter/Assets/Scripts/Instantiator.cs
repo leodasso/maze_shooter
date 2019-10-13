@@ -30,9 +30,6 @@ public class Instantiator : MonoBehaviour
 
 	[ToggleLeft, Tooltip("Apply my scale to the new instance")]
 	public bool applyScale;
-
-	[ShowIf("instantiateStagePlayer")]
-	public Stage stage;
 	
 	[AssetsOnly, HideIf("instantiateStagePlayer"), PreviewField]
 	public GameObject prefabToInstantiate;
@@ -52,7 +49,7 @@ public class Instantiator : MonoBehaviour
 	{
 		get
 		{
-			if (instantiateStagePlayer) return stage.PlayerShip;
+			if (instantiateStagePlayer) return GameMaster.Get().currentStage.PlayerShip;
 			return prefabToInstantiate;
 		}
 	}
@@ -84,6 +81,7 @@ public class Instantiator : MonoBehaviour
 
 	void RunEvents(InstantiateBehavior behavior)
 	{
+		if (!Application.isPlaying) return;
 		if (createInstance == behavior) Instantiate();
 		if (destroyInstance == behavior) RemoveInstance();
 	}
@@ -91,6 +89,7 @@ public class Instantiator : MonoBehaviour
 	// left public to be accesible from Unity Events
 	public void Instantiate()
 	{
+		if (!Application.isPlaying) return;
 		if (_instance != null && !allowMultipleInstances) return;
 		
 		if (ToInstantiate == null)
@@ -111,6 +110,7 @@ public class Instantiator : MonoBehaviour
 					break;
 		}
 
+		if (!Application.isPlaying) return;
 		_instance = Instantiate(ToInstantiate, transform.position, transform.rotation, parent);
 		if (applyScale) _instance.transform.localScale = transform.localScale;
 	}

@@ -170,11 +170,6 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 79
       objectReference: {fileID: 0}
-    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 79
-      objectReference: {fileID: 0}
     - target: {fileID: 199762990607043272, guid: 89615f8e22da67444b294b1a6f251e7f,
         type: 3}
       propertyPath: m_SortingOrder
@@ -184,6 +179,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 79
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89615f8e22da67444b294b1a6f251e7f, type: 3}
@@ -2036,7 +2036,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 948079702}
-  - {fileID: 1932108486}
+  - {fileID: 1406484037}
   - {fileID: 1121567880}
   - {fileID: 2014359018}
   - {fileID: 588704238}
@@ -2366,11 +2366,6 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 79
       objectReference: {fileID: 0}
-    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 79
-      objectReference: {fileID: 0}
     - target: {fileID: 199762990607043272, guid: 89615f8e22da67444b294b1a6f251e7f,
         type: 3}
       propertyPath: m_SortingOrder
@@ -2380,6 +2375,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 79
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89615f8e22da67444b294b1a6f251e7f, type: 3}
@@ -22006,6 +22006,11 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  uEventOnTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &406517771
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -22338,6 +22343,7 @@ MonoBehaviour:
   castingLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  ignoredColliders: []
   layersToDamage:
     serializedVersion: 2
     m_Bits: 32567
@@ -22623,11 +22629,6 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1599
       objectReference: {fileID: 0}
-    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 1599
-      objectReference: {fileID: 0}
     - target: {fileID: 199762990607043272, guid: 89615f8e22da67444b294b1a6f251e7f,
         type: 3}
       propertyPath: m_SortingOrder
@@ -22637,6 +22638,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 1549
+      objectReference: {fileID: 0}
+    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 1599
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89615f8e22da67444b294b1a6f251e7f, type: 3}
@@ -22899,7 +22905,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2092656439
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: -20
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -29071,11 +29077,6 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 559
       objectReference: {fileID: 0}
-    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 559
-      objectReference: {fileID: 0}
     - target: {fileID: 199762990607043272, guid: 89615f8e22da67444b294b1a6f251e7f,
         type: 3}
       propertyPath: m_SortingOrder
@@ -29085,6 +29086,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 509
+      objectReference: {fileID: 0}
+    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 559
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89615f8e22da67444b294b1a6f251e7f, type: 3}
@@ -29332,6 +29338,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  uEventOnTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!61 &741519380
@@ -33900,7 +33911,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2092656439
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: -75
   m_RenderMode: 1
   m_SortMode: 0
@@ -38634,7 +38645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4668848611544918, guid: b1a2a0c85709f0142b637e8ced29d5ea, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 212932469533596488, guid: b1a2a0c85709f0142b637e8ced29d5ea,
         type: 3}
@@ -39099,11 +39110,6 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1599
       objectReference: {fileID: 0}
-    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 1599
-      objectReference: {fileID: 0}
     - target: {fileID: 199762990607043272, guid: 89615f8e22da67444b294b1a6f251e7f,
         type: 3}
       propertyPath: m_SortingOrder
@@ -39113,6 +39119,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 1549
+      objectReference: {fileID: 0}
+    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 1599
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89615f8e22da67444b294b1a6f251e7f, type: 3}
@@ -39318,11 +39329,6 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 2399
       objectReference: {fileID: 0}
-    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 2399
-      objectReference: {fileID: 0}
     - target: {fileID: 199762990607043272, guid: 89615f8e22da67444b294b1a6f251e7f,
         type: 3}
       propertyPath: m_SortingOrder
@@ -39332,6 +39338,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 2349
+      objectReference: {fileID: 0}
+    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 2399
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89615f8e22da67444b294b1a6f251e7f, type: 3}
@@ -39385,11 +39396,6 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 559
       objectReference: {fileID: 0}
-    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 559
-      objectReference: {fileID: 0}
     - target: {fileID: 199762990607043272, guid: 89615f8e22da67444b294b1a6f251e7f,
         type: 3}
       propertyPath: m_SortingOrder
@@ -39399,6 +39405,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 509
+      objectReference: {fileID: 0}
+    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 559
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89615f8e22da67444b294b1a6f251e7f, type: 3}
@@ -39481,6 +39492,81 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1406484036
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 226894769}
+    m_Modifications:
+    - target: {fileID: 1913206650931314636, guid: 2a69f42e92a05e648a034ac204de3750,
+        type: 3}
+      propertyPath: m_Name
+      value: spawn point
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913206650931314639, guid: 2a69f42e92a05e648a034ac204de3750,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.5764229
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913206650931314639, guid: 2a69f42e92a05e648a034ac204de3750,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -37.037647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913206650931314639, guid: 2a69f42e92a05e648a034ac204de3750,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913206650931314639, guid: 2a69f42e92a05e648a034ac204de3750,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913206650931314639, guid: 2a69f42e92a05e648a034ac204de3750,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913206650931314639, guid: 2a69f42e92a05e648a034ac204de3750,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913206650931314639, guid: 2a69f42e92a05e648a034ac204de3750,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913206650931314639, guid: 2a69f42e92a05e648a034ac204de3750,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913206650931314639, guid: 2a69f42e92a05e648a034ac204de3750,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913206650931314639, guid: 2a69f42e92a05e648a034ac204de3750,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913206650931314639, guid: 2a69f42e92a05e648a034ac204de3750,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2a69f42e92a05e648a034ac204de3750, type: 3}
+--- !u!4 &1406484037 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1913206650931314639, guid: 2a69f42e92a05e648a034ac204de3750,
+    type: 3}
+  m_PrefabInstance: {fileID: 1406484036}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1412181124 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4332112564745528, guid: f80ff5040a5a6c541a074796c3bddf49,
@@ -40099,7 +40185,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2092656439
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: -6
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -48441,11 +48527,6 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 319
       objectReference: {fileID: 0}
-    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 319
-      objectReference: {fileID: 0}
     - target: {fileID: 199762990607043272, guid: 89615f8e22da67444b294b1a6f251e7f,
         type: 3}
       propertyPath: m_SortingOrder
@@ -48455,6 +48536,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 269
+      objectReference: {fileID: 0}
+    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 319
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89615f8e22da67444b294b1a6f251e7f, type: 3}
@@ -48798,6 +48884,11 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  uEventOnTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &1590927428
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -48979,6 +49070,11 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  uEventOnTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &1621376411
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -49049,11 +49145,6 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 319
       objectReference: {fileID: 0}
-    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 319
-      objectReference: {fileID: 0}
     - target: {fileID: 199762990607043272, guid: 89615f8e22da67444b294b1a6f251e7f,
         type: 3}
       propertyPath: m_SortingOrder
@@ -49063,6 +49154,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 269
+      objectReference: {fileID: 0}
+    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 319
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89615f8e22da67444b294b1a6f251e7f, type: 3}
@@ -49475,11 +49571,6 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 2399
       objectReference: {fileID: 0}
-    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 2399
-      objectReference: {fileID: 0}
     - target: {fileID: 199762990607043272, guid: 89615f8e22da67444b294b1a6f251e7f,
         type: 3}
       propertyPath: m_SortingOrder
@@ -49489,6 +49580,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 2349
+      objectReference: {fileID: 0}
+    - target: {fileID: 114596764572633468, guid: 89615f8e22da67444b294b1a6f251e7f,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 2399
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89615f8e22da67444b294b1a6f251e7f, type: 3}
@@ -49629,6 +49725,7 @@ MonoBehaviour:
   castingLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  ignoredColliders: []
   layersToDamage:
     serializedVersion: 2
     m_Bits: 32567
@@ -49746,6 +49843,11 @@ MonoBehaviour:
           m_StringArgument: playerTriedToLeave
           m_BoolArgument: 0
         m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  uEventOnTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!61 &1678030524
@@ -50140,7 +50242,7 @@ PrefabInstance:
     - target: {fileID: 1677788761552021949, guid: 77232df8e08dc844985f9717be0ed7d1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1677788761552021949, guid: 77232df8e08dc844985f9717be0ed7d1,
         type: 3}
@@ -50516,87 +50618,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1798979316}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1932108485
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1932108486}
-  - component: {fileID: 1932108487}
-  - component: {fileID: 1932108488}
-  m_Layer: 0
-  m_Name: spawn point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1932108486
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932108485}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7, y: -35.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 226894769}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1932108487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932108485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 997b69907ee6a7244944c6de53f6f4af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  instantiateStagePlayer: 1
-  stage: {fileID: 11400000, guid: 35c1ebdfbc9e0c84197d168e0f15c26a, type: 2}
-  prefabToInstantiate: {fileID: 0}
-  createInstance: 0
-  destroyInstance: 0
-  instancePlaceInHierarchy: 0
---- !u!114 &1932108488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932108485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a83b5d72ab14f3f4c8442f76808cf317, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvents:
-  - {fileID: 11400000, guid: d59afbacd3a55d243a91bacaf0cb6478, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1932108487}
-        m_MethodName: Instantiate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  comment: 
 --- !u!1 &1943009580
 GameObject:
   m_ObjectHideFlags: 0
@@ -51081,6 +51102,11 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  uEventOnTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &2067246911
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -51319,6 +51345,11 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  uEventOnTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &2121575930
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -51434,6 +51465,11 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  uEventOnTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &2138094879
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -51525,7 +51561,7 @@ PrefabInstance:
     - target: {fileID: 2224807673256253025, guid: 80dd472038f964349b664b3487d4f49c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2224807673256253025, guid: 80dd472038f964349b664b3487d4f49c,
         type: 3}
