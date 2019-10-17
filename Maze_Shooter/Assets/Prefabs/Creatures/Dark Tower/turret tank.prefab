@@ -2951,7 +2951,7 @@ MonoBehaviour:
   initVector: {x: 1, y: 0.52}
   layersThatChangeDirection:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 33025
 --- !u!95 &6103590286332102207
 Animator:
   serializedVersion: 3
@@ -3115,7 +3115,6 @@ MonoBehaviour:
   instantiateStagePlayer: 0
   allowMultipleInstances: 0
   applyScale: 1
-  stage: {fileID: 0}
   prefabToInstantiate: {fileID: 1929394310317415765, guid: e2fa773761ee6f945bfbfbd8934f116f,
     type: 3}
   createInstance: 5
@@ -3246,7 +3245,6 @@ MonoBehaviour:
   instantiateStagePlayer: 0
   allowMultipleInstances: 1
   applyScale: 0
-  stage: {fileID: 0}
   prefabToInstantiate: {fileID: 8326729141368365193, guid: b33979e4d4a55b64b9510262167d50a7,
     type: 3}
   createInstance: 3
@@ -8449,6 +8447,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: turret tank walking effect Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5795151318493162214, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 383
+      objectReference: {fileID: 0}
     - target: {fileID: 5795151319858530043, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8504,30 +8507,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5795151319858530042, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
+    - target: {fileID: 7258203413755222837, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
         type: 3}
-      propertyPath: sortingOrder
-      value: 342
+      propertyPath: m_SortingOrder
+      value: 389
       objectReference: {fileID: 0}
     - target: {fileID: 5795151318493162215, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5795151318493162214, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
+    - target: {fileID: 5795151319858530042, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
         type: 3}
-      propertyPath: m_SortingOrder
-      value: 383
+      propertyPath: sortingOrder
+      value: 342
       objectReference: {fileID: 0}
     - target: {fileID: 1898410785520410019, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7258203413755222837, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 389
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0114cd39dfd5cc47b4d6e0311e40a0e, type: 3}

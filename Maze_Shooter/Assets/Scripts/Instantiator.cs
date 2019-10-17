@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class Instantiator : MonoBehaviour
 {
@@ -71,11 +74,13 @@ public class Instantiator : MonoBehaviour
 
 	void OnDisable()
 	{
+		if (Time.unscaledTime < Mathf.Epsilon) return;
 		RunEvents(InstantiateBehavior.OnDisable);
 	}
 
 	void OnDestroy()
 	{
+		if (Time.unscaledTime < Mathf.Epsilon) return;
 		RunEvents(InstantiateBehavior.OnDestroy);
 	}
 
@@ -89,6 +94,12 @@ public class Instantiator : MonoBehaviour
 	// left public to be accesible from Unity Events
 	public void Instantiate()
 	{
+		#if UNITY_EDITOR
+		if (!EditorApplication.isPlayingOrWillChangePlaymode) return;
+		if (EditorApplication.isPaused) return;
+		#endif
+		// If this is being disabled because we're loading a scene, we don't want it to create an effect.
+		if (GameMaster.transitioning) return;
 		if (!Application.isPlaying) return;
 		if (_instance != null && !allowMultipleInstances) return;
 		

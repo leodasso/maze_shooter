@@ -39,10 +39,26 @@ public class ActivateChildren : MonoBehaviour
         }
     }
 
-    [Button]
+    [ButtonGroup()]
     public void ActivateMyChildren()
     {
-        StartCoroutine(DoActivation());
+        if (!Application.isPlaying)
+        {
+            // If in editor mode, just activate the dang ol children.
+            foreach (Transform t in transform)
+                t.gameObject.SetActive(true);
+        }
+        else
+        {
+            StartCoroutine(DoActivation());
+        }
+    }
+
+    [ButtonGroup()]
+    public void DeactivateMyChildren()
+    {
+        foreach (Transform t in transform)
+            t.gameObject.SetActive(false);
     }
 
     IEnumerator DoActivation()
