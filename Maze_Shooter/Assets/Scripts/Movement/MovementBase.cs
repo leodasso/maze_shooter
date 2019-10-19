@@ -26,4 +26,14 @@ public class MovementBase : MonoBehaviour
     {
         return _direction;
     }
+
+    public void IncreaseSpeedMultiplier(float amt)
+    {
+        speedMultiplier += amt;
+    }
+
+    public void SetSpeedMultiplier(float value)
+    {
+        speedMultiplier = value;
+    }
 }

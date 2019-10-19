@@ -3,18 +3,32 @@ using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
 
+public enum MovementMode
+{
+    Force = 0, Velocity = 1
+}
+
 public class LinearMovement : MovementBase
 {
+    [Tooltip("The initial direction I'll move. This is previewed as the yellow line coming from me.")]
     public Vector2 initVector;
 
     [Tooltip("If I collide with objects of these layers, I will reverse direction")]
     public LayerMask layersThatChangeDirection;
+
+    public MovementMode movementMode = MovementMode.Force;
     
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         _direction = initVector.normalized;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, transform.position + (Vector3)initVector.normalized * speedMultiplier * speed.Value);
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -32,7 +46,16 @@ public class LinearMovement : MovementBase
     {
         if (!_rigidbody2D) return;
 
-        Vector2 force = _direction.normalized * speedMultiplier * speed.Value;
-        _rigidbody2D.AddForce(force);
+        Vector2 forceVector = _direction.normalized * speedMultiplier * speed.Value;
+        
+        switch (movementMode)
+        {
+            case MovementMode.Force:
+                _rigidbody2D.AddForce(forceVector);
+                break;
+            case MovementMode.Velocity:
+                _rigidbody2D.velocity = forceVector;
+                break;
+        }
     }
 }

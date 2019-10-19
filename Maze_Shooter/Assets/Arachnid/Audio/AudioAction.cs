@@ -8,6 +8,9 @@ public class AudioAction : MonoBehaviour
 	[AssetsOnly]
 	public AudioCollection audioCollection;
 
+	[Range(0, 1), Tooltip("Multiplies by the volume of the audio collection.")]
+	public float volume = 1;
+
 	[ToggleLeft]
 	public bool playOnAwake = false;
 	[ToggleLeft]
@@ -57,7 +60,7 @@ public class AudioAction : MonoBehaviour
 		newSource.clip = audioCollection.GetRandomClip();
 		newSource.playOnAwake = false;
 		newSource.outputAudioMixerGroup = audioCollection.mixerGroup;
-		newSource.volume = audioCollection.volume;
+		newSource.volume = audioCollection.volume * volume;
 		newSource.pitch = audioCollection.Pitch();
 		newSource.spatialBlend = 1;
 		newSource.maxDistance = audioCollection.maxDistance;
