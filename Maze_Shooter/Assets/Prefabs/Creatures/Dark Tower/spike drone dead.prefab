@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 54
+  m_SortingOrder: 1214
   m_Sprite: {fileID: 4443647513024767146, guid: 7d7580752e7b6e24fa015e7f69c29d12,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   isStatic: 0
-  sortingOrder: 54
+  sortingOrder: 1214
   renderers:
   - renderer: {fileID: 2153000356349870476}
     offset: 0
@@ -241,7 +241,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -52686479
   m_SortingLayer: -1
-  m_SortingOrder: 44
+  m_SortingOrder: 1204
   m_Sprite: {fileID: 4127948919688396149, guid: 7d7580752e7b6e24fa015e7f69c29d12,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -286,7 +286,6 @@ MonoBehaviour:
   filterTriggers: 1
   triggerers:
   - {fileID: 11400000, guid: 35831a8bfbcf71f4fb702f50d0ec7816, type: 2}
-  - {fileID: 11400000, guid: e5152fd09c938094d966b62e43b66bad, type: 2}
   prefabToAttach: {fileID: 4182263772333898405, guid: db9fa89e8ee817744891a67f27de98df,
     type: 3}
 --- !u!1 &6295265374145706746
@@ -5017,7 +5016,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 56
+  m_SortingOrder: 1216
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -5052,6 +5051,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: poison bubbles effect
+      objectReference: {fileID: 0}
+    - target: {fileID: 5187408628638837657, guid: f67ef49f654ad654c9c0c0ade5d11ab2,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1209
+      objectReference: {fileID: 0}
+    - target: {fileID: 2392509886743859700, guid: f67ef49f654ad654c9c0c0ade5d11ab2,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1215
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562302763389710564, guid: f67ef49f654ad654c9c0c0ade5d11ab2,
+        type: 3}
+      propertyPath: m_Name
+      value: bubbles bg
       objectReference: {fileID: 0}
     - target: {fileID: 1290609347268735622, guid: f67ef49f654ad654c9c0c0ade5d11ab2,
         type: 3}
@@ -5123,30 +5137,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.58586
       objectReference: {fileID: 0}
-    - target: {fileID: 2860084500199018304, guid: f67ef49f654ad654c9c0c0ade5d11ab2,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.014
-      objectReference: {fileID: 0}
-    - target: {fileID: 2860084500199018304, guid: f67ef49f654ad654c9c0c0ade5d11ab2,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.099
-      objectReference: {fileID: 0}
-    - target: {fileID: 5562302763389710564, guid: f67ef49f654ad654c9c0c0ade5d11ab2,
-        type: 3}
-      propertyPath: m_Name
-      value: bubbles bg
-      objectReference: {fileID: 0}
     - target: {fileID: 7104973634191891690, guid: f67ef49f654ad654c9c0c0ade5d11ab2,
         type: 3}
       propertyPath: scalingMode
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2392509886743859700, guid: f67ef49f654ad654c9c0c0ade5d11ab2,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 5956009952754411166, guid: f67ef49f654ad654c9c0c0ade5d11ab2,
         type: 3}
@@ -5158,10 +5152,15 @@ PrefabInstance:
       propertyPath: ShapeModule.arc.value
       value: 158.66
       objectReference: {fileID: 0}
-    - target: {fileID: 5187408628638837657, guid: f67ef49f654ad654c9c0c0ade5d11ab2,
+    - target: {fileID: 2860084500199018304, guid: f67ef49f654ad654c9c0c0ade5d11ab2,
         type: 3}
-      propertyPath: m_SortingOrder
-      value: 49
+      propertyPath: m_LocalPosition.x
+      value: -0.014
+      objectReference: {fileID: 0}
+    - target: {fileID: 2860084500199018304, guid: f67ef49f654ad654c9c0c0ade5d11ab2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.099
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f67ef49f654ad654c9c0c0ade5d11ab2, type: 3}

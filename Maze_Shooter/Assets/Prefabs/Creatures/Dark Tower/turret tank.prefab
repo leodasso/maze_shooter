@@ -2739,7 +2739,7 @@ MonoBehaviour:
   ignoredColliders: []
   layersToDamage:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 33280
   damage:
     useConstant: 0
     constantValue: 1
@@ -3028,6 +3028,7 @@ MonoBehaviour:
   layersThatChangeDirection:
     serializedVersion: 2
     m_Bits: 33025
+  movementMode: 0
 --- !u!95 &6103590286332102207
 Animator:
   serializedVersion: 3
@@ -8523,11 +8524,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: turret tank walking effect Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 5795151318493162214, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 383
-      objectReference: {fileID: 0}
     - target: {fileID: 5795151319858530043, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8583,6 +8579,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5795151318493162214, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 383
+      objectReference: {fileID: 0}
+    - target: {fileID: 5795151319858530042, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 342
+      objectReference: {fileID: 0}
     - target: {fileID: 7258203413755222837, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
         type: 3}
       propertyPath: m_SortingOrder
@@ -8592,11 +8598,6 @@ PrefabInstance:
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5795151319858530042, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 342
       objectReference: {fileID: 0}
     - target: {fileID: 1898410785520410019, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
         type: 3}
