@@ -558,6 +558,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feddc11d7b9c9d24aa0c17c92f2e1578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chooseTargetFinder: 0
+  customTargetFinder: {fileID: 0}
+  aimQuickness: 20
 --- !u!1 &454500709888706449
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,7 +653,7 @@ MonoBehaviour:
           name: playerSeen
           isSystemEvent: 0
           isGlobal: 0
-        toState: sentry
+        toState: delay
         linkStyle: 0
         linkConstraint: 0
         colorIndex: 0
@@ -667,7 +670,7 @@ MonoBehaviour:
         - 
         - disable gun rotator
         - disable gun
-        actionEnabled: 0101010101
+        actionEnabled: 0001010101
         actionIsOpen: 0101010101
         actionStartIndex: 0000000002000000070000000c00000011000000
         actionHashCodes: 9bd6f8013a4cad053a4cad053a4cad053a4cad05
@@ -852,8 +855,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 282
-        y: 310
+        x: 342
+        y: 307
         width: 132
         height: 32
       isBreakpoint: 0
@@ -2541,6 +2544,78 @@ MonoBehaviour:
         - resetOnExit
         paramDataPos: 000000000000000000000000000000000000000000000000000000000100000001000000010000000100000002000000030000000200000002000000020000000400000005000000
         paramByteDataSize: 000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    - name: delay
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 196
+        y: 305
+        width: 100
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: FINISHED
+          isSystemEvent: 1
+          isGlobal: 0
+        toState: sentry
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.Wait
+        customNames:
+        - 
+        actionEnabled: 01
+        actionIsOpen: 01
+        actionStartIndex: 00000000
+        actionHashCodes: 48c01101
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams: []
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams: []
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams: []
+        fsmObjectParams: []
+        fsmVarParams: []
+        fsmArrayParams: []
+        fsmEnumParams: []
+        fsmFloatParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
+        fsmIntParams: []
+        fsmBoolParams: []
+        fsmVector2Params: []
+        fsmVector3Params: []
+        fsmColorParams: []
+        fsmRectParams: []
+        fsmQuaternionParams: []
+        stringParams:
+        - FINISHED
+        byteData: 00
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 0f0000001700000001000000
+        paramName:
+        - time
+        - finishEvent
+        - realTime
+        paramDataPos: 000000000000000000000000
+        paramByteDataSize: 000000000000000001000000
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -2931,6 +3006,7 @@ MonoBehaviour:
     constantValue: 1
     valueObject: {fileID: 0}
   noiseCalibration: {x: -0.5, y: -0.5}
+  randomizeNoise: 0
 --- !u!114 &66026790
 MonoBehaviour:
   m_ObjectHideFlags: 0

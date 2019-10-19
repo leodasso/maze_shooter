@@ -27,18 +27,7 @@ public class WorldMap : MonoBehaviour
 		// place the player at the correct node
 		yield return new WaitForSecondsRealtime(.1f);
 		SelectCurrentNode();
-		
-		/*
-		// Turn on/off all the paths
-		foreach (var path in paths)
-		{
-			if (path.PrerequisitesComplete())
-				path.SetPathVisible();
-			else 
-				path.SetPathInvisible();
-		}
-		*/
-
+ 
 		if (GameMaster.Get().justCompletedStage)
 		{
 			GameMaster.Get().justCompletedStage.onComplete_worldMap?.Raise();

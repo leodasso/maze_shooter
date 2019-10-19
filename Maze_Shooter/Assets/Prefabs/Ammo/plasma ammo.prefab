@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1461809570}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.72557, y: 0.5260383, z: 0.72557}
+  m_LocalScale: {x: 0.66752446, y: 0.48395523, z: 0.66752446}
   m_Children: []
   m_Father: {fileID: 4941505532878942}
   m_RootOrder: 1
@@ -107,7 +107,7 @@ Transform:
   m_GameObject: {fileID: 1692683203}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.37600002, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.81586, y: 0.81586, z: 0.81586}
   m_Children: []
   m_Father: {fileID: 4941505532878942}
   m_RootOrder: 0
@@ -175,6 +175,8 @@ MonoBehaviour:
   effectPrefab: {fileID: 1625267135333434, guid: d188682e4264b3b4e9e4e56aba3e9553,
     type: 3}
   lifetime: 2
+  delay: 0
+  ignoreMinLifetime: 1
 --- !u!114 &8875663597477085551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +192,7 @@ MonoBehaviour:
   effectPrefab: {fileID: 1350632062081934, guid: 1cb2cec89670a8d469eeee3b80433f20,
     type: 3}
   lifetime: 1
+  delay: 0
 --- !u!1 &1341631613168128
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,16 +244,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dfbbed3d166ae4b9ba9aaf030070b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedMultiplier: 1
   speed:
     useConstant: 0
-    constantValue: 25
+    constantValue: 28
     valueObject: {fileID: 0}
   lifetime:
     useConstant: 0
-    constantValue: 0.4
+    constantValue: 0.45
     valueObject: {fileID: 0}
+  maxSpeed: 150
   addForceOverLifetime: 0
   forceOverLifetime: {x: 0, y: 0}
+  applyForwardForce: 1
+  forwardForceOverLifetime:
+    useConstant: 0
+    constantValue: -45
+    valueObject: {fileID: 0}
 --- !u!50 &50909293905456280
 Rigidbody2D:
   serializedVersion: 4
@@ -286,7 +296,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.1671963, y: 0.42220056}
+  m_Size: {x: 0.11, y: 0.42220056}
   m_Direction: 0
 --- !u!114 &114097700053149034
 MonoBehaviour:
@@ -322,6 +332,7 @@ MonoBehaviour:
   castingLayerMask:
     serializedVersion: 2
     m_Bits: 33025
+  ignoredColliders: []
   layersToDamage:
     serializedVersion: 2
     m_Bits: 34816

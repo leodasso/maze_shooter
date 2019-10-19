@@ -10,6 +10,9 @@ public class GunData : ScriptableObject
 	[MinMaxSlider(.1f, 60, true), Tooltip("Number of shots per second. The minimum is when the player is barely touching joystick," +
 	                                " and max is when they're at full tilt.")]
 	public Vector2 firingRate;
+
+	[Tooltip("how wide is the firing spread angle? Larger values here will mean less accuracy. 0 is perfectly accurate."), MinValue(0)]
+	public float firingSpread;
 	
 	[Tooltip("Multiple firing patterns can be assigned so that this gun can level up")]
 	public List<FiringPattern> firingPatterns = new List<FiringPattern>();

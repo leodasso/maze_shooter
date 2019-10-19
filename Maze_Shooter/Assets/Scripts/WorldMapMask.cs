@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 public class WorldMapMask : MonoBehaviour
 {
     [Tooltip("How big should the mask be when activated?")]
+    [OnValueChanged("UpdateScale")]
     public float maskSize = 1.5f;
 
     [Tooltip("How quickly does the mask appear and disappear?")]
@@ -27,6 +28,11 @@ public class WorldMapMask : MonoBehaviour
         transform.localScale = Vector3.zero;
         _scale = 0;
         _desiredScale = 0;
+    }
+
+    public void UpdateScale()
+    {
+        transform.localScale = Vector3.one * maskSize;
     }
 
     [Button]

@@ -35,9 +35,15 @@ namespace Arachnid
                 
                 return;
             }
-            
+
             if (debug)
+            {
                 Debug.Log(name + " event was raised at " + Time.unscaledTime, this);
+                foreach (var listener in listeners)
+                {
+                    Debug.Log("    Listener: " + listener.name, listener);
+                }
+            }
 
             if (delay > 0)
             {

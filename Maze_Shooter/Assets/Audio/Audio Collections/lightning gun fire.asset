@@ -4,16 +4,19 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 747892d7f12cbed43aaff112a4096988, type: 3}
   m_Name: lightning gun fire
   m_EditorClassIdentifier: 
-  pitchRange: {x: 0.90787405, y: 1.1322834}
+  volume: 1
+  pitchRange: {x: 0.90787405, y: 1}
   clips:
   - {fileID: 8300000, guid: 2421cb65ec5bd6a48920d3b512a66c17, type: 3}
   audioLifetime: 0.8
+  maxDistance: 50
   mixerGroup: {fileID: 243331649520472524, guid: 41c4af8ccd09be548a7004eaf73f7694,
     type: 2}
