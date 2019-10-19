@@ -185,6 +185,7 @@ GameObject:
   - component: {fileID: 815590681662725928}
   - component: {fileID: 815590681662725929}
   - component: {fileID: 5893008394253896807}
+  - component: {fileID: 5742927415854040782}
   m_Layer: 11
   m_Name: cling dasher
   m_TagString: Untagged
@@ -229,7 +230,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &774797746346867754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1242,6 +1243,21 @@ MonoBehaviour:
     useConstant: 1
     constantValue: 0
     valueObject: {fileID: 11400000, guid: a172aa1166137fb4b831df41ca8c2977, type: 2}
+--- !u!114 &5742927415854040782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815590681662725932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1074ae146ab84d846bebff6ee43077c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody2D: {fileID: 857624485225548052}
+  angleOffset: -90
+  minVelocity: 0.5
 --- !u!1 &816038512149913192
 GameObject:
   m_ObjectHideFlags: 0

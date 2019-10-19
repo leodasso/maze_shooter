@@ -97,9 +97,7 @@ public class Instantiator : MonoBehaviour
 
 	// left public to be accesible from Unity Events
 	public void Instantiate()
-	{
-		Debug.Log("Beginning instantiate function", gameObject);
-		
+	{		
 		#if UNITY_EDITOR
 		if (!EditorApplication.isPlayingOrWillChangePlaymode || EditorApplication.isPaused)
 		{

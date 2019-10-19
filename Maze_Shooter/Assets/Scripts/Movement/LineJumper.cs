@@ -118,7 +118,7 @@ public class LineJumper : MovementBase
     {
         if (Math.LayerMaskContainsLayer(layersToGrab, other.gameObject.layer))
         {
-            if (_jumping)
+            if (_jumping && _jumpTime > .15f)
                 WallGrabbed();
         }
         
