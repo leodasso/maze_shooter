@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioCollection: {fileID: 11400000, guid: e0872f0f530818148af2523e7fb2444b, type: 2}
+  volume: 1
   playOnAwake: 0
   playOnEnable: 0
 --- !u!1 &1352491837857902967
@@ -4921,6 +4922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioCollection: {fileID: 11400000, guid: cedb2826c1fd4ca428b18d5be58f67d8, type: 2}
+  volume: 1
   playOnAwake: 0
   playOnEnable: 0
 --- !u!1 &1353241504385691699
@@ -5143,6 +5145,7 @@ MonoBehaviour:
     type: 3}
   lifetime: 3
   delay: 0
+  ignoreMinLifetime: 0
 --- !u!114 &1393273793680008527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6141,7 +6144,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0

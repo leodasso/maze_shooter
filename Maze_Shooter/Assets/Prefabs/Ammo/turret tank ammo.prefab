@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 861334481}
   - component: {fileID: 6366971581844521460}
   - component: {fileID: 8591465563762233262}
+  - component: {fileID: 1407742262418884420}
   m_Layer: 0
   m_Name: visuals
   m_TagString: Untagged
@@ -178,6 +179,7 @@ MonoBehaviour:
     type: 3}
   lifetime: 2
   delay: 0
+  ignoreMinLifetime: 0
 --- !u!114 &8591465563762233262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +196,22 @@ MonoBehaviour:
     type: 3}
   lifetime: 1
   delay: 0.03
+--- !u!114 &1407742262418884420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861334480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de6c16f983620a4da43f9e72b293064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 7131442154916950390, guid: 53adaf9227f916b419341bf365eb925a,
+    type: 3}
+  lifetime: 5
+  delay: 0
 --- !u!1 &1148764081657417401
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +308,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148764081657417401}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -384,6 +402,28 @@ MonoBehaviour:
       - m_Target: {fileID: 8411325883525831625}
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1085270150185573381}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1407742262418884420}
+        m_MethodName: InvokeEffect
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
