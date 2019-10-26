@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 114331078264694250}
   - component: {fileID: 114596764572633468}
   - component: {fileID: 5450931460025712874}
+  - component: {fileID: 2188068472144366453}
   m_Layer: 17
   m_Name: crystal
   m_TagString: Untagged
@@ -191,6 +192,7 @@ MonoBehaviour:
     type: 3}
   lifetime: 5
   delay: 0
+  ignoreMinLifetime: 0
 --- !u!114 &114596764572633468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +231,19 @@ MonoBehaviour:
     type: 3}
   lifetime: 5
   delay: 0
+--- !u!114 &2188068472144366453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082493285421550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ae39bcea454eee46a2f5db422b5f9eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomSpeedRange: {x: 0.9, y: 1.2}
 --- !u!1 &1186698035940150
 GameObject:
   m_ObjectHideFlags: 0
