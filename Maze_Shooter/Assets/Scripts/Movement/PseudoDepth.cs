@@ -15,6 +15,13 @@ public class PseudoDepth : MonoBehaviour
     [Tooltip("Optional shadow - I will control the opacity and rotation if referenced here."), TabGroup("tabGroup", "main")]
     public GameObject shadow;
 
+    [Tooltip("This makes colliders triggers when the object is above a certain height. Good for simulating 'pass under' " +
+             "type of behavior."), TabGroup("tabGroup", "main")]
+    public bool controlCollider;
+
+    [ShowIf("controlCollider"), TabGroup("tabGroup", "main")]
+    public float minHeight = .5f;
+
     [ShowIf("hasShadow"), Range(0, 1), TabGroup("tabGroup", "main")]
     public float shadowOpacity = .5f;
     
@@ -48,7 +55,9 @@ public class PseudoDepth : MonoBehaviour
     public List<PseudoDepth> belowMe = new List<PseudoDepth>();
 
     [TabGroup("tabGroup", "events")]
-    public UnityEvent onGroundHitEvent;    
+    public UnityEvent onGroundHitEvent;
+
+    Collider2D _collider2D;
 
     public float globalBottom => z - heightBelow;
     public float globalTop => z + heightAbove;
@@ -115,6 +124,8 @@ public class PseudoDepth : MonoBehaviour
     {
         // Update the visuals on awake so any effects/other stuff on the visuals objects spawns at correct position
         UpdateVisuals();
+
+        _collider2D = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
@@ -147,6 +158,11 @@ public class PseudoDepth : MonoBehaviour
         else if (globalBottom >= _groundBuffer && _grounded)
         {
             OnLeaveGround();
+        }
+
+        if (controlCollider && _collider2D)
+        {
+            _collider2D.isTrigger = globalBottom > minHeight;
         }
 
         UpdateVisuals();
