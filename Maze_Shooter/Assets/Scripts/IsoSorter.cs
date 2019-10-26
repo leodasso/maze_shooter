@@ -7,6 +7,12 @@ using Sirenix.OdinInspector;
 public class IsoSorter : MonoBehaviour
 {
 
+	[ToggleLeft, Tooltip("Use a transform other than this one to determine sorting")]
+	public bool useCustomTransform;
+
+	[ShowIf("useCustomTransform")]
+	public Transform customTransform;
+	
 	public float offset;
 	[ToggleLeft]
 	public bool isStatic;
@@ -16,15 +22,12 @@ public class IsoSorter : MonoBehaviour
 	
 	public List<SortedRenderer> renderers = new List<SortedRenderer>();
 
+	Transform SortingTransform => useCustomTransform ? customTransform : transform;
+
 	void OnDrawGizmosSelected()
 	{
 		Gizmos.color = Color.yellow;
-		Gizmos.DrawCube(new Vector3(transform.position.x, transform.position.y + offset, transform.position.z), Vector3.one * .1f );
-	}
-
-	// Use this for initialization
-	void Start () {
-		
+		Gizmos.DrawCube(new Vector3(SortingTransform.position.x, SortingTransform.position.y + offset, SortingTransform.position.z), Vector3.one * .1f );
 	}
 
 	[Button]
@@ -38,12 +41,13 @@ public class IsoSorter : MonoBehaviour
 		}
 	}
 	
+	
 	// Update is called once per frame
 	void Update ()
 	{
 		if (isStatic && Application.isPlaying) return;
 
-		sortingOrder = Mathf.RoundToInt((-transform.position.y - offset) * _worldSpaceToSortRatio);
+		sortingOrder = Mathf.RoundToInt((-SortingTransform.position.y - offset) * _worldSpaceToSortRatio);
 
 		for (int i = 0; i < renderers.Count; i++)
 		{
