@@ -188,6 +188,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visuals: {fileID: 1681613329239344196}
   shadow: {fileID: 1681613328185660557}
+  controlCollider: 0
+  minHeight: 0.5
   shadowOpacity: 0.5
   z: 0.66
   heightAbove: 0.44
@@ -201,7 +203,7 @@ MonoBehaviour:
     useConstant: 1
     constantValue: 0
     valueObject: {fileID: 11400000, guid: 1904e1643f76f294ea8a52f78e84262b, type: 2}
-  bounce: 0.55
+  bounce: 0.2
   belowMe: []
   onGroundHitEvent:
     m_PersistentCalls:

@@ -155,7 +155,7 @@ public class PseudoDepth : MonoBehaviour
         // If the z value is greater than the buffer above the ground, we can
         // reset it to ungrounded. The buffer is there so the events don't get called a
         // ton if the z is oscillating right near 0
-        else if (globalBottom >= _groundBuffer && _grounded)
+        else if (globalBottom >= myFloor() + _groundBuffer && _grounded)
         {
             OnLeaveGround();
         }
