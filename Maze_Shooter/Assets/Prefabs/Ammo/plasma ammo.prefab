@@ -225,7 +225,7 @@ Transform:
   m_GameObject: {fileID: 1341631613168128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.34, y: 1, z: 1}
   m_Children:
   - {fileID: 1692683205}
   - {fileID: 1461809572}
@@ -311,6 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioCollection: {fileID: 11400000, guid: 824debf4ecf123248bbf162b133abb87, type: 2}
+  volume: 1
   playOnAwake: 1
   playOnEnable: 0
 --- !u!114 &114971726572545910
@@ -352,6 +353,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useCustomTransform: 0
+  customTransform: {fileID: 0}
   offset: 0
   isStatic: 0
   sortingOrder: 0
@@ -374,6 +377,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visuals: {fileID: 1692683203}
   shadow: {fileID: 1461809570}
+  controlCollider: 0
+  minHeight: 0.5
   shadowOpacity: 0.394
   z: 0.47
   heightAbove: 0.47
