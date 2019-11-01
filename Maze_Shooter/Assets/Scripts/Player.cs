@@ -13,15 +13,27 @@ public class Player : MonoBehaviour
 	[ReadOnly]
 	public Vector2 moveInput;
 	public FloatReference fireThreshhold;
+	
+	[LabelText("gun graphic"), Tooltip("Optional - link a sprite rotator component to show the rotation of the gun")]
 	public SpriteRotation spriteRotation;
+
+	[Tooltip("Optional - animator to send speed and movement angle to")]
+	public Animator animator;
+	[Tooltip("This doesn't affect movement! Just offsets the movement angle that gets sent to the animator."), ShowIf("hasAnimator")]
+	public float movementAngleOffset = 45;
+	 
 	bool _firing;
 	Rewired.Player _player;
 	Ship _ship;
+	Rigidbody2D _rigidbody2D;
+
+	bool hasAnimator => animator != null;
 
 	// Use this for initialization
 	void Start ()
 	{
 		_ship = GetComponent<Ship>();
+		_rigidbody2D = GetComponent<Rigidbody2D>();
 		_player = ReInput.players.GetPlayer(0);
 	}
 	
@@ -45,6 +57,15 @@ public class Player : MonoBehaviour
 		
 		gun.firing = _firing;
 		gun.fireRateIntensity = fireInput.magnitude;
+
+		// Send parameters to animator based on movement
+		if (animator)
+		{
+			if (_rigidbody2D)
+				animator.SetFloat("speed", _rigidbody2D.velocity.magnitude);
+			
+			animator.SetFloat("facingAngle", Math.AngleFromVector2(moveInput, movementAngleOffset));
+		}
 		
 		if (!_firing) return;
 		
