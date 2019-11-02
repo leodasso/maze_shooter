@@ -309,7 +309,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148764081657417401}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -5312,7 +5312,12 @@ PrefabInstance:
     - target: {fileID: 4303417960238860750, guid: 81d354746b1a5a149828a2ceac4c7d23,
         type: 3}
       propertyPath: m_Parameters.m_EndRange
-      value: 1.3092363
+      value: 2.585001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4303417960238860750, guid: 81d354746b1a5a149828a2ceac4c7d23,
+        type: 3}
+      propertyPath: m_Parameters.m_GravityCurve.scalar
+      value: 0.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81d354746b1a5a149828a2ceac4c7d23, type: 3}
