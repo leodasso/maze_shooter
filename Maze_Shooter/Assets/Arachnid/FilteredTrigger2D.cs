@@ -17,6 +17,12 @@ namespace Arachnid
 
 		[ShowIf("filterTriggers"), Tooltip("Any object in one of these collections can trigger this."), AssetsOnly]
 		public List<Collection> triggerers = new List<Collection>();
+		
+		[ToggleLeft]
+		public bool useLayerMask;
+		
+		[Tooltip("Layers which will trigger this."), ShowIf("useLayerMask")]
+		public LayerMask layerMask;
 
 		bool _triggered;
 
@@ -59,14 +65,20 @@ namespace Arachnid
 
 		void Trigger(Collider2D other)
 		{
-			if (_triggered && oneOff) return;
+			if (_triggered && oneOff) 
+				return;
+			if (useLayerMask && !Math.LayerMaskContainsLayer(layerMask, other.gameObject.layer))
+				return;
 			_triggered = true;
 			OnTriggered(other);
 		}
 
 		void TriggerExit(Collider2D other)
 		{
-			if (_triggered && oneOff) return;
+			if (_triggered && oneOff) 
+				return;
+			if (useLayerMask && !Math.LayerMaskContainsLayer(layerMask, other.gameObject.layer))
+				return;
 			_triggered = true;
 			OnTriggerExited(other);
 		}
