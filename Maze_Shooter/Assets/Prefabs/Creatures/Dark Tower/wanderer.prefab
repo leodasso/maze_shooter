@@ -359,6 +359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useCustomTransform: 0
+  customTransform: {fileID: 0}
   offset: -0.21
   isStatic: 0
   sortingOrder: -10
@@ -505,6 +507,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visuals: {fileID: 8961933997810396715}
   shadow: {fileID: 4066229364524762684}
+  controlCollider: 0
+  minHeight: 0.5
   shadowOpacity: 0.754
   z: 0
   heightAbove: 0.65
@@ -564,24 +568,13 @@ MonoBehaviour:
   lifetime: 5
   delay: 0
   spawnEffect: 1
-  velocityRange: {x: 4, y: 100}
+  velocityRange: {x: 2, y: 100}
   triggeringLayers:
     serializedVersion: 2
-    m_Bits: 35072
+    m_Bits: 35073
   onCollision:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6923364076189253854}
-        m_MethodName: ApplyVelocity
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 4
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &5401229488121741848
@@ -632,7 +625,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 6
+          m_FloatArgument: 9
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
