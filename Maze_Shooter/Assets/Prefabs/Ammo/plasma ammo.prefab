@@ -69,7 +69,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2b4036ade54a4f842a311556a892f405, type: 3}
-  m_Color: {r: 0.3820755, g: 1, b: 0.90806955, a: 0.375482}
+  m_Color: {r: 0.3820755, g: 1, b: 0.90806955, a: 0.3743}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -106,7 +106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1692683203}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.37600002, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 0.81586, y: 0.81586, z: 0.81586}
   m_Children: []
   m_Father: {fileID: 4941505532878942}
@@ -192,7 +192,7 @@ MonoBehaviour:
   effectPrefab: {fileID: 1350632062081934, guid: 1cb2cec89670a8d469eeee3b80433f20,
     type: 3}
   lifetime: 1
-  delay: 0
+  delay: 0.01
 --- !u!1 &1341631613168128
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,18 +381,18 @@ MonoBehaviour:
   controlCollider: 0
   minHeight: 0.5
   shadowOpacity: 0.394
-  z: 0.47
-  heightAbove: 0.47
-  heightBelow: 0.47
+  z: 0.5
+  heightAbove: 0.5
+  heightBelow: 0.5
   zFactor:
     useConstant: 1
     constantValue: 0
     valueObject: {fileID: 11400000, guid: c2dc52804bd54244da763a679d85c4d8, type: 2}
   useGravity: 0
   gravity:
-    useConstant: 0
+    useConstant: 1
     constantValue: 0
-    valueObject: {fileID: 0}
+    valueObject: {fileID: 11400000, guid: 1904e1643f76f294ea8a52f78e84262b, type: 2}
   bounce: 0.15
   belowMe: []
   onGroundHitEvent:
@@ -400,6 +400,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  debug: 1
 --- !u!1001 &8812301685142797500
 PrefabInstance:
   m_ObjectHideFlags: 0
