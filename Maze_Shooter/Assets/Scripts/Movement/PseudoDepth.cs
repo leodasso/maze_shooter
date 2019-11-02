@@ -57,6 +57,9 @@ public class PseudoDepth : MonoBehaviour
     [TabGroup("tabGroup", "events")]
     public UnityEvent onGroundHitEvent;
 
+    [TabGroup("tabGroup", "main"), Tooltip("Shows debug rays of intersection checks with other pseudo depth")]
+    public bool debug;
+
     Collider2D _collider2D;
 
     public float globalBottom => z - heightBelow;
@@ -117,6 +120,13 @@ public class PseudoDepth : MonoBehaviour
         Gizmos.DrawLine(visuals.transform.position, pos);
         float width = .15f;
         Gizmos.DrawLine(new Vector3(pos.x - width, pos.y, pos.z), new Vector3(pos.x + width, pos.y, pos.z));
+    }
+
+    void DrawDebugLine(Vector3 atPosition, Color lineColor)
+    {
+        var topPos = atPosition + Vector3.up * globalTop;
+        var bottomPos = atPosition + Vector3.up * globalBottom;
+        Debug.DrawLine(topPos, bottomPos, lineColor, 30);
     }
 
     // Start is called before the first frame update
@@ -220,6 +230,12 @@ public class PseudoDepth : MonoBehaviour
     /// </summary>
     public bool OverlapWith(PseudoDepth other)
     {
+        if (debug)
+        {
+            DrawDebugLine(transform.position, Color.magenta);
+            other.DrawDebugLine(transform.position + Vector3.right * .1f, Color.red);
+        }
+        
         return globalTop >= other.globalBottom && globalBottom < other.globalTop;
     }
 
