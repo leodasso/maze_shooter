@@ -9,6 +9,9 @@ namespace Arachnid
 	public class FilteredTrigger2D : MonoBehaviour
 	{
 
+		[ToggleLeft]
+		public bool debug;
+		
 		[ToggleLeft, Tooltip("Will only trigger once.")]
 		public bool oneOff;
 
@@ -65,22 +68,43 @@ namespace Arachnid
 
 		void Trigger(Collider2D other)
 		{
-			if (_triggered && oneOff) 
-				return;
-			if (useLayerMask && !Math.LayerMaskContainsLayer(layerMask, other.gameObject.layer))
-				return;
+			if (debug) Debug.Log(other.name + " has triggered " + name + ". Running further checks...");
+			if (!PassedOneOffCheck()) return;
+			if (!PassedLayerMaskCheck(other)) return;
 			_triggered = true;
 			OnTriggered(other);
 		}
 
 		void TriggerExit(Collider2D other)
 		{
-			if (_triggered && oneOff) 
-				return;
-			if (useLayerMask && !Math.LayerMaskContainsLayer(layerMask, other.gameObject.layer))
-				return;
+			if (debug) Debug.Log(other.name + " has exited " + name + ". Running further checks...");
+			if (!PassedOneOffCheck()) return;
+			if (!PassedLayerMaskCheck(other))return;
 			_triggered = true;
 			OnTriggerExited(other);
+		}
+
+		bool PassedLayerMaskCheck(Collider2D other)
+		{
+			if (useLayerMask && !Math.LayerMaskContainsLayer(layerMask, other.gameObject.layer))
+			{
+				Debug.Log(other.name + " is in a layer that doesn't trigger " + name, gameObject);
+				return false;
+			}
+
+			return true;
+		}
+		
+		bool PassedOneOffCheck()
+		{
+			if (_triggered && oneOff)
+			{
+				if (debug) 
+					Debug.Log(name + " is a one-off trigger, and has already been activated.", gameObject);
+				return false;
+			}
+
+			return true;
 		}
 
 		protected virtual void OnTriggerExited(Collider2D triggerer)
