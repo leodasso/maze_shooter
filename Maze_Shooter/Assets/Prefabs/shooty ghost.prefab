@@ -4913,7 +4913,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2558271942015291143}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.14700004, z: 0}
+  m_LocalPosition: {x: 0, y: -0.065, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1564157586900109539}
@@ -5296,8 +5296,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2561247814290397375}
   - component: {fileID: 2537767633236554173}
-  - component: {fileID: 2455102131439177925}
   - component: {fileID: 2454917228666383991}
+  - component: {fileID: 2455102131439177925}
+  - component: {fileID: 1412972367060349232}
   - component: {fileID: 5947221492626954739}
   - component: {fileID: 2454808949065271225}
   - component: {fileID: 2454887192655553147}
@@ -5358,23 +5359,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &2455102131439177925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2558774405243798637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6dd3ec3cfa38d4419fe1df1bcf9e4a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementInput: {x: 0, y: 0}
-  enginePower:
-    useConstant: 1
-    constantValue: 1333
-    valueObject: {fileID: 11400000, guid: 868a9604caea1ac49b853683a131f8c8, type: 2}
 --- !u!114 &2454917228666383991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5387,14 +5371,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a64d189d9fffc64cbd07103f1c7e764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveInput: {x: 0, y: 0}
+  fireInput: {x: 0, y: 0}
+--- !u!114 &2455102131439177925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2558774405243798637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6dd3ec3cfa38d4419fe1df1bcf9e4a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enginePower:
+    useConstant: 1
+    constantValue: 1333
+    valueObject: {fileID: 11400000, guid: 868a9604caea1ac49b853683a131f8c8, type: 2}
+--- !u!114 &1412972367060349232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2558774405243798637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6536483ecad77bf48942988b8f1a761e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   gunRotator: {fileID: 2558973810885742091}
   gun: {fileID: 2455516142618266729}
-  moveInput: {x: 0, y: 0}
   fireThreshhold:
     useConstant: 0
     constantValue: 0.15
     valueObject: {fileID: 0}
-  spriteRotation: {fileID: 0}
+  fireInput: {x: 0, y: 0}
 --- !u!114 &5947221492626954739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5409,7 +5422,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 2558774405243798636}
   movementAngleOffset: 35
-  moveInput: {x: 0, y: 0}
 --- !u!114 &2454808949065271225
 MonoBehaviour:
   m_ObjectHideFlags: 0

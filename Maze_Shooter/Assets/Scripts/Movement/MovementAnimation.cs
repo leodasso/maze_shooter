@@ -1,15 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Arachnid;
 
-public class MovementAnimation : MonoBehaviour
+public class MovementAnimation : MonoBehaviour, IControllable
 {
     [Tooltip("Animator to send speed and movement angle to")]
     public Animator animator;
     [Tooltip("This doesn't affect movement! Just offsets the movement angle that gets sent to the animator.")]
     public float movementAngleOffset = 45;
-    public Vector2 moveInput;
     Rigidbody2D _rigidbody2D;
     
     // Start is called before the first frame update
@@ -18,17 +15,20 @@ public class MovementAnimation : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ApplyLeftStickInput(Vector2 input)
     {
-        // Send parameters to animator based on movement
-        if (animator)
-        {
-            if (_rigidbody2D)
-                animator.SetFloat("speed", _rigidbody2D.velocity.magnitude);
+        if (!animator) return;
+        if (_rigidbody2D)
+            animator.SetFloat("speed", _rigidbody2D.velocity.magnitude);
 			
-            animator.SetFloat("facingAngle", Math.AngleFromVector2(moveInput, movementAngleOffset));
-        }
+        animator.SetFloat("facingAngle", Math.AngleFromVector2(input, movementAngleOffset));
+    }
 
+    public void ApplyRightStickInput(Vector2 input)
+    {}
+
+    public string Name()
+    {
+        return "MovementAnimation" + name;
     }
 }

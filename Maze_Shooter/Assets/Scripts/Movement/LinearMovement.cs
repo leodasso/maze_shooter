@@ -8,7 +8,7 @@ public enum MovementMode
     Force = 0, Velocity = 1
 }
 
-public class LinearMovement : MovementBase
+public class LinearMovement : MovementBase, IControllable
 {
     [Tooltip("The initial direction I'll move. This is previewed as the yellow line coming from me.")]
     public Vector2 initVector;
@@ -57,5 +57,19 @@ public class LinearMovement : MovementBase
                 _rigidbody2D.velocity = forceVector;
                 break;
         }
+    }
+
+    public void ApplyLeftStickInput(Vector2 input)
+    {
+        if (input.magnitude > .5f)
+            _direction = input.normalized;
+    }
+
+    public void ApplyRightStickInput(Vector2 input)
+    { }
+
+    public string Name()
+    {
+        return "linearMovement" + name;
     }
 }
