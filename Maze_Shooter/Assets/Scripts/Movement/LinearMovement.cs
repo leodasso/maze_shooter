@@ -59,17 +59,10 @@ public class LinearMovement : MovementBase, IControllable
         }
     }
 
-    public void ApplyLeftStickInput(Vector2 input)
+    public virtual void ApplyLeftStickInput(Vector2 input)
     {
         if (input.magnitude > .5f)
             _direction = input.normalized;
     }
 
-    public void ApplyRightStickInput(Vector2 input)
-    { }
-
-    public string Name()
-    {
-        return "linearMovement" + name;
-    }
 }
