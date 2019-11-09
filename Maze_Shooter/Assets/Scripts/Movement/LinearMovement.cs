@@ -59,7 +59,7 @@ public class LinearMovement : MovementBase, IControllable
         }
     }
 
-    public virtual void ApplyLeftStickInput(Vector2 input)
+    public override void ApplyLeftStickInput(Vector2 input)
     {
         if (input.magnitude > .5f)
             _direction = input.normalized;
