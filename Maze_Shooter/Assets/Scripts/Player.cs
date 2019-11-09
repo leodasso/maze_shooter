@@ -19,19 +19,19 @@ public class Player : MonoBehaviour
 	{
 		controllables.Clear();
 		controllables.AddRange(GetComponentsInChildren<IControllable>());
-		foreach (var component in controllables)
-		{
-			Debug.Log(name + " found controllable " + component.Name());
-		}
 	}
 
 	// Use this for initialization
 	void Start ()
 	{
 		_player = ReInput.players.GetPlayer(0);
+	}
+
+	void OnEnable()
+	{
 		GetAllControllables();
 	}
-	
+
 	// Update is called once per frame
 	void Update () 
 	{
