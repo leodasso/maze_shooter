@@ -107,6 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4753802007361199473}
   - component: {fileID: 4753802007361199472}
+  - component: {fileID: 7766431501527553585}
   - component: {fileID: 4753802007361199475}
   - component: {fileID: 4753802007361199478}
   - component: {fileID: 4753802007361199476}
@@ -152,6 +153,27 @@ CapsuleCollider2D:
   m_Offset: {x: -0.13043237, y: 0.14013812}
   m_Size: {x: 3.0213232, y: 1.893608}
   m_Direction: 1
+--- !u!50 &7766431501527553585
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4753802007361199474}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &4753802007361199475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,6 +188,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visuals: {fileID: 4753802006871350409}
   shadow: {fileID: 4753802007429470654}
+  controlCollider: 0
+  minHeight: 0.5
   shadowOpacity: 0.953
   z: 0
   heightAbove: 4.25
@@ -186,6 +210,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  debug: 0
 --- !u!114 &4753802007361199478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useCustomTransform: 0
+  customTransform: {fileID: 0}
   offset: 0
   isStatic: 0
   sortingOrder: 274
