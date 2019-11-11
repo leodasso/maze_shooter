@@ -42,6 +42,9 @@ namespace ShootyGhost
                                    "and particles to change based on haunt burst value")] 
         public FloatValue hauntBurstIntensityRef;
 
+        [TabGroup("main")]
+        public GameObject transitionEffect;
+
         [TabGroup("events"), LabelText("onTargetingBegin")]
         public UnityEvent onHauntStateBegin;
         [TabGroup("events"), LabelText("onTargetingEnd")]
@@ -123,6 +126,12 @@ namespace ShootyGhost
             onHauntBegin.Invoke();
             _rigidbody2D.simulated = false;
             StartCoroutine(MoveToHaunted());
+            
+            // Instantiate the transition visuals
+            GameObject transition = Instantiate(transitionEffect, transform.position, transform.rotation);
+            ArcMover arcMover = transition.GetComponent<ArcMover>();
+            arcMover.startPosition = transform.position;
+            arcMover.end = haunted.gameObject;
         }
 
         void EndHaunt()
