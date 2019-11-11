@@ -18,6 +18,15 @@ namespace ShootyGhost
     {
         Rewired.Player _player;
 
+        [TabGroup("main"), Tooltip("Haunt juice is needed to perform hauntings!")]
+        public float hauntJuice = 0;
+
+        [TabGroup("main"), Tooltip("The cost of performing a haunt")]
+        public FloatReference hauntCost;
+
+        [TabGroup("main"), Tooltip("The cooldown for returning to targeting mode once it's exited")]
+        public FloatReference targetingModeCooldown;
+
         [TabGroup("main"), ReadOnly]
         public GhostState ghostState = GhostState.Normal;
 
@@ -57,6 +66,7 @@ namespace ShootyGhost
         public UnityEvent onHauntEnd;
 
         Rigidbody2D _rigidbody2D;
+        float _targetingModeTimer = 0;
         
         // Start is called before the first frame update
         void Start()
@@ -70,17 +80,21 @@ namespace ShootyGhost
         {
             if (_player == null) return;
 
+            // Cooldown for targeting mode entry. Prevents player from spamming targeting mode quickly
+            if (_targetingModeTimer >= 0)
+                _targetingModeTimer -= Time.unscaledDeltaTime;
+
             // Input for entering haunt targeting mode
             if (_player.GetButtonDown("haunt"))
             {
-                if (ghostState == GhostState.Normal)
+                if (CanBeginHauntTargeting)
                     BeginHauntTargeting();
             }
                 
             // Input for leaving haunt targeting mode
             if (_player.GetButtonUp("haunt"))
             {
-                if (ghostState == GhostState.Targeting)
+                if (CanHaunt)
                     EndHauntTargeting();
             }
 
@@ -95,6 +109,10 @@ namespace ShootyGhost
             else hauntBurstIntensity = 0;
             hauntBurstIntensityRef.Value = hauntBurstIntensity;
         }
+
+        bool CanBeginHauntTargeting => ghostState == GhostState.Normal && _targetingModeTimer <= 0 && HasHauntJuice;
+        bool CanHaunt => ghostState == GhostState.Targeting && HasHauntJuice;
+        bool HasHauntJuice => hauntJuice >= hauntCost.Value;
 
         /// <summary>
         /// Haunt targeting is the state where time slows down
@@ -116,6 +134,8 @@ namespace ShootyGhost
             
             targetedHauntable = null;
             onHauntStateEnd.Invoke();
+
+            _targetingModeTimer = targetingModeCooldown.Value;
         }
 
         void BeginHaunt(Hauntable newHaunted)
