@@ -18,7 +18,7 @@ namespace Arachnid
             get { return myValue; }
             set {
                 // If the value is changing, raise the onValueChange events
-                if (value != myValue)
+                if (System.Math.Abs(value - myValue) > Mathf.Epsilon)
                 {
                     if (readOnly)
                     {
