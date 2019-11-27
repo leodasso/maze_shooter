@@ -182,5 +182,10 @@ namespace ShootyGhost
             onHauntStateEnd.Invoke();
             hauntBurstIntensityRef.Value = 0;
         }
+
+        public void AddJuice(float amount)
+        {
+            hauntJuice += amount;
+        }
     }
 }
