@@ -371,6 +371,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useCustomTransform: 0
+  customTransform: {fileID: 0}
   offset: -0.29
   isStatic: 0
   sortingOrder: 292
@@ -393,6 +395,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visuals: {fileID: 509886600404033905}
   shadow: {fileID: 816254312103317020}
+  controlCollider: 0
+  minHeight: 0.5
   shadowOpacity: 1
   z: 0.39
   heightAbove: 0.8
@@ -413,6 +417,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  debug: 0
 --- !u!114 &815590681662725934
 MonoBehaviour:
   m_ObjectHideFlags: 0

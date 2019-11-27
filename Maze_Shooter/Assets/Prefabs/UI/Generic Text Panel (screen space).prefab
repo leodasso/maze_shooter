@@ -434,7 +434,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textOutput: {fileID: 114268903261094098}
   background: {fileID: 114118927532685816}
-  textComponent: {fileID: 114854500390314992}
+  spriteBackground: {fileID: 0}
+  destroyWhenComplete: 1
+  active: 0
+  onDialogStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   onDialogComplete:
     m_PersistentCalls:
       m_Calls:
@@ -451,6 +458,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  animator: {fileID: 0}
 --- !u!114 &114961181587748630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,7 +629,7 @@ MonoBehaviour:
     events:
     - name: beginCutscene
       isSystemEvent: 0
-      isGlobal: 0
+      isGlobal: 1
     - name: dialogComplete
       isSystemEvent: 0
       isGlobal: 1

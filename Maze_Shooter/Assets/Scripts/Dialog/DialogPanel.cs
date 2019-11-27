@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Arachnid;
+﻿using Arachnid;
 using Rewired;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -11,13 +8,18 @@ using Sirenix.OdinInspector;
 public class DialogPanel : MonoBehaviour
 {
 	public TalkyText textOutput;
+	[Tooltip("Background image (optional) Will be tinted the color of the dialog.")]
 	public Image background;
-	public TextMeshProUGUI textComponent;
-	
-	[System.NonSerialized, ShowInInspector, ReadOnly]
-	public GameObject speaker;
+	[Tooltip("Background sprite (optional) Will be tinted the color of the dialog.")]
+	public SpriteRenderer spriteBackground;
+	public bool destroyWhenComplete = true;
+	[Tooltip("Is this dialog panel currently showing dialog?")]
+	public bool active;
 
+	public UnityEvent onDialogStart;
 	public UnityEvent onDialogComplete;
+	[Tooltip("Optional - will set 'visible' bool in animator when shown or hidden")]
+	public Animator animator;
 
 	Dialog _dialog;
 	int _index = 0;
@@ -28,20 +30,40 @@ public class DialogPanel : MonoBehaviour
 		_player = ReInput.players.GetPlayer(0);
 	}
 
-	public void ShowDialog(Dialog dialog, GameObject newSpeaker)
+	void Start()
 	{
+		textOutput.FullClear();
+	}
+
+	[Button]
+	public void ShowDialog(Dialog dialog)
+	{
+		active = true;
+		textOutput.FullClear();
+		onDialogStart.Invoke();
 		_dialog = dialog;
-		speaker = newSpeaker;
-		background.color = dialog.panelColor;
-		textComponent.color = dialog.textColor;
+		if (dialog.setColors)
+		{
+			SetBackgroundColor(dialog.panelColor);
+			textOutput.SetTextColor(dialog.textColor);
+		}
 		textOutput.charactersPerSecond = _dialog.charactersPerSecond;
 		_index = 0;
+		animator?.SetBool("visible", true);
 		ShowText(_index);
+	}
+
+	void SetBackgroundColor(Color color)
+	{
+		if (background) 
+			background.color = color;
+		if (spriteBackground)
+			spriteBackground.color = color;
 	}
 
 	void Update()
 	{
-		if (_player.GetButtonDown("alpha"))
+		if (_player.GetButtonDown("alpha") && active)
 			ProgressText();
 	}
 
@@ -67,16 +89,19 @@ public class DialogPanel : MonoBehaviour
 
 	void Exit()
 	{
+		active = false;
 		if (_dialog.progressCurrentSequenceWhenComplete)
 			EventSequence.AdvanceSequence();
 		
 		onDialogComplete.Invoke();
-		
-		Destroy(gameObject);
+		animator?.SetBool("visible", false);
+		if (destroyWhenComplete)
+			Destroy(gameObject);
 	}
 
 	void ShowText(int index)
 	{
+		Debug.Log("Setting input text to " + _dialog.text[index]);
 		textOutput.inputText = _dialog.text[index];
 	}
 }

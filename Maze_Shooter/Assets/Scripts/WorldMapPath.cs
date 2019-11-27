@@ -3,21 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using Arachnid;
 using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 public class WorldMapPath : MonoBehaviour
 {
+    [TabGroup("main")]
     public FloatReference openPathDelay;
     
+    [TabGroup("main")]
     [Tooltip("The unique key for this particular path")]
+    [ValidateInput("ValidateSaveKey", "Save key must be unique!")]
     public string uniqueSaveKey;
 
+    [TabGroup("main")]
     [Tooltip("Optional - which stages need to be complete before this path can be shown?")]
     public List<Stage> prerequisites = new List<Stage>();
 
+    [TabGroup("main")]
     public float animationDuration = 1;
-
+    
+    [TabGroup("events")]
     public UnityEvent pathOpenAnimation;
-
+    
+    [TabGroup("events")]
     public UnityEvent onPathOpen;
 
     const string saveKeyPrefix = "mapPathway_";
@@ -30,6 +38,17 @@ public class WorldMapPath : MonoBehaviour
             Debug.Log("Stage " + stage + " is seen as complete: " + isComplete, gameObject);
             if (!isComplete) return false;
         }
+        return true;
+    }
+
+    bool ValidateSaveKey(string inputKey)
+    {
+        foreach (var path in FindObjectsOfType<WorldMapPath>())
+        {
+            if (path == this) continue;
+            if (path.uniqueSaveKey == inputKey) return false;
+        }
+
         return true;
     }
     

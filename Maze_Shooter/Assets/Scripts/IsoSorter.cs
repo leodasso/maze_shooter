@@ -22,10 +22,11 @@ public class IsoSorter : MonoBehaviour
 	
 	public List<SortedRenderer> renderers = new List<SortedRenderer>();
 
-	Transform SortingTransform => useCustomTransform ? customTransform : transform;
+	Transform SortingTransform => useCustomTransform && customTransform ? customTransform : transform;
 
 	void OnDrawGizmosSelected()
 	{
+		if (SortingTransform == null) return;
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawCube(new Vector3(SortingTransform.position.x, SortingTransform.position.y + offset, SortingTransform.position.z), Vector3.one * .1f );
 	}
@@ -47,6 +48,7 @@ public class IsoSorter : MonoBehaviour
 	{
 		if (isStatic && Application.isPlaying) return;
 
+		
 		sortingOrder = Mathf.RoundToInt((-SortingTransform.position.y - offset) * _worldSpaceToSortRatio);
 
 		for (int i = 0; i < renderers.Count; i++)

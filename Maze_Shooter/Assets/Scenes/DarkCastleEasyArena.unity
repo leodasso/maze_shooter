@@ -1467,10 +1467,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6250be75fee71d74c9e0503cc4f7cb73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   oneOff: 1
   filterTriggers: 1
   triggerers:
   - {fileID: 11400000, guid: 35831a8bfbcf71f4fb702f50d0ec7816, type: 2}
+  useLayerMask: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   events: []
   uEvent:
     m_PersistentCalls:
@@ -2081,11 +2086,6 @@ PrefabInstance:
         type: 3}
       propertyPath: ForceModule.enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3562795425305617256, guid: 7bcdbfcec05bede4db7f8a917ebe3108,
-        type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3562795425305617256, guid: 7bcdbfcec05bede4db7f8a917ebe3108,
         type: 3}
@@ -7760,6 +7760,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: beginCutscene
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 736a3e821ff482449bd82ef74a593f0c, type: 2}
+        m_MethodName: CompleteStage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -31160,6 +31171,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: big static vCam
       objectReference: {fileID: 0}
+    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
+        type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
+        type: 3}
+      propertyPath: m_Lens.Dutch
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
+        type: 3}
+      propertyPath: m_Priority
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
+        type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.93
@@ -31191,26 +31222,6 @@ PrefabInstance:
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
-        type: 3}
-      propertyPath: m_Lens.OrthographicSize
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
-        type: 3}
-      propertyPath: m_Lens.Dutch
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
-        type: 3}
-      propertyPath: m_Priority
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
-        type: 3}
-      propertyPath: m_Follow
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114053712148332992, guid: fde8f66d53e4214438069d431895986a,
         type: 3}
@@ -31798,12 +31809,12 @@ MonoBehaviour:
       isGlobal: 0
     - name: beginCutscene
       isSystemEvent: 0
-      isGlobal: 0
+      isGlobal: 1
     globalTransitions:
     - fsmEvent:
         name: beginCutscene
         isSystemEvent: 0
-        isGlobal: 0
+        isGlobal: 1
       toState: begin scene
       linkStyle: 0
       linkConstraint: 0
@@ -32346,12 +32357,12 @@ MonoBehaviour:
       isGlobal: 0
     - name: beginCutscene
       isSystemEvent: 0
-      isGlobal: 0
+      isGlobal: 1
     globalTransitions:
     - fsmEvent:
         name: beginCutscene
         isSystemEvent: 0
-        isGlobal: 0
+        isGlobal: 1
       toState: begin scene
       linkStyle: 0
       linkConstraint: 0
@@ -32992,6 +33003,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: main vCam
       objectReference: {fileID: 0}
+    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
+        type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
+        type: 3}
+      propertyPath: m_Lens.Dutch
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
+        type: 3}
+      propertyPath: m_Priority
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
+        type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.89
@@ -33023,26 +33054,6 @@ PrefabInstance:
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
-        type: 3}
-      propertyPath: m_Lens.OrthographicSize
-      value: 7.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
-        type: 3}
-      propertyPath: m_Lens.Dutch
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
-        type: 3}
-      propertyPath: m_Priority
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
-        type: 3}
-      propertyPath: m_Follow
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114053712148332992, guid: fde8f66d53e4214438069d431895986a,
         type: 3}

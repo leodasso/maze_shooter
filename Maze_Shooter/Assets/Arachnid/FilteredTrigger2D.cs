@@ -17,15 +17,15 @@ namespace Arachnid
 
 		[ToggleLeft, Tooltip("Only allow triggers from objects of a particular collection")]
 		public bool filterTriggers = true;
-
-		[ShowIf("filterTriggers"), Tooltip("Any object in one of these collections can trigger this."), AssetsOnly]
-		public List<Collection> triggerers = new List<Collection>();
 		
 		[ToggleLeft]
 		public bool useLayerMask;
 		
 		[Tooltip("Layers which will trigger this."), ShowIf("useLayerMask")]
 		public LayerMask layerMask;
+
+		[ShowIf("filterTriggers"), Tooltip("Any object in one of these collections can trigger this."), AssetsOnly]
+		public List<Collection> triggerers = new List<Collection>();
 
 		bool _triggered;
 

@@ -281,6 +281,7 @@ GameObject:
   - component: {fileID: 1106338079595454607}
   - component: {fileID: 908841898175101187}
   - component: {fileID: 8646180055908494490}
+  - component: {fileID: 6919931052475985068}
   m_Layer: 11
   m_Name: wanderer
   m_TagString: Untagged
@@ -661,27 +662,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7240a95320bc4f8a98e3f5cdfd3a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onPosessed:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 908841898175101187}
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  onDisposessed:
+  onHaunted:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onUnHaunted:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &6919931052475985068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4066229365527839010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd62e0eefe2f65418d822388730eef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 7680006163492061324}
+  rigidbody2D: {fileID: 7119995420098848735}
+  floatName: speed
 --- !u!1 &8961933997810396715
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,6 +814,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: turret tank walking effect Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5795151318493162214, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -31
+      objectReference: {fileID: 0}
     - target: {fileID: 5795151319858530043, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -864,16 +874,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5795151318493162214, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: -31
-      objectReference: {fileID: 0}
-    - target: {fileID: 5795151319858530042, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
-        type: 3}
-      propertyPath: sortingOrder
-      value: -31
-      objectReference: {fileID: 0}
     - target: {fileID: 5795151318493162215, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
         type: 3}
       propertyPath: ShapeModule.radius.value
@@ -893,6 +893,11 @@ PrefabInstance:
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5795151319858530042, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
+        type: 3}
+      propertyPath: sortingOrder
+      value: -31
       objectReference: {fileID: 0}
     - target: {fileID: 1898410785520410019, guid: f0114cd39dfd5cc47b4d6e0311e40a0e,
         type: 3}

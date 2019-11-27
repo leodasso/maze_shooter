@@ -14,6 +14,6 @@ public class DialogAnchor : MonoBehaviour
 
     public void DisplayDialog(Dialog dialog)
     {
-        dialog.Display(gameObject);
+        dialog.Display();
     }
 }

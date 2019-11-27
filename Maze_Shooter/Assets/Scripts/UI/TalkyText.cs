@@ -48,7 +48,8 @@ public class TalkyText : MonoBehaviour
     public string formattedOutput = "";
 
     float _intervalTimer;
-    TextMeshProUGUI _textBox;
+    TextMeshProUGUI _textBoxUGUI;
+    TextMeshPro _textBox;
     Text _textBoxLegacy;
     string _outputText = "";
     
@@ -64,12 +65,18 @@ public class TalkyText : MonoBehaviour
     float _t;
     float _audioT;
 
+    void Awake()
+    {
+        _textBox = GetComponent<TextMeshPro>();
+        _textBoxUGUI = GetComponent<TextMeshProUGUI>();
+        _textBoxLegacy = GetComponent<Text>();
+    }
+
     // Use this for initialization
     void Start()
     {
-        _textBox = GetComponent<TextMeshProUGUI>();
-        if (_textBox != null) _textBox.parseCtrlCharacters = true;
-        _textBoxLegacy = GetComponent<Text>();
+        if (_textBox) _textBox.parseCtrlCharacters = true;
+        if (_textBoxUGUI) _textBoxUGUI.parseCtrlCharacters = true;
         
         Clear();
         UpdateText();
@@ -127,6 +134,13 @@ public class TalkyText : MonoBehaviour
         if (_charCount > _sfxChars) _charCount = 0;
     }
 
+    public void SetTextColor(Color color)
+    {
+        if (_textBox) _textBox.color = color;
+        if (_textBoxUGUI) _textBoxUGUI.color = color;
+        if (_textBoxLegacy) _textBoxLegacy.color = color;
+    }
+
     /// <summary>
     /// Clears output text, and resets stuff to begin typing again.
     /// </summary>
@@ -137,6 +151,16 @@ public class TalkyText : MonoBehaviour
         _t = 0;
         _nextSymbolIndex = 0;
         _expectedClosingTags.Clear();
+    }
+
+    /// <summary>
+    /// Clears output text and the textbox components
+    /// </summary>
+    public void FullClear()
+    {
+        inputText = "";
+        Clear();
+        PushTextToComponents("");
     }
 
     /// <summary>
@@ -206,13 +230,14 @@ public class TalkyText : MonoBehaviour
         foreach (var s in _expectedClosingTags)
             formattedOutput += s;
         
-        PushTextToComponents();
+        PushTextToComponents(formattedOutput);
     }
 
-    void PushTextToComponents()
+    void PushTextToComponents(string text)
     {
-        if (_textBox) _textBox.text = formattedOutput;
-        if (_textBoxLegacy) _textBoxLegacy.text = formattedOutput;
+        if (_textBox) _textBox.text = text;
+        if (_textBoxUGUI) _textBoxUGUI.text = text;
+        if (_textBoxLegacy) _textBoxLegacy.text = text;
     }
 
     [Button]
@@ -220,6 +245,6 @@ public class TalkyText : MonoBehaviour
     {
         if (FullyShowing) return;
         _outputText = formattedOutput = inputText;
-        PushTextToComponents();
+        PushTextToComponents(formattedOutput);
     }
 }
