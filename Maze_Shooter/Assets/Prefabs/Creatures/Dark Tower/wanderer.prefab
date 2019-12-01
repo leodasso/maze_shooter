@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 908841898175101187}
   - component: {fileID: 8646180055908494490}
   - component: {fileID: 6919931052475985068}
+  - component: {fileID: 8415834299328173419}
   m_Layer: 11
   m_Name: wanderer
   m_TagString: Untagged
@@ -687,6 +688,29 @@ MonoBehaviour:
   animator: {fileID: 7680006163492061324}
   rigidbody2D: {fileID: 7119995420098848735}
   floatName: speed
+--- !u!114 &8415834299328173419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4066229365527839010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2f0559373d85f45b346c40a11e6303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emitVelocity:
+    useConstant: 1
+    constantValue: 0
+    valueObject: {fileID: 11400000, guid: d3d7f79e3c7cd5d4dacb6cb04384b87a, type: 2}
+  quantity:
+    useConstant: 1
+    constantValue: 0
+    valueObject: {fileID: 11400000, guid: d7541266784a7334bbd3a65eb0464a02, type: 2}
+  emitOnDisable: 1
+  hauntGlobPrefab: {fileID: 168237388850607572, guid: 9759ed316756a7544a9a478d95143200,
+    type: 3}
 --- !u!1 &8961933997810396715
 GameObject:
   m_ObjectHideFlags: 0

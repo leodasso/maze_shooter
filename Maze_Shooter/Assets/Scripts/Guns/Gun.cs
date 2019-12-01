@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Math = Arachnid.Math;
 
-
+[TypeInfoBox("Fires things in the local Y axis")]
 public class Gun : GunBase
 {
 	[Range(0, 1)]
