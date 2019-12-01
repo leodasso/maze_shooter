@@ -28,8 +28,9 @@ public class GunBrain : MonoBehaviour, IControllable
         if (!_firing) return;
 		
         // Tell the gun where to fire
-        float angle =  Math.AngleFromVector2(new Vector2(fireInput.x, fireInput.y), -90);
-        gunRotator.transform.localEulerAngles = new Vector3(0, 0, angle);
+        float angle =  Math.AngleFromVector2(new Vector2(-fireInput.x, fireInput.y), -90);
+        //gunRotator.transform.localEulerAngles = Math.EulersFromAxis(angle, axisOfRotation);
+        gunRotator.transform.rotation = Quaternion.Euler(0, angle, 0);
     }
 
     // This is required by the IControllable interface

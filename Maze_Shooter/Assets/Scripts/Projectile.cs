@@ -15,7 +15,7 @@ public class Projectile : MonoBehaviour
 	[ToggleLeft]
 	public bool addForceOverLifetime;
 	[ShowIf("addForceOverLifetime"), Tooltip("This is a world-space force")]
-	public Vector2 forceOverLifetime;
+	public Vector3 forceOverLifetime;
 
 	[ToggleLeft] 
 	public bool applyForwardForce;
@@ -26,8 +26,8 @@ public class Projectile : MonoBehaviour
 	float _lifetimeTimer;
 	float _localSpeed;
 	// The velocity added from global force over lifetime.
-	Vector2 _velocity;
-	Vector2 _totalVelocity;
+	Vector3 _velocity;
+	Vector3 _totalVelocity;
 
 	void OnEnable()
 	{

@@ -6,16 +6,16 @@ using UnityEngine;
 public class Ship : MonoBehaviour, IControllable
 {
 	public FloatReference enginePower;
-	Rigidbody2D _rigidbody2D;
+	Rigidbody _rigidbody;
 	Vector2 _moveVector;
 
 	// Use this for initialization
 	void Start ()
 	{
-		_rigidbody2D = GetComponent<Rigidbody2D>();
-		if (!_rigidbody2D)
+		_rigidbody = GetComponent<Rigidbody>();
+		if (!_rigidbody)
 		{
-			Debug.LogError("No rigidbody2D component could be found on " + name + ", ending ship component.");
+			Debug.LogError("No rigidbody component could be found on " + name + ", ending ship component.");
 			enabled = false;
 		}
 	}
@@ -23,7 +23,8 @@ public class Ship : MonoBehaviour, IControllable
 	void FixedUpdate()
 	{
 		Vector2 clampedMoveInput = Vector2.ClampMagnitude(_moveVector, 1);
-		_rigidbody2D.AddForce(clampedMoveInput * enginePower.Value * Time.fixedDeltaTime);
+		Vector3 force3D = new Vector3(clampedMoveInput.x, 0, clampedMoveInput.y);
+		_rigidbody.AddForce(force3D * enginePower.Value * Time.fixedDeltaTime);
 	}
 
 	public void ApplyLeftStickInput(Vector2 input)
