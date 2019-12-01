@@ -24,8 +24,10 @@ namespace ShootyGhost
         public void ApplyRightStickInput(Vector2 input)
         {
             // Move the selector based on right stick movement
-            Vector2 vector = input.normalized;
-            selector.transform.localPosition = input.magnitude * hauntingRange.Value * vector;
+            // Sometimes the input's magnitude can exceed 1, so this ensures it stays within the range.
+            Vector3 totalInput = new Vector3(input.x, 0, input.y);
+            Vector3 clampedInput = Vector3.ClampMagnitude(totalInput, 1);
+            selector.transform.localPosition = clampedInput * hauntingRange.Value;
         }
 
         public void ApplyLeftStickInput(Vector2 input)

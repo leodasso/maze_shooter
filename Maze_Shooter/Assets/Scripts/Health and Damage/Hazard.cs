@@ -12,7 +12,7 @@ public class Hazard : ContactBase
     public LayerMask layersToDamage;
 	public IntReference damage;
 
-    protected override void OnCollisionAction(Collision2D collision, Collider2D otherCol)
+    protected override void OnCollisionAction(Collision collision, Collider otherCol)
     {
         if (!enabled) return;
         if (!Math.LayerMaskContainsLayer(layersToDamage, otherCol.gameObject.layer)) return;
@@ -21,13 +21,13 @@ public class Hazard : ContactBase
         destructible?.DoDamage(damage.Value, collision.GetContact(0).point, collision.GetContact(0).normal);
     }
 
-    protected override void OnTriggerAction(Collider2D other)
+    protected override void OnTriggerAction(Collider other)
     {
         if (!enabled) return;
         if (!Math.LayerMaskContainsLayer(layersToDamage, other.gameObject.layer)) return;
         
         IDestructible destructible = other.GetComponent<IDestructible>();
-        destructible?.DoDamage(damage.Value, ((Vector2)transform.position + (Vector2)other.transform.position)/2, 
+        destructible?.DoDamage(damage.Value, (transform.position + other.transform.position)/2, 
             (transform.position - other.transform.position).normalized);
     }
 }

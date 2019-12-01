@@ -36,7 +36,7 @@ public class GunBase : MonoBehaviour
     [Tooltip("This list is referenced by any ammo fired by this gun. The ammo will know " +
              "not to interact with these colliders. Prevents ammo from hitting the thing that " +
              "fired it on the very first frame.")]
-    public List<Collider2D> collidersToIgnore = new List<Collider2D>();
+    public List<Collider> collidersToIgnore = new List<Collider>();
 
     [MinValue(0)]
     public int Level
@@ -80,7 +80,7 @@ public class GunBase : MonoBehaviour
         Hazard hazard = newAmmo.GetComponent<Hazard>();
         if (hazard)
         {
-            hazard.ignoredColliders = new List<Collider2D>(collidersToIgnore);
+            hazard.ignoredColliders = new List<Collider>(collidersToIgnore);
             hazard.enabled = true;
         }
     }

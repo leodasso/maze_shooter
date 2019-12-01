@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Arachnid;
+﻿using Arachnid;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
