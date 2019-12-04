@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4130622135684261830}
   - component: {fileID: 4130622135684261831}
   - component: {fileID: 4130622135684261829}
-  m_Layer: 0
+  - component: {fileID: 3463775809130845739}
+  m_Layer: 16
   m_Name: plant prop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,3 +102,17 @@ MonoBehaviour:
   renderers:
   - renderer: {fileID: 4130622135684261831}
     offset: 0
+--- !u!136 &3463775809130845739
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4130622135684261832}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.11
+  m_Height: 4.65
+  m_Direction: 1
+  m_Center: {x: 0.09980714, y: 2.432799, z: 0}
