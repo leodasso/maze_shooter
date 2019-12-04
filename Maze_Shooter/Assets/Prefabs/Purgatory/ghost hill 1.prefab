@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7267385623762003045}
   - component: {fileID: 3262024528888132113}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: intersection ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1210
   m_Sprite: {fileID: 21300000, guid: 7623dfc4bb494284db633aba137fbb35, type: 3}
-  m_Color: {r: 0.75627446, g: 0.9716981, b: 0.9716981, a: 0.09019608}
+  m_Color: {r: 0.75627446, g: 0.9716981, b: 0.9716981, a: 0.227}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -91,7 +91,8 @@ GameObject:
   - component: {fileID: 2085375269602569030}
   - component: {fileID: 2085375269602569028}
   - component: {fileID: 7352950481360567783}
-  m_Layer: 8
+  - component: {fileID: 5274332789699215420}
+  m_Layer: 0
   m_Name: ghost hill 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +153,7 @@ SpriteRenderer:
   m_SortingOrder: -1209
   m_Sprite: {fileID: 4458493735644990224, guid: 3e61499d50b6bd441a83e7c83f7ed4f6,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.48235294}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.227}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -198,3 +199,19 @@ MonoBehaviour:
     offset: 1
   - renderer: {fileID: 3262024528888132113}
     offset: 0
+--- !u!114 &5274332789699215420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085375269602569031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5bf346cd4b9a564bb745bd17cf58de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alpha: 0.227
+  sprites:
+  - {fileID: 2085375269602569030}
+  - {fileID: 3262024528888132113}

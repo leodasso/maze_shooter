@@ -126,6 +126,8 @@ namespace nTools.PrefabPainter
         public float            brushOverlapDistance;
         public OverlapCheckObjects brushOverlapCheckObjects;
         public LayerMask        brushOverlapCheckLayers;
+	    public float maxAlpha = 1;
+	    public float minAlpha = 1;
 
         // Precise place 
         public PrecisePlaceOrientationMode ppOrientationMode;
@@ -330,6 +332,8 @@ namespace nTools.PrefabPainter
             brushOverlapDistance        = other.brushOverlapDistance;
             brushOverlapCheckObjects    = other.brushOverlapCheckObjects;
             brushOverlapCheckLayers     = other.brushOverlapCheckLayers;
+            maxAlpha = other.maxAlpha;
+            minAlpha = other.minAlpha;
 
             ppOrientationMode           = other.ppOrientationMode;
             ppFlipOrientation           = other.ppFlipOrientation;

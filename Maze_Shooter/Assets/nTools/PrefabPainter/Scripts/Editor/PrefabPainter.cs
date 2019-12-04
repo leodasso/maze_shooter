@@ -1375,6 +1375,13 @@ namespace nTools.PrefabPainter
             return OrientationMode.AlongSurfaceNormal;
         }
 
+        void ApplyAlpha(GameObject newObject, float newAlpha)
+        {
+            PaintAlpha paintAlpha = newObject.GetComponent<PaintAlpha>();
+            if (!paintAlpha) return;
+            paintAlpha.SetAlpha(newAlpha);
+        }
+
 
         void OrientObject(PlacedObjectInfo placedObjectInfo)
         {
@@ -1819,6 +1826,8 @@ namespace nTools.PrefabPainter
             OrientObject(placedObjectInfo);
             PositionObject(raycastInfo, gameObject, brush.settings, prefabSlot);
             ScaleObject(raycastInfo, gameObject, brush.settings, prefabSlot);
+            float finalAlpha = UnityEngine.Random.Range(brush.settings.minAlpha, brush.settings.maxAlpha);
+            ApplyAlpha(gameObject, finalAlpha);
 
 
             if(currentTool == PaintTool.Brush && brush.settings.brushOverlapCheck)

@@ -40,6 +40,9 @@ namespace nTools.PrefabPainter
         public static GUIContent    brushScaleUniformMax        = new GUIContent("Max", "");
         public static GUIContent    brushScalePerAxisMin        = new GUIContent("Min", "");
         public static GUIContent    brushScalePerAxisMax        = new GUIContent("Max", "");
+        public static GUIContent    brushAlphaMin               = new GUIContent("Min", "");
+        public static GUIContent    brushAlphaMax               = new GUIContent("Max", "");
+
 
         public static GUIContent    brushPaintOnSelected        = new GUIContent("Paint On Selected Only", "");
         public static GUIContent    brushPaintOnLayers          = new GUIContent("Paint On Layers", "");
@@ -3382,6 +3385,9 @@ namespace nTools.PrefabPainter
                         MakeUndoOnChange(ref brush.name, DelayedTextField (Strings.brushName, brush.name));
                         MakeUndoOnChange(ref brushSettings.brushRadius, EditorGUILayout.Slider(Strings.brushRadius, brushSettings.brushRadius, 0.01f, settings.maxBrushRadius));
                         MakeUndoOnChange(ref brushSettings.brushSpacing, EditorGUILayout.Slider(Strings.brushSpacing, brushSettings.brushSpacing, 0.01f, settings.maxBrushSpacing));
+                        MakeUndoOnChange(ref brushSettings.minAlpha, EditorGUILayout.Slider(new GUIContent("Min Alpha"), brushSettings.minAlpha, 0, 1));
+                        MakeUndoOnChange(ref brushSettings.maxAlpha, EditorGUILayout.Slider(new GUIContent("Max Alpha"), brushSettings.maxAlpha, 0, 1));
+
                         MakeUndoOnChange(ref brushSettings.brushOverallScale, Mathf.Max(0.01f, EditorGUILayout.FloatField (new GUIContent("Overall Brush Scale"), brushSettings.brushOverallScale)));
                         MakeUndoOnChange(ref brushSettings.brushOverlapCheck, EditorGUILayout.Toggle (new GUIContent("Overlap Check"), brushSettings.brushOverlapCheck));
                         if(brushSettings.brushOverlapCheck)
