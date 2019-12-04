@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Arachnid;
+using Sirenix.OdinInspector;
 
 /// <summary>
 /// Controls rotation and firing of a gun based on a 2d directional input.
@@ -10,6 +11,9 @@ public class GunBrain : MonoBehaviour, IControllable
     public Gun gun;
     public FloatReference fireThreshhold;
     public Vector2 fireInput;
+
+    [ReadOnly]
+    public Quaternion aim;
     
     bool _firing;
 
@@ -21,16 +25,17 @@ public class GunBrain : MonoBehaviour, IControllable
         
         if (gun)
         {
-            gun.firing = _firing;
-            gun.fireRateIntensity = fireInput.magnitude;
+            //gun.firing = _firing;
+            //gun.fireRateIntensity = fireInput.magnitude;
         }
         
         if (!_firing) return;
 		
         // Tell the gun where to fire
         float angle =  Math.AngleFromVector2(new Vector2(-fireInput.x, fireInput.y), -90);
-        //gunRotator.transform.localEulerAngles = Math.EulersFromAxis(angle, axisOfRotation);
-        gunRotator.transform.rotation = Quaternion.Euler(0, angle, 0);
+        // declare aim below so other components can access it if they need to
+        aim = Quaternion.Euler(0, angle, 0);
+        gunRotator.transform.rotation = aim;
     }
 
     // This is required by the IControllable interface
