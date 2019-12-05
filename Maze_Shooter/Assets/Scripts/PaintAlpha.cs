@@ -11,7 +11,7 @@ public class PaintAlpha : MonoBehaviour
     [Range(0, 1), OnValueChanged("ApplyAlpha")]
     public float alpha = 1;
     
-    public List<SpriteRenderer> sprites = new List<SpriteRenderer>();
+    public List<AlphaSet> sprites = new List<AlphaSet>();
 
     public void SetAlpha(float newAlpha)
     {
@@ -21,10 +21,23 @@ public class PaintAlpha : MonoBehaviour
 
     void ApplyAlpha()
     {
-        foreach (SpriteRenderer sprite in sprites)
+        foreach (AlphaSet set in sprites)
         {
-            Color c = sprite.color;
-            sprite.color = new Color(c.r, c.g, c.b, alpha);
+            set.Apply(alpha);
+        }
+    }
+
+    [System.Serializable]
+    public class AlphaSet
+    {
+        [Range(0, 1)]
+        public float alpha = 1;
+        public SpriteRenderer spriteRenderer;
+
+        public void Apply(float parentAlpha)
+        {
+            Color c = spriteRenderer.color;
+            spriteRenderer.color = new Color(c.r, c.g, c.b, alpha * parentAlpha);
         }
     }
 }
