@@ -7,8 +7,10 @@ using Arachnid;
 /// <summary>
 /// Base class for interactions on trigger or collision between 2D elements
 /// </summary>
-public class ContactBase : MonoBehaviour 
+public class ContactBase : MonoBehaviour
 {
+	[ToggleLeft, PropertyOrder(-500)]
+	public bool debug;
 	[Tooltip("Layers that will destroy this object. Any inheriting class's behavior will happen before this is destroyed.")]
 	public LayerMask layersThatDestroyThis;
 
@@ -26,6 +28,7 @@ public class ContactBase : MonoBehaviour
 	void Awake()
 	{
 		_prevPosition = transform.position;
+		ignoredColliders.AddRange(GetComponentsInChildren<Collider>());
 	}
 
 	void Update()
@@ -34,12 +37,15 @@ public class ContactBase : MonoBehaviour
 		
 		// Raycast from previous to current position
 		Vector3 direction = transform.position - _prevPosition;
-		//RaycastHit hit = Physics.Raycast(_prevPosition, direction.normalized, direction.magnitude, castingLayerMask);
 		Ray castingRay = new Ray(_prevPosition, direction);
 		RaycastHit hit;
 		if (Physics.Raycast(castingRay, out hit, direction.magnitude))
-		if ( hit.collider != null && !ignoredColliders.Contains(hit.collider))
+		if ( hit.collider != null && !ignoredColliders.Contains(hit.collider) && !hit.collider.isTrigger)
 		{
+			if (debug)
+			{
+				Debug.Log(name + " casted against " + hit.collider.name, gameObject);
+			}
 			transform.position = hit.point;
 			Triggered(hit.collider);
 		}
