@@ -17,6 +17,12 @@ public class GunBrain : MonoBehaviour, IControllable
     
     bool _firing;
 
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawRay(transform.position, GetAimVector());
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -35,7 +41,13 @@ public class GunBrain : MonoBehaviour, IControllable
         float angle =  Math.AngleFromVector2(new Vector2(-fireInput.x, fireInput.y), -90);
         // declare aim below so other components can access it if they need to
         aim = Quaternion.Euler(0, angle, 0);
-        gunRotator.transform.rotation = aim;
+        if (gunRotator)
+            gunRotator.transform.rotation = aim;
+    }
+
+    public Vector3 GetAimVector()
+    {
+        return aim * Vector3.forward;
     }
 
     // This is required by the IControllable interface
@@ -45,6 +57,9 @@ public class GunBrain : MonoBehaviour, IControllable
     {
         fireInput = input;
     }
+
+    public void DoActionAlpha()
+    { }
 
     public string Name()
     {

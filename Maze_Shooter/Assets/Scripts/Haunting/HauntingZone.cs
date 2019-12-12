@@ -30,9 +30,9 @@ namespace ShootyGhost
             selector.transform.localPosition = clampedInput * hauntingRange.Value;
         }
 
-        public void ApplyLeftStickInput(Vector2 input)
-        {
-        }
+        public void DoActionAlpha() { }
+
+        public void ApplyLeftStickInput(Vector2 input) { }
 
         public string Name()
         {

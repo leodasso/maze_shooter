@@ -43,11 +43,16 @@ public class Player : MonoBehaviour
 		moveInput = new Vector2(_player.GetAxis("moveX"), _player.GetAxis("moveY"));
 		fireInput = new Vector2(_player.GetAxis("fireX"), _player.GetAxis("fireY"));
 
+		bool alphaAction = _player.GetButtonDown("alpha");
+
 		// tell the ship how to move based on player's input
 		foreach (var controllable in controllables)
 		{
 			controllable.ApplyLeftStickInput(moveInput);
 			controllable.ApplyRightStickInput(fireInput);
+			
+			if (alphaAction)
+				controllable.DoActionAlpha();
 		}
 	}
 }

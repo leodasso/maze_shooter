@@ -42,8 +42,9 @@ public class MovementBase : MonoBehaviour, IControllable
         _direction = input.normalized;
     }
 
-    public virtual void ApplyRightStickInput(Vector2 input)
-    { }
+    public virtual void ApplyRightStickInput(Vector2 input) { }
+
+    public void DoActionAlpha() { }
 
     public string Name()
     {

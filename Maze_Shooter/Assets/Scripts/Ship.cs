@@ -35,6 +35,9 @@ public class Ship : MonoBehaviour, IControllable
 	public void ApplyRightStickInput(Vector2 input)
 	{ }
 
+	public void DoActionAlpha()
+	{}
+
 	public string Name()
 	{
 		return "ship: " + name;
