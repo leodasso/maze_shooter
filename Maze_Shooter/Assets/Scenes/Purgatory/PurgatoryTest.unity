@@ -48607,16 +48607,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   devilToLaunch: {fileID: 0}
   launchPosition: {fileID: 1447820263}
-  launchSpeed:
-    useConstant: 0
-    constantValue: 25
-    valueObject: {fileID: 0}
   gunBrain: {fileID: 9032496079764511262}
   devilTrain: {fileID: 5566636563238022982}
   inputThreshhold:
     useConstant: 1
     constantValue: 0
     valueObject: {fileID: 11400000, guid: 594a0c060d881f647aa97a5d8c1a0c1a, type: 2}
+  launchSpeed:
+    useConstant: 0
+    constantValue: 40
+    valueObject: {fileID: 0}
+  transportTime:
+    useConstant: 0
+    constantValue: 0.3
+    valueObject: {fileID: 0}
+  launchState: 0
 --- !u!1 &5566656700831518545
 GameObject:
   m_ObjectHideFlags: 0

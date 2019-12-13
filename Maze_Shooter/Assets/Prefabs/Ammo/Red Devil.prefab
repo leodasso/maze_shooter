@@ -287,6 +287,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634828bcc7515614593978fb40b2a9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigidbody: {fileID: 4734935179019926774}
+  collider: {fileID: 4761205435095914545}
+  devilState: 2
   onLaunch:
     m_PersistentCalls:
       m_Calls: []
@@ -307,8 +310,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  rigidbody: {fileID: 4734935179019926774}
-  collider: {fileID: 4761205435095914545}
+  onPickedUp:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &2972432064229778603
 MonoBehaviour:
   m_ObjectHideFlags: 0

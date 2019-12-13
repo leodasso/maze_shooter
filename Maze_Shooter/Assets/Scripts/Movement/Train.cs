@@ -14,15 +14,16 @@ public class Train : MonoBehaviour
     public float radius = 1;
     Vector3 memorizedFrontPosition;
 
+    public bool EmptyTrain => trainElements.Count < 1;
+
     // Update is called once per frame
     void Update()
     {
-        if (trainElements.Count < 1) return;
+        if (EmptyTrain) return;
         
         // The first train element follows this
         trainElements[0].Follow(transform, radius);
-
-        memorizedFrontPosition = trainElements[0].transform.position;
+        memorizedFrontPosition = trainElements[0].transform.position - transform.position;
         
         for (int i = 1; i < trainElements.Count; i++)
         {
@@ -36,7 +37,7 @@ public class Train : MonoBehaviour
     /// </summary>
     public GameObject TakeFrontElement()
     {
-        if (trainElements.Count < 1) return null;
+        if (EmptyTrain) return null;
         GameObject frontMost = trainElements[0].gameObject;
         trainElements.RemoveAt(0);
         frontMost.GetComponent<TrainElement>().ExitTrain();
@@ -45,16 +46,30 @@ public class Train : MonoBehaviour
 
     public void PlaceInFront(GameObject element)
     {
-        TrainElement t = element.GetComponent<TrainElement>();
+        TrainElement t = GetTrainElement(element);
+        t.EnterTrain();
+        t.transform.position = FrontPosition();
+        trainElements.Insert(0, t);
+    }
+    
+    public void PlaceInBack(GameObject element)
+    {
+        TrainElement t = GetTrainElement(element);
+        t.EnterTrain();
+        //t.transform.position = BackPosition();
+        trainElements.Add(t);
+    }
+
+    TrainElement GetTrainElement(GameObject go)
+    {
+        TrainElement t = go.GetComponent<TrainElement>();
         if (!t)
         {
-            Debug.Log("Element doesn't have a train component!", element);
-            return;
+            Debug.Log("Object doesn't have a train component!", go);
+            return null;
         }
 
-        t.EnterTrain();
-        element.transform.position = FrontPosition();
-        trainElements.Insert(0, t);
+        return t;
     }
 
     /// <summary>
@@ -65,6 +80,15 @@ public class Train : MonoBehaviour
         if (trainElements.Count > 0)
             return trainElements[0].transform.position + Vector3.left * .01f;
 
-        return memorizedFrontPosition;
+        return memorizedFrontPosition + transform.position;
+    }
+
+    
+    Vector3 BackPosition()
+    {
+        if (trainElements.Count > 0)
+            return trainElements[trainElements.Count - 1].transform.position + Vector3.left * .01f;
+
+        return memorizedFrontPosition + transform.position;
     }
 }
