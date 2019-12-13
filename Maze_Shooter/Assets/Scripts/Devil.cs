@@ -1,24 +1,28 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
+using Arachnid;
 
-public class Devil : MonoBehaviour
+public class Devil : ContactBase
 {
     public enum DevilState
     {
         Launched,
         Rebound,
         Grounded,
-        
+        Following,
     }
     
-    [Space, TabGroup("Main")] 
+    [Tooltip("Layers that this hazard will do damage to"), TabGroup("Main")]
+    public LayerMask layersToDamage;
+    
+    [TabGroup("Main")] 
     public new Rigidbody rigidbody;
     
     [TabGroup("Main")]
     public new Collider collider;
 
-    [TabGroup("Main"), ReadOnly]
+    [TabGroup("Main")]
     public DevilState devilState = DevilState.Grounded;
     
     [TabGroup("Events")]
@@ -38,8 +42,18 @@ public class Devil : MonoBehaviour
     [Tooltip("Triggered when the player picks this devil up off the ground.")]
     [TabGroup("Events")]
     public UnityEvent onPickedUp;
-    
 
+    public UnityEvent onReboundGrab;
+
+    // TODO damage for special modes maybe?
+    int Damage => 1;
+
+    float _stillTimer = 0;
+
+    public bool CanBePickedUp()
+    {
+        return devilState == DevilState.Grounded;
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -56,36 +70,55 @@ public class Devil : MonoBehaviour
         onLaunch.Invoke();
     }
 
+    public void SetAsFollowing()
+    {
+        devilState = DevilState.Following;
+    }
+
     void Rebound()
     {
-        Debug.Log("Rebounded!", gameObject);
         devilState = DevilState.Rebound;
         gameObject.layer = LayerMask.NameToLayer("Default");
     }
 
-    void OnCollisionEnter(Collision other)
-    {
-        if (devilState == DevilState.Launched)
-            Rebound();
-                
-        DevilLauncher launcher = other.collider.GetComponent<DevilLauncher>();
-        if (launcher)
-        {
-            ReturnToLauncher(launcher);
-            return;
-        }
-        
-        // TODO have return/bounce force randomized?
-        
-        // TODO if hit enemy, call onHitTarget
-    }
-
-    void ReturnToLauncher(DevilLauncher launcher)
+    public void ReturnToLauncher(DevilLauncher launcher)
     {
         gameObject.layer = LayerMask.NameToLayer("PlayerBullets");
         rigidbody.isKinematic = true;
+        devilState = DevilState.Following;
         launcher.PickUpDevil(this);
         onPickedUp.Invoke();
+    }
+    
+    protected override void OnCollisionAction(Collision collision, Collider otherCol)
+    {
+        if (devilState == DevilState.Launched)
+            Rebound();
+        
+        // the devil can be caught on the rebound mid-air by the player's main collider for bonuses.
+        DevilLauncher launcher = otherCol.GetComponent<DevilLauncher>();
+        if (launcher)
+        {
+            ReturnToLauncher(launcher);
+            onReboundGrab.Invoke();
+            return;
+        }
+        
+        // TODO check if hit ground, and if so, stick / set state!
+
+        // TODO have return/bounce force randomized?
+
+        // TODO if hit enemy, call onHitTarget, do damage
+    }
+
+    void DoDamage(Collision collision, Collider other)
+    {
+        if (!enabled) return;
+        if (!Math.LayerMaskContainsLayer(layersToDamage, other.gameObject.layer)) return;
+        if (devilState != DevilState.Launched) return;
+        
+        IDestructible destructible = other.GetComponent<IDestructible>();
+        destructible?.DoDamage(Damage, collision.GetContact(0).point, collision.GetContact(0).normal);
 
     }
 }

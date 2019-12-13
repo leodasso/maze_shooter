@@ -16,20 +16,30 @@ public class Train : MonoBehaviour
 
     public bool EmptyTrain => trainElements.Count < 1;
 
+    void Start()
+    {
+        foreach (var trainElement in trainElements)
+        {
+            trainElement.EnterTrain();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (EmptyTrain) return;
         
-        // The first train element follows this
-        trainElements[0].Follow(transform, radius);
-        memorizedFrontPosition = trainElements[0].transform.position - transform.position;
+        // The first train element follows this object, while the rest 
+        // just follow the next train element in line
+        trainElements[0].Follow(transform, radius, 0);
         
         for (int i = 1; i < trainElements.Count; i++)
         {
             var nextTrainElement = trainElements[i - 1];
-            trainElements[i].Follow(nextTrainElement.transform, nextTrainElement.radius);
+            trainElements[i].Follow(nextTrainElement.transform, nextTrainElement.radius, i);
         }
+        
+        memorizedFrontPosition = trainElements[0].transform.position - transform.position;
     }
 
     /// <summary>

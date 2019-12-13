@@ -19,6 +19,13 @@ public class TrainElement : MonoBehaviour
     [TabGroup("Main")]
     public float radius = 1;
 
+    [TabGroup("Main")] 
+    public float followSpeed = 15;
+
+    [Tooltip("Optional - if an Animator is added, this component will send inTrain and trainIndex info to the animator.")]
+    [TabGroup("Main")]
+    public Animator animator;
+
     // The ray cast from the leader toward this
     Ray _leaderRay;
 
@@ -32,6 +39,7 @@ public class TrainElement : MonoBehaviour
     public void EnterTrain()
     {
         _onEnterTrain.Invoke();
+        animator?.SetBool("inTrain", true);
     }
 
     /// <summary>
@@ -40,6 +48,7 @@ public class TrainElement : MonoBehaviour
     public void ExitTrain()
     {
         _onExitTrain.Invoke();
+        animator?.SetBool("inTrain", false);
     }
 
     void OnDrawGizmos()
@@ -48,11 +57,12 @@ public class TrainElement : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radius);
     }
 
-    public void Follow(Transform leader, float leaderRadius)
+    public void Follow(Transform leader, float leaderRadius, int index)
     {
         if (!enabled) return;
         _leaderRay = new Ray(leader.position, transform.position - leader.position);
         float followDist = radius + leaderRadius;
-        transform.position = Vector3.Lerp(transform.position, _leaderRay.GetPoint(followDist), Time.deltaTime * 15);
+        transform.position = Vector3.Lerp(transform.position, _leaderRay.GetPoint(followDist), Time.deltaTime * followSpeed);
+        animator?.SetInteger("trainIndex", index);
     }
 }
