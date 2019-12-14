@@ -63,6 +63,8 @@ public class TrainElement : MonoBehaviour
         _leaderRay = new Ray(leader.position, transform.position - leader.position);
         float followDist = radius + leaderRadius;
         transform.position = Vector3.Lerp(transform.position, _leaderRay.GetPoint(followDist), Time.deltaTime * followSpeed);
-        animator?.SetInteger("trainIndex", index);
+        
+        if (Application.isPlaying)
+            animator?.SetInteger("trainIndex", index);
     }
 }

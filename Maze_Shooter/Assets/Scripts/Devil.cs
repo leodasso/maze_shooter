@@ -24,16 +24,25 @@ public class Devil : ContactBase
 
     [TabGroup("Main")]
     public DevilState devilState = DevilState.Grounded;
+
+    [TabGroup("Main")] 
+    public FloatReference reboundSpeed;
+    
+    [TabGroup("Main")] 
+    public FloatReference reboundRandomness;
+
+    [TabGroup("Main")] 
+    public FloatReference reboundVerticalness;
     
     [TabGroup("Events")]
     public UnityEvent onLaunch;
     
     [TabGroup("Events")]
-    public UnityEvent onHitTarget;
+    public UnityEvent onRebound;
     
-    [Tooltip("Triggered when a wall/non-damage-able prop is hit")]
+    [Tooltip("Triggered when the player grabs the rebound out of mid-air.")]
     [TabGroup("Events")]
-    public UnityEvent onHitWall;
+    public UnityEvent onReboundGrab;
 
     [Tooltip("Triggered when hits the ground after being launched.")]
     [TabGroup("Events")]
@@ -43,7 +52,9 @@ public class Devil : ContactBase
     [TabGroup("Events")]
     public UnityEvent onPickedUp;
 
-    public UnityEvent onReboundGrab;
+    [Tooltip("Triggered when I deal damage to the thing I hit.")]
+    [TabGroup("Events")]
+    public UnityEvent onSuccessfulAttack;
 
     // TODO damage for special modes maybe?
     int Damage => 1;
@@ -58,7 +69,6 @@ public class Devil : ContactBase
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     public void Launch(Vector3 launchVelocity)
@@ -75,10 +85,18 @@ public class Devil : ContactBase
         devilState = DevilState.Following;
     }
 
-    void Rebound()
+    void Rebound(Collision collision)
     {
         devilState = DevilState.Rebound;
         gameObject.layer = LayerMask.NameToLayer("Default");
+        
+        // Set rebound velocity 
+        var contact = collision.contacts[0];
+        var newVelocity = contact.normal * reboundSpeed.Value;
+        var randomVelocity = Random.onUnitSphere * reboundRandomness.Value;
+        rigidbody.velocity = newVelocity + randomVelocity + Vector3.up * reboundVerticalness.Value;
+        
+        onRebound.Invoke();
     }
 
     public void ReturnToLauncher(DevilLauncher launcher)
@@ -92,9 +110,6 @@ public class Devil : ContactBase
     
     protected override void OnCollisionAction(Collision collision, Collider otherCol)
     {
-        if (devilState == DevilState.Launched)
-            Rebound();
-        
         // the devil can be caught on the rebound mid-air by the player's main collider for bonuses.
         DevilLauncher launcher = otherCol.GetComponent<DevilLauncher>();
         if (launcher)
@@ -104,11 +119,34 @@ public class Devil : ContactBase
             return;
         }
         
-        // TODO check if hit ground, and if so, stick / set state!
+        DoDamage(collision, otherCol);
+        
+        if (devilState == DevilState.Launched)
+            Rebound(collision);
+        
+        // check if hit ground, and if so, stick / set state!
+        if (otherCol.gameObject.CompareTag("Ground"))
+            StickInGround();
+    }
 
-        // TODO have return/bounce force randomized?
 
-        // TODO if hit enemy, call onHitTarget, do damage
+    float SymmetricRandom(float input)
+    {
+        return Random.Range(-input, input);
+    }
+
+    void StickInGround()
+    {
+        // Stick
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.isKinematic = true;
+        
+        // Make sure pick upable
+        devilState = DevilState.Grounded;
+        
+        // TODO animation for stuck in ground?
+        
+        // TODO effects maybe?
     }
 
     void DoDamage(Collision collision, Collider other)
@@ -118,7 +156,9 @@ public class Devil : ContactBase
         if (devilState != DevilState.Launched) return;
         
         IDestructible destructible = other.GetComponent<IDestructible>();
-        destructible?.DoDamage(Damage, collision.GetContact(0).point, collision.GetContact(0).normal);
+        if (destructible == null) return;
+        onSuccessfulAttack.Invoke();
+        destructible.DoDamage(Damage, collision.GetContact(0).point, collision.GetContact(0).normal);
 
     }
 }
