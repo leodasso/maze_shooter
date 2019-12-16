@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Main Camera Blends
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: static vCam
-    m_To: static vCam
+  - m_From: galactic vCam
+    m_To: follow vCam
     m_Blend:
       m_Style: 1
-      m_Time: 0.5
+      m_Time: 0.7
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
@@ -25,21 +25,10 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: '**ANY CAMERA**'
-    m_To: (none)
+    m_To: galactic vCam
     m_Blend:
       m_Style: 1
-      m_Time: 0.25
-      m_CustomCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-  - m_From: hallway vCam
-    m_To: main hall vCam
-    m_Blend:
-      m_Style: 1
-      m_Time: 0.25
+      m_Time: 1
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
