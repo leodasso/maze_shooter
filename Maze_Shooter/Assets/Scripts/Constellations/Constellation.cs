@@ -13,6 +13,7 @@ public class Constellation : MonoBehaviour
 
     public UnityEvent onNewlyCollected;
     public UnityEvent onReCollected;
+    public UnityEvent onAddToGalaxy;
 
     bool _touched;
     
@@ -27,15 +28,26 @@ public class Constellation : MonoBehaviour
         // Ensure there's no double activations
         if (_touched) return;
         _touched = true;
+
+        bool beenCollected = myConstellation.HasBeenCollected();
         
-        // TODO logic to see if this is collected in the save file
-        onNewlyCollected.Invoke();
+        myConstellation.SaveAsCollected();
+        
+        // Different behaviors depending on if it's already been collected.
+        // Constellations that have been collected before can still appear in the scene, but we don't want to do
+        // the whole song and dance when you get it again. Maybe just a quick bit of feedback to show that it's 
+        // been touched, but has already been collected.
+        if (beenCollected)
+            onReCollected.Invoke();
+        else
+            onNewlyCollected.Invoke();
     }
 
     public void OpenGalaxy()
     {
         Galaxy newGalaxy = Instantiate(galaxyPrefab, galaxySpawnPoint.position, quaternion.identity).GetComponent<Galaxy>();
         newGalaxy.constellationToFocus = myConstellation;
+        newGalaxy.constellationInstance = this;
         newGalaxy.showConstellationAcquire.Invoke();
     }
 

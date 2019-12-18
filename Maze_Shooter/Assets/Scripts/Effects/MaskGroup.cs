@@ -23,4 +23,16 @@ public class MaskGroup : MonoBehaviour
             r.maskInteraction = maskInteraction;
         }
     }
+
+    public void SetMaskInteraction(SpriteMaskInteraction newMaskInteraction)
+    {
+        maskInteraction = newMaskInteraction;
+        SetMaskInteraction();
+    }
+
+    public void SetAsMasked()
+    {
+        maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+        SetMaskInteraction();
+    }
 }

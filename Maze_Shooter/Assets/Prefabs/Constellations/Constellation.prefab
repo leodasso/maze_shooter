@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 8046897499305332267}
   - component: {fileID: 8155467657653731974}
   - component: {fileID: 7883879871293945028}
+  - component: {fileID: 3634356858681860968}
   m_Layer: 0
   m_Name: Constellation
   m_TagString: Untagged
@@ -115,6 +116,8 @@ Transform:
   m_Children:
   - {fileID: 5015598310021326296}
   - {fileID: 4328640685090186599}
+  - {fileID: 8634345112113941149}
+  - {fileID: 7023301175888149118}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -245,6 +248,22 @@ MonoBehaviour:
   onReCollected:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onAddToGalaxy:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3634356858681860968}
+        m_MethodName: SetAsMasked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &8155467657653731974
@@ -656,14 +675,19 @@ MonoBehaviour:
         actionNames:
         - HutongGames.PlayMaker.Actions.Wait
         - HutongGames.PlayMaker.Actions.SetAnimatorTrigger
+        - VirtualCamSetPriority
+        - HutongGames.PlayMaker.Actions.InvokeMethod
         customNames:
         - 
         - 
-        actionEnabled: 0101
-        actionIsOpen: 0101
-        actionStartIndex: 0000000003000000
-        actionHashCodes: 48c011019bd6f801
-        unityObjectParams: []
+        - 
+        - 
+        actionEnabled: 01010101
+        actionIsOpen: 01010101
+        actionStartIndex: 00000000030000000500000007000000
+        actionHashCodes: 48c011019bd6f801b33fd90259f9a004
+        unityObjectParams:
+        - {fileID: 8523244851861973193}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
         - ownerOption: 0
@@ -674,6 +698,14 @@ MonoBehaviour:
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
+        - ownerOption: 1
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 2713366190319946639}
         animationCurveParams: []
         functionCallParams: []
         fsmTemplateControlParams: []
@@ -687,6 +719,18 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: touched
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: OnTriggerEffect
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: InvokeEffect
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -698,8 +742,32 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 1
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
         fsmIntParams: []
-        fsmBoolParams: []
+        fsmBoolParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
@@ -707,20 +775,29 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - FINISHED
-        byteData: 00
+        byteData: 0064000000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 0f00000017000000010000001400000012000000
+        paramDataType: 0f0000001700000001000000140000001200000000000000050000001400000012000000120000000f000000110000000f00000011000000
         paramName:
         - time
         - finishEvent
         - realTime
         - gameObject
         - trigger
-        paramDataPos: 0000000000000000000000000000000000000000
-        paramByteDataSize: 0000000000000000010000000000000000000000
+        - priorityDelta
+        - virtualCamera
+        - gameObject
+        - behaviour
+        - methodName
+        - delay
+        - repeating
+        - repeatDelay
+        - cancelOnExit
+        paramDataPos: 0000000000000000000000000000000000000000010000000000000001000000010000000200000001000000000000000200000001000000
+        paramByteDataSize: 0000000000000000010000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000
     - name: close title panel
       description: 
       colorIndex: 0
@@ -743,13 +820,16 @@ MonoBehaviour:
         linkConstraint: 0
         colorIndex: 0
       actionData:
-        actionNames: []
-        customNames: []
-        actionEnabled: 
-        actionIsOpen: 
-        actionStartIndex: 
-        actionHashCodes: 
-        unityObjectParams: []
+        actionNames:
+        - InvokeGameEvent
+        customNames:
+        - 
+        actionEnabled: 01
+        actionIsOpen: 01
+        actionStartIndex: 00000000
+        actionHashCodes: 7f1a7103
+        unityObjectParams:
+        - {fileID: 11400000, guid: 07384f3cf1cd16f4e91d1d18b111b616, type: 2}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
         animationCurveParams: []
@@ -777,10 +857,11 @@ MonoBehaviour:
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 
-        paramName: []
-        paramDataPos: 
-        paramByteDataSize: 
+        paramDataType: 05000000
+        paramName:
+        - gameEvent
+        paramDataPos: 00000000
+        paramByteDataSize: 00000000
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -891,6 +972,30 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3634356858681860968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743245700665940826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c3f2150a4b443458ddb1a806a0e5cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers:
+  - {fileID: 743245700530220851}
+  - {fileID: 743245699444830205}
+  - {fileID: 1907891950003681673}
+  - {fileID: 7810935701682522767}
+  - {fileID: 7810935701455039263}
+  - {fileID: 7810935700744974229}
+  - {fileID: 7810935700778964577}
+  - {fileID: 7810935700757824340}
+  - {fileID: 7810935700241833047}
+  - {fileID: 7810935700144270327}
+  maskInteraction: 0
 --- !u!1 &1357571247268301860
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,6 +1026,53 @@ Transform:
   m_Father: {fileID: 743245700665940807}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2713366190319946639
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7023301175888149118}
+  - component: {fileID: 4672739214041940777}
+  m_Layer: 0
+  m_Name: effect spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7023301175888149118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2713366190319946639}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 743245700665940807}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4672739214041940777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2713366190319946639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de6c16f983620a4da43f9e72b293064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 3937333457965774097, guid: a8044ecb357e5fb4e99fc1db44a660bd,
+    type: 3}
+  lifetime: 5
+  delay: 0
 --- !u!1 &6368434445056510202
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,6 +1115,37 @@ Transform:
   m_Father: {fileID: 743245700665940807}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4400140222607409249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8637511509574037085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83b5d72ab14f3f4c8442f76808cf317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - {fileID: 11400000, guid: b7e4ee69a8cd33745b72b5befc4e695d, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8523244851861973193}
+        m_MethodName: set_Priority
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  comment: 
 --- !u!1001 &743245699208202545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1290,15 +1473,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4be33f18239d78541aa81c3b8f50264c, type: 3}
---- !u!4 &1043914300078724787 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 300668605635392863, guid: 4be33f18239d78541aa81c3b8f50264c,
-    type: 3}
-  m_PrefabInstance: {fileID: 743245699342590956}
-  m_PrefabAsset: {fileID: 0}
 --- !u!120 &1043914300078724788 stripped
 LineRenderer:
   m_CorrespondingSourceObject: {fileID: 300668605635392856, guid: 4be33f18239d78541aa81c3b8f50264c,
+    type: 3}
+  m_PrefabInstance: {fileID: 743245699342590956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1043914300078724787 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 300668605635392863, guid: 4be33f18239d78541aa81c3b8f50264c,
     type: 3}
   m_PrefabInstance: {fileID: 743245699342590956}
   m_PrefabAsset: {fileID: 0}
@@ -2101,3 +2284,105 @@ SpriteRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 1907891950102260569}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8637127516731196643
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 743245700665940807}
+    m_Modifications:
+    - target: {fileID: 1028332695186110, guid: fde8f66d53e4214438069d431895986a, type: 3}
+      propertyPath: m_Name
+      value: constellation vCam
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 29.276701
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -44.773365
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.30070576
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.953717
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
+        type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
+        type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
+        type: 3}
+      propertyPath: m_Priority
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114983388701754208, guid: fde8f66d53e4214438069d431895986a,
+        type: 3}
+      propertyPath: m_CameraDistance
+      value: 55
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114983388701754208, guid: fde8f66d53e4214438069d431895986a, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: fde8f66d53e4214438069d431895986a, type: 3}
+--- !u!1 &8637511509574037085 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1028332695186110, guid: fde8f66d53e4214438069d431895986a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8637127516731196643}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8634345112113941149 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8637127516731196643}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8523244851861973193 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8637127516731196643}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8637511509574037085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

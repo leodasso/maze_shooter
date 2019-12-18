@@ -1324,15 +1324,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 031149d7badddeb4cb86dcbd83752425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  focusOffset: {x: 0, y: -6, z: 0}
+  mergeSpeed:
+    useConstant: 0
+    constantValue: 4
+    valueObject: {fileID: 0}
   focusSpeed:
     useConstant: 0
-    constantValue: 2
+    constantValue: 2.7
     valueObject: {fileID: 0}
   constellationNodes:
   - {fileID: 4551044669281040218}
   focusObject: {fileID: 0}
   galaxyMain: {fileID: 4551044668861170373}
   constellationToFocus: {fileID: 0}
+  constellationInstance: {fileID: 0}
   showConstellationAcquire:
     m_PersistentCalls:
       m_Calls:
@@ -1549,7 +1555,7 @@ MonoBehaviour:
           name: FINISHED
           isSystemEvent: 1
           isGlobal: 0
-        toState: close portal
+        toState: merge constellation
         linkStyle: 0
         linkConstraint: 0
         colorIndex: 0
@@ -1616,7 +1622,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: 3
+          value: 1
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 0
@@ -1662,8 +1668,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 477
-        y: 231
+        x: 717
+        y: 281
         width: 107
         height: 32
       isBreakpoint: 0
@@ -1756,8 +1762,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 633
-        y: 232
+        x: 876.1328
+        y: 252
         width: 100
         height: 16
       isBreakpoint: 0
@@ -1767,15 +1773,25 @@ MonoBehaviour:
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Actions.DestroySelf
+        - HutongGames.PlayMaker.Actions.ActivateGameObject
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 62f95203
+        - 
+        actionEnabled: 0001
+        actionIsOpen: 0101
+        actionStartIndex: 0000000001000000
+        actionHashCodes: 62f95203b2cf1000
         unityObjectParams: []
         fsmGameObjectParams: []
-        fsmOwnerDefaultParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
         animationCurveParams: []
         functionCallParams: []
         fsmTemplateControlParams: []
@@ -1796,22 +1812,165 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData: 
+        byteData: 0000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 11000000
+        paramDataType: 110000001400000011000000110000000100000001000000
         paramName:
         - detachChildren
-        paramDataPos: 00000000
-        paramByteDataSize: 00000000
+        - gameObject
+        - activate
+        - recursive
+        - resetOnExit
+        - everyFrame
+        paramDataPos: 000000000000000001000000020000000000000001000000
+        paramByteDataSize: 000000000000000000000000000000000100000001000000
+    - name: merge constellation
+      description: pulls the constellation into the portal and merges it with it's
+        corresponding node in the galaxy
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 471
+        y: 301
+        width: 200
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: FINISHED
+          isSystemEvent: 1
+          isGlobal: 0
+        toState: close portal
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.InvokeMethod
+        - HutongGames.PlayMaker.Actions.Wait
+        customNames:
+        - 
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000007000000
+        actionHashCodes: 59f9a00448c01101
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams: []
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: Galaxy
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: MergeConstellationToNode
+        fsmObjectParams: []
+        fsmVarParams: []
+        fsmArrayParams: []
+        fsmEnumParams: []
+        fsmFloatParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1.5
+        fsmIntParams: []
+        fsmBoolParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        fsmVector2Params: []
+        fsmVector3Params: []
+        fsmColorParams: []
+        fsmRectParams: []
+        fsmQuaternionParams: []
+        stringParams:
+        - FINISHED
+        byteData: 00
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 1400000012000000120000000f000000110000000f000000110000000f0000001700000001000000
+        paramName:
+        - gameObject
+        - behaviour
+        - methodName
+        - delay
+        - repeating
+        - repeatDelay
+        - cancelOnExit
+        - time
+        - finishEvent
+        - realTime
+        paramDataPos: 00000000000000000100000000000000000000000100000001000000020000000000000000000000
+        paramByteDataSize: 00000000000000000000000000000000000000000000000000000000000000000000000001000000
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -2389,11 +2548,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 48.96048
+      value: 40.150345
       objectReference: {fileID: 0}
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -69.92282
+      value: -57.340645
       objectReference: {fileID: 0}
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2445,7 +2604,7 @@ PrefabInstance:
     - target: {fileID: 114983388701754208, guid: fde8f66d53e4214438069d431895986a,
         type: 3}
       propertyPath: m_CameraDistance
-      value: 85.36
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fde8f66d53e4214438069d431895986a, type: 3}

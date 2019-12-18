@@ -6,4 +6,15 @@ using UnityEngine;
 public class ConstellationData : ScriptableObject
 {
     public string title = "Please name me";
+
+    public bool HasBeenCollected()
+    {
+        // TODO
+        return false;
+    }
+
+    public void SaveAsCollected()
+    {
+        // TODO
+    }
 }
