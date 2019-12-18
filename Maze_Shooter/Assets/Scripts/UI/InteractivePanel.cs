@@ -2,7 +2,6 @@
 using Rewired;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 using Sirenix.OdinInspector;
 
 public class InteractivePanel : MonoBehaviour
@@ -10,6 +9,14 @@ public class InteractivePanel : MonoBehaviour
 	public bool destroyWhenComplete = true;
 	[Tooltip("Is this dialog panel currently showing?")]
 	public bool active;
+
+	[Tooltip("Is this a UI element that requires a parent canvas?")]
+	public bool requireCanvas;
+
+	[ShowIf("requireCanvas"), Tooltip("Choose which type of canvas is required as a parent." +
+	                                  " If the canvas doesn't already exist in the scene, it will be " +
+	                                  "instantiated for you.")]
+	public GuiCanvasType canvasType;
 
 	public UnityEvent onPanelStart;
 	public UnityEvent onPanelComplete;
@@ -22,6 +29,27 @@ public class InteractivePanel : MonoBehaviour
 	void Awake()
 	{
 		_player = ReInput.players.GetPlayer(0);
+	}
+
+	/// <summary>
+	/// Use this rather than instantiate for UI panels. This function determines
+	/// if a UI canvas is needed for this prefab, and instantiates it if needed.
+	/// </summary>
+	public InteractivePanel CreateInstance()
+	{
+		GameObject newInstance = Instantiate(gameObject, ParentCanvas());
+		return newInstance.GetComponent<InteractivePanel>();
+	}
+
+	Transform ParentCanvas()
+	{
+		if (!requireCanvas) return null;
+		if (!canvasType)
+		{
+			Debug.LogError(gameObject.name + " requires a canvas to be instantiated, but no canvas type is defined!");
+			return null;
+		}
+		return canvasType.GetInstance().transform;
 	}
 
 	public virtual void ShowPanel()
@@ -47,7 +75,7 @@ public class InteractivePanel : MonoBehaviour
 	/// the base.ExitPanel() should most likely be after all the inheriting code, because
 	/// this function may destroy the object.
 	/// </summary>
-	protected virtual void ExitPanel()
+	public virtual void ExitPanel()
 	{
 		active = false;		
 		onPanelComplete.Invoke();

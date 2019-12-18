@@ -1,5 +1,4 @@
 ﻿using Arachnid;
-using Rewired;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -70,7 +69,7 @@ public class DialogPanel : InteractivePanel
 		ExitPanel();
 	}
 
-	protected override void ExitPanel()
+	public override void ExitPanel()
 	{
 		if (_dialog.progressCurrentSequenceWhenComplete)
 			EventSequence.AdvanceSequence();
