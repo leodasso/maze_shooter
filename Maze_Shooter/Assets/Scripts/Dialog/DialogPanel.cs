@@ -5,30 +5,15 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 
-public class DialogPanel : MonoBehaviour
+public class DialogPanel : InteractivePanel
 {
 	public TalkyText textOutput;
 	[Tooltip("Background image (optional) Will be tinted the color of the dialog.")]
 	public Image background;
 	[Tooltip("Background sprite (optional) Will be tinted the color of the dialog.")]
 	public SpriteRenderer spriteBackground;
-	public bool destroyWhenComplete = true;
-	[Tooltip("Is this dialog panel currently showing dialog?")]
-	public bool active;
-
-	public UnityEvent onDialogStart;
-	public UnityEvent onDialogComplete;
-	[Tooltip("Optional - will set 'visible' bool in animator when shown or hidden")]
-	public Animator animator;
-
 	Dialog _dialog;
 	int _index = 0;
-	Rewired.Player _player;
-
-	void Awake()
-	{
-		_player = ReInput.players.GetPlayer(0);
-	}
 
 	void Start()
 	{
@@ -38,9 +23,8 @@ public class DialogPanel : MonoBehaviour
 	[Button]
 	public void ShowDialog(Dialog dialog)
 	{
-		active = true;
 		textOutput.FullClear();
-		onDialogStart.Invoke();
+		ShowPanel();
 		_dialog = dialog;
 		if (dialog.setColors)
 		{
@@ -49,7 +33,6 @@ public class DialogPanel : MonoBehaviour
 		}
 		textOutput.charactersPerSecond = _dialog.charactersPerSecond;
 		_index = 0;
-		animator?.SetBool("visible", true);
 		ShowText(_index);
 	}
 
@@ -61,10 +44,10 @@ public class DialogPanel : MonoBehaviour
 			spriteBackground.color = color;
 	}
 
-	void Update()
+	protected override void OkayButtonPressed()
 	{
-		if (_player.GetButtonDown("alpha") && active)
-			ProgressText();
+		base.OkayButtonPressed();
+		ProgressText();
 	}
 
 	void ProgressText()
@@ -84,19 +67,14 @@ public class DialogPanel : MonoBehaviour
 			return;
 		}
 
-		Exit();
+		ExitPanel();
 	}
 
-	void Exit()
+	protected override void ExitPanel()
 	{
-		active = false;
 		if (_dialog.progressCurrentSequenceWhenComplete)
 			EventSequence.AdvanceSequence();
-		
-		onDialogComplete.Invoke();
-		animator?.SetBool("visible", false);
-		if (destroyWhenComplete)
-			Destroy(gameObject);
+		base.ExitPanel();
 	}
 
 	void ShowText(int index)
