@@ -1,13 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
+﻿using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 public class Constellation : MonoBehaviour
 {
     public ConstellationData myConstellation;
     public GameObject galaxyPrefab;
+    [Tooltip("If the star has already been collected in the past, this is what will show")]
+    public GameObject collectedVisuals;
+    [Tooltip("If the star is new, this is what will show")]
+    public GameObject notCollectedVisuals;
     public InteractivePanel titleGuiPrefab;
     public Transform galaxySpawnPoint;
 
@@ -20,7 +23,31 @@ public class Constellation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        IndicateIfCollected(myConstellation.HasBeenCollected());
+    }
+
+    /// <summary>
+    /// This affects the visuals only - sets the star to indicate that it has already been collected
+    /// </summary>
+    [ButtonGroup()]
+    void ShowAsCollected()
+    {
+        IndicateIfCollected(true);
+    }
+
+    /// <summary>
+    /// This affects the visuals only - sets the star to indicated that it's new!
+    /// </summary>
+    [ButtonGroup()]
+    void ShowAsNew()
+    {
+        IndicateIfCollected(false);
+    }
+
+    void IndicateIfCollected(bool hasBeenCollected)
+    {
+        collectedVisuals.SetActive(hasBeenCollected);
+        notCollectedVisuals.SetActive(!hasBeenCollected);
     }
 
     public void OnTouched()

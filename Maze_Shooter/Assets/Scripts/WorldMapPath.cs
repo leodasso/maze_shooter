@@ -92,12 +92,7 @@ public class WorldMapPath : MonoBehaviour
     /// </summary>
     void SaveAnimationShown()
     {
-        string saveDir;
-        if (GameMaster.Get().TryGetSaveFileDirectory(out saveDir))
-            ES3.Save<bool>(saveKeyPrefix + uniqueSaveKey, true, saveDir);
-        
-        else 
-            Debug.LogWarning("Error saving " + name, gameObject);
+        GameMaster.SaveToCurrentFile(saveKeyPrefix + uniqueSaveKey, true, this);
     }
 
     /// <summary>
@@ -105,13 +100,6 @@ public class WorldMapPath : MonoBehaviour
     /// </summary>
     bool PathOpenShown()
     {
-        string saveDir;
-        if (GameMaster.Get().TryGetSaveFileDirectory(out saveDir))
-        {
-            return ES3.Load<bool>(saveKeyPrefix + uniqueSaveKey, saveDir, false);
-        }
-            
-        Debug.LogError("Unable to find save file directory. " + name, gameObject);
-        return false;
+        return GameMaster.LoadFromCurrentFile(saveKeyPrefix + uniqueSaveKey, false, this);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Arachnid;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -93,6 +94,39 @@ public class GameMaster : ScriptableObject
         }
         
         ES3.DeleteFile(saveFilesDirectory + avatar.name + ".es3");
+    }
+
+    /// <summary>
+    /// Saves the given value to the player's current save file.
+    /// </summary>
+    /// <param name="saveKey">The key to store the value under.</param>
+    /// <param name="value">The value to save.</param>
+    /// <param name="requester">The object that is requesting for a value to be saved.</param>
+    public static void SaveToCurrentFile<T>(string saveKey, T value, Object requester)
+    {
+        string saveDir;
+        if (Get().TryGetSaveFileDirectory(out saveDir))
+            ES3.Save<T>(saveKey, value, saveDir);
+        
+        else 
+            Debug.LogError("Error saving " + saveKey + " value from " + requester.name, requester);
+    }
+
+    /// <summary>
+    /// Loads the value for the given key from the player's current save file.
+    /// </summary>
+    /// <param name="saveKey">The key to load the value from</param>
+    /// <param name="defaultValue">The default value. If no value has been saved to this key yet,
+    /// this will be returned.</param>
+    /// <param name="requester">The object requesting for the value.</param>
+    /// <exception cref="FileLoadException">If no save file can be found, an exception is thrown</exception>
+    public static T LoadFromCurrentFile<T>(string saveKey, T defaultValue, Object requester)
+    {
+        string saveDir;
+        if (Get().TryGetSaveFileDirectory(out saveDir))
+            return ES3.Load<T>(saveKey, saveDir, defaultValue);
+            
+        throw new FileLoadException();
     }
 
     /// <summary>
