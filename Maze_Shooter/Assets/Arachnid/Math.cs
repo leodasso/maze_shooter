@@ -58,6 +58,15 @@ namespace Arachnid
 			
 		}
 
+		/// <summary>
+		/// Returns a random element of the given list.
+		/// </summary>
+		public static T RandomElementOfList<T>(List<T> list)
+		{
+			int selectedIndex = Random.Range(0, list.Count);
+			return list[selectedIndex];
+		}
+
 		public static bool LayerMaskContainsLayer(LayerMask layerMask, int layer)
 		{
 			return layerMask == (layerMask | (1 << layer));

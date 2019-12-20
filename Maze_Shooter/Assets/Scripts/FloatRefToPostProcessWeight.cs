@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using Arachnid;
+using Sirenix.OdinInspector;
 
 /// <summary>
 /// Applies the value of a float reference to a post-process volume's weight.
@@ -8,8 +9,13 @@ using Arachnid;
 [RequireComponent(typeof(PostProcessVolume))]
 public class FloatRefToPostProcessWeight : MonoBehaviour
 {
-    bool applyOnUpdate = true;
+    public bool applyOnUpdate = true;
+    public bool useCurve;
     public FloatReference weightValue;
+    
+    [Tooltip("X axis is the weight value, and Y axis is the output to post processing weight")]
+    [ShowIf("useCurve")]
+    public AnimationCurve outputCurve;
     public float lerpSpeed = 50;
 
     float _weight = 0;
@@ -32,8 +38,10 @@ public class FloatRefToPostProcessWeight : MonoBehaviour
     void Apply()
     {
         _weight = Mathf.Lerp(_weight, weightValue.Value, Time.unscaledDeltaTime * lerpSpeed);
-        if (_weight < .025f) _weight = 0;
-
-        _volume.weight = _weight;
+        _volume.weight = useCurve ? outputCurve.Evaluate(_weight) : _weight;
+        
+        // Prevent weird buggy stuff with post processing 
+        if (_volume.weight < .001f)
+            _volume.weight = 0;
     }
 }
