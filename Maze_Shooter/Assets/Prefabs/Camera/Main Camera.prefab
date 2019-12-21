@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1239083452385834}
   m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
-  m_LocalPosition: {x: 1.91, y: 44.09048, z: -65.41282}
+  m_LocalPosition: {x: 1.91, y: 26.6767, z: -40.543365}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1737812943130379500}
@@ -60,7 +60,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 30
+  field of view: 20
   orthographic: 1
   orthographic size: 5
   m_Depth: -1
@@ -449,6 +449,16 @@ PrefabInstance:
     - target: {fileID: 1721376550755909379, guid: 213b993368631434ca17c3295069e842,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219240230075903987, guid: 213b993368631434ca17c3295069e842,
+        type: 3}
+      propertyPath: lerpSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219240230075903987, guid: 213b993368631434ca17c3295069e842,
+        type: 3}
+      propertyPath: active
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

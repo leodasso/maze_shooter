@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 using Arachnid;
 using Sirenix.OdinInspector;
@@ -11,25 +13,45 @@ public class HellSpawner : MonoBehaviour
 {
     public List<GameObject> evilEyesPrefabs = new List<GameObject>();
     public Collection collectionToFollow;
-    [Space]
+    
+    [Tooltip("Ref to the float value which holds the darkness value.")]
+    public FloatValue darknessLevel;
+    
     [Tooltip("Radius around the player that evil eyes can be spawned.")]
     public float spawnRadius = 10;
-    [Tooltip("The min scale of a spawned evil eye.")]
-    public float minSpawnScale = .7f;
-    [Tooltip("The max scale of a spawned evil eye.")]
-    public float maxSpawnScale = 1.2f;
-    [Space]
-    public float maxSpawnFrequency;
-    public float minSpawnFrequency;
-    public FloatReference spawnFrequencyIncreaseSpeed;
-    [ShowInInspector, ReadOnly]
-    float _spawnFrequency;
-    public FloatValue darknessLevel;
+    
+    [Tooltip("How long to wait from when the player leaves the light to spawning the first evil eyes")]
+    public float spawnDelay = 1;
 
-    float _spawnDelay = 1;
+    [Tooltip("When the player re-enters the light, the evil eye instances are destroyed one at a time. " +
+             "This is how long in seconds it takes to destroy all of them.")]
+    public float destroyTime = .5f;
+    
+    [Tooltip("The min scale of a spawned evil eye.")]
+    [BoxGroup("scale", GroupName = "Spawn Scale")]
+    [HorizontalGroup("scale/minMax"), LabelText("Min"), LabelWidth(60)]
+    public float minSpawnScale = .7f;
+    
+    [Tooltip("The max scale of a spawned evil eye.")]
+    [HorizontalGroup("scale/minMax"), LabelText("Max"), LabelWidth(60)]
+    public float maxSpawnScale = 1.2f;
+    
+    [BoxGroup("freq", GroupName = "Spawn Frequency"), LabelText("Increase Speed")]
+    public FloatReference spawnFrequencyIncreaseSpeed;
+    
+    [HorizontalGroup("freq/minMax"), LabelText("Min"), LabelWidth(60)]
+    public float minSpawnFrequency;
+    
+    [HorizontalGroup("freq/minMax"), LabelText("Max"), LabelWidth(60)]
+    public float maxSpawnFrequency;
+    
+    [ShowInInspector, ReadOnly, BoxGroup("freq")]
+    float _spawnFrequency;
     
     // Evil eye instances that have been spawned in
     List<GameObject> _instances = new List<GameObject>();
+
+    GameObject _hellSpawnParent;
 
     void OnDrawGizmosSelected()
     {
@@ -45,8 +67,8 @@ public class HellSpawner : MonoBehaviour
 
         if (InDarkness())
         {
-            _spawnDelay -= Time.deltaTime;
-            if (_spawnDelay <= 0)
+            spawnDelay -= Time.deltaTime;
+            if (spawnDelay <= 0)
                 Spawn();
         }
 
@@ -54,14 +76,36 @@ public class HellSpawner : MonoBehaviour
         // reset the spawn delay so the eye's don't immediately start appearing when they enter darkness.
         if (InFullLight())
         {
-            _spawnDelay = 1;
-            if (_instances.Count > 0)
-            {
-                foreach (var instance in _instances)
-                {
-                    Destroy(instance);
-                }
-            }
+            spawnDelay = 1;
+            DestroyDemons();
+        }
+    }
+
+    /// <summary>
+    /// Sequentially destroys all the demons that have been spawned while in the dark.
+    /// </summary>
+    void DestroyDemons()
+    {
+        if (_instances.Count <= 0) return;
+        StartCoroutine(DestroyDemonsSequence());
+    }
+
+    IEnumerator DestroyDemonsSequence()
+    {
+        // Order the spawned demons by their distance to the spawner.
+        // That way we can destroy the ones closer to the spawner(and therefore the light)
+        // first, and it will look cool.
+        List<GameObject> instancesToDestroy = 
+            _instances.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).ToList();
+        _instances.Clear();
+
+        int count = instancesToDestroy.Count;
+        float waitTime = destroyTime / count;
+        
+        foreach (var demon in instancesToDestroy)
+        {
+            Destroy(demon);
+            yield return new WaitForSeconds(waitTime);
         }
     }
 
@@ -70,15 +114,19 @@ public class HellSpawner : MonoBehaviour
         // Failsafe so we never spawn evil eyes in the light
         if (!InDarkness()) return;
 
+        if (!_hellSpawnParent)
+            _hellSpawnParent = new GameObject("Hell Spawns");
+
         // Pick the prefab and a random location, then spawn an instance
         var toSpawn = Math.RandomElementOfList(evilEyesPrefabs);
         Vector3 pos = Random.onUnitSphere * spawnRadius;
         var newInstance = Instantiate(toSpawn, pos + transform.position, quaternion.identity);
+        newInstance.transform.parent = _hellSpawnParent.transform;
         newInstance.transform.localScale *= Random.Range(minSpawnScale, maxSpawnScale);
         _instances.Add(newInstance);
         
         // Setup for the next spawn
-        _spawnDelay = 1 / _spawnFrequency;
+        spawnDelay = 1 / _spawnFrequency;
     }
 
     void FollowPlayer()
