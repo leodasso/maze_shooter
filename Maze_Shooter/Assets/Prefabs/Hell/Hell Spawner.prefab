@@ -43,6 +43,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e3abd70badeba45bc55968613d9442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onEnterDarkness:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 0d5b188ef9ecf42448dc12af4ee91216, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onEnterLight:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: d2c7847a9b2adf143907bcefedb057ee, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onGameOver:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   evilEyesPrefabs:
   - {fileID: 7638218383370006366, guid: e4074c5f5e85a674a964ab1f25bdcdbe, type: 3}
   - {fileID: 6155762964191326801, guid: 0c3f01e88b83ba54f8950c11243331ed, type: 3}
@@ -52,16 +89,22 @@ MonoBehaviour:
   - {fileID: 1438711829364603170, guid: a1091afeac9984642b3e16d84dee9837, type: 3}
   - {fileID: 1438711829364603170, guid: a1091afeac9984642b3e16d84dee9837, type: 3}
   - {fileID: 1438711829364603170, guid: a1091afeac9984642b3e16d84dee9837, type: 3}
+  bigEvilEyesPrefab: {fileID: 389346113364943590, guid: 9c8e61057751fd841b68f119db742394,
+    type: 3}
   collectionToFollow: {fileID: 11400000, guid: 35831a8bfbcf71f4fb702f50d0ec7816, type: 2}
   darknessLevel: {fileID: 11400000, guid: a92e24161040e0041bb8f1b885be5fbb, type: 2}
-  spawnRadius: 7
-  spawnDelay: 0.6
+  timeToDeath:
+    useConstant: 1
+    constantValue: 0
+    valueObject: {fileID: 11400000, guid: 6c39408b2eae1ef4cb1f7889faf84ccc, type: 2}
+  spawnRadius: 8
+  spawnDelay: 0.4
   destroyTime: 0.5
   minSpawnScale: 0.4
   maxSpawnScale: 1
   spawnFrequencyIncreaseSpeed:
     useConstant: 0
-    constantValue: 0.35
+    constantValue: 0.5
     valueObject: {fileID: 0}
-  minSpawnFrequency: 0.1
-  maxSpawnFrequency: 3
+  minSpawnFrequency: 0.2
+  maxSpawnFrequency: 4

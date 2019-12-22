@@ -32,6 +32,8 @@ public class CameraShaker : MonoBehaviour
 	[Button]
 	public void Shake(float intensity)
 	{
+		if (!enabled) return;
+		if (!_noise) return;
 		_noise.m_AmplitudeGain = Mathf.Max(_noise.m_AmplitudeGain, intensity);
 		_noise.m_FrequencyGain = Mathf.Max(_noise.m_FrequencyGain, intensity * frequencyMultiplier);
 	}

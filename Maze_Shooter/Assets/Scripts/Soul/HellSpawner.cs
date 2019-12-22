@@ -5,17 +5,30 @@ using UnityEngine;
 using Arachnid;
 using Sirenix.OdinInspector;
 using Unity.Mathematics;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 [TypeInfoBox("When the player is in darkness, this object follows and spawns evil eyes " +
              "to give feedback that something bad is going to happen soon.")]
 public class HellSpawner : MonoBehaviour
 {
+    public UnityEvent onEnterDarkness;
+    public UnityEvent onEnterLight;
+    public UnityEvent onGameOver;
+    
+    [Space]
     public List<GameObject> evilEyesPrefabs = new List<GameObject>();
+
+    [Tooltip("The main evil eyes that spawns right before the player dies"), AssetsOnly]
+    public GameObject bigEvilEyesPrefab;
+    
     public Collection collectionToFollow;
     
     [Tooltip("Ref to the float value which holds the darkness value.")]
     public FloatValue darknessLevel;
+
+    [Tooltip("How long can the player be in the darkness before they die?")]
+    public FloatReference timeToDeath;
     
     [Tooltip("Radius around the player that evil eyes can be spawned.")]
     public float spawnRadius = 10;
@@ -52,6 +65,9 @@ public class HellSpawner : MonoBehaviour
     List<GameObject> _instances = new List<GameObject>();
 
     GameObject _hellSpawnParent;
+    bool _inDarkness;
+    float _timeInDarkness;
+    bool _gameOver;
 
     void OnDrawGizmosSelected()
     {
@@ -62,11 +78,28 @@ public class HellSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_gameOver) return;
         CalculateSpawnFrequency();
         FollowPlayer();
 
         if (InDarkness())
         {
+            // If the player spends too much time in the darkness, it's game over man, game over
+            _timeInDarkness += Time.deltaTime;
+            if (_timeInDarkness >= timeToDeath.Value)
+            {
+                _gameOver = true;
+                SpawnGameOverObject();
+                onGameOver.Invoke();
+            }
+            
+            // Call the event for entering darkness
+            if (!_inDarkness)
+            {
+                _inDarkness = true;
+                onEnterDarkness.Invoke();
+            }
+            
             spawnDelay -= Time.deltaTime;
             if (spawnDelay <= 0)
                 Spawn();
@@ -76,6 +109,15 @@ public class HellSpawner : MonoBehaviour
         // reset the spawn delay so the eye's don't immediately start appearing when they enter darkness.
         if (InFullLight())
         {
+            _timeInDarkness = 0;
+            
+            // Call the event for entering light
+            if (_inDarkness)
+            {
+                _inDarkness = false;
+                onEnterLight.Invoke();
+            }
+            
             spawnDelay = 1;
             DestroyDemons();
         }
@@ -114,19 +156,22 @@ public class HellSpawner : MonoBehaviour
         // Failsafe so we never spawn evil eyes in the light
         if (!InDarkness()) return;
 
-        if (!_hellSpawnParent)
-            _hellSpawnParent = new GameObject("Hell Spawns");
-
         // Pick the prefab and a random location, then spawn an instance
         var toSpawn = Math.RandomElementOfList(evilEyesPrefabs);
         Vector3 pos = Random.onUnitSphere * spawnRadius;
         var newInstance = Instantiate(toSpawn, pos + transform.position, quaternion.identity);
-        newInstance.transform.parent = _hellSpawnParent.transform;
+        newInstance.transform.parent = HellSpawnParent().transform;
         newInstance.transform.localScale *= Random.Range(minSpawnScale, maxSpawnScale);
         _instances.Add(newInstance);
         
         // Setup for the next spawn
         spawnDelay = 1 / _spawnFrequency;
+    }
+
+    void SpawnGameOverObject()
+    {
+        var newInstance = Instantiate(bigEvilEyesPrefab, transform.position, quaternion.identity);
+        newInstance.transform.parent = HellSpawnParent().transform;
     }
 
     void FollowPlayer()
@@ -158,5 +203,12 @@ public class HellSpawner : MonoBehaviour
     {
         if (!darknessLevel) return false;
         return darknessLevel.Value <= .8f;
+    }
+
+    GameObject HellSpawnParent()
+    {
+        if (!_hellSpawnParent)
+            _hellSpawnParent = new GameObject("Hell Spawns");
+        return _hellSpawnParent;
     }
 }
