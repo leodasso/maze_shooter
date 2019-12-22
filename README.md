@@ -1,21 +1,12 @@
-# maze_shooter
-a 2D modular maze shooter Unity Project
+# Shooty Ghost
+A twin stick shooter about a ghost in purgatory finding their way in the afterlife.
 
-This is a Unity project! To try it out, download Unity version 2018.2.2 or higher.
+The mechanics build off of the usual twin stick shooter, but with some unique changes:
+##Shooting
+Rather than shooting an endless stream of bullets, your ammo in this game is tiny demons that you find. Emphasis is placed on well-planned shots, and catching the demon after it rebounds off the target.
+##Haunting
+Other creatures and some props can be haunted! Take control of them and see what surprising ways the twin stick inputs apply to them.
+##Constellations
+Collect stars around purgatory to build constellations! This is your main method of progression, as collecting these stars will open up new areas of the world.
 
-The game is a series of fast paced, simple shooter stages with unique goals, such as:
-  "Kill the boss!"
-  "Find the exit!"
-  "Feed the space-cows!"
-  "Eat all the pellets!"
-  
-The design goal is to stretch the envelope of what a twin-stick shooter is to the very absolute brink.
-The goal of each stage must be simple enough to fit in a sentence at the intro of the stage. 
-There is a 'Super Mario World' style world map.
-
-Story:
-Play as a hero who has dedicated life to defeating the dark overlord. This happens in world 1. The rest of the game is various ways the hero struggles to come to terms with a peaceful world.
-
-Challenges:
-Each stage will have a number of additional challenges to complete and earn POWER MOONS! (just kidding they won't literally be moons but it's the same principal.
-The power moons could be found hidden in the stage, or from achieveing excellence like "Accuracy > 90%" or "No Damage"
+This is a Unity project! To try it out, download Unity version 2019.1 or higher, and open the project.
