@@ -56,9 +56,10 @@ public class Constellation : MonoBehaviour
         if (_touched) return;
         _touched = true;
 
+        // Remember if it had been collected before saving the new value
         bool beenCollected = myConstellation.HasBeenCollected();
         
-        myConstellation.SaveAsCollected();
+        myConstellation.Save(true);
         
         // Different behaviors depending on if it's already been collected.
         // Constellations that have been collected before can still appear in the scene, but we don't want to do

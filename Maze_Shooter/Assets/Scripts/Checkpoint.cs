@@ -29,15 +29,17 @@ public class Checkpoint : MonoBehaviour
 
     bool IsActiveCheckpoint()
     {
-        if (GameMaster.Get().currentStage == null) return false;
-        return GameMaster.Get().currentStage.CheckpointIsActive(uniqueId);
+        // TODO
+        return false;
+        //if (GameMaster.Get().currentStage == null) return false;
+        //return GameMaster.Get().currentStage.CheckpointIsActive(uniqueId);
     }
 
     [Button]
     public void SetAsActiveCheckpoint()
     {
-        if (GameMaster.Get().currentStage == null) return;
-        GameMaster.Get().currentStage.SetActiveCheckpoint(uniqueId);
+        //if (GameMaster.Get().currentStage == null) return;
+        //GameMaster.Get().currentStage.SetActiveCheckpoint(uniqueId);
     }
 
     /// <summary>

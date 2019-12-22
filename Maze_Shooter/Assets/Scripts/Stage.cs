@@ -11,35 +11,27 @@ public class Stage : ScriptableObject
     public string displayName;
     public Color stageColor = Color.white;
     public string sceneName;
-    public bool useDefaultPlayerShip = true;
+    // bool useDefaultPlayerShip = true;
     
-    [HideIf("useDefaultPlayerShip")]
-    public GameObject customShip;
+    //[HideIf("useDefaultPlayerShip")]
+    //public GameObject customShip;
     
     [Tooltip("Events that will take place immediately when stage is loaded")]
     public List<GameEvent> immediateEvents;
 
-    [Tooltip("If this stage was just completed, this event will be called as soon as the world map is loaded.")]
-    public GameEvent onComplete_worldMap;
+    //[Tooltip("If this stage was just completed, this event will be called as soon as the world map is loaded.")]
+    //public GameEvent onComplete_worldMap;
     const string _key_complete = "_complete";
     const string _key_checkpoint = "_checkpoint";
 
-    public GameObject PlayerShip
-    {
-        get
-        {
-            if (!useDefaultPlayerShip && customShip != null) 
-                return customShip;
-
-            return GameMaster.Get().defaultPlayerShip;
-        }
-    }
+    public GameObject PlayerShip => GameMaster.Get().defaultPlayerShip;
 
     public void Load(float delay)
     {
         GameMaster.Get().LoadScene(sceneName, delay);
     }
 
+    /*
     public bool IsComplete()
     {
         string saveDir;
@@ -65,6 +57,7 @@ public class Stage : ScriptableObject
             Debug.LogError("Unable to save stage complete:true", this);
         }
     }
+
 
     /// <summary>
     /// Returns if the checkpoint with the given ID is the active one for this stage.
@@ -97,4 +90,5 @@ public class Stage : ScriptableObject
         
         Debug.LogError("Unable to save stage checkpoint status for checkpoint " + checkpointId, this);
     }
+    */
 }

@@ -17,8 +17,7 @@ public class GameMaster : ScriptableObject
     public SaveDataAvatar currentAvatar;
 
     public static string saveFilesDirectory = "saveFiles/";
-    public static int cashThisSession;
-    
+
     /// <summary>
     /// True when transitioning between scenes/stages
     /// </summary>
@@ -48,6 +47,17 @@ public class GameMaster : ScriptableObject
         SceneManager.LoadScene(sceneName);
     }
 
+
+
+    /*
+    public void GotoWorldMap(float delay)
+    {
+        LoadScene("WorldMap_B", delay);
+    }
+    */
+
+    #region Load-Save
+    
     public void VerifyMainSaveFile()
     {
         if (ES3.FileExists("main.es3"))
@@ -71,17 +81,12 @@ public class GameMaster : ScriptableObject
         }
         else Debug.Log("No save files exist.");
     }
-
-    public void GotoWorldMap(float delay)
-    {
-        LoadScene("WorldMap_B", delay);
-    }
-
+    
     public static bool AvatarIsUsedBySaveFile(SaveDataAvatar avatar)
     {
         return ES3.FileExists(saveFilesDirectory + avatar.name + ".es3");
     }
-
+    
     public static void DeleteSaveData(SaveDataAvatar avatar)
     {
         if (!avatar) return;
@@ -95,7 +100,8 @@ public class GameMaster : ScriptableObject
         
         ES3.DeleteFile(saveFilesDirectory + avatar.name + ".es3");
     }
-
+    
+    
     /// <summary>
     /// Saves the given value to the player's current save file.
     /// </summary>
@@ -111,6 +117,7 @@ public class GameMaster : ScriptableObject
         else 
             Debug.LogError("Error saving " + saveKey + " value from " + requester.name, requester);
     }
+    
 
     /// <summary>
     /// Loads the value for the given key from the player's current save file.
@@ -119,7 +126,6 @@ public class GameMaster : ScriptableObject
     /// <param name="defaultValue">The default value. If no value has been saved to this key yet,
     /// this will be returned.</param>
     /// <param name="requester">The object requesting for the value.</param>
-    /// <exception cref="FileLoadException">If no save file can be found, an exception is thrown</exception>
     public static T LoadFromCurrentFile<T>(string saveKey, T defaultValue, Object requester)
     {
         string saveDir;
@@ -141,4 +147,5 @@ public class GameMaster : ScriptableObject
         file = saveFilesDirectory + currentAvatar.name + ".es3";
         return true;
     }
+    #endregion
 }

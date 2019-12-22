@@ -32,12 +32,14 @@ public class WorldMapPath : MonoBehaviour
    
     bool PathIsOpen()
     {
+        /*
         foreach (var stage in prerequisites)
         {
-            bool isComplete = stage.IsComplete();
-            Debug.Log("Stage " + stage + " is seen as complete: " + isComplete, gameObject);
+            //bool isComplete = stage.IsComplete();
+            //Debug.Log("Stage " + stage + " is seen as complete: " + isComplete, gameObject);
             if (!isComplete) return false;
         }
+        */
         return true;
     }
 
