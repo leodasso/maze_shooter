@@ -12,8 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2703b727fc435244b5e70aa6b3ce205, type: 3}
   m_Name: game master
   m_EditorClassIdentifier: 
-  defaultPlayerShip: {fileID: 2558774405243798637, guid: 60c6eb8378bd7d148b1581b5d940ea71,
+  defaultPlayerShip: {fileID: 3594317241385997719, guid: 0b7bc270b67169f42a1babf7f6748058,
     type: 3}
-  currentStage: {fileID: 0}
+  currentStage: {fileID: 11400000, guid: c092e2d8fcd1689468925a117e8c2197, type: 2}
   justCompletedStage: {fileID: 0}
   currentAvatar: {fileID: 11400000, guid: 1d447c7288706094390871ecd1fb0d52, type: 2}
+  savedStage: {fileID: 11400000, guid: 361a58afbc8e3cc40892a453c2425f85, type: 2}
+  savedCheckpoint: {fileID: 11400000, guid: 5739792f1e5bf4d459c62c2a71f32a55, type: 2}
+  allStages:
+  - {fileID: 11400000, guid: c092e2d8fcd1689468925a117e8c2197, type: 2}
+  onBeginLoadSavedGame:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: b59d8939d548fc746b299040e5383a1b, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
