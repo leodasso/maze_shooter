@@ -5,6 +5,7 @@ using Arachnid;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
 
 [CreateAssetMenu]
 public class GameMaster : ScriptableObject
@@ -15,6 +16,13 @@ public class GameMaster : ScriptableObject
     public Stage justCompletedStage;
     static GameMaster _gameMaster;
     public SaveDataAvatar currentAvatar;
+
+    public SavedString savedStage;
+    public SavedString savedCheckpoint;
+    
+    public List<Stage> allStages = new List<Stage>();
+
+    public UnityEvent onBeginLoadSavedGame;
 
     public static string saveFilesDirectory = "saveFiles/";
 
@@ -30,9 +38,40 @@ public class GameMaster : ScriptableObject
         return _gameMaster;
     }
 
+    [Button, DisableInEditorMode]
+    public void BeginGame()
+    {
+        onBeginLoadSavedGame.Invoke();
+        // find the stage to load from list
+        Stage stageToLoad = GetStage(savedStage.GetValue());
+        // Load with a delay so there's time for the transition to fade in
+        stageToLoad.Load(1);
+    }
+
+    Stage GetStage(string stageName)
+    {
+        foreach (Stage stage in allStages)
+        {
+            if (stage.name == stageName) return stage;
+        }
+        
+        Debug.LogError("No stage found matching name " + stageName);
+        return null;
+    }
+
+    public static void SetCheckpoint(string checkpointName)
+    {
+        Get().savedStage.Save(Get().currentStage.name);
+        Get().savedCheckpoint.Save(checkpointName);
+    }
+
+    public static bool IsCurrentCheckpoint(string checkpointName)
+    {
+        return checkpointName == Get().savedCheckpoint.GetValue();
+    }
+
     public void LoadScene(string sceneName, float delay)
     {
-        
         CoroutineHelper.NewCoroutine(DelayLoadScene(sceneName, delay));
     }
 
@@ -46,15 +85,6 @@ public class GameMaster : ScriptableObject
         yield return new WaitForSecondsRealtime(delay);
         SceneManager.LoadScene(sceneName);
     }
-
-
-
-    /*
-    public void GotoWorldMap(float delay)
-    {
-        LoadScene("WorldMap_B", delay);
-    }
-    */
 
     #region Load-Save
     

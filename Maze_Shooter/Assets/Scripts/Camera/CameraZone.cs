@@ -22,7 +22,7 @@ public class CameraZone : MonoBehaviour
 	public int priorityDelta = 1;
 	
 	
-	void OnTriggerEnter2D(Collider2D other)
+	void OnTriggerEnter(Collider other)
 	{
 		CollectionElement element = other.GetComponent<CollectionElement>();
 		if (!element) return;
@@ -31,7 +31,7 @@ public class CameraZone : MonoBehaviour
 		EnterAction(other);
 	}
 
-	void OnTriggerExit2D(Collider2D other)
+	void OnTriggerExit(Collider other)
 	{
 		CollectionElement element = other.GetComponent<CollectionElement>();
 		if (!element) return;
@@ -41,13 +41,13 @@ public class CameraZone : MonoBehaviour
 	}
 
 
-	void EnterAction(Collider2D other)
+	void EnterAction(Collider other)
 	{
 		if (overwriteFollowTarget) vCam.Follow = other.transform;
 		if (adjustPriority) vCam.Priority += priorityDelta;
 	}
 
-	void ExitAction(Collider2D other)
+	void ExitAction(Collider other)
 	{
 		if (adjustPriority) vCam.Priority -= priorityDelta;
 	}
