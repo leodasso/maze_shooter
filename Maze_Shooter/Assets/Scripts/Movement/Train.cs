@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 /// <summary>
 /// Controls a train of objects moving behind this game object. Trailing objects
@@ -10,6 +11,14 @@ using UnityEngine;
 [ExecuteAlways]
 public class Train : MonoBehaviour
 {
+    [Tooltip("Should I control the scale of the elements of this train?")]
+    public bool scaleElements;
+    
+    [ShowIf("scaleElements")]
+    [Tooltip("Scale of the followers of the train. X axis is position in the train, 0 being front and 1 being back, " +
+             "and Y axis is the scale.")]
+    public AnimationCurve scaleCurve;
+    
     public List<TrainElement> trainElements = new List<TrainElement>();
     public float radius = 1;
     Vector3 memorizedFrontPosition;
@@ -29,6 +38,8 @@ public class Train : MonoBehaviour
     {
         if (EmptyTrain) return;
         
+        if (scaleElements) ScaleElementsUpdate();
+        
         // The first train element follows this object, while the rest 
         // just follow the next train element in line
         trainElements[0].Follow(transform, radius, 0);
@@ -36,10 +47,26 @@ public class Train : MonoBehaviour
         for (int i = 1; i < trainElements.Count; i++)
         {
             var nextTrainElement = trainElements[i - 1];
-            trainElements[i].Follow(nextTrainElement.transform, nextTrainElement.radius, i);
+            trainElements[i].Follow(nextTrainElement.transform, nextTrainElement.FinalRadius, i);
         }
         
         memorizedFrontPosition = trainElements[0].transform.position - transform.position;
+    }
+
+    /// <summary>
+    /// Has each element scale to fit the scale curve of the train.
+    /// </summary>
+    void ScaleElementsUpdate()
+    {
+        for (int i = 0; i < trainElements.Count; i++)
+        {
+            var element = trainElements[i];
+            if (!element) continue;
+            
+            // get the normalized position in the train
+            float normalizedPos = (float) i / trainElements.Count;
+            element.SetScale(scaleCurve.Evaluate(normalizedPos));
+        }
     }
 
     /// <summary>

@@ -16,12 +16,16 @@ public class TrainElement : MonoBehaviour
     UnityEvent _onExitTrain;
     
     [Tooltip("Determines how much space is left before and after this element.")]
+    [TabGroup("Main"), ShowInInspector, SerializeField]
+    float radius = 1;
+    
+    [Tooltip("Does the local scale of this object affect the follow radius? (uses x scale).")]
     [TabGroup("Main")]
-    public float radius = 1;
+    public bool scaleAffectsRadius = true;
 
     [TabGroup("Main")] 
     public float followSpeed = 15;
-
+    
     [Tooltip("Optional - if an Animator is added, this component will send inTrain and trainIndex info to the animator.")]
     [TabGroup("Main")]
     public Animator animator;
@@ -29,8 +33,23 @@ public class TrainElement : MonoBehaviour
     // The ray cast from the leader toward this
     Ray _leaderRay;
 
+    Vector3 _initScale;
+    float _scale;
+    bool _lerpScale = false;
+
+    public float FinalRadius => scaleAffectsRadius ? transform.localScale.x * radius : radius;
+
     void Start()
     {
+        _initScale = transform.localScale;
+    }
+
+    void Update()
+    {
+        if (_lerpScale)
+        {
+            transform.localScale = Vector3.Lerp(transform.localScale, _initScale * _scale, Time.deltaTime * 8);
+        }
     }
 
     /// <summary>
@@ -39,7 +58,8 @@ public class TrainElement : MonoBehaviour
     public void EnterTrain()
     {
         _onEnterTrain.Invoke();
-        animator?.SetBool("inTrain", true);
+        if (animator)
+            animator.SetBool("inTrain", true);
     }
 
     /// <summary>
@@ -48,23 +68,34 @@ public class TrainElement : MonoBehaviour
     public void ExitTrain()
     {
         _onExitTrain.Invoke();
-        animator?.SetBool("inTrain", false);
+        transform.localScale = _initScale;
+        _lerpScale = false;
+        if (animator)
+           animator.SetBool("inTrain", false);
     }
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.color = new Color(1, 1, 0, .3f);
+        Gizmos.DrawWireSphere(transform.position, FinalRadius);
+    }
+
+    public void SetScale(float scale)
+    {
+        _lerpScale = true;
+        _scale = scale;
     }
 
     public void Follow(Transform leader, float leaderRadius, int index)
     {
         if (!enabled) return;
         _leaderRay = new Ray(leader.position, transform.position - leader.position);
-        float followDist = radius + leaderRadius;
+        float followDist = FinalRadius + leaderRadius;
         transform.position = Vector3.Lerp(transform.position, _leaderRay.GetPoint(followDist), Time.deltaTime * followSpeed);
         
-        if (Application.isPlaying)
-            animator?.SetInteger("trainIndex", index);
+        if (Application.isPlaying && animator)
+            animator.SetInteger("trainIndex", index);
     }
+    
+    
 }

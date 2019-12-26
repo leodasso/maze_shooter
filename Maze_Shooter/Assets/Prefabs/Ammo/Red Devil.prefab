@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4761205435765647063}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.23482898, y: 0.23482898, z: 0.23482898}
+  m_LocalPosition: {x: 0, y: 0.122, z: 0}
+  m_LocalScale: {x: 0.32793868, y: 0.32793868, z: 0.32793868}
   m_Children: []
   m_Father: {fileID: 4756572357687856458}
   m_RootOrder: 0
@@ -69,7 +69,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -242
-  m_Sprite: {fileID: 21300000, guid: 0e015ecd147972c41b1faf4690c53167, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 49dbff62aa0040e4a894272bc56d92de, type: 3}
   m_Color: {r: 0.9056604, g: 0.21787111, b: 0.21787111, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -200,6 +200,8 @@ GameObject:
   - component: {fileID: 8709141563604272668}
   - component: {fileID: 2972432064229778603}
   - component: {fileID: 5114826848663277341}
+  - component: {fileID: 9008572659450247471}
+  - component: {fileID: 4718483383281776832}
   m_Layer: 10
   m_Name: Red Devil
   m_TagString: Untagged
@@ -214,7 +216,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4762546893851248404}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.11269188, y: -2.83, z: 2.4357247}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -222,7 +224,7 @@ Transform:
   - {fileID: 8668784228061756773}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.00001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6939101588531117716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,7 +272,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.22
+  m_Radius: 0.34
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3517594103167405972
 MonoBehaviour:
@@ -328,8 +330,9 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   radius: 0.4
+  scaleAffectsRadius: 1
   followSpeed: 25
-  animator: {fileID: 5114826848663277341}
+  animator: {fileID: 0}
 --- !u!114 &8709141563604272668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,6 +482,39 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &9008572659450247471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4762546893851248404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614cbf546f33c0e48911e6d3334ede19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5114826848663277341}
+  setSpeed: 1
+  velocitySource: 1
+  rigidbody: {fileID: 0}
+  pseudoVelocity: {fileID: 4718483383281776832}
+  setMoveAngle: 0
+  movementAngleOffset: 45
+--- !u!114 &4718483383281776832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4762546893851248404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c59d099fb221046bc028cc4ac24536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocitySamples: 5
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &4060178335246782888
 PrefabInstance:
   m_ObjectHideFlags: 0

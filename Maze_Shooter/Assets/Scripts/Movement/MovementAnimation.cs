@@ -1,26 +1,64 @@
 ﻿using UnityEngine;
 using Arachnid;
+using Sirenix.OdinInspector;
 
+[TypeInfoBox("Give the animator info based on the player input and rigidbody velocity. To set up, add float parameters 'speed' " +
+             "and 'facingAngle' to the Animator you want to control.")]
 public class MovementAnimation : MonoBehaviour, IControllable
 {
+    public enum VelocitySource
+    {
+        Rigidbody,
+        PseudoVelocity,
+    }
+    
     [Tooltip("Animator to send speed and movement angle to")]
     public Animator animator;
-    [Tooltip("This doesn't affect movement! Just offsets the movement angle that gets sent to the animator.")]
-    public float movementAngleOffset = 45;
-    Rigidbody _rigidbody;
+
+    [ToggleGroup("setSpeed")]
+    public bool setSpeed;
     
-    // Start is called before the first frame update
-    void Start()
+    [ToggleGroup("setSpeed")]
+    [Tooltip("Choose the source to get the velocity of this object. This is used to set the 'speed' parameter of the animator.")]
+    public VelocitySource velocitySource;
+    
+    [ToggleGroup("setSpeed"), ShowIf("UsesRigidbody")]
+    public new Rigidbody rigidbody;
+    
+    [ToggleGroup("setSpeed"), HideIf("UsesRigidbody")]
+    public PseudoVelocity pseudoVelocity;
+
+    [ToggleGroup("setMoveAngle")] 
+    public bool setMoveAngle;
+    
+    [Tooltip("This doesn't affect movement! Just offsets the movement angle that gets sent to the animator.")]
+    [ToggleGroup("setMoveAngle")] 
+    public float movementAngleOffset = 45;
+
+    bool UsesRigidbody => velocitySource == VelocitySource.Rigidbody;
+
+    float _velocity;
+    
+    
+    void Update()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        if (!animator) return;
+        if (setSpeed) SetSpeedUpdate();
     }
+
+        void SetSpeedUpdate()
+        {
+            if (UsesRigidbody && !rigidbody) return;
+            if (!UsesRigidbody && !pseudoVelocity) return;
+
+            _velocity = UsesRigidbody ? rigidbody.velocity.magnitude : pseudoVelocity.velocity.magnitude;
+            animator.SetFloat("speed", _velocity);
+        }
 
     public void ApplyLeftStickInput(Vector2 input)
     {
+        if (!setMoveAngle) return;
         if (!animator) return;
-        if (_rigidbody)
-            animator.SetFloat("speed", _rigidbody.velocity.magnitude);
-			
         animator.SetFloat("facingAngle", Math.AngleFromVector2(input, movementAngleOffset));
     }
 
