@@ -88,7 +88,9 @@ public class Devil : ContactBase
     void Rebound(Collision collision)
     {
         devilState = DevilState.Rebound;
-        gameObject.layer = LayerMask.NameToLayer("Default");
+        // Change the rebounded bullets to 'phantom props' so they can collide with player & be picked up,
+        // but won't collide with other bullets
+        gameObject.layer = LayerMask.NameToLayer("PhantomProps");
         
         // Set rebound velocity 
         var contact = collision.contacts[0];

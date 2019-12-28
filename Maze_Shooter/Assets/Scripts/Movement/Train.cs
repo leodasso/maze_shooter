@@ -15,9 +15,9 @@ public class Train : MonoBehaviour
     public bool scaleElements;
     
     [ShowIf("scaleElements")]
-    [Tooltip("Scale of the followers of the train. X axis is position in the train, 0 being front and 1 being back, " +
+    [Tooltip("Scale of the followers of the train. X axis is position in the train, 0 being front, then 1, 2, 3, ...n. " +
              "and Y axis is the scale.")]
-    public AnimationCurve scaleCurve;
+    public AnimationCurve scaleCurve = AnimationCurve.Constant(0, 5, 1);
     
     public List<TrainElement> trainElements = new List<TrainElement>();
     public float radius = 1;
@@ -63,9 +63,7 @@ public class Train : MonoBehaviour
             var element = trainElements[i];
             if (!element) continue;
             
-            // get the normalized position in the train
-            float normalizedPos = (float) i / trainElements.Count;
-            element.SetScale(scaleCurve.Evaluate(normalizedPos));
+            element.SetScale(scaleCurve.Evaluate(i));
         }
     }
 
@@ -93,7 +91,6 @@ public class Train : MonoBehaviour
     {
         TrainElement t = GetTrainElement(element);
         t.EnterTrain();
-        //t.transform.position = BackPosition();
         trainElements.Add(t);
     }
 
