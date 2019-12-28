@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using Unity.Mathematics;
 
 public class Shadow : MonoBehaviour
 {
@@ -13,13 +10,12 @@ public class Shadow : MonoBehaviour
     public LayerMask castingMask;
     GameObject shadowInstance;
     RaycastHit hit;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        shadowInstance = Instantiate(shadowPrefab, transform.position, quaternion.identity);
-    }
 
+    void OnEnable()
+    {
+        shadowInstance = Instantiate(shadowPrefab, transform.position, shadowPrefab.transform.rotation);
+    }
+    
     // Update is called once per frame
     void LateUpdate()
     {
@@ -30,5 +26,11 @@ public class Shadow : MonoBehaviour
         }
         
         shadowInstance.transform.position = new Vector3(transform.position.x, y, transform.position.z);
+    }
+
+    void OnDisable()
+    {
+        if (shadowInstance)
+            Destroy(shadowInstance);
     }
 }
