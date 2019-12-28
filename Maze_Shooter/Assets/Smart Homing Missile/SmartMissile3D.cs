@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Arachnid;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -15,7 +16,7 @@ public class SmartMissile3D : SmartMissile<Rigidbody, Vector3>
 	protected override Transform findNewTarget()
 	{
 		foreach (Collider newTarget in Physics.OverlapSphere(transform.position, m_searchRange))
-			if (newTarget.gameObject.CompareTag(m_targetTag) && isWithinRange(newTarget.transform.position))
+			if ( Math.LayerMaskContainsLayer(targetLayerMask, newTarget.gameObject.layer) && isWithinRange(newTarget.transform.position))
 			{
 				m_targetDistance = Vector3.Distance(newTarget.transform.position, transform.position);
 				return newTarget.transform;
@@ -58,12 +59,9 @@ public class SmartMissile3D : SmartMissile<Rigidbody, Vector3>
 		if (enabled)
 		{
 			// Draw the search zone
-			if (m_drawSearchZone)
-			{
-				Handles.color = m_zoneColor;
-				Handles.DrawSolidArc(transform.position, Quaternion.AngleAxis(90, -transform.right) * m_forward, Quaternion.AngleAxis(-m_searchAngle / 2, transform.up) * m_forward, m_searchAngle, m_searchRange);
-				Handles.DrawSolidArc(transform.position, m_forward, Quaternion.AngleAxis(-m_searchAngle / 2, transform.up) * m_forward, 360, m_searchRange);
-			}
+			Handles.color = m_zoneColor;
+			Handles.DrawSolidArc(transform.position, Quaternion.AngleAxis(90, -transform.right) * m_forward, Quaternion.AngleAxis(-m_searchAngle / 2, transform.up) * m_forward, m_searchAngle, m_searchRange);
+			Handles.DrawSolidArc(transform.position, m_forward, Quaternion.AngleAxis(-m_searchAngle / 2, transform.up) * m_forward, 360, m_searchRange);
 
 			// Draw a line to the target
 			if (m_target != null)

@@ -41,7 +41,7 @@ public class Canon : MonoBehaviour
 			newProjectile.transform.eulerAngles = new Vector3(0,0,-Mathf.Atan2(transform.forward.x, transform.forward.y)*Mathf.Rad2Deg);
 			
 			SmartMissile2D smartMissile = newProjectile.GetComponent<SmartMissile2D>();
-			smartMissile.m_lifeTime = m_config.m_lifeTime;
+			smartMissile.lifeTime = m_config.m_lifeTime;
 			smartMissile.m_searchRange = m_config.m_searchRange;
 			smartMissile.m_searchAngle = m_config.m_searchAngle;
 			smartMissile.m_canLooseTarget = m_config.m_canLooseTarget;
@@ -55,7 +55,7 @@ public class Canon : MonoBehaviour
 			newProjectile.GetComponent<Rigidbody>().AddForce(transform.forward * m_launchIntensity, ForceMode.Impulse);
 
 			SmartMissile3D smartMissile = newProjectile.GetComponent<SmartMissile3D>();
-			smartMissile.m_lifeTime = m_config.m_lifeTime;
+			smartMissile.lifeTime = m_config.m_lifeTime;
 			smartMissile.m_searchRange = m_config.m_searchRange;
 			smartMissile.m_searchAngle = m_config.m_searchAngle;
 			smartMissile.m_canLooseTarget = m_config.m_canLooseTarget;

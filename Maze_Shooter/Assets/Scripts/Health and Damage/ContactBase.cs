@@ -9,19 +9,26 @@ using Arachnid;
 /// </summary>
 public class ContactBase : MonoBehaviour
 {
+	[BoxGroup("contact")]
 	[ToggleLeft, PropertyOrder(-500)]
 	public bool debug;
+	
+	[BoxGroup("contact")]
 	[Tooltip("Layers that will destroy this object. Any inheriting class's behavior will happen before this is destroyed.")]
 	public LayerMask layersThatDestroyThis;
 
+	[BoxGroup("contact")]
 	[Tooltip("Is this hazard expected to move at high velocity? If so, does a raycast check to make sure it doesn't go through" +
 	         " any colliders.")]
 	[PropertyOrder(-100)]
 	public bool highVelocity = false;
 
+	[BoxGroup("contact")]
 	[ShowIf("highVelocity"), PropertyOrder(-99)]
 	[Tooltip("Layers that will be checked against for the high velocity raycasting.")]
 	public LayerMask castingLayerMask;
+	
+	[BoxGroup("contact")]
 	public List<Collider> ignoredColliders = new List<Collider>();
 	protected Vector3 _prevPosition;
 

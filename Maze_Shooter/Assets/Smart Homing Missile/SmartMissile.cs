@@ -1,19 +1,26 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 public abstract class SmartMissile : MonoBehaviour { }
 
 public abstract class SmartMissile<RgbdType, VecType> : SmartMissile
 {
 	[Header("Missile")]
-	[SerializeField, Tooltip("In seconds, 0 for infinite lifetime.")]
-	public float m_lifeTime = 5;
-	[SerializeField]
+	public bool hasLifetime;
+
+	[SerializeField, Tooltip("In seconds, 0 for infinite lifetime."), ShowIf("hasLifetime")]
+	public float lifeTime = 5;
+	
+	[SerializeField, Tooltip("Rotate the missile so it's looking the direction it's moving")]
 	protected bool m_lookDirection = true;
-	[SerializeField]
+	
+	[SerializeField, ShowIf("m_lookDirection")]
 	protected Vector3 m_lookDirectionOffset;
+	
 	[SerializeField]
 	UnityEvent m_onNewTargetFound;
+	
 	[SerializeField]
 	UnityEvent m_onTargetLost;
 
@@ -29,27 +36,19 @@ public abstract class SmartMissile<RgbdType, VecType> : SmartMissile
 	[Header("Guidance")]
 	[SerializeField, Tooltip("Intensity the missile will be guided with.")]
 	public float m_guidanceIntensity = 5f;
-	[SerializeField, Tooltip("Increase the intensity depending on the ditance.")]
+	[SerializeField, Tooltip("Increase the intensity depending on the distance.")]
 	public AnimationCurve m_distanceInfluence = AnimationCurve.Linear(0, 1, 1, 1);
 
 	[Header("Target")]
 	[SerializeField, Tooltip("Use this if the center of the object is not what you target.")]
 	public VecType m_targetOffset;
-	[SerializeField, HideInInspector]
-	protected string m_targetTag = "Untagged";
-	public string TargetTag
-	{
-		get { return m_targetTag; }
-		set { m_targetTag = value; }
-	}
+	public LayerMask targetLayerMask;
 
 	[Header("Debug")]
 	[SerializeField, Tooltip("Color of the search zone."), HideInInspector]
 	protected Color m_zoneColor = new Color(255, 0, 155, 0.1f);
 	[SerializeField, Tooltip("Color of the line to the target."), HideInInspector]
 	protected Color m_lineColor = new Color(255, 0, 155, 1);
-	[SerializeField, Tooltip("Draw the search zone."), HideInInspector]
-	protected bool m_drawSearchZone = false;
 
 	protected RgbdType m_rigidbody;
 	protected Transform m_target;
@@ -61,8 +60,8 @@ public abstract class SmartMissile<RgbdType, VecType> : SmartMissile
 	{
 		m_targetDistance = m_searchRange;
 
-		if (m_lifeTime > 0)
-			Destroy(gameObject, m_lifeTime);
+		if (lifeTime > 0 && hasLifetime)
+			Destroy(gameObject, lifeTime);
 	}
 
 	void FixedUpdate()
@@ -82,6 +81,16 @@ public abstract class SmartMissile<RgbdType, VecType> : SmartMissile
 		}
 		else if (m_target = findNewTarget())
 			m_onNewTargetFound.Invoke();
+	}
+
+	public void ClearTarget()
+	{
+		m_target = null;
+	}
+
+	void OnEnable()
+	{
+		ClearTarget();
 	}
 
 	/// <summary>

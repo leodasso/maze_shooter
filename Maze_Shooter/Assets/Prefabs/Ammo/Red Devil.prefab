@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 5114826848663277341}
   - component: {fileID: 9008572659450247471}
   - component: {fileID: 4718483383281776832}
+  - component: {fileID: 8051173750528964998}
   m_Layer: 10
   m_Name: Red Devil
   m_TagString: Untagged
@@ -386,19 +387,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 8051173750528964998}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   onRebound:
     m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  onReboundGrab:
-    m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: a7437d3579a26f245800a83778a660df, type: 2}
-        m_MethodName: DoTimeBend
-        m_Mode: 1
+      - m_Target: {fileID: 8051173750528964998}
+        m_MethodName: set_enabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -409,9 +416,25 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  onHitGround:
+  onReboundGrab:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onHitGround:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8051173750528964998}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   onPickedUp:
@@ -515,6 +538,75 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocitySamples: 5
   velocity: {x: 0, y: 0, z: 0}
+--- !u!114 &8051173750528964998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4762546893851248404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb20d64deb4107499b277b77fae6ffc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasLifetime: 0
+  lifeTime: 5
+  m_lookDirection: 0
+  m_lookDirectionOffset: {x: 0, y: 0, z: 0}
+  m_onNewTargetFound:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_onTargetLost:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_searchRange: 15
+  m_searchAngle: 60
+  m_canLooseTarget: 1
+  m_guidanceIntensity: 4
+  m_distanceInfluence:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.00033950806
+      value: 0.8991394
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.6966044
+      value: 0.9959238
+      inSlope: 0.3054039
+      outSlope: 0.3054039
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.100045815
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9990845
+      value: 1.2001457
+      inSlope: 0.801465
+      outSlope: 0.801465
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.16290942
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_targetOffset: {x: 0, y: 0, z: 0}
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  m_zoneColor: {r: 255, g: 0, b: 155, a: 0.1}
+  m_lineColor: {r: 255, g: 0, b: 155, a: 1}
 --- !u!1001 &4060178335246782888
 PrefabInstance:
   m_ObjectHideFlags: 0

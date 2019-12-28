@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Arachnid;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -15,7 +16,7 @@ public class SmartMissile2D : SmartMissile<Rigidbody2D, Vector2>
 	protected override Transform findNewTarget()
 	{
 		foreach (Collider2D newTarget in Physics2D.OverlapCircleAll(transform.position, m_searchRange))
-			if (newTarget.gameObject.CompareTag(m_targetTag) && isWithinRange(newTarget.transform.position))
+			if ( Math.LayerMaskContainsLayer(targetLayerMask, newTarget.gameObject.layer) && isWithinRange(newTarget.transform.position))
 			{
 				m_targetDistance = Vector2.Distance(newTarget.transform.position, transform.position);
 				return newTarget.transform;
@@ -58,11 +59,8 @@ public class SmartMissile2D : SmartMissile<Rigidbody2D, Vector2>
 		if (enabled)
 		{
 			// Draw the search zone
-			if (m_drawSearchZone)
-			{
-				Handles.color = m_zoneColor;
-				Handles.DrawSolidArc(transform.position, transform.forward, Quaternion.AngleAxis(-m_searchAngle/2, transform.forward) * m_forward, m_searchAngle, m_searchRange);
-			}
+			Handles.color = m_zoneColor;
+			Handles.DrawSolidArc(transform.position, transform.forward, Quaternion.AngleAxis(-m_searchAngle/2, transform.forward) * m_forward, m_searchAngle, m_searchRange);
 
 			// Draw a line to the target
 			if (m_target != null)
