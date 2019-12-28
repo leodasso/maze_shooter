@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
 
 // TODO
 // lerp devils to head
@@ -34,6 +35,8 @@ public class DevilLauncher : MonoBehaviour, IControllable
     public FloatReference transportTime;
     
     public LaunchState launchState = LaunchState.Empty;
+
+    public UnityEvent onLaunch;
     
     
 
@@ -107,7 +110,7 @@ public class DevilLauncher : MonoBehaviour, IControllable
     {
         if (!devilToLaunch || launchState != LaunchState.Ready)
             return;
-
+        
         Vector3 launchVector = gunBrain.GetAimVector();
         devilToLaunch.transform.parent = null;
 
@@ -116,6 +119,8 @@ public class DevilLauncher : MonoBehaviour, IControllable
 
         devilToLaunch = null;
         launchState = LaunchState.Empty;
+        
+        onLaunch.Invoke();
     }
 
     public void PickUpDevil(Devil devil)
