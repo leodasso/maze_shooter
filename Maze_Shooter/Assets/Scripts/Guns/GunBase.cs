@@ -14,7 +14,6 @@ public class GunBase : MonoBehaviour
     public FloatReference startFiringDelay;
     public List<GunData> overrideGuns = new List<GunData>();
     public GunData gunData;
-    PseudoDepth _pseudoDepth;
 
     public GunData GunData
     {
@@ -54,7 +53,6 @@ public class GunBase : MonoBehaviour
     // Use this for initialization
     protected virtual void Start()
     {
-        _pseudoDepth = GetComponent<PseudoDepth>();
         _startFiringTimer = startFiringDelay.Value;
     }
 

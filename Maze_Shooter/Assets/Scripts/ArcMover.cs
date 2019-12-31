@@ -10,12 +10,12 @@ public class ArcMover : MonoBehaviour
     public Vector3 startPosition;
     public GameObject end;
     
-    public PseudoDepth myDepth;
+    //public PseudoDepth myDepth;
 
-    [ShowIf("HasPseudoDepth")]
-    public AnimationCurve heightCurve;
+    //[ShowIf("HasPseudoDepth")]
+    //public AnimationCurve heightCurve;
 
-    public bool HasPseudoDepth => myDepth != null;
+    //public bool HasPseudoDepth => myDepth != null;
 
     // Update is called once per frame
     void Update()
@@ -23,7 +23,7 @@ public class ArcMover : MonoBehaviour
         if (!end) return;
 
         transform.position = Vector2.Lerp(startPosition, end.transform.position, progress);
-        if (HasPseudoDepth)
-            myDepth.z = heightCurve.Evaluate(progress);
+        // if (HasPseudoDepth)
+        //    myDepth.z = heightCurve.Evaluate(progress);
     }
 }

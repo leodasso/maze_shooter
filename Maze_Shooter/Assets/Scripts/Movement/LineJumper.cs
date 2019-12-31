@@ -12,9 +12,6 @@ public class LineJumper : MovementBase
     
     [TabGroup("main")]
     public CurveObject jumpHeight;
-    
-    [TabGroup("main")]
-    public PseudoDepth pseudoDepth;
 
     [TabGroup("main")]
     public float climbingSpeed = 1;
@@ -81,7 +78,8 @@ public class LineJumper : MovementBase
         }
 
         _climbing = true;
-        pseudoDepth.ApplyVelocity(climbingSpeed);
+        // TODO set climb velocity
+        // pseudoDepth.ApplyVelocity(climbingSpeed);
     }
 
     public void MirrorAim()
@@ -92,7 +90,8 @@ public class LineJumper : MovementBase
     void EndClimb()
     {
         _climbing = false;
-        pseudoDepth.ApplyVelocity(0);
+        // TODO set velocity in RB
+        // pseudoDepth.ApplyVelocity(0);
         onClimbComplete.Invoke();
     }
 
@@ -102,7 +101,7 @@ public class LineJumper : MovementBase
             aimer.transform.eulerAngles = new Vector3(0, 0, Math.AngleFromVector2(aimDirection.normalized, 0));
 
         if (_climbing)
-            if (pseudoDepth.z >= startingHeight) EndClimb();
+            if (transform.position.z >= startingHeight) EndClimb();
     }
 
     void FixedUpdate()
@@ -110,7 +109,7 @@ public class LineJumper : MovementBase
         if (!_jumping) return;
         
         _rigidbody2D.velocity = jumpSpeed.ValueFor(_jumpTime) * speed.Value * speedMultiplier * aimDirection;
-        if (pseudoDepth) pseudoDepth.z = jumpHeight.ValueFor(_jumpTime);
+        //if (pseudoDepth) pseudoDepth.z = jumpHeight.ValueFor(_jumpTime);
         _jumpTime += Time.fixedDeltaTime;
     }
 
