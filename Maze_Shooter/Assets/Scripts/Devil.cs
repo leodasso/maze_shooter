@@ -128,7 +128,10 @@ public class Devil : ContactBase
         
         // check if hit ground, and if so, stick / set state!
         if (otherCol.gameObject.CompareTag("Ground"))
+        {
+            onHitGround.Invoke();
             StickInGround();
+        }
     }
 
 
@@ -147,8 +150,6 @@ public class Devil : ContactBase
         devilState = DevilState.Grounded;
         
         // TODO animation for stuck in ground?
-        
-        // TODO effects maybe?
     }
 
     void DoDamage(Collision collision, Collider other)
