@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4130622135684261831}
   - component: {fileID: 4130622135684261829}
   - component: {fileID: 3463775809130845739}
+  - component: {fileID: 4960442903429840830}
   m_Layer: 16
   m_Name: plant prop
   m_TagString: Untagged
@@ -116,3 +117,22 @@ CapsuleCollider:
   m_Height: 4.65
   m_Direction: 1
   m_Center: {x: 0.09980714, y: 2.432799, z: 0}
+--- !u!114 &4960442903429840830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4130622135684261832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c90574d4d9adcd84d8edcdd21d15de75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 3584
+  wobbliness: 8
+  stiffness: 12
+  wobbleVel: {x: 0, y: 0, z: 0}
+  wobblePoint: {x: 0, y: 0, z: 0}
