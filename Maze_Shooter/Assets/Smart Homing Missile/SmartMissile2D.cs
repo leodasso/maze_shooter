@@ -15,6 +15,9 @@ public class SmartMissile2D : SmartMissile<Rigidbody2D, Vector2>
 
 	protected override Transform findNewTarget()
 	{
+		if (overrideTarget)
+			return customTarget;
+		
 		foreach (Collider2D newTarget in Physics2D.OverlapCircleAll(transform.position, m_searchRange))
 			if ( Math.LayerMaskContainsLayer(targetLayerMask, newTarget.gameObject.layer) && isWithinRange(newTarget.transform.position))
 			{

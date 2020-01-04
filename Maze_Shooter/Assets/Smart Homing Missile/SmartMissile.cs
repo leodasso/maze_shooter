@@ -42,6 +42,11 @@ public abstract class SmartMissile<RgbdType, VecType> : SmartMissile
 	[Header("Target")]
 	[SerializeField, Tooltip("Use this if the center of the object is not what you target.")]
 	public VecType m_targetOffset;
+	[Tooltip("Allows you to set a custom target, and turns off target-finding behavior.")]
+	public bool overrideTarget;
+	[ShowIf("overrideTarget")]
+	public Transform customTarget;
+	[HideIf("overrideTarget")]
 	public LayerMask targetLayerMask;
 
 	[Header("Debug")]
