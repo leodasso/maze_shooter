@@ -15,13 +15,7 @@ public class WobblyProp : MonoBehaviour
 
     public float wobbliness = 1;
     public float stiffness = 1;
-    [Tooltip("Wobble is created by rotating this transform to look at the look point. This value controls the height " +
-             "of that point above the position of this transform.")]
-    public float lookPointHeight = 5;
-
-    public bool xWobble = true;
-    public bool yWobble = true;
-    public bool zWobble = true;
+    public Vector3 wobbleScale = Vector3.one;
 
     [ReadOnly]
     public Vector3 wobbleVel = Vector3.zero;
@@ -29,8 +23,7 @@ public class WobblyProp : MonoBehaviour
     [ReadOnly]
     public Vector3 wobblePoint = Vector3.zero;
 
-    Vector3 LookPoint => transform.position + wobblePoint + Vector3.up * lookPointHeight;
-    Vector3 LookVector => LookPoint - transform.position;
+    Quaternion initRotation;
 
 
     void OnDrawGizmosSelected()
@@ -41,16 +34,12 @@ public class WobblyProp : MonoBehaviour
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(wobblePoint + position, .1f);
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(LookPoint, .1f);
-        Gizmos.color = new Color(0, 1, 0, .3f);
-        Gizmos.DrawLine(wobblePoint + position, LookPoint);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        initRotation = transform.localRotation;
     }
 
     // Update is called once per frame
@@ -59,7 +48,10 @@ public class WobblyProp : MonoBehaviour
         wobbleVel = Vector3.Lerp(wobbleVel, -wobblePoint, Time.deltaTime * stiffness);
         wobblePoint += wobbliness * Time.deltaTime * wobbleVel;
 
-        transform.rotation = quaternion.LookRotation(Vector3.forward, LookVector);
+        Vector3 scaledWobblePoint = Vector3.Scale(wobbleScale, wobblePoint);
+        
+        Quaternion rot = Quaternion.Euler(scaledWobblePoint.z, scaledWobblePoint.y, -scaledWobblePoint.x);
+        transform.localRotation = initRotation * rot;
     }
 
     void OnTriggerEnter(Collider other)
