@@ -38,8 +38,8 @@ public class NoiseMovement : MovementBase
     void FixedUpdate()
     {
         _noiseScrollOffset += Time.fixedDeltaTime * scrollSpeed.Value;
-        _direction = GeneratedPerlinVector();
-        _rigidbody2D.AddForce(_direction * speed.Value * speedMultiplier);
+        direction = Math.Project2Dto3D(GeneratedPerlinVector());
+        _rigidbody.AddForce(direction * speed.Value * speedMultiplier);
     }
     
     

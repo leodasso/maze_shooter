@@ -108,7 +108,7 @@ public class LineJumper : MovementBase
     {
         if (!_jumping) return;
         
-        _rigidbody2D.velocity = jumpSpeed.ValueFor(_jumpTime) * speed.Value * speedMultiplier * aimDirection;
+        _rigidbody.velocity = jumpSpeed.ValueFor(_jumpTime) * speed.Value * speedMultiplier * aimDirection;
         //if (pseudoDepth) pseudoDepth.z = jumpHeight.ValueFor(_jumpTime);
         _jumpTime += Time.fixedDeltaTime;
     }
@@ -132,6 +132,6 @@ public class LineJumper : MovementBase
         onWallGrabbed.Invoke();
         _jumping = false;
         _jumpTime = 0;
-        _rigidbody2D.velocity = Vector2.zero;
+        _rigidbody.velocity = Vector2.zero;
     }
 }

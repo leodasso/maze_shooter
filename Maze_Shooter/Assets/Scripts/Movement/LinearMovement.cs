@@ -22,7 +22,7 @@ public class LinearMovement : MovementBase
     protected override void Start()
     {
         base.Start();
-        _direction = initVector.normalized;
+        direction = initVector.normalized;
     }
 
     void OnDrawGizmos()
@@ -35,26 +35,26 @@ public class LinearMovement : MovementBase
     {
         if (!Math.LayerMaskContainsLayer(layersThatChangeDirection, other.gameObject.layer)) return;
         
-        Vector2 newVector = Vector2.Reflect(_direction, other.contacts[0].normal);
+        Vector2 newVector = Vector2.Reflect(direction, other.contacts[0].normal);
         Debug.DrawRay(other.contacts[0].point, newVector.normalized, Color.magenta, 30);
 
-        _direction = newVector;
+        direction = newVector;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!_rigidbody2D) return;
+        if (!_rigidbody) return;
 
-        Vector2 forceVector = _direction.normalized * speedMultiplier * speed.Value;
+        Vector2 forceVector = direction.normalized * speedMultiplier * speed.Value;
         
         switch (movementMode)
         {
             case MovementMode.Force:
-                _rigidbody2D.AddForce(forceVector);
+                _rigidbody.AddForce(forceVector);
                 break;
             case MovementMode.Velocity:
-                _rigidbody2D.velocity = forceVector;
+                _rigidbody.velocity = forceVector;
                 break;
         }
     }
@@ -62,7 +62,7 @@ public class LinearMovement : MovementBase
     public override void ApplyLeftStickInput(Vector2 input)
     {
         if (input.magnitude > .5f)
-            _direction = input.normalized;
+            direction = input.normalized;
     }
 
 }

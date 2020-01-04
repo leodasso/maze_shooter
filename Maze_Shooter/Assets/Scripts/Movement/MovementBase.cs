@@ -8,23 +8,28 @@ public class MovementBase : MonoBehaviour, IControllable
     public float speedMultiplier = 1;
     public FloatReference speed;
     
-    protected Rigidbody2D _rigidbody2D;
-    protected Vector2 _direction;
+    protected Rigidbody _rigidbody;
+    
+    /// <summary>
+    /// The intended direction of movement. Differs from velocity in that if there's a wall or blocker and
+    /// velocity is 0, this will still show the intended direction.
+    /// </summary>
+    protected Vector2 direction;
     
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-        _direction = new Vector2(1, 0);
+        _rigidbody = GetComponent<Rigidbody>();
+        direction = new Vector2(1, 0);
     }
 
     /// <summary>
     /// Returns the direction the mover is pointed to. Similar to velocity, however even if velocity
     /// is 0, this will still return the direction it intends to go.
     /// </summary>
-    public Vector2 GetIntendedDirection()
+    public Vector3 GetIntendedDirection()
     {
-        return _direction;
+        return Math.Project2Dto3D(direction);
     }
 
     public void IncreaseSpeedMultiplier(float amt)
@@ -39,7 +44,7 @@ public class MovementBase : MonoBehaviour, IControllable
     
     public virtual void ApplyLeftStickInput(Vector2 input)
     {
-        _direction = input.normalized;
+        direction = Vector2.ClampMagnitude(input, 1);
     }
 
     public virtual void ApplyRightStickInput(Vector2 input) { }

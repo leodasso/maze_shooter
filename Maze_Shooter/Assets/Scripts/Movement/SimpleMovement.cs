@@ -4,10 +4,10 @@ using Arachnid;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[TypeInfoBox("Moves towards a target with 2d physics movement. To set a target, add a targetFinder component.")]
+[TypeInfoBox("Moves towards a target with physics. To set a target, add a targetFinder component.")]
 public class SimpleMovement : MovementBase
 {    
-    [Tooltip("The thing I'll move towards. Keep in mind if there's a tergetFinder referenced, it will overwrite" +
+    [Tooltip("The thing I'll move towards. Keep in mind if there's a targetFinder referenced, it will overwrite" +
              " whatever you put in here.")]
     public GameObject target;
     
@@ -23,9 +23,9 @@ public class SimpleMovement : MovementBase
     
     void FixedUpdate()
     {
-        if (!target) return;
+        if (target) 
+            direction = (target.transform.position - transform.position).normalized;
         
-        _direction = (target.transform.position - transform.position).normalized;
-        _rigidbody2D.AddForce(_direction.normalized * speed.Value * speedMultiplier);
+        _rigidbody.AddForce(Math.Project2Dto3D(direction) * speed.Value * speedMultiplier * Time.fixedDeltaTime);
     }
 }

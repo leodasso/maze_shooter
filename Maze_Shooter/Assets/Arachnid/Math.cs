@@ -59,6 +59,16 @@ namespace Arachnid
 		}
 
 		/// <summary>
+		/// Given a vector of a direction in 2D space (x, y) returns a vector that's the 2D
+		/// vector projected on to the ground. Useful for taking a Vector2 input (like gamepad joystick)
+		/// and returning a vector that will move an object along the ground.
+		/// </summary>
+		public static Vector3 Project2Dto3D(Vector2 flatVector)
+		{
+			return new Vector3(flatVector.x, 0, flatVector.y);
+		}
+
+		/// <summary>
 		/// Returns a random element of the given list.
 		/// </summary>
 		public static T RandomElementOfList<T>(List<T> list)
