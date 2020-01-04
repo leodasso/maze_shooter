@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &522022562580709260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 522022562580709262}
+  - component: {fileID: 522022562580709261}
+  m_Layer: 0
+  m_Name: Hell Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &522022562580709262
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522022562580709260}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.51, y: -2.2878647, z: 4.18}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &522022562580709261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522022562580709260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e3abd70badeba45bc55968613d9442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEnterDarkness:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 0d5b188ef9ecf42448dc12af4ee91216, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onEnterLight:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: d2c7847a9b2adf143907bcefedb057ee, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onGameOver:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 5cb0095fa8a13fe40ae6e9d9927987a0, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 91a963b9b7179064ab269233b23775dc, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  evilEyesPrefabs:
+  - {fileID: 7638218383370006366, guid: e4074c5f5e85a674a964ab1f25bdcdbe, type: 3}
+  - {fileID: 6155762964191326801, guid: 0c3f01e88b83ba54f8950c11243331ed, type: 3}
+  - {fileID: 6155762964191326801, guid: 0c3f01e88b83ba54f8950c11243331ed, type: 3}
+  - {fileID: 6155762964191326801, guid: 0c3f01e88b83ba54f8950c11243331ed, type: 3}
+  - {fileID: 3977796414700213780, guid: 61fe193d9d0619d44b9d8369e88a62b4, type: 3}
+  - {fileID: 1438711829364603170, guid: a1091afeac9984642b3e16d84dee9837, type: 3}
+  - {fileID: 1438711829364603170, guid: a1091afeac9984642b3e16d84dee9837, type: 3}
+  - {fileID: 1438711829364603170, guid: a1091afeac9984642b3e16d84dee9837, type: 3}
+  bigEvilEyesPrefab: {fileID: 389346113364943590, guid: 9c8e61057751fd841b68f119db742394,
+    type: 3}
+  collectionToFollow: {fileID: 11400000, guid: 35831a8bfbcf71f4fb702f50d0ec7816, type: 2}
+  darknessLevel: {fileID: 11400000, guid: a92e24161040e0041bb8f1b885be5fbb, type: 2}
+  timeToDeath:
+    useConstant: 1
+    constantValue: 0
+    valueObject: {fileID: 11400000, guid: 6c39408b2eae1ef4cb1f7889faf84ccc, type: 2}
+  spawnRadius: 8
+  spawnDelay: 0.4
+  destroyTime: 0.5
+  minSpawnScale: 0.4
+  maxSpawnScale: 1
+  spawnFrequencyIncreaseSpeed:
+    useConstant: 0
+    constantValue: 0.5
+    valueObject: {fileID: 0}
+  minSpawnFrequency: 0.2
+  maxSpawnFrequency: 4

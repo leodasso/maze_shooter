@@ -40,7 +40,7 @@ public class PulseMovement : MonoBehaviour
 	public List<PulseEvent> pulseEvents = new List<PulseEvent>();
 	
 	float _totalSpeed;
-	Rigidbody2D _rigidbody2D;
+	Rigidbody _rigidbody;
 	float _delayTimer;
 	
 	//curve time value starts high so that it will call the 'onPulse' event immediately
@@ -49,7 +49,7 @@ public class PulseMovement : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		_rigidbody2D = GetComponent<Rigidbody2D>();
+		_rigidbody = GetComponent<Rigidbody>();
 		_delayTimer = startDelay.Value + Random.Range(0, randomStartDelay.Value);
 		if (!speedCurve)
 		{
@@ -102,8 +102,8 @@ public class PulseMovement : MonoBehaviour
 	{
 		if (!target) return;
 
-		Vector2 dir = target.transform.position - transform.position;
-		_rigidbody2D.AddForce(dir.normalized * _totalSpeed);
+		Vector3 dir = target.transform.position - transform.position;
+		_rigidbody.AddForce(dir.normalized * _totalSpeed);
 	}
 
 	public void IncreaseTimeMultiplier(float amt)

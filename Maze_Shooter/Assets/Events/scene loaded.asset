@@ -4,20 +4,34 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad82d867e45a0d54e820f85e0fae95d9, type: 3}
   m_Name: scene loaded
   m_EditorClassIdentifier: 
+  enabled: 1
   debug: 0
+  delay: 0
   onEventRaised:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: c790b694fbd0b284b858b074c5ba9411, type: 2}
         m_MethodName: SetTransitioning
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: a92e24161040e0041bb8f1b885be5fbb, type: 2}
+        m_MethodName: set_Value
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

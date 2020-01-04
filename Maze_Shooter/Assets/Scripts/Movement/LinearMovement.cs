@@ -8,7 +8,7 @@ public enum MovementMode
     Force = 0, Velocity = 1
 }
 
-public class LinearMovement : MovementBase, IControllable
+public class LinearMovement : MovementBase
 {
     [Tooltip("The initial direction I'll move. This is previewed as the yellow line coming from me.")]
     public Vector2 initVector;

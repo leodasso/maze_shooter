@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody))]
 public class MagnetMovement : MonoBehaviour
 {
     [Tooltip("Will have magnetic movement towards objects of this collection")]
     public Collection targets;
     public CurveObject forceOverDistance;
-    Rigidbody2D _rigidbody2D;
+    Rigidbody _rigidbody;
     
     
     // Start is called before the first frame update
     void Start()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
@@ -25,8 +25,8 @@ public class MagnetMovement : MonoBehaviour
             if (!target) continue;
             if (!target.gameObject.activeInHierarchy) continue;
 
-            Vector2 direction = (target.transform.position - transform.position).normalized;
-            _rigidbody2D.AddForce(direction * MagneticForce(target.transform));
+            Vector3 direction = (target.transform.position - transform.position).normalized;
+            _rigidbody.AddForce(direction * MagneticForce(target.transform));
         }
     }
 

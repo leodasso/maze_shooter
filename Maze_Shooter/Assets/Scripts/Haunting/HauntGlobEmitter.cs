@@ -43,7 +43,7 @@ public class HauntGlobEmitter : MonoBehaviour
             // Instantiate the glob and set the value
             HauntGlob newGlob = Instantiate(hauntGlobPrefab, transform.position, quaternion.identity)
                 .GetComponent<HauntGlob>();
-            newGlob.SetValue(emitValue);
+            //newGlob.SetValue(emitValue);
             
             // give a random force to the new glob
             Rigidbody2D globRigidbody = newGlob.GetComponent<Rigidbody2D>();

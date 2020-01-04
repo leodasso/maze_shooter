@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Arachnid;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
 
 [CreateAssetMenu]
 public class GameMaster : ScriptableObject
@@ -15,9 +17,15 @@ public class GameMaster : ScriptableObject
     static GameMaster _gameMaster;
     public SaveDataAvatar currentAvatar;
 
-    public static string saveFilesDirectory = "saveFiles/";
-    public static int cashThisSession;
+    public SavedString savedStage;
+    public SavedString savedCheckpoint;
     
+    public List<Stage> allStages = new List<Stage>();
+
+    public UnityEvent onBeginLoadSavedGame;
+
+    public static string saveFilesDirectory = "saveFiles/";
+
     /// <summary>
     /// True when transitioning between scenes/stages
     /// </summary>
@@ -30,9 +38,40 @@ public class GameMaster : ScriptableObject
         return _gameMaster;
     }
 
+    [Button, DisableInEditorMode]
+    public void BeginGame()
+    {
+        onBeginLoadSavedGame.Invoke();
+        // find the stage to load from list
+        Stage stageToLoad = GetStage(savedStage.GetValue());
+        // Load with a delay so there's time for the transition to fade in
+        stageToLoad.Load(1);
+    }
+
+    Stage GetStage(string stageName)
+    {
+        foreach (Stage stage in allStages)
+        {
+            if (stage.name == stageName) return stage;
+        }
+        
+        Debug.LogError("No stage found matching name " + stageName);
+        return null;
+    }
+
+    public static void SetCheckpoint(string checkpointName)
+    {
+        Get().savedStage.Save(Get().currentStage.name);
+        Get().savedCheckpoint.Save(checkpointName);
+    }
+
+    public static bool IsCurrentCheckpoint(string checkpointName)
+    {
+        return checkpointName == Get().savedCheckpoint.GetValue();
+    }
+
     public void LoadScene(string sceneName, float delay)
     {
-        
         CoroutineHelper.NewCoroutine(DelayLoadScene(sceneName, delay));
     }
 
@@ -47,6 +86,8 @@ public class GameMaster : ScriptableObject
         SceneManager.LoadScene(sceneName);
     }
 
+    #region Load-Save
+    
     public void VerifyMainSaveFile()
     {
         if (ES3.FileExists("main.es3"))
@@ -70,17 +111,12 @@ public class GameMaster : ScriptableObject
         }
         else Debug.Log("No save files exist.");
     }
-
-    public void GotoWorldMap(float delay)
-    {
-        LoadScene("WorldMap_B", delay);
-    }
-
+    
     public static bool AvatarIsUsedBySaveFile(SaveDataAvatar avatar)
     {
         return ES3.FileExists(saveFilesDirectory + avatar.name + ".es3");
     }
-
+    
     public static void DeleteSaveData(SaveDataAvatar avatar)
     {
         if (!avatar) return;
@@ -93,6 +129,40 @@ public class GameMaster : ScriptableObject
         }
         
         ES3.DeleteFile(saveFilesDirectory + avatar.name + ".es3");
+    }
+    
+    
+    /// <summary>
+    /// Saves the given value to the player's current save file.
+    /// </summary>
+    /// <param name="saveKey">The key to store the value under.</param>
+    /// <param name="value">The value to save.</param>
+    /// <param name="requester">The object that is requesting for a value to be saved.</param>
+    public static void SaveToCurrentFile<T>(string saveKey, T value, Object requester)
+    {
+        string saveDir;
+        if (Get().TryGetSaveFileDirectory(out saveDir))
+            ES3.Save<T>(saveKey, value, saveDir);
+        
+        else 
+            Debug.LogError("Error saving " + saveKey + " value from " + requester.name, requester);
+    }
+    
+
+    /// <summary>
+    /// Loads the value for the given key from the player's current save file.
+    /// </summary>
+    /// <param name="saveKey">The key to load the value from</param>
+    /// <param name="defaultValue">The default value. If no value has been saved to this key yet,
+    /// this will be returned.</param>
+    /// <param name="requester">The object requesting for the value.</param>
+    public static T LoadFromCurrentFile<T>(string saveKey, T defaultValue, Object requester)
+    {
+        string saveDir;
+        if (Get().TryGetSaveFileDirectory(out saveDir))
+            return ES3.Load<T>(saveKey, saveDir, defaultValue);
+            
+        throw new FileLoadException();
     }
 
     /// <summary>
@@ -107,4 +177,5 @@ public class GameMaster : ScriptableObject
         file = saveFilesDirectory + currentAvatar.name + ".es3";
         return true;
     }
+    #endregion
 }

@@ -9,7 +9,8 @@ public class CashCrystal : MonoBehaviour
 
     public void GrabCrystal()
     {
-        GameMaster.cashThisSession += cashValue;
+        // TODO money??
+        //GameMaster.cashThisSession += cashValue;
         Destroy(gameObject);
     }
 }

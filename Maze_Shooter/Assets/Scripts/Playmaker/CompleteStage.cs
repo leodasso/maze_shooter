@@ -13,8 +13,8 @@ public class CompleteStage : FsmStateAction
 
     public override void OnEnter()
     {
-        if (stage)
-            stage.CompleteStage();
+        //if (stage)
+        //    stage.CompleteStage();
         Finish();
     }
 }

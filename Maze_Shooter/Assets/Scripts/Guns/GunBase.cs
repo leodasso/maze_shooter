@@ -14,7 +14,6 @@ public class GunBase : MonoBehaviour
     public FloatReference startFiringDelay;
     public List<GunData> overrideGuns = new List<GunData>();
     public GunData gunData;
-    PseudoDepth _pseudoDepth;
 
     public GunData GunData
     {
@@ -36,7 +35,7 @@ public class GunBase : MonoBehaviour
     [Tooltip("This list is referenced by any ammo fired by this gun. The ammo will know " +
              "not to interact with these colliders. Prevents ammo from hitting the thing that " +
              "fired it on the very first frame.")]
-    public List<Collider2D> collidersToIgnore = new List<Collider2D>();
+    public List<Collider> collidersToIgnore = new List<Collider>();
 
     [MinValue(0)]
     public int Level
@@ -54,7 +53,6 @@ public class GunBase : MonoBehaviour
     // Use this for initialization
     protected virtual void Start()
     {
-        _pseudoDepth = GetComponent<PseudoDepth>();
         _startFiringTimer = startFiringDelay.Value;
     }
 
@@ -70,22 +68,17 @@ public class GunBase : MonoBehaviour
     
     protected void CreateBullet(Vector2 offset, float angle)
     {
-        Vector2 localOffset = transform.TransformPoint(offset);
+        Vector3 localOffset = transform.TransformPoint(offset);
         Debug.DrawLine(transform.position, localOffset, Color.yellow, 1);
         var newAmmo = Instantiate(Ammo, localOffset, transform.rotation);
-        newAmmo.transform.Rotate(0, 0, angle, Space.World);
+        newAmmo.transform.Rotate(0, angle, 0, Space.World);
         newAmmo.layer = LayerMask.NameToLayer(gunType == GunType.Enemy ? 
             "EnemyBullets" : "PlayerBullets");
 
-        // Apply my height to the ammo's height (if it uses pseudo depth)
-        PseudoDepth ammoDepth = newAmmo.GetComponent<PseudoDepth>();
-        if (ammoDepth && _pseudoDepth)
-            ammoDepth.z = _pseudoDepth.z;
-        
         Hazard hazard = newAmmo.GetComponent<Hazard>();
         if (hazard)
         {
-            hazard.ignoredColliders = new List<Collider2D>(collidersToIgnore);
+            hazard.ignoredColliders = new List<Collider>(collidersToIgnore);
             hazard.enabled = true;
         }
     }

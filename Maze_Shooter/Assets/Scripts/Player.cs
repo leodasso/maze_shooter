@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
 	public List<IControllable> controllables = new List<IControllable>();
 	Rewired.Player _player;
 
+	bool _alphaAction;
+
 	void GetAllControllables()
 	{
 		controllables.Clear();
@@ -32,6 +34,14 @@ public class Player : MonoBehaviour
 		GetAllControllables();
 	}
 
+	void OnDisable()
+	{
+		moveInput = Vector2.zero;
+		fireInput = Vector2.zero;
+		_alphaAction = false;
+		UpdateControllables();
+	}
+
 	// Update is called once per frame
 	void Update () 
 	{
@@ -42,12 +52,20 @@ public class Player : MonoBehaviour
 		// Get the player's inputs
 		moveInput = new Vector2(_player.GetAxis("moveX"), _player.GetAxis("moveY"));
 		fireInput = new Vector2(_player.GetAxis("fireX"), _player.GetAxis("fireY"));
+		_alphaAction = _player.GetButtonDown("alpha");
+		
+		UpdateControllables();
+	}
 
-		// tell the ship how to move based on player's input
+	void UpdateControllables()
+	{
 		foreach (var controllable in controllables)
 		{
 			controllable.ApplyLeftStickInput(moveInput);
 			controllable.ApplyRightStickInput(fireInput);
+			
+			if (_alphaAction)
+				controllable.DoActionAlpha();
 		}
 	}
 }

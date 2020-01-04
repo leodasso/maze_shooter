@@ -41,12 +41,12 @@ public class ApplyVelocity : MonoBehaviour
     public void SetVelocity(Vector3 velocity)
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        PseudoDepth depth = GetComponent<PseudoDepth>();
+        //PseudoDepth depth = GetComponent<PseudoDepth>();
 
         if (rb)
             rb.velocity = velocity;
         
-        if (depth)
-            depth.ApplyVelocity(velocity.z);
+        //if (depth)
+        //    depth.ApplyVelocity(velocity.z);
     }
 }

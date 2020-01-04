@@ -30,7 +30,7 @@ public class WorldMap : MonoBehaviour
  
 		if (GameMaster.Get().justCompletedStage)
 		{
-			GameMaster.Get().justCompletedStage.onComplete_worldMap?.Raise();
+			//GameMaster.Get().justCompletedStage.onComplete_worldMap?.Raise();
 			GameMaster.Get().justCompletedStage = null;
 		}
 	}

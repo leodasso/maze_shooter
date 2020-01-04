@@ -8,7 +8,7 @@ public class EventFromDamage : MonoBehaviour, IDestructible
 {
     public UnityEvent onAttemptedDamage;
 
-    public void DoDamage(int amount, Vector2 pos, Vector2 dir)
+    public void DoDamage(int amount, Vector3 pos, Vector3 dir)
     {
         onAttemptedDamage.Invoke();
     }

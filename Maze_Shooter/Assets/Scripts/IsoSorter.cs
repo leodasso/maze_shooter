@@ -49,7 +49,7 @@ public class IsoSorter : MonoBehaviour
 		if (isStatic && Application.isPlaying) return;
 
 		
-		sortingOrder = Mathf.RoundToInt((-SortingTransform.position.y - offset) * _worldSpaceToSortRatio);
+		sortingOrder = Mathf.RoundToInt((-SortingTransform.position.z - offset) * _worldSpaceToSortRatio);
 
 		for (int i = 0; i < renderers.Count; i++)
 		{
