@@ -24,6 +24,13 @@ public class Instantiator : MonoBehaviour
 		AsSibling,
 		AsChild
 	}
+
+	public enum RotationType
+	{
+		ThisRotation,
+		Prefab,
+		Zero
+	}
 	
 	[ToggleLeft]
 	public bool instantiateStagePlayer;
@@ -44,6 +51,9 @@ public class Instantiator : MonoBehaviour
 
 	[EnumToggleButtons, HideLabel, Title("Instance Place In Hierarchy", bold:false, horizontalLine:false)]
 	public HierarchyType instancePlaceInHierarchy = HierarchyType.World;
+
+	[EnumToggleButtons, HideLabel, Title("Instance Rotation", bold: false, horizontalLine: false)]
+	public RotationType instanceRotation = RotationType.ThisRotation;
 
 	[ShowInInspector, ReadOnly]
 	GameObject _instance;
@@ -128,7 +138,19 @@ public class Instantiator : MonoBehaviour
 		}
 
 		if (!Application.isPlaying) return;
-		_instance = Instantiate(ToInstantiate, transform.position, transform.rotation, parent);
+
+		Quaternion rotation = transform.rotation;
+		switch (instanceRotation)
+		{
+				case RotationType.Prefab:
+					rotation = ToInstantiate.transform.rotation;
+					break;
+				case RotationType.Zero:
+					rotation = Quaternion.Euler(Vector3.zero);
+					break;
+		}
+		
+		_instance = Instantiate(ToInstantiate, transform.position, rotation, parent);
 		if (applyScale) _instance.transform.localScale = transform.localScale;
 	}
 

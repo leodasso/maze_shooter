@@ -1,55 +1,57 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Arachnid;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
 
 public class Gate : MonoBehaviour
 {
-    [ValidateInput("ValidateStars", "Required stars count must match the sum of stars in gate lights. Either adjust the count or " +
-                                    "add/remove gate lights.", ContinuousValidationCheck = true)]
-    public int requiredStars = 5;
-    public List<GateLight> gateLights = new List<GateLight>();
-    [AssetsOnly, Tooltip("The prop constellation that gets pulled out of the ghost and put into the gate lights")]
-    public GameObject propConstellationPrefab;
-    public Collection player;
+    public Stage destination;
+    [Tooltip("GateLinks are shared between pairs of gates. This lets the game know which gate in the destination stage" +
+             " the player will start at.")]
+    public GateLink gateLink;
+    public Vector3 gateForward = Vector3.forward;
 
-    [ShowInInspector, ReadOnly]
-    GameObject _player;
-    
-    
+    public UnityEvent onPlayerEnterGate;
+    public UnityEvent onPlayerSpawnToThisGate;
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(transform.position, transform.rotation * gateForward * 5);
+    }
+
     // Start is called before the first frame update
     void Start()
+    {}
+
+    public void SpawnPlayer()
     {
-        
+        // Disable the gate to prevent player from just getting spawned back and forth.
+        // It will be re-enabled when they exit the proximity trigger
+        enabled = false;
+        onPlayerSpawnToThisGate.Invoke();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void TryTransportPlayer()
     {
-        
+        if (!enabled) return;
+        // TODO check if the player is moving the right way through the gate using Vector3.Dot against gateForward
+        GameMaster.SetGateLink(gateLink);
+        onPlayerEnterGate.Invoke();
     }
 
-    public void GetPlayer()
+    public void LoadDestination()
     {
-        _player = player.GetElement(0).gameObject;
+        destination.Load(0);
     }
 
-    bool ValidateStars(int inputStars)
+    public void CheckIfSpawningPlayer()
     {
-        int sum = 0;
-        foreach (GateLight gateLight in gateLights)
+        if (GameMaster.Get().gateLink == gateLink)
         {
-            sum += gateLight.stars;
+            onPlayerSpawnToThisGate.Invoke();
         }
-
-        return sum == inputStars;
-    }
-
-    [Button]
-    void GetGateLights()
-    {
-        gateLights.Clear();
-        gateLights.AddRange(GetComponentsInChildren<GateLight>());
     }
 }

@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
 
 public class StageController : MonoBehaviour
 {
 	[AssetsOnly, InlineEditor()]
 	public Stage stage;
+
+	public UnityEvent onStartFromGate;
+	public UnityEvent onStartFromCheckpoint;
+	
 
 	void Awake()
 	{
@@ -25,6 +30,14 @@ public class StageController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		GateLink gateLink = GameMaster.Get().gateLink;
+		if (gateLink)
+			onStartFromGate.Invoke();
+		else
+			onStartFromCheckpoint.Invoke();
+		
+		GameMaster.CompleteGateLink();
+		
 		// Raise the immediate events
 		foreach (var e in stage.immediateEvents)
 			e.Raise();

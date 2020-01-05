@@ -47,7 +47,6 @@ public class VirtualCamHelper : MonoBehaviour
         _vCam.Priority = newPriority;
         StartCoroutine(SetPriority(originalPriority, priorityOverrideDuration));
     }
-    
 
     IEnumerator SetPriority (int priority, float delay)
     {

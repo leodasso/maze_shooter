@@ -16,6 +16,7 @@ public class GameMaster : ScriptableObject
     public Stage justCompletedStage;
     static GameMaster _gameMaster;
     public SaveDataAvatar currentAvatar;
+    public GateLink gateLink;
 
     public SavedString savedStage;
     public SavedString savedCheckpoint;
@@ -68,6 +69,16 @@ public class GameMaster : ScriptableObject
     public static bool IsCurrentCheckpoint(string checkpointName)
     {
         return checkpointName == Get().savedCheckpoint.GetValue();
+    }
+
+    public static void SetGateLink(GateLink newGateLink)
+    {
+        Get().gateLink = newGateLink;
+    }
+
+    public static void CompleteGateLink()
+    {
+        Get().gateLink = null;
     }
 
     public void LoadScene(string sceneName, float delay)
