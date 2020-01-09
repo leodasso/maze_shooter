@@ -29,7 +29,7 @@ public class Gate : MonoBehaviour
     {
         // Disable the gate to prevent player from just getting spawned back and forth.
         // It will be re-enabled when they exit the proximity trigger
-        enabled = false;
+        //enabled = false;
         onPlayerSpawnToThisGate.Invoke();
     }
 
