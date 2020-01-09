@@ -21,6 +21,8 @@ public class DevilLauncher : MonoBehaviour, IControllable
     public GameObject devilToLaunch;
     public GameObject launchPosition;
     public GunBrain gunBrain;
+
+    public DevilList devilList;
     
     [Tooltip("The train is like a conga line of devils that follow behind you. It acts as the ammo clip for this launcher.")]
     public Train devilTrain;
@@ -38,13 +40,24 @@ public class DevilLauncher : MonoBehaviour, IControllable
 
     public UnityEvent onLaunch;
     
-    
-
-    
     // Start is called before the first frame update
     void Start()
     {
-        
+        SpawnDevils();
+    }
+
+    void SpawnDevils()
+    {
+        foreach (DevilData devilData in devilList.objects.Values)
+        {
+            if (!devilData.IsRecruited()) continue;
+            
+            GameObject newDevil =
+                Instantiate(devilData.prefab, transform.position, devilData.prefab.transform.rotation);
+
+            Devil devil = newDevil.GetComponent<Devil>();
+            devil.ReturnToLauncher(this);
+        }
     }
     
     public void ApplyRightStickInput(Vector2 input)

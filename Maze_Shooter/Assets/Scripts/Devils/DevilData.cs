@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ES3PlayMaker;
 using UnityEngine;
 
 /// <summary>
@@ -16,5 +17,10 @@ public class DevilData : SavedBool
     public bool IsRecruited()
     {
         return GetValue();
+    }
+
+    protected override void LogSaveStatus()
+    {
+        Debug.Log(name + " has been recruited (in save file): " + RawLoad());
     }
 }

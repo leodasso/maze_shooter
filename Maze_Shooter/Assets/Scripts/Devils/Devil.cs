@@ -113,7 +113,7 @@ public class Devil : ContactBase
         onRebound.Invoke();
     }
 
-    void ReturnToLauncher(DevilLauncher launcher)
+    public void ReturnToLauncher(DevilLauncher launcher)
     {
         gameObject.layer = LayerMask.NameToLayer("PlayerBullets");
         rigidbody.isKinematic = true;
@@ -122,43 +122,31 @@ public class Devil : ContactBase
         onPickedUp.Invoke();
     }
 
-    public void TouchedByLauncher(DevilLauncher launcher)
-    {
-        Debug.Log("Touched by a devil launcher!");
-        // if this is a new touch, save the devil as picked up
-        if (devilData)
-        {
-            Debug.Log("Devil is recruited: " + devilData.IsRecruited());
-            Recruit();
-        }
-
-        ReturnToLauncher(launcher);
-        onReboundGrab.Invoke();
-    }
-
     /// <summary>
     /// Saves this devil as recruited by the player.
     /// </summary>
     void Recruit()
     {
-        // Save value
-        if (devilData) 
-            devilData.Save(true);
+        if (!devilData) return;
+        if (devilData.IsRecruited()) return;
         
-        Debug.Log("Recruiting devil " + name, this);
+        // Set value in the save file that this is recruited
+        devilData.Save(true);
         
         // TODO maybe special animation or effects for being recruited?
     }
     
     protected override void OnCollisionAction(Collision collision, Collider otherCol)
-    {
-        Debug.Log("Collision action with devil!");
-        
+    {        
         // the devil can be caught on the rebound mid-air by the player's main collider for bonuses.
         DevilLauncher launcher = otherCol.GetComponent<DevilLauncher>();
         if (launcher)
         {
-            TouchedByLauncher(launcher);
+            // if this is a new touch, save the devil as picked up
+            if (devilData) Recruit();
+
+            ReturnToLauncher(launcher);
+            onReboundGrab.Invoke();
             return;
         }
         

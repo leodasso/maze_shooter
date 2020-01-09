@@ -94,7 +94,7 @@ public abstract class SavedProperty<T> : ScriptableObject
         GameMaster.SaveToCurrentFile(Prefix + name, value, this);
     }
     
-    T Load()
+    protected T Load()
     {
         if (debug)
             Debug.Log(name + "'s value is being loaded.");
@@ -111,9 +111,17 @@ public abstract class SavedProperty<T> : ScriptableObject
             Debug.Log("Cached value is expired; Reloading the cache.");
 
         _lastLoadTime = DateTime.Now;
-        var saveFileValue = GameMaster.LoadFromCurrentFile(Prefix + name, defaultValue, this);
+        var saveFileValue = RawLoad();
         _cachedValue = saveFileValue;
         return saveFileValue;
+    }
+
+    /// <summary>
+    /// Returns value directly from save file, ignoring cache.
+    /// </summary>
+    protected T RawLoad()
+    {
+        return GameMaster.LoadFromCurrentFile(Prefix + name, defaultValue, this);
     }
 
     bool CacheIsValid()

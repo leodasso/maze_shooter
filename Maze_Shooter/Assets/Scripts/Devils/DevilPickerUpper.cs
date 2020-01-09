@@ -10,6 +10,6 @@ public class DevilPickerUpper : MonoBehaviour
         Devil devil = other.GetComponent<Devil>();
         if (!devil) return;
         if (devil.CanBePickedUp())
-            devil.TouchedByLauncher(launcher);
+            devil.ReturnToLauncher(launcher);
     }
 }
