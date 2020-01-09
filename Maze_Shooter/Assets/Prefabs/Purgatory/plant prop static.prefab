@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 911068473298902073}
   - component: {fileID: 911068473298902075}
   - component: {fileID: 303609720871763351}
+  - component: {fileID: 4491336878375869024}
+  - component: {fileID: 3778151637584127755}
   m_Layer: 16
-  m_Name: plant prop 1
+  m_Name: plant prop static
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,3 +120,37 @@ MonoBehaviour:
   sprites:
   - alpha: 1
     spriteRenderer: {fileID: 911068473298902073}
+--- !u!136 &4491336878375869024
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911068473298902070}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.665
+  m_Height: 0.99
+  m_Direction: 1
+  m_Center: {x: 0.17503434, y: 0.30005807, z: 0}
+--- !u!114 &3778151637584127755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911068473298902070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c90574d4d9adcd84d8edcdd21d15de75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 3584
+  wobbliness: 12
+  stiffness: 5
+  wobbleScale: {x: 0.15, y: 0, z: 5}
+  wobbleVel: {x: 0, y: 0, z: 0}
+  wobblePoint: {x: 0, y: 0, z: 0}
