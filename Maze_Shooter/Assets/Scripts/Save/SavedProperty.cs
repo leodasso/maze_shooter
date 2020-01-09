@@ -88,17 +88,17 @@ public abstract class SavedProperty<T> : ScriptableObject
                                  "even though the save file value has been updated.");
         }
         #endif
+        // Update the cache. This way even if there's a cache time of 100 seconds,
+        // it will be updated when the saved value is.
+        _cachedValue = value;
         GameMaster.SaveToCurrentFile(Prefix + name, value, this);
     }
     
     T Load()
     {
-#if UNITY_EDITOR
         if (debug)
-        {
             Debug.Log(name + "'s value is being loaded.");
-        }
-#endif
+
         if (CacheIsValid())
         {
             if (debug)

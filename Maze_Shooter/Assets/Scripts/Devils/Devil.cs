@@ -12,6 +12,9 @@ public class Devil : ContactBase
         Grounded,
         Following,
     }
+
+    [Tooltip("Data unique to this devil. Allows for saving when I'm picked up by player."), TabGroup("Main")]
+    public DevilData devilData;
     
     [Tooltip("Layers that this hazard will do damage to"), TabGroup("Main")]
     public LayerMask layersToDamage;
@@ -69,6 +72,15 @@ public class Devil : ContactBase
     // Start is called before the first frame update
     void Start()
     {
+        if (devilData)
+        {
+            // If the devil is out in the wild and marked as picked up in the save file,
+            // we just want to disable it.
+            if (devilState != DevilState.Following && devilData.IsRecruited())
+            {
+                gameObject.SetActive(false);
+            }
+        }
     }
 
     public void Launch(Vector3 launchVelocity)
@@ -101,7 +113,7 @@ public class Devil : ContactBase
         onRebound.Invoke();
     }
 
-    public void ReturnToLauncher(DevilLauncher launcher)
+    void ReturnToLauncher(DevilLauncher launcher)
     {
         gameObject.layer = LayerMask.NameToLayer("PlayerBullets");
         rigidbody.isKinematic = true;
@@ -109,15 +121,44 @@ public class Devil : ContactBase
         launcher.PickUpDevil(this);
         onPickedUp.Invoke();
     }
+
+    public void TouchedByLauncher(DevilLauncher launcher)
+    {
+        Debug.Log("Touched by a devil launcher!");
+        // if this is a new touch, save the devil as picked up
+        if (devilData)
+        {
+            Debug.Log("Devil is recruited: " + devilData.IsRecruited());
+            Recruit();
+        }
+
+        ReturnToLauncher(launcher);
+        onReboundGrab.Invoke();
+    }
+
+    /// <summary>
+    /// Saves this devil as recruited by the player.
+    /// </summary>
+    void Recruit()
+    {
+        // Save value
+        if (devilData) 
+            devilData.Save(true);
+        
+        Debug.Log("Recruiting devil " + name, this);
+        
+        // TODO maybe special animation or effects for being recruited?
+    }
     
     protected override void OnCollisionAction(Collision collision, Collider otherCol)
     {
+        Debug.Log("Collision action with devil!");
+        
         // the devil can be caught on the rebound mid-air by the player's main collider for bonuses.
         DevilLauncher launcher = otherCol.GetComponent<DevilLauncher>();
         if (launcher)
         {
-            ReturnToLauncher(launcher);
-            onReboundGrab.Invoke();
+            TouchedByLauncher(launcher);
             return;
         }
         
