@@ -13,6 +13,12 @@ public class WobblyProp : MonoBehaviour
     [Tooltip("Layers that cause this prop to wobble")]
     public LayerMask layerMask;
 
+    [Tooltip("(optional) Perlin noise profile, for adding ambient wobble, like wind blowing.")]
+    public NoiseProfile noiseProfile;
+    
+    [ShowIf("HasNoise")]
+    public float noiseMultiplier = 1;
+
     public float wobbliness = 1;
     public float stiffness = 1;
     public Vector3 wobbleScale = Vector3.one;
@@ -24,6 +30,11 @@ public class WobblyProp : MonoBehaviour
     public Vector3 wobblePoint = Vector3.zero;
 
     Quaternion initRotation;
+
+    bool HasNoise => noiseProfile != null;
+
+    Vector2 _noiseScrollPoint;
+    Vector2 _currentNoiseValue;
 
 
     void OnDrawGizmosSelected()
@@ -47,11 +58,26 @@ public class WobblyProp : MonoBehaviour
     {
         wobbleVel = Vector3.Lerp(wobbleVel, -wobblePoint, Time.deltaTime * stiffness);
         wobblePoint += wobbliness * Time.deltaTime * wobbleVel;
-
         Vector3 scaledWobblePoint = Vector3.Scale(wobbleScale, wobblePoint);
         
-        Quaternion rot = Quaternion.Euler(scaledWobblePoint.z, scaledWobblePoint.y, -scaledWobblePoint.x);
+        if (HasNoise)
+        {
+            _noiseScrollPoint += Time.deltaTime * noiseProfile.scrollSpeed;
+            _currentNoiseValue = GeneratedPerlinVector() * noiseMultiplier * noiseProfile.strength;
+        }
+        
+        Quaternion rot = Quaternion.Euler(scaledWobblePoint.z + _currentNoiseValue.x, scaledWobblePoint.y, -scaledWobblePoint.x + _currentNoiseValue.y);
         transform.localRotation = initRotation * rot;
+    }
+    
+    Vector2 GeneratedPerlinVector()
+    {
+        float inputX = transform.position.x + _noiseScrollPoint.x;
+        float inputY = transform.position.y + _noiseScrollPoint.y;
+        
+        float x = Mathf.PerlinNoise(inputX * noiseProfile.frequency, inputY * noiseProfile.frequency) - .5f;
+        float y = Mathf.PerlinNoise(inputY * noiseProfile.frequency, inputX * noiseProfile.frequency) - .5f;
+        return new Vector2(x, y);
     }
 
     void OnTriggerEnter(Collider other)

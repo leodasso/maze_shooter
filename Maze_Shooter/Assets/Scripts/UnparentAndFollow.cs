@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Sirenix.OdinInspector;
 
+[TypeInfoBox("On start, unparents from the transform parent. Follows former parent's position.")]
 public class UnparentAndFollow : MonoBehaviour
 {
     Vector3 _offset;

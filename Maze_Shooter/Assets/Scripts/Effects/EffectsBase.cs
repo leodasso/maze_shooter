@@ -27,6 +27,14 @@ public class EffectsBase : MonoBehaviour
 
 	protected float _lifetime;
 
+	protected Actor _actor;
+
+	void Awake()
+	{
+		_actor = GetComponent<Actor>();
+		if (!_actor) _actor = GetComponentInParent<Actor>();
+	}
+
 	void Update()
 	{
 		_lifetime += Time.deltaTime;
@@ -41,6 +49,8 @@ public class EffectsBase : MonoBehaviour
 	{
 		if (!Application.isPlaying) return;
 		if (Time.unscaledTime < Mathf.Epsilon) return;
+		
+		if (_actor && _actor.culled) return;
 		
 		// If this is being disabled because we're loading a scene, we don't want it to create an effect.
 		if (GameMaster.transitioning) return;
