@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -9,29 +8,20 @@ public class ColorGroup : MonoBehaviour
     public Color color = Color.white;
     public bool overwriteAlpha;
     public List<SpriteRenderer> sprites = new List<SpriteRenderer>();
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    float _tempAlpha;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    [ButtonGroup()]
     public void SetColor()
     {
         GetSprites();
         foreach (var sprite in sprites)
         {
-            sprite.color = new Color(color.r, color.g, color.b, sprite.color.a);
+            _tempAlpha = overwriteAlpha ? color.a : sprite.color.a;
+            sprite.color = new Color(color.r, color.g, color.b, _tempAlpha);
         }
     }
 
-    [Button]
+    [ButtonGroup()]
     public void GetSprites()
     {
         sprites.Clear();

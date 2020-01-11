@@ -297,6 +297,7 @@ GameObject:
   - component: {fileID: 9008572659450247471}
   - component: {fileID: 4718483383281776832}
   - component: {fileID: 8051173750528964998}
+  - component: {fileID: 678789328677780319}
   m_Layer: 10
   m_Name: Red Devil
   m_TagString: Untagged
@@ -452,6 +453,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 35073
   ignoredColliders: []
+  devilData: {fileID: 0}
   layersToDamage:
     serializedVersion: 2
     m_Bits: 34816
@@ -754,11 +756,28 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_targetOffset: {x: 0, y: 0, z: 0}
+  overrideTarget: 0
+  customTarget: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 2048
   m_zoneColor: {r: 255, g: 0, b: 155, a: 0.1}
   m_lineColor: {r: 255, g: 0, b: 155, a: 1}
+--- !u!114 &678789328677780319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4762546893851248404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f88644049d5ad449976ca12a853ef88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeholderPrefab: {fileID: 7276623351531485110, guid: 3038f4405f5499e4685eb480b364a719,
+    type: 3}
+  culled: 0
 --- !u!1 &8105437495255184960
 GameObject:
   m_ObjectHideFlags: 0
