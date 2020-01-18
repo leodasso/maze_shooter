@@ -62,6 +62,8 @@ public class DevilLauncher : MonoBehaviour, IControllable
     
     public void ApplyRightStickInput(Vector2 input)
     {
+        if (!enabled) return;
+        
         // check if firing threshhold, place devil on launch position
         if (input.magnitude >= inputThreshhold.Value && launchState == LaunchState.Empty)
             BeginTransport();
@@ -115,6 +117,7 @@ public class DevilLauncher : MonoBehaviour, IControllable
 
     public void DoActionAlpha()
     {
+        if (!enabled) return;
         LaunchDevil();
     }
 
@@ -134,6 +137,11 @@ public class DevilLauncher : MonoBehaviour, IControllable
         launchState = LaunchState.Empty;
         
         onLaunch.Invoke();
+    }
+
+    void OnDisable()
+    {
+        ReturnPreppedDevil();
     }
 
     public void PickUpDevil(Devil devil)

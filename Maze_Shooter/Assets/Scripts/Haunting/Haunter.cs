@@ -62,6 +62,9 @@ namespace ShootyGhost
         [TabGroup("events"), Space]
         public UnityEvent onHauntBegin;
 
+        [TabGroup("events")]
+        public UnityEvent onJuiceAdded;
+
         [TabGroup("events")] 
         public UnityEvent onHauntEnd;
 
@@ -186,6 +189,7 @@ namespace ShootyGhost
         public void AddJuice(float amount)
         {
             hauntJuice += amount;
+            onJuiceAdded.Invoke();
         }
     }
 }

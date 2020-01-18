@@ -33,4 +33,9 @@ public class AimIndicator : MonoBehaviour
         transform.rotation = gunBrain.aim;
 
     }
+
+    void OnDisable()
+    {
+        SetAlpha(0);
+    }
 }
