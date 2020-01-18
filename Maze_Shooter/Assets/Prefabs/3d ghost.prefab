@@ -268,7 +268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3594317241385997719}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.91, y: -4.87, z: 4.51}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3596589943858681433}
@@ -514,7 +514,7 @@ MonoBehaviour:
   customTransform: {fileID: 0}
   offset: -0.2
   isStatic: 0
-  sortingOrder: -431
+  sortingOrder: 20
   renderers:
   - renderer: {fileID: 3680872684990957169}
     offset: 1
@@ -575,6 +575,25 @@ MonoBehaviour:
     type: 2}
   transitionEffect: {fileID: 4991704436452651575, guid: 77acee53dc67fac40ba55d5e94a5c3da,
     type: 3}
+  hauntGuiSettings: {fileID: 11400000, guid: 524e3f9e6b275f142b1237ad4f682799, type: 2}
+  guiSpawnOffset: {x: 0, y: 2.5, z: 1}
+  hideHauntGui:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: c9f28932571ff794198ea8a85b70c910, type: 2}
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  showTime: 3
   onHauntStateBegin:
     m_PersistentCalls:
       m_Calls:
@@ -1860,7 +1879,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -430
+  m_SortingOrder: 21
   m_Sprite: {fileID: 21300000, guid: 6dde6f3c298cfec4e8dde4fda32d5644, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -7119,6 +7138,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4151602328836940682}
+        m_MethodName: ShowJuiceGui
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   comment: 
@@ -7142,6 +7172,17 @@ MonoBehaviour:
       - m_Target: {fileID: 3594317241385997715}
         m_MethodName: set_enabled
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 4151602328836940682}
+        m_MethodName: HideJuiceGui
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
