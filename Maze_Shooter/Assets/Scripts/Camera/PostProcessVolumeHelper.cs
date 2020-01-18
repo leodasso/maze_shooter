@@ -23,6 +23,14 @@ public class PostProcessVolumeHelper : MonoBehaviour
         _volume.weight = snapTo;
     }
 
+    /// <summary>
+    /// Adds the given amount to the volume's weight without lerping
+    /// </summary>
+    public void AddVolumeWeight(float amt)
+    {
+        _volume.weight += amt;
+    }
+
     // Active and inactive functions are for UnityEvent to ref
     public void SetActive()
     {
