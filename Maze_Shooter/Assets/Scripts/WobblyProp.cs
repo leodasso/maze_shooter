@@ -97,7 +97,6 @@ public class WobblyProp : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Hit by object of layer " + other.gameObject.layer, other.gameObject);
         if (!Math.LayerMaskContainsLayer(layerMask, other.gameObject.layer))
             return;
         
@@ -119,7 +118,6 @@ public class WobblyProp : MonoBehaviour
 
     public void SetWobble(Vector3 vector)
     {
-        Debug.Log("Setting wobble vector to " + vector);
         wobbleVel += vector;
     }
 }
