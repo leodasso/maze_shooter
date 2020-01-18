@@ -93,5 +93,17 @@ namespace Arachnid
 			float remainder = inputAngle % 360;
 			return 360 - remainder;
 		}
+
+		/// <summary>
+		/// The default perlin noise is a range from 0 to 1, but has a chance to be slightly
+		/// above 1. This returns a range that's ALWAYS between -0.5 and 0.5
+		/// </summary>
+		/// <param name="perlinX"></param>
+		/// <param name="perlinY"></param>
+		/// <param name="frequency"></param>
+		public static float CleanCenteredNoise(float perlinX, float perlinY, float frequency)
+		{
+			return Mathf.Clamp01(Mathf.PerlinNoise(perlinX * frequency, perlinY * frequency)) - .5f;
+		}
 	}
 }

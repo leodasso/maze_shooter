@@ -4772,6 +4772,7 @@ GameObject:
   - component: {fileID: 7929894042448423395}
   - component: {fileID: 7928661334988036628}
   - component: {fileID: 7928661334988036627}
+  - component: {fileID: 1353271397703375742}
   - component: {fileID: 7928661334988036630}
   - component: {fileID: 7928661334988036629}
   - component: {fileID: 8349495595492401576}
@@ -5059,6 +5060,26 @@ MonoBehaviour:
     valueObject: {fileID: 0}
   target: {fileID: 0}
   targetFinder: {fileID: 8042278319276946398}
+--- !u!114 &1353271397703375742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7928661334988036626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1eef7adf007a041a8f3a94b1f38be2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedMultiplier: 0
+  speed:
+    useConstant: 0
+    constantValue: 50
+    valueObject: {fileID: 0}
+  noiseProfile: {fileID: 11400000, guid: e0587325c44a4e748bc9d8121e4c9d17, type: 2}
+  noiseCalibration: {x: 0, y: 0}
+  randomizeNoise: 1
 --- !u!95 &7928661334988036630
 Animator:
   serializedVersion: 3
@@ -5314,14 +5335,17 @@ MonoBehaviour:
       actionData:
         actionNames:
         - SetMoveSpeedMultiplier
+        - SetMoveSpeedMultiplier
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 7d042b04
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000003000000
+        actionHashCodes: 7d042b047d042b04
         unityObjectParams:
         - {fileID: 7928661334988036627}
+        - {fileID: 1353271397703375742}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
         animationCurveParams: []
@@ -5344,18 +5368,21 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData: 0000803f00
+        byteData: 0000803f000000803f00
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 050000000200000001000000
+        paramDataType: 050000000200000001000000050000000200000001000000
         paramName:
         - mover
         - multiplier
         - resetOnExit
-        paramDataPos: 000000000000000004000000
-        paramByteDataSize: 000000000400000001000000
+        - mover
+        - multiplier
+        - resetOnExit
+        paramDataPos: 000000000000000004000000010000000500000009000000
+        paramByteDataSize: 000000000400000001000000000000000400000001000000
     - name: dazed
       description: 
       colorIndex: 0
@@ -5382,16 +5409,19 @@ MonoBehaviour:
         - HutongGames.PlayMaker.Actions.Wait
         - SetMoveSpeedMultiplier
         - HutongGames.PlayMaker.Actions.SetAnimatorTrigger
+        - SetMoveSpeedMultiplier
         customNames:
         - 
         - 
         - 
-        actionEnabled: 010101
-        actionIsOpen: 010101
-        actionStartIndex: 000000000300000006000000
-        actionHashCodes: 48c011017d042b049bd6f801
+        - 
+        actionEnabled: 01010101
+        actionIsOpen: 01010101
+        actionStartIndex: 00000000030000000600000008000000
+        actionHashCodes: 48c011017d042b049bd6f8017d042b04
         unityObjectParams:
         - {fileID: 7928661334988036627}
+        - {fileID: 1353271397703375742}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
         - ownerOption: 0
@@ -5435,12 +5465,12 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - FINISHED
-        byteData: 000000000001
+        byteData: 0000000000019a99993e01
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 0f00000017000000010000000500000002000000010000001400000012000000
+        paramDataType: 0f00000017000000010000000500000002000000010000001400000012000000050000000200000001000000
         paramName:
         - time
         - finishEvent
@@ -5450,8 +5480,11 @@ MonoBehaviour:
         - resetOnExit
         - gameObject
         - trigger
-        paramDataPos: 0000000000000000000000000000000001000000050000000000000000000000
-        paramByteDataSize: 0000000000000000010000000000000004000000010000000000000000000000
+        - mover
+        - multiplier
+        - resetOnExit
+        paramDataPos: 000000000000000000000000000000000100000005000000000000000000000001000000060000000a000000
+        paramByteDataSize: 0000000000000000010000000000000004000000010000000000000000000000000000000400000001000000
     events:
     - name: FINISHED
       isSystemEvent: 1

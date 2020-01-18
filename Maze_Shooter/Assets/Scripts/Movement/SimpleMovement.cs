@@ -23,11 +23,9 @@ public class SimpleMovement : MovementBase
     
     void FixedUpdate()
     {
-        Vector3 forceVector = Math.Project2Dto3D(direction);
-        
         if (target) 
-            forceVector = (target.transform.position - transform.position).normalized;
+            direction = (target.transform.position - transform.position).normalized;
         
-        _rigidbody.AddForce(forceVector * speed.Value * speedMultiplier * Time.fixedDeltaTime);
+        _rigidbody.AddForce(direction * speed.Value * speedMultiplier * Time.fixedDeltaTime);
     }
 }

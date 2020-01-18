@@ -1,15 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Arachnid;
+using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class NoiseMovement : MovementBase
-{    
-    [Tooltip("The frequency or size of the noise. Larger frequency will result in smaller, jittery movements")]
-    public FloatReference noiseFrequency;
-    
-    [Tooltip("The scroll speed of the perlin noise.")]
-    public FloatReference scrollSpeed;
+{
+    [Tooltip("Profile for the stats of the perlin noise.")]
+    public NoiseProfile noiseProfile;
     
     [Tooltip("If the group tends to bunch up in one corner or another after a while, use this to adjust their overall movement.")]
     public Vector2 noiseCalibration = new Vector2(-.5f, -.5f);
@@ -31,13 +30,14 @@ public class NoiseMovement : MovementBase
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere((Vector2)transform.position + GeneratedPerlinVector(), .05f);
-        Gizmos.DrawLine(transform.position, (Vector2)transform.position + GeneratedPerlinVector());
+        Vector3 noisePos = transform.position + Math.Project2Dto3D(GeneratedPerlinVector());
+        Gizmos.DrawSphere(noisePos, .05f);
+        Gizmos.DrawLine(transform.position, noisePos);
     }
     
     void FixedUpdate()
     {
-        _noiseScrollOffset += Time.fixedDeltaTime * scrollSpeed.Value;
+        _noiseScrollOffset += Time.fixedDeltaTime * noiseProfile.scrollSpeed.x;
         direction = Math.Project2Dto3D(GeneratedPerlinVector());
         _rigidbody.AddForce(direction * speed.Value * speedMultiplier);
     }
@@ -46,16 +46,16 @@ public class NoiseMovement : MovementBase
     Vector2 GeneratedPerlinVector()
     {
         float inputX = transform.position.x - _noiseScrollOffset;
-        float inputY = transform.position.y + _noiseScrollOffset;
+        float inputY = transform.position.z + _noiseScrollOffset;
 
         if (randomizeNoise)
         {
             inputX += _noiseRandomOffset.x;
             inputY += _noiseRandomOffset.y;
         }
-        
-        float x = Mathf.PerlinNoise(inputX * noiseFrequency.Value, inputY * noiseFrequency.Value) + noiseCalibration.x;
-        float y = Mathf.PerlinNoise(inputY * noiseFrequency.Value, inputX * noiseFrequency.Value) + noiseCalibration.y;
+
+        float x = Math.CleanCenteredNoise(inputX, inputY, noiseProfile.frequency) + noiseCalibration.x;
+        float y = Math.CleanCenteredNoise(inputX, inputY, noiseProfile.frequency) + noiseCalibration.y;
         return new Vector2(x, y);
     }
 
