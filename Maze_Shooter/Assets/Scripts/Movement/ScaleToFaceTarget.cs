@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 [RequireComponent(typeof(TargetFinder))]
 public class ScaleToFaceTarget : MonoBehaviour
 {
+    public Transform objectToScale;
     TargetFinder _targetFinder;
     float _defaultScaleX;
     int direction = 1;
@@ -16,7 +17,7 @@ public class ScaleToFaceTarget : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _defaultScaleX = transform.localScale.x;
+        _defaultScaleX = objectToScale.localScale.x;
         _targetFinder = GetComponent<TargetFinder>();
     }
 
@@ -30,7 +31,7 @@ public class ScaleToFaceTarget : MonoBehaviour
 
         if (direction != prevDirection)
         {
-            transform.localScale = new Vector3(_defaultScaleX * direction, transform.localScale.y, 1);
+            objectToScale.localScale = new Vector3(_defaultScaleX * direction, objectToScale.localScale.y, 1);
             prevDirection = direction;
         }
     }

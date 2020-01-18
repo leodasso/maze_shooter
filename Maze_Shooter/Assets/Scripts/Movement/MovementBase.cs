@@ -20,7 +20,7 @@ public class MovementBase : MonoBehaviour, IControllable
     protected virtual void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        direction = new Vector2(1, 0);
+        direction = new Vector2(0, 0);
     }
 
     /// <summary>

@@ -15,10 +15,16 @@ public class WobblyProp : MonoBehaviour
 
     [Tooltip("(optional) Perlin noise profile, for adding ambient wobble, like wind blowing.")]
     public NoiseProfile noiseProfile;
+
+    [Tooltip("The default object to wobble is this. Use this toggle if you want the collisions/triggers from this object " +
+             "to wobble another object.")]
+    public bool wobbleOtherObject;
+
+    [ShowIf("wobbleOtherObject")]
+    public Transform wobbler;
     
     [ShowIf("HasNoise")]
     public float noiseMultiplier = 1;
-
     public float wobbliness = 1;
     public float stiffness = 1;
     public Vector3 wobbleScale = Vector3.one;
@@ -35,6 +41,7 @@ public class WobblyProp : MonoBehaviour
 
     Vector2 _noiseScrollPoint;
     Vector2 _currentNoiseValue;
+    Transform ObjectToWobble => wobbleOtherObject ? wobbler : transform;
 
 
     void OnDrawGizmosSelected()
@@ -50,7 +57,7 @@ public class WobblyProp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        initRotation = transform.localRotation;
+        initRotation = ObjectToWobble.localRotation;
     }
 
     // Update is called once per frame
@@ -67,7 +74,7 @@ public class WobblyProp : MonoBehaviour
         }
         
         Quaternion rot = Quaternion.Euler(scaledWobblePoint.z + _currentNoiseValue.x, scaledWobblePoint.y, -scaledWobblePoint.x + _currentNoiseValue.y);
-        transform.localRotation = initRotation * rot;
+        ObjectToWobble.localRotation = initRotation * rot;
     }
     
     Vector2 GeneratedPerlinVector()
@@ -85,22 +92,34 @@ public class WobblyProp : MonoBehaviour
         if (!Math.LayerMaskContainsLayer(layerMask, other.gameObject.layer))
             return;
         
-        DoWobble(other);
+        SetWobble(GetVelocity(other.gameObject));
     }
 
-    void DoWobble(Collider other)
+    void OnCollisionEnter(Collision other)
     {
-        // calculate relative velocity
-        Vector3 vel = Vector3.zero;
-        var otherRb = other.GetComponent<Rigidbody>();
-        if (otherRb) vel = otherRb.velocity;
-        else
-        {
-            var otherPseudoVel = other.GetComponent<PseudoVelocity>();
-            if (otherPseudoVel) vel = otherPseudoVel.velocity;
-        }
+        Debug.Log("Hit by object of layer " + other.gameObject.layer, other.gameObject);
+        if (!Math.LayerMaskContainsLayer(layerMask, other.gameObject.layer))
+            return;
+        
+        SetWobble(other.relativeVelocity);
+    }
 
-        // TODO get total force based on other rigidbody velocity & mass 
-        wobbleVel += vel;
+    Vector3 GetVelocity(GameObject other)
+    {
+        var otherRb = other.GetComponent<Rigidbody>();
+        if (otherRb) 
+            return otherRb.velocity;
+
+        var otherPseudoVel = other.GetComponent<PseudoVelocity>();
+        if (otherPseudoVel) 
+            return otherPseudoVel.velocity;
+
+        return Vector3.zero;
+    }
+
+    public void SetWobble(Vector3 vector)
+    {
+        Debug.Log("Setting wobble vector to " + vector);
+        wobbleVel += vector;
     }
 }
