@@ -24,21 +24,27 @@ namespace ShootyGhost
             haunter = GetComponentInParent<Haunter>();
         }
 
-        void OnTriggerEnter2D(Collider2D other)
+        void OnTriggerEnter(Collider other)
         {
             Hauntable hauntable = other.GetComponent<Hauntable>();
             if (!hauntable) return;
+            
+            hauntable.TargetedForHaunt();
 
-            _indicator = Instantiate(indicatorPrefab, other.transform.position, quaternion.identity, other.transform);
+            Vector3 otherPos = other.transform.position;
+            Vector3 spawnPos = new Vector3(otherPos.x, otherPos.y + other.bounds.size.y, otherPos.z);
+            _indicator = Instantiate(indicatorPrefab, spawnPos, quaternion.identity, other.transform);
 
             haunter.targetedHauntable = hauntable;
             onHauntableOverlapped.Invoke();
         }
 
-        void OnTriggerExit2D(Collider2D other)
+        void OnTriggerExit(Collider other)
         {
             Hauntable hauntable = other.GetComponent<Hauntable>();
             if (!hauntable) return;
+            
+            hauntable.UnTargetedForHaunt();
 
             if (hauntable == haunter.targetedHauntable)
             {

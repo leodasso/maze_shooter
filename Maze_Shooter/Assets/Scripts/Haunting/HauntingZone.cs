@@ -14,6 +14,7 @@ namespace ShootyGhost
         [Tooltip("The visual representation of the haunting area. This is scalled according to the haunting range.")]
         public GameObject hauntingArea;
         public Transform selector;
+        public float selectorLerpSpeed = 10;
 
         // Update is called once per frame
         void Update()
@@ -25,9 +26,10 @@ namespace ShootyGhost
         {
             // Move the selector based on right stick movement
             // Sometimes the input's magnitude can exceed 1, so this ensures it stays within the range.
-            Vector3 totalInput = new Vector3(input.x, 0, input.y);
+            Vector3 totalInput = Math.Project2Dto3D(input);
             Vector3 clampedInput = Vector3.ClampMagnitude(totalInput, 1);
-            selector.transform.localPosition = clampedInput * hauntingRange.Value;
+            selector.transform.localPosition = Vector3.Lerp(selector.transform.localPosition, 
+                clampedInput * hauntingRange.Value, Time.unscaledDeltaTime * selectorLerpSpeed);
         }
 
         public void DoActionAlpha() { }

@@ -20,6 +20,9 @@ namespace ShootyGhost
 
         [TabGroup("main"), Tooltip("Haunt juice is needed to perform hauntings!")]
         public int hauntJuice = 0;
+        
+        [TabGroup("main"), Tooltip("On Start(), hauntJuice value is pulled from save file using this. On Destroy(), it's saved.")]
+        public SavedInt savedHauntJuice;
 
         [TabGroup("main"), Tooltip("The cost of performing a haunt")]
         public FloatReference hauntCost;
@@ -91,6 +94,7 @@ namespace ShootyGhost
         {
             _player = ReInput.players.GetPlayer(0);
             _rigidbody = GetComponent<Rigidbody>();
+            hauntJuice = savedHauntJuice.GetValue();
         }
 
         // Update is called once per frame
@@ -98,15 +102,13 @@ namespace ShootyGhost
         {
             if (_player == null) return;
 
-            if (_hauntGuiTimed)
+            // Haunt GUI shows up when picking up haunt juice. This timer removes it after a certain amt of time.
+            if (_hauntGuiTimed && ghostState == GhostState.Normal)
             {
                 if (_hauntGuiTimer > 0)
                     _hauntGuiTimer -= Time.unscaledDeltaTime;
-
                 else
-                {
                     HideJuiceGui();
-                }
             }
 
 
@@ -208,6 +210,7 @@ namespace ShootyGhost
         // Make sure we're not leaving anything hanging if this is destroyed during targeting
         void OnDestroy()
         {
+            savedHauntJuice.Save(hauntJuice);
             onHauntStateEnd.Invoke();
             hauntBurstIntensityRef.Value = 0;
         }
