@@ -11,6 +11,8 @@ namespace ShootyGhost
         public UnityEvent onHaunted;
         public UnityEvent onUnHaunted;
         public GameObject hauntCostGuiPrefab;
+        
+        int _hauntJuiceApplied = 0;
 
         GameObject _hauntCostGuiInstance;
 
@@ -24,6 +26,11 @@ namespace ShootyGhost
         {
             if (_hauntCostGuiInstance)
                 Destroy(_hauntCostGuiInstance);
+        }
+
+        public bool CostIsFulfilled()
+        {
+            return _hauntJuiceApplied >= hauntCost;
         }
 
         public void TargetedForHaunt()

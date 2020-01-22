@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
 using Rewired;
@@ -88,6 +89,7 @@ namespace ShootyGhost
         float _hauntGuiTimer = 0;
         bool _hauntGuiTimed;
         int _hauntGuiQtyShowing = 0;
+        List<HauntGui> _hauntGuiInstances = new List<HauntGui>();
         
         // Start is called before the first frame update
         void Start()
@@ -101,6 +103,9 @@ namespace ShootyGhost
         void Update()
         {
             if (_player == null) return;
+            
+            if (ghostState == GhostState.Targeting) 
+                TargetingUpdate();
 
             // Haunt GUI shows up when picking up haunt juice. This timer removes it after a certain amt of time.
             if (_hauntGuiTimed && ghostState == GhostState.Normal)
@@ -140,6 +145,35 @@ namespace ShootyGhost
             }
             else hauntBurstIntensity = 0;
             hauntBurstIntensityRef.Value = hauntBurstIntensity;
+        }
+
+        void TargetingUpdate()
+        {
+            if (targetedHauntable)
+            {
+                if (!targetedHauntable.CostIsFulfilled())
+                {
+                    // try to fulfill the haunt cost...
+                    if (hauntJuice > 0)
+                    {
+                        SendHauntPacket();
+                    }
+                }
+            }
+            else
+            {
+                
+            }
+        }
+
+        void SendHauntPacket()
+        {
+           
+        }
+
+        void RecallHauntPacket()
+        {
+            
         }
 
         bool CanBeginHauntTargeting => ghostState == GhostState.Normal && _targetingModeTimer <= 0 && HasHauntJuice;
@@ -219,7 +253,7 @@ namespace ShootyGhost
         {
             hauntJuice += amount;
             onJuiceAdded.Invoke();
-            ShowJuiceUi(amount, showTime);
+            ShowJuiceGui(amount, showTime);
         }
 
         public void HideJuiceGui()
@@ -235,8 +269,9 @@ namespace ShootyGhost
             StartCoroutine(SpawnJuiceUi(hauntJuice - _hauntGuiQtyShowing));
         }
 
-        void ShowJuiceUi(int newQty, float showForSeconds)
+        void ShowJuiceGui(int newQty, float showForSeconds)
         {
+            _hauntGuiInstances.Clear();
             _hauntGuiTimed = true;
             _hauntGuiTimer = showForSeconds;
             StartCoroutine(SpawnJuiceUi(newQty));
@@ -252,6 +287,8 @@ namespace ShootyGhost
                 Vector3 spawnPos = transform.position + guiSpawnOffset + Random.onUnitSphere;
                 GameObject newHauntGui = Instantiate(hauntGuiPrefab.prefab, spawnPos, Quaternion.identity);
                 _hauntGuiQtyShowing += hauntGuiPrefab.value;
+                HauntGui newGui = newHauntGui.GetComponent<HauntGui>();
+                _hauntGuiInstances.Add(newGui);
 
                 var springJoint = newHauntGui.GetComponent<SpringJoint>();
                 springJoint.connectedBody = _rigidbody;
