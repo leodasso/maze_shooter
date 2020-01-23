@@ -242,7 +242,7 @@ Rigidbody:
   m_GameObject: {fileID: 2284393115287650875}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 0.05
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -257,7 +257,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2284393115287650875}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.34
@@ -291,7 +291,7 @@ MonoBehaviour:
   m_searchRange: 100
   m_searchAngle: 360
   m_canLooseTarget: 0
-  m_guidanceIntensity: 5
+  m_guidanceIntensity: 6
   m_distanceInfluence:
     serializedVersion: 2
     m_Curve:
@@ -305,13 +305,13 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      time: 0.9999973
+      value: 1.6954169
+      inSlope: 2.2714992
+      outSlope: 2.2714992
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.04384643
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

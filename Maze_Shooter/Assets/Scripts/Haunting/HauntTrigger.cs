@@ -35,7 +35,7 @@ namespace ShootyGhost
             Vector3 spawnPos = new Vector3(otherPos.x, otherPos.y + other.bounds.size.y, otherPos.z);
             _indicator = Instantiate(indicatorPrefab, spawnPos, quaternion.identity, other.transform);
 
-            haunter.targetedHauntable = hauntable;
+            haunter.SetTargetedHauntable(hauntable);
             onHauntableOverlapped.Invoke();
         }
 
@@ -49,7 +49,7 @@ namespace ShootyGhost
             if (hauntable == haunter.targetedHauntable)
             {
                 if (_indicator) Destroy(_indicator);
-                haunter.targetedHauntable = null;
+                haunter.ClearTargetedHauntable();
                 onHauntableExited.Invoke();
             }
         }

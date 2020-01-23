@@ -153,25 +153,35 @@ namespace ShootyGhost
             {
                 if (!targetedHauntable.CostIsFulfilled())
                 {
-                    // try to fulfill the haunt cost...
-                    if (hauntJuice > 0)
-                    {
-                        SendHauntPacket();
-                    }
+                    SendHauntPacket();
                 }
             }
-            else
-            {
-                
-            }
+        }
+
+        public void SetTargetedHauntable(Hauntable newTarget)
+        {
+            targetedHauntable = newTarget;
+        }
+
+        public void ClearTargetedHauntable()
+        {
+            targetedHauntable = null;
+            RecallHauntPackets();
         }
 
         void SendHauntPacket()
         {
-           
+            if (!targetedHauntable) return;
+            foreach (HauntGui hauntShell in _hauntGuiInstances)
+            {
+                if (hauntShell.IsEmpty()) continue;
+                hauntShell.SendHauntPacket(targetedHauntable.gameObject);
+                targetedHauntable.AddHauntJuice(1);
+                return;
+            }
         }
 
-        void RecallHauntPacket()
+        void RecallHauntPackets()
         {
             
         }
@@ -194,12 +204,15 @@ namespace ShootyGhost
         void EndHauntTargeting()
         {
             if (targetedHauntable)
-                BeginHaunt(targetedHauntable);
+            {
+                // BeginHaunt(targetedHauntable);
+            }
             else 
                 ghostState = GhostState.Normal;
             
             targetedHauntable = null;
             onHauntStateEnd.Invoke();
+            
 
             _targetingModeTimer = targetingModeCooldown.Value;
         }
@@ -228,6 +241,7 @@ namespace ShootyGhost
             haunted.OnUnHaunted();
             onHauntEnd.Invoke();
             haunted = targetedHauntable = null;
+            RecallHauntPackets();
         }
         
         /// <summary>

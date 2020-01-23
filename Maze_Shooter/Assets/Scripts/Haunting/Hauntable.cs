@@ -33,6 +33,11 @@ namespace ShootyGhost
             return _hauntJuiceApplied >= hauntCost;
         }
 
+        public void AddHauntJuice(int qty)
+        {
+            _hauntJuiceApplied += qty;
+        }
+
         public void TargetedForHaunt()
         {
             
