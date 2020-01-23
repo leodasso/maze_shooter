@@ -5,6 +5,7 @@ using UnityEngine;
 using Rewired;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
+using Unity.Mathematics;
 
 namespace ShootyGhost
 {
@@ -58,14 +59,8 @@ namespace ShootyGhost
         [TabGroup("main")]
         public GameObject transitionEffect;
 
-        [TabGroup("UI")] 
-        public HauntGuiSettings hauntGuiSettings;
-
         [TabGroup("UI")]
-        public Vector3 guiSpawnOffset;
-
-        [TabGroup("UI")]
-        public UnityEvent hideHauntGui;
+        public GameObject hauntJuiceQtyGuiPrefab;
 
         [TabGroup("UI")] 
         public float showTime = 5;
@@ -86,10 +81,10 @@ namespace ShootyGhost
 
         Rigidbody _rigidbody;
         float _targetingModeTimer = 0;
-        float _hauntGuiTimer = 0;
+        HauntJuiceGui _juiceGuiInstance;
+        float _hauntGuiTimer;
         bool _hauntGuiTimed;
-        int _hauntGuiQtyShowing = 0;
-        List<HauntGui> _hauntGuiInstances = new List<HauntGui>();
+        
         
         // Start is called before the first frame update
         void Start()
@@ -106,7 +101,7 @@ namespace ShootyGhost
             
             if (ghostState == GhostState.Targeting) 
                 TargetingUpdate();
-
+            
             // Haunt GUI shows up when picking up haunt juice. This timer removes it after a certain amt of time.
             if (_hauntGuiTimed && ghostState == GhostState.Normal)
             {
@@ -115,7 +110,6 @@ namespace ShootyGhost
                 else
                     HideJuiceGui();
             }
-
 
             // Cooldown for targeting mode entry. Prevents player from spamming targeting mode quickly
             if (_targetingModeTimer >= 0)
@@ -172,13 +166,6 @@ namespace ShootyGhost
         void SendHauntPacket()
         {
             if (!targetedHauntable) return;
-            foreach (HauntGui hauntShell in _hauntGuiInstances)
-            {
-                if (hauntShell.IsEmpty()) continue;
-                hauntShell.SendHauntPacket(targetedHauntable.gameObject);
-                targetedHauntable.AddHauntJuice(1);
-                return;
-            }
         }
 
         void RecallHauntPackets()
@@ -267,48 +254,30 @@ namespace ShootyGhost
         {
             hauntJuice += amount;
             onJuiceAdded.Invoke();
-            ShowJuiceGui(amount, showTime);
+
+            _hauntGuiTimed = true;
+            _hauntGuiTimer = showTime;
+            ShowJuiceGui();
         }
 
-        public void HideJuiceGui()
+        void HideJuiceGui()
         {
             _hauntGuiTimed = false;
-            _hauntGuiQtyShowing = 0;
-            hideHauntGui.Invoke();
+            if (_juiceGuiInstance)
+                _juiceGuiInstance.Hide();
         }
         
         public void ShowJuiceGui()
         {
-            _hauntGuiTimed = false;
-            StartCoroutine(SpawnJuiceUi(hauntJuice - _hauntGuiQtyShowing));
-        }
-
-        void ShowJuiceGui(int newQty, float showForSeconds)
-        {
-            _hauntGuiInstances.Clear();
-            _hauntGuiTimed = true;
-            _hauntGuiTimer = showForSeconds;
-            StartCoroutine(SpawnJuiceUi(newQty));
-        }
-
-        IEnumerator SpawnJuiceUi(int qty)
-        {
-            while (qty > 0)
+            if (!_juiceGuiInstance)
             {
-                var hauntGuiPrefab = hauntGuiSettings.GetLargestHauntGui(qty);
-                qty -= hauntGuiPrefab.value;
+                GameObject newHauntGui = Instantiate(hauntJuiceQtyGuiPrefab, transform.position + Vector3.up,
+                    quaternion.identity);
 
-                Vector3 spawnPos = transform.position + guiSpawnOffset + Random.onUnitSphere;
-                GameObject newHauntGui = Instantiate(hauntGuiPrefab.prefab, spawnPos, Quaternion.identity);
-                _hauntGuiQtyShowing += hauntGuiPrefab.value;
-                HauntGui newGui = newHauntGui.GetComponent<HauntGui>();
-                _hauntGuiInstances.Add(newGui);
-
-                var springJoint = newHauntGui.GetComponent<SpringJoint>();
-                springJoint.connectedBody = _rigidbody;
-                
-                yield return new WaitForEndOfFrame();
+                _juiceGuiInstance = newHauntGui.GetComponent<HauntJuiceGui>();
+                _juiceGuiInstance.Init(this);
             }
+            else _juiceGuiInstance.Show();
         }
     }
 }
