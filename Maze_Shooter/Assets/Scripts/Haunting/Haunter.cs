@@ -59,6 +59,12 @@ namespace ShootyGhost
         [TabGroup("main")]
         public GameObject transitionEffect;
 
+        [TabGroup("main")]
+        public GameObject hauntPacketPrefab;
+
+        [TabGroup("main")] 
+        public GameObject hauntIndicatorPrefab;
+
         [TabGroup("UI")]
         public GameObject hauntJuiceQtyGuiPrefab;
 
@@ -84,6 +90,10 @@ namespace ShootyGhost
         HauntJuiceGui _juiceGuiInstance;
         float _hauntGuiTimer;
         bool _hauntGuiTimed;
+        List<HauntPacket> _hauntPackets = new List<HauntPacket>();
+        GameObject _indicator;
+
+        public int DisplayedHauntJuice => hauntJuice - _hauntPackets.Count;
         
         
         // Start is called before the first frame update
@@ -143,13 +153,9 @@ namespace ShootyGhost
 
         void TargetingUpdate()
         {
-            if (targetedHauntable)
-            {
-                if (!targetedHauntable.CostIsFulfilled())
-                {
-                    SendHauntPacket();
-                }
-            }
+            if (!targetedHauntable) return;
+            if (!targetedHauntable.CostIsFulfilled())
+                SendHauntPacket();
         }
 
         public void SetTargetedHauntable(Hauntable newTarget)
@@ -160,17 +166,47 @@ namespace ShootyGhost
         public void ClearTargetedHauntable()
         {
             targetedHauntable = null;
+            if (_indicator) 
+                Destroy(_indicator);
             RecallHauntPackets();
         }
 
         void SendHauntPacket()
         {
             if (!targetedHauntable) return;
+            if (_hauntPackets.Count >= targetedHauntable.hauntCost) return;
+
+            HauntPacket newHauntPacket = Instantiate(hauntPacketPrefab, transform.position, quaternion.identity)
+                .GetComponent<HauntPacket>();
+            
+            newHauntPacket.Init(this, targetedHauntable);
+            _hauntPackets.Add(newHauntPacket);
+        }
+
+        public void TakeBackHauntPacket(HauntPacket packet)
+        {
+            _hauntPackets.Remove(packet);
         }
 
         void RecallHauntPackets()
         {
+            foreach (var packet in _hauntPackets)
+                packet.ReturnToHaunter();
             
+            _hauntPackets.Clear();
+        }
+
+        /// <summary>
+        /// A haunt packet has successfully reached thet target
+        /// </summary>
+        public void OnPacketSuccess(Hauntable target)
+        {
+            Debug.Log("Packet success!");
+            if (target.CostIsFulfilled())
+            {
+                Debug.Log("All good, instantiating indicator");
+                _indicator = Instantiate(hauntIndicatorPrefab, target.transform.position, quaternion.identity, target.transform);
+            }
         }
 
         bool CanBeginHauntTargeting => ghostState == GhostState.Normal && _targetingModeTimer <= 0 && HasHauntJuice;

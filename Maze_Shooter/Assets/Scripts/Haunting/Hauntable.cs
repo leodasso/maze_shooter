@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
@@ -12,14 +13,15 @@ namespace ShootyGhost
         public UnityEvent onUnHaunted;
         public GameObject hauntCostGuiPrefab;
         
-        int _hauntJuiceApplied = 0;
-
-        GameObject _hauntCostGuiInstance;
+        HauntCostGui _hauntCostGuiInstance;
+        List<HauntPacket> _hauntPackets = new List<HauntPacket>();
+        
+        public int DisplayedHauntJuice => hauntCost - _hauntPackets.Count;
 
         void Start()
         {
-            _hauntCostGuiInstance = Instantiate(hauntCostGuiPrefab);
-            _hauntCostGuiInstance.GetComponent<HauntCostGui>().Init(this);
+            _hauntCostGuiInstance = Instantiate(hauntCostGuiPrefab).GetComponent<HauntCostGui>();
+            _hauntCostGuiInstance.Init(this);
         }
 
         void OnDestroy()
@@ -30,22 +32,31 @@ namespace ShootyGhost
 
         public bool CostIsFulfilled()
         {
-            return _hauntJuiceApplied >= hauntCost;
+            Debug.Log("Checking cost for " + name + ", packets: " + _hauntPackets.Count + "/" + hauntCost);
+            return _hauntPackets.Count >= hauntCost;
         }
 
-        public void AddHauntJuice(int qty)
+        public void AddHauntPacket(HauntPacket newPacket)
         {
-            _hauntJuiceApplied += qty;
+            if (_hauntPackets.Contains(newPacket)) return;
+            _hauntPackets.Add(newPacket);
+        }
+
+        public void LoseHauntPacket(HauntPacket packet)
+        {
+            _hauntPackets.Remove(packet);
         }
 
         public void TargetedForHaunt()
         {
-            
+            if (_hauntCostGuiInstance) 
+                _hauntCostGuiInstance.ShowFull();
         }
 
         public void UnTargetedForHaunt()
         {
-            
+            if (_hauntCostGuiInstance)
+                _hauntCostGuiInstance.Show();
         }
 
         [Button]

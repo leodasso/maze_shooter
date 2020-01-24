@@ -21,11 +21,17 @@ public class SmartMissile3D : SmartMissile<Rigidbody, Vector3>
 		foreach (Collider newTarget in Physics.OverlapSphere(transform.position, m_searchRange))
 			if ( Math.LayerMaskContainsLayer(targetLayerMask, newTarget.gameObject.layer) && isWithinRange(newTarget.transform.position))
 			{
-				m_targetDistance = Vector3.Distance(newTarget.transform.position, transform.position);
+				SetTarget(newTarget.transform);
 				return newTarget.transform;
 			}
 
 		return null;
+	}
+
+	protected override void SetTarget(Transform newTarget)
+	{
+		m_targetDistance = Vector3.Distance(newTarget.position, transform.position);
+		m_target = newTarget.transform;
 	}
 
 	protected override bool isWithinRange(Vector3 Coordinates)

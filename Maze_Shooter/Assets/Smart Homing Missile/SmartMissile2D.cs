@@ -21,13 +21,19 @@ public class SmartMissile2D : SmartMissile<Rigidbody2D, Vector2>
 		foreach (Collider2D newTarget in Physics2D.OverlapCircleAll(transform.position, m_searchRange))
 			if ( Math.LayerMaskContainsLayer(targetLayerMask, newTarget.gameObject.layer) && isWithinRange(newTarget.transform.position))
 			{
-				m_targetDistance = Vector2.Distance(newTarget.transform.position, transform.position);
+				SetTarget(newTarget.transform);
 				return newTarget.transform;
 			}
 
 		return null;
 	}
-	
+
+	protected override void SetTarget(Transform newTarget)
+	{
+		m_targetDistance = Vector2.Distance(newTarget.position, transform.position);
+		m_target = newTarget;
+	}
+
 	protected override bool isWithinRange(Vector3 Coordinates)
 	{
 		m_forward = m_rigidbody.velocity;

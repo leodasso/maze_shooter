@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2284393115116602430}
   - component: {fileID: 2284393115116602431}
   - component: {fileID: 9207736534544209850}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,10 +208,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2284393115287650874}
+  - component: {fileID: -3645888552592142629}
   - component: {fileID: 2284393115287650868}
   - component: {fileID: 4615612513660114514}
   - component: {fileID: 2388293656666906202}
-  m_Layer: 18
+  m_Layer: 17
   m_Name: Haunt Packet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,6 +234,97 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3645888552592142629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284393115287650875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e324031179a6e0046a869a7176f64578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smartMissile: {fileID: 2388293656666906202}
+  speed: 100
+  rigidbody: {fileID: 2284393115287650868}
+  onMergeWithTarget:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2284393115287650868}
+        m_MethodName: set_isKinematic
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 4615612513660114514}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2284393115116602429}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onLeaveTarget:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2284393115287650868}
+        m_MethodName: set_isKinematic
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4615612513660114514}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 2284393115116602429}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!54 &2284393115287650868
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -248,7 +340,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!135 &4615612513660114514
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -291,13 +383,13 @@ MonoBehaviour:
   m_searchRange: 100
   m_searchAngle: 360
   m_canLooseTarget: 0
-  m_guidanceIntensity: 6
+  m_guidanceIntensity: 30
   m_distanceInfluence:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1
+      time: 0.0018157959
+      value: 0.7470398
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -305,13 +397,13 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.9999973
-      value: 1.6954169
-      inSlope: 2.2714992
-      outSlope: 2.2714992
+      time: 0.9951562
+      value: 1.0886286
+      inSlope: -0.44857594
+      outSlope: -0.44857594
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.04384643
+      inWeight: 0.10917301
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -334,7 +426,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2407350864172526500}
   - component: {fileID: 3439562516705665946}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: unit spot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

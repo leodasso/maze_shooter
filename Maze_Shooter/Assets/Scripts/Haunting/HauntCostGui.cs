@@ -9,11 +9,6 @@ public class HauntCostGui : MonoBehaviour
     [ShowInInspector, ReadOnly]
     Hauntable _hauntable;
     
-    [ShowInInspector, ReadOnly]
-    public int _cost;
-
-    public int fulfilledAmount;
-    
     public float progressLerpSpeed = 12;
 
     [Tooltip("The mask is scaled up and down to change the filled amount of the progress bar(s)")]
@@ -25,23 +20,22 @@ public class HauntCostGui : MonoBehaviour
 
     public UnityEvent onShow;
     public UnityEvent onHide;
+    public UnityEvent onShowFull;
 
     float _barScale;
     float _normalizedProgress;
     Vector3 _progressBarMaskInitScale;
-
+    
+    void Awake ()
+    {
+        _progressBarMaskInitScale = progressBarMask.localScale;
+    }
+    
     public void Init(Hauntable linkedHauntable)
     {
         _hauntable = linkedHauntable;
-        _cost = _hauntable.hauntCost;
         followObject.objectToFollow = linkedHauntable.gameObject;
         Recalculate();
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        _progressBarMaskInitScale = progressBarMask.localScale;
     }
 
     // Update is called once per frame
@@ -52,13 +46,19 @@ public class HauntCostGui : MonoBehaviour
 
     void Recalculate()
     {
-        numberText.text = (_cost - fulfilledAmount).ToString();
+        int displayedAmt = _hauntable.DisplayedHauntJuice;
+        numberText.text = displayedAmt.ToString();
         
         // Turn the amount into a number between 0 and 1, so we can feed it to the progress bars
-        _normalizedProgress = Mathf.Clamp01((float)fulfilledAmount / _cost);
+        _normalizedProgress = 1 - Mathf.Clamp01((float) displayedAmt / _hauntable.hauntCost);
 
         _barScale = Mathf.Lerp(_barScale, _normalizedProgress, Time.unscaledDeltaTime * progressLerpSpeed);
         progressBarMask.localScale = _progressBarMaskInitScale * _barScale;
+    }
+
+    public void ShowFull()
+    {
+        onShowFull.Invoke();
     }
 
     public void Show()

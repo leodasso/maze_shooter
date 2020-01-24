@@ -84,8 +84,15 @@ public abstract class SmartMissile<RgbdType, VecType> : SmartMissile
 				goToTarget();
 			}
 		}
-		else if (m_target = findNewTarget())
+		else if (findNewTarget())
 			m_onNewTargetFound.Invoke();
+	}
+
+	public void SetCustomTarget(Transform newTarget)
+	{
+		overrideTarget = true;
+		customTarget = newTarget;
+		SetTarget(customTarget);
 	}
 
 	public void ClearTarget()
@@ -102,6 +109,8 @@ public abstract class SmartMissile<RgbdType, VecType> : SmartMissile
 	/// Find a new target within the search zone. Returns null if no target is found.
 	/// </summary>
 	protected abstract Transform findNewTarget();
+
+	protected abstract void SetTarget(Transform newTarget);
 	
 	/// <summary>
 	/// Returns true if the input Coodinates are within the search zone.

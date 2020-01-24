@@ -21,7 +21,7 @@ public class HauntJuiceGui : MonoBehaviour
     void Update()
     {
         if (!_haunter) return;
-        numberText.text = _haunter.hauntJuice.ToString();
+        numberText.text = _haunter.DisplayedHauntJuice.ToString();
     }
 
     public void Show()

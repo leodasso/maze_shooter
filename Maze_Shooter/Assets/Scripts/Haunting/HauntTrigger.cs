@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using Unity.Mathematics;
 using UnityEngine.Events;
 
 namespace ShootyGhost
@@ -8,8 +7,6 @@ namespace ShootyGhost
     [TypeInfoBox("Creates events for overlapping with hauntable things")]
     public class HauntTrigger : MonoBehaviour
     {
-        [Tooltip("Sits above the hauntable object to indicate that it's selected and is hauntable")]
-        public GameObject indicatorPrefab;
         public UnityEvent onHauntableOverlapped;
         public UnityEvent onHauntableExited;
 
@@ -30,11 +27,6 @@ namespace ShootyGhost
             if (!hauntable) return;
             
             hauntable.TargetedForHaunt();
-
-            Vector3 otherPos = other.transform.position;
-            Vector3 spawnPos = new Vector3(otherPos.x, otherPos.y + other.bounds.size.y, otherPos.z);
-            _indicator = Instantiate(indicatorPrefab, spawnPos, quaternion.identity, other.transform);
-
             haunter.SetTargetedHauntable(hauntable);
             onHauntableOverlapped.Invoke();
         }
@@ -48,7 +40,6 @@ namespace ShootyGhost
 
             if (hauntable == haunter.targetedHauntable)
             {
-                if (_indicator) Destroy(_indicator);
                 haunter.ClearTargetedHauntable();
                 onHauntableExited.Invoke();
             }
