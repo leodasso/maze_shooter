@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 [ExecuteAlways]
 public class ArcMover : MonoBehaviour
@@ -9,6 +10,11 @@ public class ArcMover : MonoBehaviour
     public GameObject end;
     public AnimationCurve heightCurve;
 
+    public UnityEvent transitionIn;
+    public UnityEvent transitionOut;
+
+    public TrailRenderer trailRenderer;
+
     float _y;
 
     // Update is called once per frame
@@ -17,5 +23,16 @@ public class ArcMover : MonoBehaviour
         if (!end) return;
         _y = heightCurve.Evaluate(progress);
         transform.position = Vector3.Lerp(startPosition, end.transform.position, progress) + Vector3.up * _y;
+    }
+
+    // Below functions are for easy interfacing with PlayMaker
+    public void BeginTrailEmit()
+    {
+        trailRenderer.emitting = true;
+    }
+
+    public void StopTrailEmit()
+    {
+        trailRenderer.emitting = false;
     }
 }

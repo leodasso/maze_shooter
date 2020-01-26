@@ -67,7 +67,7 @@ namespace ShootyGhost
         public Vector3 GetReturnPosition()
         {
             // TODO lol this prob needs better options
-            return transform.position + Vector3.back * 5;
+            return transform.position + Vector3.left * 5;
         }
 
         [Button]

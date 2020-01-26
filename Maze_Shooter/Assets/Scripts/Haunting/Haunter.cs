@@ -15,6 +15,12 @@ namespace ShootyGhost
         Targeting = 1,     // searching for a target to haunt
         Haunting = 2,      // currently controlling a hauntable thing
     }
+
+    public enum HauntTransition
+    {
+        In,    // Moving into the haunted thing
+        Out,   // Coming out from the haunted thing
+    }
     
     public class Haunter : MonoBehaviour
     {
@@ -36,6 +42,7 @@ namespace ShootyGhost
         [TabGroup("main"), ReadOnly]
         public Hauntable targetedHauntable;
 
+        /// <summary> The actual hauntable currently being controlled/haunted </summary>
         [Tooltip("The actual hauntable currently being controlled/haunted")]
         [TabGroup("main"), ReadOnly]
         public Hauntable haunted;
@@ -268,11 +275,7 @@ namespace ShootyGhost
             onHauntBegin.Invoke();
             _rigidbody.isKinematic = true;
             
-            // Instantiate the transition visuals
-            GameObject transition = Instantiate(transitionEffect, transform.position, transform.rotation);
-            ArcMover arcMover = transition.GetComponent<ArcMover>();
-            arcMover.startPosition = transform.position;
-            arcMover.end = haunted.gameObject;
+            SpawnTransitionObject(HauntTransition.In, transform.position, haunted.gameObject);
         }
 
         /// <summary>
@@ -283,12 +286,27 @@ namespace ShootyGhost
             if (haunted)
             {
                 transform.position = haunted.GetReturnPosition();
+                SpawnTransitionObject(HauntTransition.Out, transform.position, haunted.gameObject);
                 haunted.OnUnHaunted();
             }
             
             ghostState = GhostState.Normal;
             onHauntEnd.Invoke();
             haunted = targetedHauntable = null;
+        }
+
+        
+        void SpawnTransitionObject(HauntTransition transitionType, Vector3 start, GameObject destination)
+        {
+            GameObject transition = Instantiate(transitionEffect, transform.position, transform.rotation);
+            ArcMover arcMover = transition.GetComponent<ArcMover>();
+            arcMover.startPosition = start;
+            arcMover.end = destination;
+            
+            if (transitionType == HauntTransition.In)
+                arcMover.transitionIn.Invoke();
+            else 
+                arcMover.transitionOut.Invoke();
         }
         
 
