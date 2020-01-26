@@ -17,6 +17,7 @@ namespace ShootyGhost
         HauntCostGui _hauntCostGuiInstance;
         List<HauntPacket> _hauntPackets = new List<HauntPacket>();
         GameObject _hauntedEffectInstance;
+        Haunter _haunter;
         
         public int DisplayedHauntJuice => hauntCost - _hauntPackets.Count;
 
@@ -66,19 +67,15 @@ namespace ShootyGhost
         public Vector3 GetReturnPosition()
         {
             // TODO lol this prob needs better options
-            return transform.position + Vector3.back * 3;
+            return transform.position + Vector3.back * 5;
         }
 
         [Button]
-        public void Posess()
+        public void OnIsHaunted(Haunter newHaunter)
         {
+            _haunter = newHaunter;
             _hauntPackets.Clear();
             onHaunted.Invoke();
-            if (hauntedEffectPrefab)
-            {
-                _hauntedEffectInstance =
-                    Instantiate(hauntedEffectPrefab, transform.position, Quaternion.identity, transform);
-            }
         }
 
         public void OnUnHaunted()
@@ -87,6 +84,23 @@ namespace ShootyGhost
                 Destroy(_hauntedEffectInstance);
             
             onUnHaunted.Invoke();
+            _haunter = null;
+        }
+
+        public void TriggerIfHaunted()
+        {
+            if (!_haunter) return;
+            InstantiateHauntEffect();
+        }
+
+
+        void InstantiateHauntEffect()
+        {
+            if (hauntedEffectPrefab)
+            {
+                _hauntedEffectInstance =
+                    Instantiate(hauntedEffectPrefab, transform.position, Quaternion.identity, transform);
+            }
         }
     }
 }

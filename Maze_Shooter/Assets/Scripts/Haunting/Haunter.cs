@@ -62,9 +62,6 @@ namespace ShootyGhost
         [TabGroup("main")] 
         public GameObject hauntIndicatorPrefab;
 
-        [TabGroup("main")] 
-        public GameObject hauntedEffectPrefab;
-
         [TabGroup("UI")]
         public GameObject hauntJuiceQtyGuiPrefab;
 
@@ -265,7 +262,7 @@ namespace ShootyGhost
         {
             haunted = newHaunted;
             hauntJuice -= newHaunted.hauntCost;
-            haunted.Posess();
+            haunted.OnIsHaunted(this);
             DestroyHauntPackets();
             ghostState = GhostState.Haunting;
             onHauntBegin.Invoke();

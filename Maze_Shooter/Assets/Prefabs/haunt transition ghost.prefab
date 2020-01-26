@@ -5094,7 +5094,7 @@ MonoBehaviour:
           name: FINISHED
           isSystemEvent: 1
           isGlobal: 0
-        toState: destroy delay
+        toState: Transition finished
         linkStyle: 0
         linkConstraint: 0
         colorIndex: 0
@@ -5353,14 +5353,14 @@ MonoBehaviour:
         - realTime
         paramDataPos: 00000000000000000000000001000000020000000000000001000000030000000400000005000000000000000000000005000000
         paramByteDataSize: 00000000010000000000000000000000000000000000000004000000000000000000000000000000000000000000000001000000
-    - name: destroy delay
+    - name: Transition finished
       description: 
       colorIndex: 0
       position:
         serializedVersion: 2
         x: 339
         y: 104
-        width: 120
+        width: 152
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -5377,13 +5377,16 @@ MonoBehaviour:
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Actions.Wait
+        - InvokeGameEvent
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 48c01101
-        unityObjectParams: []
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000003000000
+        actionHashCodes: 48c011017f1a7103
+        unityObjectParams:
+        - {fileID: 11400000, guid: 93da0c8645abd2846911e25cab9a50c1, type: 2}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
         animationCurveParams: []
@@ -5418,20 +5421,21 @@ MonoBehaviour:
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 0f0000001700000001000000
+        paramDataType: 0f000000170000000100000005000000
         paramName:
         - time
         - finishEvent
         - realTime
-        paramDataPos: 000000000000000000000000
-        paramByteDataSize: 000000000000000001000000
+        - gameEvent
+        paramDataPos: 00000000000000000000000000000000
+        paramByteDataSize: 00000000000000000100000000000000
     - name: destroy
       description: 
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 504
-        y: 105
+        x: 577
+        y: 103
         width: 100
         height: 16
       isBreakpoint: 0
