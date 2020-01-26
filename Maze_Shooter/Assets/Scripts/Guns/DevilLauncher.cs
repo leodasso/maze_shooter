@@ -26,6 +26,8 @@ public class DevilLauncher : MonoBehaviour, IControllable
     
     [Tooltip("The train is like a conga line of devils that follow behind you. It acts as the ammo clip for this launcher.")]
     public Train devilTrain;
+
+    public AimIndicator aimer;
     
     [Space, Tooltip("How far does the player's joystick need to lean before we prep a red devil for launch? (between 0 and 1)")]
     public FloatReference inputThreshhold;
@@ -43,6 +45,7 @@ public class DevilLauncher : MonoBehaviour, IControllable
     // Start is called before the first frame update
     void Start()
     {
+        aimer.enabled = false;
         SpawnDevils();
     }
 
@@ -57,6 +60,7 @@ public class DevilLauncher : MonoBehaviour, IControllable
 
             Devil devil = newDevil.GetComponent<Devil>();
             devil.ReturnToLauncher(this);
+            aimer.enabled = true;
         }
     }
     
@@ -146,6 +150,7 @@ public class DevilLauncher : MonoBehaviour, IControllable
 
     public void PickUpDevil(Devil devil)
     {
+        aimer.enabled = true;
         devilTrain.PlaceInBack(devil.gameObject);
     }
     

@@ -154,7 +154,7 @@ MonoBehaviour:
       settings:
         brushRadius: 4.61
         brushSpacing: 0.95
-        brushOverallScale: 1
+        brushOverallScale: 1.18
         brushOverlapCheck: 1
         brushOverlapCheckMode: 0
         brushOverlapDistance: 0.5
@@ -162,8 +162,8 @@ MonoBehaviour:
         brushOverlapCheckLayers:
           serializedVersion: 2
           m_Bits: 0
-        maxAlpha: 0.203
-        minAlpha: 0.035
+        maxAlpha: 1
+        minAlpha: 0.668
         ppOrientationMode: 0
         ppFlipOrientation: 0
         ppFixedRotation: 0
@@ -186,7 +186,7 @@ MonoBehaviour:
         scaleUniformMax: 1
         scalePerAxisMin: {x: 1, y: 1, z: 1}
         scalePerAxisMax: {x: 1, y: 1, z: 1}
-        scaleAux: 1
+        scaleAux: 2.25
         multibrushEnabled: 0
         multibrushSlots:
         - enabled: 1
@@ -283,7 +283,7 @@ MonoBehaviour:
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
       selectedSlot: 0
-      selected: 0
+      selected: 1
       colorTag: 0
     - name: ground piece Variant 1
       settings:
@@ -557,7 +557,7 @@ MonoBehaviour:
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
       selectedSlot: 5
-      selected: 1
+      selected: 0
       colorTag: 0
     - name: stepping stone
       settings:
@@ -698,7 +698,7 @@ MonoBehaviour:
     brushes:
     - name: grass small 1
       settings:
-        brushRadius: 2.5
+        brushRadius: 0.97
         brushSpacing: 1.65
         brushOverallScale: 1
         brushOverlapCheck: 0
@@ -728,11 +728,11 @@ MonoBehaviour:
         randomizeOrientationZ: 0
         scaleTransformMode: 0
         scaleMode: 0
-        scaleUniformMin: 1.33
+        scaleUniformMin: 1
         scaleUniformMax: 1.71
         scalePerAxisMin: {x: 1, y: 1, z: 1}
         scalePerAxisMax: {x: 1, y: 1, z: 1}
-        scaleAux: 2.1
+        scaleAux: 1.33
         multibrushEnabled: 1
         multibrushSlots:
         - enabled: 1
@@ -838,9 +838,9 @@ MonoBehaviour:
       colorTag: 0
     - name: plant prop V5
       settings:
-        brushRadius: 5
+        brushRadius: 2.02
         brushSpacing: 1.37
-        brushOverallScale: 2
+        brushOverallScale: 1.06
         brushOverlapCheck: 0
         brushOverlapCheckMode: 0
         brushOverlapDistance: 0.5
@@ -872,7 +872,7 @@ MonoBehaviour:
         scaleUniformMax: 1.73
         scalePerAxisMin: {x: 1, y: 1, z: 1}
         scalePerAxisMax: {x: 1, y: 1, z: 1}
-        scaleAux: 0.88
+        scaleAux: 0.78
         multibrushEnabled: 1
         multibrushSlots:
         - enabled: 1

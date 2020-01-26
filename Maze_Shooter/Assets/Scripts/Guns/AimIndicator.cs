@@ -5,8 +5,10 @@ public class AimIndicator : MonoBehaviour
 {
     public GunBrain gunBrain;
     public SpriteRenderer indicatorSprite;
+    
     [Tooltip("How far does the player's joystick need to lean before we prep a red devil for launch? (between 0 and 1)")]
     public FloatReference inputThreshhold;
+    
     Color _color;
     float _inputMagnitude;
     
