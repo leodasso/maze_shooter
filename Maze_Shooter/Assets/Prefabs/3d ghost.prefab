@@ -574,10 +574,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hauntJuice: 0
   savedHauntJuice: {fileID: 11400000, guid: f0c3b54f17cdc3c4f9912da934951ef3, type: 2}
-  hauntCost:
-    useConstant: 1
-    constantValue: 0
-    valueObject: {fileID: 11400000, guid: ef51de38179ab064abb6972a7eaf95a8, type: 2}
   targetingModeCooldown:
     useConstant: 1
     constantValue: 0
@@ -1217,7 +1213,7 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 369
+        x: 383
         y: 308
         width: 126
         height: 32
@@ -1549,19 +1545,22 @@ MonoBehaviour:
         - HutongGames.PlayMaker.Actions.SetIsKinematic
         - HutongGames.PlayMaker.Actions.EnableBehaviour
         - HutongGames.PlayMaker.Actions.EnableBehaviour
+        - InvokeGameEvent
         customNames:
         - Enable Behaviour
         - 
         - 
         - 
-        actionEnabled: 01010101
-        actionIsOpen: 01010101
-        actionStartIndex: 0000000005000000070000000c000000
-        actionHashCodes: 3a4cad0515264c013a4cad053a4cad05
+        - 
+        actionEnabled: 0101010101
+        actionIsOpen: 0101010101
+        actionStartIndex: 0000000005000000070000000c00000011000000
+        actionHashCodes: 3a4cad0515264c013a4cad053a4cad057f1a7103
         unityObjectParams:
         - {fileID: 3594317241385997712}
         - {fileID: 3491025872995073933}
         - {fileID: 142111185362739402}
+        - {fileID: 11400000, guid: 12ac11e6cd9be7f4f8dee5e8f41baca4, type: 2}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
         - ownerOption: 1
@@ -1681,7 +1680,7 @@ MonoBehaviour:
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 1400000012000000050000001100000011000000140000001100000014000000120000000500000011000000110000001400000012000000050000001100000011000000
+        paramDataType: 140000001200000005000000110000001100000014000000110000001400000012000000050000001100000011000000140000001200000005000000110000001100000005000000
         paramName:
         - gameObject
         - behaviour
@@ -1700,8 +1699,9 @@ MonoBehaviour:
         - component
         - enable
         - resetOnExit
-        paramDataPos: 0000000000000000000000000000000001000000010000000200000002000000010000000100000003000000040000000300000002000000020000000500000006000000
-        paramByteDataSize: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+        - gameEvent
+        paramDataPos: 000000000000000000000000000000000100000001000000020000000200000001000000010000000300000004000000030000000200000002000000050000000600000003000000
+        paramByteDataSize: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
     events:
     - name: FINISHED
       isSystemEvent: 1

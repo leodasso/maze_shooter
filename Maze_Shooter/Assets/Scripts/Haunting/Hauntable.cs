@@ -12,9 +12,11 @@ namespace ShootyGhost
         public UnityEvent onHaunted;
         public UnityEvent onUnHaunted;
         public GameObject hauntCostGuiPrefab;
+        public GameObject hauntedEffectPrefab;
         
         HauntCostGui _hauntCostGuiInstance;
         List<HauntPacket> _hauntPackets = new List<HauntPacket>();
+        GameObject _hauntedEffectInstance;
         
         public int DisplayedHauntJuice => hauntCost - _hauntPackets.Count;
 
@@ -70,13 +72,20 @@ namespace ShootyGhost
         [Button]
         public void Posess()
         {
-            Debug.Log(name + " was haunted!", gameObject);
             _hauntPackets.Clear();
             onHaunted.Invoke();
+            if (hauntedEffectPrefab)
+            {
+                _hauntedEffectInstance =
+                    Instantiate(hauntedEffectPrefab, transform.position, Quaternion.identity, transform);
+            }
         }
 
         public void OnUnHaunted()
         {
+            if (_hauntedEffectInstance)
+                Destroy(_hauntedEffectInstance);
+            
             onUnHaunted.Invoke();
         }
     }

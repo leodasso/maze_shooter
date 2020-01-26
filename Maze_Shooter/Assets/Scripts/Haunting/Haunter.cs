@@ -62,6 +62,9 @@ namespace ShootyGhost
         [TabGroup("main")] 
         public GameObject hauntIndicatorPrefab;
 
+        [TabGroup("main")] 
+        public GameObject hauntedEffectPrefab;
+
         [TabGroup("UI")]
         public GameObject hauntJuiceQtyGuiPrefab;
 

@@ -22,4 +22,9 @@ public class SpriteFlipper : MonoBehaviour
         objectToScale.localScale = new Vector3(_defaultScaleX * _facingDirection, objectToScale.localScale.y, 1);
         _prevDirection = _facingDirection;
     }
+
+    void OnDisable()
+    {
+        _prevDirection = 99;
+    }
 }

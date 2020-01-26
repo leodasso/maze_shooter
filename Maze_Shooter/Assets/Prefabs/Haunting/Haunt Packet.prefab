@@ -227,7 +227,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2284393115287650875}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.43, y: 5.81, z: -1.4239426}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2284393115116602428}
@@ -352,7 +352,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.34
+  m_Radius: 0.6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2388293656666906202
 MonoBehaviour:
@@ -383,7 +383,7 @@ MonoBehaviour:
   m_searchRange: 100
   m_searchAngle: 360
   m_canLooseTarget: 0
-  m_guidanceIntensity: 30
+  m_guidanceIntensity: 45
   m_distanceInfluence:
     serializedVersion: 2
     m_Curve:
@@ -397,13 +397,13 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.9951562
-      value: 1.0886286
-      inSlope: -0.44857594
-      outSlope: -0.44857594
+      time: 1.0036402
+      value: 1.1016978
+      inSlope: 0.25435576
+      outSlope: 0.25435576
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.10917301
+      inWeight: 0.03745351
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
