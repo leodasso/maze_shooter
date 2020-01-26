@@ -32,7 +32,6 @@ namespace ShootyGhost
 
         public bool CostIsFulfilled()
         {
-            Debug.Log("Checking cost for " + name + ", packets: " + _hauntPackets.Count + "/" + hauntCost);
             return _hauntPackets.Count >= hauntCost;
         }
 

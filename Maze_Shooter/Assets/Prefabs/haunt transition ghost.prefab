@@ -4873,7 +4873,7 @@ TrailRenderer:
   m_Time: 0.5
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 2
+    widthMultiplier: 4
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -4891,8 +4891,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0, g: 0, b: 0, a: 1}
+      key1: {r: 0, g: 0, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4936,7 +4936,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4991704436452651572}
-  - component: {fileID: 4991704436452651578}
   - component: {fileID: 4991704436452651573}
   - component: {fileID: 4991704436452651579}
   m_Layer: 0
@@ -4961,43 +4960,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4991704436452651578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4991704436452651575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 261b4d5328d9d434d8c26630b2f81440, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visuals: {fileID: 4991704436646639300}
-  shadow: {fileID: 0}
-  controlCollider: 0
-  minHeight: 0.5
-  shadowOpacity: 0.5
-  z: 0.99540997
-  heightAbove: 0.12
-  heightBelow: 0.16
-  zFactor:
-    useConstant: 1
-    constantValue: 0
-    valueObject: {fileID: 11400000, guid: c2dc52804bd54244da763a679d85c4d8, type: 2}
-  useGravity: 0
-  gravity:
-    useConstant: 0
-    constantValue: 0
-    valueObject: {fileID: 0}
-  bounce: 0.15
-  belowMe: []
-  onGroundHitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  debug: 0
 --- !u!114 &4991704436452651573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5011,41 +4973,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progress: 0
-  startPosition: {x: 0, y: 0, z: 0}
+  startPosition: {x: -26.05, y: 0, z: 8}
   end: {fileID: 0}
-  myDepth: {fileID: 4991704436452651578}
   heightCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.000007796567
-      value: 0.15588795
-      inSlope: 25.190527
-      outSlope: 25.190527
+      time: 0.0007588938
+      value: 0.002357483
+      inSlope: 26.083572
+      outSlope: 26.083572
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.031858187
+      outWeight: 0.022181233
     - serializedVersion: 3
-      time: 0.5008366
-      value: 5.4891396
-      inSlope: -0.19597971
-      outSlope: -0.19597971
+      time: 1
+      value: -0.002319336
+      inSlope: -21.721392
+      outSlope: -21.721392
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.026265943
       outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1.0009193
-      value: 0.99527174
-      inSlope: -17.837067
-      outSlope: -17.837067
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.050664864
-      outWeight: 0.33333334
-    m_PreInfinity: 1
-    m_PostInfinity: 1
+    m_PreInfinity: 2
+    m_PostInfinity: 2
     m_RotationOrder: 4
 --- !u!114 &4991704436452651579
 MonoBehaviour:
@@ -5573,7 +5525,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 1
+    preprocessed: 0
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0

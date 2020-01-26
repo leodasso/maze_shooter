@@ -91,8 +91,11 @@ namespace HutongGames.PlayMaker.Actions
         }
 #endif
 
-        // Check that the GameObject is the same
-        // and that we have a component reference cached
+
+        /// <summary>
+        /// Check that the GameObject is the same
+        /// and that we have a component reference cached
+        /// </summary>
         protected bool UpdateCache(GameObject go)
         {
             if (go == null) return false;

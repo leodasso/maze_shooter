@@ -92,6 +92,7 @@ namespace ShootyGhost
         bool _hauntGuiTimed;
         List<HauntPacket> _hauntPackets = new List<HauntPacket>();
         GameObject _indicator;
+        Hauntable _pendingHauntable;
 
         public int DisplayedHauntJuice => hauntJuice - _hauntPackets.Count;
         
@@ -166,6 +167,7 @@ namespace ShootyGhost
         public void ClearTargetedHauntable()
         {
             targetedHauntable = null;
+            _pendingHauntable = null;
             if (_indicator) 
                 Destroy(_indicator);
             RecallHauntPackets();
@@ -196,6 +198,14 @@ namespace ShootyGhost
             _hauntPackets.Clear();
         }
 
+        void DestroyHauntPackets()
+        {
+            foreach (var packet in _hauntPackets) 
+                Destroy(packet);
+            
+            _hauntPackets.Clear();
+        }
+
         /// <summary>
         /// A haunt packet has successfully reached thet target
         /// </summary>
@@ -203,10 +213,16 @@ namespace ShootyGhost
         {
             Debug.Log("Packet success!");
             if (target.CostIsFulfilled())
-            {
-                Debug.Log("All good, instantiating indicator");
-                _indicator = Instantiate(hauntIndicatorPrefab, target.transform.position, quaternion.identity, target.transform);
-            }
+                SetPendingHauntable(target);
+        }
+
+        /// <summary>
+        /// Sets the given target as the hauntable that will be haunted when haunt-targeting mode is exited.
+        /// </summary>
+        void SetPendingHauntable(Hauntable target)
+        {
+            _indicator = Instantiate(hauntIndicatorPrefab, target.transform.position, quaternion.identity, target.transform);
+            _pendingHauntable = target;
         }
 
         bool CanBeginHauntTargeting => ghostState == GhostState.Normal && _targetingModeTimer <= 0 && HasHauntJuice;
@@ -226,17 +242,15 @@ namespace ShootyGhost
         
         void EndHauntTargeting()
         {
-            if (targetedHauntable)
-            {
-                // BeginHaunt(targetedHauntable);
-            }
+            if (_pendingHauntable)
+                BeginHaunt(_pendingHauntable);
+
             else 
                 ghostState = GhostState.Normal;
             
-            targetedHauntable = null;
+            ClearTargetedHauntable();
             onHauntStateEnd.Invoke();
             
-
             _targetingModeTimer = targetingModeCooldown.Value;
         }
 
@@ -244,6 +258,7 @@ namespace ShootyGhost
         {
             haunted = newHaunted;
             haunted.Posess();
+            DestroyHauntPackets();
             ghostState = GhostState.Haunting;
             onHauntBegin.Invoke();
             _rigidbody.isKinematic = true;

@@ -35,6 +35,7 @@ namespace HutongGames.PlayMaker.Actions
 		}
 
 		Behaviour componentTarget;
+		Collider colliderComponent;
 
 		public override void OnEnter()
 		{
@@ -51,21 +52,24 @@ namespace HutongGames.PlayMaker.Actions
 			}
 
 			if (component != null)
-			{
-				componentTarget = component as Behaviour;
-			}
+				ProcessComponent(component, go);
+
 			else
-			{
-				componentTarget = go.GetComponent(ReflectionUtils.GetGlobalType(behaviour.Value)) as Behaviour;
-			}
+				ProcessComponent(go.GetComponent(ReflectionUtils.GetGlobalType(behaviour.Value)), go);
+		}
 
-			if (componentTarget == null)
-			{
-				LogWarning(" " + go.name + " missing behaviour: " + behaviour.Value);
-				return;
-			}
+		void ProcessComponent(Component component, GameObject go)
+		{
+			colliderComponent = component as Collider;
+			componentTarget = component as Behaviour;
 
-			componentTarget.enabled = enable.Value;
+			if (colliderComponent != null)
+				colliderComponent.enabled = enable.Value;
+
+			else if (componentTarget != null)
+				componentTarget.enabled = enable.Value;
+
+			else LogWarning(" " + go.name + " missing behaviour: " + behaviour.Value);
 		}
 
 		public override void OnExit()
