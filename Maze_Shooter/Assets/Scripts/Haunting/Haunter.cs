@@ -26,9 +26,6 @@ namespace ShootyGhost
         [TabGroup("main"), Tooltip("On Start(), hauntJuice value is pulled from save file using this. On Destroy(), it's saved.")]
         public SavedInt savedHauntJuice;
 
-        [TabGroup("main"), Tooltip("The cost of performing a haunt")]
-        public FloatReference hauntCost;
-
         [TabGroup("main"), Tooltip("The cooldown for returning to targeting mode once it's exited")]
         public FloatReference targetingModeCooldown;
 
@@ -70,17 +67,18 @@ namespace ShootyGhost
 
         [TabGroup("UI")] 
         public float showTime = 5;
+        
+        [TabGroup("events")]
+        public UnityEvent onJuiceAdded;
 
         [TabGroup("events"), LabelText("onTargetingBegin")]
         public UnityEvent onHauntStateBegin;
+        
         [TabGroup("events"), LabelText("onTargetingEnd")]
         public UnityEvent onHauntStateEnd;
         
         [TabGroup("events"), Space]
         public UnityEvent onHauntBegin;
-
-        [TabGroup("events")]
-        public UnityEvent onJuiceAdded;
 
         [TabGroup("events")] 
         public UnityEvent onHauntEnd;
@@ -94,7 +92,10 @@ namespace ShootyGhost
         GameObject _indicator;
         Hauntable _pendingHauntable;
 
-        public int DisplayedHauntJuice => hauntJuice - _hauntPackets.Count;
+        public int AvailableHauntJuice => hauntJuice - _hauntPackets.Count;
+        bool CanBeginHauntTargeting => ghostState == GhostState.Normal && _targetingModeTimer <= 0 && HasHauntJuice;
+        bool CanHaunt => ghostState == GhostState.Targeting && HasHauntJuice;
+        bool HasHauntJuice => hauntJuice > 0;
         
         
         // Start is called before the first frame update
@@ -140,6 +141,12 @@ namespace ShootyGhost
                     EndHauntTargeting();
             }
 
+            if (ghostState == GhostState.Haunting)
+            {
+                if (haunted)
+                    transform.position = haunted.transform.position;
+            }
+            
             // Input for leaving a haunted object. The player must hold down 
             // the haunt button until intensity reaches 1 to exit.
             if (ghostState == GhostState.Haunting && _player.GetButton("haunt"))
@@ -177,6 +184,7 @@ namespace ShootyGhost
         {
             if (!targetedHauntable) return;
             if (_hauntPackets.Count >= targetedHauntable.hauntCost) return;
+            if (AvailableHauntJuice <= 0) return;
 
             HauntPacket newHauntPacket = Instantiate(hauntPacketPrefab, transform.position, quaternion.identity)
                 .GetComponent<HauntPacket>();
@@ -225,10 +233,6 @@ namespace ShootyGhost
             _pendingHauntable = target;
         }
 
-        bool CanBeginHauntTargeting => ghostState == GhostState.Normal && _targetingModeTimer <= 0 && HasHauntJuice;
-        bool CanHaunt => ghostState == GhostState.Targeting && HasHauntJuice;
-        bool HasHauntJuice => hauntJuice >= hauntCost.Value;
-
         /// <summary>
         /// Haunt targeting is the state where time slows down
         /// as the player searches for an object or enemy to haunt.
@@ -257,12 +261,12 @@ namespace ShootyGhost
         void BeginHaunt(Hauntable newHaunted)
         {
             haunted = newHaunted;
+            hauntJuice -= newHaunted.hauntCost;
             haunted.Posess();
             DestroyHauntPackets();
             ghostState = GhostState.Haunting;
             onHauntBegin.Invoke();
             _rigidbody.isKinematic = true;
-            StartCoroutine(MoveToHaunted());
             
             // Instantiate the transition visuals
             GameObject transition = Instantiate(transitionEffect, transform.position, transform.rotation);
@@ -271,27 +275,22 @@ namespace ShootyGhost
             arcMover.end = haunted.gameObject;
         }
 
+        /// <summary>
+        /// Returns the ghost from posessing whatever it is currently haunting to its true form.
+        /// </summary>
         void EndHaunt()
         {
-            transform.parent = null;
+            if (haunted)
+            {
+                transform.position = haunted.GetReturnPosition();
+                haunted.OnUnHaunted();
+            }
+            
             ghostState = GhostState.Normal;
-            _rigidbody.isKinematic = false;
-            haunted.OnUnHaunted();
             onHauntEnd.Invoke();
             haunted = targetedHauntable = null;
-            RecallHauntPackets();
         }
         
-        /// <summary>
-        /// Wait out the delay (hauntMovementDelay) and then move this object
-        /// into the haunted transform as a child.
-        /// </summary>
-        IEnumerator MoveToHaunted()
-        {
-            yield return new WaitForSecondsRealtime(hauntMovementDelay);
-            transform.parent = haunted.transform;
-            transform.localPosition = Vector3.zero;
-        }
 
         // Make sure we're not leaving anything hanging if this is destroyed during targeting
         void OnDestroy()

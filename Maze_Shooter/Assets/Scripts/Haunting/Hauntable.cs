@@ -58,10 +58,20 @@ namespace ShootyGhost
                 _hauntCostGuiInstance.Show();
         }
 
+        /// <summary>
+        /// Calculates and returns the position that the ghost should go to once exiting after haunt
+        /// </summary>
+        public Vector3 GetReturnPosition()
+        {
+            // TODO lol this prob needs better options
+            return transform.position + Vector3.back * 3;
+        }
+
         [Button]
         public void Posess()
         {
             Debug.Log(name + " was haunted!", gameObject);
+            _hauntPackets.Clear();
             onHaunted.Invoke();
         }
 

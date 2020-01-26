@@ -10,7 +10,9 @@ public class SpriteFlipper : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        _defaultScaleX = objectToScale.localScale.x;
+        // Using the absolute value here so that 1 can always be associated with 'right' even if
+        // the sprite starts off scaled left
+        _defaultScaleX = Mathf.Abs(objectToScale.localScale.x);
     }
 
     protected void UpdateScale(float direction)

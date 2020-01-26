@@ -9,6 +9,6 @@ public class FlipToVelocity : SpriteFlipper
     // Update is called once per frame
     void Update()
     {
-        UpdateScale(-rigidbody.velocity.x);
+        UpdateScale(rigidbody.velocity.x);
     }
 }
