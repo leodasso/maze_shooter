@@ -1005,7 +1005,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 245986168}
-        m_MethodName: SpawnPlayer
+        m_MethodName: CheckIfSpawningPlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1615,9 +1615,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: gate vCam
       objectReference: {fileID: 0}
+    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
+        type: 3}
+      propertyPath: m_Priority
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
+        type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
+        type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 7715663081955918930}
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -44.222546
+      value: -44.16743
       objectReference: {fileID: 0}
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1625,7 +1640,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -24.424393
+      value: -24.520214
       objectReference: {fileID: 0}
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1667,21 +1682,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
-        type: 3}
-      propertyPath: m_Priority
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
-        type: 3}
-      propertyPath: m_Lens.FieldOfView
-      value: 22
-      objectReference: {fileID: 0}
-    - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
-        type: 3}
-      propertyPath: m_Follow
-      value: 
-      objectReference: {fileID: 7715663081955918930}
     m_RemovedComponents:
     - {fileID: 114983388701754208, guid: fde8f66d53e4214438069d431895986a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fde8f66d53e4214438069d431895986a, type: 3}

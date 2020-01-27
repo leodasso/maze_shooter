@@ -25,11 +25,8 @@ public class Gate : MonoBehaviour
     void Start()
     {}
 
-    public void SpawnPlayer()
+    void SpawnPlayer()
     {
-        // Disable the gate to prevent player from just getting spawned back and forth.
-        // It will be re-enabled when they exit the proximity trigger
-        //enabled = false;
         onPlayerSpawnToThisGate.Invoke();
     }
 
@@ -50,8 +47,6 @@ public class Gate : MonoBehaviour
     public void CheckIfSpawningPlayer()
     {
         if (GameMaster.Get().gateLink == gateLink)
-        {
             onPlayerSpawnToThisGate.Invoke();
-        }
     }
 }

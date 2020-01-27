@@ -18,7 +18,7 @@ public class IsoSorter : MonoBehaviour
 	public bool isStatic;
 	[ReadOnly]
 	public int sortingOrder;
-	float _worldSpaceToSortRatio = 100;
+	static float _worldSpaceToSortRatio = 10;
 	
 	public List<SortedRenderer> renderers = new List<SortedRenderer>();
 
@@ -47,8 +47,6 @@ public class IsoSorter : MonoBehaviour
 	void Update ()
 	{
 		if (isStatic && Application.isPlaying) return;
-
-		
 		sortingOrder = Mathf.RoundToInt((-SortingTransform.position.z - offset) * _worldSpaceToSortRatio);
 
 		for (int i = 0; i < renderers.Count; i++)
