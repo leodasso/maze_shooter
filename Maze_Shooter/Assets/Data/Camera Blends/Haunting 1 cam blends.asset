@@ -10,42 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36baaa8bdcb9d8b49b9199833965d2c3, type: 3}
-  m_Name: Main Camera Blends
+  m_Name: Haunting 1 cam blends
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: galactic vCam
-    m_To: follow vCam
-    m_Blend:
-      m_Style: 1
-      m_Time: 0.7
-      m_CustomCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-  - m_From: '**ANY CAMERA**'
-    m_To: galactic vCam
-    m_Blend:
-      m_Style: 1
-      m_Time: 1
-      m_CustomCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-  - m_From: galactic vCam
-    m_To: '**ANY CAMERA**'
-    m_Blend:
-      m_Style: 1
-      m_Time: 1
-      m_CustomCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
   - m_From: follow vCam
     m_To: darkness vCam
     m_Blend:
@@ -72,7 +39,7 @@ MonoBehaviour:
     m_To: gate vCam
     m_Blend:
       m_Style: 1
-      m_Time: 0.25
+      m_Time: 0.5
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
@@ -80,31 +47,42 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: '**ANY CAMERA**'
-    m_To: wide vCam
+    m_To: full vCam
     m_Blend:
       m_Style: 1
-      m_Time: 10
+      m_Time: 2
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: wide vCam
-    m_To: '**ANY CAMERA**'
+  - m_From: gate vCam
+    m_To: full vCam
     m_Blend:
       m_Style: 1
-      m_Time: 5
+      m_Time: 3
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: '**ANY CAMERA**'
+  - m_From: full vCam
     m_To: focus vCam
     m_Blend:
-      m_Style: 1
+      m_Style: 0
+      m_Time: 2
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: focus vCam
+    m_To: full vCam
+    m_Blend:
+      m_Style: 0
       m_Time: 2
       m_CustomCurve:
         serializedVersion: 2
