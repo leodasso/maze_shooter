@@ -45,6 +45,6 @@ public class MovementBase : MonoBehaviour, IControllable
 
     public string Name()
     {
-        return "linearMovement" + name;
+        return GetType().ToString() + " " + name;
     }
 }

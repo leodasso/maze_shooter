@@ -269,13 +269,24 @@ namespace ShootyGhost
         {
             haunted = newHaunted;
             hauntJuice -= newHaunted.hauntCost;
-            haunted.OnIsHaunted(this);
             DestroyHauntPackets();
             ghostState = GhostState.Haunting;
             onHauntBegin.Invoke();
             _rigidbody.isKinematic = true;
             
-            SpawnTransitionObject(HauntTransition.In, transform.position, haunted.gameObject);
+            var transitionObject = SpawnTransitionObject(HauntTransition.In, transform.position, haunted.gameObject);
+            
+            // Using a delegate, call the target's 'OnIsHaunted()' method precisely when the transition is complete
+            transitionObject.onTransitionComplete += InvokeTargetHauntedMethod;
+        }
+
+        /// <summary>
+        /// Invokes 'OnIsHaunted()' on the targeted hauntable (if there is one)
+        /// </summary>
+        void InvokeTargetHauntedMethod()
+        {
+            if (!haunted) return;
+            haunted.OnIsHaunted(this);
         }
 
         /// <summary>
@@ -296,7 +307,7 @@ namespace ShootyGhost
         }
 
         
-        void SpawnTransitionObject(HauntTransition transitionType, Vector3 start, GameObject destination)
+        ArcMover SpawnTransitionObject(HauntTransition transitionType, Vector3 start, GameObject destination)
         {
             GameObject transition = Instantiate(transitionEffect, transform.position, transform.rotation);
             ArcMover arcMover = transition.GetComponent<ArcMover>();
@@ -307,6 +318,8 @@ namespace ShootyGhost
                 arcMover.transitionIn.Invoke();
             else 
                 arcMover.transitionOut.Invoke();
+
+            return arcMover;
         }
         
 

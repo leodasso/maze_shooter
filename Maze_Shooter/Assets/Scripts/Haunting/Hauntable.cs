@@ -74,6 +74,7 @@ namespace ShootyGhost
         public void OnIsHaunted(Haunter newHaunter)
         {
             _haunter = newHaunter;
+            InstantiateHauntEffect();
             _hauntPackets.Clear();
             onHaunted.Invoke();
         }
@@ -86,13 +87,6 @@ namespace ShootyGhost
             onUnHaunted.Invoke();
             _haunter = null;
         }
-
-        public void TriggerIfHaunted()
-        {
-            if (!_haunter) return;
-            InstantiateHauntEffect();
-        }
-
 
         void InstantiateHauntEffect()
         {

@@ -1,14 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class FlipToVelocity : SpriteFlipper
 {
     public new Rigidbody rigidbody;
+    [MinValue(0)]
+    public float minFlipVelocity = .05f;
     
     // Update is called once per frame
     void Update()
     {
-        UpdateScale(rigidbody.velocity.x);
+        if (Mathf.Abs(rigidbody.velocity.x) >= minFlipVelocity)
+            UpdateScale(rigidbody.velocity.x);
     }
 }
