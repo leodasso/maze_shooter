@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 [ExecuteAlways]
@@ -14,6 +15,8 @@ public class ArcMover : MonoBehaviour
     public UnityEvent transitionOut;
 
     public TrailRenderer trailRenderer;
+
+    public Action onTransitionComplete;
 
     float _y;
 
@@ -34,5 +37,11 @@ public class ArcMover : MonoBehaviour
     public void StopTrailEmit()
     {
         trailRenderer.emitting = false;
+    }
+
+    public void TransitionComplete()
+    {
+        if (onTransitionComplete != null)
+            onTransitionComplete.Invoke();
     }
 }

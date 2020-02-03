@@ -7,6 +7,9 @@ using Sirenix.OdinInspector;
 
 public class Player : MonoBehaviour
 {
+	[ToggleLeft]
+	public bool debug;
+	
 	[ReadOnly]
 	public Vector2 moveInput;
 	[ReadOnly]
@@ -61,6 +64,9 @@ public class Player : MonoBehaviour
 	{
 		foreach (var controllable in controllables)
 		{
+			if (debug)
+				Debug.Log(name + " updating controllable " + controllable.Name());
+			
 			controllable.ApplyLeftStickInput(moveInput);
 			controllable.ApplyRightStickInput(fireInput);
 			

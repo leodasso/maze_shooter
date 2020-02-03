@@ -8,7 +8,7 @@ public class SoulLight : MonoBehaviour
     float _distance = 0;
     float _normalizedDist;
 
-    [Tooltip("The x axis is distance from center, and y axis is intensity multiplier.")]
+    [Tooltip("The x axis is normalized distance from center (0-1), and y axis is intensity multiplier.")]
     public AnimationCurve intensityCurve;
     public new SphereCollider collider;
 
