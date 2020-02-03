@@ -39,7 +39,6 @@ public class AimAtObjects : MonoBehaviour
 		_targetDelta = Vector3.Lerp(_targetDelta, selectedTargetFinder.currentTarget.transform.position - transform.position,
 			Time.deltaTime * aimQuickness);
 
-		float z = Math.AngleFromVector2(_targetDelta, -90);
-		transform.eulerAngles = new Vector3(0, 0, z);
+		transform.rotation = Quaternion.LookRotation(_targetDelta, Vector3.up);
 	}
 }
