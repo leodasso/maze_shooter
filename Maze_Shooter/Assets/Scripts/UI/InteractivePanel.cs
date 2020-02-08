@@ -26,7 +26,7 @@ public class InteractivePanel : MonoBehaviour
 
 	Rewired.Player _player;
 
-	void Awake()
+	protected virtual void Awake()
 	{
 		_player = ReInput.players.GetPlayer(0);
 	}
@@ -56,7 +56,8 @@ public class InteractivePanel : MonoBehaviour
 	{
 		active = true;
 		onPanelStart.Invoke();
-		animator?.SetBool("visible", true);
+		if (animator)
+			animator.SetBool("visible", true);
 	}
 
 	void Update()
@@ -79,7 +80,8 @@ public class InteractivePanel : MonoBehaviour
 	{
 		active = false;		
 		onPanelComplete.Invoke();
-		animator?.SetBool("visible", false);
+		if (animator)
+			animator.SetBool("visible", false);
 		if (destroyWhenComplete)
 			Destroy(gameObject);
 	}

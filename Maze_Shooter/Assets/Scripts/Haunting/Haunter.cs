@@ -270,7 +270,6 @@ namespace ShootyGhost
             haunted = newHaunted;
             hauntJuice -= newHaunted.hauntCost;
             DestroyHauntPackets();
-            ghostState = GhostState.Haunting;
             onHauntBegin.Invoke();
             _rigidbody.isKinematic = true;
             
@@ -278,6 +277,7 @@ namespace ShootyGhost
             
             // Using a delegate, call the target's 'OnIsHaunted()' method precisely when the transition is complete
             transitionObject.onTransitionComplete += InvokeTargetHauntedMethod;
+            ghostState = GhostState.Haunting;
         }
 
         /// <summary>

@@ -16,7 +16,7 @@ public class Dialog : ScriptableObject
     [ShowIf("setColors")]
     public Color textColor = new Color(.95f, .95f, .95f);
     [AssetsOnly]
-    public GameObject panelPrefab;
+    public DialogPanel panelPrefab;
     public int charactersPerSecond = 50;
 
     [ToggleLeft]
@@ -30,8 +30,7 @@ public class Dialog : ScriptableObject
             return;
         }
 
-        GameObject instance = Instantiate(panelPrefab);
-        DialogPanel p = instance.GetComponent<DialogPanel>();
-        p.ShowDialog(this);
+        var panelInstance = panelPrefab.CreateInstance() as DialogPanel;
+        panelInstance.ShowDialog(this);
     }
 }

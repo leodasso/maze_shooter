@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62941683021397994}
-  m_LocalRotation: {x: 0.30062962, y: -0.006767082, z: 0.021463279, w: 0.9534754}
+  m_LocalRotation: {x: 0.34193355, y: -0.0076968516, z: 0.021147644, w: 0.9394547}
   m_LocalPosition: {x: 6.25, y: -0.24, z: -1.46}
   m_LocalScale: {x: 1.8606083, y: 1.8606083, z: 1.8606083}
   m_Children:
@@ -160,10 +160,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 2.5351386
-  m_Height: 18.19085
+  m_Radius: 3.3429868
+  m_Height: 17.828186
   m_Direction: 1
-  m_Center: {x: 0.54414034, y: 8.595425, z: 0}
+  m_Center: {x: 0.41381097, y: 8.776756, z: 0}
 --- !u!114 &62941683766979577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,7 +229,7 @@ MonoBehaviour:
   customTransform: {fileID: 0}
   offset: 0
   isStatic: 0
-  sortingOrder: 195
+  sortingOrder: 204
   renderers:
   - renderer: {fileID: 62941683942527514}
     offset: 0
@@ -254,7 +254,7 @@ MonoBehaviour:
   speedMultiplier: 1
   speed:
     useConstant: 0
-    constantValue: 10000
+    constantValue: 13000
     valueObject: {fileID: 0}
   target: {fileID: 0}
   useTargetFinder: 0
@@ -671,6 +671,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToScale: {fileID: 62941683766979578}
   rigidbody: {fileID: 62941683766979558}
+  minFlipVelocity: 0.05
 --- !u!1 &62941683942527516
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,7 +697,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62941683942527516}
-  m_LocalRotation: {x: 0.3007058, y: -0, z: -0, w: 0.953717}
+  m_LocalRotation: {x: 0.34202015, y: -0, z: -0, w: 0.9396927}
   m_LocalPosition: {x: -0.02, y: 1.49, z: 0}
   m_LocalScale: {x: 2.0096002, y: 2.0096002, z: 2.0096002}
   m_Children:
@@ -816,7 +817,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -835,7 +836,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 203
   m_Sprite: {fileID: -5928484895896822070, guid: 315d01eb30eb25d4a85dbfb42335ebb9,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1118,6 +1119,66 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: useCustomTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 201
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: customTransform
+      value: 
+      objectReference: {fileID: 62941683766979578}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: offset
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 201
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704432, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: blendMaterial
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704432, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: blendMode
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5242195440903704437, guid: e2cca486d573ca0408e410e9501501d2,
         type: 3}
@@ -1529,66 +1590,6 @@ PrefabInstance:
       propertyPath: VelocityModule.radial.minMaxState
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 201
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704432, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: blendMaterial
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704432, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: blendMode
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: useCustomTransform
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 201
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: customTransform
-      value: 
-      objectReference: {fileID: 62941683766979578}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: offset
-      value: 0.36
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2cca486d573ca0408e410e9501501d2, type: 3}
 --- !u!4 &5197041658228124751 stripped
@@ -1678,6 +1679,66 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: useCustomTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 201
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: customTransform
+      value: 
+      objectReference: {fileID: 62941683766979578}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: offset
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 201
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_VelocityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_LengthScale
+      value: 2.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704432, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: blendMaterial
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704432, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: blendMode
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5242195440903704437, guid: e2cca486d573ca0408e410e9501501d2,
         type: 3}
@@ -1988,66 +2049,6 @@ PrefabInstance:
         type: 3}
       propertyPath: NoiseModule.damping
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 201
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_VelocityScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_LengthScale
-      value: 2.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704432, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: blendMaterial
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704432, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: blendMode
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: useCustomTransform
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 201
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: customTransform
-      value: 
-      objectReference: {fileID: 62941683766979578}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: offset
-      value: 0.36
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2cca486d573ca0408e410e9501501d2, type: 3}

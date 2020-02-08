@@ -14,8 +14,9 @@ public class DialogPanel : InteractivePanel
 	Dialog _dialog;
 	int _index = 0;
 
-	void Start()
+	protected override void Awake()
 	{
+		base.Awake();
 		textOutput.FullClear();
 	}
 
@@ -78,7 +79,7 @@ public class DialogPanel : InteractivePanel
 
 	void ShowText(int index)
 	{
-		Debug.Log("Setting input text to " + _dialog.text[index]);
+		Debug.Log("Setting input text to " + _dialog.text[index], textOutput);
 		textOutput.inputText = _dialog.text[index];
 	}
 }

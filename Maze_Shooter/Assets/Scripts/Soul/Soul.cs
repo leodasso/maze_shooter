@@ -25,6 +25,7 @@ public class Soul : MonoBehaviour
         lightness = 0;
         foreach (SoulLight soulLight in lightSources)
         {
+            if (!soulLight.isActiveAndEnabled) continue;
             lightness += soulLight.LightIntensity(transform.position);
             if (lightness > 1)
                 lightness = 1;
@@ -36,6 +37,11 @@ public class Soul : MonoBehaviour
     void UpdateDarkness()
     {
         darkness.Value = 1 - lightness;
+    }
+
+    public void Reset()
+    {
+        lightSources.Clear();
     }
 
     void OnTriggerEnter(Collider other)

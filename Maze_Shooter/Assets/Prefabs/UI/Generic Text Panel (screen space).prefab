@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.20249337, y: 0}
   m_AnchorMax: {x: 0.80387133, y: 0.34037024}
-  m_AnchoredPosition: {x: 0, y: 10}
-  m_SizeDelta: {x: 0, y: -20}
+  m_AnchoredPosition: {x: 0, y: 53.25}
+  m_SizeDelta: {x: 246.7, y: 106.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222760297820373550
 CanvasRenderer:
@@ -60,15 +60,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8666667}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 6871bde03cc483649a40c8719f3f2255, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: -8555599076299583737, guid: 1f6369445bcfd73428918387f1150318,
+    type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -121,8 +122,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -5}
-  m_SizeDelta: {x: -80, y: -50}
+  m_AnchoredPosition: {x: 0, y: -0.8999939}
+  m_SizeDelta: {x: -467.7, y: -196.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1214450926156564
 GameObject:
@@ -192,8 +193,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 'So, this is it. My revenge will finally be realized. '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3dc3e8c40db5a1b48862936fa3a9ef95, type: 2}
-  m_sharedMaterial: {fileID: 21465730590964758, guid: 3dc3e8c40db5a1b48862936fa3a9ef95,
+  m_fontAsset: {fileID: 11400000, guid: 6b95445ccd06e3b45b2c91d564ea9254, type: 2}
+  m_sharedMaterial: {fileID: -6784623786063286060, guid: 6b95445ccd06e3b45b2c91d564ea9254,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -260,13 +261,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 114854500390314992}
-    characterCount: 0
+    characterCount: 53
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 0
+    spaceCount: 10
+    wordCount: 10
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 2
+    pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -315,7 +316,6 @@ GameObject:
   - component: {fileID: 223065413789044126}
   - component: {fileID: 114489569884433446}
   - component: {fileID: 114689685433863198}
-  - component: {fileID: 114000810633540942}
   - component: {fileID: 114662870244019674}
   - component: {fileID: 114961181587748630}
   m_Layer: 5
@@ -405,21 +405,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114000810633540942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1858797030528934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5517fc8e77dcec348a659c2d9e8fa419, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingPpu: 100
-  oscillationAmount: 2
-  oscillationFrequency: 12
 --- !u!114 &114662870244019674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,33 +417,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4b22f3416e5c948a65683714652fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textOutput: {fileID: 114268903261094098}
-  background: {fileID: 114118927532685816}
-  spriteBackground: {fileID: 0}
   destroyWhenComplete: 1
   active: 0
-  onDialogStart:
+  requireCanvas: 0
+  canvasType: {fileID: 0}
+  onPanelStart:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  onDialogComplete:
+  onPanelComplete:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114961181587748630}
-        m_MethodName: SendEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: textFinished
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onOkayButtonPressed:
+    m_PersistentCalls:
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   animator: {fileID: 0}
+  textOutput: {fileID: 114268903261094098}
+  background: {fileID: 114118927532685816}
+  spriteBackground: {fileID: 0}
 --- !u!114 &114961181587748630
 MonoBehaviour:
   m_ObjectHideFlags: 0

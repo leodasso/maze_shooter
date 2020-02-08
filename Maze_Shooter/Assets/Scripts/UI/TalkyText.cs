@@ -158,6 +158,7 @@ public class TalkyText : MonoBehaviour
     /// </summary>
     public void FullClear()
     {
+        Debug.Log("Doing a full clear!");
         inputText = "";
         Clear();
         PushTextToComponents("");
