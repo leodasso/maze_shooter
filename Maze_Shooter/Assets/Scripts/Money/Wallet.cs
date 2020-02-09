@@ -29,7 +29,7 @@ public class Wallet : MonoBehaviour
         Coin otherCoin = other.GetComponent<Coin>();
         if (!otherCoin) return;
         _currentMoney += otherCoin.value;
-        Destroy(otherCoin.gameObject);
+        otherCoin.Grab();
     }
 
     void TrySave()

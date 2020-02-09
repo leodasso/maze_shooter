@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoneySpawner : MonoBehaviour
 {
-    public GameObject coinPrefab;
+    public SpawnCollection coins;
     public bool spawnOnDestroy;
 
     void OnDestroy()
@@ -15,6 +15,6 @@ public class MoneySpawner : MonoBehaviour
 
     void Spawn()
     {
-        Instantiate(coinPrefab, transform.position, Quaternion.identity);
+        Instantiate(coins.GetRandom(), transform.position, Quaternion.identity);
     }
 }
