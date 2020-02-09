@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 1264617879074373012}
   - component: {fileID: 6192797525792800719}
   - component: {fileID: 9133136081894106821}
-  m_Layer: 17
+  - component: {fileID: 8699341115704775891}
+  m_Layer: 19
   m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +45,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1264617879074373013}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: be2daee01a259ee438a45d600be7f40c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -62,6 +63,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0485e8f6c81ea574eb6f002af7b277d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnVelocity: {x: 0, y: 10, z: 0}
+  spawnVelocityRandomness: 3
+  rigidbody: {fileID: 1264617879074373012}
   destroyDelay: 0.3
   onGrabbed:
     m_PersistentCalls:
@@ -150,6 +154,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8699341115704775891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264617879074373013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe6141f844198b439629637c169cd3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowPrefab: {fileID: 1024560133667443443, guid: 197d5c7da3c5ae849952a8a55cad5e77,
+    type: 3}
+  shadowScale: 1
+  castingMask:
+    serializedVersion: 2
+    m_Bits: 257
 --- !u!1 &1718996336293192445
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,7 +220,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
