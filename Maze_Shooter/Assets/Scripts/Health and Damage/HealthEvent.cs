@@ -11,11 +11,8 @@ public enum HealthEventMode
 }
 
 [RequireComponent(typeof(Health))]
-public class HealthEvent : MonoBehaviour
+public class HealthEvent : HealthPlugin
 {
-    [ReadOnly]
-    public Health health;
-
     [Tooltip("Is this event based on remaining hit points or percentage of health?")]
     public HealthEventMode mode = HealthEventMode.hitPoints;
 
@@ -32,21 +29,21 @@ public class HealthEvent : MonoBehaviour
 
     public bool modeIsHitPoints => mode == HealthEventMode.hitPoints;
 
-    void Start()
+    protected override void Start()
     {
-        FindHealthComponent();
-        health.onDamaged += CheckEvent;
-        
+        base.Start();        
         UpdateHpOfEvent();
     }
 
-    void FindHealthComponent()
+    protected override void Damaged(int newHp)
     {
-        health = GetComponent<Health>();
-        if (!health) 
-            Debug.LogWarning("Health Event component " + name + " requires a Health component on the same object in order to function.");
+        base.Damaged(newHp);
+        CheckEvent(newHp);
     }
 
+    /// <summary>
+    /// If mode is set to percentage, get's the HP value that lines up to that percentage
+    /// </summary>
     void UpdateHpOfEvent()
     {
         if (modeIsHitPoints) return;

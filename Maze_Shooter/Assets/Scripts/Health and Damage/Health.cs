@@ -33,6 +33,7 @@ public class Health : MonoBehaviour, IDestructible
 	public UnityEvent onKilledEvent;
 
 	public Action<int> onDamaged;
+	public Action<int> onHealed;
 
 	float _invulnerableTimer;
 
@@ -72,7 +73,14 @@ public class Health : MonoBehaviour, IDestructible
 		
 		onDamaged?.Invoke(_currentHealth);
 		onDamagedEvent.Invoke();
-		
+	}
+
+	public void Heal(int amount)
+	{
+		if (!enabled) return;
+		_currentHealth += amount;
+		_currentHealth = Mathf.Clamp(_currentHealth, 0, hitPoints.Value);
+		if (onHealed != null) onHealed.Invoke(amount);
 	}
 
 	public void Destruct()
