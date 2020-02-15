@@ -38,9 +38,11 @@ public class Health : MonoBehaviour, IDestructible
 	float _invulnerableTimer;
 
 	public bool IsInvulnerable => _invulnerableTimer > 0;
+	public bool IsKilled => _isKilled;
+	public int CurrentHealth => _currentHealth;
+	bool _isKilled;
 
-	// Use this for initialization
-	void Start ()
+	void Awake ()
 	{
 		_currentHealth = hitPoints.Value;
 	}
@@ -83,8 +85,15 @@ public class Health : MonoBehaviour, IDestructible
 		if (onHealed != null) onHealed.Invoke(amount);
 	}
 
+	public void SetHp(int newHp)
+	{
+		if (!enabled) return;
+		_currentHealth = newHp;
+	}
+
 	public void Destruct()
 	{
+		_isKilled = true;
 		onKilledEvent.Invoke();
 		Destroy(gameObject);
 	}

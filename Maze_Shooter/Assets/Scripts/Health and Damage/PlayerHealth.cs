@@ -8,14 +8,23 @@ using Sirenix.OdinInspector;
              "needs to be combined with a Health component.")]
 public class PlayerHealth : HealthPlugin
 {
+    public SavedInt savedPlayerHealth;
     public UnityEvent onHealthCritical;
     public UnityEvent onHealthOkay;
+
+    public void SetSavedHealthValue()
+    {
+        if (savedPlayerHealth.HasSavedValue())
+        {
+            health.SetHp(savedPlayerHealth.GetValue());
+            CheckForCritical();
+        }
+    }
 
     protected override void Damaged(int newHp)
     {
         base.Damaged(newHp);
-        if (newHp < 2)
-            onHealthCritical.Invoke();
+        CheckForCritical();
     }
 
     protected override void Healed(int newHp)
@@ -23,5 +32,18 @@ public class PlayerHealth : HealthPlugin
         base.Healed(newHp);
         if (newHp > 1)
             onHealthOkay.Invoke();
+    }
+
+    void CheckForCritical()
+    {
+        if (health.CurrentHealth < 2)
+            onHealthCritical.Invoke();
+    }
+
+    void OnDestroy()
+    {
+        // Don't save the health value if the player was destroyed because HP reached 0
+        if (health.IsKilled) return;
+        savedPlayerHealth.Save(health.CurrentHealth);
     }
 }

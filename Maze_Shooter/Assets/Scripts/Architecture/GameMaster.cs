@@ -176,6 +176,15 @@ public class GameMaster : ScriptableObject
         throw new FileLoadException();
     }
 
+    public static bool DoesKeyExist(string saveKey)
+    {
+        string saveDir;
+        if (Get().TryGetSaveFileDirectory(out saveDir))
+            return ES3.KeyExists(saveKey, saveDir);
+        
+        throw new FileLoadException();
+    }
+
     /// <summary>
     /// Returns true if the directory was found. 
     /// </summary>

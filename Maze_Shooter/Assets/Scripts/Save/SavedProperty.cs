@@ -133,4 +133,12 @@ public abstract class SavedProperty<T> : ScriptableObject
         var difference = DateTime.Now - _lastLoadTime;
         return difference.TotalSeconds < cacheLifetime;
     }
+
+    /// <summary>
+    /// Checks if there's any data in the current save file for this value.
+    /// </summary>
+    public bool HasSavedValue()
+    {
+        return GameMaster.DoesKeyExist(Prefix + name);
+    }
 }
