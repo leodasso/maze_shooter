@@ -9,6 +9,7 @@ public class Key : MonoBehaviour
 {
     public GuidGenerator guidGenerator;
     public UnityEvent onAqcuired;
+    public UnityEvent onFirstTimeAcquire;
     public UnityEvent onUsed;
     GameObject _beholder;
     bool _acquired;
@@ -25,6 +26,7 @@ public class Key : MonoBehaviour
     {
         _acquired = true;
         onAqcuired.Invoke();
+        onFirstTimeAcquire.Invoke();
         Debug.Log("key was acquired!");
     }
 
