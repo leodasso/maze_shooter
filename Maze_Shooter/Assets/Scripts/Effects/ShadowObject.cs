@@ -9,7 +9,8 @@ public class ShadowObject : MonoBehaviour
     public float maxDistance = 10;
     public Gradient colorByDistance;
     public List<SpriteRenderer> sprites = new List<SpriteRenderer>();
-
+    
+    List<ShadowObjectPlugin> _plugins = new List<ShadowObjectPlugin>();
     float _dist;
     float _normalizedDist;
 
@@ -26,6 +27,16 @@ public class ShadowObject : MonoBehaviour
         _dist = Mathf.Clamp(_dist, 0, maxDistance);
         _normalizedDist = _dist / maxDistance;
         SetColor(colorByDistance.Evaluate(_normalizedDist));
+        
+        foreach (var plugin in _plugins)
+        {
+            plugin.Recalculate(Mathf.Clamp01(_normalizedDist));
+        }
+    }
+
+    public void AddPlugin(ShadowObjectPlugin newPlugin)
+    {
+        _plugins.Add(newPlugin);
     }
 
     void SetColor(Color color)

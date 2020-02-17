@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 1781844950}
   - component: {fileID: 1781844951}
   - component: {fileID: 1781844952}
-  - component: {fileID: 5716802932685850705}
+  - component: {fileID: 5802432017048918399}
+  - component: {fileID: 8762276104371340549}
   m_Layer: 17
   m_Name: Keystone
   m_TagString: Untagged
@@ -79,7 +80,7 @@ MonoBehaviour:
   shadowScale: 1
   castingMask:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 256
 --- !u!136 &1781844949
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -90,10 +91,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.84
+  m_Radius: 1.04
   m_Height: 6.575521
   m_Direction: 1
-  m_Center: {x: 0, y: 2.7877605, z: 0}
+  m_Center: {x: 0, y: 1.8, z: 0}
 --- !u!114 &1781844950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,7 +111,7 @@ MonoBehaviour:
   thingToOrbit: {fileID: 0}
   orbitRadius: 1
   orbitOffset: {x: 0, y: 0, z: 0}
-  lerpSpeed: 8
+  lerpSpeed: 20
 --- !u!114 &1781844951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,15 +124,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ab1d4ff4ec67f4b92b68d7a2db6338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode: 0
+  keyState: 0
+  orbiter: {fileID: 1781844950}
   guidGenerator: {fileID: 1781844952}
   onAqcuired:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1781844949}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5802432017048918399}
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: acquire
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  onFirstTimeAcquire:
+  moveToBeholder:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5802432017048918399}
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: snapAcquire
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   onUsed:
@@ -152,7 +189,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqueId: 4b86042e-fa74-4ff3-8a36-d76573d5e3e3
---- !u!114 &5716802932685850705
+--- !u!95 &5802432017048918399
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960910279621325415}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5b7e89cc128fd1047b1267e94055d9f3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8762276104371340549
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,40 +217,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1960910279621325415}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 161a145403dbeea4198a74f6ed11b3f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 219da9824ea70fd4882cd1b0bb8203cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 0
-  oneOff: 0
-  filterTriggers: 1
-  useLayerMask: 1
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 512
-  triggerers:
-  - {fileID: 11400000, guid: 35831a8bfbcf71f4fb702f50d0ec7816, type: 2}
-  events: []
-  onTriggerEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1781844950}
-        m_MethodName: SetThingToOrbit
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: Arachnid.UnityEventGameObjectParam, Arachnid, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  onTriggerExit:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: Arachnid.UnityEventGameObjectParam, Arachnid, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+  collection: {fileID: 11400000, guid: 61213d67bd8f34c479f8d1c60261877e, type: 2}
 --- !u!1 &1960910281087259824
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +246,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1960910281087259824}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.29, z: 0}
+  m_LocalPosition: {x: 0, y: 1.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1960910279621325413}

@@ -11,12 +11,12 @@ public class Orbiter : MonoBehaviour
     public float orbitRadius = 1;
     public Vector3 orbitOffset;
     public float lerpSpeed = 8;
-    private Vector3 _orbitPos;
+    Vector3 _orbitPos;
+    float _angleInRadians;
     
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // This function is public so unity events can interface with it
@@ -29,7 +29,8 @@ public class Orbiter : MonoBehaviour
     void Update()
     {
         if (!thingToOrbit) return;
-        Vector3 circle = new Vector3(orbitRadius * Mathf.Cos(angle), 0, orbitRadius * Mathf.Sin(angle));
+        _angleInRadians = (angle / 360) * 2 * Mathf.PI;
+        Vector3 circle = new Vector3(orbitRadius * Mathf.Cos(_angleInRadians), 0, orbitRadius * Mathf.Sin(_angleInRadians));
         _orbitPos = thingToOrbit.position + orbitOffset + circle;
         transform.position = Vector3.Lerp(transform.position, _orbitPos, Time.deltaTime * lerpSpeed);
     }

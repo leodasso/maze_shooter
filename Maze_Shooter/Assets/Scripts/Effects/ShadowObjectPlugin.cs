@@ -4,6 +4,12 @@ using UnityEngine;
 
 public abstract class ShadowObjectPlugin : MonoBehaviour
 {
-    // TODO extend to allow for control of alpha on color group / particle emission
     public ShadowObject shadowObject;
+
+    void Awake()
+    {
+        shadowObject.AddPlugin(this);
+    }
+
+    public abstract void Recalculate(float normalizedDist);
 }

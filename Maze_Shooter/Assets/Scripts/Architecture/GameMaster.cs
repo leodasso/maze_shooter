@@ -17,6 +17,7 @@ public class GameMaster : ScriptableObject
     static GameMaster _gameMaster;
     public SaveDataAvatar currentAvatar;
     public GateLink gateLink;
+    public Collection playerInstancesCollection;
 
     public SavedString savedStage;
     public SavedString savedCheckpoint;
@@ -47,6 +48,13 @@ public class GameMaster : ScriptableObject
         Stage stageToLoad = GetStage(savedStage.GetValue());
         // Load with a delay so there's time for the transition to fade in
         stageToLoad.Load(1);
+    }
+
+    public static GameObject GetPlayerInstance()
+    {
+        var firstPlayerObject = Get().playerInstancesCollection.GetFirstElement();
+        if (firstPlayerObject == null) return null;
+        return firstPlayerObject.gameObject;
     }
 
     Stage GetStage(string stageName)

@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 1272527372}
   - component: {fileID: 1272527370}
   - component: {fileID: 1272527371}
+  - component: {fileID: 9039625657524052680}
+  - component: {fileID: 2339766406018898031}
   m_Layer: 0
-  m_Name: glow
+  m_Name: vertical glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -30
+  m_SortingOrder: -29
   m_Sprite: {fileID: -2843172069484014020, guid: b6267730ec425fd4795d8a9437f8de8b,
     type: 3}
   m_Color: {r: 0.8867924, g: 0.44810376, b: 0.012548926, a: 1}
@@ -139,6 +141,105 @@ MonoBehaviour:
       vectorValue: {x: 0, y: 0, z: 0, w: 0}
       floatValue: 0
       textureValue: {fileID: 0}
+--- !u!114 &9039625657524052680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272527369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6863d874374ba2b48bbdaa79850c458e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlColor: 0
+  updateColor: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  overwriteAlpha: 0
+  controlAlpha: 1
+  updateAlpha: 1
+  alpha: 1
+  sprites:
+  - {fileID: 1272527370}
+  texts: []
+  childColorGroups: []
+--- !u!114 &2339766406018898031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272527369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a46110beeff3be48a755dd8fe8c080c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowObject: {fileID: 8105908617540962545}
+  colorGroup: {fileID: 9039625657524052680}
+  alphaCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.0023499
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1.0024414
+      value: 0.14151001
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &259028445999165656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303488135961224499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a0668e995a6b84d904fbe9db3461bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowObject: {fileID: 8105908617540962545}
+  particleSystem: {fileID: 303488135961224501}
+  emissionCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0021858215
+      value: 14.253311
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.8015137
+      value: 0.027107239
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4006529794002031174
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +251,7 @@ GameObject:
   - component: {fileID: 4006529794002031176}
   - component: {fileID: 4006529794002031175}
   m_Layer: 0
-  m_Name: Keystone Shadow
+  m_Name: ground glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,7 +307,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -52686479
   m_SortingLayer: -1
-  m_SortingOrder: -32
+  m_SortingOrder: -31
   m_Sprite: {fileID: -1506514462682016019, guid: 1f6369445bcfd73428918387f1150318,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -229,6 +330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8628182711840255626}
   - component: {fileID: 8105908617540962545}
+  - component: {fileID: 3044355851614985789}
   m_Layer: 0
   m_Name: Keystone Shadow
   m_TagString: Untagged
@@ -265,7 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90fc79be76cb9c4458fed57c2b88260e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 10
+  maxDistance: 4.5
   colorByDistance:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
@@ -297,6 +399,30 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   sprites:
   - {fileID: 4006529794002031175}
+--- !u!114 &3044355851614985789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8658877947491313633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useCustomTransform: 0
+  customTransform: {fileID: 0}
+  offset: 0
+  isStatic: 0
+  sortingOrder: -31
+  renderers:
+  - renderer: {fileID: 303488135961224500}
+    offset: 2
+  - renderer: {fileID: 303488136081506096}
+    offset: 2
+  - renderer: {fileID: 1272527370}
+    offset: 2
 --- !u!1001 &3270169787208582956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -304,6 +430,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8628182711840255626}
     m_Modifications:
+    - target: {fileID: 2979077012763435551, guid: 9b9422386ca0ab546be9520ee9f7a461,
+        type: 3}
+      propertyPath: m_Name
+      value: Keystone Particle
+      objectReference: {fileID: 0}
     - target: {fileID: 2979077012763435546, guid: 9b9422386ca0ab546be9520ee9f7a461,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -359,16 +490,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2979077012763435551, guid: 9b9422386ca0ab546be9520ee9f7a461,
+    - target: {fileID: 2979077012763435544, guid: 9b9422386ca0ab546be9520ee9f7a461,
         type: 3}
-      propertyPath: m_Name
-      value: Keystone Particle
+      propertyPath: m_SortingOrder
+      value: -29
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979077013184624668, guid: 9b9422386ca0ab546be9520ee9f7a461,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -29
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b9422386ca0ab546be9520ee9f7a461, type: 3}
+--- !u!1 &303488135961224499 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2979077012763435551, guid: 9b9422386ca0ab546be9520ee9f7a461,
+    type: 3}
+  m_PrefabInstance: {fileID: 3270169787208582956}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &303488135961224502 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2979077012763435546, guid: 9b9422386ca0ab546be9520ee9f7a461,
+    type: 3}
+  m_PrefabInstance: {fileID: 3270169787208582956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &303488135961224501 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2979077012763435545, guid: 9b9422386ca0ab546be9520ee9f7a461,
+    type: 3}
+  m_PrefabInstance: {fileID: 3270169787208582956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!199 &303488135961224500 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 2979077012763435544, guid: 9b9422386ca0ab546be9520ee9f7a461,
+    type: 3}
+  m_PrefabInstance: {fileID: 3270169787208582956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!199 &303488136081506096 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 2979077013184624668, guid: 9b9422386ca0ab546be9520ee9f7a461,
     type: 3}
   m_PrefabInstance: {fileID: 3270169787208582956}
   m_PrefabAsset: {fileID: 0}
