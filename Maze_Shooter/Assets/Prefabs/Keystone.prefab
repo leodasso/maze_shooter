@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1960910279621325413}
+  - component: {fileID: 9139055540337624807}
+  - component: {fileID: 1781844949}
   - component: {fileID: 1960910279621325414}
   - component: {fileID: 1960910279621325412}
-  - component: {fileID: 1781844949}
   - component: {fileID: 1781844950}
   - component: {fileID: 1781844951}
   - component: {fileID: 1781844952}
@@ -39,6 +40,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &9139055540337624807
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960910279621325415}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &1781844949
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960910279621325415}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.04
+  m_Height: 6.575521
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.8, z: 0}
 --- !u!114 &1960910279621325414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,20 +112,6 @@ MonoBehaviour:
   castingMask:
     serializedVersion: 2
     m_Bits: 256
---- !u!136 &1781844949
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1960910279621325415}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 1.04
-  m_Height: 6.575521
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.8, z: 0}
 --- !u!114 &1781844950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,17 +148,6 @@ MonoBehaviour:
   onAqcuired:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1781844949}
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 5802432017048918399}
         m_MethodName: SetTrigger
         m_Mode: 5
@@ -171,9 +177,20 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  onUsed:
+  onPlacedInSlot:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1781844950}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1781844952

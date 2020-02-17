@@ -28,7 +28,7 @@ public class Key : MonoBehaviour
     [Tooltip("If the player has previously acquired this keystone but is returning to the scene, this action happens.")]
     public UnityEvent moveToBeholder;
     
-    public UnityEvent onUsed;
+    public UnityEvent onPlacedInSlot;
     GameObject _beholder;
     const string saveDataPrefix = "key_";
     const string slotNameSaveDataSuffix = "_keySlot";
@@ -42,7 +42,7 @@ public class Key : MonoBehaviour
         if (_keySlot != "none")
         {
             keyState = KeyState.InSlot;
-            // TODO invoke move to slot event
+            PlaceKeyInSavedSlotInstantly();
         }
         
         else if (LoadAcquiredStatus())
@@ -77,10 +77,24 @@ public class Key : MonoBehaviour
         onAqcuired.Invoke();
     }
 
-    public void DisableAnimator()
+    public void PlaceInSlotForFirstTime(KeySlot slot)
     {
-        var animator = GetComponent<Animator>();
-        if (animator) animator.enabled = false;
+        SaveKeySlot(slot.guidGenerator.uniqueId);
+    }
+
+
+    void PlaceKeyInSavedSlotInstantly()
+    {
+        var keySlot = GetSavedKeySlot();
+        if (!keySlot) return;
+        keySlot.PlaceKeyInstantly(this);
+    }
+
+    KeySlot GetSavedKeySlot()
+    {
+        GameObject savedSlotGameObject = GuidGenerator.GetObjectForGuid(LoadSlot());
+        if (!savedSlotGameObject) return null;
+        return savedSlotGameObject.GetComponent<KeySlot>();
     }
 
     bool CanBeAcquired()
@@ -90,6 +104,7 @@ public class Key : MonoBehaviour
 #endif
         return keyState == KeyState.Idle;
     }
+    
 
     /// <summary>
     /// Returns the GUID of the slot that this key has been placed in. If it hasn't yet been placed in a
@@ -103,6 +118,23 @@ public class Key : MonoBehaviour
     }
 
     /// <summary>
+    /// Saves the keyslot that this key has been placed into.
+    /// </summary>
+    void SaveKeySlot(string slotGuid)
+    {
+        if (!guidGenerator)
+        {
+            Debug.LogError("Trying to save slot for keystone, but no guid exists! Please add a GUID generator" +
+                           " component.", gameObject);
+            return;
+        }
+        
+        GameMaster.SaveToCurrentFile(
+            saveDataPrefix + guidGenerator.uniqueId + slotNameSaveDataSuffix, slotGuid, this);
+    }
+    
+
+    /// <summary>
     /// Does the save file show that this has been acquired previously?
     /// </summary>
     bool LoadAcquiredStatus()
@@ -113,6 +145,7 @@ public class Key : MonoBehaviour
         if (!guidGenerator) return false;
         return GameMaster.LoadFromCurrentFile(saveDataPrefix + guidGenerator.uniqueId, false, this);
     }
+    
 
     void SaveAsAcquired()
     {
@@ -123,5 +156,11 @@ public class Key : MonoBehaviour
             return;
         }
         GameMaster.SaveToCurrentFile(saveDataPrefix + guidGenerator.uniqueId, true, this);
+    }
+    
+    public void DisableAnimator()
+    {
+        var animator = GetComponent<Animator>();
+        if (animator) animator.enabled = false;
     }
 }
