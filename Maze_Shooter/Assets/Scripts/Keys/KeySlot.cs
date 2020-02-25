@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,17 +10,26 @@ public class KeySlot : MonoBehaviour
     public UnityEvent onInsertInstantly;
     public bool IsFilled => _filled;
     bool _filled;
+
+    public Action onSlotFilled;
     
 
     public void InsertKey()
     {
-        _filled = true;
         onKeyInserted.Invoke();
+        FillSlot();
     }
 
     public void InsertKeyInstantly()
     {
-        _filled = true;
         onInsertInstantly.Invoke();
+        FillSlot();
+    }
+
+    void FillSlot()
+    {
+        _filled = true;
+        if (onSlotFilled != null) 
+            onSlotFilled.Invoke();
     }
 }

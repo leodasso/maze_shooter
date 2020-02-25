@@ -20,6 +20,7 @@ public class GuidGenerator : MonoBehaviour
     {
         foreach (var guidGenerator in allInstances)
         {
+            if (!guidGenerator) continue;
             if (guidGenerator.uniqueId == guid) return guidGenerator.gameObject;
         }
         return null;
@@ -37,3 +38,4 @@ public class GuidGenerator : MonoBehaviour
         uniqueId = guid.ToString();
     }
 }
+   
