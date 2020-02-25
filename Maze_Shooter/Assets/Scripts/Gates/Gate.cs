@@ -1,18 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.Events;
 
 public class Gate : MonoBehaviour
 {
+    [ToggleLeft] [Tooltip("Is this gate traversable? "), TabGroup("Main")]
+    public bool activated = true;
+    
+    [TabGroup("Main")]
     public Stage destination;
+    
     [Tooltip("GateLinks are shared between pairs of gates. This lets the game know which gate in the destination stage" +
-             " the player will start at.")]
+             " the player will start at."), TabGroup("Main")]
     public GateLink gateLink;
+    
+    [TabGroup("Main")]
     public Vector3 gateForward = Vector3.forward;
 
+    [TabGroup("Events")]
     public UnityEvent onPlayerEnterGate;
+    
+    [TabGroup("Events")]
     public UnityEvent onPlayerSpawnToThisGate;
 
     void OnDrawGizmos()
@@ -21,7 +29,7 @@ public class Gate : MonoBehaviour
         Gizmos.DrawRay(transform.position, transform.rotation * gateForward * 5);
     }
 
-    // Start is called before the first frame update
+    // Start is left in intentionally so that the 'active' toggle is exposed on the component.
     void Start()
     {}
 

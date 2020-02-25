@@ -28,6 +28,9 @@ public class ColorGroup : MonoBehaviour
     public List<SpriteRenderer> sprites = new List<SpriteRenderer>();
     public List<TextMeshPro> texts = new List<TextMeshPro>();
     public List<ColorGroup> childColorGroups = new List<ColorGroup>();
+
+    [Tooltip("Automatically gets sprites and color groups from children when updating color/alpha in editor.")]
+    public bool autoGetSprites = true;
     float _tempAlpha;
 
     void Update()
@@ -43,8 +46,12 @@ public class ColorGroup : MonoBehaviour
     void SetColor()
     {
         if (!controlColor) return;
-        GetChildColorGroups();
-        GetSprites();
+        if (autoGetSprites)
+        {
+            GetChildColorGroups();
+            GetSprites();
+        }
+
         SetColorFast(Color.white);
     }
 
@@ -79,8 +86,11 @@ public class ColorGroup : MonoBehaviour
     void SetAlpha()
     {
         if (!controlAlpha) return;
-        GetChildColorGroups();
-        GetSprites();
+        if (autoGetSprites)
+        {
+            GetChildColorGroups();
+            GetSprites();
+        }
         SetAlphaFast();
     }
 
