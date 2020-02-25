@@ -29,13 +29,13 @@ public class Key : MonoBehaviour
     [Tooltip("If the player has previously acquired this keystone but is returning to the scene, this action happens.")]
     public UnityEvent moveToBeholder;
     
-    public UnityEvent onPlacedInSlot;
+    public UnityEvent fadeOut;
     GameObject _beholder;
     const string saveDataPrefix = "key_";
     const string slotNameSaveDataSuffix = "_keySlot";
-
     string _keySlot;
 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -78,17 +78,12 @@ public class Key : MonoBehaviour
         onAqcuired.Invoke();
     }
 
-    public void PlaceInSlotForFirstTime(KeySlot slot)
-    {
-        SaveKeySlot(slot.guidGenerator.uniqueId);
-    }
-
-
     void PlaceKeyInSavedSlotInstantly()
     {
         var keySlot = GetSavedKeySlot();
         if (!keySlot) return;
-        keySlot.PlaceKeyInstantly(this);
+        keySlot.InsertKeyInstantly();
+        RemoveMe();
     }
 
     KeySlot GetSavedKeySlot()
@@ -105,7 +100,32 @@ public class Key : MonoBehaviour
 #endif
         return keyState == KeyState.Idle;
     }
-    
+
+    public void PlaceIntoSlot(GameObject keySlot)
+    {
+        // Lets us turn off the component to prevent duplicate placements
+        if (!enabled) return;
+        
+        KeySlot slot = keySlot.GetComponent<KeySlot>();
+        if (!slot)
+        {
+            Debug.LogError("No KeySlot component was found on " + keySlot.name, keySlot);
+            return;
+        }
+
+        if (slot.IsFilled) return;
+        
+        slot.InsertKey();
+        SaveKeySlot(slot.guidGenerator.uniqueId);
+        RemoveMe();
+    }
+
+    void RemoveMe()
+    {
+        fadeOut.Invoke();
+        Destroy(gameObject, 1);
+        enabled = false;
+    }
 
     /// <summary>
     /// Returns the GUID of the slot that this key has been placed in. If it hasn't yet been placed in a
@@ -163,5 +183,11 @@ public class Key : MonoBehaviour
     {
         var animator = GetComponent<Animator>();
         if (animator) animator.enabled = false;
+    }
+
+    public void EnableAnimator()
+    {
+        var animator = GetComponent<Animator>();
+        if (animator) animator.enabled = true;
     }
 }
