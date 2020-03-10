@@ -4,8 +4,8 @@ using UnityEngine.Events;
 
 public class Gate : MonoBehaviour
 {
-    [ToggleLeft] [Tooltip("Is this gate traversable? "), TabGroup("Main")]
-    public bool activated = true;
+    [ToggleLeft, SerializeField, ShowInInspector, Tooltip("Is this gate traversable? "), TabGroup("Main")]
+    bool activated = true;
     
     [TabGroup("Main")]
     public Stage destination;
@@ -23,15 +23,35 @@ public class Gate : MonoBehaviour
     [TabGroup("Events")]
     public UnityEvent onPlayerSpawnToThisGate;
 
+    [TabGroup("Events")]
+    public UnityEvent onGateActivated;
+
+    [TabGroup("Events")]
+    public UnityEvent onGateDeactivated;
+
+    public void ActivateGate()
+    {
+        activated = true;
+        onGateActivated.Invoke();
+    }
+
+    public void DeactivateGate()
+    {
+        activated = false;
+        onGateDeactivated.Invoke();
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawRay(transform.position, transform.rotation * gateForward * 5);
     }
 
-    // Start is left in intentionally so that the 'active' toggle is exposed on the component.
     void Start()
-    {}
+    {
+        // behave correctly if the 'activated' toggle is turned off in editor
+        if (!activated) onGateDeactivated.Invoke();
+    }
 
     void SpawnPlayer()
     {
@@ -41,7 +61,7 @@ public class Gate : MonoBehaviour
 
     public void TryTransportPlayer()
     {
-        if (!enabled) return;
+        if (!enabled || !activated) return;
         // TODO check if the player is moving the right way through the gate using Vector3.Dot against gateForward
         GameMaster.SetGateLink(gateLink);
         onPlayerEnterGate.Invoke();

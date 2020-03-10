@@ -79,6 +79,14 @@ public class ColorGroup : MonoBehaviour
         UpdateChildColorGroups();
     }
 
+    public void SetAlphaTo(float newAlpha)
+    {
+        if (!controlAlpha) return;
+        alpha = Mathf.Clamp01(newAlpha);
+        
+        SetAlphaFast();
+    }
+
     /// <summary>
     /// Sets the alpha after refreshing color group and sprites list. This is slow
     /// and should only be used by the inspector.
@@ -97,7 +105,7 @@ public class ColorGroup : MonoBehaviour
     /// <summary>
     /// Doesn't refresh sprites list - can be called in Update
     /// </summary>
-    public void SetAlphaFast(float parentAlpha = 1)
+    void SetAlphaFast(float parentAlpha = 1)
     {
         if (!controlAlpha) return;
         foreach (var sprite in sprites)
