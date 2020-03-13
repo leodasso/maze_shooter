@@ -73,7 +73,7 @@ namespace ShootyGhost
         {
             _target = newTarget;
             newTarget.TargetedForHaunt();
-            haunter.SetTargetedHauntable(newTarget);
+            haunter.SetPendingHauntable(newTarget);
         }
 
 
@@ -82,7 +82,7 @@ namespace ShootyGhost
             if (!_target) return;
             _target.UnTargetedForHaunt();
 
-            if (_target == haunter.targetedHauntable)
+            if (_target == haunter.PendingHauntable)
             {
                 haunter.ClearTargetedHauntable();
                 onHauntableExited.Invoke();

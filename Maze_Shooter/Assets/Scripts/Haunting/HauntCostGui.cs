@@ -46,7 +46,7 @@ public class HauntCostGui : MonoBehaviour
 
     void Recalculate()
     {
-        int displayedAmt = _hauntable.DisplayedHauntJuice;
+        int displayedAmt = _hauntable.hauntCost;
         numberText.text = displayedAmt.ToString();
         
         // Turn the amount into a number between 0 and 1, so we can feed it to the progress bars

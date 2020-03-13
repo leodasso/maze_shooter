@@ -15,11 +15,7 @@ namespace ShootyGhost
         public GameObject hauntedEffectPrefab;
         
         HauntCostGui _hauntCostGuiInstance;
-        List<HauntPacket> _hauntPackets = new List<HauntPacket>();
         GameObject _hauntedEffectInstance;
-        Haunter _haunter;
-        
-        public int DisplayedHauntJuice => hauntCost - _hauntPackets.Count;
 
         void Start()
         {
@@ -31,22 +27,6 @@ namespace ShootyGhost
         {
             if (_hauntCostGuiInstance)
                 Destroy(_hauntCostGuiInstance);
-        }
-
-        public bool CostIsFulfilled()
-        {
-            return _hauntPackets.Count >= hauntCost;
-        }
-
-        public void AddHauntPacket(HauntPacket newPacket)
-        {
-            if (_hauntPackets.Contains(newPacket)) return;
-            _hauntPackets.Add(newPacket);
-        }
-
-        public void LoseHauntPacket(HauntPacket packet)
-        {
-            _hauntPackets.Remove(packet);
         }
 
         public void TargetedForHaunt()
@@ -73,9 +53,7 @@ namespace ShootyGhost
         [Button]
         public void OnIsHaunted(Haunter newHaunter)
         {
-            _haunter = newHaunter;
             InstantiateHauntEffect();
-            _hauntPackets.Clear();
             onHaunted.Invoke();
         }
 
@@ -85,7 +63,6 @@ namespace ShootyGhost
                 Destroy(_hauntedEffectInstance);
             
             onUnHaunted.Invoke();
-            _haunter = null;
         }
 
         void InstantiateHauntEffect()
