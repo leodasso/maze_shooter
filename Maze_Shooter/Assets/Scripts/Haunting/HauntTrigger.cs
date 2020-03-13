@@ -18,7 +18,6 @@ namespace ShootyGhost
 
         readonly List<Hauntable> _overlappedHauntables = new List<Hauntable>();
         Hauntable _target;
-        GameObject _indicator;
         float _loseHauntTargetTimer = 0;
 
         void Start()
@@ -72,7 +71,6 @@ namespace ShootyGhost
         void SetHauntTarget(Hauntable newTarget)
         {
             _target = newTarget;
-            newTarget.TargetedForHaunt();
             haunter.SetPendingHauntable(newTarget);
         }
 
@@ -80,8 +78,6 @@ namespace ShootyGhost
         void LoseHauntTarget()
         {
             if (!_target) return;
-            _target.UnTargetedForHaunt();
-
             if (_target == haunter.PendingHauntable)
             {
                 haunter.ClearTargetedHauntable();

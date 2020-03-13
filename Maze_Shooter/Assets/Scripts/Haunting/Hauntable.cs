@@ -8,38 +8,13 @@ namespace ShootyGhost
     [TypeInfoBox("Can be haunted by Haunter!")]
     public class Hauntable : MonoBehaviour
     {
-        public int hauntCost = 5;
+        [Tooltip("Cost of haunt juice per second to posess this.")]
+        public float hauntBurnRate = .5f;
         public UnityEvent onHaunted;
         public UnityEvent onUnHaunted;
-        public GameObject hauntCostGuiPrefab;
         public GameObject hauntedEffectPrefab;
         
-        HauntCostGui _hauntCostGuiInstance;
         GameObject _hauntedEffectInstance;
-
-        void Start()
-        {
-            _hauntCostGuiInstance = Instantiate(hauntCostGuiPrefab).GetComponent<HauntCostGui>();
-            _hauntCostGuiInstance.Init(this);
-        }
-
-        void OnDestroy()
-        {
-            if (_hauntCostGuiInstance)
-                Destroy(_hauntCostGuiInstance);
-        }
-
-        public void TargetedForHaunt()
-        {
-            if (_hauntCostGuiInstance) 
-                _hauntCostGuiInstance.ShowFull();
-        }
-
-        public void UnTargetedForHaunt()
-        {
-            if (_hauntCostGuiInstance)
-                _hauntCostGuiInstance.Show();
-        }
 
         /// <summary>
         /// Calculates and returns the position that the ghost should go to once exiting after haunt

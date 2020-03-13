@@ -626,6 +626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hauntJuice: 0
+  juiceBurnRate: 0.3
   savedHauntJuice: {fileID: 11400000, guid: f0c3b54f17cdc3c4f9912da934951ef3, type: 2}
   targetingModeCooldown:
     useConstant: 1
@@ -1243,18 +1244,21 @@ MonoBehaviour:
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Actions.ActivateGameObject
-        - InvokeGameEvent
         - HutongGames.PlayMaker.Actions.SetAnimatorBool
+        - InvokeGameEvent
+        - InvokeGameEvent
         customNames:
         - despawn haunter
         - 
         - 
-        actionEnabled: 010101
-        actionIsOpen: 010101
-        actionStartIndex: 000000000500000006000000
-        actionHashCodes: b2cf10007f1a71035f913504
+        - 
+        actionEnabled: 01010101
+        actionIsOpen: 01010101
+        actionStartIndex: 00000000050000000a0000000b000000
+        actionHashCodes: b2cf10005f9135047f1a71037f1a7103
         unityObjectParams:
         - {fileID: 11400000, guid: 9882b07d380c9ba49a5f7ea2e089e68e, type: 2}
+        - {fileID: 11400000, guid: db5779892c7dd924197a09407136f5a4, type: 2}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
         - ownerOption: 1
@@ -1322,21 +1326,22 @@ MonoBehaviour:
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 1400000011000000110000000100000001000000050000001400000012000000110000000100000007000000
+        paramDataType: 140000001100000011000000010000000100000014000000120000001100000001000000070000000500000005000000
         paramName:
         - gameObject
         - activate
         - recursive
         - resetOnExit
         - everyFrame
-        - gameEvent
         - gameObject
         - parameter
         - Value
         - everyFrame
         - everyFrameOption
-        paramDataPos: 0000000000000000010000000000000001000000000000000100000000000000020000000200000003000000
-        paramByteDataSize: 0000000000000000000000000100000001000000000000000000000000000000000000000100000004000000
+        - gameEvent
+        - gameEvent
+        paramDataPos: 000000000000000001000000000000000100000001000000000000000200000002000000030000000000000001000000
+        paramByteDataSize: 000000000000000000000000010000000100000000000000000000000000000001000000040000000000000000000000
     - name: Haunt
       description: In posession of another creature or object
       colorIndex: 0
@@ -1618,13 +1623,16 @@ MonoBehaviour:
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Actions.Wait
+        - InvokeGameEvent
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 48c01101
-        unityObjectParams: []
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000003000000
+        actionHashCodes: 48c011017f1a7103
+        unityObjectParams:
+        - {fileID: 11400000, guid: db5779892c7dd924197a09407136f5a4, type: 2}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
         animationCurveParams: []
@@ -1659,13 +1667,14 @@ MonoBehaviour:
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 0f0000001700000001000000
+        paramDataType: 0f000000170000000100000005000000
         paramName:
         - time
         - finishEvent
         - realTime
-        paramDataPos: 000000000000000000000000
-        paramByteDataSize: 000000000000000001000000
+        - gameEvent
+        paramDataPos: 00000000000000000000000000000000
+        paramByteDataSize: 00000000000000000100000000000000
     - name: haunt exit
       description: 
       colorIndex: 0
@@ -7740,6 +7749,7 @@ GameObject:
   - component: {fileID: 2768052250708780507}
   - component: {fileID: 4677854053115028106}
   - component: {fileID: 7912980611034768620}
+  - component: {fileID: 2290492782491493214}
   m_Layer: 9
   m_Name: Haunting Events
   m_TagString: Untagged
@@ -7842,17 +7852,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 4151602328836940682}
-        m_MethodName: HideJuiceGui
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 8980527348889709744}
         m_MethodName: set_enabled
         m_Mode: 6
@@ -7863,6 +7862,37 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  comment: 
+--- !u!114 &2290492782491493214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9030244848307221422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83b5d72ab14f3f4c8442f76808cf317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - {fileID: 11400000, guid: db5779892c7dd924197a09407136f5a4, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4151602328836940682}
+        m_MethodName: HideJuiceGui
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null

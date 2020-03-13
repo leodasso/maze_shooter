@@ -28,6 +28,8 @@ namespace ShootyGhost
 
         [TabGroup("main"), Tooltip("Haunt juice is needed to perform hauntings!")]
         public int hauntJuice = 0;
+
+        public float juiceBurnRate = .3f;
         
         [TabGroup("main"), Tooltip("On Start(), hauntJuice value is pulled from save file using this. On Destroy(), it's saved.")]
         public SavedInt savedHauntJuice;
@@ -95,6 +97,7 @@ namespace ShootyGhost
         bool CanBeginHauntTargeting => ghostState == GhostState.Normal && _targetingModeTimer <= 0 && HasHauntJuice;
         bool CanHaunt => ghostState == GhostState.Targeting && HasHauntJuice;
         bool HasHauntJuice => hauntJuice > 0;
+        float CurrentJuiceBurnRate => haunted ? haunted.hauntBurnRate : juiceBurnRate;
         
         
         // Start is called before the first frame update
@@ -158,6 +161,8 @@ namespace ShootyGhost
         public void ClearTargetedHauntable()
         {
             _pendingHauntable = null;
+            if (_indicator) 
+                Destroy(_indicator);
         }
         
         /// <summary>
@@ -199,7 +204,6 @@ namespace ShootyGhost
         void BeginHaunt(Hauntable newHaunted)
         {
             haunted = newHaunted;
-            hauntJuice -= newHaunted.hauntCost;
             onHauntBegin.Invoke();
             _rigidbody.isKinematic = true;
             
@@ -271,7 +275,8 @@ namespace ShootyGhost
             ShowJuiceGui();
         }
 
-        void HideJuiceGui()
+        // These are referenced by external unity events, that's why they're public
+        public void HideJuiceGui()
         {
             _hauntGuiTimed = false;
             if (_juiceGuiInstance)
