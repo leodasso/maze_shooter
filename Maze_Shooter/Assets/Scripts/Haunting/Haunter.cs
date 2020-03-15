@@ -92,12 +92,14 @@ namespace ShootyGhost
         bool _hauntGuiTimed;
         GameObject _indicator;
         Hauntable _pendingHauntable;
+        float _juiceBurnTimer;
 
         public Hauntable PendingHauntable => _pendingHauntable;
         bool CanBeginHauntTargeting => ghostState == GhostState.Normal && _targetingModeTimer <= 0 && HasHauntJuice;
         bool CanHaunt => ghostState == GhostState.Targeting && HasHauntJuice;
         bool HasHauntJuice => hauntJuice > 0;
         float CurrentJuiceBurnRate => haunted ? haunted.hauntBurnRate : juiceBurnRate;
+        bool IsBurningJuice => ghostState != GhostState.Normal;
         
         
         // Start is called before the first frame update
@@ -120,6 +122,19 @@ namespace ShootyGhost
                     _hauntGuiTimer -= Time.unscaledDeltaTime;
                 else
                     HideJuiceGui();
+            }
+
+            if (IsBurningJuice)
+            {
+                _juiceBurnTimer += CurrentJuiceBurnRate * Time.unscaledDeltaTime;
+                if (_juiceBurnTimer >= 1)
+                {
+                    _juiceBurnTimer = 0;
+                    
+                    hauntJuice--;
+                    if (hauntJuice <= 0)
+                        QuitHaunting();
+                }
             }
 
             // Cooldown for targeting mode entry. Prevents player from spamming targeting mode quickly
@@ -156,6 +171,16 @@ namespace ShootyGhost
             }
             else hauntBurstIntensity = 0;
             hauntBurstIntensityRef.Value = hauntBurstIntensity;
+        }
+
+        /// <summary>
+        /// Quits all forms of haunting, whether its targeting or actively haunting a target
+        /// </summary>
+        void QuitHaunting()
+        {
+            if (ghostState == GhostState.Haunting)
+                EndHaunt();
+            else EndHauntTargeting();
         }
 
         public void ClearTargetedHauntable()
