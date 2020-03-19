@@ -6,6 +6,8 @@ using Sirenix.OdinInspector;
 [ExecuteAlways]
 public class PathFollower : MovementBase
 {
+    public float acceleration = 10;
+    public float drag = 10;
     public CinemachineSmoothPath path;
     [Tooltip("If true, my movement will take priority over any other pathFollowers I encounter. Enable this for a " +
              "player controlled path follower.")]
@@ -25,9 +27,7 @@ public class PathFollower : MovementBase
     /// The dot product between the path tangent and the movement input direction.
     /// </summary>
     float _dot;
-
-    float TotalPathSpeed => speed.Value / path.PathLength;
-
+    float MaxSpeed => speed.Value * speedMultiplier;
     float _speedOnPath;
 
     void OnDrawGizmos()
@@ -63,20 +63,32 @@ public class PathFollower : MovementBase
     {
         _dot = Vector3.Dot(_pathTangent.normalized, direction.normalized) * inputDirectionForgiveness;
         _dot = Mathf.Clamp(_dot, -1, 1);
-        _speedOnPath = TotalPathSpeed * _dot;
+        _speedOnPath += acceleration * _dot * direction.magnitude;
+        _speedOnPath = Mathf.Clamp(_speedOnPath, -MaxSpeed, MaxSpeed);
+
+        _speedOnPath = Mathf.Lerp(_speedOnPath, 0, Time.deltaTime * drag);
 
         foreach (var sibling in siblings)
         {
             sibling._speedOnPath = _speedOnPath;
         }
     }
+
+    [Button]
+    void ZeroSpeed()
+    {
+        _speedOnPath = 0;
+    }
     
     void OnCollisionEnter(Collision other)
     {
         PathFollower otherPathFollower = other.collider.GetComponent<PathFollower>();
-        if (!otherPathFollower) return;
+        if (otherPathFollower)
+        {
+            // TODO unity event when bumping into another
+        }
         
-        // TODO unity event when bumping into another
+        Debug.Log("Collided with something homie");
     }
 
 
