@@ -6,17 +6,27 @@ using Sirenix.OdinInspector;
 [ExecuteAlways]
 public class PathFollower : MovementBase
 {
+    [Tooltip("If true, my movement will take priority over any other pathFollowers I encounter. Enable this for a " +
+             "player controlled path follower."), PropertyOrder(-999)]
+    public bool master;
+
+    [Space]
     public float acceleration = 10;
     public float drag = 10;
-    public CinemachineSmoothPath path;
-    [Tooltip("If true, my movement will take priority over any other pathFollowers I encounter. Enable this for a " +
-             "player controlled path follower.")]
-    public bool master;
+    [Tooltip("Speed of lerping position to the current point along the path.")]
     public float lerpSpeed = 10;
     public float pathPosition;
-    public float radius = 1;
+    
+    [Tooltip("Try to get it to match the collider approximately - this is used for faking collision.")]
+    public float radius = 2;
+    
     [Range(1, 5), Tooltip("How much can the angle of input differ from angle of path and still achieve full speed?")]
     public float inputDirectionForgiveness = 2;
+    
+    public LayerMask collisionLayerMask;
+    
+    [Space]
+    public CinemachineSmoothPath path;
     public List<PathFollower> siblings = new List<PathFollower>();
 
     bool _slowDown;
@@ -88,7 +98,39 @@ public class PathFollower : MovementBase
             // TODO unity event when bumping into another
         }
         
-        Debug.Log("Collided with something homie");
+        if (other.collider.isTrigger) return;
+        if (!Arachnid.Math.LayerMaskContainsLayer(collisionLayerMask, other.gameObject.layer)) return;
+
+        Vector3 groundPoint = other.GetContact(0).point;
+        groundPoint = new Vector3(groundPoint.x, transform.position.y, groundPoint.z);
+        Debug.DrawLine(groundPoint, groundPoint + Vector3.up, Color.magenta, 30);
+        
+        // whichever direction we're currently moving along the path, we can assume the way we want to move
+        // when colliding is the opposite of that
+        float correctionDir = _speedOnPath > 0 ? -1 : 1;
+        
+        // Prevent overlaps
+        int iterations = 0;
+        float currentPathPos = pathPosition;
+        // Because distance calc is expensive, limit this to only a few iterations
+        while (iterations < 5)
+        {
+            currentPathPos += radius / 5 * correctionDir;
+            if (Vector3.Distance(groundPoint, path.EvaluatePositionAtUnit(currentPathPos, _units)) > radius)
+                break;
+            iterations++;
+        }
+        
+        // manually place me at the new non-overlapping position
+        pathPosition = currentPathPos;
+        transform.position = path.EvaluatePositionAtUnit(pathPosition, _units);
+        
+        Bounce();
+    }
+
+    void Bounce()
+    {
+        _speedOnPath *= -.9f;
     }
 
 
