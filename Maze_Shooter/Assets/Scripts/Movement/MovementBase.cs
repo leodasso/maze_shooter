@@ -8,6 +8,9 @@ public class MovementBase : MonoBehaviour, IControllable
     public float speedMultiplier = 1;
     public FloatReference speed;
     
+    [Tooltip("Optional - will set the current path tangent to the sprite animation player")]
+    public SpriteAnimationPlayer spriteAnimationPlayer;
+    
     protected Rigidbody _rigidbody;
     
     /// <summary>
@@ -21,6 +24,11 @@ public class MovementBase : MonoBehaviour, IControllable
     {
         _rigidbody = GetComponent<Rigidbody>();
         direction = Vector3.zero;
+    }
+
+    public Vector3 GetDirection()
+    {
+        return direction;
     }
 
 
