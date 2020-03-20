@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Arachnid;
+﻿using Arachnid;
 using UnityEngine;
 
 public class ObjectDistanceVolumizer : Volumizer
@@ -9,14 +6,7 @@ public class ObjectDistanceVolumizer : Volumizer
     public Collection objectsToCheck;
     public float minDistance = 0;
     public float maxDistance = 10;
-    
     float _distance;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

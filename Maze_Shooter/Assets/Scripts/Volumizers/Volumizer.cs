@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 /// <summary>
 /// Convert anything (kind of) into a normalized value, i.e. volumize it. This is a base class, but examples of
@@ -27,6 +27,13 @@ public class Volumizer : MonoBehaviour
             newValue = Mathf.Clamp01(newValue);
 
         normalizedValue = newValue;
+    }
+
+    [Button]
+    void GetAllVolumes()
+    {
+        volumes.Clear();
+        volumes.AddRange(GetComponentsInChildren<Volume>());
     }
 
 }

@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ColorGroupVolume : Volume
+﻿public class ColorGroupVolume : Volume
 {
     public ColorGroup colorGroup;
     
