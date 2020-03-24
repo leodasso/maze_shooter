@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Ghost/Saved Int")]
+[CreateAssetMenu(menuName = "Ghost/Save/Saved Int")]
 public class SavedInt : SavedProperty<int>
 {
     

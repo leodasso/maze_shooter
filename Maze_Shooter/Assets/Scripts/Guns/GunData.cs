@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Ghost/Gun Data")]
 public class GunData : ScriptableObject
 {
 	[Title("Fire Rate", "Min & Max")]

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-[CreateAssetMenu()]
+[CreateAssetMenu(menuName = "Ghost/Sprite Turnaround Animation")]
 public class SpriteAnimation : ScriptableObject
 {
     public enum DirectionsType

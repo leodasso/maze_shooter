@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Ghost/Saved String")]
+[CreateAssetMenu(menuName = "Ghost/Save/Saved String")]
 public class SavedString : SavedProperty<string>
 {
 }

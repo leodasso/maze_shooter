@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 using UnityEngine.Events;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Ghost/Game Master")]
 public class GameMaster : ScriptableObject
 {
     public GameObject defaultPlayerShip;

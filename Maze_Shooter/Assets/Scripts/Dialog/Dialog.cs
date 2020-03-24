@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Ghost/Dialog")]
 public class Dialog : ScriptableObject
 {
     [MultiLineProperty(6), HideLabel]

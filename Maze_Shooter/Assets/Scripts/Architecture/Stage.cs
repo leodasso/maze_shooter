@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 
-[CreateAssetMenu(menuName = "Stage")]
+[CreateAssetMenu(menuName = "Ghost/Stage")]
 public class Stage : ScriptableObject
 {
     public string displayName;

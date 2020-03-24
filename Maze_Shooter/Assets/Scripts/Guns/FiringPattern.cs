@@ -5,7 +5,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Ghost/Firing Pattern")]
 [TypeInfoBox("This can be referenced by guns in order to fire more complex firing patterns per shot.")]
 public class FiringPattern : SerializedScriptableObject
 {

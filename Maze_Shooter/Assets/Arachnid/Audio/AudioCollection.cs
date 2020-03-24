@@ -9,7 +9,7 @@ using UnityEngine.Audio;
 /// A scriptable object that's a collection of audio clips. Allows for various similar clips to be grouped together,
 /// and when this is invoked, it will pick one at random. Pairs with the AudioAction component
 /// </summary>
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Arachnid/Audio Collection")]
 public class AudioCollection : ScriptableObject
 {
     public float volume = 1;

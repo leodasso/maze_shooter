@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-[CreateAssetMenu()]
+[CreateAssetMenu(menuName = "Ghost/GUI Canvas Type")]
 public class GuiCanvasType : ScriptableObject
 {
     [SerializeField, ShowInInspector]

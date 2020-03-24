@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Ghost/Time Controller")]
 public class TimeController : ScriptableObject
 {
     public AnimationCurve timeBendCurve;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Ghost/Saved Bool")]
+[CreateAssetMenu(menuName = "Ghost/Save/Saved Bool")]
 public class SavedBool : SavedProperty<bool>
 {
     
