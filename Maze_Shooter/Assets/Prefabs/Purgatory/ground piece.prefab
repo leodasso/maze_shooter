@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2118271093973037277}
   - component: {fileID: 1504537773717973265}
   - component: {fileID: 406679526958948910}
+  - component: {fileID: 776587377626108268}
   m_Layer: 0
   m_Name: ground piece
   m_TagString: Untagged
@@ -159,3 +160,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 3.84
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &776587377626108268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7119833136169469582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c426a4c6e9bde479880815583ec655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorCategory: 0
+  spriteRenderers:
+  - {fileID: 7119833136169469576}
+  colorGroups: []

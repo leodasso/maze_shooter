@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 303609720871763351}
   - component: {fileID: 4491336878375869024}
   - component: {fileID: 3778151637584127755}
+  - component: {fileID: 6770600334979078606}
   m_Layer: 16
   m_Name: plant prop static
   m_TagString: Untagged
@@ -71,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -4079
+  m_SortingOrder: -408
   m_Sprite: {fileID: -1085553073919880486, guid: 3e61499d50b6bd441a83e7c83f7ed4f6,
     type: 3}
   m_Color: {r: 0.69803923, g: 0.827451, b: 0.827451, a: 1}
@@ -100,7 +101,7 @@ MonoBehaviour:
   customTransform: {fileID: 0}
   offset: 0
   isStatic: 0
-  sortingOrder: -4079
+  sortingOrder: -408
   renderers:
   - renderer: {fileID: 911068473298902073}
     offset: 0
@@ -149,8 +150,28 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 3584
+  noiseProfile: {fileID: 0}
+  wobbleOtherObject: 0
+  wobbler: {fileID: 0}
+  noiseMultiplier: 1
   wobbliness: 12
   stiffness: 5
   wobbleScale: {x: 0.15, y: 0, z: 5}
   wobbleVel: {x: 0, y: 0, z: 0}
   wobblePoint: {x: 0, y: 0, z: 0}
+--- !u!114 &6770600334979078606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911068473298902070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c426a4c6e9bde479880815583ec655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorCategory: 1
+  spriteRenderers:
+  - {fileID: 911068473298902073}
+  colorGroups: []
