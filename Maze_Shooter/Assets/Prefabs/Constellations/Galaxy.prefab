@@ -2015,7 +2015,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -2049,7 +2049,7 @@ MonoBehaviour:
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
+  eventHandlerComponentsAdded: 1
 --- !u!1 &4551044670399803128
 GameObject:
   m_ObjectHideFlags: 0
@@ -2450,6 +2450,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: constellation node
       objectReference: {fileID: 0}
+    - target: {fileID: 3068080598928574914, guid: 36e1068daab01ad41a709b2149f5febb,
+        type: 3}
+      propertyPath: linkedConstellation
+      value: 
+      objectReference: {fileID: 11400000, guid: 16f4b753b55b63d41baad5ec5872ef23,
+        type: 2}
     - target: {fileID: 3068080598928574915, guid: 36e1068daab01ad41a709b2149f5febb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2505,12 +2511,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3068080598928574914, guid: 36e1068daab01ad41a709b2149f5febb,
-        type: 3}
-      propertyPath: linkedConstellation
-      value: 
-      objectReference: {fileID: 11400000, guid: 16f4b753b55b63d41baad5ec5872ef23,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36e1068daab01ad41a709b2149f5febb, type: 3}
 --- !u!4 &4551044669281040219 stripped

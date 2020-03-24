@@ -1,0 +1,138 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-8748011354113471608
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: f56db9f61b862d340b84fe8adca3d113
+  m_EffectName: Attenuation
+  m_MixLevel: 2cceef0dfebb1244aa65735ffd355a90
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!243 &-2874561980316877595
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Low
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 1ee4c9e8c931c8a41b30f5e851041daf
+  m_Children: []
+  m_Volume: 69a3b47d00094474a893a3ac0a10ebca
+  m_Pitch: d8391b1ba67ee3f42abe0886dbd14442
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -869326981448859468}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &-869326981448859468
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 72345f972c84b8640aaf173445a60f04
+  m_EffectName: Attenuation
+  m_MixLevel: ac5a6844615a0b64ba5b8e5e99ad5cb5
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!243 &-20665171520323051
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Top
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 0951e7faa039e3047a04c4cb71c68725
+  m_Children: []
+  m_Volume: 1948a6d32efdf01408043fdab3194e87
+  m_Pitch: 0c57808f405e54f4ba1d5e943c8f0f37
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -8748011354113471608}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!241 &24100000
+AudioMixerController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Music
+  m_OutputGroup: {fileID: 24300002, guid: 0285ea35b73236449bf6f2964e648e63, type: 2}
+  m_MasterGroup: {fileID: 24300002}
+  m_Snapshots:
+  - {fileID: 24500006}
+  m_StartSnapshot: {fileID: 24500006}
+  m_SuspendThreshold: -80
+  m_EnableSuspend: 1
+  m_UpdateMode: 0
+  m_ExposedParameters: []
+  m_AudioMixerGroupViews:
+  - guids:
+    - 0411b02cec497d14e85a43f2d55fe92a
+    - 0951e7faa039e3047a04c4cb71c68725
+    - 1ee4c9e8c931c8a41b30f5e851041daf
+    name: View
+  m_CurrentViewIndex: 0
+  m_TargetSnapshot: {fileID: 24500006}
+--- !u!243 &24300002
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Master
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 0411b02cec497d14e85a43f2d55fe92a
+  m_Children:
+  - {fileID: -20665171520323051}
+  - {fileID: -2874561980316877595}
+  m_Volume: 093e7d227dbc3014a96be6d150e01bfb
+  m_Pitch: 917b0c15f7889354398719936b3f2e5b
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 24400004}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &24400004
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 28efe81935b779b4a931bf6d0a26eba8
+  m_EffectName: Attenuation
+  m_MixLevel: 3b873f285ad4f1c479d9de8e10e5dcb4
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!245 &24500006
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Snapshot
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: d22db57b1e74a6a40b9b10aefb525128
+  m_FloatValues: {}
+  m_TransitionOverrides: {}
