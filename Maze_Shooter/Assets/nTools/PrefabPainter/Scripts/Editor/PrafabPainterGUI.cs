@@ -51,6 +51,7 @@ namespace nTools.PrefabPainter
         public static GUIContent    brushCustomSceneObject      = new GUIContent("Custom Scene Object", "");
         public static GUIContent    brushGroupPrefabs           = new GUIContent("Group Prefabs", "");
         public static GUIContent    brushOverwritePrefabLayer   = new GUIContent("Overwrite Prefab Layer", "");
+        public static GUIContent    colorCategory               = new GUIContent("Color Category", "");
         public static GUIContent    brushPrefabPlaceLayer       = new GUIContent("Prefab Place Layer", "");
 
 
@@ -1010,16 +1011,6 @@ namespace nTools.PrefabPainter
                 activeTab.brushes.ForEach((b) => { if (b.selected) b.settings.multibrushEnabled = !isAllMutibrush; });                
                     
             }));
-//            menu.AddItem(new GUIContent("Advanced Settings"), isAllAdvancedSettings, ContextMenuCallback, new Action(() => {
-//                Undo.RegisterCompleteObjectUndo(settings, "PP: Change Brush Settings");
-//                activeTab.brushes.ForEach((b) => { if (b.selected) b.settings.advancedSettingsEnabled = !isAllAdvancedSettings; });                
-//
-//            }));
-//			menu.AddItem(new GUIContent("Pivot Editor"), isAllPivotEditor, ContextMenuCallback, new Action(() => {
-//				Undo.RegisterCompleteObjectUndo(settings, "PP: Change Brush Settings");
-//				activeTab.brushes.ForEach((b) => { if (b.selected) b.settings.pivotEditorEnabled = !isAllPivotEditor; });                
-//
-//			}));
             menu.AddItem(new GUIContent("Slope Filter"), isAllSlopeFilter, ContextMenuCallback, new Action(() => {
                 Undo.RegisterCompleteObjectUndo(settings, "PP: Change Brush Settings");
                 activeTab.brushes.ForEach((b) => { if (b.selected) b.settings.slopeEnabled = !isAllSlopeFilter; });                
@@ -2704,25 +2695,6 @@ namespace nTools.PrefabPainter
             return new Vector3(s_Vector3Floats[0], s_Vector3Floats[1], s_Vector3Floats[2]);
         }
 
-
-//        static void Vector2MinMaxField(GUIContent label, SerializedProperty minProperty, SerializedProperty maxProperty)
-//        {
-//            EditorGUILayout.BeginHorizontal();
-//            EditorGUILayout.PrefixLabel(label);
-//            Rect position = EditorGUILayout.GetControlRect(true, EditorGUIUtility.singleLineHeight, EditorStyles.numberField);
-//            s_Vector2Floats[0] = minProperty.floatValue;
-//            s_Vector2Floats[1] = maxProperty.floatValue;
-//            EditorGUI.BeginChangeCheck();
-//            EditorGUI.MultiFloatField(position, s_MinMaxLabels, s_Vector2Floats);
-//            if (EditorGUI.EndChangeCheck())
-//            {
-//                minProperty.floatValue = s_Vector2Floats[0];
-//                maxProperty.floatValue = s_Vector2Floats[1];
-//            }
-//
-//            EditorGUILayout.EndHorizontal();
-//        }
-
         public bool FlatTexturedButton(Rect rect, GUIContent content)
         {
             Event e = Event.current;
@@ -2760,7 +2732,6 @@ namespace nTools.PrefabPainter
 
             return clicked;
         }
-
 
 
         public bool Foldout(bool foldout, string content)
@@ -3793,6 +3764,10 @@ namespace nTools.PrefabPainter
 
                 MakeUndoOnChange(ref settings.groupPrefabs, EditorGUILayout.Toggle(Strings.brushGroupPrefabs, settings.groupPrefabs));
 
+                MakeUndoOnChange(ref settings.overwriteColorCategory, EditorGUILayout.Toggle("Overwrite Color Cat", settings.overwriteColorCategory));
+                
+                MakeUndoOnChange(ref settings.colorCategory, (ColorCategory)EditorGUILayout.EnumPopup("Color Category", settings.colorCategory));
+
                 MakeUndoOnChange(ref settings.overwritePrefabLayer, EditorGUILayout.Toggle(Strings.brushOverwritePrefabLayer, settings.overwritePrefabLayer));
                 GUI.enabled = settings.overwritePrefabLayer;
                 MakeUndoOnChange(ref settings.prefabPlaceLayer, EditorGUILayout.LayerField(Strings.brushPrefabPlaceLayer, settings.prefabPlaceLayer));
@@ -3821,6 +3796,10 @@ namespace nTools.PrefabPainter
             Undo.RegisterCompleteObjectUndo(settings, "PP: Change value");
         }
 
+	    void SelectedToolChanged()
+	    {
+	        _colorManager = ColorManager.Get();
+	    }
 
         void OnMainGUI ()
         {            
@@ -3836,7 +3815,12 @@ namespace nTools.PrefabPainter
             // Tool select
             EditorGUILayout.BeginHorizontal ();
             GUILayout.FlexibleSpace ();
+            EditorGUI.BeginChangeCheck();
             currentTool = (PaintTool)GUI.Toolbar(EditorGUILayout.GetControlRect(GUILayout.MaxWidth(kToolbarWidth), GUILayout.Height(kToolbarHeight)), (int)currentTool, toolbarTextures);
+            if (EditorGUI.EndChangeCheck())
+            {
+                SelectedToolChanged();
+            }
             GUILayout.FlexibleSpace ();
             EditorGUILayout.EndHorizontal ();
 

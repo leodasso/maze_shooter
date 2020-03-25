@@ -18,6 +18,8 @@ namespace nTools.PrefabPainter
     public partial class PrefabPainter : EditorWindow
     {
 
+        ColorManager _colorManager;
+
         public struct RaycastInfo
         {
             public Ray ray;
@@ -952,6 +954,7 @@ namespace nTools.PrefabPainter
         {
             // Get existing open window or if none, make a new one:
             PrefabPainter window = (PrefabPainter)EditorWindow.GetWindow(typeof(PrefabPainter));
+            window._colorManager = ColorManager.Get();
             window.ShowUtility();
         }
 
@@ -1089,10 +1092,8 @@ namespace nTools.PrefabPainter
 
             s_activeWindow = this;
 
-
             settings = LoadSettings();
             LoadSceneSettings();
-
 
             currentTool = PaintTool.None;
 
@@ -1820,6 +1821,22 @@ namespace nTools.PrefabPainter
             {
                 ForAllInHierarchy(gameObject, go => { go.layer = settings.prefabPlaceLayer; });
             }
+
+            // Color profile system
+            ColorElement colorElement = gameObject.GetComponent<ColorElement>();
+            if (colorElement)
+            {
+                if (settings.overwriteColorCategory)
+                    colorElement.colorCategory = settings.colorCategory;
+
+                if (_colorManager && _colorManager.colorProfile)
+                    colorElement.ApplyColorProfile(_colorManager.colorProfile);
+            }
+            else
+            {
+                Debug.Log("No color element found on " + gameObject.name, gameObject);
+            }
+
 
             PlacedObjectInfo placedObjectInfo = new PlacedObjectInfo(raycastInfo, gameObject, brush, prefabSlot);
 

@@ -9,6 +9,15 @@ public class ColorManager : MonoBehaviour
     public ColorProfile colorProfile;
     List<ColorElement> _colorElements = new List<ColorElement>();
 
+    static ColorManager _instance;
+
+    public static ColorManager Get()
+    {
+        if (_instance) return _instance;
+        _instance = FindObjectOfType<ColorManager>();
+        return _instance;
+    }
+
     /// <summary>
     /// This is very expensive and is EDITOR ONLY! Do not use this during gameplay
     /// </summary>
