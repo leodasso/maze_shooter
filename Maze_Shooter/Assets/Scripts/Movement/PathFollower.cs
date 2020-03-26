@@ -37,7 +37,7 @@ public class PathFollower : MovementBase
     /// The dot product between the path tangent and the movement input direction.
     /// </summary>
     float _dot;
-    float MaxSpeed => speed.Value * speedMultiplier;
+    float MaxSpeed => speed.Value * TotalSpeedMultiplier();
     float _speedOnPath;
 
     void OnDrawGizmos()
@@ -50,8 +50,10 @@ public class PathFollower : MovementBase
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
+        
         if (!path) return;
         _pathTangent = path.EvaluateTangentAtUnit(pathPosition, _units);
 

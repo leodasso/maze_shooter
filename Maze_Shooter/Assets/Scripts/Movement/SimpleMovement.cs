@@ -17,8 +17,10 @@ public class SimpleMovement : MovementBase
     public TargetFinder targetFinder;
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
+        
         if (targetFinder && targetFinder.currentTarget && useTargetFinder) 
             target = targetFinder.currentTarget.gameObject;
     }

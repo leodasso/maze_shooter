@@ -1,12 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Arachnid;
+using Sirenix.OdinInspector;
 
 public class MovementBase : MonoBehaviour, IControllable
 {
     public float speedMultiplier = 1;
     public FloatReference speed;
+
+    [Tooltip("Use an animation curve to control the speed over time? This is a multiplier.")]
+    public bool useSpeedCurve;
+    
+    [ShowIf("useSpeedCurve")]
+    public AnimationCurve speedCurve;
     
     [Tooltip("Optional - will set the current path tangent to the sprite animation player")]
     public SpriteAnimationPlayer spriteAnimationPlayer;
@@ -18,12 +23,32 @@ public class MovementBase : MonoBehaviour, IControllable
     /// velocity is 0, this will still show the intended direction.
     /// </summary>
     protected Vector3 direction;
+
+    float _speedCurveTime;
+
+    protected float TotalSpeedMultiplier()
+    {
+        if (!useSpeedCurve) return speedMultiplier;
+        return speedMultiplier * speedCurve.Evaluate(_speedCurveTime);
+    }
     
     // Start is called before the first frame update
     protected virtual void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         direction = Vector3.zero;
+    }
+
+    protected virtual void Update()
+    {
+        if (useSpeedCurve)
+        {
+            _speedCurveTime += Time.deltaTime;
+            if (_speedCurveTime > speedCurve.Duration())
+            {
+                _speedCurveTime = 0;
+            }
+        }
     }
 
     public Vector3 GetDirection()

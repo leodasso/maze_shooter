@@ -26,6 +26,16 @@ namespace Arachnid
 			float rad = Mathf.Atan2(rotatedVector.y, rotatedVector.x);
 			return Mathf.Rad2Deg * rad;
 		}
+		
+		public static Vector2 RadiansToVector2(float radian)
+		{
+			return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
+		}
+  
+		public static Vector2 DegreeToVector2(float degree)
+		{
+			return RadiansToVector2(degree * Mathf.Deg2Rad);
+		}
 
 		/// <summary>
 		/// Given the input, returns a number that's rounded to the nearest increment. For example, given an input
@@ -92,18 +102,6 @@ namespace Arachnid
 			inputAngle = Mathf.Abs(inputAngle);
 			float remainder = inputAngle % 360;
 			return 360 - remainder;
-		}
-
-		/// <summary>
-		/// The default perlin noise is a range from 0 to 1, but has a chance to be slightly
-		/// above 1. This returns a range that's ALWAYS between -0.5 and 0.5
-		/// </summary>
-		/// <param name="perlinX"></param>
-		/// <param name="perlinY"></param>
-		/// <param name="frequency"></param>
-		public static float CleanCenteredNoise(float perlinX, float perlinY, float frequency)
-		{
-			return Mathf.Clamp01(Mathf.PerlinNoise(perlinX * frequency, perlinY * frequency)) - .5f;
 		}
 	}
 }

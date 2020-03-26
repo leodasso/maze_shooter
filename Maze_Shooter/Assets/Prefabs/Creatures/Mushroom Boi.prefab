@@ -5094,15 +5094,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b1eef7adf007a041a8f3a94b1f38be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 0
+  speedMultiplier: 1
   speed:
     useConstant: 0
-    constantValue: 50
+    constantValue: 10
     valueObject: {fileID: 0}
   spriteAnimationPlayer: {fileID: 0}
-  noiseProfile: {fileID: 11400000, guid: e0587325c44a4e748bc9d8121e4c9d17, type: 2}
-  noiseCalibration: {x: 0, y: 0}
-  randomizeNoise: 1
+  minDecisionTime: 0.4
+  maxDecisionTime: 0.7
 --- !u!95 &7928661334988036630
 Animator:
   serializedVersion: 3
