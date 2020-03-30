@@ -12,6 +12,8 @@ public class ColorElement : MonoBehaviour
     public ColorCategory colorCategory = ColorCategory.Primary;
     public List<SpriteRenderer> spriteRenderers = new List<SpriteRenderer>();
     public List<ColorGroup> colorGroups = new List<ColorGroup>();
+    
+    
 
     [Button]
     void AutoPopulate()
@@ -35,6 +37,13 @@ public class ColorElement : MonoBehaviour
         {
             colorGroup.color = newColor;
             colorGroup.SetColorFast(Color.white);
+        }
+
+        // Alpha should always be maintained, so after all the colors are set,
+        // update the paint alpha components in this object
+        foreach (var alphaThing in GetComponentsInChildren<PaintAlpha>())
+        {
+            alphaThing.ApplyAlpha();
         }
     }
 }

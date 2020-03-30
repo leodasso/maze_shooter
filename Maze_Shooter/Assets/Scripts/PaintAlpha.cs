@@ -19,7 +19,7 @@ public class PaintAlpha : MonoBehaviour
         ApplyAlpha();
     }
 
-    void ApplyAlpha()
+    public void ApplyAlpha()
     {
         foreach (AlphaSet set in sprites)
         {
