@@ -6,7 +6,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 #if BLENDMODES_LWRP
-using UnityEngine.Rendering.LWRP;
+using UnityEngine.Rendering.Universal;
 #endif
 
 namespace BlendModes

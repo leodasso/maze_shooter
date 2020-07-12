@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultPlayerShip: {fileID: 3594317241385997719, guid: 0b7bc270b67169f42a1babf7f6748058,
     type: 3}
-  currentStage: {fileID: 11400000, guid: c092e2d8fcd1689468925a117e8c2197, type: 2}
+  currentStage: {fileID: 11400000, guid: 12be37ad80450664ca8059438d6a33ce, type: 2}
   justCompletedStage: {fileID: 0}
   currentAvatar: {fileID: 11400000, guid: 1d447c7288706094390871ecd1fb0d52, type: 2}
   gateLink: {fileID: 0}
@@ -34,6 +34,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: b59d8939d548fc746b299040e5383a1b, type: 2}
+        m_TargetAssemblyTypeName: Arachnid.GameEvent, Arachnid
         m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
@@ -44,5 +45,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null

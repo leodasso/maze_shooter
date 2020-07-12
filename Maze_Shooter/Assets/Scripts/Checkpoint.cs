@@ -5,6 +5,9 @@ using UnityEngine.Events;
 [TypeInfoBox("Checkpoints will spawn the player to them when the stage loads.")]
 public class Checkpoint : MonoBehaviour
 {
+    [Tooltip("Regardless of which checkpoint is saved, spawn from this one. This is ignored in builds"), ToggleLeft]
+    public bool forceSpawn;
+    
     [Tooltip("The ID for this checkpoint. Must be unique from any other checkpoints in this scene, but it's fine" +
              " if it's the same as a checkpoint in a different scene.")]
     public string uniqueId = "ENTER A UNIQUE ID";
@@ -13,8 +16,16 @@ public class Checkpoint : MonoBehaviour
 
     [SerializeField, ShowInInspector]
     UnityEvent _onSpawn;
+
+    bool ShouldForceSpawn()
+    {
+        #if UNITY_EDITOR
+        return forceSpawn;
+        #endif
+        return false;
+    }
     
-    bool IsActiveCheckpoint => GameMaster.IsCurrentCheckpoint(uniqueId);
+    bool IsActiveCheckpoint => ShouldForceSpawn() || GameMaster.IsCurrentCheckpoint(uniqueId);
 
     public void SpawnPlayer()
     {

@@ -87,7 +87,7 @@ public class PathFollower : MovementBase
     }
 
     [Button]
-    void ZeroSpeed()
+    public void ZeroSpeed()
     {
         _speedOnPath = 0;
     }

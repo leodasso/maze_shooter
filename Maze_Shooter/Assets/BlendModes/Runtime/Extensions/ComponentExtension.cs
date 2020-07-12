@@ -259,29 +259,16 @@ namespace BlendModes
 
             extensionsMap = new Dictionary<Type, List<Type>>();
             var assemblyTypes = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(a => !IsDynamicAssembly(a)).SelectMany(a => a.GetExportedTypes())
+                .Where(a => !a.IsDynamic).SelectMany(a => a.GetExportedTypes())
                 .Where(t => t.IsDefined(typeof(ExtendedComponentAttribute), false));
             foreach (var type in assemblyTypes)
             {
-                #if NET_4_6 || NET_STANDARD_2_0
                 var attr = type.GetCustomAttribute<ExtendedComponentAttribute>(false);
-                #else
-                var attr = (ExtendedComponentAttribute)Attribute.GetCustomAttribute(type, typeof(ExtendedComponentAttribute));
-                #endif
                 if (!extensionsMap.ContainsKey(attr.ExtendedComponentType))
                     extensionsMap.Add(attr.ExtendedComponentType, new List<Type>());
                 extensionsMap[attr.ExtendedComponentType].Add(type);
             }
             return extensionsMap;
-        }
-
-        private static bool IsDynamicAssembly (System.Reflection.Assembly assembly)
-        {
-            #if NET_4_6 || NET_STANDARD_2_0
-            return assembly.IsDynamic;
-            #else
-            return assembly is System.Reflection.Emit.AssemblyBuilder;
-            #endif
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]

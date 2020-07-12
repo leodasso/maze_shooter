@@ -188,6 +188,7 @@ public class Devil : ContactBase
         if (devilState != DevilState.Launched) return;
         
         IDestructible destructible = other.GetComponent<IDestructible>();
+        if (destructible == null) destructible = other.GetComponentInParent<IDestructible>();
         if (destructible == null) return;
         onSuccessfulAttack.Invoke();
         destructible.DoDamage(Damage, collision.GetContact(0).point, collision.GetContact(0).normal);

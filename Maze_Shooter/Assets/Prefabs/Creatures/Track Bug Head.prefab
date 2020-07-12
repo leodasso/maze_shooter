@@ -325,6 +325,13 @@ MonoBehaviour:
     useConstant: 0
     constantValue: 40
     valueObject: {fileID: 0}
+  useSpeedCurve: 0
+  speedCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   spriteAnimationPlayer: {fileID: 0}
   master: 1
   acceleration: 0.75
@@ -372,15 +379,25 @@ MonoBehaviour:
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Actions.InvokeMethod
+        - HutongGames.PlayMaker.Actions.InvokeMethod
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 59f9a004
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000007000000
+        actionHashCodes: 59f9a00459f9a004
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
         - ownerOption: 0
           gameObject:
             useVariable: 0
@@ -408,11 +425,35 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: UnMaster
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: PathFollower
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: ZeroSpeed
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
         fsmEnumParams: []
         fsmFloatParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
         - useVariable: 0
           name: 
           tooltip: 
@@ -439,6 +480,18 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
@@ -450,7 +503,7 @@ MonoBehaviour:
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 1400000012000000120000000f000000110000000f00000011000000
+        paramDataType: 1400000012000000120000000f000000110000000f000000110000001400000012000000120000000f000000110000000f00000011000000
         paramName:
         - gameObject
         - behaviour
@@ -459,8 +512,15 @@ MonoBehaviour:
         - repeating
         - repeatDelay
         - cancelOnExit
-        paramDataPos: 00000000000000000100000000000000000000000100000001000000
-        paramByteDataSize: 00000000000000000000000000000000000000000000000000000000
+        - gameObject
+        - behaviour
+        - methodName
+        - delay
+        - repeating
+        - repeatDelay
+        - cancelOnExit
+        paramDataPos: 0000000000000000010000000000000000000000010000000100000001000000020000000300000002000000020000000300000003000000
+        paramByteDataSize: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
     - name: haunted
       description: 
       colorIndex: 0
@@ -618,7 +678,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 1
+    preprocessed: 0
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -6188,6 +6248,26 @@ PrefabInstance:
       propertyPath: NoiseModule.damping
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: useCustomTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 202
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: customTransform
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: offset
+      value: 0.36
+      objectReference: {fileID: 0}
     - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6227,26 +6307,6 @@ PrefabInstance:
         type: 3}
       propertyPath: blendMode
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: useCustomTransform
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 202
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: customTransform
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: offset
-      value: 0.36
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2cca486d573ca0408e410e9501501d2, type: 3}
@@ -6748,6 +6808,26 @@ PrefabInstance:
       propertyPath: VelocityModule.radial.minMaxState
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: useCustomTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 202
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: customTransform
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: offset
+      value: 0.36
+      objectReference: {fileID: 0}
     - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6787,26 +6867,6 @@ PrefabInstance:
         type: 3}
       propertyPath: blendMode
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: useCustomTransform
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 202
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: customTransform
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: offset
-      value: 0.36
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2cca486d573ca0408e410e9501501d2, type: 3}

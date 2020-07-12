@@ -1832,11 +1832,6 @@ namespace nTools.PrefabPainter
                 if (_colorManager && _colorManager.colorProfile)
                     colorElement.ApplyColorProfile(_colorManager.colorProfile);
             }
-            else
-            {
-                Debug.Log("No color element found on " + gameObject.name, gameObject);
-            }
-
 
             PlacedObjectInfo placedObjectInfo = new PlacedObjectInfo(raycastInfo, gameObject, brush, prefabSlot);
 

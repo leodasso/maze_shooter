@@ -51,7 +51,7 @@ public class DevilLauncher : MonoBehaviour, IControllable
 
     void SpawnDevils()
     {
-        foreach (DevilData devilData in devilList.objects.Values)
+        foreach (DevilData devilData in devilList.objects)
         {
             if (!devilData.IsRecruited()) continue;
             

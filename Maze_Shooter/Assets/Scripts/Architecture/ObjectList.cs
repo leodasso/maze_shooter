@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 
-public abstract class ObjectList<T> : SerializedScriptableObject
+public abstract class ObjectList<T> : ScriptableObject
 {
     [ShowInInspector]
-    public Dictionary<string, T> objects;
+    public List<T> objects;
 }

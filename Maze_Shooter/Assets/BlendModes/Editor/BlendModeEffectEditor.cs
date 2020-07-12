@@ -24,6 +24,7 @@ namespace BlendModes
         private static readonly GUIContent framebufferEnabledContent = new GUIContent("Framebuffer", "Use `framebuffer_fetch` instruction instead of a grab pass to access the backbuffer. Significantly improves performance, but is only supported on selected devices (most notably PowerVR-based ones on iOS).");
         private static readonly GUIContent unifiedGrabEnabledContent = new GUIContent("Unified Grab", "Share a grab texture with the other instances, that have this optimization enabled. Significantly improves performance when multiple blend mode effects are used simultaneously, but the instances won't properly blend with each other.");
         private static readonly GUIContent shareMaterialContent = new GUIContent("Share Material", "Whether to share material instances with the same shader family and blend mode type. Can reduce draw calls count in some cases, but all the material properties will also be shared.");
+        private static readonly GUIContent stencilIdContent = new GUIContent("Stencil ID", "ID of the stencil buffer to use for masking. Change in case default value conflicts with other stencil operations you're performing.");
         private static readonly int blendModeEnumLength = System.Enum.GetNames(typeof(BlendMode)).Length;
 
         private SerializedProperty shaderFamilyProperty;
@@ -38,6 +39,7 @@ namespace BlendModes
         private SerializedProperty framebufferEnabledProperty;
         private SerializedProperty unifiedGrabEnabledProperty;
         private SerializedProperty shareMaterialProperty;
+        private SerializedProperty stencilIdProperty;
 
         private ShaderPropertiesList shaderPropertiesList;
 
@@ -62,6 +64,7 @@ namespace BlendModes
             framebufferEnabledProperty = serializedObject.FindProperty("framebufferEnabled");
             unifiedGrabEnabledProperty = serializedObject.FindProperty("unifiedGrabEnabled");
             shareMaterialProperty = serializedObject.FindProperty("shareMaterial");
+            stencilIdProperty = serializedObject.FindProperty("stencilId");
         }
 
         public override void OnInspectorGUI ()
@@ -176,7 +179,10 @@ namespace BlendModes
             }
             EditorGUILayout.PropertyField(maskModeProperty, maskModeContent);
             if (BlendModeEffect.MaskMode != MaskMode.Disabled)
+            {
                 EditorGUILayout.PropertyField(maskBehaviourProperty, maskBehaviourContent);
+                EditorGUILayout.PropertyField(stencilIdProperty, stencilIdContent);
+            }
         }
 
         private void OptimizationsGUI ()

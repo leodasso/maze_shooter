@@ -88,8 +88,8 @@ namespace BlendModes
         [SerializeField] private bool shareMaterial = false;
         [SerializeField] private Material blendMaterial = null;
         [SerializeField] private ComponentExtensionState componentExtensionState = new ComponentExtensionState();
+        [SerializeField] private int stencilId = 1;
 
-        private const int defaultStencilId = 1;
         private static ShaderResources shaderResources => cachedShaderResources ? cachedShaderResources : (cachedShaderResources = ShaderResources.Load());
         private static ShaderResources cachedShaderResources;
 
@@ -285,6 +285,10 @@ namespace BlendModes
             }
             else if (!blendMaterial || blendMaterial.shader.name != shaderName || forceCreateMaterial) // Re-use current blend material when possible.
             {
+                if (blendMaterial) // Destroy non-shared materials when changing them.
+                    if (Application.isPlaying) Destroy(blendMaterial);
+                    else DestroyImmediate(blendMaterial);
+
                 var shader = shaderResources.GetShaderByName(shaderName);
                 blendMaterial = CreateBlendMaterial(shader);
                 сomponentExtension.OnEffectMaterialCreated(blendMaterial);
@@ -329,13 +333,13 @@ namespace BlendModes
             {
                 block.SetFloat(ShaderUtilities.BlendStencilCompPropertyId, blendStencilComp);
                 block.SetFloat(ShaderUtilities.NormalStencilCompPropertyId, normalStencilComp);
-                block.SetFloat(ShaderUtilities.StencilIdPropertyId, defaultStencilId);
+                block.SetFloat(ShaderUtilities.StencilIdPropertyId, stencilId);
             }
             else
             {
                 material.SetFloat(ShaderUtilities.BlendStencilCompPropertyId, blendStencilComp);
                 material.SetFloat(ShaderUtilities.NormalStencilCompPropertyId, normalStencilComp);
-                material.SetFloat(ShaderUtilities.StencilIdPropertyId, defaultStencilId);
+                material.SetFloat(ShaderUtilities.StencilIdPropertyId, stencilId);
             }
         }
 
@@ -394,6 +398,13 @@ namespace BlendModes
             if (isMaterialDirty) SetMaterialProperties();
 
             сomponentExtension?.OnEffectUpdated();
+        }
+
+        private void OnDestroy ()
+        {
+            if (!ShareMaterial && blendMaterial)
+                if (Application.isPlaying) Destroy(blendMaterial);
+                else DestroyImmediate(blendMaterial);
         }
     }
 }
