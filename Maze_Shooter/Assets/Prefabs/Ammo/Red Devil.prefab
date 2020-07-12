@@ -141,6 +141,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -152,6 +154,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -163,7 +166,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -242
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 49dbff62aa0040e4a894272bc56d92de, type: 3}
   m_Color: {r: 0.9056604, g: 0.21787111, b: 0.21787111, a: 1}
   m_FlipX: 0
@@ -190,6 +193,8 @@ TrailRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -201,6 +206,7 @@ TrailRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -300,7 +306,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4756572357687856458}
-  - component: {fileID: 6939101588531117716}
   - component: {fileID: 4734935179019926774}
   - component: {fileID: 4761205435095914545}
   - component: {fileID: 3517594103167405972}
@@ -337,26 +342,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6939101588531117716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4762546893851248404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useCustomTransform: 0
-  customTransform: {fileID: 0}
-  offset: 0
-  isStatic: 0
-  sortingOrder: -244
-  renderers:
-  - renderer: {fileID: 4761205435765647056}
-    offset: 2
 --- !u!54 &4734935179019926774
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -402,6 +387,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4761205435095914545}
+        m_TargetAssemblyTypeName: 
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -413,6 +399,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 8709141563604272668}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SetAsFollowing
         m_Mode: 1
         m_Arguments:
@@ -423,12 +410,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   _onExitTrain:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4761205435095914545}
+        m_TargetAssemblyTypeName: 
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -439,8 +425,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   radius: 0.4
   scaleAffectsRadius: 1
   followSpeed: 25
@@ -489,6 +473,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1973618468606857601}
+        m_TargetAssemblyTypeName: 
         m_MethodName: set_emitting
         m_Mode: 6
         m_Arguments:
@@ -500,6 +485,7 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 8051173750528964998}
+        m_TargetAssemblyTypeName: 
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -511,6 +497,7 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 11400000, guid: aab09b8da784a95408d91774eca91514, type: 2}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
@@ -521,12 +508,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onRebound:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8051173750528964998}
+        m_TargetAssemblyTypeName: 
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -538,6 +524,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 11400000, guid: aab09b8da784a95408d91774eca91514, type: 2}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
@@ -549,6 +536,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 5035997380141275141}
+        m_TargetAssemblyTypeName: 
         m_MethodName: InvokeEffect
         m_Mode: 1
         m_Arguments:
@@ -559,12 +547,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onReboundGrab:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1932312516921636307}
+        m_TargetAssemblyTypeName: 
         m_MethodName: InvokeEffect
         m_Mode: 1
         m_Arguments:
@@ -575,12 +562,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onHitGround:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8051173750528964998}
+        m_TargetAssemblyTypeName: 
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -592,6 +578,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 7497171503171875312}
+        m_TargetAssemblyTypeName: 
         m_MethodName: InvokeEffect
         m_Mode: 1
         m_Arguments:
@@ -602,12 +589,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onPickedUp:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1973618468606857601}
+        m_TargetAssemblyTypeName: 
         m_MethodName: set_emitting
         m_Mode: 6
         m_Arguments:
@@ -618,12 +604,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onSuccessfulAttack:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 4469e24dd11490440a8ecc3e4ff35000, type: 2}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
@@ -634,8 +619,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &2972432064229778603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -725,13 +708,9 @@ MonoBehaviour:
   m_onNewTargetFound:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   m_onTargetLost:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   m_searchRange: 15
   m_searchAngle: 80
   m_canLooseTarget: 1

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1444966101224227787}
   - component: {fileID: 8143411395030173107}
-  - component: {fileID: 6681549304427940918}
   m_Layer: 0
   m_Name: bg island
   m_TagString: Untagged
@@ -46,6 +45,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -57,6 +58,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -68,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2092656439
   m_SortingLayer: -3
-  m_SortingOrder: -15190
+  m_SortingOrder: 0
   m_Sprite: {fileID: 6496034006162071731, guid: 890993dad11f32b42872591a6ee68883,
     type: 3}
   m_Color: {r: 0.12246626, g: 0.10768955, b: 0.18867922, a: 1}
@@ -81,23 +83,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6681549304427940918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2252139482311742491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useCustomTransform: 0
-  customTransform: {fileID: 0}
-  offset: 0
-  isStatic: 1
-  sortingOrder: -15190
-  renderers:
-  - renderer: {fileID: 8143411395030173107}
-    offset: 0

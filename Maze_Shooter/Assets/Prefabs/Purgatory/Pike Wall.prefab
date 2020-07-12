@@ -45,6 +45,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -56,6 +58,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -125,6 +128,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -136,6 +141,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -205,6 +211,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -216,6 +224,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -379,6 +388,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -390,6 +401,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -421,11 +433,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8216961033639340386}
     m_Modifications:
-    - target: {fileID: 4154211192069246758, guid: 8cb0e799d9a8b9e40b9870f2bbe1a0c4,
-        type: 3}
-      propertyPath: m_Name
-      value: Pike
-      objectReference: {fileID: 0}
     - target: {fileID: 1706266576503720330, guid: 8cb0e799d9a8b9e40b9870f2bbe1a0c4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -481,10 +488,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 2.0960002
       objectReference: {fileID: 0}
-    - target: {fileID: 5531017094291074175, guid: 8cb0e799d9a8b9e40b9870f2bbe1a0c4,
+    - target: {fileID: 3362224768635750050, guid: 8cb0e799d9a8b9e40b9870f2bbe1a0c4,
         type: 3}
-      propertyPath: m_SortingOrder
+      propertyPath: sortingOrder
       value: 293
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154211192069246758, guid: 8cb0e799d9a8b9e40b9870f2bbe1a0c4,
+        type: 3}
+      propertyPath: m_Name
+      value: Pike
       objectReference: {fileID: 0}
     - target: {fileID: 5531017094291074175, guid: 8cb0e799d9a8b9e40b9870f2bbe1a0c4,
         type: 3}
@@ -500,11 +512,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3362224768635750050, guid: 8cb0e799d9a8b9e40b9870f2bbe1a0c4,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 293
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cb0e799d9a8b9e40b9870f2bbe1a0c4, type: 3}
@@ -527,10 +534,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8216961033639340386}
     m_Modifications:
-    - target: {fileID: 7576184320436872338, guid: 6c6c8c9e630a4f04b9a4d3859bbcad83,
+    - target: {fileID: 2035808246483011531, guid: 6c6c8c9e630a4f04b9a4d3859bbcad83,
         type: 3}
-      propertyPath: m_Name
-      value: Pike v1
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035808246483011531, guid: 6c6c8c9e630a4f04b9a4d3859bbcad83,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035808246483011531, guid: 6c6c8c9e630a4f04b9a4d3859bbcad83,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035808246483011531, guid: 6c6c8c9e630a4f04b9a4d3859bbcad83,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5129417487734743614, guid: 6c6c8c9e630a4f04b9a4d3859bbcad83,
         type: 3}
@@ -587,30 +609,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7576184320436872338, guid: 6c6c8c9e630a4f04b9a4d3859bbcad83,
+        type: 3}
+      propertyPath: m_Name
+      value: Pike v1
+      objectReference: {fileID: 0}
     - target: {fileID: 9091571321031535894, guid: 6c6c8c9e630a4f04b9a4d3859bbcad83,
         type: 3}
       propertyPath: sortingOrder
       value: 293
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035808246483011531, guid: 6c6c8c9e630a4f04b9a4d3859bbcad83,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 293
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035808246483011531, guid: 6c6c8c9e630a4f04b9a4d3859bbcad83,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035808246483011531, guid: 6c6c8c9e630a4f04b9a4d3859bbcad83,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2035808246483011531, guid: 6c6c8c9e630a4f04b9a4d3859bbcad83,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c6c8c9e630a4f04b9a4d3859bbcad83, type: 3}
@@ -633,10 +640,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8216961033639340386}
     m_Modifications:
+    - target: {fileID: 4605107470593538485, guid: 85d4db05e3634cf49bfeff816ce3dcca,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605107470593538485, guid: 85d4db05e3634cf49bfeff816ce3dcca,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605107470593538485, guid: 85d4db05e3634cf49bfeff816ce3dcca,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605107470593538485, guid: 85d4db05e3634cf49bfeff816ce3dcca,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5371676666983733996, guid: 85d4db05e3634cf49bfeff816ce3dcca,
         type: 3}
       propertyPath: m_Name
       value: Pike v7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6738436152499458920, guid: 85d4db05e3634cf49bfeff816ce3dcca,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 293
       objectReference: {fileID: 0}
     - target: {fileID: 7243861944808823872, guid: 85d4db05e3634cf49bfeff816ce3dcca,
         type: 3}
@@ -693,31 +725,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -1.695
       objectReference: {fileID: 0}
-    - target: {fileID: 4605107470593538485, guid: 85d4db05e3634cf49bfeff816ce3dcca,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 293
-      objectReference: {fileID: 0}
-    - target: {fileID: 4605107470593538485, guid: 85d4db05e3634cf49bfeff816ce3dcca,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4605107470593538485, guid: 85d4db05e3634cf49bfeff816ce3dcca,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4605107470593538485, guid: 85d4db05e3634cf49bfeff816ce3dcca,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6738436152499458920, guid: 85d4db05e3634cf49bfeff816ce3dcca,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 293
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85d4db05e3634cf49bfeff816ce3dcca, type: 3}
 --- !u!212 &5611522924123639117 stripped
@@ -739,6 +746,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8216961033639340386}
     m_Modifications:
+    - target: {fileID: 2605806793823781295, guid: 3626c82d858e1be449dc24a338ef690a,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2605806793823781295, guid: 3626c82d858e1be449dc24a338ef690a,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2605806793823781295, guid: 3626c82d858e1be449dc24a338ef690a,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2605806793823781295, guid: 3626c82d858e1be449dc24a338ef690a,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5062807237969472370, guid: 3626c82d858e1be449dc24a338ef690a,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 293
+      objectReference: {fileID: 0}
     - target: {fileID: 5858348408410137334, guid: 3626c82d858e1be449dc24a338ef690a,
         type: 3}
       propertyPath: m_Name
@@ -799,31 +831,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.6960001
       objectReference: {fileID: 0}
-    - target: {fileID: 5062807237969472370, guid: 3626c82d858e1be449dc24a338ef690a,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 293
-      objectReference: {fileID: 0}
-    - target: {fileID: 2605806793823781295, guid: 3626c82d858e1be449dc24a338ef690a,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 293
-      objectReference: {fileID: 0}
-    - target: {fileID: 2605806793823781295, guid: 3626c82d858e1be449dc24a338ef690a,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2605806793823781295, guid: 3626c82d858e1be449dc24a338ef690a,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2605806793823781295, guid: 3626c82d858e1be449dc24a338ef690a,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3626c82d858e1be449dc24a338ef690a, type: 3}
 --- !u!4 &958935941083952323 stripped
@@ -845,10 +852,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8216961033639340386}
     m_Modifications:
-    - target: {fileID: 8225495430188171136, guid: 634ec776f910d9545ad1ce8d1e3573ba,
+    - target: {fileID: 523107142884826329, guid: 634ec776f910d9545ad1ce8d1e3573ba,
         type: 3}
-      propertyPath: m_Name
-      value: Pike v5
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 523107142884826329, guid: 634ec776f910d9545ad1ce8d1e3573ba,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 523107142884826329, guid: 634ec776f910d9545ad1ce8d1e3573ba,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 523107142884826329, guid: 634ec776f910d9545ad1ce8d1e3573ba,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6642121137174870316, guid: 634ec776f910d9545ad1ce8d1e3573ba,
         type: 3}
@@ -905,30 +927,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 523107142884826329, guid: 634ec776f910d9545ad1ce8d1e3573ba,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 293
-      objectReference: {fileID: 0}
-    - target: {fileID: 523107142884826329, guid: 634ec776f910d9545ad1ce8d1e3573ba,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 523107142884826329, guid: 634ec776f910d9545ad1ce8d1e3573ba,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 523107142884826329, guid: 634ec776f910d9545ad1ce8d1e3573ba,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7289471881840064004, guid: 634ec776f910d9545ad1ce8d1e3573ba,
         type: 3}
       propertyPath: sortingOrder
       value: 293
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225495430188171136, guid: 634ec776f910d9545ad1ce8d1e3573ba,
+        type: 3}
+      propertyPath: m_Name
+      value: Pike v5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 634ec776f910d9545ad1ce8d1e3573ba, type: 3}
@@ -951,10 +958,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8216961033639340386}
     m_Modifications:
-    - target: {fileID: 8086596205676109001, guid: 9cf7250f6d623544cb784befce7b2998,
+    - target: {fileID: 386741980235890576, guid: 9cf7250f6d623544cb784befce7b2998,
         type: 3}
-      propertyPath: m_Name
-      value: Pike v6
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 386741980235890576, guid: 9cf7250f6d623544cb784befce7b2998,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 386741980235890576, guid: 9cf7250f6d623544cb784befce7b2998,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 386741980235890576, guid: 9cf7250f6d623544cb784befce7b2998,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6787493220994882149, guid: 9cf7250f6d623544cb784befce7b2998,
         type: 3}
@@ -1011,30 +1033,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.998
       objectReference: {fileID: 0}
-    - target: {fileID: 386741980235890576, guid: 9cf7250f6d623544cb784befce7b2998,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 293
-      objectReference: {fileID: 0}
-    - target: {fileID: 386741980235890576, guid: 9cf7250f6d623544cb784befce7b2998,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 386741980235890576, guid: 9cf7250f6d623544cb784befce7b2998,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 386741980235890576, guid: 9cf7250f6d623544cb784befce7b2998,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7437379133730461005, guid: 9cf7250f6d623544cb784befce7b2998,
         type: 3}
       propertyPath: sortingOrder
       value: 293
+      objectReference: {fileID: 0}
+    - target: {fileID: 8086596205676109001, guid: 9cf7250f6d623544cb784befce7b2998,
+        type: 3}
+      propertyPath: m_Name
+      value: Pike v6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cf7250f6d623544cb784befce7b2998, type: 3}
@@ -1057,10 +1064,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8216961033639340386}
     m_Modifications:
-    - target: {fileID: 8181187040055299070, guid: f7fa77fb19d227c458a5a98e36aa2018,
+    - target: {fileID: 355166358145525927, guid: f7fa77fb19d227c458a5a98e36aa2018,
         type: 3}
-      propertyPath: m_Name
-      value: Pike v4
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 355166358145525927, guid: f7fa77fb19d227c458a5a98e36aa2018,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 355166358145525927, guid: f7fa77fb19d227c458a5a98e36aa2018,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 355166358145525927, guid: f7fa77fb19d227c458a5a98e36aa2018,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6882119515952090450, guid: f7fa77fb19d227c458a5a98e36aa2018,
         type: 3}
@@ -1117,30 +1139,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 355166358145525927, guid: f7fa77fb19d227c458a5a98e36aa2018,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 293
-      objectReference: {fileID: 0}
-    - target: {fileID: 355166358145525927, guid: f7fa77fb19d227c458a5a98e36aa2018,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 355166358145525927, guid: f7fa77fb19d227c458a5a98e36aa2018,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 355166358145525927, guid: f7fa77fb19d227c458a5a98e36aa2018,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7387828398182498938, guid: f7fa77fb19d227c458a5a98e36aa2018,
         type: 3}
       propertyPath: sortingOrder
       value: 293
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181187040055299070, guid: f7fa77fb19d227c458a5a98e36aa2018,
+        type: 3}
+      propertyPath: m_Name
+      value: Pike v4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7fa77fb19d227c458a5a98e36aa2018, type: 3}
@@ -1167,6 +1174,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pike v2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2096189368765362635, guid: a5bdceb479ac7f5408acb236c3e7817c,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 293
       objectReference: {fileID: 0}
     - target: {fileID: 2599646716627533539, guid: a5bdceb479ac7f5408acb236c3e7817c,
         type: 3}
@@ -1226,7 +1238,7 @@ PrefabInstance:
     - target: {fileID: 9186272577795742486, guid: a5bdceb479ac7f5408acb236c3e7817c,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 293
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9186272577795742486, guid: a5bdceb479ac7f5408acb236c3e7817c,
         type: 3}
@@ -1242,11 +1254,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2096189368765362635, guid: a5bdceb479ac7f5408acb236c3e7817c,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 293
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5bdceb479ac7f5408acb236c3e7817c, type: 3}

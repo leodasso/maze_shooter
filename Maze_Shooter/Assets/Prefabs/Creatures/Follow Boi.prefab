@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 890667005}
   - component: {fileID: 890667006}
-  - component: {fileID: 2921942031636101703}
   m_Layer: 11
   m_Name: eye
   m_TagString: Untagged
@@ -46,6 +45,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -57,6 +58,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -68,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -70
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fb21d43469c422e4799d052c515883f3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -80,26 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2921942031636101703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 890667004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useCustomTransform: 0
-  customTransform: {fileID: 0}
-  offset: -1.82
-  isStatic: 0
-  sortingOrder: -70
-  renderers:
-  - renderer: {fileID: 890667006}
-    offset: 0
 --- !u!1 &1679605950
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +92,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1679605951}
   - component: {fileID: 1679605952}
-  - component: {fileID: 3171979700407238754}
   m_Layer: 11
   m_Name: eye (1)
   m_TagString: Untagged
@@ -146,6 +127,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -157,6 +140,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -168,7 +152,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -73
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fb21d43469c422e4799d052c515883f3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -180,26 +164,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3171979700407238754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1679605950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useCustomTransform: 0
-  customTransform: {fileID: 0}
-  offset: -1.82
-  isStatic: 0
-  sortingOrder: -73
-  renderers:
-  - renderer: {fileID: 1679605952}
-    offset: 0
 --- !u!1 &1787893163000772841
 GameObject:
   m_ObjectHideFlags: 0
@@ -2325,6 +2289,62 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+  LifetimeByEmitterSpeedModule:
+    enabled: 0
+    m_Curve:
+      serializedVersion: 2
+      minMaxState: 1
+      scalar: 1
+      minScalar: 1
+      maxCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: -0.8
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0.2
+          inSlope: -0.8
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      minCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    m_Range: {x: 0, y: 1}
   ForceModule:
     enabled: 1
     x:
@@ -4905,11 +4925,12 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 79e3d4cd6a421624a8642fd2d77c6a82, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4917,6 +4938,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4928,7 +4950,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -63
+  m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -4946,6 +4968,8 @@ ParticleSystemRenderer:
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
+  m_FreeformStretching: 0
+  m_RotateWithStretchDirection: 1
   m_VertexStreams: 00010304
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
@@ -4998,6 +5022,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5009,6 +5035,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5020,7 +5047,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -62
+  m_SortingOrder: 0
   m_Sprite: {fileID: 2105866782918168587, guid: 3e61499d50b6bd441a83e7c83f7ed4f6,
     type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -5044,7 +5071,6 @@ GameObject:
   - component: {fileID: 3053469220318892189}
   - component: {fileID: 3163438176175473595}
   - component: {fileID: 3163513471110075931}
-  - component: {fileID: 3164214594045991435}
   - component: {fileID: 3058405400877805719}
   - component: {fileID: 3058405400877805718}
   - component: {fileID: 5690894077638604819}
@@ -5114,28 +5140,6 @@ MonoBehaviour:
     type: 3}
   lifetime: 2
   delay: 0
---- !u!114 &3164214594045991435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3059426726623626087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useCustomTransform: 0
-  customTransform: {fileID: 0}
-  offset: -0.29
-  isStatic: 0
-  sortingOrder: -62
-  renderers:
-  - renderer: {fileID: 3058405402303508176}
-    offset: 0
-  - renderer: {fileID: 6033915721677630051}
-    offset: -1
 --- !u!54 &3058405400877805719
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5198,6 +5202,14 @@ MonoBehaviour:
     useConstant: 0
     constantValue: 1200
     valueObject: {fileID: 0}
+  useSpeedCurve: 0
+  speedCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spriteAnimationPlayer: {fileID: 0}
   target: {fileID: 0}
   useTargetFinder: 1
   targetFinder: {fileID: 0}
@@ -5304,11 +5316,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7240a95320bc4f8a98e3f5cdfd3a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hauntCost: 5
+  hauntBurnRate: 0.5
   onHaunted:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1162031423457185821}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SendEvent
         m_Mode: 5
         m_Arguments:
@@ -5319,12 +5332,11 @@ MonoBehaviour:
           m_StringArgument: haunt
           m_BoolArgument: 1
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onUnHaunted:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1162031423457185821}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SendEvent
         m_Mode: 5
         m_Arguments:
@@ -5335,10 +5347,6 @@ MonoBehaviour:
           m_StringArgument: unHaunt
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  hauntCostGuiPrefab: {fileID: 1037163846840892316, guid: 6b49eaa24e3774049ae32f3e23ca0330,
-    type: 3}
   hauntedEffectPrefab: {fileID: 5520204612225126108, guid: ab8bf88defaea02438d3ee613bc23c3d,
     type: 3}
 --- !u!114 &3290414228200204743
@@ -5358,12 +5366,25 @@ MonoBehaviour:
     useConstant: 0
     constantValue: 1500
     valueObject: {fileID: 0}
-  path: {fileID: 0}
+  useSpeedCurve: 0
+  speedCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spriteAnimationPlayer: {fileID: 0}
   master: 0
+  acceleration: 10
+  drag: 10
   lerpSpeed: 8
   pathPosition: -12.67
   radius: 2.32
   inputDirectionForgiveness: 2
+  collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  path: {fileID: 0}
   siblings: []
 --- !u!114 &8557623537271473342
 MonoBehaviour:
@@ -5385,8 +5406,6 @@ MonoBehaviour:
   onTargetFound:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &1162031423457185821
 MonoBehaviour:
   m_ObjectHideFlags: 0

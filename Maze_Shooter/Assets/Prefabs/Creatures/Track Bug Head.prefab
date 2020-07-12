@@ -46,6 +46,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -57,6 +59,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -68,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 214
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9ab5dc105aaa59e4ab9f0aef0e32db8e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -102,7 +105,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1707409855521191249}
   - component: {fileID: 1600783818807862903}
-  - component: {fileID: 1601142147402366919}
   - component: {fileID: 1702441638062724443}
   - component: {fileID: 1702441638062724442}
   - component: {fileID: 1949418780268948257}
@@ -159,28 +161,6 @@ MonoBehaviour:
   lifetime: 3
   delay: 0
   ignoreMinLifetime: 0
---- !u!114 &1601142147402366919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703678156157347499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useCustomTransform: 0
-  customTransform: {fileID: 0}
-  offset: -0.29
-  isStatic: 0
-  sortingOrder: 214
-  renderers:
-  - renderer: {fileID: 1702441636636298012}
-    offset: 0
-  - renderer: {fileID: 7957064793357569967}
-    offset: -1
 --- !u!54 &1702441638062724443
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -267,6 +247,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3310628721242994129}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SendEvent
         m_Mode: 5
         m_Arguments:
@@ -278,6 +259,7 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
         m_MethodName: set_Priority
         m_Mode: 3
         m_Arguments:
@@ -288,12 +270,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onUnHaunted:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3310628721242994129}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SendEvent
         m_Mode: 5
         m_Arguments:
@@ -304,8 +285,6 @@ MonoBehaviour:
           m_StringArgument: unHaunt
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   hauntedEffectPrefab: {fileID: 5520204612225126108, guid: ab8bf88defaea02438d3ee613bc23c3d,
     type: 3}
 --- !u!114 &1186712155347913739
@@ -3036,6 +3015,62 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+  LifetimeByEmitterSpeedModule:
+    enabled: 0
+    m_Curve:
+      serializedVersion: 2
+      minMaxState: 1
+      scalar: 1
+      minScalar: 1
+      maxCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: -0.8
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0.2
+          inSlope: -0.8
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      minCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    m_Range: {x: 0, y: 1}
   ForceModule:
     enabled: 1
     x:
@@ -5616,11 +5651,12 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 79e3d4cd6a421624a8642fd2d77c6a82, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5628,6 +5664,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5639,7 +5676,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 213
+  m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -5657,6 +5694,8 @@ ParticleSystemRenderer:
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
+  m_FreeformStretching: 0
+  m_RotateWithStretchDirection: 1
   m_VertexStreams: 00010304
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
@@ -5712,6 +5751,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5723,6 +5764,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5856,6 +5898,7 @@ MonoBehaviour:
       vectorValue: {x: 0, y: 0, z: 0, w: 0}
       floatValue: 0
       textureValue: {fileID: 0}
+  stencilId: 1
 --- !u!1001 &7057408949670009995
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5863,10 +5906,75 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2968137097057845363}
     m_Modifications:
+    - target: {fileID: 5242195440903704432, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: blendMaterial
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704432, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: blendMode
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5242195440903704433, guid: e2cca486d573ca0408e410e9501501d2,
         type: 3}
       propertyPath: m_Name
       value: cluster particles
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 202
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_VelocityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_LengthScale
+      value: 2.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: useCustomTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 202
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: customTransform
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: offset
+      value: 0.36
       objectReference: {fileID: 0}
     - target: {fileID: 5242195440903704436, guid: e2cca486d573ca0408e410e9501501d2,
         type: 3}
@@ -6248,25 +6356,40 @@ PrefabInstance:
       propertyPath: NoiseModule.damping
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e2cca486d573ca0408e410e9501501d2, type: 3}
+--- !u!198 &2968137097774535678 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5242195440903704437, guid: e2cca486d573ca0408e410e9501501d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 7057408949670009995}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7057408950227308295
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7057408948980041647}
+    m_Modifications:
+    - target: {fileID: 5242195440903704432, guid: e2cca486d573ca0408e410e9501501d2,
         type: 3}
-      propertyPath: useCustomTransform
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 202
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: customTransform
+      propertyPath: blendMaterial
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+    - target: {fileID: 5242195440903704432, guid: e2cca486d573ca0408e410e9501501d2,
         type: 3}
-      propertyPath: offset
-      value: 0.36
+      propertyPath: blendMode
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704433, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_Name
+      value: Spiral Particles
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
         type: 3}
@@ -6290,43 +6413,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
         type: 3}
-      propertyPath: m_VelocityScale
+      propertyPath: m_SortingLayerID
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
         type: 3}
-      propertyPath: m_LengthScale
-      value: 2.9
+      propertyPath: m_SortingLayer
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704432, guid: e2cca486d573ca0408e410e9501501d2,
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
         type: 3}
-      propertyPath: blendMaterial
+      propertyPath: useCustomTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: sortingOrder
+      value: 202
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
+        type: 3}
+      propertyPath: customTransform
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704432, guid: e2cca486d573ca0408e410e9501501d2,
+    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
         type: 3}
-      propertyPath: blendMode
-      value: 8
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e2cca486d573ca0408e410e9501501d2, type: 3}
---- !u!198 &2968137097774535678 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5242195440903704437, guid: e2cca486d573ca0408e410e9501501d2,
-    type: 3}
-  m_PrefabInstance: {fileID: 7057408949670009995}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &7057408950227308295
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 7057408948980041647}
-    m_Modifications:
-    - target: {fileID: 5242195440903704433, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_Name
-      value: Spiral Particles
+      propertyPath: offset
+      value: 0.36
       objectReference: {fileID: 0}
     - target: {fileID: 5242195440903704436, guid: e2cca486d573ca0408e410e9501501d2,
         type: 3}
@@ -6807,66 +6920,6 @@ PrefabInstance:
         type: 3}
       propertyPath: VelocityModule.radial.minMaxState
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: useCustomTransform
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: sortingOrder
-      value: 202
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: customTransform
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704435, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: offset
-      value: 0.36
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 202
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704434, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704432, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: blendMaterial
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242195440903704432, guid: e2cca486d573ca0408e410e9501501d2,
-        type: 3}
-      propertyPath: blendMode
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2cca486d573ca0408e410e9501501d2, type: 3}
