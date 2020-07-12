@@ -2152,6 +2152,62 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+  LifetimeByEmitterSpeedModule:
+    enabled: 0
+    m_Curve:
+      serializedVersion: 2
+      minMaxState: 1
+      scalar: 1
+      minScalar: 1
+      maxCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: -0.8
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0.2
+          inSlope: -0.8
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      minCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    m_Range: {x: 0, y: 1}
   ForceModule:
     enabled: 0
     x:
@@ -4732,11 +4788,12 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: eddb562e57b7f234390e2d0c57822bf1, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4744,6 +4801,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4773,6 +4831,8 @@ ParticleSystemRenderer:
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
+  m_FreeformStretching: 0
+  m_RotateWithStretchDirection: 1
   m_VertexStreams: 00010304
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
@@ -4791,7 +4851,6 @@ GameObject:
   - component: {fileID: 6488000914601163039}
   - component: {fileID: 3446228766620969029}
   - component: {fileID: 6690052687944608610}
-  - component: {fileID: 386365441771052328}
   - component: {fileID: 6388597115015113688}
   - component: {fileID: 4982152448392815974}
   - component: {fileID: 638610674830744795}
@@ -4831,11 +4890,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6558144cc0e052a45b44fb99b11b4ca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  forceSpawn: 0
   uniqueId: DONT FORGET TO ENTER AN ID
   onDeactivated:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4455110941903431778}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Stop
         m_Mode: 1
         m_Arguments:
@@ -4846,12 +4907,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   _onSpawn:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4982152448392815974}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Instantiate
         m_Mode: 1
         m_Arguments:
@@ -4862,8 +4922,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!136 &3446228766620969029
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4891,28 +4949,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collection: {fileID: 11400000, guid: 81dae18351105444d8c426c9c3ce8de0, type: 2}
---- !u!114 &386365441771052328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6488000914601163027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useCustomTransform: 0
-  customTransform: {fileID: 0}
-  offset: 0
-  isStatic: 0
-  sortingOrder: 0
-  renderers:
-  - renderer: {fileID: 513636574282671695}
-    offset: 0
-  - renderer: {fileID: 5635306941272428116}
-    offset: 0
 --- !u!114 &6388597115015113688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4940,6 +4976,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4455110941903431778}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Play
         m_Mode: 1
         m_Arguments:
@@ -4951,6 +4988,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 6488000914601163039}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SetAsActiveCheckpoint
         m_Mode: 1
         m_Arguments:
@@ -4961,13 +4999,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onTriggerExit:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &4982152448392815974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4987,6 +5021,7 @@ MonoBehaviour:
   createInstance: 0
   destroyInstance: 0
   instancePlaceInHierarchy: 0
+  instanceRotation: 0
 --- !u!114 &638610674830744795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5005,6 +5040,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6488000914601163039}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SpawnIfCurrentCheckpoint
         m_Mode: 1
         m_Arguments:
@@ -5015,8 +5051,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   comment: When the 'spawn player' event is raised, I'll check if the game master's
     currently saved checkpoint is me. If it is, I'll spawn the player.
 --- !u!114 &520547346679055625
@@ -5037,6 +5071,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6488000914601163039}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OtherCheckpointWasActivated
         m_Mode: 1
         m_Arguments:
@@ -5047,8 +5082,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   comment: 
 --- !u!1 &7052314562921396228
 GameObject:
@@ -5095,6 +5128,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5106,6 +5141,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
