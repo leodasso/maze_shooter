@@ -231,22 +231,11 @@ namespace ShootyGhost
             haunted = newHaunted;
             onHauntBegin.Invoke();
             _rigidbody.isKinematic = true;
-            
-            var transitionObject = SpawnTransitionObject(HauntTransition.In, transform.position, haunted.gameObject);
-            
-            // Using a delegate, call the target's 'OnIsHaunted()' method precisely when the transition is complete
-            transitionObject.onTransitionComplete += InvokeTargetHauntedMethod;
+
+			newHaunted.OnIsHaunted(this);
             ghostState = GhostState.Haunting;
         }
 
-        /// <summary>
-        /// Invokes 'OnIsHaunted()' on the targeted hauntable (if there is one)
-        /// </summary>
-        void InvokeTargetHauntedMethod()
-        {
-            if (!haunted) return;
-            haunted.OnIsHaunted(this);
-        }
 
         /// <summary>
         /// Returns the ghost from posessing whatever it is currently haunting to its true form.

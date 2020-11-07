@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2937294253991182750}
   - component: {fileID: 1795888898030860677}
   - component: {fileID: 2466559516322197303}
-  - component: {fileID: 653308771213324197}
   - component: {fileID: 8050917244385575065}
   m_Layer: 0
   m_Name: haunt selector
@@ -51,13 +50,9 @@ MonoBehaviour:
   onHauntableOverlapped:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onHauntableExited:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   loseHauntTargetDelay: 0.25
   haunter: {fileID: 0}
 --- !u!54 &1795888898030860677
@@ -90,26 +85,6 @@ CapsuleCollider:
   m_Height: 8
   m_Direction: 1
   m_Center: {x: 0.00000011920929, y: 2.33, z: 0}
---- !u!114 &653308771213324197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2937294253991182738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useCustomTransform: 0
-  customTransform: {fileID: 0}
-  offset: 0
-  isStatic: 0
-  sortingOrder: 0
-  renderers:
-  - renderer: {fileID: 0}
-    offset: 0
 --- !u!82 &8050917244385575065
 AudioSource:
   m_ObjectHideFlags: 0
@@ -123,7 +98,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 4112f045de559ed47954f499ff7bfa4c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.49
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -284,6 +259,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -295,6 +272,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -377,3 +355,4 @@ MonoBehaviour:
       vectorValue: {x: 0, y: 0, z: 0, w: 0}
       floatValue: 0
       textureValue: {fileID: 0}
+  stencilId: 1

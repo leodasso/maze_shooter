@@ -34,6 +34,7 @@ namespace ShootyGhost
 
         public void OnUnHaunted()
         {
+			Debug.Log("On Unhaunted was invoked");
             if (_hauntedEffectInstance)
                 Destroy(_hauntedEffectInstance);
             

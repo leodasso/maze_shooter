@@ -160,6 +160,7 @@ public class PathFollower : MovementBase
 
     public void UnMaster()
     {
+		Debug.Log("Setting unmaster");
         master = false;
     }
 }
