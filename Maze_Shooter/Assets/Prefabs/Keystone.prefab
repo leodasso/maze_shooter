@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 9139055540337624807}
   - component: {fileID: 1781844949}
   - component: {fileID: 1781844951}
-  - component: {fileID: 1960910279621325414}
   - component: {fileID: 1960910279621325412}
   - component: {fileID: 1781844950}
   - component: {fileID: 1781844952}
   - component: {fileID: 5802432017048918399}
   - component: {fileID: 8762276104371340549}
+  - component: {fileID: 1252508457705955713}
   m_Layer: 17
   m_Name: Keystone
   m_TagString: Untagged
@@ -91,6 +91,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5802432017048918399}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SetTrigger
         m_Mode: 5
         m_Arguments:
@@ -101,12 +102,11 @@ MonoBehaviour:
           m_StringArgument: acquire
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   moveToBeholder:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5802432017048918399}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SetTrigger
         m_Mode: 5
         m_Arguments:
@@ -117,12 +117,11 @@ MonoBehaviour:
           m_StringArgument: snapAcquire
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   fadeOut:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5802432017048918399}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SetTrigger
         m_Mode: 5
         m_Arguments:
@@ -134,6 +133,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1960910279621325412}
+        m_TargetAssemblyTypeName: 
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -144,32 +144,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
---- !u!114 &1960910279621325414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1960910279621325415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useCustomTransform: 0
-  customTransform: {fileID: 0}
-  offset: 0
-  isStatic: 0
-  sortingOrder: -31
-  renderers:
-  - renderer: {fileID: 1960910281087259831}
-    offset: 0
-  - renderer: {fileID: 0}
-    offset: 1
-  - renderer: {fileID: 0}
-    offset: -1
 --- !u!114 &1960910279621325412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +224,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collection: {fileID: 11400000, guid: 61213d67bd8f34c479f8d1c60261877e, type: 2}
+--- !u!210 &1252508457705955713
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960910279621325415}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &1960910281087259824
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +280,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -306,6 +293,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -317,7 +305,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -31
+  m_SortingOrder: 0
   m_Sprite: {fileID: -6696737265829526569, guid: b6267730ec425fd4795d8a9437f8de8b,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -402,6 +390,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1781844951}
+        m_TargetAssemblyTypeName: 
         m_MethodName: PlaceIntoSlot
         m_Mode: 0
         m_Arguments:
@@ -412,10 +401,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: Arachnid.UnityEventGameObjectParam, Arachnid, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
   onTriggerExit:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: Arachnid.UnityEventGameObjectParam, Arachnid, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5531017094291074175}
   - component: {fileID: 7422821983503372343}
   - component: {fileID: 6685489647682422409}
-  - component: {fileID: 3362224768635750050}
   m_Layer: 0
   m_Name: Pike
   m_TagString: Untagged
@@ -48,6 +47,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -59,6 +60,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -70,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 863
+  m_SortingOrder: 0
   m_Sprite: {fileID: 8122773377100562925, guid: 63de4ccf42725e14ca88e4401809a454,
     type: 3}
   m_Color: {r: 0.69803923, g: 0.827451, b: 0.827451, a: 1}
@@ -115,23 +117,3 @@ MonoBehaviour:
   x: 0
   y: 1
   z: 0
---- !u!114 &3362224768635750050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4154211192069246758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useCustomTransform: 0
-  customTransform: {fileID: 0}
-  offset: 0
-  isStatic: 0
-  sortingOrder: 863
-  renderers:
-  - renderer: {fileID: 5531017094291074175}
-    offset: 0

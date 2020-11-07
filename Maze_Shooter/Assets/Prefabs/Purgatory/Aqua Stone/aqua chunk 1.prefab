@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 76349204458780752}
   - component: {fileID: 5353508599097408724}
-  - component: {fileID: 1433061866198027343}
   m_Layer: 0
   m_Name: aqua chunk 1
   m_TagString: Untagged
@@ -47,26 +46,6 @@ CapsuleCollider:
   m_Height: 2.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.71, z: 0}
---- !u!114 &1433061866198027343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5659408205890490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useCustomTransform: 0
-  customTransform: {fileID: 0}
-  offset: 0
-  isStatic: 0
-  sortingOrder: 3929
-  renderers:
-  - renderer: {fileID: 6278683620052620958}
-    offset: 0
 --- !u!1 &1674627330741544608
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,6 +92,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -124,6 +105,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -135,7 +117,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3929
+  m_SortingOrder: 0
   m_Sprite: {fileID: -6731492954841824887, guid: 63de4ccf42725e14ca88e4401809a454,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

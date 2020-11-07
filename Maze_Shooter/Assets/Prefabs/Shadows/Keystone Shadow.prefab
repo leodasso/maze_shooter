@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1272527369}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.1, z: 0}
+  m_LocalPosition: {x: 0, y: 6.1, z: -0.69}
   m_LocalScale: {x: 1.42166, y: 1.42166, z: 1.42166}
   m_Children: []
   m_Father: {fileID: 8628182711840255626}
@@ -48,6 +48,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -59,6 +61,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -70,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -29
+  m_SortingOrder: 0
   m_Sprite: {fileID: -2843172069484014020, guid: b6267730ec425fd4795d8a9437f8de8b,
     type: 3}
   m_Color: {r: 0.8867924, g: 0.44810376, b: 0.012548926, a: 1}
@@ -141,6 +144,7 @@ MonoBehaviour:
       vectorValue: {x: 0, y: 0, z: 0, w: 0}
       floatValue: 0
       textureValue: {fileID: 0}
+  stencilId: 1
 --- !u!114 &9039625657524052680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +168,7 @@ MonoBehaviour:
   - {fileID: 1272527370}
   texts: []
   childColorGroups: []
+  autoGetSprites: 1
 --- !u!114 &2339766406018898031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +290,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -296,6 +303,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -330,7 +338,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8628182711840255626}
   - component: {fileID: 8105908617540962545}
-  - component: {fileID: 3044355851614985789}
   m_Layer: 0
   m_Name: Keystone Shadow
   m_TagString: Untagged
@@ -399,30 +406,6 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   sprites:
   - {fileID: 4006529794002031175}
---- !u!114 &3044355851614985789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8658877947491313633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useCustomTransform: 0
-  customTransform: {fileID: 0}
-  offset: 0
-  isStatic: 0
-  sortingOrder: -31
-  renderers:
-  - renderer: {fileID: 303488135961224500}
-    offset: 2
-  - renderer: {fileID: 303488136081506096}
-    offset: 2
-  - renderer: {fileID: 1272527370}
-    offset: 2
 --- !u!1001 &3270169787208582956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -430,10 +413,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8628182711840255626}
     m_Modifications:
-    - target: {fileID: 2979077012763435551, guid: 9b9422386ca0ab546be9520ee9f7a461,
+    - target: {fileID: 2979077012763435544, guid: 9b9422386ca0ab546be9520ee9f7a461,
         type: 3}
-      propertyPath: m_Name
-      value: Keystone Particle
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979077012763435545, guid: 9b9422386ca0ab546be9520ee9f7a461,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979077012763435545, guid: 9b9422386ca0ab546be9520ee9f7a461,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.67
       objectReference: {fileID: 0}
     - target: {fileID: 2979077012763435546, guid: 9b9422386ca0ab546be9520ee9f7a461,
         type: 3}
@@ -448,7 +441,7 @@ PrefabInstance:
     - target: {fileID: 2979077012763435546, guid: 9b9422386ca0ab546be9520ee9f7a461,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.32
       objectReference: {fileID: 0}
     - target: {fileID: 2979077012763435546, guid: 9b9422386ca0ab546be9520ee9f7a461,
         type: 3}
@@ -490,25 +483,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2979077012763435545, guid: 9b9422386ca0ab546be9520ee9f7a461,
+    - target: {fileID: 2979077012763435551, guid: 9b9422386ca0ab546be9520ee9f7a461,
         type: 3}
-      propertyPath: moveWithTransform
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2979077012763435545, guid: 9b9422386ca0ab546be9520ee9f7a461,
-        type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 0.67
-      objectReference: {fileID: 0}
-    - target: {fileID: 2979077012763435544, guid: 9b9422386ca0ab546be9520ee9f7a461,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: -29
-      objectReference: {fileID: 0}
-    - target: {fileID: 2979077013184624668, guid: 9b9422386ca0ab546be9520ee9f7a461,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: -29
+      propertyPath: m_Name
+      value: Keystone Particle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b9422386ca0ab546be9520ee9f7a461, type: 3}
@@ -527,18 +505,6 @@ Transform:
 --- !u!198 &303488135961224501 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 2979077012763435545, guid: 9b9422386ca0ab546be9520ee9f7a461,
-    type: 3}
-  m_PrefabInstance: {fileID: 3270169787208582956}
-  m_PrefabAsset: {fileID: 0}
---- !u!199 &303488135961224500 stripped
-ParticleSystemRenderer:
-  m_CorrespondingSourceObject: {fileID: 2979077012763435544, guid: 9b9422386ca0ab546be9520ee9f7a461,
-    type: 3}
-  m_PrefabInstance: {fileID: 3270169787208582956}
-  m_PrefabAsset: {fileID: 0}
---- !u!199 &303488136081506096 stripped
-ParticleSystemRenderer:
-  m_CorrespondingSourceObject: {fileID: 2979077013184624668, guid: 9b9422386ca0ab546be9520ee9f7a461,
     type: 3}
   m_PrefabInstance: {fileID: 3270169787208582956}
   m_PrefabAsset: {fileID: 0}

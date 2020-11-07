@@ -45,6 +45,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -56,6 +58,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -67,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 944220931
   m_SortingLayer: -2
-  m_SortingOrder: 2860
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1506514462682016019, guid: 1f6369445bcfd73428918387f1150318,
     type: 3}
   m_Color: {r: 0.61759156, g: 0.754717, b: 0.45923817, a: 1}
@@ -126,6 +129,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -137,6 +142,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -224,7 +230,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3344184906594405735}
   - component: {fileID: 8568888786299189809}
-  - component: {fileID: 8406295924527269249}
   - component: {fileID: 7954275626544533079}
   - component: {fileID: 5711288812710617187}
   - component: {fileID: 674155035325289275}
@@ -272,26 +277,6 @@ MonoBehaviour:
   objectsToCheck: {fileID: 11400000, guid: feaafdb82417d8144bf932a779c76b85, type: 2}
   minDistance: 5
   maxDistance: 35
---- !u!114 &8406295924527269249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9165430166830150333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useCustomTransform: 0
-  customTransform: {fileID: 0}
-  offset: 0
-  isStatic: 1
-  sortingOrder: 0
-  renderers:
-  - renderer: {fileID: 2011269643943115268}
-    offset: 0
 --- !u!114 &7954275626544533079
 MonoBehaviour:
   m_ObjectHideFlags: 0
