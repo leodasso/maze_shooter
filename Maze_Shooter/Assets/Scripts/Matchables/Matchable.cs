@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using ShootyGhost;
 
 public class Matchable : MonoBehaviour
 {
@@ -43,6 +42,7 @@ public class Matchable : MonoBehaviour
 
 	void ProcessIntersection(Collider other) {
 
+		if (!enabled) return;
 		if (AmMaxLevel()) return;
 		var otherMatchable = other.GetComponent<Matchable>();
 
@@ -64,9 +64,12 @@ public class Matchable : MonoBehaviour
 
 	void MatchWith(Matchable other) {
 
+		if (matchedObject) return;
 		Debug.Log("Matching with " + other.name);
 
 		matchedObject = other;
+		// disable the matched object so it doesn't also run match behavior
+		matchedObject.enabled = false;
 
 		SetFreeMovement(true);
 		other.SetFreeMovement(true);
@@ -76,18 +79,33 @@ public class Matchable : MonoBehaviour
 
 		if (AmMaxLevel()) return;
 
-		Debug.Log("Merging with " + other.name);
-
 		// get the next level prefab
-		int nextLevel = level + 1;
-		GameObject nextLevelPrefab = matchableInfo.evolutions[nextLevel];
+		int evolution = level + 1;
+		GameObject evolutionPrefab = matchableInfo.evolutions[evolution];
 
 		// instantiate the next level prefab
-		Instantiate(nextLevelPrefab, transform.position, transform.rotation);
+		GameObject evolutionInstance = Instantiate(evolutionPrefab, transform.position, transform.rotation);
 
+		// Check if the haunter should be migrated to the next level evolution. Check both matchers for a haunter
+		Haunter haunter = GetHaunter();
+		if (!haunter) haunter = other.GetHaunter();
+		if (haunter) {
+			Hauntable evolutionHauntable = evolutionInstance.GetComponent<Hauntable>();
+			if (evolutionHauntable) 
+				haunter.MigrateHaunt(evolutionHauntable);
+			
+			else haunter.EndHaunt(evolutionInstance);
+		}
+		
 		// destroy 
 		Destroy(other.gameObject);
 		Destroy(gameObject);
+	}
+
+	Haunter GetHaunter() {
+		Hauntable myHauntable = GetComponent<Hauntable>();
+		if (!myHauntable) return null;
+		return myHauntable.haunter;
 	}
 
 	bool AmMaxLevel() {

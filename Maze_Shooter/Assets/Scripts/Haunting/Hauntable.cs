@@ -11,6 +11,8 @@ namespace ShootyGhost
         public UnityEvent onHaunted;
         public UnityEvent onUnHaunted;
         public GameObject hauntedEffectPrefab;
+
+		public Haunter haunter;
         
         GameObject _hauntedEffectInstance;
 
@@ -37,6 +39,7 @@ namespace ShootyGhost
                 Destroy(_hauntedEffectInstance);
             
             onUnHaunted.Invoke();
+			haunter = null;
         }
 
         void InstantiateHauntEffect()

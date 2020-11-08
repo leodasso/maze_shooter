@@ -218,6 +218,7 @@ namespace ShootyGhost
             onHauntBegin.Invoke();
             _rigidbody.isKinematic = true;
 
+			newHaunted.haunter = this;
 			newHaunted.OnIsHaunted(this);
             ghostState = GhostState.Haunting;
         }
@@ -226,12 +227,14 @@ namespace ShootyGhost
         /// <summary>
         /// Returns the ghost from posessing whatever it is currently haunting to its true form.
         /// </summary>
-        void EndHaunt()
+        public void EndHaunt(GameObject overrideHauntedObject = null)
         {
+			GameObject container = overrideHauntedObject ? overrideHauntedObject : haunted.gameObject;
+
             if (haunted)
             {
                 transform.position = haunted.GetReturnPosition();
-                SpawnTransitionObject(HauntTransition.Out, transform.position, haunted.gameObject);
+                SpawnTransitionObject(HauntTransition.Out, transform.position, container);
                 haunted.OnUnHaunted();
             }
             
@@ -239,6 +242,10 @@ namespace ShootyGhost
             onHauntEnd.Invoke();
             haunted = null;
         }
+
+		public void MigrateHaunt(Hauntable newHauntable) {
+			BeginHaunt(newHauntable);
+		}
 
         
         ArcMover SpawnTransitionObject(HauntTransition transitionType, Vector3 start, GameObject destination)
