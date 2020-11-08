@@ -8,8 +8,6 @@ namespace ShootyGhost
     [TypeInfoBox("Can be haunted by Haunter!")]
     public class Hauntable : MonoBehaviour
     {
-        [Tooltip("Cost of haunt juice per second to posess this.")]
-        public float hauntBurnRate = .5f;
         public UnityEvent onHaunted;
         public UnityEvent onUnHaunted;
         public GameObject hauntedEffectPrefab;

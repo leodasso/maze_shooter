@@ -98,7 +98,6 @@ namespace ShootyGhost
         bool CanBeginHauntTargeting => ghostState == GhostState.Normal && _targetingModeTimer <= 0 && HasHauntJuice;
         bool CanHaunt => ghostState == GhostState.Targeting && HasHauntJuice;
         bool HasHauntJuice => hauntJuice > 0;
-        float CurrentJuiceBurnRate => haunted ? haunted.hauntBurnRate : juiceBurnRate;
         bool IsBurningJuice => ghostState != GhostState.Normal;
         
         
@@ -122,19 +121,6 @@ namespace ShootyGhost
                     _hauntGuiTimer -= Time.unscaledDeltaTime;
                 else
                     HideJuiceGui();
-            }
-
-            if (IsBurningJuice)
-            {
-                _juiceBurnTimer += CurrentJuiceBurnRate * Time.unscaledDeltaTime;
-                if (_juiceBurnTimer >= 1)
-                {
-                    _juiceBurnTimer = 0;
-                    
-                    hauntJuice--;
-                    if (hauntJuice <= 0)
-                        QuitHaunting();
-                }
             }
 
             // Cooldown for targeting mode entry. Prevents player from spamming targeting mode quickly
