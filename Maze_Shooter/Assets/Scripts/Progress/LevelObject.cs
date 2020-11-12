@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
@@ -12,35 +12,53 @@ public class LevelObject : MonoBehaviour
 
 	[ReadOnly]
 	public bool awake;
-
 	public List<LevelVolume> volumes = new List<LevelVolume>();
-
 	public UnityEvent onAwaken;
 	public UnityEvent onSleep;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        CalculateIfAwake();
     }
 
-	public void AddVolume(LevelVolume volume) {
+	public void RefreshVolumesList() {
+		volumes = volumes.Where(x => x != null).Where(x => x.isActiveAndEnabled == true).ToList();
+		CalculateIfAwake();
+	}
+
+
+	void AddVolume(LevelVolume volume) {
 		if (volumes.Contains(volume)) return;
 		volumes.Add(volume);
+		if (!awake) CalculateIfAwake();
+	}
 
-		if (awake) return;
+	void RemoveVolume(LevelVolume volume) {
+		volumes.Remove(volume);
+		if (awake) CalculateIfAwake();
+	}
+
+	void OnTriggerEnter(Collider other) {
+		LevelVolume volume = other.GetComponent<LevelVolume>();
+		if (!volume) return;
+		AddVolume(volume);
+	}
+
+	void OnTriggerExit(Collider other) {
+		LevelVolume volume = other.GetComponent<LevelVolume>();
+		if (!volume) return;
+		RemoveVolume(volume);
+	}
+
+	void CalculateIfAwake() {
 		int level = volumes.Count;
 		if (level >= minLevel) {
 			awake = true;
 			onAwaken.Invoke();
+			return;
 		}
-	}
 
-	public void RemoveVolume(LevelVolume volume) {
-		volumes.Remove(volume);
-
-		if (!awake) return;
-		int level = volumes.Count;
 		if (level < minLevel) {
 			awake = false;
 			onSleep.Invoke();

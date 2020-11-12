@@ -114,13 +114,94 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c2c5fd692f7d944a61ee07bfab4564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minLevel: 0
+  minLevel: 1
+  awake: 0
+  volumes: []
   onAwaken:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2991514910253029581}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_isTrigger
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5444286106661378726}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: wake
+          m_BoolArgument: 1
+        m_CallState: 2
   onSleep:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2991514910253029581}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_isTrigger
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 13
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 5444286106661378726}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: sleep
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6731917409635660436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2991514910253029582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83b5d72ab14f3f4c8442f76808cf317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - {fileID: 11400000, guid: dee042ce6fadea0448b63d9e5b6d0ac6, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 556512539}
+        m_TargetAssemblyTypeName: LevelObject, Assembly-CSharp
+        m_MethodName: RefreshVolumesList
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  comment: When volumes are disabled or destroyed, onTriggerExit won't call automatically,
+    so an event is used instead.
 --- !u!1001 &3851495998121653129
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -143,35 +224,40 @@ PrefabInstance:
       propertyPath: spriteRenderers.Array.data[1]
       value: 
       objectReference: {fileID: 809510666}
+    - target: {fileID: 2085375269602569028, guid: d331b365ccbdd4943bb7424aeb0fd341,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2085375269602569029, guid: d331b365ccbdd4943bb7424aeb0fd341,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.838852
+      value: -0.899312
       objectReference: {fileID: 0}
     - target: {fileID: 2085375269602569029, guid: d331b365ccbdd4943bb7424aeb0fd341,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2.0330906
       objectReference: {fileID: 0}
     - target: {fileID: 2085375269602569029, guid: d331b365ccbdd4943bb7424aeb0fd341,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.390347
+      value: 6.799999
       objectReference: {fileID: 0}
     - target: {fileID: 2085375269602569029, guid: d331b365ccbdd4943bb7424aeb0fd341,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2085375269602569029, guid: d331b365ccbdd4943bb7424aeb0fd341,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2085375269602569029, guid: d331b365ccbdd4943bb7424aeb0fd341,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2085375269602569029, guid: d331b365ccbdd4943bb7424aeb0fd341,
         type: 3}
@@ -301,6 +387,12 @@ GameObject:
 --- !u!4 &2991514910253029580 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2085375269602569029, guid: d331b365ccbdd4943bb7424aeb0fd341,
+    type: 3}
+  m_PrefabInstance: {fileID: 3851495998121653129}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &2991514910253029581 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 2085375269602569028, guid: d331b365ccbdd4943bb7424aeb0fd341,
     type: 3}
   m_PrefabInstance: {fileID: 3851495998121653129}
   m_PrefabAsset: {fileID: 0}
