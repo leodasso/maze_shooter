@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7434343428368915272}
   - component: {fileID: 3670041778914619440}
   - component: {fileID: 7541060519485978057}
+  - component: {fileID: 139785339123030165}
+  - component: {fileID: 7320496023490666361}
   m_Layer: 0
   m_Name: small ghost hill
   m_TagString: Untagged
@@ -128,6 +130,70 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!95 &139785339123030165
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434343428368915275}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b161ed0b70698d0439bd15d40ecb4b2c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7320496023490666361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434343428368915275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c2c5fd692f7d944a61ee07bfab4564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minLevel: 0
+  awake: 0
+  volumes: []
+  onAwaken:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 139785339123030165}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: wake
+          m_BoolArgument: 0
+        m_CallState: 2
+  onSleep:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 139785339123030165}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: sleep
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7541060520491907115
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Arachnid;
-using UnityEngine;
+﻿using UnityEngine;
 using Rewired;
+using Arachnid;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 using Unity.Mathematics;
@@ -151,7 +149,7 @@ namespace ShootyGhost
             // the haunt button until intensity reaches 1 to exit.
             if (ghostState == GhostState.Haunting && _player.GetButton("haunt"))
             {
-                hauntBurstIntensity += Time.unscaledDeltaTime;
+                hauntBurstIntensity += Time.unscaledDeltaTime * 2;
                 if (hauntBurstIntensity >= 1)
                     EndHaunt();
             }

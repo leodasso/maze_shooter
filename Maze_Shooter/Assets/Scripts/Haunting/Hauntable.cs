@@ -21,8 +21,16 @@ namespace ShootyGhost
         /// </summary>
         public Vector3 GetReturnPosition()
         {
+			Vector3 dir = Vector3.left;
+			Player player = GetComponent<Player>();
+			if (player) {
+				dir = (Vector3)player.moveInput;
+			}
+
+			
+			
             // TODO lol this prob needs better options
-            return transform.position + Vector3.left * 5;
+            return transform.position + dir * 5;
         }
 
         [Button]

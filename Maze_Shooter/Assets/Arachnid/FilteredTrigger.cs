@@ -11,6 +11,9 @@ namespace Arachnid
 
 		[ToggleLeft]
 		public bool debug;
+
+		[ToggleLeft, Tooltip("Call 'OnTriggerExit' on awake, even if there is no trigger exit.")]
+		public bool triggerExitOnAwake;
 		
 		[ToggleLeft, Tooltip("Will only trigger once.")]
 		public bool oneOff;
@@ -28,6 +31,10 @@ namespace Arachnid
 		public List<Collection> triggerers = new List<Collection>();
 
 		bool _triggered;
+
+		void Awake() {
+			if (triggerExitOnAwake) OnTriggerExited(null);
+		}
 
 
 		void OnTriggerEnter(Collider other)
