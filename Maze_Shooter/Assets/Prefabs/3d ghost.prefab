@@ -282,7 +282,6 @@ GameObject:
   - component: {fileID: 3594317241385997712}
   - component: {fileID: 3491025872995073933}
   - component: {fileID: 3196075495648318836}
-  - component: {fileID: 4678050132525959177}
   - component: {fileID: 3490914254658770499}
   - component: {fileID: 7952798998470580956}
   - component: {fileID: 3490623736127823015}
@@ -291,7 +290,6 @@ GameObject:
   - component: {fileID: 3490375850402369535}
   - component: {fileID: 3490500826504311321}
   - component: {fileID: 6988027918430771749}
-  - component: {fileID: 3594317241385997718}
   - component: {fileID: 4151602328836940682}
   - component: {fileID: 3594317241385997713}
   - component: {fileID: 3594317241385997724}
@@ -382,25 +380,6 @@ MonoBehaviour:
   target: {fileID: 0}
   useTargetFinder: 0
   targetFinder: {fileID: 0}
---- !u!114 &4678050132525959177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3594317241385997719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 614cbf546f33c0e48911e6d3334ede19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 3594317241385997718}
-  setSpeed: 1
-  velocitySource: 0
-  rigidbody: {fileID: 3594317241385997713}
-  pseudoVelocity: {fileID: 0}
-  setMoveAngle: 1
-  movementAngleOffset: 35
 --- !u!114 &3490914254658770499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,25 +575,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3594317241385997719}
   m_Enabled: 1
---- !u!95 &3594317241385997718
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3594317241385997719}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c2d7bb5fa523ec945b97cdc157d59f45, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &4151602328836940682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1941,6 +1901,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3596589943858681433}
   - component: {fileID: 3680872684990957169}
+  - component: {fileID: 529407112023919641}
+  - component: {fileID: 2790715351501112535}
   - component: {fileID: 1374170497471438033}
   - component: {fileID: 7650560304715948519}
   m_Layer: 9
@@ -2015,6 +1977,67 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &529407112023919641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3594942849639997181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e36991b5ec351624d9f107cd87edbe4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationPlayer: {fileID: 2790715351501112535}
+  rigidbody: {fileID: 3594317241385997713}
+  speedToFramerate:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.99765015
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 14.427493
+      value: 2.226059
+      inSlope: 0.075887665
+      outSlope: 0.075887665
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.09816858
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  idle: {fileID: 11400000, guid: f5f309166b8850949beb97c36a97298a, type: 2}
+  run: {fileID: 11400000, guid: 0abce78cfa57f7842a44f360b1e7de60, type: 2}
+  idleSpeed: 0.25
+--- !u!114 &2790715351501112535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3594942849639997181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b424b41f41d9e7429bb3c5296a25754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedMultiplier: 1
+  frameRate: 12
+  spriteRenderer: {fileID: 3680872684990957169}
+  spriteAnimation: {fileID: 11400000, guid: f5f309166b8850949beb97c36a97298a, type: 2}
+  facingDirectionSource: 1
+  rigidbody: {fileID: 3594317241385997713}
+  mover: {fileID: 3196075495648318836}
+  pseudoVelocity: {fileID: 0}
 --- !u!114 &1374170497471438033
 MonoBehaviour:
   m_ObjectHideFlags: 0
