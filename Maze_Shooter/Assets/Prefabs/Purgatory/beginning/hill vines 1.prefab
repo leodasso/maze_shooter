@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1037177249332466599}
   - component: {fileID: 8970571286502427003}
   - component: {fileID: 6913211231280999076}
-  - component: {fileID: 5081024330472811304}
+  - component: {fileID: 3047366165773621085}
   m_Layer: 15
   m_Name: hill vines 1
   m_TagString: Untagged
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e06f15acaf029d24c810d86102968fe5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ee9f5849418f59046be3a73c2d43c7b2, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a05506e86408f4bae29a22b776d5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progress: 1
+  progress: 0
   spriteRenderer: {fileID: 1037177249332466599}
   sprites:
   - {fileID: 21300000, guid: ee9f5849418f59046be3a73c2d43c7b2, type: 3}
@@ -130,6 +130,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0304d7a6634fb5142b1c885149358f03, type: 3}
   - {fileID: 21300000, guid: a71287fa4f2026c4187c15941c0d1a0c, type: 3}
   - {fileID: 21300000, guid: e06f15acaf029d24c810d86102968fe5, type: 3}
+  playSelf: 0
+  pingPong: 0
+  frameRate: 12
   setProgressOnStart: 1
   startProgress: 0
 --- !u!135 &6913211231280999076
@@ -145,7 +148,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 3.2649999
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5081024330472811304
+--- !u!114 &3047366165773621085
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,13 +157,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 499665281397957873}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71c2c5fd692f7d944a61ee07bfab4564, type: 3}
+  m_Script: {fileID: 11500000, guid: 76a965d48758fd14aa74387aaad38508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minLevel: 0
-  awake: 0
-  volumes: []
-  onAwaken:
+  debug: 0
+  triggerExitOnAwake: 1
+  oneOff: 0
+  filterTriggers: 1
+  useLayerMask: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8192
+  triggerers:
+  - {fileID: 11400000, guid: c480fed5ad6a8814db6ad04678113800, type: 2}
+  events: []
+  unityEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8970571286502427003}
@@ -175,6 +186,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onSleep:
+  onTriggerExit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8970571286502427003}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

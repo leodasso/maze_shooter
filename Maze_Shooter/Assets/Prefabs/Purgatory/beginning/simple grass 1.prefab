@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4124519213678262932}
   - component: {fileID: 4124519213678262931}
   - component: {fileID: 4124519213678262930}
+  - component: {fileID: 6661400484169873812}
   m_Layer: 0
   m_Name: sprite
   m_TagString: Untagged
@@ -107,6 +108,23 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f033d6c81e912b04eb8b89604a62943a, type: 3}
   - {fileID: 21300000, guid: d736e76d9c60eaf4b9d533faa9f3dc78, type: 3}
   - {fileID: 21300000, guid: f29600e7ee117914ab0c241b6bf9a496, type: 3}
+  playSelf: 0
+  pingPong: 0
+  frameRate: 12
+  setProgressOnStart: 0
+  startProgress: 0
+--- !u!114 &6661400484169873812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4124519213678262933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4124519213886155689
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,9 +134,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124519213886155686}
-  - component: {fileID: 4124519213886155687}
   - component: {fileID: 4124519213886155688}
   - component: {fileID: 4296435717031355113}
+  - component: {fileID: 7777985997246341930}
   m_Layer: 13
   m_Name: simple grass 1
   m_TagString: Untagged
@@ -141,51 +159,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4124519213886155687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4124519213886155689}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71c2c5fd692f7d944a61ee07bfab4564, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minLevel: 1
-  awake: 0
-  volumes: []
-  onAwaken:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4124519213886155688}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: wake
-          m_BoolArgument: 0
-        m_CallState: 2
-  onSleep:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4124519213886155688}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: sleep
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!95 &4124519213886155688
 Animator:
   serializedVersion: 3
@@ -218,3 +191,56 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7777985997246341930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4124519213886155689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a965d48758fd14aa74387aaad38508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  triggerExitOnAwake: 1
+  oneOff: 0
+  filterTriggers: 1
+  useLayerMask: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8192
+  triggerers:
+  - {fileID: 11400000, guid: c480fed5ad6a8814db6ad04678113800, type: 2}
+  events: []
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4124519213886155688}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: wake
+          m_BoolArgument: 0
+        m_CallState: 2
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4124519213886155688}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: sleep
+          m_BoolArgument: 0
+        m_CallState: 2

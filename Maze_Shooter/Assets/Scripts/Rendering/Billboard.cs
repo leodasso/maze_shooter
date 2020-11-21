@@ -10,6 +10,7 @@ public class Billboard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		if (!Camera.main) return;
         _camera = Camera.main.transform;
     }
 

@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 798443643284077214}
   - component: {fileID: 5862848167195639655}
   - component: {fileID: 4239155956880957417}
-  - component: {fileID: 7217734790781326507}
+  - component: {fileID: 8603661259260486937}
   m_Layer: 0
   m_Name: big ghost hill
   m_TagString: Untagged
@@ -397,7 +397,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7217734790781326507
+--- !u!114 &8603661259260486937
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -406,13 +406,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 6833693720297181669}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71c2c5fd692f7d944a61ee07bfab4564, type: 3}
+  m_Script: {fileID: 11500000, guid: 76a965d48758fd14aa74387aaad38508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minLevel: 0
-  awake: 0
-  volumes: []
-  onAwaken:
+  debug: 0
+  triggerExitOnAwake: 1
+  oneOff: 0
+  filterTriggers: 1
+  useLayerMask: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8192
+  triggerers:
+  - {fileID: 11400000, guid: c480fed5ad6a8814db6ad04678113800, type: 2}
+  events: []
+  unityEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4239155956880957417}
@@ -427,7 +435,7 @@ MonoBehaviour:
           m_StringArgument: wake
           m_BoolArgument: 0
         m_CallState: 2
-  onSleep:
+  onTriggerExit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4239155956880957417}
