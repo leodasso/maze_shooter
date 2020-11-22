@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 
 public class MovementBase : MonoBehaviour, IControllable
 {
+	[OnValueChanged("ApplyDynamicsProfile")]
 	public DynamicsProfile movementProfile;
     public float speedMultiplier = 1;
 
