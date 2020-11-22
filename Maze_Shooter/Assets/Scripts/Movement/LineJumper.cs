@@ -108,7 +108,7 @@ public class LineJumper : MovementBase
     {
         if (!_jumping) return;
         
-        _rigidbody.velocity = jumpSpeed.ValueFor(_jumpTime) * speed.Value * speedMultiplier * aimDirection;
+        _rigidbody.velocity = jumpSpeed.ValueFor(_jumpTime) * movementProfile.movementForce * speedMultiplier * aimDirection;
         //if (pseudoDepth) pseudoDepth.z = jumpHeight.ValueFor(_jumpTime);
         _jumpTime += Time.fixedDeltaTime;
     }

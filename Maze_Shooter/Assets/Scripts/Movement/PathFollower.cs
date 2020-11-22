@@ -37,7 +37,7 @@ public class PathFollower : MovementBase
     /// The dot product between the path tangent and the movement input direction.
     /// </summary>
     float _dot;
-    float MaxSpeed => speed.Value * TotalSpeedMultiplier();
+    float MaxSpeed => movementProfile.movementForce * TotalSpeedMultiplier();
     float _speedOnPath;
 
     void OnDrawGizmos()

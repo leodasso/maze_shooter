@@ -89,10 +89,8 @@ namespace ShootyGhost
         float _hauntGuiTimer;
         bool _hauntGuiTimed;
         GameObject _indicator;
-        Hauntable _pendingHauntable;
         float _juiceBurnTimer;
 
-        public Hauntable PendingHauntable => _pendingHauntable;
         bool CanBeginHauntTargeting => ghostState == GhostState.Normal && _targetingModeTimer <= 0 && HasHauntJuice;
         bool CanHaunt => ghostState == GhostState.Targeting && HasHauntJuice;
         bool HasHauntJuice => hauntJuice > 0;
@@ -167,21 +165,6 @@ namespace ShootyGhost
             else EndHauntTargeting();
         }
 
-        public void ClearTargetedHauntable()
-        {
-            _pendingHauntable = null;
-            if (_indicator) 
-                Destroy(_indicator);
-        }
-        
-        /// <summary>
-        /// Sets the given target as the hauntable that will be haunted when haunt-targeting mode is exited.
-        /// </summary>
-        public void SetPendingHauntable(Hauntable target)
-        {
-            _indicator = Instantiate(hauntIndicatorPrefab, target.transform.position, quaternion.identity, target.transform);
-            _pendingHauntable = target;
-        }
 
         /// <summary>
         /// Haunt targeting is the state where time slows down
@@ -199,18 +182,14 @@ namespace ShootyGhost
             if (_indicator) 
                 Destroy(_indicator);
             
-            if (_pendingHauntable)
-                BeginHaunt(_pendingHauntable);
-            else 
-                ghostState = GhostState.Normal;
+			ghostState = GhostState.Normal;
             
-            ClearTargetedHauntable();
             onHauntStateEnd.Invoke();
             
             _targetingModeTimer = targetingModeCooldown.Value;
         }
 
-        void BeginHaunt(Hauntable newHaunted)
+        public void BeginHaunt(Hauntable newHaunted)
         {
             haunted = newHaunted;
             onHauntBegin.Invoke();

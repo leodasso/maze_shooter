@@ -26,6 +26,6 @@ public class NoiseMovement : MovementBase
     void FixedUpdate()
     {
         Vector3 flatDirection = new Vector3(direction.x, 0, direction.z);
-        _rigidbody.AddForce(flatDirection * TotalSpeedMultiplier() * speed.Value);
+        _rigidbody.AddForce(flatDirection * TotalSpeedMultiplier() * movementProfile.movementForce);
     }
 }
