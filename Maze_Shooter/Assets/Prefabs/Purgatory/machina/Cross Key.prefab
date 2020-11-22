@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1228010696220235640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1286383592523499714}
+  - component: {fileID: 1343537614001179884}
+  m_Layer: 0
+  m_Name: visuals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1286383592523499714
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228010696220235640}
+  m_LocalRotation: {x: 0.3007058, y: -0, z: -0, w: 0.953717}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7081928934014417186}
+  - {fileID: 2735424640220470451}
+  m_Father: {fileID: 2735424640670881192}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1343537614001179884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228010696220235640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2735424640220470450
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,9 +55,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2735424640220470451}
   - component: {fileID: 2735424640220470452}
-  - component: {fileID: 2735424640220470453}
   m_Layer: 0
-  m_Name: base sprite
+  m_Name: cross sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,13 +69,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2735424640220470450}
-  m_LocalRotation: {x: 0.3007058, y: -0, z: -0, w: 0.953717}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 2735424640552866690}
-  m_Father: {fileID: 2735424640670881192}
-  m_RootOrder: 0
+  m_Father: {fileID: 1286383592523499714}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2735424640220470452
 SpriteRenderer:
@@ -85,18 +129,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2735424640220470453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2735424640220470450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2735424640290852625
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +159,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2735424640670881192}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &2735424640290852628
 CapsuleCollider:
@@ -195,7 +227,7 @@ GameObject:
   - component: {fileID: 2735424640552866690}
   - component: {fileID: 2735424640552866691}
   m_Layer: 0
-  m_Name: base sprite (1)
+  m_Name: cross glow sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,7 +241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2735424640552866689}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.065, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2735424640220470451}
@@ -234,7 +266,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e9aa1ce9937d8844ca9ec0b066c12ef0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -255,9 +287,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 6401743626303516625, guid: 7b321021d53b02f4082a571d6055ef43,
+  m_Sprite: {fileID: 5114254945088661702, guid: 7b321021d53b02f4082a571d6055ef43,
     type: 3}
-  m_Color: {r: 0.09019608, g: 0.9058824, b: 0.7058824, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -287,6 +319,7 @@ GameObject:
   - component: {fileID: 8319335767901295105}
   - component: {fileID: 8581021060548856088}
   - component: {fileID: 4576933549351542699}
+  - component: {fileID: 7689182790332400148}
   m_Layer: 0
   m_Name: Cross Key
   m_TagString: Untagged
@@ -305,8 +338,8 @@ Transform:
   m_LocalPosition: {x: 22.646704, y: 0, z: -104.95739}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2735424640220470451}
   - {fileID: 2735424640290852626}
+  - {fileID: 1286383592523499714}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -411,7 +444,19 @@ MonoBehaviour:
   guidGenerator: {fileID: 2735424640670881198}
   onUseKey:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4576933549351542699}
+        m_TargetAssemblyTypeName: ShootyGhost.Hauntable, Assembly-CSharp
+        m_MethodName: EndHaunt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8436300983435887059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,18 +540,48 @@ MonoBehaviour:
         actionNames:
         - HutongGames.PlayMaker.Actions.EnableBehaviour
         - HutongGames.PlayMaker.Actions.EnableBehaviour
+        - HutongGames.PlayMaker.Actions.ActivateGameObject
+        - HutongGames.PlayMaker.Actions.SetIsKinematic
+        - HutongGames.PlayMaker.Actions.SetAnimatorTrigger
         customNames:
         - 
         - 
-        actionEnabled: 0101
-        actionIsOpen: 0101
-        actionStartIndex: 0000000005000000
-        actionHashCodes: 3a4cad053a4cad05
+        - 
+        - 
+        - 
+        actionEnabled: 0101010101
+        actionIsOpen: 0101010101
+        actionStartIndex: 00000000050000000a0000000f00000011000000
+        actionHashCodes: 3a4cad053a4cad05b2cf100015264c019bd6f801
         unityObjectParams:
         - {fileID: 8319335767901295105}
         - {fileID: 8436300983435887059}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        - ownerOption: 1
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 7081928934014417191}
         - ownerOption: 0
           gameObject:
             useVariable: 0
@@ -542,6 +617,12 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: onUnHaunt
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -573,18 +654,36 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData: 
+        byteData: 0000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 14000000120000000500000011000000110000001400000012000000050000001100000011000000
+        paramDataType: 14000000120000000500000011000000110000001400000012000000050000001100000011000000140000001100000011000000010000000100000014000000110000001400000012000000
         paramName:
         - gameObject
         - behaviour
@@ -596,8 +695,17 @@ MonoBehaviour:
         - component
         - enable
         - resetOnExit
-        paramDataPos: 00000000000000000000000000000000010000000100000001000000010000000200000003000000
-        paramByteDataSize: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+        - gameObject
+        - activate
+        - recursive
+        - resetOnExit
+        - everyFrame
+        - gameObject
+        - isKinematic
+        - gameObject
+        - trigger
+        paramDataPos: 00000000000000000000000000000000010000000100000001000000010000000200000003000000020000000400000005000000000000000100000003000000060000000400000002000000
+        paramByteDataSize: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000100000000000000000000000000000000000000
     - name: haunted
       description: 
       colorIndex: 0
@@ -623,18 +731,48 @@ MonoBehaviour:
         actionNames:
         - HutongGames.PlayMaker.Actions.EnableBehaviour
         - HutongGames.PlayMaker.Actions.EnableBehaviour
+        - HutongGames.PlayMaker.Actions.ActivateGameObject
+        - HutongGames.PlayMaker.Actions.SetIsKinematic
+        - HutongGames.PlayMaker.Actions.SetAnimatorTrigger
         customNames:
         - 
         - 
-        actionEnabled: 0101
-        actionIsOpen: 0101
-        actionStartIndex: 0000000005000000
-        actionHashCodes: 3a4cad053a4cad05
+        - 
+        - 
+        - 
+        actionEnabled: 0101010101
+        actionIsOpen: 0101010101
+        actionStartIndex: 00000000050000000a0000000f00000011000000
+        actionHashCodes: 3a4cad053a4cad05b2cf100015264c019bd6f801
         unityObjectParams:
         - {fileID: 8319335767901295105}
         - {fileID: 8436300983435887059}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        - ownerOption: 1
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 7081928934014417191}
         - ownerOption: 0
           gameObject:
             useVariable: 0
@@ -670,6 +808,12 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: onHaunt
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -701,18 +845,36 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData: 
+        byteData: 0000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 14000000120000000500000011000000110000001400000012000000050000001100000011000000
+        paramDataType: 14000000120000000500000011000000110000001400000012000000050000001100000011000000140000001100000011000000010000000100000014000000110000001400000012000000
         paramName:
         - gameObject
         - behaviour
@@ -724,8 +886,17 @@ MonoBehaviour:
         - component
         - enable
         - resetOnExit
-        paramDataPos: 00000000000000000000000000000000010000000100000001000000010000000200000003000000
-        paramByteDataSize: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+        - gameObject
+        - activate
+        - recursive
+        - resetOnExit
+        - everyFrame
+        - gameObject
+        - isKinematic
+        - gameObject
+        - trigger
+        paramDataPos: 00000000000000000000000000000000010000000100000001000000010000000200000003000000020000000400000005000000000000000100000003000000060000000400000002000000
+        paramByteDataSize: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000100000000000000000000000000000000000000
     events:
     - name: onHaunted
       isSystemEvent: 0
@@ -839,5 +1010,165 @@ MonoBehaviour:
           m_StringArgument: onUnHaunted
           m_BoolArgument: 0
         m_CallState: 2
-  hauntedEffectPrefab: {fileID: 0}
   haunter: {fileID: 0}
+--- !u!95 &7689182790332400148
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2735424640670881207}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e7e569757e166a74aabc95ea5e724bb7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3013050811467164441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7081928934014417191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0782ae9df3ff5ae4ab9e6e1985a49bf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 8235049919360912495, guid: eb89d813987295f48aa4df9253e1e2e0,
+    type: 3}
+  lifetime: 5
+  delay: 0
+--- !u!1001 &8022169835103310103
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1286383592523499714}
+    m_Modifications:
+    - target: {fileID: 944744569446246448, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: m_Name
+      value: fat ghost vis
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246448, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246453, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246453, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.0321316
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246453, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.7227063
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246453, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246453, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246453, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246453, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246453, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246453, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246453, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246453, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246453, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.4573
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246453, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4573
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246453, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4573
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246454, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246455, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: speedSource.rigidbody
+      value: 
+      objectReference: {fileID: 2735424640670881195}
+    - target: {fileID: 944744569446246455, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: direction.mover
+      value: 
+      objectReference: {fileID: 8436300983435887059}
+    - target: {fileID: 944744569446246455, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: frameRate
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 944744569446246455, guid: 096aecc403a7cb0418b827a9f32071a4,
+        type: 3}
+      propertyPath: speedToFramerate.m_Curve.Array.data[1].value
+      value: 3.5117645
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 096aecc403a7cb0418b827a9f32071a4, type: 3}
+--- !u!1 &7081928934014417191 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 944744569446246448, guid: 096aecc403a7cb0418b827a9f32071a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 8022169835103310103}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7081928934014417186 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 944744569446246453, guid: 096aecc403a7cb0418b827a9f32071a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 8022169835103310103}
+  m_PrefabAsset: {fileID: 0}

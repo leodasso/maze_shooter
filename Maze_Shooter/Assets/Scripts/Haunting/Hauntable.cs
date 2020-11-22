@@ -13,8 +13,6 @@ namespace ShootyGhost
 
 		[ReadOnly]
 		public Haunter haunter;
-        
-        GameObject _hauntedEffectInstance;
 
         /// <summary>
         /// Calculates and returns the position that the ghost should go to once exiting after haunt
@@ -27,8 +25,6 @@ namespace ShootyGhost
 				dir = (Vector3)player.moveInput;
 			}
 
-			
-			
             // TODO lol this prob needs better options
             return transform.position + dir * 5;
         }
@@ -41,12 +37,13 @@ namespace ShootyGhost
 
         public void OnUnHaunted()
         {
-			Debug.Log("On Unhaunted was invoked");
-            if (_hauntedEffectInstance)
-                Destroy(_hauntedEffectInstance);
-            
             onUnHaunted.Invoke();
 			haunter = null;
         }
+
+		public void EndHaunt() {
+			if (!haunter) return;
+			haunter.EndHaunt();
+		}
     }
 }
