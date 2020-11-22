@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 [RequireComponent(typeof(GuidGenerator))]
 public class KeySlot : MonoBehaviour
@@ -14,12 +15,14 @@ public class KeySlot : MonoBehaviour
     public Action onSlotFilled;
     
 
+	[ButtonGroup]
     public void InsertKey()
     {
         onKeyInserted.Invoke();
         FillSlot();
     }
 
+	[ButtonGroup]
     public void InsertKeyInstantly()
     {
         onInsertInstantly.Invoke();

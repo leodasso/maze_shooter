@@ -16,6 +16,11 @@ public class Grower : MonoBehaviour
         transform.localScale = Vector3.one * _scale;
     }
 
+	public void GrowInstantly() {
+		_scale = maxScale;
+		transform.localScale = Vector3.one * _scale;
+	}
+
 
 	void Update() {
 
