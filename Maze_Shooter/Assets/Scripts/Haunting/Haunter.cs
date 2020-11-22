@@ -62,8 +62,8 @@ namespace ShootyGhost
         [TabGroup("main")] 
         public GameObject hauntIndicatorPrefab;
 
-        [TabGroup("UI")]
-        public GameObject hauntJuiceQtyGuiPrefab;
+        //[TabGroup("UI")]
+        //public GameObject hauntJuiceQtyGuiPrefab;
 
         [TabGroup("UI")] 
         public float showTime = 5;
@@ -110,6 +110,7 @@ namespace ShootyGhost
         {
             if (_player == null) return;
             
+			/*
             // Haunt GUI shows up when picking up haunt juice. This timer removes it after a certain amt of time.
             if (_hauntGuiTimed && ghostState == GhostState.Normal)
             {
@@ -118,6 +119,7 @@ namespace ShootyGhost
                 else
                     HideJuiceGui();
             }
+			*/
 
             // Cooldown for targeting mode entry. Prevents player from spamming targeting mode quickly
             if (_targetingModeTimer >= 0)
@@ -249,6 +251,7 @@ namespace ShootyGhost
             hauntBurstIntensityRef.Value = 0;
         }
 
+		/*
         public void AddJuice(int amount)
         {
             hauntJuice += amount;
@@ -267,6 +270,7 @@ namespace ShootyGhost
                 _juiceGuiInstance.Hide();
         }
         
+		/*
         public void ShowJuiceGui()
         {
             if (!_juiceGuiInstance)
@@ -279,5 +283,6 @@ namespace ShootyGhost
             }
             else _juiceGuiInstance.Show();
         }
+		*/
     }
 }
