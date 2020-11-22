@@ -25,8 +25,10 @@ namespace ShootyGhost
 				dir = (Vector3)player.moveInput;
 			}
 
+			Vector3 dirtyPos = transform.position + dir * 5;
+
             // TODO lol this prob needs better options
-            return transform.position + dir * 5;
+            return new Vector3(dirtyPos.x, 0, dirtyPos.z);
         }
 
         [Button]

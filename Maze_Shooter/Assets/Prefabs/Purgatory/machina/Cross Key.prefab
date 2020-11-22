@@ -382,7 +382,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 3
 --- !u!114 &2735424640670881199
 MonoBehaviour:
@@ -1042,10 +1042,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0782ae9df3ff5ae4ab9e6e1985a49bf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectPrefab: {fileID: 8235049919360912495, guid: eb89d813987295f48aa4df9253e1e2e0,
+  effectPrefab: {fileID: 1152320502805378748, guid: f4470d3aee462aa40aeac4c0a65b8c30,
     type: 3}
   lifetime: 5
   delay: 0
+--- !u!114 &28343735530092548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7081928934014417191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b97e8ed2baea5324b9e68bb303521efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 1152320502805378748, guid: f4470d3aee462aa40aeac4c0a65b8c30,
+    type: 3}
+  lifetime: 5
+  delay: 0
+  ignoreMinLifetime: 0
 --- !u!1001 &8022169835103310103
 PrefabInstance:
   m_ObjectHideFlags: 0
