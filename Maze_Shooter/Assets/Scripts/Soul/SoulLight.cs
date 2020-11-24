@@ -12,11 +12,17 @@ public class SoulLight : MonoBehaviour
     public AnimationCurve intensityCurve;
     public new SphereCollider collider;
 
+	// leave this in so the little intensity toggle thing is available
+	void Start() {
+
+	}
+
     /// <summary>
     /// Returns the intensity of light at the given point
     /// </summary>
     public float LightIntensity(Vector3 point)
     {
+		if (!enabled) return 0;
         _distance = Vector3.Distance(point, transform.position);
         _normalizedDist = _distance / (collider.radius * ScaleMagnitude());
         return intensity * intensityCurve.Evaluate(_normalizedDist);
