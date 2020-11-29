@@ -10,12 +10,6 @@ public class LineJumper : MovementBase
     [TabGroup("main")]
     public CurveObject jumpSpeed;
     
-    [TabGroup("main")]
-    public CurveObject jumpHeight;
-
-    [TabGroup("main")]
-    public float climbingSpeed = 1;
-    
     [Tooltip("Optional: hazard component on this object. If linked, this will show a damage effect/animation when colliding" +
              " with an object of the layers that the hazard damages.")]
     [TabGroup("main")]
@@ -26,9 +20,6 @@ public class LineJumper : MovementBase
 
     [TabGroup("main"), Tooltip("Optional: object that will show the current jump direction")]
     public GameObject aimer; 
-    
-    [TabGroup("main")]
-    public Vector2 aimDirection = Vector2.right;
 
     [TabGroup("events")]
     public UnityEvent onWallGrabbed;
@@ -40,24 +31,10 @@ public class LineJumper : MovementBase
     [TabGroup("events")]
     public UnityEvent onJumpBegin;
 
-    [TabGroup("events")] 
-    public UnityEvent onClimbComplete;
-
     // how long have been jumping for
     float _jumpTime = 0;
     bool _jumping = false;
-    float startingHeight => jumpHeight ? jumpHeight.ValueFor(0) : 1;
-    float _climbVelocity = 0;
-    bool _climbing = false;
-
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(transform.position, (Vector2)transform.position + aimDirection.normalized * 5);
-        if (aimer)
-        {
-            aimer.transform.eulerAngles = new Vector3(0, 0, Math.AngleFromVector2(aimDirection.normalized, 0));
-        }
-    }
+	Vector2 _aimVector;
 
     [ButtonGroup()]
     public void Jump()
@@ -68,52 +45,32 @@ public class LineJumper : MovementBase
         onJumpBegin.Invoke();
     }
 
-    [ButtonGroup()]
-    public void BeginClimbing()
-    {
-        if (_jumping)
-        {
-            Debug.Log(name + " currently jumping, can't climb!", gameObject);
-            return;
-        }
-
-        _climbing = true;
-        // TODO set climb velocity
-        // pseudoDepth.ApplyVelocity(climbingSpeed);
-    }
 
     public void MirrorAim()
     {
-        aimDirection = -aimDirection;
+        direction = -direction;
     }
 
-    void EndClimb()
-    {
-        _climbing = false;
-        // TODO set velocity in RB
-        // pseudoDepth.ApplyVelocity(0);
-        onClimbComplete.Invoke();
-    }
 
-    void Update()
+    protected override void Update()
     {
-        if (aimer)
-            aimer.transform.eulerAngles = new Vector3(0, 0, Math.AngleFromVector2(aimDirection.normalized, 0));
+		base.Update();
+		if (direction.magnitude > .15f)
+			_aimVector = new Vector2(direction.x, direction.z);
 
-        if (_climbing)
-            if (transform.position.z >= startingHeight) EndClimb();
+		if (aimer)
+			aimer.transform.eulerAngles = new Vector3(0, 0, Math.AngleFromVector2(_aimVector, 0));
     }
 
     void FixedUpdate()
     {
         if (!_jumping) return;
         
-        _rigidbody.velocity = jumpSpeed.ValueFor(_jumpTime) * movementProfile.movementForce * speedMultiplier * aimDirection;
-        //if (pseudoDepth) pseudoDepth.z = jumpHeight.ValueFor(_jumpTime);
+        _rigidbody.AddForce(jumpSpeed.ValueFor(_jumpTime) * movementProfile.movementForce * speedMultiplier * _aimVector.normalized * Time.fixedDeltaTime);
         _jumpTime += Time.fixedDeltaTime;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter(Collider other)
     {
         if (Math.LayerMaskContainsLayer(layersToGrab, other.gameObject.layer))
         {
@@ -134,4 +91,9 @@ public class LineJumper : MovementBase
         _jumpTime = 0;
         _rigidbody.velocity = Vector2.zero;
     }
+
+	public override void DoActionAlpha() 
+	{
+		 Jump();
+	}
 }

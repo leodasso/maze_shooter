@@ -83,7 +83,7 @@ public class MovementBase : MonoBehaviour, IControllable
 
     public virtual void ApplyRightStickInput(Vector2 input) { }
 
-    public void DoActionAlpha() { }
+    public virtual void DoActionAlpha() { }
 
     public string Name()
     {
