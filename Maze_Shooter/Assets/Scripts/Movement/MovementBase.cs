@@ -4,8 +4,9 @@ using Sirenix.OdinInspector;
 
 public class MovementBase : MonoBehaviour, IControllable
 {
+	[OnValueChanged("ApplyDynamicsProfile")]
+	public DynamicsProfile movementProfile;
     public float speedMultiplier = 1;
-    public FloatReference speed;
 
     [Tooltip("Use an animation curve to control the speed over time? This is a multiplier.")]
     public bool useSpeedCurve;
@@ -37,7 +38,15 @@ public class MovementBase : MonoBehaviour, IControllable
     {
         _rigidbody = GetComponent<Rigidbody>();
         direction = Vector3.zero;
+		ApplyDynamicsProfile();
     }
+
+	protected virtual void ApplyDynamicsProfile() {
+		if (!_rigidbody) return;
+		_rigidbody.mass = movementProfile.rigidbodyMass;
+		_rigidbody.drag = movementProfile.rigidbodyDrag;
+		_rigidbody.useGravity = movementProfile.rigidbodyGravity;
+	}
 
     protected virtual void Update()
     {
@@ -74,7 +83,7 @@ public class MovementBase : MonoBehaviour, IControllable
 
     public virtual void ApplyRightStickInput(Vector2 input) { }
 
-    public void DoActionAlpha() { }
+    public virtual void DoActionAlpha() { }
 
     public string Name()
     {

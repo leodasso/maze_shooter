@@ -89,13 +89,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 0}
+    - target: {fileID: 1711862076862346006, guid: deb94e1f18bbbac409cd4784fd598df5,
+        type: 3}
       propertyPath: m_SortingOrder
-      value: -1048
+      value: -1052
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_SortingOrder
-      value: -1047
+    - target: {fileID: 5214704627691042348, guid: deb94e1f18bbbac409cd4784fd598df5,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 3.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 5214704627691042348, guid: deb94e1f18bbbac409cd4784fd598df5,
+        type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107057572135835544, guid: deb94e1f18bbbac409cd4784fd598df5,
+        type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 132096
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107057572135835544, guid: deb94e1f18bbbac409cd4784fd598df5,
+        type: 3}
+      propertyPath: wobbleScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107057572135835544, guid: deb94e1f18bbbac409cd4784fd598df5,
+        type: 3}
+      propertyPath: wobbleScale.z
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7928661334988036626, guid: deb94e1f18bbbac409cd4784fd598df5,
         type: 3}
@@ -107,6 +129,38 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7928661334988036627, guid: deb94e1f18bbbac409cd4784fd598df5,
+        type: 3}
+      propertyPath: speed.constantValue
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928661334988036627, guid: deb94e1f18bbbac409cd4784fd598df5,
+        type: 3}
+      propertyPath: movementProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: b9d63f4257296be4c9704838e0ad35a6,
+        type: 2}
+    - target: {fileID: 7928661334988036630, guid: deb94e1f18bbbac409cd4784fd598df5,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d9026de1af9b9e34c827ccb87907a52c, type: 2}
+    - target: {fileID: 7929894042448423394, guid: deb94e1f18bbbac409cd4784fd598df5,
+        type: 3}
+      propertyPath: m_Drag
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7929894043872753573, guid: deb94e1f18bbbac409cd4784fd598df5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -1051
+      objectReference: {fileID: 0}
+    - target: {fileID: 7929894043872753573, guid: deb94e1f18bbbac409cd4784fd598df5,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 355446125572ab04cac4621257a6d49f,
+        type: 3}
     - target: {fileID: 7934530072941726184, guid: deb94e1f18bbbac409cd4784fd598df5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -177,6 +231,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8040204567777706878, guid: deb94e1f18bbbac409cd4784fd598df5,
+        type: 3}
+      propertyPath: sortingOrder
+      value: -1051
+      objectReference: {fileID: 0}
     - target: {fileID: 8041832486896430122, guid: deb94e1f18bbbac409cd4784fd598df5,
         type: 3}
       propertyPath: onDamagedEvent.m_PersistentCalls.m_Calls.Array.size
@@ -212,71 +271,10 @@ PrefabInstance:
       propertyPath: onDamagedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 7928661334988036627, guid: deb94e1f18bbbac409cd4784fd598df5,
-        type: 3}
-      propertyPath: speed.constantValue
-      value: 1500
-      objectReference: {fileID: 0}
-    - target: {fileID: 7929894043872753573, guid: deb94e1f18bbbac409cd4784fd598df5,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: -1051
-      objectReference: {fileID: 0}
-    - target: {fileID: 7929894043872753573, guid: deb94e1f18bbbac409cd4784fd598df5,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 355446125572ab04cac4621257a6d49f,
-        type: 3}
-    - target: {fileID: 8040204567777706878, guid: deb94e1f18bbbac409cd4784fd598df5,
-        type: 3}
-      propertyPath: sortingOrder
-      value: -1051
-      objectReference: {fileID: 0}
-    - target: {fileID: 7929894042448423394, guid: deb94e1f18bbbac409cd4784fd598df5,
-        type: 3}
-      propertyPath: m_Drag
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7928661334988036630, guid: deb94e1f18bbbac409cd4784fd598df5,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: d9026de1af9b9e34c827ccb87907a52c, type: 2}
     - target: {fileID: 8494499548794241326, guid: deb94e1f18bbbac409cd4784fd598df5,
         type: 3}
       propertyPath: shadowScale
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1711862076862346006, guid: deb94e1f18bbbac409cd4784fd598df5,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: -1052
-      objectReference: {fileID: 0}
-    - target: {fileID: 5214704627691042348, guid: deb94e1f18bbbac409cd4784fd598df5,
-        type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 3.53
-      objectReference: {fileID: 0}
-    - target: {fileID: 5214704627691042348, guid: deb94e1f18bbbac409cd4784fd598df5,
-        type: 3}
-      propertyPath: ShapeModule.radiusThickness
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7107057572135835544, guid: deb94e1f18bbbac409cd4784fd598df5,
-        type: 3}
-      propertyPath: layerMask.m_Bits
-      value: 132096
-      objectReference: {fileID: 0}
-    - target: {fileID: 7107057572135835544, guid: deb94e1f18bbbac409cd4784fd598df5,
-        type: 3}
-      propertyPath: wobbleScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7107057572135835544, guid: deb94e1f18bbbac409cd4784fd598df5,
-        type: 3}
-      propertyPath: wobbleScale.z
-      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: deb94e1f18bbbac409cd4784fd598df5, type: 3}

@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Arachnid;
-using UnityEngine;
+﻿using UnityEngine;
 using Rewired;
+using Arachnid;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 using Unity.Mathematics;
@@ -64,8 +62,8 @@ namespace ShootyGhost
         [TabGroup("main")] 
         public GameObject hauntIndicatorPrefab;
 
-        [TabGroup("UI")]
-        public GameObject hauntJuiceQtyGuiPrefab;
+        //[TabGroup("UI")]
+        //public GameObject hauntJuiceQtyGuiPrefab;
 
         [TabGroup("UI")] 
         public float showTime = 5;
@@ -91,14 +89,11 @@ namespace ShootyGhost
         float _hauntGuiTimer;
         bool _hauntGuiTimed;
         GameObject _indicator;
-        Hauntable _pendingHauntable;
         float _juiceBurnTimer;
 
-        public Hauntable PendingHauntable => _pendingHauntable;
         bool CanBeginHauntTargeting => ghostState == GhostState.Normal && _targetingModeTimer <= 0 && HasHauntJuice;
         bool CanHaunt => ghostState == GhostState.Targeting && HasHauntJuice;
         bool HasHauntJuice => hauntJuice > 0;
-        float CurrentJuiceBurnRate => haunted ? haunted.hauntBurnRate : juiceBurnRate;
         bool IsBurningJuice => ghostState != GhostState.Normal;
         
         
@@ -115,6 +110,7 @@ namespace ShootyGhost
         {
             if (_player == null) return;
             
+			/*
             // Haunt GUI shows up when picking up haunt juice. This timer removes it after a certain amt of time.
             if (_hauntGuiTimed && ghostState == GhostState.Normal)
             {
@@ -123,19 +119,7 @@ namespace ShootyGhost
                 else
                     HideJuiceGui();
             }
-
-            if (IsBurningJuice)
-            {
-                _juiceBurnTimer += CurrentJuiceBurnRate * Time.unscaledDeltaTime;
-                if (_juiceBurnTimer >= 1)
-                {
-                    _juiceBurnTimer = 0;
-                    
-                    hauntJuice--;
-                    if (hauntJuice <= 0)
-                        QuitHaunting();
-                }
-            }
+			*/
 
             // Cooldown for targeting mode entry. Prevents player from spamming targeting mode quickly
             if (_targetingModeTimer >= 0)
@@ -165,7 +149,7 @@ namespace ShootyGhost
             // the haunt button until intensity reaches 1 to exit.
             if (ghostState == GhostState.Haunting && _player.GetButton("haunt"))
             {
-                hauntBurstIntensity += Time.unscaledDeltaTime;
+                hauntBurstIntensity += Time.unscaledDeltaTime * 2;
                 if (hauntBurstIntensity >= 1)
                     EndHaunt();
             }
@@ -183,21 +167,6 @@ namespace ShootyGhost
             else EndHauntTargeting();
         }
 
-        public void ClearTargetedHauntable()
-        {
-            _pendingHauntable = null;
-            if (_indicator) 
-                Destroy(_indicator);
-        }
-        
-        /// <summary>
-        /// Sets the given target as the hauntable that will be haunted when haunt-targeting mode is exited.
-        /// </summary>
-        public void SetPendingHauntable(Hauntable target)
-        {
-            _indicator = Instantiate(hauntIndicatorPrefab, target.transform.position, quaternion.identity, target.transform);
-            _pendingHauntable = target;
-        }
 
         /// <summary>
         /// Haunt targeting is the state where time slows down
@@ -215,48 +184,36 @@ namespace ShootyGhost
             if (_indicator) 
                 Destroy(_indicator);
             
-            if (_pendingHauntable)
-                BeginHaunt(_pendingHauntable);
-            else 
-                ghostState = GhostState.Normal;
+			ghostState = GhostState.Normal;
             
-            ClearTargetedHauntable();
             onHauntStateEnd.Invoke();
             
             _targetingModeTimer = targetingModeCooldown.Value;
         }
 
-        void BeginHaunt(Hauntable newHaunted)
+        public void BeginHaunt(Hauntable newHaunted)
         {
             haunted = newHaunted;
             onHauntBegin.Invoke();
             _rigidbody.isKinematic = true;
-            
-            var transitionObject = SpawnTransitionObject(HauntTransition.In, transform.position, haunted.gameObject);
-            
-            // Using a delegate, call the target's 'OnIsHaunted()' method precisely when the transition is complete
-            transitionObject.onTransitionComplete += InvokeTargetHauntedMethod;
+
+			newHaunted.haunter = this;
+			newHaunted.OnIsHaunted(this);
             ghostState = GhostState.Haunting;
         }
 
-        /// <summary>
-        /// Invokes 'OnIsHaunted()' on the targeted hauntable (if there is one)
-        /// </summary>
-        void InvokeTargetHauntedMethod()
-        {
-            if (!haunted) return;
-            haunted.OnIsHaunted(this);
-        }
 
         /// <summary>
         /// Returns the ghost from posessing whatever it is currently haunting to its true form.
         /// </summary>
-        void EndHaunt()
+        public void EndHaunt(GameObject overrideHauntedObject = null)
         {
+			GameObject container = overrideHauntedObject ? overrideHauntedObject : haunted.gameObject;
+
             if (haunted)
             {
                 transform.position = haunted.GetReturnPosition();
-                SpawnTransitionObject(HauntTransition.Out, transform.position, haunted.gameObject);
+                SpawnTransitionObject(HauntTransition.Out, transform.position, container);
                 haunted.OnUnHaunted();
             }
             
@@ -264,6 +221,10 @@ namespace ShootyGhost
             onHauntEnd.Invoke();
             haunted = null;
         }
+
+		public void MigrateHaunt(Hauntable newHauntable) {
+			BeginHaunt(newHauntable);
+		}
 
         
         ArcMover SpawnTransitionObject(HauntTransition transitionType, Vector3 start, GameObject destination)
@@ -290,6 +251,7 @@ namespace ShootyGhost
             hauntBurstIntensityRef.Value = 0;
         }
 
+		/*
         public void AddJuice(int amount)
         {
             hauntJuice += amount;
@@ -308,6 +270,7 @@ namespace ShootyGhost
                 _juiceGuiInstance.Hide();
         }
         
+		/*
         public void ShowJuiceGui()
         {
             if (!_juiceGuiInstance)
@@ -320,5 +283,6 @@ namespace ShootyGhost
             }
             else _juiceGuiInstance.Show();
         }
+		*/
     }
 }

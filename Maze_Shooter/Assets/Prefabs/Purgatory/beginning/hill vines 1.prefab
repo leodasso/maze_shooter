@@ -1,0 +1,203 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &499665281397957873
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7170438247492042669}
+  - component: {fileID: 1037177249332466599}
+  - component: {fileID: 8970571286502427003}
+  - component: {fileID: 6913211231280999076}
+  - component: {fileID: 3047366165773621085}
+  m_Layer: 15
+  m_Name: hill vines 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7170438247492042669
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499665281397957873}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 8.27, z: 0}
+  m_LocalScale: {x: 1.0451015, y: 0.89271945, z: 1.0451015}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1037177249332466599
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499665281397957873}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: ee9f5849418f59046be3a73c2d43c7b2, type: 3}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 6.53, y: 5}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &8970571286502427003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499665281397957873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7a05506e86408f4bae29a22b776d5d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progress: 0
+  spriteRenderer: {fileID: 1037177249332466599}
+  sprites:
+  - {fileID: 21300000, guid: ee9f5849418f59046be3a73c2d43c7b2, type: 3}
+  - {fileID: 21300000, guid: 64234045bb69e98408b439c546295dd8, type: 3}
+  - {fileID: 21300000, guid: 45d9242efaf969244bb9360791ab1fb9, type: 3}
+  - {fileID: 21300000, guid: 12b6fa0fc1595ea418d5fdbe307b38cd, type: 3}
+  - {fileID: 21300000, guid: 191a0760a76f61e4883352921ab1bfe7, type: 3}
+  - {fileID: 21300000, guid: cf79efce39f50c1418a4eab5294d9b53, type: 3}
+  - {fileID: 21300000, guid: dfb87d95cacf2b440a00ff5fa853c0bf, type: 3}
+  - {fileID: 21300000, guid: 5f89c4d48fafa7d4db4505c0942c576b, type: 3}
+  - {fileID: 21300000, guid: a85beda29ab741145bbe2486604e2cec, type: 3}
+  - {fileID: 21300000, guid: d381da238a6759f4084682abdb5780ee, type: 3}
+  - {fileID: 21300000, guid: 6a1984af7f1ef9449894c24a34e64f7e, type: 3}
+  - {fileID: 21300000, guid: 940ef54875fa55845931ed8c2d360123, type: 3}
+  - {fileID: 21300000, guid: 278b05a86caf0a140b8a79c4873d6d30, type: 3}
+  - {fileID: 21300000, guid: 697273b5de9884842bae8336f01bbe18, type: 3}
+  - {fileID: 21300000, guid: 1fe07a4090f80444f8857b9570a9603f, type: 3}
+  - {fileID: 21300000, guid: 05abc175767fc53439e0caa6aab60f8f, type: 3}
+  - {fileID: 21300000, guid: 6defdc752dde7b84dbd2d177e85c475d, type: 3}
+  - {fileID: 21300000, guid: da125e5ea26b0914e80bbceccf8c504e, type: 3}
+  - {fileID: 21300000, guid: 7a5094f8a27f016468d6cbab313c6e3e, type: 3}
+  - {fileID: 21300000, guid: ae337776d88d7dc408dfa48816e4ac72, type: 3}
+  - {fileID: 21300000, guid: 1e5e7bcc16f777f4092800635f862ca7, type: 3}
+  - {fileID: 21300000, guid: fbc8952a9202cc64cb2e30afe4f814e2, type: 3}
+  - {fileID: 21300000, guid: 88b16c0f8a030824dace5c97cf2185cd, type: 3}
+  - {fileID: 21300000, guid: f28096547a5b468419f279b552e73e5e, type: 3}
+  - {fileID: 21300000, guid: 206f74a336687a74abb1f71d00b29d4e, type: 3}
+  - {fileID: 21300000, guid: a8bbfa64f51974b429e240e071aba078, type: 3}
+  - {fileID: 21300000, guid: b1cc7c8a359b16141943f66dac710f48, type: 3}
+  - {fileID: 21300000, guid: 0304d7a6634fb5142b1c885149358f03, type: 3}
+  - {fileID: 21300000, guid: a71287fa4f2026c4187c15941c0d1a0c, type: 3}
+  - {fileID: 21300000, guid: e06f15acaf029d24c810d86102968fe5, type: 3}
+  playSelf: 0
+  pingPong: 0
+  frameRate: 12
+  setProgressOnStart: 1
+  startProgress: 0
+--- !u!135 &6913211231280999076
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499665281397957873}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.2649999
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3047366165773621085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499665281397957873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a965d48758fd14aa74387aaad38508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  triggerExitOnAwake: 1
+  oneOff: 0
+  filterTriggers: 1
+  useLayerMask: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8192
+  triggerers:
+  - {fileID: 11400000, guid: c480fed5ad6a8814db6ad04678113800, type: 2}
+  events: []
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8970571286502427003}
+        m_TargetAssemblyTypeName: SpriteAnimator, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8970571286502427003}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

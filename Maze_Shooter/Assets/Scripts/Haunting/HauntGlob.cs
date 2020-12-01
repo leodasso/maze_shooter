@@ -18,6 +18,6 @@ public class HauntGlob : MonoBehaviour
         if (_used) return;
         _used = true;
         onGrabbed.Invoke();
-        haunter.AddJuice(value);
+        //haunter.AddJuice(value);
     }
 }

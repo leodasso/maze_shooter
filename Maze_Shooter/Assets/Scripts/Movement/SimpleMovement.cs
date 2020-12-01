@@ -30,7 +30,7 @@ public class SimpleMovement : MovementBase
         if (target && useTargetFinder) 
             direction = (target.transform.position - transform.position).normalized;
         
-        _rigidbody.AddForce(direction * speed.Value * speedMultiplier * Time.fixedDeltaTime);
+        _rigidbody.AddForce(direction * movementProfile.movementForce * speedMultiplier * Time.fixedDeltaTime);
     }
 
     // These functions are for playmaker to easily interface with this behavior
