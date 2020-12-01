@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
@@ -34,7 +35,7 @@ public class LineJumper : MovementBase
     // how long have been jumping for
     float _jumpTime = 0;
     bool _jumping = false;
-	Vector2 _aimVector;
+	Vector3 _aimVector;
 
     [ButtonGroup()]
     public void Jump()
@@ -51,15 +52,22 @@ public class LineJumper : MovementBase
         direction = -direction;
     }
 
+	void GrabNearestWall() {
+		List<Collider> grabbables = new List<Collider>();
+		grabbables.AddRange(Physics.OverlapSphere(transform.position, 50, layersToGrab, QueryTriggerInteraction.Ignore));
+		grabbables.OrderBy(x => Vector3.SqrMagnitude(transform.position - x.transform.position));
+		Debug.Log("The nearest grabbable is " + grabbables[0].name, grabbables[0].gameObject);		
+	}
+
 
     protected override void Update()
     {
 		base.Update();
 		if (direction.magnitude > .15f)
-			_aimVector = new Vector2(direction.x, direction.z);
+			_aimVector = direction;
 
 		if (aimer)
-			aimer.transform.eulerAngles = new Vector3(0, 0, Math.AngleFromVector2(_aimVector, 0));
+			aimer.transform.eulerAngles = new Vector3(0, 0, Math.AngleFromVector2(new Vector2(_aimVector.x, _aimVector.z), 0));
     }
 
     void FixedUpdate()
