@@ -28,7 +28,7 @@ public class LinearMovement : MovementBase
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3)initVector.normalized * TotalSpeedMultiplier() * speed.Value);
+        Gizmos.DrawLine(transform.position, transform.position + (Vector3)initVector.normalized * TotalSpeedMultiplier() * movementProfile.movementForce);
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -46,7 +46,7 @@ public class LinearMovement : MovementBase
     {
         if (!_rigidbody) return;
 
-        Vector2 forceVector = direction.normalized * TotalSpeedMultiplier() * speed.Value;
+        Vector2 forceVector = direction.normalized * TotalSpeedMultiplier() * movementProfile.movementForce;
         
         switch (movementMode)
         {

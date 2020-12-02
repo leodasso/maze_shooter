@@ -16,12 +16,14 @@ namespace Arachnid {
 
         protected override void OnTriggered(Collider triggerer)
         {
+			if (debug) Debug.Log(name + " successful trigger raised.");
             unityEvent.Invoke();
             foreach (var e in events) e.Raise();
         }
 
         protected override void OnTriggerExited(Collider triggerer)
         {
+			if (debug) Debug.Log(name + " successful trigger exit raised.");
             onTriggerExit.Invoke();
         }
     }

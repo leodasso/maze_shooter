@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7268866569938960948}
   - component: {fileID: 7269363252433786772}
   - component: {fileID: 7268921865803225814}
-  - component: {fileID: 7273161151209413508}
   - component: {fileID: 7311411899717972248}
   - component: {fileID: 7311411899717972249}
   - component: {fileID: 1854418539689100164}
@@ -100,6 +99,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SendEvent
         m_Mode: 5
         m_Arguments:
@@ -110,12 +110,11 @@ MonoBehaviour:
           m_StringArgument: hit
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onKilledEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: aab09b8da784a95408d91774eca91514, type: 2}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
@@ -127,6 +126,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 11400000, guid: 2f70adeed3bc4c549a62eb5244963e1b, type: 2}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
@@ -137,8 +137,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &7268866569938960948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,28 +183,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collection: {fileID: 11400000, guid: e5152fd09c938094d966b62e43b66bad, type: 2}
---- !u!114 &7273161151209413508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7310395000482235112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 678dfca8541d2904bad28021844ad4c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useCustomTransform: 0
-  customTransform: {fileID: 0}
-  offset: -0.29
-  isStatic: 0
-  sortingOrder: -45
-  renderers:
-  - renderer: {fileID: 7311411901112151903}
-    offset: 0
-  - renderer: {fileID: 0}
-    offset: -1
 --- !u!54 &7311411899717972248
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -417,6 +393,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -428,6 +406,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

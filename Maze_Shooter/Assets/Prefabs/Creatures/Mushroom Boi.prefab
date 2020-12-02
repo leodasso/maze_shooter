@@ -5108,11 +5108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62303fade5ac0bd4cae4c99fb7aa08ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementProfile: {fileID: 11400000, guid: 6ffe8faf65420154a921ae9d1a075bc3, type: 2}
   speedMultiplier: 0
-  speed:
-    useConstant: 0
-    constantValue: 800
-    valueObject: {fileID: 0}
   useSpeedCurve: 0
   speedCurve:
     serializedVersion: 2
@@ -5136,11 +5133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b1eef7adf007a041a8f3a94b1f38be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementProfile: {fileID: 0}
   speedMultiplier: 1
-  speed:
-    useConstant: 0
-    constantValue: 10
-    valueObject: {fileID: 0}
   useSpeedCurve: 0
   speedCurve:
     serializedVersion: 2
@@ -6527,7 +6521,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7240a95320bc4f8a98e3f5cdfd3a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hauntBurnRate: 0.5
   onHaunted:
     m_PersistentCalls:
       m_Calls:
@@ -6560,6 +6553,7 @@ MonoBehaviour:
         m_CallState: 2
   hauntedEffectPrefab: {fileID: 5520204612225126108, guid: ab8bf88defaea02438d3ee613bc23c3d,
     type: 3}
+  haunter: {fileID: 0}
 --- !u!114 &4694341347964605281
 MonoBehaviour:
   m_ObjectHideFlags: 0
