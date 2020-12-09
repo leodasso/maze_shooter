@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Collections;
+using UnityEngine;
 using Rewired;
 using Arachnid;
 using UnityEngine.Events;
@@ -36,6 +38,9 @@ namespace ShootyGhost
 
         [TabGroup("main"), Tooltip("The cooldown for returning to targeting mode once it's exited")]
         public FloatReference targetingModeCooldown;
+
+		[TabGroup("main"), Tooltip("The time it takes to move the haunt trigger through the full animation")]
+        public FloatReference hauntAnimDuration;
 
         [TabGroup("main"), ReadOnly]
         public GhostState ghostState = GhostState.Normal;
@@ -96,9 +101,6 @@ namespace ShootyGhost
 		/// </summary>
 		Vector3 HauntDirection() 
 		{
-			_moveInput = new Vector2(_player.GetAxis("moveX"), _player.GetAxis("moveY"));
-			_fireInput = new Vector2(_player.GetAxis("fireX"), _player.GetAxis("fireY"));
-
 			if (_fireInput.magnitude > .1f) 	 
 				_hauntDirection =  Math.Project2Dto3D(_fireInput.normalized);
 			else if (_moveInput.magnitude > .1f)
@@ -112,14 +114,21 @@ namespace ShootyGhost
             _player = ReInput.players.GetPlayer(0);
             _rigidbody = GetComponent<Rigidbody>();
             // hauntStars = savedHauntStars.GetValue();
+			ResetHauntTrigger();
         }
+
+		void RefreshInput() 
+		{
+			_moveInput = new Vector2(_player.GetAxis("moveX"), _player.GetAxis("moveY"));
+			_fireInput = new Vector2(_player.GetAxis("fireX"), _player.GetAxis("fireY"));
+		}
 
         // Update is called once per frame
         void Update()
         {
             if (_player == null) return;
 
-			hauntTrigger.transform.localPosition = HauntDirection() * hauntDistance.Value;
+			RefreshInput();
 
             // Cooldown for targeting mode entry. Prevents player from spamming targeting mode quickly
             if (_targetingModeTimer >= 0)
@@ -127,18 +136,8 @@ namespace ShootyGhost
 
 
             // Input for entering haunt targeting mode
-            if (_player.GetButtonDown("haunt"))
-            {
-                if (CanBeginHauntTargeting)
-                    BeginHauntTargeting();
-            }
-                
-            // Input for leaving haunt targeting mode
-            if (_player.GetButtonUp("haunt"))
-            {
-                if (CanHaunt)
-                    EndHauntTargeting();
-            }
+            if (HauntRequested() && CanBeginHauntTargeting)
+				BeginHauntTargeting();
 
             if (ghostState == GhostState.Haunting)
             {
@@ -157,6 +156,41 @@ namespace ShootyGhost
             else hauntBurstIntensity = 0;
             hauntBurstIntensityRef.Value = hauntBurstIntensity;
         }
+
+		bool HauntRequested() 
+		{
+			return _player.GetButtonDown("haunt") || _fireInput.magnitude > .25f;
+		}
+
+		public void AnimateHauntTarget() 
+		{
+			Vector3 localTriggerPos = HauntDirection() * hauntDistance.Value;
+			StartCoroutine(AnimateHauntTargetRoutine(localTriggerPos));
+		}
+
+		IEnumerator AnimateHauntTargetRoutine(Vector3 finalLocalPos) 
+		{
+			float progress = 0;
+			hauntTrigger.SetActive(true);
+
+			while (progress < 1) {
+				progress += Time.unscaledDeltaTime / hauntAnimDuration.Value;
+				hauntTrigger.transform.localPosition = Vector3.Lerp(Vector3.zero, finalLocalPos, progress);
+				yield return null;
+			}
+
+			ResetHauntTrigger();
+
+			// If no hauntable was caught in the trigger by the end of the animation,
+			// just return to normal mode
+			if (ghostState == GhostState.Targeting) EndHauntTargeting();
+		}
+
+		void ResetHauntTrigger() 
+		{
+			hauntTrigger.SetActive(false);
+			hauntTrigger.transform.localPosition = Vector3.zero;
+		}
 
 
         /// <summary>
