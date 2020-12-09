@@ -24,13 +24,10 @@ namespace ShootyGhost
     {
         Rewired.Player _player;
 
-        [TabGroup("main"), Tooltip("Haunt juice is needed to perform hauntings!")]
-        public int hauntJuice = 0;
-
-        public float juiceBurnRate = .3f;
+		public int hauntStars = 1;
         
-        [TabGroup("main"), Tooltip("On Start(), hauntJuice value is pulled from save file using this. On Destroy(), it's saved.")]
-        public SavedInt savedHauntJuice;
+        [TabGroup("main"), Tooltip("On Start(), haunt stars value is pulled from save file using this. On Destroy(), it's saved.")]
+        public SavedInt savedHauntStars;
 
         [TabGroup("main"), Tooltip("The cooldown for returning to targeting mode once it's exited")]
         public FloatReference targetingModeCooldown;
@@ -61,12 +58,6 @@ namespace ShootyGhost
 
         [TabGroup("main")] 
         public GameObject hauntIndicatorPrefab;
-
-        //[TabGroup("UI")]
-        //public GameObject hauntJuiceQtyGuiPrefab;
-
-        [TabGroup("UI")] 
-        public float showTime = 5;
         
         [TabGroup("events")]
         public UnityEvent onJuiceAdded;
@@ -85,41 +76,23 @@ namespace ShootyGhost
 
         Rigidbody _rigidbody;
         float _targetingModeTimer = 0;
-        HauntJuiceGui _juiceGuiInstance;
-        float _hauntGuiTimer;
-        bool _hauntGuiTimed;
         GameObject _indicator;
-        float _juiceBurnTimer;
 
-        bool CanBeginHauntTargeting => ghostState == GhostState.Normal && _targetingModeTimer <= 0 && HasHauntJuice;
-        bool CanHaunt => ghostState == GhostState.Targeting && HasHauntJuice;
-        bool HasHauntJuice => hauntJuice > 0;
-        bool IsBurningJuice => ghostState != GhostState.Normal;
-        
+        bool CanBeginHauntTargeting => ghostState == GhostState.Normal && _targetingModeTimer <= 0;
+        bool CanHaunt => ghostState == GhostState.Targeting;
         
         // Start is called before the first frame update
         void Start()
         {
             _player = ReInput.players.GetPlayer(0);
             _rigidbody = GetComponent<Rigidbody>();
-            hauntJuice = savedHauntJuice.GetValue();
+            hauntStars = savedHauntStars.GetValue();
         }
 
         // Update is called once per frame
         void Update()
         {
             if (_player == null) return;
-            
-			/*
-            // Haunt GUI shows up when picking up haunt juice. This timer removes it after a certain amt of time.
-            if (_hauntGuiTimed && ghostState == GhostState.Normal)
-            {
-                if (_hauntGuiTimer > 0)
-                    _hauntGuiTimer -= Time.unscaledDeltaTime;
-                else
-                    HideJuiceGui();
-            }
-			*/
 
             // Cooldown for targeting mode entry. Prevents player from spamming targeting mode quickly
             if (_targetingModeTimer >= 0)
@@ -156,6 +129,7 @@ namespace ShootyGhost
             else hauntBurstIntensity = 0;
             hauntBurstIntensityRef.Value = hauntBurstIntensity;
         }
+
 
         /// <summary>
         /// Quits all forms of haunting, whether its targeting or actively haunting a target
@@ -246,43 +220,9 @@ namespace ShootyGhost
         // Make sure we're not leaving anything hanging if this is destroyed during targeting
         void OnDestroy()
         {
-            savedHauntJuice.Save(hauntJuice);
+            savedHauntStars.Save(hauntStars);
             onHauntStateEnd.Invoke();
             hauntBurstIntensityRef.Value = 0;
         }
-
-		/*
-        public void AddJuice(int amount)
-        {
-            hauntJuice += amount;
-            onJuiceAdded.Invoke();
-
-            _hauntGuiTimed = true;
-            _hauntGuiTimer = showTime;
-            ShowJuiceGui();
-        }
-
-        // These are referenced by external unity events, that's why they're public
-        public void HideJuiceGui()
-        {
-            _hauntGuiTimed = false;
-            if (_juiceGuiInstance)
-                _juiceGuiInstance.Hide();
-        }
-        
-		/*
-        public void ShowJuiceGui()
-        {
-            if (!_juiceGuiInstance)
-            {
-                GameObject newHauntGui = Instantiate(hauntJuiceQtyGuiPrefab, transform.position + Vector3.up,
-                    quaternion.identity);
-
-                _juiceGuiInstance = newHauntGui.GetComponent<HauntJuiceGui>();
-                _juiceGuiInstance.Init(this);
-            }
-            else _juiceGuiInstance.Show();
-        }
-		*/
     }
 }
