@@ -585,9 +585,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4144dd2ea20ee43b6cb91fbbb74a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hauntJuice: 0
-  juiceBurnRate: 0.3
-  savedHauntJuice: {fileID: 11400000, guid: f0c3b54f17cdc3c4f9912da934951ef3, type: 2}
+  hauntStars: 1
+  hauntTrigger: {fileID: 326339311406208307}
+  savedHauntStars: {fileID: 0}
+  hauntDistance:
+    useConstant: 0
+    constantValue: 10
+    valueObject: {fileID: 0}
   targetingModeCooldown:
     useConstant: 1
     constantValue: 0
@@ -602,7 +606,6 @@ MonoBehaviour:
     type: 3}
   hauntIndicatorPrefab: {fileID: 6791069316512883524, guid: 486e61407b0d7a84eac3f6bc4dfdb120,
     type: 3}
-  showTime: 3
   onJuiceAdded:
     m_PersistentCalls:
       m_Calls:
@@ -2595,6 +2598,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8050917244385575065, guid: eabc9b650459ba94296987e09a5aeeda, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eabc9b650459ba94296987e09a5aeeda, type: 3}
+--- !u!1 &326339311406208307 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2937294253991182738, guid: eabc9b650459ba94296987e09a5aeeda,
+    type: 3}
+  m_PrefabInstance: {fileID: 3189742950165517473}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &326339311406208306 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2937294253991182739, guid: eabc9b650459ba94296987e09a5aeeda,

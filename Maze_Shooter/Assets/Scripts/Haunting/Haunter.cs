@@ -3,7 +3,6 @@ using Rewired;
 using Arachnid;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
-using Unity.Mathematics;
 
 namespace ShootyGhost
 {
@@ -25,9 +24,15 @@ namespace ShootyGhost
         Rewired.Player _player;
 
 		public int hauntStars = 1;
+
+		[TabGroup("main")]
+        public GameObject hauntTrigger;
         
         [TabGroup("main"), Tooltip("On Start(), haunt stars value is pulled from save file using this. On Destroy(), it's saved.")]
         public SavedInt savedHauntStars;
+
+		[TabGroup("main"), Tooltip("The max distance you can haunt")]
+        public FloatReference hauntDistance;
 
         [TabGroup("main"), Tooltip("The cooldown for returning to targeting mode once it's exited")]
         public FloatReference targetingModeCooldown;
@@ -78,15 +83,35 @@ namespace ShootyGhost
         float _targetingModeTimer = 0;
         GameObject _indicator;
 
+		Vector2 _moveInput;
+		Vector2 _fireInput;
+
+		Vector3 _hauntDirection = Vector3.right;
+
         bool CanBeginHauntTargeting => ghostState == GhostState.Normal && _targetingModeTimer <= 0;
         bool CanHaunt => ghostState == GhostState.Targeting;
+
+		/// <summary>
+		/// Returns the direction that the haunty ghost will shoot towards if activated (based on player input)
+		/// </summary>
+		Vector3 HauntDirection() 
+		{
+			_moveInput = new Vector2(_player.GetAxis("moveX"), _player.GetAxis("moveY"));
+			_fireInput = new Vector2(_player.GetAxis("fireX"), _player.GetAxis("fireY"));
+
+			if (_fireInput.magnitude > .1f) 	 
+				_hauntDirection =  Math.Project2Dto3D(_fireInput.normalized);
+			else if (_moveInput.magnitude > .1f)
+				 _hauntDirection = Math.Project2Dto3D(_moveInput.normalized);
+			return _hauntDirection;
+		}
         
         // Start is called before the first frame update
         void Start()
         {
             _player = ReInput.players.GetPlayer(0);
             _rigidbody = GetComponent<Rigidbody>();
-            hauntStars = savedHauntStars.GetValue();
+            // hauntStars = savedHauntStars.GetValue();
         }
 
         // Update is called once per frame
@@ -94,9 +119,12 @@ namespace ShootyGhost
         {
             if (_player == null) return;
 
+			hauntTrigger.transform.localPosition = HauntDirection() * hauntDistance.Value;
+
             // Cooldown for targeting mode entry. Prevents player from spamming targeting mode quickly
             if (_targetingModeTimer >= 0)
                 _targetingModeTimer -= Time.unscaledDeltaTime;
+
 
             // Input for entering haunt targeting mode
             if (_player.GetButtonDown("haunt"))
@@ -220,7 +248,7 @@ namespace ShootyGhost
         // Make sure we're not leaving anything hanging if this is destroyed during targeting
         void OnDestroy()
         {
-            savedHauntStars.Save(hauntStars);
+            // savedHauntStars.Save(hauntStars);
             onHauntStateEnd.Invoke();
             hauntBurstIntensityRef.Value = 0;
         }
