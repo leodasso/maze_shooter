@@ -32,4 +32,21 @@ public class HauntStarSlot : MonoBehaviour
 		float curvedProgress = progressCurve.Evaluate(progress);
         transform.localPosition = Vector3.LerpUnclamped(Vector3.zero, _finalPos, curvedProgress);
     }
+
+	public void PlayAnimation(float beginningValue, float endValue, float duration) 
+	{
+		StartCoroutine(PlayAnimSequence(beginningValue, endValue, duration));
+	}
+
+	IEnumerator PlayAnimSequence(float beginningValue, float endValue, float duration) 
+	{
+		float lerp = 0;
+		while (lerp < 1) {
+			
+			progress = Mathf.Lerp(beginningValue, endValue, lerp);
+			lerp += Time.unscaledDeltaTime / duration;
+			yield return null;
+		}
+		progress = endValue;
+	}
 }
