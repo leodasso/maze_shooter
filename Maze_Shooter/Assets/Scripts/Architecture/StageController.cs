@@ -12,6 +12,9 @@ public class StageController : MonoBehaviour
 
 	public UnityEvent onStartFromGate;
 	public UnityEvent onStartFromCheckpoint;
+
+	[Tooltip("A list of all the constellations in this stage.")]
+	public List<Constellation> allConstellations = new List<Constellation>();
 	
 
 	void Awake()
@@ -41,5 +44,12 @@ public class StageController : MonoBehaviour
 		// Raise the immediate events
 		foreach (var e in stage.immediateEvents)
 			e.Raise();
+	}
+
+	[Button]
+	void PopulateConstellationList() 
+	{
+		allConstellations.Clear();
+		allConstellations.AddRange(FindObjectsOfType<Constellation>());
 	}
 }
