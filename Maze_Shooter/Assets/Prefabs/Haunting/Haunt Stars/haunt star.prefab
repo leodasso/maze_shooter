@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6137259942169149719}
   - component: {fileID: 723045281312600565}
   - component: {fileID: 1169796356247809748}
+  - component: {fileID: 1686765685}
   m_Layer: 0
   m_Name: haunt star
   m_TagString: Untagged
@@ -197,3 +198,60 @@ MonoBehaviour:
     m_NumAlphaKeys: 3
   renderersToColor:
   - {fileID: 1565771051167146989}
+  noise: {fileID: 1686765685}
+  noiseIntensity:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0012090919
+      value: -0.0021967033
+      inSlope: -0.08621429
+      outSlope: -0.08621429
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.1153057
+    - serializedVersion: 3
+      time: 0.42720392
+      value: 3.0201178
+      inSlope: 0.68005437
+      outSlope: 0.68005437
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18554349
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.795672
+      value: 2.8717775
+      inSlope: -0.051003218
+      outSlope: -0.051003218
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9996376
+      value: -0.0061016083
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 1
+    m_PostInfinity: 1
+    m_RotationOrder: 4
+--- !u!114 &1686765685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3876930543173970433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f3084e5d9ec8f4d90c66310de7c9f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseSpeed: 1.3
+  noise: {x: 0, y: 0, z: 0}

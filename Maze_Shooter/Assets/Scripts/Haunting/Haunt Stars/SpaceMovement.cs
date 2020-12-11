@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class SpaceMovement : MonoBehaviour
 {
@@ -16,10 +17,21 @@ public class SpaceMovement : MonoBehaviour
 
 	public List<SpriteRenderer> renderersToColor = new List<SpriteRenderer>();
 
+
+	[Tooltip("Optional perlin noise to make movement more random")]
+	public NoiseGenerator noise;
+
+	[ShowIf("UseNoise")]
+	public AnimationCurve noiseIntensity = AnimationCurve.Linear(0, 0, 1, 1);
+
 	Vector3 _finalPos;
 	Transform _finalPosTransform;
+	// randomly assigned at start - determines the direction of movement of the sample point along the perlin plane
+    Vector2 _noiseSampleDirection;
 
 	Vector3 ActualFinalPos => _finalPosTransform ? _finalPosTransform.localPosition : _finalPos; 
+
+	bool UseNoise => noise != null;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +47,9 @@ public class SpaceMovement : MonoBehaviour
 
 		float curvedProgress = progressCurve.Evaluate(progress);
         transform.localPosition = Vector3.LerpUnclamped(Vector3.zero, ActualFinalPos, curvedProgress);
+
+		if (UseNoise) 
+			transform.Translate(noise.noise * noiseIntensity.Evaluate(progress));
     }
 
 	public void SetDestinationObject(Transform t) {
@@ -59,4 +74,9 @@ public class SpaceMovement : MonoBehaviour
 
 		if (onAnimComplete != null) onAnimComplete.Invoke();
 	}
+
+	void RandomizeNoise()
+    {
+        _noiseSampleDirection = UnityEngine.Random.onUnitSphere;
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Sirenix.OdinInspector;
 using ShootyGhost;
 
@@ -25,17 +26,15 @@ public class HauntConstellation : MonoBehaviour
 	[BoxGroup("stars")]
 	public float starAnimDuration = 1.5f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public UnityEvent onPlaySequence;
+	public UnityEvent onCheckPass;
+	public UnityEvent onCheckFail;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	[Button]
+	void PlayFullSequence() 
+	{
+		onPlaySequence.Invoke();
+	}
 
 	[Button]
 	void GetHauntStarSlots() {
@@ -43,13 +42,28 @@ public class HauntConstellation : MonoBehaviour
 		hauntStarSlots.AddRange(GetComponentsInChildren<HauntStarSlot>());
 	}
 
-	[Button]
+	public void AcceptHaunt() 
+	{
+		if (hauntable) {
+
+		}
+	}
+
+	public void RejectHaunt() 
+	{
+		if (hauntable) 
+		{
+			
+		}
+	}
+
+	[ButtonGroup]
 	public void ShowSlots() 
 	{
 		StartCoroutine(ShowSlotsSequence());
 	}
 
-	[Button]
+	[ButtonGroup]
 	public void SpawnStars() 
 	{
 		List<GameObject> starPrefabs = new List<GameObject>();
@@ -65,6 +79,28 @@ public class HauntConstellation : MonoBehaviour
 		
 		// sequence for spawning stars, matching them to slots
 		StartCoroutine(SpawnStarsSequence(starPrefabs));
+	}
+
+	[ButtonGroup]
+	public void CheckIfSlotsFilled() 
+	{
+		foreach(var slot in hauntStarSlots) {
+
+			if (!slot.CheckIfFilled()) {
+				onCheckFail.Invoke();
+				RejectHaunt();
+				return;
+			}
+		}
+
+		onCheckPass.Invoke();
+		AcceptHaunt();
+	}
+
+	[ButtonGroup]
+	public void RecallSlots() 
+	{
+		foreach (var starSlot in hauntStarSlots) starSlot.Recall();
 	}
 
 	IEnumerator SpawnStarsSequence(List<GameObject> prefabs) 
