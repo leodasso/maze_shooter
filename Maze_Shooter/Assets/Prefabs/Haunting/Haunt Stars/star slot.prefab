@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8120842810824128861}
   - component: {fileID: 7280399620425400019}
   - component: {fileID: 1692737357632643753}
+  - component: {fileID: 404404736786188299}
   m_Layer: 0
   m_Name: star slot
   m_TagString: Untagged
@@ -29,7 +30,8 @@ Transform:
   m_LocalRotation: {x: 0.3007058, y: -0, z: -0, w: 0.953717}
   m_LocalPosition: {x: 1.94, y: 7.69, z: 0}
   m_LocalScale: {x: 0.75343, y: 0.75343, z: 0.75343}
-  m_Children: []
+  m_Children:
+  - {fileID: 8762750743219448228}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -107,6 +109,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337e9204155e19a49bc2e063de43dfc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mover: {fileID: 404404736786188299}
+  onFilled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9095879462743464519}
+        m_TargetAssemblyTypeName: OnTriggerEffect, Assembly-CSharp
+        m_MethodName: InvokeEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &404404736786188299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2754394556623825065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eefc988181de1f4d906e08c38eb5979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   progress: 0
@@ -201,3 +231,50 @@ MonoBehaviour:
     m_NumAlphaKeys: 3
   renderersToColor:
   - {fileID: 8120842810824128861}
+--- !u!1 &8495617636540053187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8762750743219448228}
+  - component: {fileID: 9095879462743464519}
+  m_Layer: 0
+  m_Name: filled effect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8762750743219448228
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8495617636540053187}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1353928431225158679}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9095879462743464519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8495617636540053187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de6c16f983620a4da43f9e72b293064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 6055410014917391117, guid: a55d474928c2cbf4e8e2a18716873a1f,
+    type: 3}
+  lifetime: 5
+  delay: 0

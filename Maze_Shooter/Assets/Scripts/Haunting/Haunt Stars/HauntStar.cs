@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class HauntStar : MonoBehaviour
 {
-	public float progress;
+	public SpaceMovement mover;
 	public HauntStarSlot slot;
 
     // Start is called before the first frame update
@@ -13,26 +14,16 @@ public class HauntStar : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+	[Button]
 	public void GotoSlot(HauntStarSlot newSlot, float duration) 
 	{
 		slot = newSlot;
+		mover.SetDestinationObject(slot.transform);
+		mover.PlayAnimation(0, 1, duration, FillSlot);
 	}
 
-	IEnumerator PlayAnimSequence(float beginningValue, float endValue, float duration) 
+	void FillSlot() 
 	{
-		float lerp = 0;
-		while (lerp < 1) {
-			
-			progress = Mathf.Lerp(beginningValue, endValue, lerp);
-			lerp += Time.unscaledDeltaTime / duration;
-			yield return null;
-		}
-		progress = endValue;
+		if (slot) slot.FillSlot();
 	}
 }

@@ -1,52 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HauntStarSlot : MonoBehaviour
 {
-	[Range(0, 1)]
-	public float progress = 0;
+	public SpaceMovement mover;
+	public UnityEvent onFilled;
 
-	[Tooltip("Cosmetic - for finessing how the star looks throughout it's motion")]
-	public AnimationCurve progressCurve = AnimationCurve.Linear(0, 0, 1, 1);
-
-	[Tooltip("Color of the star as it moves through its gradient")]
-	public Gradient progressGradient;
-
-	public List<SpriteRenderer> renderersToColor = new List<SpriteRenderer>();
-
-	Vector3 _finalPos;
 
     // Start is called before the first frame update
     void Start()
     {
-        _finalPos = transform.localPosition;
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-		foreach( SpriteRenderer r in renderersToColor) 
-			r.color = progressGradient.Evaluate(progress);
-
-		float curvedProgress = progressCurve.Evaluate(progress);
-        transform.localPosition = Vector3.LerpUnclamped(Vector3.zero, _finalPos, curvedProgress);
-    }
+	public void FillSlot() 
+	{
+		onFilled.Invoke();
+	}
 
 	public void PlayAnimation(float beginningValue, float endValue, float duration) 
 	{
-		StartCoroutine(PlayAnimSequence(beginningValue, endValue, duration));
-	}
-
-	IEnumerator PlayAnimSequence(float beginningValue, float endValue, float duration) 
-	{
-		float lerp = 0;
-		while (lerp < 1) {
-			
-			progress = Mathf.Lerp(beginningValue, endValue, lerp);
-			lerp += Time.unscaledDeltaTime / duration;
-			yield return null;
-		}
-		progress = endValue;
+		mover.PlayAnimation(beginningValue, endValue, duration);
 	}
 }

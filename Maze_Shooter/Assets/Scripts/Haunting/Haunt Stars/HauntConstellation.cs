@@ -18,8 +18,12 @@ public class HauntConstellation : MonoBehaviour
 	[BoxGroup("star slots")]
 	public List<HauntStarSlot> hauntStarSlots = new List<HauntStarSlot>();
 
+	[BoxGroup("stars")]
 	[Tooltip("Delay between spawning each star (the star itself, not the slot)")]
 	public float delayBetweenStars = .1f;
+
+	[BoxGroup("stars")]
+	public float starAnimDuration = 1.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -69,7 +73,11 @@ public class HauntConstellation : MonoBehaviour
 
 		while (starIndex < prefabs.Count) {
 			yield return new WaitForSecondsRealtime(delayBetweenSlots);
-			GameObject newStar = Instantiate( prefabs[starIndex], transform.position, Quaternion.identity, transform);
+			HauntStar newStar = 
+				Instantiate( prefabs[starIndex], transform.position, Quaternion.identity, transform)
+				.GetComponent<HauntStar>();
+
+			newStar.GotoSlot(hauntStarSlots[starIndex], starAnimDuration);
 			starIndex++;
 		}
 	}

@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7229189598429073901}
   - component: {fileID: 1565771051167146989}
   - component: {fileID: 6137259942169149719}
+  - component: {fileID: 723045281312600565}
+  - component: {fileID: 1169796356247809748}
   m_Layer: 0
   m_Name: haunt star
   m_TagString: Untagged
@@ -25,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3876930543173970433}
-  m_LocalRotation: {x: 0.3007058, y: -0, z: -0, w: 0.953717}
+  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
   m_LocalPosition: {x: 0, y: 7.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
 --- !u!212 &1565771051167146989
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -95,3 +97,103 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &723045281312600565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3876930543173970433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78d608e1e457f6346b711a7ecdcaaffc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mover: {fileID: 1169796356247809748}
+  slot: {fileID: 0}
+--- !u!114 &1169796356247809748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3876930543173970433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eefc988181de1f4d906e08c38eb5979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progress: 1
+  progressCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 9.004811
+      outSlope: 9.004811
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.051750075
+    - serializedVersion: 3
+      time: 0.42366087
+      value: 1.51343
+      inSlope: 0.09887816
+      outSlope: 0.09887816
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.14899878
+      outWeight: 0.27764717
+    - serializedVersion: 3
+      time: 0.8293249
+      value: 1.4370809
+      inSlope: 0.06340481
+      outSlope: 0.06340481
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.5554034
+      outWeight: 0.23403093
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -6.8347206
+      outSlope: -6.8347206
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15606956
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  progressGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 0}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 1}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 12440
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 3
+  renderersToColor:
+  - {fileID: 1565771051167146989}
