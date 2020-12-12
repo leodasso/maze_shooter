@@ -91,9 +91,7 @@ public class HauntConstellation : MonoBehaviour
 				return;
 			}
 		}
-
 		playMaker.SendEvent("pass");
-		AcceptHaunt();
 	}
 
 	[ButtonGroup]

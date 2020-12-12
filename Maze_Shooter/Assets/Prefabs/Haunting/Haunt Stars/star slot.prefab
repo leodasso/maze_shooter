@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: 404404736786188299}
   - component: {fileID: 8169852565500389020}
   - component: {fileID: 8701860527777510321}
+  - component: {fileID: 6741585803193941410}
   m_Layer: 0
   m_Name: star slot
   m_TagString: Untagged
@@ -78,7 +79,7 @@ Transform:
   m_GameObject: {fileID: 2754394556623825065}
   m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
   m_LocalPosition: {x: 1.94, y: 7.69, z: 0}
-  m_LocalScale: {x: 0.75343, y: 0.75343, z: 0.75343}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8762750743219448228}
   - {fileID: 1949029609823031673}
@@ -125,8 +126,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 2147172134274218698, guid: ee268a2bb54aaf7449e1264a5c078a82,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: ec46db3563efca541bad0ab7cf08aa63, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -166,31 +166,31 @@ MonoBehaviour:
   onFilled:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9095879462743464519}
-        m_TargetAssemblyTypeName: OnTriggerEffect, Assembly-CSharp
-        m_MethodName: InvokeEffect
-        m_Mode: 1
+      - m_Target: {fileID: 6741585803193941410}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: fill
           m_BoolArgument: 0
         m_CallState: 2
   onFailedToFill:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 536311984923262468}
-        m_TargetAssemblyTypeName: OnTriggerEffect, Assembly-CSharp
-        m_MethodName: InvokeEffect
-        m_Mode: 1
+      - m_Target: {fileID: 6741585803193941410}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: break
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &404404736786188299
@@ -345,6 +345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noiseSpeed: 0.6
   noise: {x: 0, y: 0, z: 0}
+  realTime: 1
 --- !u!114 &8701860527777510321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,6 +361,25 @@ MonoBehaviour:
   target: {fileID: 0}
   lerpSpeed: 10
   useRealtime: 1
+--- !u!95 &6741585803193941410
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2754394556623825065}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e2716b1d09e507c4f9a3c8f7ac010ea2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8495617636540053187
 GameObject:
   m_ObjectHideFlags: 0

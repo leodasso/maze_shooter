@@ -12,6 +12,7 @@ public class SpriteAnimator : MonoBehaviour
     public List<Sprite> sprites = new List<Sprite>();
 
 	[Space]
+	public bool unscaledTime;
 	public bool playSelf;
 	[ShowIf("playSelf")]
 	public bool pingPong;
@@ -24,6 +25,8 @@ public class SpriteAnimator : MonoBehaviour
 
 	int playDirection = 1;
 
+	float DeltaTime => unscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
+
 	void Start() {
 		if (setProgressOnStart) progress = startProgress;
 	}
@@ -34,7 +37,7 @@ public class SpriteAnimator : MonoBehaviour
 
 	IEnumerator DoPlay(float duration) {
 		while (progress < 1) {
-			progress += Time.deltaTime / duration;
+			progress += DeltaTime / duration;
 			yield return null;
 		}
 	}
@@ -64,7 +67,7 @@ public class SpriteAnimator : MonoBehaviour
 		}
 		
 		float progressRate = frameRate / sprites.Count;
-		progress += Time.deltaTime * progressRate * playDirection;
+		progress += DeltaTime * progressRate * playDirection;
 
 		progress = Mathf.Clamp01(progress);
 	}

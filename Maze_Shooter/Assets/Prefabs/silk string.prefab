@@ -58,10 +58,10 @@ LineRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914630162680833838}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 0
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 0
+  m_MotionVectors: 2
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
@@ -69,7 +69,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e0155b9c6172a5340a8332060069cd58, type: 2}
+  - {fileID: 2100000, guid: 47d68f719d9fe914a877254eab480e78, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -91,11 +91,12 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Positions:
-  - {x: -68.56, y: 0, z: -12.2}
-  - {x: -51.4, y: 0, z: -12.2}
+  - {x: -22.41, y: 0, z: -12.2}
+  - {x: -21.189999, y: 4.8900003, z: -12.2}
+  - {x: -19.97, y: 9.780001, z: -12.2}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.3816179
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -108,6 +109,15 @@ LineRenderer:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -129,7 +139,7 @@ LineRenderer:
       ctime5: 65535
       ctime6: 65535
       ctime7: 0
-      atime0: 22767
+      atime0: 32117
       atime1: 65535
       atime2: 65535
       atime3: 0
@@ -143,7 +153,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1

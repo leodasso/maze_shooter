@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 
 public class HauntStar : MonoBehaviour
 {
+	public SpriteRenderer spriteRenderer;
 	public SpaceMovement mover;
 	public HauntStarSlot slot;
 
@@ -25,5 +26,6 @@ public class HauntStar : MonoBehaviour
 	void FillSlot() 
 	{
 		if (slot) slot.FillSlot();
+		spriteRenderer.enabled = false;
 	}
 }

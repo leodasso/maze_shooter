@@ -4,6 +4,7 @@ public class NoiseGenerator : MonoBehaviour
 {
     public float noiseSpeed;
 	public Vector3 noise;
+	public bool realTime;
 
     // The imaginary coordinates that sample on the perlin plane to generate noise
     // this comment is really smart sounding hah
@@ -21,8 +22,9 @@ public class NoiseGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		float t = realTime ? Time.unscaledDeltaTime : Time.deltaTime;
 
-        _noiseSamplePos += Time.deltaTime * _noiseSampleDirection * noiseSpeed;
+        _noiseSamplePos += t * _noiseSampleDirection * noiseSpeed;
         float x = Mathf.PerlinNoise(_noiseSamplePos.x, -_noiseSamplePos.x) - .5f;
         float y = Mathf.PerlinNoise(_noiseSamplePos.y, -_noiseSamplePos.y) - .5f;
 		float z = Mathf.PerlinNoise(_noiseSamplePos.x, -_noiseSamplePos.y) - .5f;
