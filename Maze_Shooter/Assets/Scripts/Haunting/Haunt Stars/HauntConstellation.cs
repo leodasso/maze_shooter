@@ -26,14 +26,13 @@ public class HauntConstellation : MonoBehaviour
 	[BoxGroup("stars")]
 	public float starAnimDuration = 1.5f;
 
-	public UnityEvent onPlaySequence;
-	public UnityEvent onCheckPass;
-	public UnityEvent onCheckFail;
+	[Tooltip("'start', 'pass', and 'fail' events will be sent to the playmaker fsm.")]
+	public PlayMakerFSM playMaker;
 
 	[Button]
-	void PlayFullSequence() 
+	public void PlayFullSequence() 
 	{
-		onPlaySequence.Invoke();
+		playMaker.SendEvent("start");
 	}
 
 	[Button]
@@ -44,27 +43,28 @@ public class HauntConstellation : MonoBehaviour
 
 	public void AcceptHaunt() 
 	{
-		if (hauntable) {
+		if (hauntable) 
+			hauntable.AcceptHaunt();
 
-		}
+		Destroy(gameObject);
 	}
 
 	public void RejectHaunt() 
 	{
 		if (hauntable) 
-		{
-			
-		}
+			hauntable.RejectHaunt();
+
+		Destroy(gameObject);
 	}
 
 	[ButtonGroup]
-	public void ShowSlots() 
+	void ShowSlots() 
 	{
 		StartCoroutine(ShowSlotsSequence());
 	}
 
 	[ButtonGroup]
-	public void SpawnStars() 
+	void SpawnStars() 
 	{
 		List<GameObject> starPrefabs = new List<GameObject>();
 
@@ -82,23 +82,22 @@ public class HauntConstellation : MonoBehaviour
 	}
 
 	[ButtonGroup]
-	public void CheckIfSlotsFilled() 
+	void CheckIfSlotsFilled() 
 	{
 		foreach(var slot in hauntStarSlots) {
 
 			if (!slot.CheckIfFilled()) {
-				onCheckFail.Invoke();
-				RejectHaunt();
+				playMaker.SendEvent("fail");
 				return;
 			}
 		}
 
-		onCheckPass.Invoke();
+		playMaker.SendEvent("pass");
 		AcceptHaunt();
 	}
 
 	[ButtonGroup]
-	public void RecallSlots() 
+	void RecallSlots() 
 	{
 		foreach (var starSlot in hauntStarSlots) starSlot.Recall();
 	}

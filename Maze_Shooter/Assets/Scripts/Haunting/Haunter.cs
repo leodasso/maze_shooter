@@ -234,7 +234,7 @@ namespace ShootyGhost
             _rigidbody.isKinematic = true;
 
 			newHaunted.haunter = this;
-			newHaunted.OnIsHaunted(this);
+			newHaunted.AttemptHaunt(this);
             ghostState = GhostState.Haunting;
         }
 

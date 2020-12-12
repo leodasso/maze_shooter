@@ -11,6 +11,8 @@ namespace ShootyGhost
         public UnityEvent onHaunted;
         public UnityEvent onUnHaunted;
 
+		public GameObject hauntConstellationPrefab;
+
 		[ReadOnly]
 		public Haunter haunter;
 
@@ -22,7 +24,8 @@ namespace ShootyGhost
 			Vector3 dir = Vector3.left;
 			Player player = GetComponent<Player>();
 			if (player) {
-				dir = (Vector3)player.moveInput;
+				if (player.moveInput.magnitude > .5f)
+					dir = (Vector3)player.moveInput;
 			}
 
 			Vector3 dirtyPos = transform.position + dir * 5;
@@ -31,11 +34,28 @@ namespace ShootyGhost
             return new Vector3(dirtyPos.x, 0, dirtyPos.z);
         }
 
-        [Button]
-        public void OnIsHaunted(Haunter newHaunter)
-        {
-            onHaunted.Invoke();
-        }
+		public void AttemptHaunt(Haunter newHaunter) 
+		{
+			// instantiate the haunt constellation
+			HauntConstellation hauntConstellation = 
+				Instantiate(hauntConstellationPrefab, transform.position, Quaternion.identity)
+				.GetComponent<HauntConstellation>();
+
+			hauntConstellation.hauntable = this;
+			hauntConstellation.PlayFullSequence();
+		}
+
+		/// The haunt will be accepted or rejected based on if the haunter
+		/// has enough stars to haunt this object
+		public void AcceptHaunt() 
+		{
+			onHaunted.Invoke();
+		}
+
+		public void RejectHaunt() 
+		{
+			EndHaunt();
+		}
 
         public void OnUnHaunted()
         {

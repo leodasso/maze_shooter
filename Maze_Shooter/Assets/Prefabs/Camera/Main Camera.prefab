@@ -220,7 +220,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1737812943130379500}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &637826335896500392
 MonoBehaviour:
@@ -386,13 +386,13 @@ Transform:
   m_Children:
   - {fileID: 865203041114130626}
   - {fileID: 8204405918574059529}
-  - {fileID: 1779315712227086258}
   - {fileID: 1932314915766771133}
   - {fileID: 1109198108675404565}
+  - {fileID: 6645923857133671937}
   m_Father: {fileID: 4544171246489010}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1104200962239574193
+--- !u!1001 &1767424362217982998
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -437,7 +437,7 @@ PrefabInstance:
     - target: {fileID: 1721376550755909379, guid: 213b993368631434ca17c3295069e842,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1721376550755909379, guid: 213b993368631434ca17c3295069e842,
         type: 3}
@@ -458,51 +458,49 @@ PrefabInstance:
         type: 3}
       propertyPath: gameEvents.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: ed93eef6b07c8f541a90564924082ee8,
+      objectReference: {fileID: 11400000, guid: 0c8f54a25c4bd0f48ab4ddf8f0f304af,
         type: 2}
-    - target: {fileID: 1967656025302367366, guid: 213b993368631434ca17c3295069e842,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3485509252305403931, guid: 213b993368631434ca17c3295069e842,
         type: 3}
       propertyPath: m_Name
-      value: Haunt Targeting
+      value: Critical Health
       objectReference: {fileID: 0}
     - target: {fileID: 6548448886324087722, guid: 213b993368631434ca17c3295069e842,
         type: 3}
       propertyPath: sharedProfile
       value: 
-      objectReference: {fileID: 11400000, guid: aeaa87e6d0ba19d4e90d760c135e8b4a,
+      objectReference: {fileID: 11400000, guid: 0c526f322c570264da801464c85acb2f,
         type: 2}
+    - target: {fileID: 6548448886324087722, guid: 213b993368631434ca17c3295069e842,
+        type: 3}
+      propertyPath: priority
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 8131284683282758637, guid: 213b993368631434ca17c3295069e842,
         type: 3}
       propertyPath: gameEvents.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 9882b07d380c9ba49a5f7ea2e089e68e,
+      objectReference: {fileID: 11400000, guid: 0603a2f5b7b86be4c9a9d7be4e7b3ec4,
         type: 2}
-    - target: {fileID: 8131284683282758637, guid: 213b993368631434ca17c3295069e842,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8219240230075903987, guid: 213b993368631434ca17c3295069e842,
         type: 3}
       propertyPath: lerpSpeed
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8131284683282758637, guid: 213b993368631434ca17c3295069e842, type: 3}
-    - {fileID: 1967656025302367366, guid: 213b993368631434ca17c3295069e842, type: 3}
+    - target: {fileID: 8219240230075903987, guid: 213b993368631434ca17c3295069e842,
+        type: 3}
+      propertyPath: active
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 213b993368631434ca17c3295069e842, type: 3}
---- !u!4 &1779315712227086258 stripped
+--- !u!4 &1109198108675404565 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1721376550755909379, guid: 213b993368631434ca17c3295069e842,
     type: 3}
-  m_PrefabInstance: {fileID: 1104200962239574193}
+  m_PrefabInstance: {fileID: 1767424362217982998}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1767424362217982998
+--- !u!1001 &5465292227615992066
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -568,34 +566,34 @@ PrefabInstance:
         type: 3}
       propertyPath: gameEvents.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 0c8f54a25c4bd0f48ab4ddf8f0f304af,
+      objectReference: {fileID: 11400000, guid: 551f572231e3bc544b74e7899b607e2b,
         type: 2}
     - target: {fileID: 3485509252305403931, guid: 213b993368631434ca17c3295069e842,
         type: 3}
       propertyPath: m_Name
-      value: Critical Health
+      value: haunt constellation
       objectReference: {fileID: 0}
     - target: {fileID: 6548448886324087722, guid: 213b993368631434ca17c3295069e842,
         type: 3}
       propertyPath: sharedProfile
       value: 
-      objectReference: {fileID: 11400000, guid: 0c526f322c570264da801464c85acb2f,
+      objectReference: {fileID: 11400000, guid: a4834a23fc40bb249926d9b96bd1f2f6,
         type: 2}
     - target: {fileID: 6548448886324087722, guid: 213b993368631434ca17c3295069e842,
         type: 3}
       propertyPath: priority
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8131284683282758637, guid: 213b993368631434ca17c3295069e842,
         type: 3}
       propertyPath: gameEvents.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 0603a2f5b7b86be4c9a9d7be4e7b3ec4,
+      objectReference: {fileID: 11400000, guid: baab6b314804f4743ba90dcbebd3cf53,
         type: 2}
     - target: {fileID: 8219240230075903987, guid: 213b993368631434ca17c3295069e842,
         type: 3}
       propertyPath: lerpSpeed
-      value: 5
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8219240230075903987, guid: 213b993368631434ca17c3295069e842,
         type: 3}
@@ -604,11 +602,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 213b993368631434ca17c3295069e842, type: 3}
---- !u!4 &1109198108675404565 stripped
+--- !u!4 &6645923857133671937 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1721376550755909379, guid: 213b993368631434ca17c3295069e842,
     type: 3}
-  m_PrefabInstance: {fileID: 1767424362217982998}
+  m_PrefabInstance: {fileID: 5465292227615992066}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7365753105721728778
 PrefabInstance:
