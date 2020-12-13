@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using ShootyGhost;
 
 public class TrackBugAnimator : MonoBehaviour
 {

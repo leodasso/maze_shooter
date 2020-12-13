@@ -65,6 +65,7 @@ namespace ShootyGhost
         public GameObject transitionEffect;
 
         public GameObject hauntIndicatorPrefab;
+		public GameObject hauntDashPrefab;
 
 		[Tooltip("This component calls events: beginHauntTargeting, endHauntTargeting, haunt, endHaunt")]
 		public PlayMakerFSM playMaker;
@@ -149,6 +150,11 @@ namespace ShootyGhost
 
 		public void AnimateHauntTarget() 
 		{
+			SpriteAnimationPlayer hauntDash = 
+				Instantiate(hauntDashPrefab, transform.position, Quaternion.identity).GetComponent<SpriteAnimationPlayer>();
+			hauntDash.direction.customDirection = HauntDirection();
+			hauntDash.gameObject.SetActive(true);
+			hauntDash.PlayClipFromBeginning( () => {hauntDash.gameObject.SetActive(false);} );
 			Vector3 localTriggerPos = HauntDirection() * hauntDistance.Value;
 			StartCoroutine(AnimateHauntTargetRoutine(localTriggerPos));
 		}
@@ -166,8 +172,14 @@ namespace ShootyGhost
 
 			ResetHauntTrigger();
 
-			// If no hauntable was caught in the trigger by the end of the animation,
-			// just return to normal mode
+		}
+
+		/// <summary>
+		/// If no hauntable was caught in the trigger by the end of the animation,
+		/// just return to normal mode
+		/// </summary>
+		public void TryReturnToNormal() 
+		{
 			if (ghostState == GhostState.Targeting) EndHauntTargeting();
 		}
 

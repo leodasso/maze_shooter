@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Arachnid;
 using Sirenix.OdinInspector;
+using ShootyGhost;
 
 public class MovementBase : MonoBehaviour, IControllable
 {
