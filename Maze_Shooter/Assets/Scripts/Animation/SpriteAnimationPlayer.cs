@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -7,6 +7,7 @@ public enum DirectionSourceType
 	Rigidbody,
 	Mover,
 	PseudoVelocity,
+	Custom,
 }
 
 public class SpriteAnimationPlayer : MonoBehaviour
@@ -65,6 +66,12 @@ public class SpriteAnimationPlayer : MonoBehaviour
 			_frameProgress = 0;
 			NextFrame();
 		}
+	}
+
+	public void PlayClipFromBeginning() 
+	{
+		_currentFrame = 0;
+		_frameProgress = 0;
 	}
 
 	void SetFacingVector(Vector3 forward)

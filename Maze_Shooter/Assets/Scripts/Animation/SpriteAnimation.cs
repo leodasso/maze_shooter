@@ -10,10 +10,12 @@ public class SpriteAnimation : ScriptableObject
     {
         FourWay,
         EightWay,
+		OneWay,
     }
 
     public DirectionsType directionsCount = DirectionsType.EightWay;
     
+	[HideIf("IsOneWay")]
     [PreviewField, HorizontalGroup("frames", marginLeft:2, marginRight:2, MaxWidth = 45)]
     public List<Sprite> north = new List<Sprite>();
     
@@ -28,13 +30,17 @@ public class SpriteAnimation : ScriptableObject
     [ShowIf("IsEightWay"), PreviewField, HorizontalGroup("frames", marginLeft:2, marginRight:2, MaxWidth = 45)]
     public List<Sprite> southeast = new List<Sprite>();
     
+	[HideIf("IsOneWay")]
     [PreviewField, HorizontalGroup("frames", marginLeft:2, marginRight:2, MaxWidth = 45)]
     public List<Sprite> south = new List<Sprite>();
 
     bool IsEightWay => directionsCount == DirectionsType.EightWay;
+	bool IsOneWay => directionsCount == DirectionsType.OneWay;
 
     public List<Sprite> ClipForDirection(Vector2 direction)
     {
+		if (IsOneWay) return east;
+
         float angle = Vector2.Angle(Vector2.up, direction);
         
         if (directionsCount == DirectionsType.EightWay)

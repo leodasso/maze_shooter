@@ -9,6 +9,9 @@ public class MovementSource
 	[HideLabel, SerializeField]
 	DirectionSourceType source = DirectionSourceType.Rigidbody;
 
+	[ShowIf("SourceIsCustom"), HideLabel, SerializeField]
+	Vector3 customDirection;
+
 	[ShowIf("SourceIsRigidbody"), HideLabel, SerializeField]
 	new Rigidbody rigidbody;
 
@@ -22,11 +25,13 @@ public class MovementSource
 	bool SourceIsRigidbody => source == DirectionSourceType.Rigidbody;
 	bool SourceIsMover => source == DirectionSourceType.Mover;
 	bool SourceIsPseudo => source == DirectionSourceType.PseudoVelocity;
+	bool SourceIsCustom => source == DirectionSourceType.Custom;
 
 	public Vector3 GetMovementVector()
 	{
 		switch (source)
 		{
+			case DirectionSourceType.Custom: return customDirection; 
 			case DirectionSourceType.Mover: return mover.GetDirection();
 			case DirectionSourceType.Rigidbody: return rigidbody.velocity;
 			case DirectionSourceType.PseudoVelocity: return pseudoVelocity.velocity;

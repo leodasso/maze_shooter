@@ -68,9 +68,6 @@ namespace ShootyGhost
 
         [TabGroup("main")] 
         public GameObject hauntIndicatorPrefab;
-        
-        [TabGroup("events")]
-        public UnityEvent onJuiceAdded;
 
         [TabGroup("events"), LabelText("onTargetingBegin")]
         public UnityEvent onHauntStateBegin;
