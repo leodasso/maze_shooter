@@ -27,59 +27,47 @@ namespace ShootyGhost
 
 		public int hauntStars = 1;
 
-		[TabGroup("main")]
         public GameObject hauntTrigger;
         
-        [TabGroup("main"), Tooltip("On Start(), haunt stars value is pulled from save file using this. On Destroy(), it's saved.")]
+        [Tooltip("On Start(), haunt stars value is pulled from save file using this. On Destroy(), it's saved.")]
         public SavedInt savedHauntStars;
 
-		[TabGroup("main"), Tooltip("The max distance you can haunt")]
+		[Tooltip("The max distance you can haunt")]
         public FloatReference hauntDistance;
 
-        [TabGroup("main"), Tooltip("The cooldown for returning to targeting mode once it's exited")]
+        [Tooltip("The cooldown for returning to targeting mode once it's exited")]
         public FloatReference targetingModeCooldown;
 
-		[TabGroup("main"), Tooltip("The time it takes to move the haunt trigger through the full animation")]
+		[Tooltip("The time it takes to move the haunt trigger through the full animation")]
         public FloatReference hauntAnimDuration;
 
-        [TabGroup("main"), ReadOnly]
+        [ReadOnly]
         public GhostState ghostState = GhostState.Normal;
 
         /// <summary> The actual hauntable currently being controlled/haunted </summary>
         [Tooltip("The actual hauntable currently being controlled/haunted")]
-        [TabGroup("main"), ReadOnly]
+        [ReadOnly]
         public Hauntable haunted;
         
-        [TabGroup("main"), Tooltip("Delay between a successful haunt and actually placing this object inside" +
+        [Tooltip("Delay between a successful haunt and actually placing this object inside" +
                                    " the haunted transform.")]
         public float hauntMovementDelay = .25f;
         
-        [Range(0, 1), Space, TabGroup("main")]
+        [Range(0, 1), Space]
         [Tooltip("When 'exiting' a haunted thing, the haunted object blows up like a balloon, about to pop. The amount it's" +
                  " blown up is the haunt burst intensity. When it reaches 1, this will exit the haunted and return to normal.")]
         public float hauntBurstIntensity = 0;
 
-        [TabGroup("main"), Tooltip("Updating a float value with the value of haunt burst allows other things like camera" +
+        [Tooltip("Updating a float value with the value of haunt burst allows other things like camera" +
                                    "and particles to change based on haunt burst value")] 
         public FloatValue hauntBurstIntensityRef;
 
-        [TabGroup("main")]
         public GameObject transitionEffect;
 
-        [TabGroup("main")] 
         public GameObject hauntIndicatorPrefab;
 
-        [TabGroup("events"), LabelText("onTargetingBegin")]
-        public UnityEvent onHauntStateBegin;
-        
-        [TabGroup("events"), LabelText("onTargetingEnd")]
-        public UnityEvent onHauntStateEnd;
-        
-        [TabGroup("events"), Space]
-        public UnityEvent onHauntBegin;
-
-        [TabGroup("events")] 
-        public UnityEvent onHauntEnd;
+		[Tooltip("This component calls events: beginHauntTargeting, endHauntTargeting, haunt, endHaunt")]
+		public PlayMakerFSM playMaker;
 
         Rigidbody _rigidbody;
         float _targetingModeTimer = 0;
@@ -208,7 +196,7 @@ namespace ShootyGhost
         void BeginHauntTargeting()
         {
             ghostState = GhostState.Targeting;
-            onHauntStateBegin.Invoke();
+			playMaker.SendEvent("beginHauntTargeting");
         }
 
         
@@ -219,15 +207,14 @@ namespace ShootyGhost
             
 			ghostState = GhostState.Normal;
             
-            onHauntStateEnd.Invoke();
-            
+			playMaker.SendEvent("endHauntTargeting");
             _targetingModeTimer = targetingModeCooldown.Value;
         }
 
         public void BeginHaunt(Hauntable newHaunted)
         {
             haunted = newHaunted;
-            onHauntBegin.Invoke();
+            playMaker.SendEvent("haunt");
             _rigidbody.isKinematic = true;
 
 			newHaunted.haunter = this;
@@ -251,7 +238,7 @@ namespace ShootyGhost
             }
             
             ghostState = GhostState.Normal;
-            onHauntEnd.Invoke();
+            playMaker.SendEvent("endHaunt");
             haunted = null;
         }
 
@@ -280,7 +267,7 @@ namespace ShootyGhost
         void OnDestroy()
         {
             // savedHauntStars.Save(hauntStars);
-            onHauntStateEnd.Invoke();
+            playMaker.SendEvent("endHaunt");
             hauntBurstIntensityRef.Value = 0;
         }
     }

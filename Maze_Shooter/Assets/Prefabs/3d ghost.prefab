@@ -558,81 +558,7 @@ MonoBehaviour:
     type: 3}
   hauntIndicatorPrefab: {fileID: 6791069316512883524, guid: 486e61407b0d7a84eac3f6bc4dfdb120,
     type: 3}
-  onJuiceAdded:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 88a0f31da06bcb04ea055a0208f5edb0, type: 2}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onHauntStateBegin:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6539296253958561908}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: SendEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: beginHauntTargeting
-          m_BoolArgument: 0
-        m_CallState: 2
-  onHauntStateEnd:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6539296253958561908}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: SendEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: endHauntTargeting
-          m_BoolArgument: 0
-        m_CallState: 2
-  onHauntBegin:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6539296253958561908}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: SendEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: haunt
-          m_BoolArgument: 0
-        m_CallState: 2
-  onHauntEnd:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6539296253958561908}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: SendEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: endHaunt
-          m_BoolArgument: 0
-        m_CallState: 2
+  playMaker: {fileID: 6539296253958561908}
 --- !u!54 &3594317241385997713
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2086,14 +2012,13 @@ GameObject:
   - component: {fileID: 5995787175479970515}
   - component: {fileID: 5087618752115411061}
   - component: {fileID: 8300783195974783091}
-  - component: {fileID: 723960852361571653}
   m_Layer: 9
   m_Name: haunt dash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5893489942355565307
 Transform:
   m_ObjectHideFlags: 0
@@ -2224,22 +2149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &723960852361571653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5891706560301748831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0782ae9df3ff5ae4ab9e6e1985a49bf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectPrefab: {fileID: 8235049919360912495, guid: eb89d813987295f48aa4df9253e1e2e0,
-    type: 3}
-  lifetime: 5
-  delay: 0
 --- !u!1 &8637379181843648116
 GameObject:
   m_ObjectHideFlags: 0
@@ -2664,15 +2573,15 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8050917244385575065, guid: eabc9b650459ba94296987e09a5aeeda, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eabc9b650459ba94296987e09a5aeeda, type: 3}
---- !u!4 &326339311406208306 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2937294253991182739, guid: eabc9b650459ba94296987e09a5aeeda,
-    type: 3}
-  m_PrefabInstance: {fileID: 3189742950165517473}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &326339311406208307 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2937294253991182738, guid: eabc9b650459ba94296987e09a5aeeda,
+    type: 3}
+  m_PrefabInstance: {fileID: 3189742950165517473}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &326339311406208306 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2937294253991182739, guid: eabc9b650459ba94296987e09a5aeeda,
     type: 3}
   m_PrefabInstance: {fileID: 3189742950165517473}
   m_PrefabAsset: {fileID: 0}
