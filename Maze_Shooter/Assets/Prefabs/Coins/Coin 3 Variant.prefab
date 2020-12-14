@@ -26,10 +26,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1264617879074373013, guid: 9f3dc32251692224395ffddde661ba79,
+    - target: {fileID: 738524100121655638, guid: 9f3dc32251692224395ffddde661ba79,
         type: 3}
-      propertyPath: m_Name
-      value: Coin 3 Variant
+      propertyPath: m_SortingOrder
+      value: -101
       objectReference: {fileID: 0}
     - target: {fileID: 1264617879074373011, guid: 9f3dc32251692224395ffddde661ba79,
         type: 3}
@@ -86,6 +86,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1264617879074373012, guid: 9f3dc32251692224395ffddde661ba79,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264617879074373012, guid: 9f3dc32251692224395ffddde661ba79,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264617879074373013, guid: 9f3dc32251692224395ffddde661ba79,
+        type: 3}
+      propertyPath: m_Name
+      value: Coin 3 Variant
+      objectReference: {fileID: 0}
     - target: {fileID: 1264617879074373014, guid: 9f3dc32251692224395ffddde661ba79,
         type: 3}
       propertyPath: m_Radius
@@ -96,10 +111,31 @@ PrefabInstance:
       propertyPath: m_Center.x
       value: 0.07
       objectReference: {fileID: 0}
-    - target: {fileID: 6192797525792800719, guid: 9f3dc32251692224395ffddde661ba79,
+    - target: {fileID: 1469797232963627782, guid: 9f3dc32251692224395ffddde661ba79,
         type: 3}
-      propertyPath: sortingOrder
+      propertyPath: m_SortingOrder
       value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469797232963627782, guid: 9f3dc32251692224395ffddde661ba79,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a55abb2a0a4c1f540993b462ca023b0c,
+        type: 3}
+    - target: {fileID: 4679383405116591769, guid: 9f3dc32251692224395ffddde661ba79,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -102
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679383405116591769, guid: 9f3dc32251692224395ffddde661ba79,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679383405116591769, guid: 9f3dc32251692224395ffddde661ba79,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4688558336615937885, guid: 9f3dc32251692224395ffddde661ba79,
         type: 3}
@@ -121,36 +157,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0.028
       objectReference: {fileID: 0}
-    - target: {fileID: 1469797232963627782, guid: 9f3dc32251692224395ffddde661ba79,
+    - target: {fileID: 6192797525792800719, guid: 9f3dc32251692224395ffddde661ba79,
         type: 3}
-      propertyPath: m_SortingOrder
+      propertyPath: sortingOrder
       value: -100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1469797232963627782, guid: 9f3dc32251692224395ffddde661ba79,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: a55abb2a0a4c1f540993b462ca023b0c,
-        type: 3}
-    - target: {fileID: 738524100121655638, guid: 9f3dc32251692224395ffddde661ba79,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: -101
-      objectReference: {fileID: 0}
-    - target: {fileID: 4679383405116591769, guid: 9f3dc32251692224395ffddde661ba79,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: -102
-      objectReference: {fileID: 0}
-    - target: {fileID: 4679383405116591769, guid: 9f3dc32251692224395ffddde661ba79,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4679383405116591769, guid: 9f3dc32251692224395ffddde661ba79,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 227807845615326112, guid: 9f3dc32251692224395ffddde661ba79, type: 3}

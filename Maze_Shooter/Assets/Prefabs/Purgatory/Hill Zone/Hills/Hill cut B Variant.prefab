@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 728864167}
   - component: {fileID: 728864168}
+  - component: {fileID: 9167105793832165017}
+  - component: {fileID: 8981918996294707445}
   m_Layer: 0
   m_Name: sprite (1)
   m_TagString: Untagged
@@ -24,12 +26,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 728864166}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.93, z: -0.06}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 7.53, z: -4.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6204951564907554211}
-  m_RootOrder: 2
+  m_Father: {fileID: 6204951565325705632}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &728864168
 SpriteRenderer:
@@ -83,6 +85,35 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &9167105793832165017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728864166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f3084e5d9ec8f4d90c66310de7c9f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseSpeed: 0.25
+  noise: {x: 0, y: 0, z: 0}
+  realTime: 0
+--- !u!114 &8981918996294707445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728864166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2a8cb0960f6e344b4066dd025cd22f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseGenerator: {fileID: 9167105793832165017}
+  movementAmount: {x: 0, y: 2.5, z: 0}
 --- !u!1001 &1766806199870773140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -179,9 +210,9 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d235d826b96377847896cae5bf2dcb9b, type: 3}
---- !u!4 &6204951564907554211 stripped
+--- !u!4 &6204951565325705632 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5663450744025575991, guid: d235d826b96377847896cae5bf2dcb9b,
+  m_CorrespondingSourceObject: {fileID: 5663450745794426420, guid: d235d826b96377847896cae5bf2dcb9b,
     type: 3}
   m_PrefabInstance: {fileID: 1766806199870773140}
   m_PrefabAsset: {fileID: 0}

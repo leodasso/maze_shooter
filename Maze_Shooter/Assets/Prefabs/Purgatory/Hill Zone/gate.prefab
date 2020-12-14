@@ -177,6 +177,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2698130401765285276}
   - component: {fileID: 2698130401765285277}
+  - component: {fileID: 6211261757026012480}
+  - component: {fileID: 6157662346509758412}
   m_Layer: 0
   m_Name: Stage_1_Parts_3
   m_TagString: Untagged
@@ -250,6 +252,35 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6211261757026012480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2698130401765285279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f3084e5d9ec8f4d90c66310de7c9f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseSpeed: 0.45
+  noise: {x: 0, y: 0, z: 0}
+  realTime: 0
+--- !u!114 &6157662346509758412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2698130401765285279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2a8cb0960f6e344b4066dd025cd22f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseGenerator: {fileID: 6211261757026012480}
+  movementAmount: {x: 0.4, y: 1, z: 0}
 --- !u!1 &2698130401889590239
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,6 +454,8 @@ GameObject:
   - component: {fileID: 1646524476595668139}
   - component: {fileID: 2086997396250632676}
   - component: {fileID: 4983534771119520520}
+  - component: {fileID: 5080413101188121544}
+  - component: {fileID: 8290073837516425313}
   m_Layer: 0
   m_Name: roof
   m_TagString: Untagged
@@ -438,7 +471,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2698130402738846004}
   m_LocalRotation: {x: 0.3007058, y: -0, z: -0, w: 0.953717}
-  m_LocalPosition: {x: 0, y: 5.8, z: 2.88}
+  m_LocalPosition: {x: 0, y: 6.2, z: 3.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2698130402081688840}
@@ -533,6 +566,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateEveryFrame: 0
+--- !u!114 &5080413101188121544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2698130402738846004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f3084e5d9ec8f4d90c66310de7c9f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseSpeed: 0.3
+  noise: {x: 0, y: 0, z: 0}
+  realTime: 0
+--- !u!114 &8290073837516425313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2698130402738846004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2a8cb0960f6e344b4066dd025cd22f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseGenerator: {fileID: 5080413101188121544}
+  movementAmount: {x: 0, y: 1, z: 0}
 --- !u!1 &2698130402932280659
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,6 +605,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2698130402932280656}
   - component: {fileID: 2698130402932280657}
+  - component: {fileID: 5394244322075204535}
+  - component: {fileID: 9096609066097252603}
   m_Layer: 0
   m_Name: Stage_1_Parts_4
   m_TagString: Untagged
@@ -615,6 +679,35 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5394244322075204535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2698130402932280659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f3084e5d9ec8f4d90c66310de7c9f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseSpeed: 0.45
+  noise: {x: 0, y: 0, z: 0}
+  realTime: 0
+--- !u!114 &9096609066097252603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2698130402932280659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2a8cb0960f6e344b4066dd025cd22f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseGenerator: {fileID: 5394244322075204535}
+  movementAmount: {x: 0.4, y: 1, z: 0}
 --- !u!1 &8620468360538201453
 GameObject:
   m_ObjectHideFlags: 0
