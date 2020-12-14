@@ -134,7 +134,7 @@
 		_ShadowAlpha("Shadow Alpha", Range(0, 1)) = 0.5 //86
 		_ShadowColor("Shadow Color", Color) = (0, 0, 0, 1) //87
 
-		_HandDrawnAmount("Hand Drawn Amount", Range(2, 20)) = 10 //88
+		_HandDrawnAmount("Hand Drawn Amount", Range(0.1, 20)) = 10 //88
 		_HandDrawnSpeed("Hand Drawn Speed", Range(1, 15)) = 5 //89
 
 		_GrassSpeed("Grass Speed", Range(0,50)) = 2 //90

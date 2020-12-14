@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 952882ccc304a43449ad40e9f0f58bfb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 580df700a24af194dace6e4601dfb19f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,12 +101,14 @@ MonoBehaviour:
   spriteAnimation: {fileID: 11400000, guid: 0621145fa20d97e4c8853d87445d7a27, type: 2}
   direction:
     source: 1
+    customDirection: {x: 0, y: 0, z: 0}
     rigidbody: {fileID: 0}
     mover: {fileID: 0}
     pseudoVelocity: {fileID: 0}
   speedChangesFramerate: 1
   speedSource:
     source: 0
+    customDirection: {x: 0, y: 0, z: 0}
     rigidbody: {fileID: 0}
     mover: {fileID: 0}
     pseudoVelocity: {fileID: 0}
