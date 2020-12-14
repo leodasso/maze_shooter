@@ -953,7 +953,6 @@ namespace nTools.PrefabPainter
         public int              prefabPlaceLayer;
         public bool             groupPrefabs;
         public bool             overwriteColorCategory;
-        public ColorCategory    colorCategory;
 
         // Precise place settings
         public float            ppSnapRotationValue;

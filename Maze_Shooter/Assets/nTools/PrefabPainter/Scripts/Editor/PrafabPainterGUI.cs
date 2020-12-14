@@ -3766,8 +3766,6 @@ namespace nTools.PrefabPainter
 
                 MakeUndoOnChange(ref settings.overwriteColorCategory, EditorGUILayout.Toggle("Overwrite Color Cat", settings.overwriteColorCategory));
                 
-                MakeUndoOnChange(ref settings.colorCategory, (ColorCategory)EditorGUILayout.EnumPopup("Color Category", settings.colorCategory));
-
                 MakeUndoOnChange(ref settings.overwritePrefabLayer, EditorGUILayout.Toggle(Strings.brushOverwritePrefabLayer, settings.overwritePrefabLayer));
                 GUI.enabled = settings.overwritePrefabLayer;
                 MakeUndoOnChange(ref settings.prefabPlaceLayer, EditorGUILayout.LayerField(Strings.brushPrefabPlaceLayer, settings.prefabPlaceLayer));
@@ -3798,7 +3796,6 @@ namespace nTools.PrefabPainter
 
 	    void SelectedToolChanged()
 	    {
-	        _colorManager = ColorManager.Get();
 	    }
 
         void OnMainGUI ()
