@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: hand drawn sprite
+  m_Name: hand drawn sprite invert
   m_Shader: {fileID: 4800000, guid: a36b7719ff0465b42ab1407d67672c5f, type: 3}
-  m_ShaderKeywords: ATLAS_ON DOODLE_ON ETC1_EXTERNAL_ALPHA
+  m_ShaderKeywords: ATLAS_ON DOODLE_ON ETC1_EXTERNAL_ALPHA NEGATIVE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -166,7 +166,7 @@ Material:
     - _MotionBlurDist: 1.25
     - _MyDstMode: 10
     - _MySrcMode: 5
-    - _NegativeAmount: 0
+    - _NegativeAmount: 1
     - _OcclusionStrength: 1
     - _OffsetUvX: 0
     - _OffsetUvY: 0
