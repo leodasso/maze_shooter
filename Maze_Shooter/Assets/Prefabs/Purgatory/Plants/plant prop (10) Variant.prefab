@@ -1,5 +1,47 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1271454213357387589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3648139657068028411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a965d48758fd14aa74387aaad38508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  triggerExitOnAwake: 0
+  oneOff: 0
+  filterTriggers: 1
+  useLayerMask: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 2561
+  triggerers:
+  - {fileID: 11400000, guid: e5152fd09c938094d966b62e43b66bad, type: 2}
+  - {fileID: 11400000, guid: 35831a8bfbcf71f4fb702f50d0ec7816, type: 2}
+  events: []
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6209824220624437146}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &860787050232497715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90,3 +132,90 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c7a2fa9287facb41b0938530ece3270, type: 3}
+--- !u!1 &3648139657068028411 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4130622135684261832, guid: 1c7a2fa9287facb41b0938530ece3270,
+    type: 3}
+  m_PrefabInstance: {fileID: 860787050232497715}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3648139657068028405 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4130622135684261830, guid: 1c7a2fa9287facb41b0938530ece3270,
+    type: 3}
+  m_PrefabInstance: {fileID: 860787050232497715}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4146335446076063872
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3648139657068028405}
+    m_Modifications:
+    - target: {fileID: 716852524022210733, guid: 2033346ce5ad8a048a561b9986b64cdd,
+        type: 3}
+      propertyPath: m_Name
+      value: snowgrass seed effect
+      objectReference: {fileID: 0}
+    - target: {fileID: 7094756867699872146, guid: 2033346ce5ad8a048a561b9986b64cdd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7094756867699872146, guid: 2033346ce5ad8a048a561b9986b64cdd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7094756867699872146, guid: 2033346ce5ad8a048a561b9986b64cdd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7094756867699872146, guid: 2033346ce5ad8a048a561b9986b64cdd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7094756867699872146, guid: 2033346ce5ad8a048a561b9986b64cdd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7094756867699872146, guid: 2033346ce5ad8a048a561b9986b64cdd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7094756867699872146, guid: 2033346ce5ad8a048a561b9986b64cdd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7094756867699872146, guid: 2033346ce5ad8a048a561b9986b64cdd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7094756867699872146, guid: 2033346ce5ad8a048a561b9986b64cdd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7094756867699872146, guid: 2033346ce5ad8a048a561b9986b64cdd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7094756867699872146, guid: 2033346ce5ad8a048a561b9986b64cdd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2033346ce5ad8a048a561b9986b64cdd, type: 3}
+--- !u!198 &6209824220624437146 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8045403816097890074, guid: 2033346ce5ad8a048a561b9986b64cdd,
+    type: 3}
+  m_PrefabInstance: {fileID: 4146335446076063872}
+  m_PrefabAsset: {fileID: 0}

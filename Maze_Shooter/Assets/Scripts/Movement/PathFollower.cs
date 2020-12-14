@@ -61,10 +61,14 @@ public class PathFollower : MovementBase
 
         pathPosition += _speedOnPath * Time.deltaTime;
         // Loop the path position so it stays within the bounds of path length.
-        if (pathPosition < 0)
-            pathPosition += path.PathLength;
-        else if (pathPosition > path.PathLength)
-            pathPosition -= path.PathLength;
+		if (path.Looped) {
+			if (pathPosition < 0)
+				pathPosition += path.PathLength;
+			else if (pathPosition > path.PathLength)
+				pathPosition -= path.PathLength;
+		}else {
+			pathPosition = Mathf.Clamp(pathPosition, 0, path.PathLength);
+		}
         
         // Lerp me to the path point
         transform.position = Vector3.Lerp(transform.position, path.EvaluatePositionAtUnit(pathPosition, _units), 
