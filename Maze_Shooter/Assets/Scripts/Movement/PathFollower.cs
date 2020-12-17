@@ -25,9 +25,6 @@ public class PathFollower : MovementBase
     public float inputDirectionForgiveness = 2;
     
     public LayerMask collisionLayerMask;
-
-	public UnityEvent onPathStartReached;
-	public UnityEvent onPathEndReached;
     
     [Space]
     public CinemachineSmoothPath path;
@@ -43,6 +40,10 @@ public class PathFollower : MovementBase
     float _dot;
     float MaxSpeed => movementProfile.movementForce * TotalSpeedMultiplier();
     float _speedOnPath;
+
+	public void PlaceAtEnd() {
+		pathPosition = path.PathLength;
+	}
 
     void OnDrawGizmos()
     {

@@ -17,6 +17,8 @@ namespace ShootyGhost
 		[ReadOnly]
 		public Haunter haunter;
 
+		void Start() {}
+
         /// <summary>
         /// Calculates and returns the position that the ghost should go to once exiting after haunt
         /// </summary>
@@ -37,6 +39,8 @@ namespace ShootyGhost
 
 		public void AttemptHaunt(Haunter newHaunter) 
 		{
+			if (!enabled) return;
+			
 			// instantiate the haunt constellation
 			HauntConstellation hauntConstellation = 
 				Instantiate(hauntConstellationPrefab, transform.position, Quaternion.identity)
