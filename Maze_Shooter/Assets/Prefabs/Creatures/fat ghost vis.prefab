@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 944744569446246453}
   - component: {fileID: 944744569446246454}
   - component: {fileID: 944744569446246455}
+  - component: {fileID: 470607013473532552}
+  - component: {fileID: 4404322041846106097}
   m_Layer: 0
   m_Name: fat ghost vis
   m_TagString: Untagged
@@ -97,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMultiplier: 1
   frameRate: 10
+  realTime: 0
   spriteRenderer: {fileID: 944744569446246454}
   spriteAnimation: {fileID: 11400000, guid: 0621145fa20d97e4c8853d87445d7a27, type: 2}
   direction:
@@ -136,3 +139,36 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &470607013473532552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944744569446246448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b97e8ed2baea5324b9e68bb303521efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 1152320502805378748, guid: f4470d3aee462aa40aeac4c0a65b8c30,
+    type: 3}
+  lifetime: 5
+  delay: 0
+  ignoreMinLifetime: 0
+--- !u!114 &4404322041846106097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944744569446246448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0782ae9df3ff5ae4ab9e6e1985a49bf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 1152320502805378748, guid: f4470d3aee462aa40aeac4c0a65b8c30,
+    type: 3}
+  lifetime: 5
+  delay: 0

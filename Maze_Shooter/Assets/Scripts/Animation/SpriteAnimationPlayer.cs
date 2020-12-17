@@ -17,6 +17,7 @@ namespace ShootyGhost {
 	{
 		public float speedMultiplier = 1;
 		public float frameRate = 12;
+		public bool realTime;
 		public SpriteRenderer spriteRenderer;
 		public SpriteAnimation spriteAnimation;
 
@@ -42,6 +43,8 @@ namespace ShootyGhost {
 
 		Action ClipFinished;
 
+		float deltaTime => realTime ? Time.unscaledDeltaTime : Time.deltaTime;
+
 		void OnDrawGizmos()
 		{
 			Gizmos.color = Color.magenta;
@@ -65,7 +68,7 @@ namespace ShootyGhost {
 				speedMultiplier = speedToFramerate.Evaluate(speedSource.GetMovementVector().magnitude);
 
 			// determine the sprite list to use based on direction
-			_frameProgress += Time.deltaTime;
+			_frameProgress += deltaTime;
 			if (_frameProgress >= FrameDuration)
 			{
 				_frameProgress = 0;

@@ -11,6 +11,7 @@ namespace ShootyGhost
         public UnityEvent onHaunted;
         public UnityEvent onUnHaunted;
 
+		[AssetsOnly]
 		public GameObject hauntConstellationPrefab;
 
 		[ReadOnly]

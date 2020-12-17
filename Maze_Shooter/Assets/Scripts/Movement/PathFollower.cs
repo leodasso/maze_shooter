@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Cinemachine;
 using Sirenix.OdinInspector;
 
@@ -24,6 +25,9 @@ public class PathFollower : MovementBase
     public float inputDirectionForgiveness = 2;
     
     public LayerMask collisionLayerMask;
+
+	public UnityEvent onPathStartReached;
+	public UnityEvent onPathEndReached;
     
     [Space]
     public CinemachineSmoothPath path;
@@ -60,6 +64,7 @@ public class PathFollower : MovementBase
         if (master) AutonomousUpdate();
 
         pathPosition += _speedOnPath * Time.deltaTime;
+		
         // Loop the path position so it stays within the bounds of path length.
 		if (path.Looped) {
 			if (pathPosition < 0)

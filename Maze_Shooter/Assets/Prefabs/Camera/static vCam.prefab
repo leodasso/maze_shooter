@@ -70,8 +70,6 @@ MonoBehaviour:
     m_OnCameraLive:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: Cinemachine.CinemachineBrain+VcamActivatedEvent, Cinemachine, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 4298491271097646}
 --- !u!114 &114324595519716808
@@ -107,6 +105,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114324595519716808}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Shake
         m_Mode: 4
         m_Arguments:
@@ -117,8 +116,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   comment: 
 --- !u!114 &114457005222983860
 MonoBehaviour:
@@ -138,6 +135,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114324595519716808}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Shake
         m_Mode: 4
         m_Arguments:
@@ -148,8 +146,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   comment: 
 --- !u!114 &7186284991668850516
 MonoBehaviour:
@@ -169,6 +165,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114324595519716808}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Shake
         m_Mode: 4
         m_Arguments:
@@ -179,8 +176,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   comment: 
 --- !u!114 &114827921640481258
 MonoBehaviour:
@@ -200,6 +195,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114324595519716808}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Shake
         m_Mode: 4
         m_Arguments:
@@ -210,8 +206,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   comment: 
 --- !u!1 &1956576183794890
 GameObject:
@@ -271,6 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NoiseProfile: {fileID: 11400000, guid: 1fadf45741dc545428d325b6deb102c1, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 7.84183e-15
   m_FrequencyGain: 2.144442e-30
   mNoiseOffsets: {x: -873.57666, y: -911.7196, z: -328.48892}

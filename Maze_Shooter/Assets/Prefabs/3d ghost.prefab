@@ -748,7 +748,7 @@ MonoBehaviour:
       - fsmEvent:
           name: haunt
           isSystemEvent: 0
-          isGlobal: 0
+          isGlobal: 1
         toState: Haunt
         linkStyle: 0
         linkConstraint: 0
@@ -1149,7 +1149,7 @@ MonoBehaviour:
       - fsmEvent:
           name: endHaunt
           isSystemEvent: 0
-          isGlobal: 0
+          isGlobal: 1
         toState: wait for transition
         linkStyle: 0
         linkConstraint: 0
@@ -1659,13 +1659,13 @@ MonoBehaviour:
       isGlobal: 0
     - name: endHaunt
       isSystemEvent: 0
-      isGlobal: 0
+      isGlobal: 1
     - name: endHauntTargeting
       isSystemEvent: 0
       isGlobal: 0
     - name: haunt
       isSystemEvent: 0
-      isGlobal: 0
+      isGlobal: 1
     globalTransitions: []
     variables:
       floatVariables: []
@@ -2103,6 +2103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMultiplier: 1
   frameRate: 10
+  realTime: 0
   spriteRenderer: {fileID: 3680872684990957169}
   spriteAnimation: {fileID: 11400000, guid: f5f309166b8850949beb97c36a97298a, type: 2}
   direction:
