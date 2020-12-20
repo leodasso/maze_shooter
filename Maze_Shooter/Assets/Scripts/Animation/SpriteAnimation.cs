@@ -22,6 +22,7 @@ namespace ShootyGhost {
 	{
 		public PlayMode playMode = PlayMode.Loop;
 		public DirectionsType directionsCount = DirectionsType.EightWay;
+		public float frameRateMultiplier = 1;
 		
 		[HideIf("IsOneWay")]
 		[PreviewField, HorizontalGroup("frames", marginLeft:2, marginRight:2, MaxWidth = 45)]

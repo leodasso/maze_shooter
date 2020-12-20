@@ -13,20 +13,29 @@ public class CreatureAnimator : MonoBehaviour
 
 	[InlineProperty]
 	public MovementSource velocitySource;
-	
+
 	public SpriteAnimation idle;
 	public SpriteAnimation run;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {    }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
 		if (velocitySource.GetMovementVector().magnitude > idleSpeed) {
-			animationPlayer.spriteAnimation = run;
+			SetAnim(run);
 		}
-		else animationPlayer.spriteAnimation = idle;
+		else SetAnim(idle);
     }
+
+	protected void SetAnim(SpriteAnimation newAnim) {
+		animationPlayer.spriteAnimation = newAnim;
+	}
+
+	protected void SetAnimImmediate(SpriteAnimation newAnim) {
+		animationPlayer.spriteAnimation = newAnim;
+		animationPlayer.PlayClipFromBeginning();
+	}
 }

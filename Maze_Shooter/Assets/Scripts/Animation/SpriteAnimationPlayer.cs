@@ -38,7 +38,7 @@ namespace ShootyGhost {
 		List<Sprite> _currentAnimClip = new List<Sprite>();
 		Vector3 _forward = Vector3.right;
 
-		float TotalFrameRate => frameRate * speedMultiplier;
+		float TotalFrameRate => spriteAnimation.frameRateMultiplier * frameRate * speedMultiplier;
 		float FrameDuration => 1 / TotalFrameRate;
 
 		Action ClipFinished;
