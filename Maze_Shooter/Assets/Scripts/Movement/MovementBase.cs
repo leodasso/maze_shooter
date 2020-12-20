@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using Arachnid;
 using Sirenix.OdinInspector;
 using ShootyGhost;
 
 public class MovementBase : MonoBehaviour, IControllable
 {
+	public static float gravity = -25;
+
 	[OnValueChanged("ApplyDynamicsProfile")]
 	public DynamicsProfile movementProfile;
     public float speedMultiplier = 1;
@@ -17,8 +20,16 @@ public class MovementBase : MonoBehaviour, IControllable
     
     [Tooltip("Optional - will set the current path tangent to the sprite animation player")]
     public SpriteAnimationPlayer spriteAnimationPlayer;
+
+	[PropertyOrder(900), FoldoutGroup("events")]
+	public UnityEvent onGrounded;
+
+	[PropertyOrder(900), FoldoutGroup("events")]
+	public UnityEvent onUnGrounded;
     
     protected Rigidbody _rigidbody;
+
+	public bool IsGrounded => _isGrounded;
     
     /// <summary>
     /// The intended direction of movement. Differs from velocity in that if there's a wall or blocker and
@@ -26,7 +37,15 @@ public class MovementBase : MonoBehaviour, IControllable
     /// </summary>
     protected Vector3 direction;
 
+	/// <summary>
+	/// Usually same as direction, but will remember the player's last direction if they stop input.
+	/// </summary>
+	protected Vector3 lastDirection;
+
     float _speedCurveTime;
+
+	[ShowInInspector, ReadOnly]
+	bool _isGrounded;
 
     protected float TotalSpeedMultiplier()
     {
@@ -43,7 +62,7 @@ public class MovementBase : MonoBehaviour, IControllable
     }
 
 	protected virtual void ApplyDynamicsProfile() {
-		if (!_rigidbody) return;
+		if (!_rigidbody || !movementProfile) return;
 		_rigidbody.mass = movementProfile.rigidbodyMass;
 		_rigidbody.drag = movementProfile.rigidbodyDrag;
 		_rigidbody.useGravity = movementProfile.rigidbodyGravity;
@@ -60,6 +79,26 @@ public class MovementBase : MonoBehaviour, IControllable
             }
         }
     }
+
+	protected virtual void OnCollisionEnter(Collision other) 
+	{
+		if (other.transform.tag == "Ground") {
+			if (!_isGrounded) {
+				onGrounded.Invoke();
+				_isGrounded = true;
+			}
+		}
+	}
+
+		protected virtual void OnCollisionExit(Collision other) 
+	{
+		if (other.transform.tag == "Ground") {
+			if (_isGrounded) {
+				onUnGrounded.Invoke();
+				_isGrounded = false;
+			}
+		}
+	}
 
     public Vector3 GetDirection()
     {
@@ -80,6 +119,8 @@ public class MovementBase : MonoBehaviour, IControllable
     public virtual void ApplyLeftStickInput(Vector2 input)
     {
         direction = Math.Project2Dto3D(Vector2.ClampMagnitude(input, 1));
+		if (direction.magnitude > .3f) lastDirection = direction;
+		lastDirection.Normalize();
     }
 
     public virtual void ApplyRightStickInput(Vector2 input) { }
