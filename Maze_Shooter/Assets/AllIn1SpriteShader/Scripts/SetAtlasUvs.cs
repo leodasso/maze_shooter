@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -60,6 +61,7 @@ public class SetAtlasUvs : MonoBehaviour
         }
     }
 
+	[Button]
     public void ResetAtlasUvs()
     {
         if (!GetRendererReferencesIfNeeded()) return;
