@@ -21,6 +21,7 @@ public class DashyMovement : MovementBase
 	bool _dashing = false;
 	bool _cooldown = false;
 	float _dashMultiplier = 1;
+	Vector3 _dashDirection;
 
 	RigidbodyConstraints initConstraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 	RigidbodyConstraints bounceConstraints = RigidbodyConstraints.FreezeRotation;
@@ -35,7 +36,7 @@ public class DashyMovement : MovementBase
     void FixedUpdate()
     {
 		Vector3 newVelocity = direction * TotalSpeedMultiplier() * _dashMultiplier;
-		if (_dashing) newVelocity = lastDirection * TotalSpeedMultiplier() * _dashMultiplier;
+		if (_dashing) newVelocity = _dashDirection * TotalSpeedMultiplier() * _dashMultiplier;
 
 		if (newVelocity.magnitude > .25f)
 			_rigidbody.velocity = new Vector3(newVelocity.x, _rigidbody.velocity.y, newVelocity.z);
@@ -50,6 +51,8 @@ public class DashyMovement : MovementBase
 	{
 		if (_dashing || _cooldown) return;
 		_dashing = true;
+		_dashDirection = direction.magnitude < .1f ? lastDirection : direction;
+		_dashDirection.Normalize();
 		StartCoroutine(DashRoutine());
 		playMaker.SendEvent("dash");
 	}

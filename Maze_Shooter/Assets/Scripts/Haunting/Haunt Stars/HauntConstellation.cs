@@ -104,7 +104,7 @@ public class HauntConstellation : MonoBehaviour
 	{
 		int starIndex = 0;
 
-		while (starIndex < prefabs.Count) {
+		while (starIndex < hauntStarSlots.Count) {
 			yield return new WaitForSecondsRealtime(delayBetweenSlots);
 			HauntStar newStar = 
 				Instantiate( prefabs[starIndex], transform.position, Quaternion.identity, transform)
