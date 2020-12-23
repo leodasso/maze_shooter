@@ -1593,12 +1593,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe6141f844198b439629637c169cd3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadowPrefab: {fileID: 1024560133667443443, guid: 197d5c7da3c5ae849952a8a55cad5e77,
+  shadowPrefab: {fileID: 1842192282749746345, guid: 227ba945210d0e749b7d50ea5f33ff96,
     type: 3}
   shadowScale: 1
   castingMask:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 2097152
 --- !u!1001 &843992847397143351
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1620,6 +1620,11 @@ PrefabInstance:
         type: 3}
       propertyPath: particleSystems.Array.data[2]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2619257262973043212, guid: 95fa684baee5afd4786be7eb3ef00469,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 3232974787184545812, guid: 95fa684baee5afd4786be7eb3ef00469,
         type: 3}
@@ -1857,7 +1862,7 @@ PrefabInstance:
     - target: {fileID: 2619257262973043212, guid: 95fa684baee5afd4786be7eb3ef00469,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 6
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3232974787184545812, guid: 95fa684baee5afd4786be7eb3ef00469,
         type: 3}

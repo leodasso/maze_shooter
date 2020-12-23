@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3463775809130845739}
   - component: {fileID: 4960442903429840830}
   - component: {fileID: 5451269134597802957}
+  - component: {fileID: 249372602563500556}
   m_Layer: 0
   m_Name: plant prop
   m_TagString: Untagged
@@ -62,7 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 3584
+    m_Bits: 3585
   noiseProfile: {fileID: 11400000, guid: 2bfce57e53118f14b8693670304e351e, type: 2}
   wobbleOtherObject: 1
   wobbler: {fileID: 1386039018424405054}
@@ -87,6 +88,22 @@ MonoBehaviour:
   placeholderPrefab: {fileID: 7276623351531485110, guid: 3038f4405f5499e4685eb480b364a719,
     type: 3}
   culled: 0
+--- !u!114 &249372602563500556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4130622135684261832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48e2b232c37b72469754bdd71ed1284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regular: {fileID: 2100000, guid: f80fe3dc1cf86ee439c2e81b5d05bea1, type: 2}
+  inverted: {fileID: 2100000, guid: 5fa8df9cfea13a14b8a85cf2fce141da, type: 2}
+  sprites:
+  - {fileID: 784974175697222477}
 --- !u!1 &8486678184378964107
 GameObject:
   m_ObjectHideFlags: 0
