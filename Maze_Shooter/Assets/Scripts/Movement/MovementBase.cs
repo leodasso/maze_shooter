@@ -118,6 +118,7 @@ public class MovementBase : MonoBehaviour, IControllable
     
     public virtual void ApplyLeftStickInput(Vector2 input)
     {
+		if (!enabled) return;
         direction = Math.Project2Dto3D(Vector2.ClampMagnitude(input, 1));
 		if (direction.magnitude > .3f) lastDirection = direction;
 		lastDirection.Normalize();
