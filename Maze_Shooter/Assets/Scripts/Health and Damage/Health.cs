@@ -23,6 +23,9 @@ public class Health : MonoBehaviour, IDestructible
 	[AssetsOnly, AssetList(Path = "Prefabs/Effects/"), ShowIf("createDamageEffect"), Indent, TabGroup("main")]
 	public GameObject damagedEffect;
 
+	[TabGroup("main"), Tooltip("Destroy this gameobject when killed (HP reaches 0)"), ToggleLeft]
+	public bool destroyWhenKilled = true;
+
 	[ShowIf("createDamageEffect"), Indent, TabGroup("main")]
 	public float damageEffectLifetime = 5;
 
@@ -95,6 +98,6 @@ public class Health : MonoBehaviour, IDestructible
 	{
 		_isKilled = true;
 		onKilledEvent.Invoke();
-		Destroy(gameObject);
+		if (destroyWhenKilled) Destroy(gameObject);
 	}
 }

@@ -14,8 +14,13 @@ public class SpriteAnimator : MonoBehaviour
 	[Space]
 	public bool unscaledTime;
 	public bool playSelf;
+
 	[ShowIf("playSelf")]
 	public bool pingPong;
+
+	[ShowIf("playSelf")]
+	public bool loop = true;
+
 	[ShowIf("playSelf")]
 	public float frameRate = 12;
 
@@ -25,9 +30,13 @@ public class SpriteAnimator : MonoBehaviour
 
 	int playDirection = 1;
 
+	// how many times has the full animation played? 
+	int _plays = 0;
+
 	float DeltaTime => unscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
 
 	void Start() {
+		Reset();
 		if (setProgressOnStart) progress = startProgress;
 	}
 
@@ -46,29 +55,41 @@ public class SpriteAnimator : MonoBehaviour
 	{
 		if (!spriteRenderer) return;
 		if (sprites.Count < 1) return;
+		if (!IsPlaying) return;
 
-		if (playSelf) SelfPlayUpdate();
-
-        int spriteIndex = Mathf.FloorToInt(progress * sprites.Count);
+		int spriteIndex = Mathf.FloorToInt(progress * sprites.Count);
         if (spriteIndex >= sprites.Count) 
             spriteIndex = sprites.Count - 1;
         spriteRenderer.sprite = sprites[spriteIndex];
+
+		if (playSelf) SelfPlayUpdate();
 	}
 
-	void SelfPlayUpdate() {
+	bool IsPlaying => loop || _plays < 1;
+
+	void SelfPlayUpdate() 
+	{
+		float progressRate = frameRate / sprites.Count;
+		progress += DeltaTime * progressRate * playDirection;
 
 		if (progress >= 1) {
 			if (pingPong) playDirection = -1;
 			else progress = 0;
 		}
+
 		else if (progress <= 0) {
 			if (pingPong) playDirection = 1;
 			else progress = 1;
 		}
-		
-		float progressRate = frameRate / sprites.Count;
-		progress += DeltaTime * progressRate * playDirection;
 
 		progress = Mathf.Clamp01(progress);
+		if (progress == 0) _plays++;
+
+	}
+
+	[Button]
+	public void Reset() {
+		_plays = 0;
+		progress = 0;
 	}
 }
