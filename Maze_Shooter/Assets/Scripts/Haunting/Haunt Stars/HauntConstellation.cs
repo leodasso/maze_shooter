@@ -78,20 +78,21 @@ public class HauntConstellation : MonoBehaviour
 		}
 		
 		// sequence for spawning stars, matching them to slots
-		StartCoroutine(SpawnStarsSequence(starPrefabs));
+		if (starPrefabs.Count > 0)
+			StartCoroutine(SpawnStarsSequence(starPrefabs));
 	}
 
 	[ButtonGroup]
 	void CheckIfSlotsFilled() 
 	{
-		foreach(var slot in hauntStarSlots) {
+		bool pass = true;
+		foreach(var slot in hauntStarSlots) 
+			if (!slot.CheckIfFilled()) pass = false;
 
-			if (!slot.CheckIfFilled()) {
-				playMaker.SendEvent("fail");
-				return;
-			}
-		}
-		playMaker.SendEvent("pass");
+		if (pass)
+			playMaker.SendEvent("pass");
+		else
+			playMaker.SendEvent("fail");
 	}
 
 	[ButtonGroup]
