@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 944744569446246455}
   - component: {fileID: 470607013473532552}
   - component: {fileID: 4404322041846106097}
+  - component: {fileID: 2303277173704144365}
   m_Layer: 0
-  m_Name: fat ghost vis
+  m_Name: fast guy ghost vis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 580df700a24af194dace6e4601dfb19f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2fc0ca2e9ab2ad242bcb505b7e71c7b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,10 +99,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 1
-  frameRate: 10
+  frameRate: 8
   realTime: 0
   spriteRenderer: {fileID: 944744569446246454}
-  spriteAnimation: {fileID: 11400000, guid: 0621145fa20d97e4c8853d87445d7a27, type: 2}
+  spriteAnimation: {fileID: 11400000, guid: ab9c68ec4cc03854e87e98aa7f6e4ea8, type: 2}
   direction:
     source: 1
     customDirection: {x: 0, y: 0, z: 0}
@@ -120,7 +121,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.99765015
+      value: 0.5022278
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -128,13 +129,22 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 9.943099
-      value: 2.226059
-      inSlope: 0.075887665
-      outSlope: 0.075887665
+      time: 0.9505871
+      value: 0.86124897
+      inSlope: 0.051662385
+      outSlope: 0.051662385
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.09816858
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 9.943099
+      value: 1.08002
+      inSlope: 0.015215904
+      outSlope: 0.015215904
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.07003009
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -172,3 +182,26 @@ MonoBehaviour:
     type: 3}
   lifetime: 5
   delay: 0
+--- !u!114 &2303277173704144365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944744569446246448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a62297ed47bfa474fa30d79ed5296a00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleSpeed: 0.5
+  animationPlayer: {fileID: 944744569446246455}
+  velocitySource:
+    source: 0
+    customDirection: {x: 0, y: 0, z: 0}
+    rigidbody: {fileID: 0}
+    mover: {fileID: 0}
+    pseudoVelocity: {fileID: 0}
+  idle: {fileID: 11400000, guid: ab9c68ec4cc03854e87e98aa7f6e4ea8, type: 2}
+  run: {fileID: 11400000, guid: dbf60cbf974e8a34aabcc206f3f82cdc, type: 2}
+  flying: {fileID: 11400000, guid: 0621145fa20d97e4c8853d87445d7a27, type: 2}
