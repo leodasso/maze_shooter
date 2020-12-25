@@ -15,6 +15,9 @@ public class DashyMovement : MovementBase
 	public AnimationCurve dashSpeedMultiplier = AnimationCurve.Constant(0, 1, 1);
 	public float dashCooldown = 2;
 
+	[Tooltip("If collides with objects with these tags while dashing, won't bounce.")]
+	public List<string> omitBounceTags = new List<string>();
+
 	[Tooltip("Sends events 'dash', 'dashFinish', 'cooldownFinish', 'dashBump'")]
 	public PlayMakerFSM playMaker;
 
@@ -86,7 +89,10 @@ public class DashyMovement : MovementBase
 	protected override void OnCollisionEnter(Collision other)
 	{
 		base.OnCollisionEnter(other);
-		if (_dashing) playMaker.SendEvent("dashBump");
+		if (_dashing) {
+			if (omitBounceTags.Contains(other.gameObject.tag)) return;
+			playMaker.SendEvent("dashBump");
+		}
 	}
 
 	public void BounceBack() 
