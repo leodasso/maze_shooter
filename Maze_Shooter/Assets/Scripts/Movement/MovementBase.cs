@@ -7,7 +7,7 @@ using ShootyGhost;
 public class MovementBase : MonoBehaviour, IControllable
 {
 	public static float gravity = -25;
-
+	
 	[OnValueChanged("ApplyDynamicsProfile")]
 	public DynamicsProfile movementProfile;
     public float speedMultiplier = 1;
@@ -17,6 +17,8 @@ public class MovementBase : MonoBehaviour, IControllable
     
     [ShowIf("useSpeedCurve")]
     public AnimationCurve speedCurve;
+
+	public Arena arena;
     
 
 	[PropertyOrder(900), FoldoutGroup("events")]
@@ -129,5 +131,15 @@ public class MovementBase : MonoBehaviour, IControllable
     public string Name()
     {
         return GetType().ToString() + " " + name;
+    }
+
+	public void ChooseDirection()
+    {
+		if (arena) {
+			Vector3 newPoint = arena.GetPoint();
+			direction = (newPoint - transform.position).normalized;
+		}
+        else
+			direction = Random.onUnitSphere;
     }
 }
