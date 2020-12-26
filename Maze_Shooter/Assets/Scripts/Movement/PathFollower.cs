@@ -14,9 +14,19 @@ public class PathFollower : MovementBase
     [Space]
     public float acceleration = 10;
     public float drag = 10;
+	public float maxSpeed = 5;
     [Tooltip("Speed of lerping position to the current point along the path.")]
     public float lerpSpeed = 10;
     public float pathPosition;
+
+	public bool clampPathPos;
+	public bool orientToPath;
+
+	[ShowIf("clampPathPos"), HorizontalGroup("clamp"), LabelText("Min"), LabelWidth(40)]
+	public float minPathPos;
+
+	[ShowIf("clampPathPos"), HorizontalGroup("clamp"), LabelText("Max"), LabelWidth(40)]
+	public float maxPathPos;
     
     [Tooltip("Try to get it to match the collider approximately - this is used for faking collision.")]
     public float radius = 2;
@@ -28,30 +38,31 @@ public class PathFollower : MovementBase
     
     [Space]
     public CinemachineSmoothPath path;
-    public List<PathFollower> siblings = new List<PathFollower>();
 
     bool _slowDown;
     Vector3 _pathTangent;
     CinemachinePathBase.PositionUnits _units = CinemachinePathBase.PositionUnits.Distance;
+
+	public float PathSpeed => _speedOnPath;
+	public float FinalRadius => radius * transform.localScale.x;
     
     /// <summary>
     /// The dot product between the path tangent and the movement input direction.
     /// </summary>
     float _dot;
-    float MaxSpeed => movementProfile.movementForce * TotalSpeedMultiplier();
     float _speedOnPath;
 
 	public void PlaceAtEnd() {
 		pathPosition = path.PathLength;
 	}
 
-    void OnDrawGizmos()
+    void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawRay(transform.position, _pathTangent * 1);
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.DrawWireSphere(transform.position, FinalRadius);
     }
 
     // Update is called once per frame
@@ -62,9 +73,19 @@ public class PathFollower : MovementBase
         if (!path) return;
         _pathTangent = path.EvaluateTangentAtUnit(pathPosition, _units);
 
-        if (master) AutonomousUpdate();
+        if (master)
+			MasterUpdate();
 
+		UpdatePosition();
+
+    }
+
+	void UpdatePosition() 
+	{
         pathPosition += _speedOnPath * Time.deltaTime;
+
+		if (clampPathPos)
+			pathPosition = Mathf.Clamp(pathPosition, minPathPos, maxPathPos);
 		
         // Loop the path position so it stays within the bounds of path length.
 		if (path.Looped) {
@@ -75,25 +96,25 @@ public class PathFollower : MovementBase
 		}else {
 			pathPosition = Mathf.Clamp(pathPosition, 0, path.PathLength);
 		}
+
+		if (orientToPath) {
+			transform.rotation = path.EvaluateOrientationAtUnit(pathPosition, _units);
+		}
         
         // Lerp me to the path point
         transform.position = Vector3.Lerp(transform.position, path.EvaluatePositionAtUnit(pathPosition, _units), 
             Time.deltaTime * lerpSpeed);
-    }
+	}
 
-    void AutonomousUpdate()
+    void MasterUpdate()
     {
         _dot = Vector3.Dot(_pathTangent.normalized, direction.normalized) * inputDirectionForgiveness;
         _dot = Mathf.Clamp(_dot, -1, 1);
-        _speedOnPath += acceleration * _dot * direction.magnitude;
-        _speedOnPath = Mathf.Clamp(_speedOnPath, -MaxSpeed, MaxSpeed);
+        _speedOnPath += acceleration * _dot * direction.magnitude * Time.deltaTime;
+        _speedOnPath = Mathf.Clamp(_speedOnPath, -maxSpeed, maxSpeed);
 
-        _speedOnPath = Mathf.Lerp(_speedOnPath, 0, Time.deltaTime * drag);
-
-        foreach (var sibling in siblings)
-        {
-            sibling._speedOnPath = _speedOnPath;
-        }
+		if (direction.magnitude < .1f)
+        	_speedOnPath = Mathf.Lerp(_speedOnPath, 0, Time.deltaTime * drag);
     }
 
     [Button]
@@ -102,8 +123,10 @@ public class PathFollower : MovementBase
         _speedOnPath = 0;
     }
     
-    void OnCollisionEnter(Collision other)
+    protected override void OnCollisionEnter(Collision other)
     {
+		base.OnCollisionEnter(other);
+
         PathFollower otherPathFollower = other.collider.GetComponent<PathFollower>();
         if (otherPathFollower)
         {
@@ -127,8 +150,8 @@ public class PathFollower : MovementBase
         // Because distance calc is expensive, limit this to only a few iterations
         while (iterations < 5)
         {
-            currentPathPos += radius / 5 * correctionDir;
-            if (Vector3.Distance(groundPoint, path.EvaluatePositionAtUnit(currentPathPos, _units)) > radius)
+            currentPathPos += FinalRadius / 5 * correctionDir;
+            if (Vector3.Distance(groundPoint, path.EvaluatePositionAtUnit(currentPathPos, _units)) > FinalRadius)
                 break;
             iterations++;
         }
@@ -145,22 +168,6 @@ public class PathFollower : MovementBase
         _speedOnPath *= -.9f;
     }
 
-
-    [Button]
-    void GetSiblings()
-    {
-        siblings.Clear();
-        Transform parent = transform.parent;
-        if (!parent)
-        {
-            Debug.LogWarning(name + " has no parent, so can't get siblings! If you're trying to group path followers " +
-                             "together, try placing them all in an empty game object.");
-            return;
-        }
-        
-        siblings.AddRange(parent.GetComponentsInChildren<PathFollower>());
-        siblings.Remove(this);
-    }
 
     // Below functions are for easy interfacing with PlayMaker
     public void SetAsMaster()

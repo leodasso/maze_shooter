@@ -92,7 +92,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  spriteAnimationPlayer: {fileID: 0}
   onGrounded:
     m_PersistentCalls:
       m_Calls: []
@@ -100,17 +99,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   master: 1
-  acceleration: 1
-  drag: 15
+  acceleration: 100
+  drag: 25
+  maxSpeed: 3
   lerpSpeed: 25
   pathPosition: 0
+  clampPathPos: 0
+  minPathPos: 0
+  maxPathPos: 0
   radius: 2
   inputDirectionForgiveness: 2
   collisionLayerMask:
     serializedVersion: 2
     m_Bits: 1
   path: {fileID: 0}
-  siblings: []
 --- !u!114 &8097513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -904,7 +906,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ea32f1a9d9308a840aea4006b2c89b20, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d1c1aed8276e32408e51cc6e8f473c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -939,7 +941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a05506e86408f4bae29a22b776d5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progress: 0.4688555
+  progress: 0.67306894
   spriteRenderer: {fileID: 2346832611299250036}
   sprites:
   - {fileID: 21300000, guid: 7ec8fe91c7c6b9642b4d5a9c6a2a7525, type: 3}

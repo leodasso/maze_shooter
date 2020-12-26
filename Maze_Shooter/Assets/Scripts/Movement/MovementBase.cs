@@ -18,8 +18,6 @@ public class MovementBase : MonoBehaviour, IControllable
     [ShowIf("useSpeedCurve")]
     public AnimationCurve speedCurve;
     
-    [Tooltip("Optional - will set the current path tangent to the sprite animation player")]
-    public SpriteAnimationPlayer spriteAnimationPlayer;
 
 	[PropertyOrder(900), FoldoutGroup("events")]
 	public UnityEvent onGrounded;
