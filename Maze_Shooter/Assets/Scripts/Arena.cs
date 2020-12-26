@@ -29,4 +29,11 @@ public class Arena : MonoBehaviour
 		Vector3 pt = GetPoint();
 		Debug.DrawLine(pt, pt + Vector3.up, Color.red, 5);
 	}
+
+	public bool ContainsObject(Transform t) 
+	{
+		return Vector2.Distance(
+			new Vector2(transform.position.x, transform.position.z), 
+			new Vector2(t.position.x, t.position.z)) <= radius;
+	}
 }

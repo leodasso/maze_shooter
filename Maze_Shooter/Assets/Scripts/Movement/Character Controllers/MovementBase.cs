@@ -165,7 +165,8 @@ public class MovementBase : MonoBehaviour, IControllable
 
 	public void ChooseRandomDirection()
     {
-		if (arena) {
+		// if there's an arena defined, keep the direction to be within arena
+		if (arena && !arena.ContainsObject(transform)) {
 			Vector3 newPoint = arena.GetPoint();
 			direction = (newPoint - transform.position).normalized;
 		}
