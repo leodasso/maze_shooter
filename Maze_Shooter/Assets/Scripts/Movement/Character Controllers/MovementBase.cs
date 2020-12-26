@@ -5,12 +5,15 @@ using Sirenix.OdinInspector;
 using ShootyGhost;
 
 public class MovementBase : MonoBehaviour, IControllable
-{
-	public static float gravity = -25;
-	
+{	
 	[OnValueChanged("ApplyDynamicsProfile")]
 	public DynamicsProfile movementProfile;
+
+	[Tooltip("Multiplies the max speed")]
     public float speedMultiplier = 1;
+
+	[Range(0, 1), Tooltip("If movement input is less than this, drag kicks in.")]
+	public float moveInputThreshold = .25f;
 
     [Tooltip("Use an animation curve to control the speed over time? This is a multiplier.")]
     public bool useSpeedCurve;
@@ -19,7 +22,6 @@ public class MovementBase : MonoBehaviour, IControllable
     public AnimationCurve speedCurve;
 
 	public Arena arena;
-    
 
 	[PropertyOrder(900), FoldoutGroup("events")]
 	public UnityEvent onGrounded;
@@ -42,6 +44,8 @@ public class MovementBase : MonoBehaviour, IControllable
 	/// </summary>
 	protected Vector3 lastDirection;
 
+	protected Vector3 totalVelocity;
+
     float _speedCurveTime;
 
 	[ShowInInspector, ReadOnly]
@@ -52,6 +56,9 @@ public class MovementBase : MonoBehaviour, IControllable
         if (!useSpeedCurve) return speedMultiplier;
         return speedMultiplier * speedCurve.Evaluate(_speedCurveTime);
     }
+
+	protected virtual float TotalMaxSpeed => TotalSpeedMultiplier() * movementProfile.maxSpeed;
+	protected virtual float TotalAcceleration => movementProfile.acceleration;
     
     // Start is called before the first frame update
     protected virtual void Start()
@@ -74,11 +81,29 @@ public class MovementBase : MonoBehaviour, IControllable
         {
             _speedCurveTime += Time.deltaTime;
             if (_speedCurveTime > speedCurve.Duration())
-            {
                 _speedCurveTime = 0;
-            }
         }
     }
+
+	protected virtual void FixedUpdate() 
+	{
+		CalculateTotalVelocity();
+
+		if (direction.magnitude > moveInputThreshold)
+			_rigidbody.velocity = new Vector3(totalVelocity.x, _rigidbody.velocity.y, totalVelocity.z);
+
+		else {
+			Vector3 zeroSpeed = new Vector3(0, _rigidbody.velocity.y, 0);
+			totalVelocity = Vector3.Lerp(totalVelocity, Vector3.zero, Time.fixedDeltaTime * movementProfile.drag);
+			_rigidbody.velocity = Vector3.Lerp(_rigidbody.velocity, zeroSpeed, Time.fixedDeltaTime * movementProfile.drag);
+		}
+	}
+
+	protected virtual void CalculateTotalVelocity() 
+	{
+		totalVelocity += direction * TotalAcceleration * Time.fixedDeltaTime;
+		totalVelocity = Vector3.ClampMagnitude(totalVelocity, TotalMaxSpeed);
+	}
 
 	protected virtual void OnCollisionEnter(Collision other) 
 	{
@@ -90,7 +115,7 @@ public class MovementBase : MonoBehaviour, IControllable
 		}
 	}
 
-		protected virtual void OnCollisionExit(Collision other) 
+	protected virtual void OnCollisionExit(Collision other) 
 	{
 		if (other.transform.tag == "Ground") {
 			if (_isGrounded) {
@@ -133,7 +158,12 @@ public class MovementBase : MonoBehaviour, IControllable
         return GetType().ToString() + " " + name;
     }
 
-	public void ChooseDirection()
+	public void RestartSpeedCurve() 
+	{
+		_speedCurveTime = 0;
+	}
+
+	public void ChooseRandomDirection()
     {
 		if (arena) {
 			Vector3 newPoint = arena.GetPoint();

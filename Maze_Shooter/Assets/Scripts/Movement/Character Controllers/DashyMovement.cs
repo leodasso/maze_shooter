@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class DashyMovement : MovementBase
 {
@@ -35,20 +34,15 @@ public class DashyMovement : MovementBase
 		_rigidbody.constraints = initConstraints;
 	}
 
-
-    void FixedUpdate()
-    {
-		Vector3 newVelocity = direction * TotalSpeedMultiplier() * _dashMultiplier;
-		if (_dashing) newVelocity = _dashDirection * TotalSpeedMultiplier() * _dashMultiplier;
-
-		if (newVelocity.magnitude > .25f)
-			_rigidbody.velocity = new Vector3(newVelocity.x, _rigidbody.velocity.y, newVelocity.z);
-
-		else {
-			Vector3 zeroSpeed = new Vector3(0, _rigidbody.velocity.y, 0);
-			_rigidbody.velocity = Vector3.Lerp(_rigidbody.velocity, zeroSpeed, Time.fixedDeltaTime * drag);
+	protected override void CalculateTotalVelocity()
+	{
+		if (_dashing) {
+			direction = _dashDirection;
+			totalVelocity = _dashDirection * TotalMaxSpeed * _dashMultiplier;
 		}
-    }
+		else
+			base.CalculateTotalVelocity();
+	}
 
 	public void Dash() 
 	{

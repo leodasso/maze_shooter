@@ -25,12 +25,12 @@ public class SimpleMovement : MovementBase
             target = targetFinder.currentTarget.gameObject;
     }
     
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
         if (target && useTargetFinder) 
             direction = (target.transform.position - transform.position).normalized;
         
-        _rigidbody.AddForce(direction * movementProfile.movementForce * TotalSpeedMultiplier() * Time.fixedDeltaTime);
+		base.FixedUpdate();
     }
 
     // These functions are for playmaker to easily interface with this behavior

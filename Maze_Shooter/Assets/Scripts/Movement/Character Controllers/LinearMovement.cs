@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
 
-public enum MovementMode
-{
-    Force = 0, Velocity = 1
-}
+
 
 public class LinearMovement : MovementBase
 {
@@ -15,8 +12,6 @@ public class LinearMovement : MovementBase
 
     [Tooltip("If I collide with objects of these layers, I will reverse direction")]
     public LayerMask layersThatChangeDirection;
-
-    public MovementMode movementMode = MovementMode.Force;
     
     // Start is called before the first frame update
     protected override void Start()
@@ -28,7 +23,7 @@ public class LinearMovement : MovementBase
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3)initVector.normalized * TotalSpeedMultiplier() * movementProfile.movementForce);
+        Gizmos.DrawLine(transform.position, transform.position + (Vector3)initVector.normalized * TotalSpeedMultiplier() * movementProfile.maxSpeed);
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -42,21 +37,10 @@ public class LinearMovement : MovementBase
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
-        if (!_rigidbody) return;
-
-        Vector2 forceVector = direction.normalized * TotalSpeedMultiplier() * movementProfile.movementForce;
-        
-        switch (movementMode)
-        {
-            case MovementMode.Force:
-                _rigidbody.AddForce(forceVector);
-                break;
-            case MovementMode.Velocity:
-                _rigidbody.velocity = forceVector;
-                break;
-        }
+		base.FixedUpdate();
+		// TODO
     }
 
     public override void ApplyLeftStickInput(Vector2 input)
