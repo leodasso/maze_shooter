@@ -10,8 +10,6 @@ public class Galaxy : MonoBehaviour
 {
     [Tooltip("Where to show the focused node (in relation to this object's pivot point)")]
     public Vector3 focusOffset;
-    [Tooltip("The speed at which the constellation instance is sucked in and merged to it's corresponding node")]
-    public FloatReference mergeSpeed;
     public FloatReference focusSpeed;
     public List<ConstellationNode> constellationNodes = new List<ConstellationNode>();
     [Tooltip("If this isn't null, it will be shown at the center of the portal")]
@@ -22,16 +20,11 @@ public class Galaxy : MonoBehaviour
     public ConstellationData constellationToFocus;
     public Constellation constellationInstance;
     public UnityEvent showConstellationAcquire;
+	public StarPath starPath;
+
+	public ConstellationNode focusNode;
 
     Vector3 _difference;
-    // If true, lerps the constellation instance to it's node
-    bool _mergingConstellation;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -43,18 +36,13 @@ public class Galaxy : MonoBehaviour
                 Vector3.Lerp(galaxyMain.transform.localPosition, _difference,
                     Time.unscaledDeltaTime * focusSpeed.Value);
         }
-
-        if (_mergingConstellation && constellationInstance)
-        {
-            constellationInstance.transform.position = Vector3.Lerp(constellationInstance.transform.position,
-                focusObject.transform.position, Time.unscaledDeltaTime * mergeSpeed.Value);
-        }
     }
 
     public void ShowConstellation(ConstellationData constellation)
     {
-        ConstellationNode node = NodeForConstellation(constellation);
-        focusObject = node.gameObject;
+        focusNode = NodeForConstellation(constellation);
+		starPath.starSlot = focusNode.transform;
+        focusObject = focusNode.gameObject;
     }
 
     public void ShowMyConstellation()
@@ -66,8 +54,9 @@ public class Galaxy : MonoBehaviour
     {
         if (!constellationInstance) return;
         constellationInstance.transform.parent = transform;
-        constellationInstance.onAddToGalaxy.Invoke();
-        _mergingConstellation = true;
+		starPath.setStartPosition(constellationInstance.transform);
+		starPath.objectOnPath = constellationInstance.transform;
+		starPath.MoveAlongPath();
     }
 
     ConstellationNode NodeForConstellation(ConstellationData constellation)
@@ -80,6 +69,12 @@ public class Galaxy : MonoBehaviour
         
         throw new Exception("The constellation " + constellation.name + " was not found in the galaxy.");
     }
+
+	public void FillNode() 
+	{
+		constellationInstance.onAddToGalaxy.Invoke();
+		if (focusNode) focusNode.Fill();
+	}
 
     [Button]
     void GetConstellationNodes()
