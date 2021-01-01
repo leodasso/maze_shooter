@@ -11,6 +11,11 @@ namespace ShootyGhost
         public UnityEvent onHaunted;
         public UnityEvent onUnHaunted;
 
+		public bool linkHealth;
+		
+		[ShowIf("linkHealth")]
+		public Health health;
+
 		[AssetsOnly]
 		public GameObject hauntConstellationPrefab;
 
@@ -55,19 +60,45 @@ namespace ShootyGhost
 		public void AcceptHaunt() 
 		{
 			onHaunted.Invoke();
+			if (linkHealth) LinkHealth();
 		}
 
+		void LinkHealth() 
+		{
+			if (!health || !haunter) {
+				Debug.LogWarning("Components are missing for health link!", gameObject);
+				return;
+			}
+
+			health.mainHealth = haunter.GetComponent<Health>();
+		}
+
+		void UnlinkHealth() 
+		{
+			if (health) health.mainHealth = null;
+		}
+
+		/// <summary>
+		/// Haunt was rejected before it could be accepted.
+		/// </summary>
 		public void RejectHaunt() 
 		{
 			EndHaunt();
 		}
 
+		/// <summary>
+		/// Handles all un-haunting for this particular object.
+		/// </summary>
         public void OnUnHaunted()
         {
             onUnHaunted.Invoke();
+			if (linkHealth) UnlinkHealth();
 			haunter = null;
         }
 
+		/// <summary>
+		/// Forces haunter to un-haunt this instance.
+		/// </summary>
 		public void EndHaunt() {
 			if (!haunter) return;
 			haunter.EndHaunt();

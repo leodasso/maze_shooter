@@ -29,6 +29,9 @@ public class Health : MonoBehaviour, IDestructible
 	[ShowIf("createDamageEffect"), Indent, TabGroup("main")]
 	public float damageEffectLifetime = 5;
 
+	[TabGroup("main"), Tooltip("(optional) events will be called on mainHealth as if it is damaged/killed")]
+	public Health mainHealth;
+
 	[DrawWithUnity, TabGroup("events")]
 	public UnityEvent onDamagedEvent;
 
@@ -78,6 +81,7 @@ public class Health : MonoBehaviour, IDestructible
 		
 		onDamaged?.Invoke(_currentHealth);
 		onDamagedEvent.Invoke();
+		if (mainHealth) mainHealth.onDamagedEvent.Invoke();
 	}
 
 	public void Heal(int amount)
@@ -98,6 +102,7 @@ public class Health : MonoBehaviour, IDestructible
 	{
 		_isKilled = true;
 		onKilledEvent.Invoke();
+		if (mainHealth) mainHealth.onKilledEvent.Invoke();
 		if (destroyWhenKilled) Destroy(gameObject);
 	}
 }

@@ -524,6 +524,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  spawnSpikesPercentage: 0.85
   dashCooldown: 2
   omitBounceTags:
   - Small
@@ -625,6 +626,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  linkHealth: 1
+  health: {fileID: 2053979096284153871}
   hauntConstellationPrefab: {fileID: 7346983384601703694, guid: 1523824622d49d742babc4ca79311c7c,
     type: 3}
   haunter: {fileID: 0}
@@ -1879,6 +1882,7 @@ MonoBehaviour:
   damagedEffect: {fileID: 0}
   destroyWhenKilled: 1
   damageEffectLifetime: 5
+  mainHealth: {fileID: 0}
   onDamagedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -2220,7 +2224,7 @@ PrefabInstance:
     - target: {fileID: 2517912055591930007, guid: 5002275caf6512849b502fc14a98c7c7,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3764227881770986091, guid: 5002275caf6512849b502fc14a98c7c7,
         type: 3}
@@ -2438,7 +2442,7 @@ PrefabInstance:
     - target: {fileID: 2517912055591930007, guid: 5002275caf6512849b502fc14a98c7c7,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3764227881770986091, guid: 5002275caf6512849b502fc14a98c7c7,
         type: 3}
