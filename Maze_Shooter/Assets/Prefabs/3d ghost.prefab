@@ -31,6 +31,7 @@ Transform:
   - {fileID: 3600187186897221227}
   - {fileID: 5652674323149366896}
   - {fileID: 1611312660587961186}
+  - {fileID: 2830437098314238963}
   m_Father: {fileID: 3596233078318729541}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -416,6 +417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug: 0
   controlledByPlayer: 1
+  arena: {fileID: 0}
   moveInput: {x: 0, y: 0}
   fireInput: {x: 0, y: 0}
 --- !u!114 &3196075495648318836
@@ -475,6 +477,7 @@ MonoBehaviour:
     type: 3}
   destroyWhenKilled: 1
   damageEffectLifetime: 5
+  mainHealth: {fileID: 0}
   onDamagedEvent:
     m_PersistentCalls:
       m_Calls:
@@ -2461,6 +2464,98 @@ MonoBehaviour:
       m_Calls: []
   gameEvents:
   - {fileID: 11400000, guid: f8523fa9519318142a6e66f67796e431, type: 2}
+--- !u!1 &7325074712588536154
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2830437098314238963}
+  - component: {fileID: 3910180080087665691}
+  - component: {fileID: 4894972296447008963}
+  m_Layer: 9
+  m_Name: Galaxy Events
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2830437098314238963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7325074712588536154}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6639616230698913869}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3910180080087665691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7325074712588536154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83b5d72ab14f3f4c8442f76808cf317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - {fileID: 11400000, guid: ed86992b445dfb74094732983e7bfd1e, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3680872684990957169}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_sortingOrder
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 105
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  comment: 
+--- !u!114 &4894972296447008963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7325074712588536154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83b5d72ab14f3f4c8442f76808cf317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - {fileID: 11400000, guid: b7e4ee69a8cd33745b72b5befc4e695d, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3680872684990957169}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_sortingOrder
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  comment: 
 --- !u!1 &8762180183152181880
 GameObject:
   m_ObjectHideFlags: 0
