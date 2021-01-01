@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
 using Sirenix.OdinInspector;
@@ -11,9 +10,10 @@ public class Stage : ScriptableObject
     public Color stageColor = Color.white;
     public string sceneName;
 
-	[Tooltip("Constellations for this stage")]
-	public List<ConstellationData> constellations = new List<ConstellationData>();
-	public GameObject hauntStarPrefab;
+	[Space]
+	public World world;
+
+	public GameObject hauntStarPrefab => world.hauntStarPrefab;
     
     [Tooltip("Events that will take place immediately when stage is loaded")]
     public List<GameEvent> immediateEvents;
@@ -28,7 +28,7 @@ public class Stage : ScriptableObject
 	public List<ConstellationData> GetAcquiredConstellations() 
 	{
 		List<ConstellationData> returnList = new List<ConstellationData>();
-		foreach(var c in constellations) 
+		foreach(var c in world.constellations) 
 			if (c.HasBeenCollected()) returnList.Add(c);
 
 		return returnList;
