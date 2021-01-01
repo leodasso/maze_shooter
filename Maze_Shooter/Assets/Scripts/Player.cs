@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
 {
 	[ToggleLeft]
 	public bool debug;
+
+	[ToggleLeft]
+	public bool controlledByPlayer;
 	
 	[ReadOnly]
 	public Vector2 moveInput;
@@ -50,14 +53,19 @@ public class Player : MonoBehaviour
 	{
 		// Don't take action if we're paused
 		if (Time.timeScale <= Mathf.Epsilon) return;
-		if (_player == null) return;
+
+		if (controlledByPlayer)
+			ApplyPlayerInputs();
 		
-		// Get the player's inputs
+		UpdateControllables();
+	}
+
+	void ApplyPlayerInputs() 
+	{
+		if (_player == null) return;
 		moveInput = new Vector2(_player.GetAxis("moveX"), _player.GetAxis("moveY"));
 		fireInput = new Vector2(_player.GetAxis("fireX"), _player.GetAxis("fireY"));
 		_alphaAction = _player.GetButtonDown("alpha");
-		
-		UpdateControllables();
 	}
 
 	void UpdateControllables()
@@ -73,5 +81,13 @@ public class Player : MonoBehaviour
 			if (_alphaAction)
 				controllable.DoActionAlpha();
 		}
+	}
+
+	public void EnablePlayerControl() {
+		controlledByPlayer = true;
+	}
+
+	public void DisablePlayerControl() {
+		controlledByPlayer = false;
 	}
 }
