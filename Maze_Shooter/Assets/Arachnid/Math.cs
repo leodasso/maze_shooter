@@ -79,6 +79,14 @@ namespace Arachnid
 		}
 
 		/// <summary>
+		/// Given a vector of a 3d direction in space, returns a vector that's 2D (x, y)
+		/// </summary>
+		public static Vector2 Project3Dto2D(Vector3 vector) 
+		{
+			return new Vector2(vector.x, vector.z);
+		}
+
+		/// <summary>
 		/// Returns a random element of the given list.
 		/// </summary>
 		public static T RandomElementOfList<T>(List<T> list)

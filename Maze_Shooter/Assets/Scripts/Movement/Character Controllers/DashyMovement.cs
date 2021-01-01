@@ -12,6 +12,8 @@ public class DashyMovement : MovementBase
 	public float bounceHorizontalSpeed = 10;
 
 	public AnimationCurve dashSpeedMultiplier = AnimationCurve.Constant(0, 1, 1);
+	[Range(0, 1), Tooltip("Percentage of the dash in which spikes are spawned. ")]
+	public float spawnSpikesPercentage = .85f;
 	public float dashCooldown = 2;
 
 	[Tooltip("If collides with objects with these tags while dashing, won't bounce.")]
@@ -57,13 +59,17 @@ public class DashyMovement : MovementBase
 	IEnumerator DashRoutine() 
 	{
 		float t = 0;
-		while (t < dashSpeedMultiplier.Duration()) {
+		while (t < dashSpeedMultiplier.Duration() * spawnSpikesPercentage) {
 			_dashMultiplier = dashSpeedMultiplier.Evaluate(t);
 			t += Time.deltaTime;
 			yield return null;
 		}
 
 		playMaker.SendEvent("dashFinish");
+
+		float remainingDashTime = dashSpeedMultiplier.Duration() * (1 - spawnSpikesPercentage);
+		yield return new WaitForSeconds(remainingDashTime);
+
 		_dashing = false;
 		_cooldown = true;
 		_dashMultiplier = 1;

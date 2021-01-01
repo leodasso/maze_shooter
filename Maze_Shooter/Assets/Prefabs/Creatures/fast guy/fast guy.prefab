@@ -556,6 +556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug: 0
   controlledByPlayer: 0
+  arena: {fileID: 0}
   moveInput: {x: 0, y: 0}
   fireInput: {x: 0, y: 0}
 --- !u!114 &7577387461302741250
@@ -642,7 +643,7 @@ MonoBehaviour:
   fsm:
     dataVersion: 2
     usedInTemplate: {fileID: 0}
-    name: FSM
+    name: FSM_dash
     startState: normal
     states:
     - name: normal

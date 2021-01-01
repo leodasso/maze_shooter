@@ -19,6 +19,9 @@ public class Arena : MonoBehaviour
 		return new Vector3(x, transform.position.y, z);
 	}
 
+	/// <summary>
+	/// Returns a random point within the arena.
+	/// </summary>
 	public Vector3 GetPoint() {
 		Vector3 random = Random.insideUnitSphere * radius;
 		return new Vector3(random.x + transform.position.x, transform.position.y, random.z + transform.position.z);

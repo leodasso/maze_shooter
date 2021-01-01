@@ -12,12 +12,14 @@ public class Player : MonoBehaviour
 
 	[ToggleLeft]
 	public bool controlledByPlayer;
+
+	public Arena arena;
 	
 	[ReadOnly]
 	public Vector2 moveInput;
 	[ReadOnly]
 	public Vector2 fireInput;
-	
+	 
 	public List<IControllable> controllables = new List<IControllable>();
 	Rewired.Player _player;
 
@@ -27,6 +29,22 @@ public class Player : MonoBehaviour
 	{
 		controllables.Clear();
 		controllables.AddRange(GetComponentsInChildren<IControllable>());
+	}
+
+	public void GotoRandomArenaPoint() 
+	{
+		if (!arena) {
+			Debug.LogWarning("No arena has been assigned for " + name, gameObject);
+			return;
+		}
+
+		Vector3 randomPos = arena.GetPoint();
+		Vector3 newDirection = (randomPos - transform.position).normalized;
+		moveInput = Math.Project3Dto2D(newDirection);
+	}
+
+	public void ClearMoveInput() {
+		moveInput = Vector2.zero;
 	}
 
 	// Use this for initialization
@@ -42,7 +60,7 @@ public class Player : MonoBehaviour
 
 	void OnDisable()
 	{
-		moveInput = Vector2.zero;
+		ClearMoveInput();
 		fireInput = Vector2.zero;
 		_alphaAction = false;
 		UpdateControllables();
