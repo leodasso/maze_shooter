@@ -21,8 +21,6 @@ public class MovementBase : MonoBehaviour, IControllable
     [ShowIf("useSpeedCurve")]
     public AnimationCurve speedCurve;
 
-	public Arena arena;
-
 	[PropertyOrder(900), FoldoutGroup("events")]
 	public UnityEvent onGrounded;
 
@@ -162,15 +160,4 @@ public class MovementBase : MonoBehaviour, IControllable
 	{
 		_speedCurveTime = 0;
 	}
-
-	public void ChooseRandomDirection()
-    {
-		// if there's an arena defined, keep the direction to be within arena
-		if (arena && !arena.ContainsObject(transform)) {
-			Vector3 newPoint = arena.GetPoint();
-			direction = (newPoint - transform.position).normalized;
-		}
-        else
-			direction = Random.onUnitSphere;
-    }
 }
