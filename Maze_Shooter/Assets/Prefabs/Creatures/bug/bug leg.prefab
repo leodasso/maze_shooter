@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3426066878066004141}
   - component: {fileID: 4834413821097991197}
+  - component: {fileID: 7762204430281390826}
   m_Layer: 0
   m_Name: bug leg
   m_TagString: Untagged
@@ -50,7 +51,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f80fe3dc1cf86ee439c2e81b5d05bea1, type: 2}
+  - {fileID: 2100000, guid: c3697d487d5530e41b6392c5babac739, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -73,11 +74,11 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: -0.38, z: 2}
-  - {x: 0, y: -4.51, z: 2}
+  - {x: 3, y: 1.0233555, z: -0.49982336}
+  - {x: 3, y: -3.4766445, z: -0.49982336}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.6440605
+    widthMultiplier: 2.5787306
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -140,7 +141,7 @@ LineRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
+    numCornerVertices: 3
     numCapVertices: 0
     alignment: 0
     textureMode: 0
@@ -148,3 +149,112 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
+--- !u!114 &7762204430281390826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7325931464111144204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 686eeac82e0453746927b3c9ed141587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progress: 1
+  heightOverProgress:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.0000683
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.059638813
+      value: 0.9967083
+      inSlope: 0.123721205
+      outSlope: 2.1384223
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.27689612
+      outWeight: 0.11669046
+    - serializedVersion: 3
+      time: 0.17656726
+      value: 2.905082
+      inSlope: 5.6464906
+      outSlope: 5.6464906
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.45184538
+      value: 2.8587394
+      inSlope: -2.7586486
+      outSlope: -2.7586486
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.21224055
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.60293347
+      value: 1.0273873
+      inSlope: -4.067599
+      outSlope: -0.13146926
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.12462646
+      outWeight: 0.11437902
+    - serializedVersion: 3
+      time: 0.998782
+      value: 1.0233555
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zOverProgress:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: -0.48576906
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5897867
+      value: 0.99179304
+      inSlope: 0.23725022
+      outSlope: 0.23725022
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.109899275
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: -0.49982336
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  thighLength: 3
+  shinLength: 4.5
+  lineRenderer: {fileID: 4834413821097991197}
