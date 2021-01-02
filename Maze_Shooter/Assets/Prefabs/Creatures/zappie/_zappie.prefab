@@ -86,15 +86,16 @@ GameObject:
   - component: {fileID: 1245006598563395976}
   - component: {fileID: 1245006598563395990}
   - component: {fileID: 1245006598563395991}
-  - component: {fileID: 1245006598563395978}
   - component: {fileID: 1245006598563395979}
   - component: {fileID: 1245006598563395980}
   - component: {fileID: 1245006598563395981}
   - component: {fileID: 1245006598563395982}
   - component: {fileID: 3672260615189943071}
   - component: {fileID: 8044700506507712432}
+  - component: {fileID: 3333965947168206778}
+  - component: {fileID: 1245006598563395978}
   m_Layer: 11
-  m_Name: lil bouncer
+  m_Name: zappie
   m_TagString: Small
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,7 +163,7 @@ MonoBehaviour:
   movementProfile: {fileID: 11400000, guid: 0c56bb7020fe81b45987ccd434f6ef4c, type: 2}
   speedMultiplier: 1
   moveInputThreshold: 0.25
-  useSpeedCurve: 1
+  useSpeedCurve: 0
   speedCurve:
     serializedVersion: 2
     m_Curve:
@@ -205,7 +206,6 @@ MonoBehaviour:
     m_PreInfinity: 1
     m_PostInfinity: 1
     m_RotationOrder: 4
-  arena: {fileID: 0}
   onGrounded:
     m_PersistentCalls:
       m_Calls: []
@@ -215,6 +215,160 @@ MonoBehaviour:
   target: {fileID: 0}
   useTargetFinder: 0
   targetFinder: {fileID: 0}
+--- !u!114 &1245006598563395979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245006598563395989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f88644049d5ad449976ca12a853ef88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeholderPrefab: {fileID: 7276623351531485110, guid: 3038f4405f5499e4685eb480b364a719,
+    type: 3}
+  culled: 0
+--- !u!114 &1245006598563395980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245006598563395989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52bf0bef0b6348140ac4cd8efa3e70f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoints:
+    useConstant: 0
+    constantValue: 2
+    valueObject: {fileID: 0}
+  invulnerableTime:
+    useConstant: 0
+    constantValue: 0.3
+    valueObject: {fileID: 0}
+  createDamageEffect: 1
+  damagedEffect: {fileID: 1388326714027936, guid: 3a54c4e88b19c6a43939dd58735c7c9b,
+    type: 3}
+  destroyWhenKilled: 1
+  damageEffectLifetime: 5
+  mainHealth: {fileID: 0}
+  onDamagedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onKilledEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 4469e24dd11490440a8ecc3e4ff35000, type: 2}
+        m_TargetAssemblyTypeName: Arachnid.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1245006598563395981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245006598563395989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1a991c2366dcd24c9e87020766883d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minVelocity: 30
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  onBump:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1245006598563395980}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: Destruct
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1245006598563395982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245006598563395989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b97e8ed2baea5324b9e68bb303521efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 1092403957575301563, guid: 71699515638d8e841a312dad24b73751,
+    type: 3}
+  lifetime: 5
+  delay: 0
+  ignoreMinLifetime: 0
+--- !u!114 &3672260615189943071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245006598563395989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 340775e3ec54c2143aeb81c7eda77eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashingRenderers:
+  - {fileID: 3812072105647805345}
+  flashTime:
+    useConstant: 0
+    constantValue: 0
+    valueObject: {fileID: 0}
+--- !u!114 &8044700506507712432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245006598563395989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63361a88b819fb140806962e1069b475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3333965947168206778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245006598563395989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a64d189d9fffc64cbd07103f1c7e764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  controlledByPlayer: 0
+  arena: {fileID: 0}
+  moveInput: {x: 0, y: 0}
+  fireInput: {x: 0, y: 0}
 --- !u!114 &1245006598563395978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,7 +555,7 @@ MonoBehaviour:
       - fsmEvent:
           name: attack
           isSystemEvent: 0
-          isGlobal: 0
+          isGlobal: 1
         toState: spark charge
         linkStyle: 0
         linkConstraint: 0
@@ -409,48 +563,146 @@ MonoBehaviour:
       actionData:
         actionNames:
         - SetMoveSpeedMultiplier
+        - HutongGames.PlayMaker.Actions.SendEvent
+        - HutongGames.PlayMaker.Actions.InvokeMethod
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 7d042b04
+        - 
+        - 
+        actionEnabled: 010101
+        actionIsOpen: 010101
+        actionStartIndex: 000000000300000007000000
+        actionHashCodes: 7d042b045e69bb0459f9a004
         unityObjectParams:
         - {fileID: 1245006598563395991}
         fsmGameObjectParams: []
-        fsmOwnerDefaultParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 1
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 7250523200289206009}
         animationCurveParams: []
         functionCallParams: []
         fsmTemplateControlParams: []
-        fsmEventTargetParams: []
+        fsmEventTargetParams:
+        - target: 1
+          excludeSelf:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          gameObject:
+            ownerOption: 0
+            gameObject:
+              useVariable: 0
+              name: 
+              tooltip: 
+              showInInspector: 0
+              networkSync: 0
+              value: {fileID: 0}
+          fsmName:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 
+          sendToChildren:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 1
+          fsmComponent: {fileID: 0}
         fsmPropertyParams: []
         layoutOptionParams: []
-        fsmStringParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: ZappieAnimator
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: ClearOverride
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
         fsmEnumParams: []
-        fsmFloatParams: []
+        fsmFloatParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
         fsmIntParams: []
-        fsmBoolParams: []
+        fsmBoolParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
-        byteData: 0000803f00
+        stringParams:
+        - recover
+        byteData: 0000803f0000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 050000000200000001000000
+        paramDataType: 0500000002000000010000001f000000170000000f000000010000001400000012000000120000000f000000110000000f00000011000000
         paramName:
         - mover
         - multiplier
         - resetOnExit
-        paramDataPos: 000000000000000004000000
-        paramByteDataSize: 000000000400000001000000
+        - eventTarget
+        - sendEvent
+        - delay
+        - everyFrame
+        - gameObject
+        - behaviour
+        - methodName
+        - delay
+        - repeating
+        - repeatDelay
+        - cancelOnExit
+        paramDataPos: 0000000000000000040000000000000000000000000000000500000000000000000000000100000001000000000000000200000001000000
+        paramByteDataSize: 0000000004000000010000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000
     - name: spark charge
       description: charges for the attack
       colorIndex: 0
@@ -713,8 +965,22 @@ MonoBehaviour:
       isGlobal: 0
     - name: attack
       isSystemEvent: 0
+      isGlobal: 1
+    - name: recover
+      isSystemEvent: 0
+      isGlobal: 1
+    - name: stop
+      isSystemEvent: 0
       isGlobal: 0
-    globalTransitions: []
+    globalTransitions:
+    - fsmEvent:
+        name: stop
+        isSystemEvent: 0
+        isGlobal: 0
+      toState: idle
+      linkStyle: 0
+      linkConstraint: 0
+      colorIndex: 0
     variables:
       floatVariables:
       - useVariable: 1
@@ -784,143 +1050,6 @@ MonoBehaviour:
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
   eventHandlerComponentsAdded: 1
---- !u!114 &1245006598563395979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245006598563395989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f88644049d5ad449976ca12a853ef88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  placeholderPrefab: {fileID: 7276623351531485110, guid: 3038f4405f5499e4685eb480b364a719,
-    type: 3}
-  culled: 0
---- !u!114 &1245006598563395980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245006598563395989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52bf0bef0b6348140ac4cd8efa3e70f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitPoints:
-    useConstant: 0
-    constantValue: 2
-    valueObject: {fileID: 0}
-  invulnerableTime:
-    useConstant: 0
-    constantValue: 0.3
-    valueObject: {fileID: 0}
-  createDamageEffect: 1
-  damagedEffect: {fileID: 1388326714027936, guid: 3a54c4e88b19c6a43939dd58735c7c9b,
-    type: 3}
-  destroyWhenKilled: 1
-  damageEffectLifetime: 5
-  mainHealth: {fileID: 0}
-  onDamagedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onKilledEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 4469e24dd11490440a8ecc3e4ff35000, type: 2}
-        m_TargetAssemblyTypeName: Arachnid.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1245006598563395981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245006598563395989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1a991c2366dcd24c9e87020766883d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minVelocity: 30
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  onBump:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1245006598563395980}
-        m_TargetAssemblyTypeName: Health, Assembly-CSharp
-        m_MethodName: Destruct
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1245006598563395982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245006598563395989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b97e8ed2baea5324b9e68bb303521efd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectPrefab: {fileID: 1092403957575301563, guid: 71699515638d8e841a312dad24b73751,
-    type: 3}
-  lifetime: 5
-  delay: 0
-  ignoreMinLifetime: 0
---- !u!114 &3672260615189943071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245006598563395989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 340775e3ec54c2143aeb81c7eda77eb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flashingRenderers:
-  - {fileID: 3812072105647805345}
-  flashTime:
-    useConstant: 0
-    constantValue: 0
-    valueObject: {fileID: 0}
---- !u!114 &8044700506507712432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245006598563395989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63361a88b819fb140806962e1069b475, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1245006599174918768
 GameObject:
   m_ObjectHideFlags: 0
@@ -5916,7 +6045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplier: 1
-  frameRate: 12
+  frameRate: 8
   realTime: 0
   spriteRenderer: {fileID: 3812072105647805345}
   spriteAnimation: {fileID: 11400000, guid: 90c4f99eb6ca5cf45928528481e7b467, type: 2}
@@ -5938,16 +6067,16 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.5
-      inSlope: 0.403004
-      outSlope: 0.403004
+      value: 0.9433961
+      inSlope: 0.25810537
+      outSlope: 0.25810537
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.046774402
+      outWeight: 0.05718283
     - serializedVersion: 3
-      time: 3.5680213
-      value: 1
+      time: 3.116043
+      value: 1.3749999
       inSlope: 0
       outSlope: 0
       tangentMode: 0
