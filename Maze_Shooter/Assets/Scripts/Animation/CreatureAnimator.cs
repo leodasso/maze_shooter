@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using ShootyGhost;
 using Sirenix.OdinInspector;
 
@@ -14,6 +12,10 @@ public class CreatureAnimator : MonoBehaviour
 	[InlineProperty]
 	public MovementSource velocitySource;
 
+	[ReadOnly]
+	public SpriteAnimation overrideAnim;
+
+	[Space]
 	public SpriteAnimation idle;
 	public SpriteAnimation run;
 
@@ -29,6 +31,10 @@ public class CreatureAnimator : MonoBehaviour
 		}
 		else SetAnim(idle);
     }
+
+	public void ClearOverride() {
+		overrideAnim = null;
+	}
 
 	protected void SetAnim(SpriteAnimation newAnim) {
 		animationPlayer.spriteAnimation = newAnim;
