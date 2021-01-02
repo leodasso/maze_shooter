@@ -348,6 +348,7 @@ MonoBehaviour:
     rigidbody: {fileID: 7577387461302741262}
     mover: {fileID: 0}
     pseudoVelocity: {fileID: 0}
+  overrideAnim: {fileID: 0}
   idle: {fileID: 11400000, guid: 5199745fba6c1fd48964d7b179a15019, type: 2}
   run: {fileID: 11400000, guid: def397426a9ee6a49b259085b32e082d, type: 2}
   flying: {fileID: 11400000, guid: 134710d2222b3b7408d5f9ae290971d4, type: 2}
@@ -373,7 +374,7 @@ GameObject:
   - component: {fileID: 8216780596284228574}
   - component: {fileID: 7076856052713985655}
   m_Layer: 0
-  m_Name: fast guy
+  m_Name: _fast guy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,7 +472,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  arena: {fileID: 0}
   onGrounded:
     m_PersistentCalls:
       m_Calls:
@@ -527,7 +527,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   spawnSpikesPercentage: 0.85
-  dashCooldown: 2
+  dashCooldown: 1
   omitBounceTags:
   - Small
   playMaker: {fileID: 737290452}
@@ -1996,7 +1996,7 @@ PrefabInstance:
     - target: {fileID: 3232974787184545812, guid: 95fa684baee5afd4786be7eb3ef00469,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3232974787184545812, guid: 95fa684baee5afd4786be7eb3ef00469,
         type: 3}
