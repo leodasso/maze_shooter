@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &85703620579300249
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6950740009406460468}
+  - component: {fileID: 4657019995845412949}
+  m_Layer: 0
+  m_Name: sfx gate activate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6950740009406460468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85703620579300249}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3029536317653837630}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4657019995845412949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85703620579300249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d30f831d9d1b84ba9603356f7a8290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioCollection: {fileID: 11400000, guid: e1fef94543809a444bfaae10298c6590, type: 2}
+  volume: 1
+  playOnAwake: 0
+  playOnEnable: 0
 --- !u!114 &8958629095367977860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +277,7 @@ Transform:
   - {fileID: 1424917714716295308}
   - {fileID: 6299290571147820149}
   - {fileID: 495738033045164230}
+  - {fileID: 6950740009406460468}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -60.093002, z: 0}
@@ -313,6 +361,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: endTransport
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4657019995845412949}
+        m_TargetAssemblyTypeName: AudioAction, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   onGateActivated:
@@ -6219,8 +6279,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -32
   m_Positions:
-  - {x: -110.59, y: -0.00999999, z: -126.57}
-  - {x: -111.802704, y: -0.00999999, z: -128.01964}
+  - {x: 48.83, y: 0.99, z: 63.33}
+  - {x: 52.79291, y: 0.99, z: 67.24411}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -6319,31 +6379,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.217487
+      value: 35.70687
       objectReference: {fileID: 0}
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 40.901268
+      value: 40.901264
       objectReference: {fileID: 0}
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 39.563927
+      value: -35.612553
       objectReference: {fileID: 0}
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.10263639
+      value: 0.2774581
       objectReference: {fileID: 0}
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.8964441
+      value: -0.36769947
       objectReference: {fileID: 0}
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.28264776
+      value: 0.11593519
       objectReference: {fileID: 0}
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.32552102
+      value: 0.8799848
       objectReference: {fileID: 0}
     - target: {fileID: 4053448151355006, guid: fde8f66d53e4214438069d431895986a, type: 3}
       propertyPath: m_RootOrder

@@ -5069,7 +5069,7 @@ MonoBehaviour:
         x: 50
         y: 116
         width: 100
-        height: 32
+        height: 48
       isBreakpoint: 0
       isSequence: 0
       hideUnused: 0
@@ -5079,6 +5079,14 @@ MonoBehaviour:
           isSystemEvent: 0
           isGlobal: 0
         toState: show slots
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      - fsmEvent:
+          name: quick
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: finalize haunt
         linkStyle: 0
         linkConstraint: 0
         colorIndex: 0
@@ -6276,6 +6284,9 @@ MonoBehaviour:
       isSystemEvent: 0
       isGlobal: 0
     - name: pass
+      isSystemEvent: 0
+      isGlobal: 0
+    - name: quick
       isSystemEvent: 0
       isGlobal: 0
     - name: start

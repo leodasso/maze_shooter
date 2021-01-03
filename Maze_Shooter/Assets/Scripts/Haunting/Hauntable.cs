@@ -2,14 +2,19 @@
 using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
+using Arachnid;
 
 namespace ShootyGhost
 {
     [TypeInfoBox("Can be haunted by Haunter!")]
     public class Hauntable : MonoBehaviour
     {
+		static List<Collection> haunted = new List<Collection>();
+
         public UnityEvent onHaunted;
         public UnityEvent onUnHaunted;
+
+		public Collection hauntableType;
 
 		public bool linkHealth;
 		
@@ -42,6 +47,10 @@ namespace ShootyGhost
             return new Vector3(dirtyPos.x, 0, dirtyPos.z);
         }
 
+		bool BeenHauntedThisSession() {
+			return haunted.Contains(hauntableType);
+		}
+
 		public void AttemptHaunt(Haunter newHaunter) 
 		{
 			if (!enabled) return;
@@ -52,13 +61,21 @@ namespace ShootyGhost
 				.GetComponent<HauntConstellation>();
 
 			hauntConstellation.hauntable = this;
-			hauntConstellation.PlayFullSequence();
+
+			// show a shorter sequence if this isn't the first time haunting this thing
+			if (BeenHauntedThisSession()) 
+				hauntConstellation.PlayQuickSequence();
+			else 
+				hauntConstellation.PlayFullSequence();
 		}
 
 		/// The haunt will be accepted or rejected based on if the haunter
 		/// has enough stars to haunt this object
 		public void AcceptHaunt() 
 		{
+			if (!haunted.Contains(hauntableType) && hauntableType != null)
+				haunted.Add(hauntableType);
+
 			onHaunted.Invoke();
 			if (linkHealth) LinkHealth();
 		}

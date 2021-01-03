@@ -26,13 +26,23 @@ public class HauntConstellation : MonoBehaviour
 	[BoxGroup("stars")]
 	public float starAnimDuration = 1.5f;
 
-	[Tooltip("'start', 'pass', and 'fail' events will be sent to the playmaker fsm.")]
+	[Tooltip("'start', 'quick', 'pass', and 'fail' events will be sent to the playmaker fsm.")]
 	public PlayMakerFSM playMaker;
 
 	[Button]
 	public void PlayFullSequence() 
 	{
 		playMaker.SendEvent("start");
+	}
+
+	public void PlayQuickSequence() 
+	{
+		playMaker.SendEvent("quick");
+	}
+
+	public void SetShortStarAnim() 
+	{
+		starAnimDuration = .3f;
 	}
 
 	[Button]
