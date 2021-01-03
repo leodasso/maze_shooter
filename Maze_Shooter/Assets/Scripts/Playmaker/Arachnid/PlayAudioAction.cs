@@ -42,6 +42,7 @@ namespace HutongGames.PlayMaker.Actions
             }
             
             _audioAction.Play();
+			Finish();
         }
     }
 }
