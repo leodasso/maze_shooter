@@ -11,6 +11,8 @@ public class AudioAction : MonoBehaviour
 	[Range(0, 1), Tooltip("Multiplies by the volume of the audio collection.")]
 	public float volume = 1;
 
+	public float playDelay = 0;
+
 	[ToggleLeft]
 	public bool playOnAwake = false;
 	[ToggleLeft]
@@ -38,6 +40,18 @@ public class AudioAction : MonoBehaviour
 
 	[Button]
 	public void Play()
+	{
+		if (playDelay < Mathf.Epsilon) ActualPlay();
+		else StartCoroutine(DelayAndPlay());
+	}
+
+	IEnumerator DelayAndPlay() 
+	{
+		yield return new WaitForSeconds(playDelay);
+		ActualPlay();
+	}
+
+	void ActualPlay() 
 	{
 		if (!Application.isPlaying)
 		{
