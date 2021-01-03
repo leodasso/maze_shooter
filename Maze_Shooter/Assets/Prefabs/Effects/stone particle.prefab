@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5007207142289132731}
   - component: {fileID: 7064683283057870179}
   - component: {fileID: 8717238531322350679}
+  - component: {fileID: 680128439734450225}
   m_Layer: 0
   m_Name: stone particle
   m_TagString: Untagged
@@ -4886,3 +4887,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &680128439734450225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337057211114071629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d30f831d9d1b84ba9603356f7a8290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioCollection: {fileID: 11400000, guid: 5b63a3bdbe5ae844ba512b8e938c2bfc, type: 2}
+  volume: 1
+  playOnAwake: 0
+  playOnEnable: 1
