@@ -55,7 +55,8 @@ public class AudioAction : MonoBehaviour
 		audioGO.transform.parent = AudioParent().transform;
 		audioGO.transform.position = transform.position;
 		AudioSource newSource = audioGO.AddComponent<AudioSource>();
-		newSource.spread = 25;
+		newSource.spread = 180;
+		newSource.dopplerLevel = 0;
 		newSource.rolloffMode = AudioRolloffMode.Linear;
 		newSource.clip = audioCollection.GetRandomClip();
 		newSource.playOnAwake = false;
