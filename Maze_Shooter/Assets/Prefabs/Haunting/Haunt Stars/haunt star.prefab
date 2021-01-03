@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1169796356247809748}
   - component: {fileID: 1686765685}
   - component: {fileID: 8024714188743357312}
+  - component: {fileID: 7475268244326793169}
   m_Layer: 0
   m_Name: haunt star
   m_TagString: Untagged
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 8
-  m_Sprite: {fileID: 21300000, guid: dca52f5dcac1c8f49af8bc28718eb4fb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 45a5fa17338fc81448b95417511c0c39, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -271,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a05506e86408f4bae29a22b776d5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progress: 0.8626155
+  progress: 0.12633215
   spriteRenderer: {fileID: 1565771051167146989}
   sprites:
   - {fileID: 21300000, guid: f3c03ac78bc251f4a9b043d922ff8975, type: 3}
@@ -289,9 +290,26 @@ MonoBehaviour:
   unscaledTime: 1
   playSelf: 1
   pingPong: 0
+  loop: 1
   frameRate: 8
   setProgressOnStart: 0
   startProgress: 0
+--- !u!114 &7475268244326793169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3876930543173970433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d30f831d9d1b84ba9603356f7a8290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioCollection: {fileID: 11400000, guid: 6d1fb0d6c5a28a541b134dfa14cb9982, type: 2}
+  volume: 1
+  playOnAwake: 0
+  playOnEnable: 1
 --- !u!1 &5961213666533335574
 GameObject:
   m_ObjectHideFlags: 0
