@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747892d7f12cbed43aaff112a4096988, type: 3}
   m_Name: zappie spawn
   m_EditorClassIdentifier: 
-  volume: 1
+  volume: 0.74
   pitchRange: {x: 1, y: 1}
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: 7af8707167b9cf04f8ad633da338ce28, type: 3}
   audioLifetime: 5
-  maxDistance: 50
-  mixerGroup: {fileID: 0}
+  maxDistance: 30
+  mixerGroup: {fileID: 243285395394358284, guid: 41c4af8ccd09be548a7004eaf73f7694,
+    type: 2}

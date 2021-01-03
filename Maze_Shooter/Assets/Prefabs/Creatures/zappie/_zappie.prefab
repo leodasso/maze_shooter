@@ -45,6 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioCollection: {fileID: 11400000, guid: 018b31817283f5b4a91414bee0ddcbde, type: 2}
   volume: 1
+  playDelay: 0
   playOnAwake: 0
   playOnEnable: 0
 --- !u!1 &1245006598150472010
@@ -462,15 +463,17 @@ MonoBehaviour:
         - HutongGames.PlayMaker.Actions.ActivateGameObject
         - HutongGames.PlayMaker.Actions.InvokeMethod
         - HutongGames.PlayMaker.Actions.InvokeMethod
+        - HutongGames.PlayMaker.Actions.PlayAudioAction
         customNames:
         - 
         - 
         - 
         - 
-        actionEnabled: 01010101
-        actionIsOpen: 01010101
-        actionStartIndex: 0000000003000000080000000f000000
-        actionHashCodes: 48c01101b2cf100059f9a00459f9a004
+        - 
+        actionEnabled: 0101010101
+        actionIsOpen: 0101010101
+        actionStartIndex: 0000000003000000080000000f00000016000000
+        actionHashCodes: 48c01101b2cf100059f9a00459f9a0048d4bb503
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
@@ -498,6 +501,14 @@ MonoBehaviour:
             showInInspector: 0
             networkSync: 0
             value: {fileID: 1245006599174918768}
+        - ownerOption: 1
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 7128895899289811047}
         animationCurveParams: []
         functionCallParams: []
         fsmTemplateControlParams: []
@@ -614,7 +625,7 @@ MonoBehaviour:
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 0f000000170000000100000014000000110000001100000001000000010000001400000012000000120000000f000000110000000f000000110000001400000012000000120000000f000000110000000f00000011000000
+        paramDataType: 0f000000170000000100000014000000110000001100000001000000010000001400000012000000120000000f000000110000000f000000110000001400000012000000120000000f000000110000000f0000001100000014000000
         paramName:
         - time
         - finishEvent
@@ -638,8 +649,9 @@ MonoBehaviour:
         - repeating
         - repeatDelay
         - cancelOnExit
-        paramDataPos: 00000000000000000000000000000000000000000100000001000000020000000100000000000000010000000100000002000000020000000300000002000000020000000300000003000000040000000400000005000000
-        paramByteDataSize: 00000000000000000100000000000000000000000000000001000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+        - gameObject
+        paramDataPos: 0000000000000000000000000000000000000000010000000100000002000000010000000000000001000000010000000200000002000000030000000200000002000000030000000300000004000000040000000500000003000000
+        paramByteDataSize: 0000000000000000010000000000000000000000000000000100000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
     - name: idle
       description: 
       colorIndex: 0
@@ -830,14 +842,16 @@ MonoBehaviour:
         - SetMoveSpeedMultiplier
         - HutongGames.PlayMaker.Actions.InvokeMethod
         - HutongGames.PlayMaker.Actions.Wait
+        - HutongGames.PlayMaker.Actions.PlayAudioAction
         customNames:
         - 
         - 
         - 
-        actionEnabled: 010101
-        actionIsOpen: 010101
-        actionStartIndex: 00000000030000000a000000
-        actionHashCodes: 7d042b0459f9a00448c01101
+        - 
+        actionEnabled: 01010101
+        actionIsOpen: 01010101
+        actionStartIndex: 00000000030000000a0000000d000000
+        actionHashCodes: 7d042b0459f9a00448c011018d4bb503
         unityObjectParams:
         - {fileID: 1245006598563395991}
         fsmGameObjectParams: []
@@ -850,6 +864,14 @@ MonoBehaviour:
             showInInspector: 0
             networkSync: 0
             value: {fileID: 7250523200289206009}
+        - ownerOption: 1
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 381172279081970716}
         animationCurveParams: []
         functionCallParams: []
         fsmTemplateControlParams: []
@@ -918,7 +940,7 @@ MonoBehaviour:
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 0500000002000000010000001400000012000000120000000f000000110000000f000000110000000f0000001700000001000000
+        paramDataType: 0500000002000000010000001400000012000000120000000f000000110000000f000000110000000f000000170000000100000014000000
         paramName:
         - mover
         - multiplier
@@ -933,8 +955,9 @@ MonoBehaviour:
         - time
         - finishEvent
         - realTime
-        paramDataPos: 00000000000000000400000000000000000000000100000000000000000000000100000001000000020000000000000005000000
-        paramByteDataSize: 00000000040000000100000000000000000000000000000000000000000000000000000000000000000000000000000001000000
+        - gameObject
+        paramDataPos: 0000000000000000040000000000000000000000010000000000000000000000010000000100000002000000000000000500000001000000
+        paramByteDataSize: 0000000004000000010000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000
     - name: resting
       description: 
       colorIndex: 0
@@ -6167,6 +6190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioCollection: {fileID: 11400000, guid: db7c23aed58e0b848bf09302bb22e974, type: 2}
   volume: 1
+  playDelay: 0
   playOnAwake: 0
   playOnEnable: 0
 --- !u!1 &7250523200289206009
@@ -6391,5 +6415,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioCollection: {fileID: 11400000, guid: 7abd6e9fa1f77134f9f4a01be491eae6, type: 2}
   volume: 1
+  playDelay: 0
   playOnAwake: 1
   playOnEnable: 0
