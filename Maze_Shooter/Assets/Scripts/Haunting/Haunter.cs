@@ -225,6 +225,7 @@ namespace ShootyGhost
 
         public void BeginHaunt(Hauntable newHaunted)
         {
+			ResetHauntTrigger();
             haunted = newHaunted;
             playMaker.SendEvent("haunt");
             _rigidbody.isKinematic = true;
