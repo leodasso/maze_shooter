@@ -252,16 +252,50 @@ MonoBehaviour:
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 0
+    - _id: 6
+      _name: pause
+      _type: 1
+      _descriptiveName: Pause
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 0
+      _categoryId: 1
+    - _id: 7
+      _name: gui_accept
+      _type: 1
+      _descriptiveName: Accept (Menu)
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 1
+    - _id: 8
+      _name: gui_back
+      _type: 1
+      _descriptiveName: Back (Menu)
+      _positiveDescriptiveName: 
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 1
     actionCategories:
     - _name: Default
       _descriptiveName: Default
       _tag: 
       _id: 0
       _userAssignable: 1
+    - _name: Gui and Menu
+      _descriptiveName: gui
+      _tag: 
+      _id: 1
+      _userAssignable: 0
     actionCategoryMap:
       list:
       - categoryId: 0
         actionIds: 000000000100000002000000030000000400000005000000
+      - categoryId: 1
+        actionIds: 060000000700000008000000
     inputBehaviors:
     - _id: 0
       _name: Default
@@ -745,8 +779,8 @@ MonoBehaviour:
     customControllerMaps: []
     customControllers: []
     playerIdCounter: 2
-    actionIdCounter: 6
-    actionCategoryIdCounter: 1
+    actionIdCounter: 9
+    actionCategoryIdCounter: 2
     inputBehaviorIdCounter: 2
     mapCategoryIdCounter: 1
     joystickLayoutIdCounter: 1
