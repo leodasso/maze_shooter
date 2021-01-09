@@ -50,14 +50,14 @@ public class HealthEvent : HealthPlugin
         if (!health) FindHealthComponent();
         if (!health) return;
 
-        hitPointsOfEvent = Mathf.RoundToInt(health.hitPoints.Value * percentageOfEvent);
+        hitPointsOfEvent = Mathf.RoundToInt(health.MaxHp.Value * percentageOfEvent);
     }
 
     void ClampHitPoints()
     {
         if (!health) FindHealthComponent();
         if (!health) return;
-        hitPointsOfEvent = Mathf.Clamp(hitPointsOfEvent, 0, health.hitPoints.Value);
+        hitPointsOfEvent = Mathf.Clamp(hitPointsOfEvent, 0, health.MaxHp.Value);
     }
 
     void CheckEvent(int newHitPoints)

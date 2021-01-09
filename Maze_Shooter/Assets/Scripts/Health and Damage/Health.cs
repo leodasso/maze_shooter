@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Sirenix.OdinInspector;
 using UnityEngine.Events;
 
@@ -11,13 +12,16 @@ public class Health : MonoBehaviour, IDestructible
 	[TabGroup("main") ]
 	public SavedInt savedMaxHp;
 
-	[TabGroup("main"), LabelText("Max HP")]
-	public IntReference hitPoints;
+	[TabGroup("main"), LabelText("Max HP"), FormerlySerializedAs("hitPoints")]
+	public IntReference MaxHp;
 	
 	[TabGroup("main"), LabelText("Current HP")]
 	public IntReference currentHp;
 
-	[Tooltip("How long after damaged will I be invulnerable?"), TabGroup("main")]
+	[ToggleLeft, TabGroup("main")]
+	public bool setHpOnStart;
+
+	[Tooltip("How long after damaged will I be invulnerable?"), TabGroup("main"), Space]
 	public FloatReference invulnerableTime;
 	
 	[ToggleLeft, TabGroup("main")]
@@ -48,13 +52,26 @@ public class Health : MonoBehaviour, IDestructible
 
 	public bool IsInvulnerable => _invulnerableTimer > 0;
 	public bool IsKilled => _isKilled;
-	public int CurrentHealth => currentHp.Value;
+	public int ActualHp {
+		get {
+			return mainHealth == null ? currentHp.Value : mainHealth.currentHp.Value;
+		}
+		set {
+			if (mainHealth) mainHealth.currentHp.Value = value;
+			else currentHp.Value = value;
+		}
+	} 
 	bool _isKilled;
 
 	void Awake ()
 	{
-		if (savedMaxHp != null) hitPoints.Value = savedMaxHp.GetValue();
-		currentHp.Value = hitPoints.Value;
+		if (savedMaxHp != null) MaxHp.Value = savedMaxHp.GetValue();
+		if (setHpOnStart) ResetHp();
+	}
+
+	public void ResetHp() 
+	{
+		currentHp.Value = MaxHp.Value;
 	}
 
 	void Update()
@@ -67,8 +84,8 @@ public class Health : MonoBehaviour, IDestructible
 	{
 		if (IsInvulnerable || !enabled) return;
 		
-		currentHp.Value -= amount;
-		if (currentHp.Value <= 0)
+		ActualHp -= amount;
+		if (ActualHp <= 0)
 		{
 			Destruct();
 			return;
@@ -83,16 +100,18 @@ public class Health : MonoBehaviour, IDestructible
 		if (invulnerableTime.Value > 0)
 			_invulnerableTimer = invulnerableTime.Value;
 		
-		onDamaged?.Invoke(currentHp.Value);
+		onDamaged?.Invoke(ActualHp);
 		onDamagedEvent.Invoke();
+
+		// invoke events from the main health component
 		if (mainHealth) mainHealth.onDamagedEvent.Invoke();
 	}
 
 	public void Heal(int amount)
 	{
 		if (!enabled) return;
-		currentHp.Value += amount;
-		currentHp.Value = Mathf.Clamp(currentHp.Value, 0, hitPoints.Value);
+		ActualHp += amount;
+		ActualHp = Mathf.Clamp(ActualHp, 0, MaxHp.Value);
 		if (onHealed != null) onHealed.Invoke(amount);
 	}
 

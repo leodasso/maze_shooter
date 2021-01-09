@@ -3,20 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
+using Arachnid;
 
 [TypeInfoBox("Handles the extra events and stuff related to the player being damaged. This " +
              "needs to be combined with a Health component.")]
 public class PlayerHealth : HealthPlugin
 {
+	public IntReference minStartHp;
     public SavedInt savedPlayerHealth;
     public UnityEvent onHealthCritical;
     public UnityEvent onHealthOkay;
 
-    public void SetSavedHealthValue()
+	protected override void Start()
+	{
+		base.Start();
+		CheckForCritical();
+	}
+
+
+    public void ApplySavedHp()
     {
         if (savedPlayerHealth.HasSavedValue())
         {
-            health.SetHp(savedPlayerHealth.GetValue());
+			int savedHp = savedPlayerHealth.GetValue();
+			savedHp = Mathf.Clamp(savedHp, minStartHp.Value, 100);
+            health.SetHp(savedHp);
             CheckForCritical();
         }
     }
@@ -36,14 +47,13 @@ public class PlayerHealth : HealthPlugin
 
     void CheckForCritical()
     {
-        if (health.CurrentHealth < 2)
+        if (health.currentHp.Value < 2)
             onHealthCritical.Invoke();
+		else onHealthOkay.Invoke();
     }
 
     void OnDestroy()
     {
-        // Don't save the health value if the player was destroyed because HP reached 0
-        if (health.IsKilled) return;
-        savedPlayerHealth.Save(health.CurrentHealth);
+        savedPlayerHealth.Save(health.currentHp.Value);
     }
 }

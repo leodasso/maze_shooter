@@ -4922,6 +4922,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 267724c47cf50c645b672f7fc009f114, type: 2}
+        m_TargetAssemblyTypeName: Arachnid.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!136 &3446228766620969029
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4962,6 +4974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
+  triggerExitOnAwake: 0
   oneOff: 0
   filterTriggers: 1
   useLayerMask: 0
@@ -5017,6 +5030,8 @@ MonoBehaviour:
   instantiateStagePlayer: 1
   allowMultipleInstances: 0
   applyScale: 0
+  randomScale: 0
+  randomScaleRange: {x: 1, y: 1}
   prefabToInstantiate: {fileID: 0}
   createInstance: 0
   destroyInstance: 0
