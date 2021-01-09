@@ -32,9 +32,10 @@ public class HudElement : MonoBehaviour
 
     public void Show() 
 	{
+		showTimer = showTime;
+
 		if (isShowing) return;
 		isShowing = true;
-		showTimer = showTime;
 		show.Invoke();
 	}
 
