@@ -26,4 +26,14 @@ public class HpGui : MonoBehaviour
 				heart.filled = i < currentHp.Value;
 		}
 	}
+
+	public void DelayRefresh() 
+	{
+		StartCoroutine(DelayAndRefresh());
+	}
+
+	IEnumerator DelayAndRefresh() {
+		yield return new WaitForSecondsRealtime(.5f);
+		Refresh();
+	}
 }

@@ -8,11 +8,14 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour, IDestructible
 {
-	[TabGroup("main")]
+	[TabGroup("main") ]
+	public SavedInt savedMaxHp;
+
+	[TabGroup("main"), LabelText("Max HP")]
 	public IntReference hitPoints;
 	
-	[ShowInInspector, DisplayAsString, Indent, TabGroup("main")]
-	int _currentHealth;
+	[TabGroup("main"), LabelText("Current HP")]
+	public IntReference currentHp;
 
 	[Tooltip("How long after damaged will I be invulnerable?"), TabGroup("main")]
 	public FloatReference invulnerableTime;
@@ -45,12 +48,13 @@ public class Health : MonoBehaviour, IDestructible
 
 	public bool IsInvulnerable => _invulnerableTimer > 0;
 	public bool IsKilled => _isKilled;
-	public int CurrentHealth => _currentHealth;
+	public int CurrentHealth => currentHp.Value;
 	bool _isKilled;
 
 	void Awake ()
 	{
-		_currentHealth = hitPoints.Value;
+		if (savedMaxHp != null) hitPoints.Value = savedMaxHp.GetValue();
+		currentHp.Value = hitPoints.Value;
 	}
 
 	void Update()
@@ -63,8 +67,8 @@ public class Health : MonoBehaviour, IDestructible
 	{
 		if (IsInvulnerable || !enabled) return;
 		
-		_currentHealth -= amount;
-		if (_currentHealth <= 0)
+		currentHp.Value -= amount;
+		if (currentHp.Value <= 0)
 		{
 			Destruct();
 			return;
@@ -79,7 +83,7 @@ public class Health : MonoBehaviour, IDestructible
 		if (invulnerableTime.Value > 0)
 			_invulnerableTimer = invulnerableTime.Value;
 		
-		onDamaged?.Invoke(_currentHealth);
+		onDamaged?.Invoke(currentHp.Value);
 		onDamagedEvent.Invoke();
 		if (mainHealth) mainHealth.onDamagedEvent.Invoke();
 	}
@@ -87,15 +91,15 @@ public class Health : MonoBehaviour, IDestructible
 	public void Heal(int amount)
 	{
 		if (!enabled) return;
-		_currentHealth += amount;
-		_currentHealth = Mathf.Clamp(_currentHealth, 0, hitPoints.Value);
+		currentHp.Value += amount;
+		currentHp.Value = Mathf.Clamp(currentHp.Value, 0, hitPoints.Value);
 		if (onHealed != null) onHealed.Invoke(amount);
 	}
 
 	public void SetHp(int newHp)
 	{
 		if (!enabled) return;
-		_currentHealth = newHp;
+		currentHp.Value = newHp;
 	}
 
 	public void Destruct()
