@@ -51,6 +51,7 @@ public class Gate : MonoBehaviour
     {
         // behave correctly if the 'activated' toggle is turned off in editor
         if (!activated) onGateDeactivated.Invoke();
+		else onGateActivated.Invoke();
     }
 
     void SpawnPlayer()
