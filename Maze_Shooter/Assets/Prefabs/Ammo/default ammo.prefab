@@ -48,7 +48,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.18
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5660836842944877373
 Rigidbody:
@@ -91,8 +91,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 1
+      time: 1.0024325
+      value: 0.28695747
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   speed:
     useConstant: 0
-    constantValue: 25
+    constantValue: 45
     valueObject: {fileID: 0}
   lifetime:
     useConstant: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96d30f831d9d1b84ba9603356f7a8290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioCollection: {fileID: 11400000, guid: a9d7bb5e4d1e43646b1c39d6619e8017, type: 2}
+  audioCollection: {fileID: 11400000, guid: 0ff60e8e24b130c4097dc8c4a3a85b58, type: 2}
   volume: 1
   playDelay: 0
   playOnAwake: 1
@@ -148,9 +148,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
+  ignoreTriggers: 1
   layersThatDestroyThis:
     serializedVersion: 2
-    m_Bits: 35329
+    m_Bits: 35585
   highVelocity: 0
   castingLayerMask:
     serializedVersion: 2
@@ -279,7 +280,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a8336671576c15a44ad9d887b72dc6ce, type: 2}
+  - {fileID: 2100000, guid: f80fe3dc1cf86ee439c2e81b5d05bea1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -300,7 +301,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fb21d43469c422e4799d052c515883f3, type: 3}
+  m_Sprite: {fileID: 2565217857388727831, guid: ee268a2bb54aaf7449e1264a5c078a82,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

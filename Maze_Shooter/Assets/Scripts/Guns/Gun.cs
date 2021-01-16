@@ -4,13 +4,21 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Math = Arachnid.Math;
 
-[TypeInfoBox("Fires things in the local Y axis")]
+[TypeInfoBox("Fires things in the local Z forward axis")]
 public class Gun : GunBase
 {
+	public bool limitAmmo;
+	[ShowIf("limitAmmo")]
+	public int maxAmmo;
+	
+	[ShowIf("limitAmmo")]
+	public int currentAmmo;
+
 	[Range(0, 1)]
 	[Tooltip("Determines how intense the fire rate is. 0 is the lowest fire rate of the selected gun," +
 	         " and 1 is the highest rate.")]
 	public float fireRateIntensity = 1;	
+
 	Vector2 FireRateRange => HasGunData ? GunData.firingRate : firingRate;
 	float FireRate => Mathf.Lerp(FireRateRange.x, FireRateRange.y, fireRateIntensity);
 	float Cooldown => 1f / FireRate;

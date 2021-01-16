@@ -31,8 +31,8 @@ public class GunBrain : MonoBehaviour, IControllable
         
         if (gun)
         {
-            //gun.firing = _firing;
-            //gun.fireRateIntensity = fireInput.magnitude;
+            gun.firing = _firing;
+            gun.fireRateIntensity = fireInput.magnitude;
         }
         
         if (!_firing) return;

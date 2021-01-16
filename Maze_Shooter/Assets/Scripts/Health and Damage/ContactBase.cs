@@ -87,7 +87,8 @@ public class ContactBase : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		Triggered(other);
+		if (CanHitCollider(other))
+			Triggered(other);
 	}
 
 	void Triggered(Collider other)
