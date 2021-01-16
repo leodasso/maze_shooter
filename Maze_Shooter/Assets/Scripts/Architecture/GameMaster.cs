@@ -26,6 +26,8 @@ public class GameMaster : ScriptableObject
 
     public UnityEvent onBeginLoadSavedGame;
 
+	public IntReference hpPerHeart;
+
     public static string saveFilesDirectory = "saveFiles/";
 
     /// <summary>
@@ -39,6 +41,8 @@ public class GameMaster : ScriptableObject
         _gameMaster = Resources.Load<GameMaster>("game master");
         return _gameMaster;
     }
+
+	public static int HpPerHeart => Get().hpPerHeart.Value;
 
     [Button, DisableInEditorMode]
     public void BeginGame()

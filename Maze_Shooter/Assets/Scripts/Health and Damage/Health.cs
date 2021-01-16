@@ -21,6 +21,9 @@ public class Health : MonoBehaviour, IDestructible
 	[ToggleLeft, TabGroup("main")]
 	public bool setHpOnStart;
 
+	[TabGroup("main")]
+	public HealthPoints healthPoints;
+
 	[Tooltip("How long after damaged will I be invulnerable?"), TabGroup("main"), Space]
 	public FloatReference invulnerableTime;
 	
