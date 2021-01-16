@@ -13,13 +13,7 @@ public class GunData : ScriptableObject
 
 	[Tooltip("spreads the bullets randomly. Higher value means less accurate. (euler angle)"), MinValue(0)]
 	public float randomSpread;
-	
-	[Tooltip("Multiple firing patterns can be assigned so that this gun can level up")]
-	public List<FiringPattern> firingPatterns = new List<FiringPattern>();
 
 	[AssetsOnly, PreviewField, AssetList(AutoPopulate = false, Path = "Prefabs/Ammo")]
 	public GameObject ammo;
-
-	public int MaxLevel => Mathf.Max(0, firingPatterns.Count - 1);
-
 }
