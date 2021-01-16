@@ -100,7 +100,7 @@ public class MovementBase : MonoBehaviour, IControllable
 	protected virtual void CalculateTotalVelocity() 
 	{
 		totalVelocity += direction * TotalAcceleration * Time.fixedDeltaTime;
-		totalVelocity = Vector3.ClampMagnitude(totalVelocity, TotalMaxSpeed);
+		totalVelocity = Vector3.ClampMagnitude(totalVelocity, TotalMaxSpeed * direction.magnitude);
 	}
 
 	protected virtual void OnCollisionEnter(Collision other) 
