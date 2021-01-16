@@ -13,16 +13,13 @@ public class Health : MonoBehaviour, IDestructible
 	public SavedInt savedMaxHp;
 
 	[TabGroup("main"), LabelText("Max HP"), FormerlySerializedAs("hitPoints")]
-	public IntReference MaxHp;
+	public IntReference maxHearts;
 	
 	[TabGroup("main"), LabelText("Current HP")]
 	public IntReference currentHp;
 
 	[ToggleLeft, TabGroup("main")]
 	public bool setHpOnStart;
-
-	[TabGroup("main")]
-	public HealthPoints healthPoints;
 
 	[Tooltip("How long after damaged will I be invulnerable?"), TabGroup("main"), Space]
 	public FloatReference invulnerableTime;
@@ -68,13 +65,13 @@ public class Health : MonoBehaviour, IDestructible
 
 	void Awake ()
 	{
-		if (savedMaxHp != null) MaxHp.Value = savedMaxHp.GetValue();
+		if (savedMaxHp != null) maxHearts.Value = savedMaxHp.GetValue();
 		if (setHpOnStart) ResetHp();
 	}
 
 	public void ResetHp() 
 	{
-		currentHp.Value = MaxHp.Value;
+		currentHp.Value = maxHearts.Value;
 	}
 
 	void Update()
@@ -114,7 +111,7 @@ public class Health : MonoBehaviour, IDestructible
 	{
 		if (!enabled) return;
 		ActualHp += amount;
-		ActualHp = Mathf.Clamp(ActualHp, 0, MaxHp.Value);
+		ActualHp = Mathf.Clamp(ActualHp, 0, maxHearts.Value);
 		if (onHealed != null) onHealed.Invoke(amount);
 	}
 

@@ -48,6 +48,16 @@ public struct HealthPoints
 		newHP.Recalculate(newPoints);
 		return newHP;
 	}
+
+	public static bool operator==(HealthPoints left, HealthPoints right) 
+	{
+		return left.TotalPoints == right.TotalPoints;
+	}
+
+	public static bool operator!=(HealthPoints left, HealthPoints right) 
+	{
+		return left.TotalPoints != right.TotalPoints;
+	}
 }
 
 #if UNITY_EDITOR
