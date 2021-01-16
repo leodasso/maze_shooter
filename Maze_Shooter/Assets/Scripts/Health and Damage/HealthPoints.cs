@@ -10,15 +10,15 @@ using UnityEditor;
 [System.Serializable]
 public class HealthPoints
 {
-	public static int pointsPerHeart = 3;
-	
 	[SerializeField]
 	int fractions;
 
 	[SerializeField]
 	int hearts;
 
-	int TotalPoints => hearts * pointsPerHeart + fractions;
+	int PointsPerHeart => GameMaster.FractionsPerHeart;
+
+	int TotalPoints => hearts * PointsPerHeart + fractions;
 
 	void Add(int points) 
 	{
@@ -28,8 +28,8 @@ public class HealthPoints
 
 	void Recalculate(int newPoints) 
 	{
-		fractions = newPoints % pointsPerHeart;
-		hearts = Mathf.FloorToInt(newPoints / pointsPerHeart);
+		fractions = newPoints % PointsPerHeart;
+		hearts = Mathf.FloorToInt(newPoints / PointsPerHeart);
 	}
 
 	public static HealthPoints operator+(HealthPoints left, HealthPoints right) 

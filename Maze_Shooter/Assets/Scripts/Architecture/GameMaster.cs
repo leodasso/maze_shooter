@@ -42,7 +42,7 @@ public class GameMaster : ScriptableObject
         return _gameMaster;
     }
 
-	public static int HpPerHeart => Get().hpPerHeart.Value;
+	public static int FractionsPerHeart => Get().hpPerHeart.Value;
 
     [Button, DisableInEditorMode]
     public void BeginGame()
