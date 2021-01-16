@@ -10,7 +10,7 @@ public class Gun : GunBase
 	public bool limitAmmo;
 	[ShowIf("limitAmmo")]
 	public int maxAmmo;
-	
+
 	[ShowIf("limitAmmo")]
 	public int currentAmmo;
 
@@ -18,6 +18,9 @@ public class Gun : GunBase
 	[Tooltip("Determines how intense the fire rate is. 0 is the lowest fire rate of the selected gun," +
 	         " and 1 is the highest rate.")]
 	public float fireRateIntensity = 1;	
+
+	[Tooltip("Used to play sfx for this gun")]
+	public AudioAction audioAction;
 
 	Vector2 FireRateRange => HasGunData ? GunData.firingRate : firingRate;
 	float FireRate => Mathf.Lerp(FireRateRange.x, FireRateRange.y, fireRateIntensity);
@@ -54,7 +57,33 @@ public class Gun : GunBase
 			return;
 		}
 
-		CreateBullet(Vector2.zero, RandomSpreadAngle);
+		if (audioAction) {
+			audioAction.audioCollection = HasAmmo ? gunData.fireSound : gunData.dryShotSound;
+			audioAction.Play();
+		}
+
+		
+		if (HasAmmo) {
+			SpendAmmo();
+			CreateBullet(Vector2.zero, RandomSpreadAngle);
+		}
+
 		_cooldownTimer = 0;
+	}
+
+	public override void Reload()
+	{
+		base.Reload();
+		currentAmmo = maxAmmo;
+		audioAction.audioCollection = gunData.reloadSound;
+		audioAction.Play();
+	}
+
+	bool HasAmmo => limitAmmo? currentAmmo > 0 : true;
+
+	void SpendAmmo() 
+	{
+		if (!HasAmmo || !limitAmmo) return;
+		currentAmmo--;
 	}
 }

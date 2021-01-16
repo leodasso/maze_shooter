@@ -69,6 +69,9 @@ public class GunBase : MonoBehaviour
             hazard.enabled = true;
         }
     }
+
+	[Button]
+	public virtual void Reload() {}
     
     public void AddOverride(GunData newData)
     {

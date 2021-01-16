@@ -16,4 +16,10 @@ public class GunData : ScriptableObject
 
 	[AssetsOnly, PreviewField, AssetList(AutoPopulate = false, Path = "Prefabs/Ammo")]
 	public GameObject ammo;
+
+	[Space]
+	public AudioCollection fireSound;
+	[Tooltip("SFX for when try to fire but there's no ammo left")]
+	public AudioCollection dryShotSound;
+	public AudioCollection reloadSound;
 }
