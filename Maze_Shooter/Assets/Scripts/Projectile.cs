@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 
 public class Projectile : MonoBehaviour
 {
-	public float speedMultiplier = 1;
+	public AnimationCurve speedMultiplier = AnimationCurve.Linear(0, 1, 1, 1);
 	public FloatReference speed;
 	public FloatReference lifetime;
 	[Tooltip("After force and everything is added on, speed can't exceed this value")]
@@ -41,7 +41,7 @@ public class Projectile : MonoBehaviour
 			_localSpeed += forwardForceOverLifetime.Value * Time.deltaTime;
 
 		// Get a world space vector from the local speed
-		_totalVelocity = transform.up * _localSpeed * speedMultiplier;
+		_totalVelocity = transform.forward * _localSpeed * speedMultiplier.Evaluate(_lifetimeTimer);
 		
 		transform.Translate(_totalVelocity * Time.deltaTime, Space.World);
 
@@ -65,10 +65,5 @@ public class Projectile : MonoBehaviour
 	public void EnableForwardForce(bool isEnabled)
 	{
 		applyForwardForce = isEnabled;
-	}
-
-	public void SetSpeedMultiplier(float newValue)
-	{
-		speedMultiplier = newValue;
 	}
 }

@@ -15,7 +15,7 @@ public class Gun : GunBase
 	FiringPattern FiringPattern {
 		get
 		{
-			if (!HasGunData) return firingPattern;
+			if (!HasGunDataPattern) return firingPattern;
 			if (GunData.firingPatterns.Count < 1) return firingPattern;
 			int maxAvailableFiringPattern = GunData.firingPatterns.Count - 1;
 			int index = Mathf.Clamp(Level, 0, maxAvailableFiringPattern);
@@ -27,7 +27,7 @@ public class Gun : GunBase
 	float FireRate => Mathf.Lerp(FireRateRange.x, FireRateRange.y, fireRateIntensity);
 	float Cooldown => 1f / FireRate;
 	bool IsCoolingDown => _cooldownTimer < Cooldown;
-	float RandomSpreadAngle => HasGunData ? Random.Range(-GunData.firingSpread, GunData.firingSpread) : 0;
+	float RandomSpreadAngle => HasGunData ? Random.Range(-GunData.randomSpread, GunData.randomSpread) : 0;
 	float _cooldownTimer;
 
 	protected override void Start()
@@ -72,6 +72,7 @@ public class Gun : GunBase
 		float x;
 		float y;
 		float progress = 0;
+		float spread = RandomSpreadAngle;
 			
 		for (int i = 0; i < FiringPattern.bullets; i++)
 		{
@@ -82,7 +83,7 @@ public class Gun : GunBase
 			y = Mathf.Lerp(0, FiringPattern.heightSpread, progress);
 			angle = Mathf.Lerp(0, FiringPattern.angleSpread, progress) * switcher;
 
-			CreateBullet(new Vector2(x, y), -Math.RoundToNearest(angle, FiringPattern.snapAngle) + RandomSpreadAngle );
+			CreateBullet(new Vector2(x, y), -Math.RoundToNearest(angle, FiringPattern.snapAngle) + spread );
 			yield return new WaitForSeconds(FiringPattern.interval);
 		}
 	}

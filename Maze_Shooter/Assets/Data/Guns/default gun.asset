@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 021c08a977cdf5d458e02450547d42f3, type: 3}
-  m_Name: laser beam
+  m_Name: default gun
   m_EditorClassIdentifier: 
-  firingRate: {x: 20, y: 25}
-  firingPatterns:
-  - {fileID: 11400000, guid: 053fe0d7e9ab923438ee846be218ffde, type: 2}
-  ammo: {fileID: 1341631613168128, guid: 329de2e0ca35ffa40b3f429290446636, type: 3}
+  firingRate: {x: 0.1, y: 8}
+  randomSpread: 2
+  firingPatterns: []
+  ammo: {fileID: 1341631613168128, guid: fc673370b839177468522e7fa71b21c9, type: 3}

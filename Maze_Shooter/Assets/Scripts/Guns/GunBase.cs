@@ -28,7 +28,7 @@ public class GunBase : MonoBehaviour
     [MinMaxSlider(.1f, 60, true), Tooltip("Number of shots per second. The minimum is when the player is barely touching joystick," +
                                           " and max is when they're at full tilt.")]
     public Vector2 firingRate;
-    [AssetsOnly, HideIf("HasGunData"), BoxGroup("local gun")]
+    [AssetsOnly, HideIf("HasGunDataPattern"), BoxGroup("local gun")]
     public FiringPattern firingPattern;
     [AssetsOnly, PreviewField, AssetList(AutoPopulate = false, Path = "Prefabs/Ammo"), BoxGroup("local gun"), HideIf("HasGunData")]
     public GameObject ammo;
@@ -47,6 +47,7 @@ public class GunBase : MonoBehaviour
     protected int level;
     float _startFiringTimer;
     protected bool HasGunData => GunData != null;
+	protected bool HasGunDataPattern => HasGunData && GunData.firingPatterns.Count > 0;
     protected GameObject Ammo => HasGunData ? GunData.ammo : ammo;
     protected bool AllowFiring => _startFiringTimer <= 0;
     
@@ -68,6 +69,7 @@ public class GunBase : MonoBehaviour
     
     protected void CreateBullet(Vector2 offset, float angle)
     {
+		offset = Math.Project2Dto3D(offset);
         Vector3 localOffset = transform.TransformPoint(offset);
         Debug.DrawLine(transform.position, localOffset, Color.yellow, 1);
         var newAmmo = Instantiate(Ammo, localOffset, transform.rotation);
