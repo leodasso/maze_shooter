@@ -12,6 +12,10 @@ public class ContactBase : MonoBehaviour
 	[BoxGroup("contact")]
 	[ToggleLeft, PropertyOrder(-500)]
 	public bool debug;
+
+	[BoxGroup("contact")]
+	[ToggleLeft, PropertyOrder(-500)]
+	public bool ignoreTriggers = true;
 	
 	[BoxGroup("contact")]
 	[Tooltip("Layers that will destroy this object. Any inheriting class's behavior will happen before this is destroyed.")]
@@ -47,7 +51,7 @@ public class ContactBase : MonoBehaviour
 		Ray castingRay = new Ray(_prevPosition, direction);
 		RaycastHit hit;
 		if (Physics.Raycast(castingRay, out hit, direction.magnitude))
-		if ( hit.collider != null && !ignoredColliders.Contains(hit.collider) && !hit.collider.isTrigger)
+		if (CanHitCollider(hit.collider))
 		{
 			if (debug)
 			{
@@ -60,15 +64,20 @@ public class ContactBase : MonoBehaviour
 		_prevPosition = transform.position;
 	}
 
+	bool CanHitCollider(Collider other) 
+	{
+		if (!other) return false;
+		if (ignoreTriggers && other.isTrigger) return false;
+		if (ignoredColliders.Contains(other)) return false;
+		if (other.gameObject == gameObject) return false;
+		return true;
+	}
+
 	void OnCollisionEnter(Collision other)
 	{
 		Collider otherCol = other.GetContact(0).otherCollider;
-		
-		// Don't collide with myself
-		if (otherCol.gameObject == gameObject) return;
-		
-		// don't collide with ignored colliders
-		if (ignoredColliders.Contains(otherCol)) return;
+
+		if (!CanHitCollider(otherCol)) return;
 		        
 		OnCollisionAction(other, otherCol);
 		
