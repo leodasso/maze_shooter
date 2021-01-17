@@ -9,7 +9,7 @@ using Arachnid;
              "needs to be combined with a Health component.")]
 public class PlayerHealth : HealthPlugin
 {
-	public IntReference minStartHp;
+	public HeartsRef minStartHp;
     public SavedInt savedPlayerHealth;
     public UnityEvent onHealthCritical;
     public UnityEvent onHealthOkay;
@@ -26,7 +26,7 @@ public class PlayerHealth : HealthPlugin
         if (savedPlayerHealth.HasSavedValue())
         {
 			int savedHp = savedPlayerHealth.GetValue();
-			savedHp = Mathf.Clamp(savedHp, minStartHp.Value, 100);
+			savedHp = Mathf.Clamp(savedHp, minStartHp.Value.TotalPoints, 100);
             health.SetHp(savedHp);
             CheckForCritical();
         }
@@ -47,13 +47,13 @@ public class PlayerHealth : HealthPlugin
 
     void CheckForCritical()
     {
-        if (health.currentHp.Value < 2)
+        if (health.currentHp.Value.hearts < 2)
             onHealthCritical.Invoke();
 		else onHealthOkay.Invoke();
     }
 
     void OnDestroy()
     {
-        savedPlayerHealth.Save(health.currentHp.Value);
+        savedPlayerHealth.Save(health.currentHp.Value.TotalPoints);
     }
 }

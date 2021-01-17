@@ -13,10 +13,10 @@ public class Health : MonoBehaviour, IDestructible
 	public SavedInt savedMaxHp;
 
 	[TabGroup("main"), LabelText("Max HP"), FormerlySerializedAs("hitPoints")]
-	public IntReference maxHearts;
+	public HeartsRef maxHearts;
 	
 	[TabGroup("main"), LabelText("Current HP")]
-	public IntReference currentHp;
+	public HeartsRef currentHp;
 
 	[ToggleLeft, TabGroup("main")]
 	public bool setHpOnStart;
@@ -52,7 +52,7 @@ public class Health : MonoBehaviour, IDestructible
 
 	public bool IsInvulnerable => _invulnerableTimer > 0;
 	public bool IsKilled => _isKilled;
-	public int ActualHp {
+	public HealthPoints ActualHp {
 		get {
 			return mainHealth == null ? currentHp.Value : mainHealth.currentHp.Value;
 		}
@@ -85,7 +85,7 @@ public class Health : MonoBehaviour, IDestructible
 		if (IsInvulnerable || !enabled) return;
 		
 		ActualHp -= amount;
-		if (ActualHp <= 0)
+		if (ActualHp.TotalPoints <= 0)
 		{
 			Destruct();
 			return;
@@ -100,7 +100,7 @@ public class Health : MonoBehaviour, IDestructible
 		if (invulnerableTime.Value > 0)
 			_invulnerableTimer = invulnerableTime.Value;
 		
-		onDamaged?.Invoke(ActualHp);
+		onDamaged?.Invoke(ActualHp.TotalPoints);
 		onDamagedEvent.Invoke();
 
 		// invoke events from the main health component
@@ -111,7 +111,7 @@ public class Health : MonoBehaviour, IDestructible
 	{
 		if (!enabled) return;
 		ActualHp += amount;
-		ActualHp = Mathf.Clamp(ActualHp, 0, maxHearts.Value);
+		ActualHp = Mathf.Clamp(ActualHp.TotalPoints, 0, maxHearts.Value.TotalPoints);
 		if (onHealed != null) onHealed.Invoke(amount);
 	}
 

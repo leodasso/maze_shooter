@@ -19,7 +19,7 @@ public struct HealthPoints
 
 	public static int PointsPerHeart => GameMaster.FractionsPerHeart;
 
-	int TotalPoints => hearts * PointsPerHeart + fractions;
+	public int TotalPoints => hearts * PointsPerHeart + fractions;
 
 	void Add(int points) 
 	{
@@ -58,6 +58,12 @@ public struct HealthPoints
 	{
 		return left.TotalPoints != right.TotalPoints;
 	}
+
+	public static implicit operator HealthPoints(int qty) {
+		HealthPoints newHp = new HealthPoints();
+		newHp.Recalculate(qty);
+		return newHp;
+	}
 }
 
 #if UNITY_EDITOR
@@ -72,10 +78,15 @@ public class HealthPointsDrawer : OdinValueDrawer<HealthPoints>
 
 		// In Odin, labels are optional and can be null, so we have to account for that.
 		if (label != null)
-		{
 			rect = EditorGUI.PrefixLabel(rect, label);
-		}
 
+		DrawEditor(ref value, rect);
+
+		this.ValueEntry.SmartValue = value;
+	}
+
+	public static void DrawEditor(ref HealthPoints value, Rect rect) 
+	{
 		var prev = EditorGUIUtility.labelWidth;
 		EditorGUIUtility.labelWidth = 15;
 		float heartsWidth = 50;
@@ -84,8 +95,6 @@ public class HealthPointsDrawer : OdinValueDrawer<HealthPoints>
 		value.fractions = EditorGUI.IntSlider(rect.AlignRight(rect.width - heartsWidth), "¾", value.fractions, 0, HealthPoints.PointsPerHeart);
 
 		EditorGUIUtility.labelWidth = prev;
-
-		this.ValueEntry.SmartValue = value;
 	}
 }
 #endif

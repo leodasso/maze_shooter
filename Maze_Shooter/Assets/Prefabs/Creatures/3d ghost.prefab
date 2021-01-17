@@ -548,12 +548,16 @@ MonoBehaviour:
   savedMaxHp: {fileID: 11400000, guid: 06d8f1f3beb6d39498ae25631021e002, type: 2}
   maxHearts:
     useConstant: 1
-    constantValue: 0
-    valueObject: {fileID: 11400000, guid: 9bf3801a5e408f24fa2c44d8ed4d5862, type: 2}
+    constantValue:
+      fractions: 1
+      hearts: 9
+    valueObject: {fileID: 11400000, guid: cce982abeb95e8141a65aa8a4e13a8bb, type: 2}
   currentHp:
-    useConstant: 1
-    constantValue: 0
-    valueObject: {fileID: 11400000, guid: 2bf00d113d444634a8dbe500d8afa06c, type: 2}
+    useConstant: 0
+    constantValue:
+      fractions: 0
+      hearts: 0
+    valueObject: {fileID: 11400000, guid: 9d9c43989d3763c44955c49f97c504b5, type: 2}
   setHpOnStart: 0
   invulnerableTime:
     useConstant: 0
@@ -622,7 +626,9 @@ MonoBehaviour:
   health: {fileID: 0}
   minStartHp:
     useConstant: 0
-    constantValue: 2
+    constantValue:
+      fractions: 0
+      hearts: 0
     valueObject: {fileID: 0}
   savedPlayerHealth: {fileID: 11400000, guid: 14a750c95c1de944c97f34de6465b075, type: 2}
   onHealthCritical:
