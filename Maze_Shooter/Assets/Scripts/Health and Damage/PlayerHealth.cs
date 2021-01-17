@@ -11,15 +11,21 @@ public class PlayerHealth : HealthPlugin
 {
 	public HeartsRef minStartHp;
     public SavedInt savedPlayerHealth;
+	public SavedInt savedPlayerMaxHealth;
     public UnityEvent onHealthCritical;
     public UnityEvent onHealthOkay;
 
 	protected override void Start()
 	{
 		base.Start();
+		ApplyMaxHp();
 		CheckForCritical();
 	}
 
+	void ApplyMaxHp() 
+	{
+		health.maxHearts.Value = savedPlayerMaxHealth.GetValue();
+	}
 
     public void ApplySavedHp()
     {
