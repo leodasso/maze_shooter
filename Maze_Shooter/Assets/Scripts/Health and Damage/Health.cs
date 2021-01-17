@@ -112,7 +112,7 @@ public class Health : MonoBehaviour, IDestructible
 		if (onHealed != null) onHealed.Invoke(amount);
 	}
 
-	public void SetHp(int newHp)
+	public void SetHp(Hearts newHp)
 	{
 		if (!enabled) return;
 		currentHp.Value = newHp;

@@ -33,6 +33,19 @@ public struct Hearts
 		hearts = Mathf.FloorToInt(newPoints / PointsPerHeart);
 	}
 
+	public void SetTotalPoints(int totalPoints) 
+	{
+		Recalculate(totalPoints);
+	}
+
+	public static Hearts Clamp(Hearts input, Hearts min, Hearts max) 
+	{
+		int total = input.TotalPoints;
+		int clamped = Mathf.Clamp(total, min.TotalPoints, max.TotalPoints);
+		input.SetTotalPoints(clamped);
+		return input;
+	}
+
 	public static Hearts operator+(Hearts left, Hearts right) 
 	{
 		Hearts newHP = new Hearts();

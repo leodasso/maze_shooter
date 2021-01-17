@@ -16,12 +16,25 @@ public class GuiHeart : MonoBehaviour
 		}
 	}
 
-	[Space, PreviewField]
-	public Sprite filledSprite;
+	public int fraction {
+		set {
+			image.sprite = fractions[value - 1];
+		}
+	}
 
-	[PreviewField]
-	public Sprite emptySprite;
-	public Image image;
+
+	[SerializeField, Space, PreviewField]
+	Sprite filledSprite;
+
+	[SerializeField, PreviewField]
+	Sprite emptySprite;
+
+	[SerializeField, PreviewField]
+	List<Sprite> fractions = new List<Sprite>();
+
+	[SerializeField]
+	Image image;
+
 
 	bool _filled;
 
@@ -30,6 +43,7 @@ public class GuiHeart : MonoBehaviour
 
 	[ButtonGroup]
 	void Empty() {filled = false;}
+	
 
     // Start is called before the first frame update
     void Start()

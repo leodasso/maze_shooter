@@ -7,13 +7,21 @@ public class HeartsTester : MonoBehaviour
 {
 
 	public Hearts value;
-
 	public Hearts input;
+
+	public int min;
+	public int max;
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
+
+	[Button]
+	void Clamp() {
+		value = Hearts.Clamp(value, min, max);
+	}
 
 	[ButtonGroup("1")]
 	void Add() {

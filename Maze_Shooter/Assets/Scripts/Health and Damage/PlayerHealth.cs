@@ -31,9 +31,10 @@ public class PlayerHealth : HealthPlugin
     {
         if (savedPlayerHealth.HasSavedValue())
         {
-			int savedHp = savedPlayerHealth.GetValue();
-			savedHp = Mathf.Clamp(savedHp, minStartHp.Value.TotalPoints, 100);
-            health.SetHp(savedHp);
+			Hearts newStartHearts = new Hearts();
+			newStartHearts.SetTotalPoints(savedPlayerHealth.GetValue());
+			newStartHearts = Hearts.Clamp(newStartHearts, minStartHp.Value, 100);
+            health.SetHp(newStartHearts);
             CheckForCritical();
         }
     }

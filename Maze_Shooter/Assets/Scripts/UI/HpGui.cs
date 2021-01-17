@@ -6,8 +6,8 @@ using Arachnid;
 
 public class HpGui : MonoBehaviour
 {
-	public IntValue currentHp;
-	public IntValue maxHp;
+	public HeartsValue currentHp;
+	public HeartsValue maxHp;
 	public List<GuiHeart> hearts = new List<GuiHeart>();
 
     // Start is called before the first frame update
@@ -21,9 +21,15 @@ public class HpGui : MonoBehaviour
 		for (int i = 0; i < hearts.Count; i++) 
 		{
 			var heart = hearts[i];
-			heart.gameObject.SetActive(i < maxHp.Value);
-			if (heart.isActiveAndEnabled)
-				heart.filled = i < currentHp.Value;
+			heart.gameObject.SetActive(i < maxHp.Value.hearts);
+			if (!heart.isActiveAndEnabled) continue;
+
+			// if this is the last heart, show fractions
+			if (i == currentHp.Value.hearts && currentHp.Value.fractions > 0) 
+				heart.fraction = currentHp.Value.fractions;
+
+			// otherwise, show full / empty hearts
+			else heart.filled = i < currentHp.Value.hearts;
 		}
 	}
 
