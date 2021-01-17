@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 1
-  ignoreTriggers: 1
+  ignoreTriggers: 0
   layersThatDestroyThis:
     serializedVersion: 2
     m_Bits: 1048576
@@ -209,7 +209,9 @@ MonoBehaviour:
     m_Bits: 44545
   damage:
     useConstant: 0
-    constantValue: 1
+    constantValue:
+      fractions: 0
+      hearts: 1
     valueObject: {fileID: 0}
 --- !u!114 &4581047164348104883
 MonoBehaviour:
