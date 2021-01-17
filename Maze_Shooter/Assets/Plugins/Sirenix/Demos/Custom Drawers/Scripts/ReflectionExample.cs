@@ -15,8 +15,9 @@ namespace Sirenix.OdinInspector.Demos
 
     // Example demonstrating how reflection can be used to enhance custom drawers.
     [TypeInfoBox(
-            "This example demonstrates how reflection can be used to extend drawers from what otherwise would be possible.\n" +
-            "In this case, a user can specify one of their own methods to receive a callback from the drawer chain.")]
+            "This example demonstrates how reflection can be used to extend drawers from what otherwise would be possible.\n\n" +
+            "In this case, a user can specify one of their own methods to receive a callback from the drawer chain.\n\n" +
+            "Note that this is a manual approach; it is recommended to use ValueResolver<T> and ActionResolver instead.")]
     public class ReflectionExample : MonoBehaviour
     {
         [OnClickMethod("OnClick")]
@@ -65,12 +66,13 @@ namespace Sirenix.OdinInspector.Demos
 
         protected override void Initialize()
         {
-            // Use MemberFinder to find the specified method, and store the method info in the context object.
-            this.Method = MemberFinder.Start(this.Property.ParentType)
-                .IsMethod()
-                .HasNoParameters()
-                .IsNamed(this.Attribute.MethodName)
-                .GetMember<MethodInfo>(out this.ErrorMessage);
+            // Use reflection to find the specified method, and store the method info in the context object.
+            this.Method = this.Property.ParentType.GetMethod(this.Attribute.MethodName, Flags.StaticInstanceAnyVisibility, null, Type.EmptyTypes, null);
+
+            if (this.Method == null)
+            {
+                this.ErrorMessage = "Could not find a parameterless method named '" + this.Attribute.MethodName + "' in the type '" + this.Property.ParentType + "'.";
+            }
         }
 
         protected override void DrawPropertyLayout(GUIContent label)

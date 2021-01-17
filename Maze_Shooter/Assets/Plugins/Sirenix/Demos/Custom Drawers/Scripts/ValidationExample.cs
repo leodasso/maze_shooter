@@ -1,4 +1,6 @@
 #if UNITY_EDITOR
+[assembly: Sirenix.OdinInspector.Editor.Validation.RegisterValidator(typeof(Sirenix.OdinInspector.Demos.NotOneAttributeValidator))]
+
 namespace Sirenix.OdinInspector.Demos
 {
     using System;
@@ -6,16 +8,15 @@ namespace Sirenix.OdinInspector.Demos
 
 #if UNITY_EDITOR
 
-    using Sirenix.OdinInspector.Editor;
-    using Sirenix.Utilities.Editor;
+    using Sirenix.OdinInspector.Editor.Validation;
 
 #endif
 
-    // This example demonstates how to implement drawers that can validate properties,
-    // and how to add warnings and errors that will be picked up by Odin Scene Validator.
+    // This example demonstrates how to implement validators that can validate properties,
+    // and how to add warnings or errors that will be picked up by Odin Project Validator.
     [TypeInfoBox(
-       "This is example demonstrates how to implement a custom drawer, that validates the property's value, " +
-       "and how to get Odin Scene Validator to pick up that validation warning or error.")]
+       "This is example demonstrates how to implement a custom validator, that validates the property's value, " +
+       "and how to get Odin Project Validator (if installed) to pick up that validation warning or error.")]
     public class ValidationExample : MonoBehaviour
     {
         [NotOne]
@@ -30,34 +31,16 @@ namespace Sirenix.OdinInspector.Demos
 
 #if UNITY_EDITOR
 
-    // Place the drawer script file in an Editor folder.
-    public class NotOneAttributeDrawer : OdinAttributeDrawer<NotOneAttribute, int>
+    // Place the validator script file in an Editor folder, and remember to include the registration attribute at the top of this file.
+    public class NotOneAttributeValidator : AttributeValidator<NotOneAttribute, int>
     {
-        protected override void DrawPropertyLayout(GUIContent label)
+        protected override void Validate(ValidationResult result)
         {
-            SirenixEditorGUI.BeginBox();
+            if (this.ValueEntry.SmartValue == 1)
             {
-                if (this.ValueEntry.SmartValue == 1)
-                {
-                    // Odin Scene Validator will listen for calls to SirenixEditorGUI.WarningMessageBox and SirenixEditorGUI.ErrorMessageBox,
-                    // so as long as you're just calling one of those two functions, the Scene Validator will catch it.
-                    SirenixEditorGUI.ErrorMessageBox("1 is not a valid value.");
-                }
-                else
-                {
-                    SirenixEditorGUI.InfoMessageBox("Value is not 1 and therefore valid.");
-                }
-
-                // Continue the drawer chain.
-                this.CallNextDrawer(label);
-
-                // Button for opening the Odin Scene Validator window.
-                if (GUILayout.Button("Open Odin Scene Validator"))
-                {
-                    OdinSceneValidatorWindow.OpenWindow();
-                }
+                result.Message = "1 is not a valid value.";
+                result.ResultType = ValidationResultType.Error;
             }
-            SirenixEditorGUI.EndBox();
         }
     }
 
