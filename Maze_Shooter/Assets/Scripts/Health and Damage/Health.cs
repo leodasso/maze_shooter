@@ -49,7 +49,7 @@ public class Health : MonoBehaviour, IDestructible
 
 	public bool IsInvulnerable => _invulnerableTimer > 0;
 	public bool IsKilled => _isKilled;
-	public HealthPoints ActualHp {
+	public Hearts ActualHp {
 		get {
 			return mainHealth == null ? currentHp.Value : mainHealth.currentHp.Value;
 		}

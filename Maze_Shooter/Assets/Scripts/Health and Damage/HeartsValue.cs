@@ -10,9 +10,9 @@ public class HeartsValue : ScriptableObject
 	[ToggleLeft]
 	public bool readOnly;
 	[SerializeField, ShowInInspector, OnValueChanged("RaiseEvents")]
-	HealthPoints myValue;
+	Hearts myValue;
 	
-	public HealthPoints Value
+	public Hearts Value
 	{
 		get { return myValue; }
 		set {

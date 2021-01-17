@@ -10,7 +10,7 @@ using Sirenix.Utilities;
 #endif
 
 [System.Serializable]
-public struct HealthPoints
+public struct Hearts
 {
 	public int fractions;
 
@@ -33,50 +33,50 @@ public struct HealthPoints
 		hearts = Mathf.FloorToInt(newPoints / PointsPerHeart);
 	}
 
-	public static HealthPoints operator+(HealthPoints left, HealthPoints right) 
+	public static Hearts operator+(Hearts left, Hearts right) 
 	{
-		HealthPoints newHP = new HealthPoints();
+		Hearts newHP = new Hearts();
 		newHP.Recalculate(left.TotalPoints + right.TotalPoints);
 		return newHP;
 	}
 
-	public static HealthPoints operator-(HealthPoints left, HealthPoints right) 
+	public static Hearts operator-(Hearts left, Hearts right) 
 	{
-		HealthPoints newHP = new HealthPoints();
+		Hearts newHP = new Hearts();
 		int newPoints = left.TotalPoints - right.TotalPoints;
 		if (newPoints < 0) newPoints = 0;
 		newHP.Recalculate(newPoints);
 		return newHP;
 	}
 
-	public static HealthPoints operator+(HealthPoints left, int right) 
+	public static Hearts operator+(Hearts left, int right) 
 	{
-		HealthPoints newHP = new HealthPoints();
+		Hearts newHP = new Hearts();
 		newHP.Recalculate(left.TotalPoints + right);
 		return newHP;
 	}
 
-	public static HealthPoints operator-(HealthPoints left, int right) 
+	public static Hearts operator-(Hearts left, int right) 
 	{
-		HealthPoints newHP = new HealthPoints();
+		Hearts newHP = new Hearts();
 		int newPoints = left.TotalPoints - right;
 		if (newPoints < 0) newPoints = 0;
 		newHP.Recalculate(newPoints);
 		return newHP;
 	}
 
-	public static bool operator==(HealthPoints left, HealthPoints right) 
+	public static bool operator==(Hearts left, Hearts right) 
 	{
 		return left.TotalPoints == right.TotalPoints;
 	}
 
-	public static bool operator!=(HealthPoints left, HealthPoints right) 
+	public static bool operator!=(Hearts left, Hearts right) 
 	{
 		return left.TotalPoints != right.TotalPoints;
 	}
 
-	public static implicit operator HealthPoints(int qty) {
-		HealthPoints newHp = new HealthPoints();
+	public static implicit operator Hearts(int qty) {
+		Hearts newHp = new Hearts();
 		newHp.hearts = qty;
 		newHp.fractions = 0;
 		return newHp;
@@ -85,11 +85,11 @@ public struct HealthPoints
 
 #if UNITY_EDITOR
 
-public class HealthPointsDrawer : OdinValueDrawer<HealthPoints>
+public class HealthPointsDrawer : OdinValueDrawer<Hearts>
 {
 	protected override void DrawPropertyLayout(GUIContent label)
 	{
-		HealthPoints value = this.ValueEntry.SmartValue;
+		Hearts value = this.ValueEntry.SmartValue;
 
 		var rect = EditorGUILayout.GetControlRect();
 
@@ -102,14 +102,14 @@ public class HealthPointsDrawer : OdinValueDrawer<HealthPoints>
 		this.ValueEntry.SmartValue = value;
 	}
 
-	public static void DrawEditor(ref HealthPoints value, Rect rect) 
+	public static void DrawEditor(ref Hearts value, Rect rect) 
 	{
 		var prev = EditorGUIUtility.labelWidth;
 		EditorGUIUtility.labelWidth = 15;
 		float heartsWidth = 50;
 		int newValue = Mathf.Clamp(value.hearts, 0, 999);
 		value.hearts = EditorGUI.IntField(rect.AlignLeft(heartsWidth), "♥", newValue );
-		value.fractions = EditorGUI.IntSlider(rect.AlignRight(rect.width - heartsWidth), "¾", value.fractions, 0, HealthPoints.PointsPerHeart);
+		value.fractions = EditorGUI.IntSlider(rect.AlignRight(rect.width - heartsWidth), "¾", value.fractions, 0, Hearts.PointsPerHeart);
 
 		EditorGUIUtility.labelWidth = prev;
 	}

@@ -17,13 +17,13 @@ public class HeartsRef
 {
 	public PropertyType useConstant = PropertyType.Local;
 
-	public HealthPoints constantValue;
+	public Hearts constantValue;
 
 	public HeartsValue valueObject;
 
 	bool isGlobal => useConstant == PropertyType.Global;
 	
-	public HealthPoints Value
+	public Hearts Value
 	{
 		get { return useConstant == PropertyType.Local ? constantValue : valueObject.Value; }
 

@@ -6,9 +6,9 @@ using Sirenix.OdinInspector;
 public class HeartsTester : MonoBehaviour
 {
 
-	public HealthPoints value;
+	public Hearts value;
 
-	public HealthPoints input;
+	public Hearts input;
     // Start is called before the first frame update
     void Start()
     {
