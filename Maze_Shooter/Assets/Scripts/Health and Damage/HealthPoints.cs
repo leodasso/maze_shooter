@@ -49,6 +49,22 @@ public struct HealthPoints
 		return newHP;
 	}
 
+	public static HealthPoints operator+(HealthPoints left, int right) 
+	{
+		HealthPoints newHP = new HealthPoints();
+		newHP.Recalculate(left.TotalPoints + right);
+		return newHP;
+	}
+
+	public static HealthPoints operator-(HealthPoints left, int right) 
+	{
+		HealthPoints newHP = new HealthPoints();
+		int newPoints = left.TotalPoints - right;
+		if (newPoints < 0) newPoints = 0;
+		newHP.Recalculate(newPoints);
+		return newHP;
+	}
+
 	public static bool operator==(HealthPoints left, HealthPoints right) 
 	{
 		return left.TotalPoints == right.TotalPoints;
@@ -61,7 +77,8 @@ public struct HealthPoints
 
 	public static implicit operator HealthPoints(int qty) {
 		HealthPoints newHp = new HealthPoints();
-		newHp.Recalculate(qty);
+		newHp.hearts = qty;
+		newHp.fractions = 0;
 		return newHp;
 	}
 }

@@ -9,9 +9,6 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour, IDestructible
 {
-	[TabGroup("main") ]
-	public SavedInt savedMaxHp;
-
 	[TabGroup("main"), LabelText("Max HP"), FormerlySerializedAs("hitPoints")]
 	public HeartsRef maxHearts;
 	
@@ -65,7 +62,7 @@ public class Health : MonoBehaviour, IDestructible
 
 	void Awake ()
 	{
-		if (savedMaxHp != null) maxHearts.Value = savedMaxHp.GetValue();
+		// if (savedMaxHp != null) maxHearts.Value = savedMaxHp.GetValue();
 		if (setHpOnStart) ResetHp();
 	}
 
