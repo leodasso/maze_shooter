@@ -77,7 +77,7 @@ public class Health : MonoBehaviour, IDestructible
 			_invulnerableTimer -= Time.deltaTime;
 	}
 
-	public void DoDamage(int amount, Vector3 pos, Vector3 dir)
+	public void DoDamage(Hearts amount, Vector3 pos, Vector3 dir)
 	{
 		if (IsInvulnerable || !enabled) return;
 		

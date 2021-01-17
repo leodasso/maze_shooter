@@ -10,7 +10,7 @@ public class Hazard : ContactBase
 {
     [Tooltip("Layers that this hazard will do damage to")]
     public LayerMask layersToDamage;
-	public IntReference damage;
+	public HeartsRef damage;
 
     protected override void OnCollisionAction(Collision collision, Collider otherCol)
     {

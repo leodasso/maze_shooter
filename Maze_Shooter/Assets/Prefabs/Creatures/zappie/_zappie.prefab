@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 1
+  ignoreTriggers: 1
   layersThatDestroyThis:
     serializedVersion: 2
     m_Bits: 0
@@ -291,10 +292,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52bf0bef0b6348140ac4cd8efa3e70f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints:
+  maxHearts:
     useConstant: 0
-    constantValue: 2
+    constantValue:
+      fractions: 0
+      hearts: 1
     valueObject: {fileID: 0}
+  currentHp:
+    useConstant: 0
+    constantValue:
+      fractions: 0
+      hearts: 1
+    valueObject: {fileID: 0}
+  setHpOnStart: 1
   invulnerableTime:
     useConstant: 0
     constantValue: 0.3
