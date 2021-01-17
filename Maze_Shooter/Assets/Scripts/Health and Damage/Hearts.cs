@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Arachnid;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 #if UNITY_EDITOR
 using UnityEditor;
-using Sirenix.OdinInspector.Editor;
-using Sirenix.Utilities;
 #endif
 
 [System.Serializable]
@@ -98,33 +93,38 @@ public struct Hearts
 
 #if UNITY_EDITOR
 
-public class HealthPointsDrawer : OdinValueDrawer<Hearts>
+[CustomPropertyDrawer(typeof(Hearts))]
+public class HeartsDrawer : PropertyDrawer
 {
-	protected override void DrawPropertyLayout(GUIContent label)
+	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 	{
-		Hearts value = this.ValueEntry.SmartValue;
+		// Using BeginProperty / EndProperty on the parent property means that
+		// prefab override logic works on the entire property.
+		EditorGUI.BeginProperty(position, label, property);
 
-		var rect = EditorGUILayout.GetControlRect();
+		// Draw label
+		if (label != null) 
+			position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
 
-		// In Odin, labels are optional and can be null, so we have to account for that.
-		if (label != null)
-			rect = EditorGUI.PrefixLabel(rect, label);
+		// Don't make child fields be indented
+		var indent = EditorGUI.indentLevel;
+		EditorGUI.indentLevel = 0;
 
-		DrawEditor(ref value, rect);
+		// Calculate rects
+		var heartsLabelRect = new Rect(position.x, position.y, 20, position.height);
+		var heartsRect = new Rect(position.x + 20, position.y, 30, position.height);
+		var fractionsLabelRect = new Rect(position.x + 55, position.y, 20, position.height);
+		var fractionsRect = new Rect(position.x + 75, position.y, position.width -75, position.height);
+		
+		
+		EditorGUI.LabelField(heartsLabelRect, "♥");
+		EditorGUI.PropertyField(heartsRect, property.FindPropertyRelative("hearts"), GUIContent.none);
+		EditorGUI.LabelField(fractionsLabelRect, "¾");
+		EditorGUI.IntSlider(fractionsRect,  property.FindPropertyRelative("fractions"), 0, Hearts.PointsPerHeart, GUIContent.none);
 
-		this.ValueEntry.SmartValue = value;
-	}
-
-	public static void DrawEditor(ref Hearts value, Rect rect) 
-	{
-		var prev = EditorGUIUtility.labelWidth;
-		EditorGUIUtility.labelWidth = 15;
-		float heartsWidth = 50;
-		int newValue = Mathf.Clamp(value.hearts, 0, 999);
-		value.hearts = EditorGUI.IntField(rect.AlignLeft(heartsWidth), "♥", newValue );
-		value.fractions = EditorGUI.IntSlider(rect.AlignRight(rect.width - heartsWidth), "¾", value.fractions, 0, Hearts.PointsPerHeart);
-
-		EditorGUIUtility.labelWidth = prev;
+		// Set indent back to what it was
+		EditorGUI.indentLevel = indent;
+		EditorGUI.EndProperty();
 	}
 }
 #endif

@@ -35,36 +35,42 @@ public class HeartsRef
 }
     
 #if UNITY_EDITOR
-public class HeartsRefDrawer : OdinValueDrawer<HeartsRef>
+[CustomPropertyDrawer(typeof(HeartsRef))]
+public class HeartsRefDrawer : PropertyDrawer
 {
-	protected override void DrawPropertyLayout(GUIContent label)
+	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 	{
-		HeartsRef value = this.ValueEntry.SmartValue;
+		// Using BeginProperty / EndProperty on the parent property means that
+		// prefab override logic works on the entire property.
+		EditorGUI.BeginProperty(position, label, property);
 
-		var rect = EditorGUILayout.GetControlRect();
+		// Draw label
+		position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
 
-		// In Odin, labels are optional and can be null, so we have to account for that.
-		if (label != null)
-		{
-			rect = EditorGUI.PrefixLabel(rect, label);
-		}
+		// Don't make child fields be indented
+		var indent = EditorGUI.indentLevel;
+		EditorGUI.indentLevel = 0;
 
-		var prev = EditorGUIUtility.labelWidth;
-		EditorGUIUtility.labelWidth = 15;
+		float remainingWidth = position.width - EditorGlobals.propTypeEnumWidth;
 
-		value.useConstant = (PropertyType)EditorGUI.EnumPopup(rect.AlignLeft(EditorGlobals.propTypeEnumWidth), value.useConstant);
-		var rightRect = rect.AlignRight(rect.width - EditorGlobals.propTypeEnumWidth);
+		// Calculate rects
+		var enumRect = new Rect(position.x, position.y, EditorGlobals.propTypeEnumWidth, position.height);
+		var valueRect = new Rect(position.x + EditorGlobals.propTypeEnumWidth + 5, position.y, remainingWidth - 8, position.height);
+		
+		// get the enum index. 0 = local, 1 = global
+		SerializedProperty enumProperty = property.FindPropertyRelative("useConstant");
+		int enumIndex = enumProperty.enumValueIndex;
 
-		if (value.useConstant == Arachnid.PropertyType.Local) 
-			HealthPointsDrawer.DrawEditor(ref value.constantValue, rightRect);
+		// Draw fields - passs GUIContent.none to each so they are drawn without labels
+		EditorGUI.PropertyField(enumRect, property.FindPropertyRelative("useConstant"), GUIContent.none);
+		if (enumIndex == 0)
+			EditorGUI.PropertyField(valueRect, property.FindPropertyRelative("constantValue"), GUIContent.none);
+		if (enumIndex == 1)
+			EditorGUI.PropertyField(valueRect, property.FindPropertyRelative("valueObject"), GUIContent.none);
 
-		if (value.useConstant == Arachnid.PropertyType.Global) {
-			value.valueObject = (HeartsValue)EditorGUI.ObjectField(rightRect, value.valueObject, typeof(HeartsValue));
-		}
-
-		EditorGUIUtility.labelWidth = prev;
-
-		this.ValueEntry.SmartValue = value;
+		// Set indent back to what it was
+		EditorGUI.indentLevel = indent;
+		EditorGUI.EndProperty();
 	}
 }
 #endif
