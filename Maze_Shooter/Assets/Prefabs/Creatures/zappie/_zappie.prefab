@@ -121,7 +121,9 @@ MonoBehaviour:
     m_Bits: 33281
   damage:
     useConstant: 0
-    constantValue: 1
+    constantValue:
+      fractions: 0
+      hearts: 0
     valueObject: {fileID: 0}
 --- !u!1 &1245006598563395989
 GameObject:
@@ -296,13 +298,13 @@ MonoBehaviour:
     useConstant: 0
     constantValue:
       fractions: 0
-      hearts: 1
+      hearts: 2
     valueObject: {fileID: 0}
   currentHp:
     useConstant: 0
     constantValue:
       fractions: 0
-      hearts: 1
+      hearts: 2
     valueObject: {fileID: 0}
   setHpOnStart: 1
   invulnerableTime:
