@@ -50,9 +50,16 @@ public class GameMaster : ScriptableObject
         onBeginLoadSavedGame.Invoke();
         // find the stage to load from list
         Stage stageToLoad = GetStage(savedStage.GetValue());
+
         // Load with a delay so there's time for the transition to fade in
         stageToLoad.Load(1);
     }
+
+	public void QuitToDesktop()
+	{
+		// TODO time since last checkpoint reminder
+		Application.Quit();
+	}
 
     public static GameObject GetPlayerInstance()
     {
