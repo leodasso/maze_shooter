@@ -68,8 +68,6 @@ public class MovementBase : MonoBehaviour, IControllable
 
 	protected virtual void ApplyDynamicsProfile() {
 		if (!_rigidbody || !movementProfile) return;
-		_rigidbody.mass = movementProfile.rigidbodyMass;
-		_rigidbody.drag = movementProfile.rigidbodyDrag;
 		_rigidbody.useGravity = movementProfile.rigidbodyGravity;
 	}
 
