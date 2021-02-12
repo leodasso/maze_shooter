@@ -95,7 +95,7 @@ namespace Arachnid
 		{
 			if (useLayerMask && !Math.LayerMaskContainsLayer(layerMask, other.gameObject.layer))
 			{
-				Debug.Log(other.name + " is in a layer that doesn't trigger " + name, gameObject);
+				//Debug.Log(other.name + " is in a layer that doesn't trigger " + name, gameObject);
 				return false;
 			}
 

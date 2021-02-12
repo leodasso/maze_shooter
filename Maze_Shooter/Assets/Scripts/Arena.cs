@@ -7,16 +7,7 @@ public class Arena : MonoBehaviour
 
 	void OnDrawGizmos() {
 		Gizmos.color = Color.cyan;
-		for (int i = 0; i < 360; i+= 10) {
-			Gizmos.DrawLine(PointAtAngle(i), PointAtAngle(i + 10));
-		}
-	}
-
-	Vector3 PointAtAngle(float angle) {
-		float radians = Mathf.Deg2Rad * angle;
-		float x = transform.position.x + radius * Mathf.Cos(radians);
-		float z = transform.position.z + radius * Mathf.Sin(radians);
-		return new Vector3(x, transform.position.y, z);
+		GizmoExtensions.DrawCircle(transform.position, radius);
 	}
 
 	/// <summary>
