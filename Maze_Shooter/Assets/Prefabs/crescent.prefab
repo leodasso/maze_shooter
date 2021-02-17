@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5549147339616407768, guid: 890993dad11f32b42872591a6ee68883,
+  m_Sprite: {fileID: -4599338952064285769, guid: ee268a2bb54aaf7449e1264a5c078a82,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -190,7 +190,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3531477424984969327}
         m_TargetAssemblyTypeName: Crescent, Assembly-CSharp
-        m_MethodName: Collect
+        m_MethodName: OnTouched
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -215,8 +215,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a4b098baa9476745a1f8c809327f29a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myOrbiter: {fileID: 5838180771202346172}
-  orbiterGroup: {fileID: 0}
+  collection: {fileID: 11400000, guid: fc5d4af58c7f69949ad851c0c9e604eb, type: 2}
   onCollected:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3531477424984969327}
+        m_TargetAssemblyTypeName: Crescent, Assembly-CSharp
+        m_MethodName: MoveToGroup
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onActivated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: fd3d618d8eba3fe48a5048f92534ac34, type: 2}
+        m_TargetAssemblyTypeName: Arachnid.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3531477424984969327}
+        m_TargetAssemblyTypeName: Crescent, Assembly-CSharp
+        m_MethodName: MoveToGroup
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

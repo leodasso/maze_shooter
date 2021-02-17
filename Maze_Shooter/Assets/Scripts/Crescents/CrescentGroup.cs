@@ -1,20 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Arachnid;
 
 public class CrescentGroup : MonoBehaviour
 {
-	public List<Crescent> crescents = new List<Crescent>();
+	public Collection crescentCollection;
+	public List<Transform> crescentSlots = new List<Transform>();
 
-    // Start is called before the first frame update
-    void Start()
+	static HashSet<CrescentGroup> crescentGroups = new HashSet<CrescentGroup>();
+
+	List<Transform> availableSlots = new List<Transform>();
+
+	public static CrescentGroup CrescentGroupForCollection(Collection collection) 
+	{
+		foreach( CrescentGroup g in crescentGroups) {
+			if (g.crescentCollection == collection) return g;
+		}
+		return null;
+	}
+
+    void Awake()
     {
-        
+        crescentGroups.Add(this);
+		availableSlots = new List<Transform>(crescentSlots);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	void OnDestroy()
+	{
+		crescentGroups.Remove(this);
+	}
+
+	public Transform GetSlot() 
+	{
+		Transform slot = availableSlots[0];
+		availableSlots.RemoveAt(0);
+		return slot;
+	}
+
 }
