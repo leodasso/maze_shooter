@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5838180770449476375}
   m_LocalRotation: {x: 0.3007058, y: -0, z: -0, w: 0.953717}
-  m_LocalPosition: {x: 0, y: 1.41, z: 0}
+  m_LocalPosition: {x: 0, y: 0.36, z: -0.73}
   m_LocalScale: {x: 0.96, y: 0.96, z: 0.96}
   m_Children: []
   m_Father: {fileID: 5838180771202346175}
@@ -144,7 +144,7 @@ CapsuleCollider:
   m_Radius: 1.11
   m_Height: 3.33
   m_Direction: 1
-  m_Center: {x: 0, y: 1.5, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5838180771202346172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +221,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3531477424984969327}
         m_TargetAssemblyTypeName: Crescent, Assembly-CSharp
-        m_MethodName: MoveToGroup
+        m_MethodName: MoveToGlyph
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -248,7 +248,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 3531477424984969327}
         m_TargetAssemblyTypeName: Crescent, Assembly-CSharp
-        m_MethodName: MoveToGroup
+        m_MethodName: MoveToGlyph
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

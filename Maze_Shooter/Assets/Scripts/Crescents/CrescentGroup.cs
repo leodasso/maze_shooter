@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Arachnid;
+using Sirenix.OdinInspector;
 
 public class CrescentGroup : MonoBehaviour
 {
 	public Collection crescentCollection;
-	public List<Transform> crescentSlots = new List<Transform>();
+	public List<CrescentGlyph> crescentGlyphs = new List<CrescentGlyph>();
 
 	static HashSet<CrescentGroup> crescentGroups = new HashSet<CrescentGroup>();
 
-	List<Transform> availableSlots = new List<Transform>();
+	List<CrescentGlyph> availableGlyphs = new List<CrescentGlyph>();
 
 	public static CrescentGroup CrescentGroupForCollection(Collection collection) 
 	{
@@ -23,7 +24,7 @@ public class CrescentGroup : MonoBehaviour
     void Awake()
     {
         crescentGroups.Add(this);
-		availableSlots = new List<Transform>(crescentSlots);
+		availableGlyphs = new List<CrescentGlyph>(crescentGlyphs);
     }
 
 	void OnDestroy()
@@ -31,11 +32,17 @@ public class CrescentGroup : MonoBehaviour
 		crescentGroups.Remove(this);
 	}
 
-	public Transform GetSlot() 
+	public CrescentGlyph GetEmptyGlyph() 
 	{
-		Transform slot = availableSlots[0];
-		availableSlots.RemoveAt(0);
-		return slot;
+		CrescentGlyph emptyGlyph = availableGlyphs[0];
+		availableGlyphs.RemoveAt(0);
+		return emptyGlyph;
 	}
 
+	[Button]
+	void GetCrescentGlyphsInChildren() 
+	{
+		crescentGlyphs.Clear();
+		crescentGlyphs.AddRange(GetComponentsInChildren<CrescentGlyph>());
+	}
 }

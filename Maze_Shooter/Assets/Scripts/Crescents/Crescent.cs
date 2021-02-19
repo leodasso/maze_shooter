@@ -35,25 +35,25 @@ public class Crescent : MonoBehaviour
 		onCollected.Invoke();
 	}
 
-	public void MoveToGroup() 
+	public void MoveToGlyph() 
 	{
 		CrescentGroup group = CrescentGroup.CrescentGroupForCollection(collection);
-		Transform slot = group.GetSlot();
-		StartCoroutine(LerpToSlot(slot));
+		CrescentGlyph newGlyph = group.GetEmptyGlyph();
+		StartCoroutine(LerpToGlyph(newGlyph));
 	}
 
-	IEnumerator LerpToSlot(Transform slot) 
+	IEnumerator LerpToGlyph(CrescentGlyph glyph) 
 	{
 		Vector3 startPos = transform.position;
 		float progress = 0;
 		
 		while (progress < 1) {
 			progress += Time.unscaledDeltaTime;
-			transform.position = Vector3.Lerp(startPos, slot.position, progress);
+			transform.position = Vector3.Lerp(startPos, glyph.transform.position, progress);
 			yield return null;
 		}
 
-		transform.parent = slot;
+		transform.parent = glyph.transform;
 		transform.localPosition = Vector3.zero;
 	}
 }
