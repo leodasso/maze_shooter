@@ -10,7 +10,15 @@ public class Crescent : MonoBehaviour
 	public UnityEvent onCollected;
 	public UnityEvent onActivated;
 
+	CrescentGroup myGroup;
+
 	static Collection activatedCrescents;
+
+
+	void Start() 
+	{
+		myGroup = CrescentGroup.CrescentGroupForCollection(collection);
+	}
 
 	void Activate() 
 	{
@@ -19,14 +27,16 @@ public class Crescent : MonoBehaviour
 
 		// call events to move camera, put focus on other crescents, freeze frame, etc
 		onActivated.Invoke();
+		if (myGroup) myGroup.onActivated.Invoke();
 	}
 
 	public void OnTouched () 
 	{
-		// check if activated or not
-		if (activatedCrescents == null) Activate();
+		if (activatedCrescents == null) 
+			Activate();
 
-		else if (activatedCrescents == collection) Collect();
+		if (activatedCrescents == collection) 
+			Collect();
 	}
 	
 
@@ -37,8 +47,7 @@ public class Crescent : MonoBehaviour
 
 	public void MoveToGlyph() 
 	{
-		CrescentGroup group = CrescentGroup.CrescentGroupForCollection(collection);
-		CrescentGlyph newGlyph = group.GetEmptyGlyph();
+		CrescentGlyph newGlyph = myGroup.GetEmptyGlyph();
 		StartCoroutine(LerpToGlyph(newGlyph));
 	}
 
@@ -53,7 +62,7 @@ public class Crescent : MonoBehaviour
 			yield return null;
 		}
 
-		transform.parent = glyph.transform;
-		transform.localPosition = Vector3.zero;
+		myGroup.ActivateGlyph(glyph);
+		gameObject.SetActive(false);
 	}
 }

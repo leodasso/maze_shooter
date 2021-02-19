@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 2167191371071840046}
   - component: {fileID: 2167191371071840045}
   - component: {fileID: 8629672441296670129}
+  - component: {fileID: 8179550619821857106}
+  - component: {fileID: 4258049935635556911}
   m_Layer: 0
   m_Name: crescent glyph
   m_TagString: Untagged
@@ -97,10 +99,65 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 2167191371071840045}
-  crescentSprite: {fileID: 5109077006402498095, guid: 8e5d622ba03b56f42b13386dd1cf1ae8,
-    type: 3}
   crescentEmptySprite: {fileID: -5880771200411132393, guid: 8e5d622ba03b56f42b13386dd1cf1ae8,
     type: 3}
   onActivate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8179550619821857106}
+        m_TargetAssemblyTypeName: OnTriggerEffect, Assembly-CSharp
+        m_MethodName: InvokeEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4258049935635556911}
+        m_TargetAssemblyTypeName: AudioAction, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8179550619821857106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2167191371071840047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de6c16f983620a4da43f9e72b293064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 8555703589354500498, guid: 9c1ac8cfaff4ac0499dbb6283a544482,
+    type: 3}
+  lifetime: 5
+  delay: 0
+--- !u!114 &4258049935635556911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2167191371071840047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d30f831d9d1b84ba9603356f7a8290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioCollection: {fileID: 11400000, guid: 32e2cb75ab01e734db76e36529562dc6, type: 2}
+  volume: 1
+  playDelay: 0
+  playOnAwake: 0
+  playOnEnable: 0
