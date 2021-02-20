@@ -4907,6 +4907,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4517401479464406582}
+  - component: {fileID: 8117772407398708892}
   m_Layer: 0
   m_Name: black prism burst effect
   m_TagString: Untagged
@@ -4929,3 +4930,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8117772407398708892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5936053805976969285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d30f831d9d1b84ba9603356f7a8290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioCollection: {fileID: 11400000, guid: cf7b7680a4ed0e448bb78e0d000dd3a3, type: 2}
+  volume: 1
+  playDelay: 0
+  playOnAwake: 1
+  playOnEnable: 0
