@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class NoiseGenerator : MonoBehaviour
 {
-    public float noiseSpeed;
-	public Vector3 noise;
+	[ToggleLeft]
 	public bool realTime;
+    public float noiseSpeed;
+
+	[ReadOnly]
+	public Vector3 noise;
 
     // The imaginary coordinates that sample on the perlin plane to generate noise
     // this comment is really smart sounding hah

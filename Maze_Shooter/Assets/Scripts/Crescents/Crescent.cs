@@ -6,14 +6,16 @@ using Arachnid;
 
 public class Crescent : MonoBehaviour
 {
+	public PrettyLerper lerper;
 	public Collection collection;
+	
 	public UnityEvent onCollected;
 	public UnityEvent onActivated;
 
 	CrescentGroup myGroup;
+	CrescentGlyph glyph;
 
 	static Collection activatedCrescents;
-
 
 	void Start() 
 	{
@@ -47,21 +49,14 @@ public class Crescent : MonoBehaviour
 
 	public void MoveToGlyph() 
 	{
-		CrescentGlyph newGlyph = myGroup.GetEmptyGlyph();
-		StartCoroutine(LerpToGlyph(newGlyph));
+		glyph = myGroup.GetEmptyGlyph();
+		lerper.target = glyph.transform;
+		lerper.DoLerp();
+		lerper.onLerpComplete += ActivateGlyph;
 	}
 
-	IEnumerator LerpToGlyph(CrescentGlyph glyph) 
+	void ActivateGlyph() 
 	{
-		Vector3 startPos = transform.position;
-		float progress = 0;
-		
-		while (progress < 1) {
-			progress += Time.unscaledDeltaTime;
-			transform.position = Vector3.Lerp(startPos, glyph.transform.position, progress);
-			yield return null;
-		}
-
 		myGroup.ActivateGlyph(glyph);
 		gameObject.SetActive(false);
 	}

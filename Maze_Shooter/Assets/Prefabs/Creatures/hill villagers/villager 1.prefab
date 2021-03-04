@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 8007869362515781302}
   - component: {fileID: 1204059272}
   - component: {fileID: 6684876206884406667}
+  - component: {fileID: 9149210445414591110}
   m_Layer: 0
   m_Name: villager 1
   m_TagString: Small
@@ -340,6 +341,25 @@ MonoBehaviour:
   arena: {fileID: 0}
   moveInput: {x: 0, y: 0}
   fireInput: {x: 0, y: 0}
+--- !u!114 &9149210445414591110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6684876205713930511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47fb51d02f660de40ab53f4eea3be7d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guiPosition: {x: 0, y: 3.16, z: 0}
+  notifyDistance: 14
+  hasAction: 1
+  actionDistance: 3
+  onAction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6684876206833577747
 GameObject:
   m_ObjectHideFlags: 0
