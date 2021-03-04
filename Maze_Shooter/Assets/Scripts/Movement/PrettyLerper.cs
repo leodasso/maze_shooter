@@ -27,6 +27,15 @@ public class PrettyLerper : MonoBehaviour
 	[ShowIf("controlNoiseMovement")]
 	public AnimationCurve noiseIntensity = AnimationCurve.Linear(0, 0, 1, 1);
 
+	[Space, ToggleLeft]
+	public bool circularMovement;
+
+	[ShowIf("circularMovement")]
+	public AnimationCurve circleRadius = AnimationCurve.Linear(0, 0, 1, 1);
+
+	[ShowIf("circularMovement"), Tooltip("position in radians")]
+	public AnimationCurve circlePos = AnimationCurve.Linear(0, 0, 1, 1);
+
 	public Action onLerpComplete;
 	
     // Start is called before the first frame update
@@ -56,6 +65,14 @@ public class PrettyLerper : MonoBehaviour
 			if (controlNoiseMovement) {
 				noiseGenerator.noiseSpeed = noiseSpeed.Evaluate(progress);
 				transform.position += noiseGenerator.noise * noiseIntensity.Evaluate(progress);
+			}
+
+			if (circularMovement) {
+				float radius = circleRadius.Evaluate(progress);
+				float radians = circlePos.Evaluate(progress);
+
+				Vector3 circle = new Vector3(Mathf.Sin(radians), Mathf.Cos(radians), 0) * radius;
+				transform.position += circle;
 			}
 
 			yield return null;
