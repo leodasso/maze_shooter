@@ -35,6 +35,7 @@ public class ActionPoint : MonoBehaviour
 	{
 		if (actionIconsPrefab) return;
 		actionIconsPrefab = Resources.Load("action icons") as GameObject;
+		Debug.Log(actionIconsPrefab.name, actionIconsPrefab);
 	}
 
 	void OnDrawGizmos() 
