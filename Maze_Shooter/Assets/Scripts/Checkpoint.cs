@@ -29,6 +29,7 @@ public class Checkpoint : MonoBehaviour
 
     public void SpawnPlayer()
     {
+		Debug.Log("checkpoint " + name + " is spawning player.", gameObject);
         _onSpawn.Invoke();
     }
 

@@ -32,7 +32,10 @@ public class HauntConstellation : MonoBehaviour
 	[Button]
 	public void PlayFullSequence() 
 	{
-		playMaker.SendEvent("start");
+		if (hauntStarSlots.Count < 1) 
+			PlayQuickSequence();
+		else
+			playMaker.SendEvent("start");
 	}
 
 	public void PlayQuickSequence() 
