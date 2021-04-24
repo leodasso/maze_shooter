@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
+[AddComponentMenu("Shadows/Shadow")]
 public class Shadow : MonoBehaviour
 {
     [AssetsOnly]

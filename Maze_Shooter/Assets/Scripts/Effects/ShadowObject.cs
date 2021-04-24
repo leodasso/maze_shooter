@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+[AddComponentMenu("Shadows/Shadow Object")]
 public class ShadowObject : MonoBehaviour
 {
     [Tooltip("When calculating shadow color, the distance between caster and shadow will be clamped to this value.")]

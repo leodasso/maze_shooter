@@ -3,6 +3,8 @@ using UnityEngine;
 
 [TypeInfoBox("Controls the alpha of a selected color group based on a shadowObject's " +
              "distance from its caster.")]
+			  
+[AddComponentMenu("Shadows/Shadow Plugin Alpha")]
 public class ShadowObjectPluginAlpha : ShadowObjectPlugin
 {
     public ColorGroup colorGroup;
