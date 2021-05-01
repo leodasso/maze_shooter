@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
 	void GetAllControllables()
 	{
 		controllables.Clear();
-		controllables.AddRange(GetComponentsInChildren<IControllable>());
+		controllables.AddRange(GetComponentsInChildren<IControllable>(true));
 	}
 
 	public void GotoRandomArenaPoint() 
