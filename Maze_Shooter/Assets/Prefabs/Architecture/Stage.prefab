@@ -142,7 +142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1737971644}
   m_Layer: 0
-  m_Name: Main Cam
+  m_Name: Main vCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,7 +162,7 @@ Transform:
   - {fileID: 7268663841646925309}
   - {fileID: 986523560849214696}
   m_Father: {fileID: 1996658116}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1996658115
 GameObject:
@@ -191,8 +191,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1737971644}
   - {fileID: 985891958863051198}
+  - {fileID: 1737971644}
   - {fileID: 986523560977188877}
   m_Father: {fileID: 492554703623393784}
   m_RootOrder: 1
@@ -532,15 +532,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4544171246489010, guid: a043c82ae9431c74f8f2768adfd7aa99, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 93.228966
+      value: -25.997522
       objectReference: {fileID: 0}
     - target: {fileID: 4544171246489010, guid: a043c82ae9431c74f8f2768adfd7aa99, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 153.15549
+      value: 158.25487
       objectReference: {fileID: 0}
     - target: {fileID: 4544171246489010, guid: a043c82ae9431c74f8f2768adfd7aa99, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 85.35464
+      value: -278.60803
       objectReference: {fileID: 0}
     - target: {fileID: 4544171246489010, guid: a043c82ae9431c74f8f2768adfd7aa99, type: 3}
       propertyPath: m_LocalRotation.x
@@ -560,7 +560,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4544171246489010, guid: a043c82ae9431c74f8f2768adfd7aa99, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4544171246489010, guid: a043c82ae9431c74f8f2768adfd7aa99, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -873,6 +873,11 @@ PrefabInstance:
       propertyPath: vCam
       value: 
       objectReference: {fileID: 876839472405081788}
+    - target: {fileID: 114232624553776574, guid: 2c8d328a8e07de94f8d1e1ed2ed7ef69,
+        type: 3}
+      propertyPath: activeCamPriority
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3741995232423399263, guid: 2c8d328a8e07de94f8d1e1ed2ed7ef69,
         type: 3}
       propertyPath: m_Radius
@@ -897,6 +902,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Follow
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6967298198241235844, guid: b1952762e8ad06544a4be25b1a4023e1,
+        type: 3}
+      propertyPath: m_Priority
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7000542364666795280, guid: b1952762e8ad06544a4be25b1a4023e1,
         type: 3}
