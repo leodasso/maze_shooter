@@ -10,6 +10,12 @@ public class Masker : MonoBehaviour
 	public UnityEvent onMaskEnable;
 	public UnityEvent onMaskDisable;
 
+	public void EnableMask(bool enable) 
+	{
+		if (enable) EnableMask();
+		else DisableMask();
+	}
+
 	[ButtonGroup]
 	public void EnableMask() 
 	{
