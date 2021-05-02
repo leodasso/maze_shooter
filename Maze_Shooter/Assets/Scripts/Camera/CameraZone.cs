@@ -22,20 +22,40 @@ public class CameraZone : MonoBehaviour
 	[Tooltip("The priority this vCam is at when there's a target in this camera zone.")]
 	public int activeCamPriority = 1;
 
-	[Space, ShowInInspector, ReadOnly]
-	bool targetInZone;
+	[ShowInInspector, ReadOnly]
+	bool camIsActive;
+
+	List<Collider> targetsInZone = new List<Collider>();
 
 	int initPriority;
+
+	bool ZoneOccupied() 
+	{
+		foreach (var target in targetsInZone) 
+		{
+			if (target != null && target.gameObject.activeInHierarchy && target.enabled) 
+				return true;
+		}
+		return false;
+	}
 
 	void Awake() 
 	{
 		initPriority = vCam.Priority;
 	}
+
+	void Update() 
+	{
+		// Unity doesn't call OnTriggerExit if a trigger is just deactivated,
+		// so we need to manually check if that's the case
+		if (camIsActive && !ZoneOccupied())
+			ExitAction(null);
+	}
 	
 	
 	void OnTriggerEnter(Collider other)
 	{
-		if (targetInZone) return;
+		if (camIsActive) return;
 
 		CollectionElement element = other.GetComponent<CollectionElement>();
 		if (!element) return;
@@ -46,7 +66,7 @@ public class CameraZone : MonoBehaviour
 
 	void OnTriggerExit(Collider other)
 	{
-		if (!targetInZone) return;
+		if (!camIsActive) return;
 
 		CollectionElement element = other.GetComponent<CollectionElement>();
 		if (!element) return;
@@ -58,7 +78,8 @@ public class CameraZone : MonoBehaviour
 
 	void EnterAction(Collider other)
 	{
-		targetInZone = true;
+		targetsInZone.Add(other);
+		camIsActive = true;
 		if (overwriteFollowTarget) 
 			vCam.Follow = other.transform;
 
@@ -68,7 +89,8 @@ public class CameraZone : MonoBehaviour
 
 	void ExitAction(Collider other)
 	{
-		targetInZone = false;
+		targetsInZone.Remove(other);
+		camIsActive = false;
 		if (adjustPriority) 
 			vCam.Priority = initPriority;
 	}
