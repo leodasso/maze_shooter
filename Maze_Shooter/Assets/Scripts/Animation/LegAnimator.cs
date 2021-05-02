@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteAlways]
+[AddComponentMenu("Animation/Leg Animator")]
 public class LegAnimator : MonoBehaviour
 {
 	[Range(0, 1)]

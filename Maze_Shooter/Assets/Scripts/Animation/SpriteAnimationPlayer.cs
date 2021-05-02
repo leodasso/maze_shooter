@@ -13,6 +13,7 @@ namespace ShootyGhost {
 		Custom,
 	}
 
+	[AddComponentMenu("Animation/Sprite Animation Player")]
 	public class SpriteAnimationPlayer : MonoBehaviour
 	{
 		public float speedMultiplier = 1;

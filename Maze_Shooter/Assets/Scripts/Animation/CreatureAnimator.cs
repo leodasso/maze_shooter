@@ -2,6 +2,7 @@
 using ShootyGhost;
 using Sirenix.OdinInspector;
 
+[AddComponentMenu("Animation/Creature Animator")]
 public class CreatureAnimator : MonoBehaviour
 {
 	public float idleSpeed = .5f;

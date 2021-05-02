@@ -1,5 +1,7 @@
 ﻿using ShootyGhost;
+using UnityEngine;
 
+[AddComponentMenu("Animation/Fast Guy Animator")]
 public class FastGuyAnimator : CreatureAnimator
 {
 	public SpriteAnimation flying;

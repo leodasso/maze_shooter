@@ -4,6 +4,7 @@ using UnityEngine;
 using ShootyGhost;
 using Sirenix.OdinInspector;
 
+[AddComponentMenu("Animation/Ghost Animator")]
 public class GhostAnimator : MonoBehaviour
 {
 	public SpriteRenderer spriteRenderer;

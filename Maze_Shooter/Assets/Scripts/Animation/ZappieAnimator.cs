@@ -1,5 +1,7 @@
 ﻿using ShootyGhost;
+using UnityEngine;
 
+[AddComponentMenu("Animation/Zappie Animator")]
 public class ZappieAnimator : CreatureAnimator
 {
 	public SpriteAnimation chargingAnim;
