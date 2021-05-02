@@ -43,6 +43,8 @@ namespace ShootyGhost {
 
 		Action ClipFinished;
 
+		SpriteAnimation prevFrameAnimation;
+
 		float deltaTime => realTime ? Time.unscaledDeltaTime : Time.deltaTime;
 
 		void OnDrawGizmos()
@@ -62,6 +64,11 @@ namespace ShootyGhost {
 		{
 			if (!spriteAnimation) return;
 
+			// Keep track of changes in sprite animation
+			if (spriteAnimation != prevFrameAnimation) 
+				OnClipChanged();
+			prevFrameAnimation = spriteAnimation;
+
 			SetFacingVector(direction.GetMovementVector());
 
 			if (speedChangesFramerate) 
@@ -74,6 +81,14 @@ namespace ShootyGhost {
 				_frameProgress = 0;
 				NextFrame();
 			}
+		}
+
+		// The animation clip has been changed on this frame
+		void OnClipChanged() 
+		{
+			if (!spriteAnimation) return;
+			if (spriteAnimation.alwaysStartFromBeginning)
+				PlayClipFromBeginning();
 		}
 
 		public void PlayClipFromBeginning() 

@@ -20,6 +20,8 @@ namespace ShootyGhost {
 	[CreateAssetMenu(menuName = "Ghost/Sprite Turnaround Animation")]
 	public class SpriteAnimation : ScriptableObject
 	{
+		[ToggleLeft, Tooltip("If enabled, this animation will always start from the beginning, no matter where the playhead was on prev animation")]
+		public bool alwaysStartFromBeginning;
 		public PlayMode playMode = PlayMode.Loop;
 		public DirectionsType directionsCount = DirectionsType.EightWay;
 		public float frameRateMultiplier = 1;
