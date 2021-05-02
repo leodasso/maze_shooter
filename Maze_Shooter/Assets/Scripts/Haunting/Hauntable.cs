@@ -14,10 +14,16 @@ namespace ShootyGhost
         public UnityEvent onHaunted;
         public UnityEvent onUnHaunted;
 
+		[Space, ToggleLeft]
+		public bool linkHealth;
+
+		[ToggleLeft, Tooltip("Enable if you want to specify a transform position for the ghost to return to when the haunt is complete")]
+		public bool customReturnPos;
+		[ShowIf("customReturnPos")]
+		public Transform returnPos;
+
 		public Collection hauntableType;
 
-		public bool linkHealth;
-		
 		[ShowIf("linkHealth")]
 		public Health health;
 
@@ -34,6 +40,9 @@ namespace ShootyGhost
         /// </summary>
         public Vector3 GetReturnPosition()
         {
+			if (customReturnPos)
+				return returnPos.position;
+
 			Vector3 dir = Vector3.left;
 			Player player = GetComponent<Player>();
 			if (player) {
@@ -119,6 +128,11 @@ namespace ShootyGhost
 		public void EndHaunt() {
 			if (!haunter) return;
 			haunter.EndHaunt();
+		}
+
+		public void EndHauntWithNoTransition() {
+			if (!haunter) return;
+			haunter.EndHaunt(null, false);
 		}
     }
 }

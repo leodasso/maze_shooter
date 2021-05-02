@@ -239,14 +239,15 @@ namespace ShootyGhost
         /// <summary>
         /// Returns the ghost from posessing whatever it is currently haunting to its true form.
         /// </summary>
-        public void EndHaunt(GameObject overrideHauntedObject = null)
+        public void EndHaunt(GameObject overrideHauntedObject = null, bool useTransition = true)
         {
 			GameObject container = overrideHauntedObject ? overrideHauntedObject : haunted.gameObject;
 
             if (haunted)
             {
                 transform.position = haunted.GetReturnPosition();
-                SpawnTransitionObject(HauntTransition.Out, transform.position, container);
+                if (useTransition)
+					SpawnTransitionObject(HauntTransition.Out, transform.position, container);
                 haunted.OnUnHaunted();
             }
             
