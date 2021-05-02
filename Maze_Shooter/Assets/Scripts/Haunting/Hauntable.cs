@@ -17,6 +17,9 @@ namespace ShootyGhost
 		[Space, ToggleLeft]
 		public bool linkHealth;
 
+		[ToggleLeft, Tooltip("Allow the player to exit this hauntable whenever the want")]
+		public bool allowManualExit = true;
+
 		[ToggleLeft, Tooltip("Enable if you want to specify a transform position for the ghost to return to when the haunt is complete")]
 		public bool customReturnPos;
 		[ShowIf("customReturnPos")]

@@ -133,15 +133,23 @@ namespace ShootyGhost
             
             // Input for leaving a haunted object. The player must hold down 
             // the haunt button until intensity reaches 1 to exit.
-            if (ghostState == GhostState.Haunting && _player.GetButton("haunt"))
+            if (CanUnHaunt() && _player.GetButton("haunt"))
             {
                 hauntBurstIntensity += Time.unscaledDeltaTime * 2;
                 if (hauntBurstIntensity >= 1)
                     EndHaunt();
             }
             else hauntBurstIntensity = 0;
+
             hauntBurstIntensityRef.Value = hauntBurstIntensity;
         }
+
+		bool CanUnHaunt() 
+		{
+			if (ghostState != GhostState.Haunting) return false;
+			if (haunted && !haunted.allowManualExit) return false;
+			return true;
+		}
 
 		bool HauntRequested() 
 		{
