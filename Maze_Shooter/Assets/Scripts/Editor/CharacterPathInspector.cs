@@ -51,15 +51,15 @@ public class CharacterPathInspector : OdinEditor
 			string labelText = "(" + i.ToString() + ") " + charPath.pathPoints[i].playmakerEvent;
 			Handles.Label(thisPos, labelText, labelStyle);
 
-			// draw lines
+
 			if (i > 0) {
 				Vector3 prevPos = PathPointPos(charPath, i-1);
 
-				// Check if point is too close to prev - see if it should be deleted
-				if (Vector3.Distance(prevPos, thisPos) < handleSize) {
-					// draw red circle to show it will be deleted
+				// If a point is too close to it's neighbor, we draw a red circle and mark it
+				// to be deleted. When user lets mouse up, it will be deleted
+				if (Vector3.Distance(prevPos, thisPos) < .5f *  HandleUtility.GetHandleSize(thisPos)) {
 					Handles.color = Color.red;
-					Handles.DrawWireArc(thisPos, Vector3.up, Vector3.left, 360, handleSize);
+					Handles.DrawWireArc(thisPos, Vector3.up, Vector3.left, 360, handleSize * 2);
 					indexToDelete = i;
 				}
 
@@ -71,7 +71,9 @@ public class CharacterPathInspector : OdinEditor
 					// button for adding a new point in the path
 					Handles.color = Color.green;
 					Vector3 addBtnPos = (thisPos + prevPos) / 2;
-					if (Handles.Button(addBtnPos, Quaternion.identity, handleSize/2, .3f, Handles.CircleHandleCap)) {
+
+					float screenSize =  HandleUtility.GetHandleSize(addBtnPos);
+					if (Handles.Button(addBtnPos, Quaternion.identity, screenSize * .1f, screenSize * .3f, Handles.CircleHandleCap)) {
 						charPath.InsertNewPoint(i, addBtnPos);
 						pathPositions.Insert(i, addBtnPos);
 					}
