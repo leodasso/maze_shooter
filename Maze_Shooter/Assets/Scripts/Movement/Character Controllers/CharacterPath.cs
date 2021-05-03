@@ -66,8 +66,15 @@ public class CharacterPath : MonoBehaviour
 		pathPoints.Add(p2);
 		pathPoints.Add(p3);
 		pathPoints.Add(p4);
-
 	}
+
+
+	[Button]
+	void ReversePath()
+	{
+		pathPoints.Reverse();
+	}
+
 
 	public void RemovePoint(int index) 
 	{
@@ -75,12 +82,12 @@ public class CharacterPath : MonoBehaviour
 		pathPoints.RemoveAt(index);
 	}
 
+
+
 	[System.Serializable]
 	public class CharacterPathPoint 
 	{
 		public Vector3 pos;
-		public string playmakerEvent;
-
 		public CharacterPathPoint() {}
 
 		public CharacterPathPoint(Vector3 newPos) {

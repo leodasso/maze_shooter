@@ -16,10 +16,8 @@ public class CharacterPathInspector : OdinEditor
 		guiBg = Resources.Load("defaultBg") as Texture2D;
 	}
 
-    protected virtual void OnSceneGUI()
-    {	
-        CharacterPath charPath = (CharacterPath)target;
-
+	public static void DrawCharacterPathInspector(CharacterPath charPath, bool allowEdit = true) 
+	{
 		GUIStyle labelStyle = new GUIStyle();
 		labelStyle.normal.textColor = Color.black;
 		labelStyle.normal.background = guiBg;
@@ -45,10 +43,11 @@ public class CharacterPathInspector : OdinEditor
 			Handles.DrawWireArc(thisPos, Vector3.up, Vector3.left, 360, handleSize);
 
 			// draw move gizmo for path point
-			pathPositions.Add(Handles.PositionHandle(thisPos, Quaternion.identity));
+			if (allowEdit)
+				pathPositions.Add(Handles.PositionHandle(thisPos, Quaternion.identity));
 
 			// draw the label
-			string labelText = "(" + i.ToString() + ") " + charPath.pathPoints[i].playmakerEvent;
+			string labelText = "(" + i.ToString() + ")";
 			Handles.Label(thisPos, labelText, labelStyle);
 
 
@@ -68,18 +67,20 @@ public class CharacterPathInspector : OdinEditor
 					// draw line between points
 					Handles.DrawDottedLine(prevPos, thisPos, 5);
 
-					// button for adding a new point in the path
-					Handles.color = Color.green;
-					Vector3 addBtnPos = (thisPos + prevPos) / 2;
+					if (allowEdit) {
+						// button for adding a new point in the path
+						Handles.color = Color.green;
+						Vector3 addBtnPos = (thisPos + prevPos) / 2;
 
-					float screenSize =  HandleUtility.GetHandleSize(addBtnPos);
-					if (Handles.Button(addBtnPos, Quaternion.identity, screenSize * .1f, screenSize * .3f, Handles.CircleHandleCap)) {
-						charPath.InsertNewPoint(i, addBtnPos);
-						pathPositions.Insert(i, addBtnPos);
+						float screenSize =  HandleUtility.GetHandleSize(addBtnPos);
+						if (Handles.Button(addBtnPos, Quaternion.identity, screenSize * .1f, screenSize * .3f, Handles.CircleHandleCap)) {
+							charPath.InsertNewPoint(i, addBtnPos);
+							pathPositions.Insert(i, addBtnPos);
+						}
+
+						// button label
+						Handles.Label(addBtnPos, "+", labelStyle);
 					}
-
-					// button label
-					Handles.Label(addBtnPos, "+", labelStyle);
 				}
 			}
 		}
@@ -93,10 +94,10 @@ public class CharacterPathInspector : OdinEditor
 				PathPointPos(charPath, charPath.pathPoints.Count - 1), 5);
 
 
-		if (indexToDelete >= 0 && mouseUp) 
+		if (indexToDelete >= 0 && mouseUp && allowEdit) 
 			charPath.RemovePoint(indexToDelete);
 
-        if (EditorGUI.EndChangeCheck())
+        if (EditorGUI.EndChangeCheck() && allowEdit)
         {
             Undo.RecordObject(charPath, "Change Character Path Positions");
 
@@ -105,7 +106,13 @@ public class CharacterPathInspector : OdinEditor
 				charPath.pathPoints[i].pos = newPos;
 			}
 		}
+	}
+
+    protected virtual void OnSceneGUI()
+    {	
+        CharacterPath charPath = (CharacterPath)target;
+		DrawCharacterPathInspector(charPath);
     }
 
-	Vector3 PathPointPos(CharacterPath path, int index) => path.transform.TransformPoint(path.pathPoints[index].pos);
+	static Vector3 PathPointPos(CharacterPath path, int index) => path.transform.TransformPoint(path.pathPoints[index].pos);
 }
