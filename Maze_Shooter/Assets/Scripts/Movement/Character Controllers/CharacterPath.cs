@@ -14,15 +14,7 @@ public class CharacterPath : MonoBehaviour
 	[Tooltip("Drag points close together to merge them.")]
 	public List<CharacterPathPoint> pathPoints = new List<CharacterPathPoint>();
 
-	[PropertyRange(-30, 30)]
-	public float testIndex = 1;
-
 	float Max => looped ? pathPoints.Count : pathPoints.Count - 1;
-
-	void OnDrawGizmos() 
-	{
-		Gizmos.DrawWireCube(GetWorldPos(testIndex), Vector3.one);
-	}
 
 	public void InsertNewPoint(int index, Vector3 worldPos)
 	{
