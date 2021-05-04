@@ -4,7 +4,8 @@ using Sirenix.OdinInspector;
 [AddComponentMenu("Shadows/Shadow")]
 public class Shadow : MonoBehaviour
 {
-    [AssetsOnly]
+    [AssetsOnly, AssetList(Path = "Prefabs/Shadows/")]
+	[PreviewField(120, ObjectFieldAlignment.Center)]
     public GameObject shadowPrefab;
 
     public float shadowScale = 1;
