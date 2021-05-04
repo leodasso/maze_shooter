@@ -139,7 +139,11 @@ public class PathMovement : MovementBase
 		if (pathIndex == lastProcessedPoint) return;
 		lastProcessedPoint = pathIndex;
 
-		// TODO actions on this point
+		// actions on this point
+		foreach(var pathEvent in pathEvents) {
+			if (pathEvent.index == pathIndex)
+				pathEvent.indexEvent.Invoke();
+		}
 
 		// Check for edges of the path 
 		if (!path.IsInRange(pathIndex + directionOnPath)) {
