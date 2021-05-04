@@ -4989,7 +4989,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6820e71c92759a84ab1c0244d0c9be98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  maxSpeed: 1
+  acceleration: 0.8
+  drag: 4
   inputAxis: {x: 0, y: 1}
   spriteAnimator: {fileID: 4205867246094441826}
 --- !u!1 &4205867246969136583
@@ -5517,7 +5519,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   linkHealth: 0
-  allowManualExit: 1
+  allowManualExit: 0
   customReturnPos: 1
   returnPos: {fileID: 4205867247538461108}
   hauntableType: {fileID: 11400000, guid: 777d1a64c428f1d47abb8fc5dd2b7828, type: 2}
