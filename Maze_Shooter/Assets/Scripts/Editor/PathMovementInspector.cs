@@ -7,26 +7,25 @@ using Sirenix.OdinInspector.Editor;
 public class PathMovementInspector : OdinEditor
 {
 	static float handleSize = .25f;
-	static Texture2D guiBg;
 	static float arrowSize = 3;
 
 
 	protected override void OnEnable()
 	{
 		base.OnEnable();
-		guiBg = Resources.Load("defaultBg") as Texture2D;
+		CharacterPathInspector.guiBg = Resources.Load("defaultBg") as Texture2D;
 	}
 
     protected virtual void OnSceneGUI()
     {	
 		PathMovement pathMovement = (PathMovement)target;
 		if (pathMovement.path)
-			CharacterPathInspector.DrawCharacterPathInspector(pathMovement.path, false, pathMovement.destinationRadius);
+			CharacterPathInspector.DrawCharacterPathInspector(pathMovement.path, false, pathMovement.destinationRadius, pathMovement.pathEvents);
 
 		Vector3 lookDir = pathMovement.VectorToNext();
 		Vector3 arrowPos = pathMovement.transform.position + lookDir - lookDir.normalized * arrowSize;
 
-
+		// Draw arrow pointing in the direction of movement
 		if (lookDir.magnitude > Mathf.Epsilon) {
 			Handles.color = Color.blue;
 			Handles.ArrowHandleCap(

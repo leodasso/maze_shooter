@@ -7,16 +7,25 @@ using Sirenix.OdinInspector.Editor;
 public class CharacterPathInspector : OdinEditor
 {
 	//static float handleSize = .25f;
-	static Texture2D guiBg;
-
+	public static Texture2D guiBg;
 
 	protected override void OnEnable()
 	{
 		base.OnEnable();
 		guiBg = Resources.Load("defaultBg") as Texture2D;
+
 	}
 
-	public static void DrawCharacterPathInspector(CharacterPath charPath, bool allowEdit = true, float handleSize = .25f) 
+	public static void DrawLabel(CharacterPath charPath, string labelText, int index) 
+	{
+		GUIStyle labelStyle = new GUIStyle();
+		labelStyle.normal.textColor = Color.black;
+		labelStyle.normal.background = guiBg;
+		labelStyle.padding = new RectOffset(4, 2, 2, 2);
+		Handles.Label(charPath.GetWorldPos(index) + Vector3.up * .2f, labelText, labelStyle);
+	}
+
+	public static void DrawCharacterPathInspector(CharacterPath charPath, bool allowEdit = true, float handleSize = .25f, List<PathEvent> pathEvents = null) 
 	{
 		GUIStyle labelStyle = new GUIStyle();
 		labelStyle.normal.textColor = Color.black;
@@ -48,6 +57,14 @@ public class CharacterPathInspector : OdinEditor
 
 			// draw the label
 			string labelText = "(" + i.ToString() + ")";
+
+			// draw labels for path events
+			if (pathEvents != null) {
+				foreach (var pathEvent in pathEvents) {
+					if (pathEvent.index == i)
+						labelText += pathEvent.ToString();
+				}
+			}
 			Handles.Label(thisPos, labelText, labelStyle);
 
 

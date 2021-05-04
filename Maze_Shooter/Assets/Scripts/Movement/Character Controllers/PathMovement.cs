@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Arachnid;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 
 [TypeInfoBox("Moves along a path with physics.")]
 public class PathMovement : MovementBase
@@ -39,6 +40,8 @@ public class PathMovement : MovementBase
 	[Tooltip("How close I have to get to the destination before considering it 'arrived at'")]
 	public float destinationRadius = .5f;
 
+	public List<PathEvent> pathEvents = new List<PathEvent>();
+
 	int directionOnPath = 1;
 
 	Vector3 destination;
@@ -47,6 +50,7 @@ public class PathMovement : MovementBase
 
 	bool HasPathOption => HasPath && !path.looped;
 
+	[OnValueChanged("UpdatePathEvents")]
 	int MaxIndex => HasPath ? path.pathPoints.Count - 1 : 1;
 
 	// Memory of last processed point so we don't just process a point every frame if it's clamped
@@ -92,6 +96,15 @@ public class PathMovement : MovementBase
 		pathIndex = startingIndex;
 		transform.position = path.GetWorldPos(startingIndex);
 		PreviewDestination();
+		UpdatePathEvents();
+	}
+
+	[Button, ShowIf("HasPath")]
+	void UpdatePathEvents() 
+	{
+		if (!HasPath) return;
+		foreach (var pathEvent in pathEvents) 
+			pathEvent.SetMax(MaxIndex);
 	}
 
 	/// <summary>
@@ -148,5 +161,35 @@ public class PathMovement : MovementBase
 
 	int DirectionToInt(Direction dir) => dir == Direction.Forward ? 1 : -1;
     
+}
 
+[System.Serializable]
+public class PathEvent
+{
+	[PropertyRange(0, "Max")]
+	public int index = 0;
+
+	public UnityEvent indexEvent;
+
+	[SerializeField, HideInInspector]
+	int maxIndex = 1;
+
+	public override string ToString() 
+	{
+		string s = "Event: ";
+		for (int i = 0; i < indexEvent.GetPersistentEventCount(); i++) {
+			var target = indexEvent.GetPersistentTarget(i);
+			string targetName = target != null ? indexEvent.GetPersistentTarget(i).name : "(none)";
+			s += targetName + " " + indexEvent.GetPersistentMethodName(i);
+		}
+
+		return s;
+	}
+
+	public int Max => maxIndex;
+
+	public void SetMax(int newMax) {
+		maxIndex = newMax;
+		index = Mathf.Clamp(index, 0, maxIndex);
+	}
 }
