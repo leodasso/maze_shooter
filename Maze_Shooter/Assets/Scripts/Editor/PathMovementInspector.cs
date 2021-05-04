@@ -8,6 +8,7 @@ public class PathMovementInspector : OdinEditor
 {
 	static float handleSize = .25f;
 	static Texture2D guiBg;
+	static float arrowSize = 3;
 
 
 	protected override void OnEnable()
@@ -20,7 +21,22 @@ public class PathMovementInspector : OdinEditor
     {	
 		PathMovement pathMovement = (PathMovement)target;
 		if (pathMovement.path)
-			CharacterPathInspector.DrawCharacterPathInspector(pathMovement.path, false);
+			CharacterPathInspector.DrawCharacterPathInspector(pathMovement.path, false, pathMovement.destinationRadius);
+
+		Vector3 lookDir = pathMovement.VectorToNext();
+		Vector3 arrowPos = pathMovement.transform.position + lookDir - lookDir.normalized * arrowSize;
+
+
+		if (lookDir.magnitude > Mathf.Epsilon) {
+			Handles.color = Color.blue;
+			Handles.ArrowHandleCap(
+				0,
+				arrowPos,
+				Quaternion.LookRotation(lookDir),
+				arrowSize,
+				EventType.Repaint
+			);
+		}
     }
 
 }

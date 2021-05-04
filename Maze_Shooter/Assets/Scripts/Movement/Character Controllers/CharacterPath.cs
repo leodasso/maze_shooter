@@ -14,6 +14,15 @@ public class CharacterPath : MonoBehaviour
 	[Tooltip("Drag points close together to merge them.")]
 	public List<CharacterPathPoint> pathPoints = new List<CharacterPathPoint>();
 
+	[PropertyRange(-30, 30)]
+	public float testIndex = 1;
+
+	float Max => looped ? pathPoints.Count : pathPoints.Count - 1;
+
+	void OnDrawGizmos() 
+	{
+		Gizmos.DrawWireCube(GetWorldPos(testIndex), Vector3.one);
+	}
 
 	public void InsertNewPoint(int index, Vector3 worldPos)
 	{
@@ -82,6 +91,42 @@ public class CharacterPath : MonoBehaviour
 		pathPoints.RemoveAt(index);
 	}
 
+	public Vector3 GetWorldPos(float pathPosition) 
+	{
+		// For non looping paths, clamp them to start and end 
+		if (!looped) 
+			pathPosition = Mathf.Clamp(pathPosition, 0, Max);
+
+		pathPosition = pathPosition % pathPoints.Count;
+		
+		// Handle negative numbers so they arent out of range
+		if (pathPosition < 0) 
+			pathPosition = Max + pathPosition;
+
+		int index = Mathf.FloorToInt(pathPosition);
+		int endIndex = index + 1;
+		if (endIndex >= pathPoints.Count) endIndex = 0;
+
+		float progress = pathPosition % 1;
+		
+		CharacterPathPoint starting = pathPoints[index];
+		CharacterPathPoint ending = pathPoints[endIndex];
+
+		Vector3 pos = Vector3.Lerp(starting.pos, ending.pos, progress);
+		return transform.TransformPoint(pos);
+	}
+
+	public bool IsEndPoint(int index) 
+	{
+		if (looped) return false;
+		return index == 0 || index >= Max;
+	}
+
+	public bool IsInRange(int index) 
+	{
+		if (looped) return true;
+		return index >= 0 && index <= Max;
+	}
 
 
 	[System.Serializable]

@@ -6,7 +6,7 @@ using Sirenix.OdinInspector.Editor;
 [CustomEditor(typeof(CharacterPath))]
 public class CharacterPathInspector : OdinEditor
 {
-	static float handleSize = .25f;
+	//static float handleSize = .25f;
 	static Texture2D guiBg;
 
 
@@ -16,7 +16,7 @@ public class CharacterPathInspector : OdinEditor
 		guiBg = Resources.Load("defaultBg") as Texture2D;
 	}
 
-	public static void DrawCharacterPathInspector(CharacterPath charPath, bool allowEdit = true) 
+	public static void DrawCharacterPathInspector(CharacterPath charPath, bool allowEdit = true, float handleSize = .25f) 
 	{
 		GUIStyle labelStyle = new GUIStyle();
 		labelStyle.normal.textColor = Color.black;
@@ -74,6 +74,7 @@ public class CharacterPathInspector : OdinEditor
 
 						float screenSize =  HandleUtility.GetHandleSize(addBtnPos);
 						if (Handles.Button(addBtnPos, Quaternion.identity, screenSize * .1f, screenSize * .3f, Handles.CircleHandleCap)) {
+							Undo.RecordObject(charPath, "Add Character Path Point");
 							charPath.InsertNewPoint(i, addBtnPos);
 							pathPositions.Insert(i, addBtnPos);
 						}
@@ -94,8 +95,10 @@ public class CharacterPathInspector : OdinEditor
 				PathPointPos(charPath, charPath.pathPoints.Count - 1), 5);
 
 
-		if (indexToDelete >= 0 && mouseUp && allowEdit) 
+		if (indexToDelete >= 0 && mouseUp && allowEdit) {
+			Undo.RecordObject(charPath, "Delete Character Path Point");
 			charPath.RemovePoint(indexToDelete);
+		}
 
         if (EditorGUI.EndChangeCheck() && allowEdit)
         {

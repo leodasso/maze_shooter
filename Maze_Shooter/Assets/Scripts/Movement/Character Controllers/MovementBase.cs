@@ -21,10 +21,10 @@ public class MovementBase : MonoBehaviour, IControllable
     [ShowIf("useSpeedCurve")]
     public AnimationCurve speedCurve;
 
-	[PropertyOrder(900), FoldoutGroup("events")]
+	[PropertyOrder(900), Title("Events")]
 	public UnityEvent onGrounded;
 
-	[PropertyOrder(900), FoldoutGroup("events")]
+	[PropertyOrder(900)]
 	public UnityEvent onUnGrounded;
     
     protected Rigidbody _rigidbody;
