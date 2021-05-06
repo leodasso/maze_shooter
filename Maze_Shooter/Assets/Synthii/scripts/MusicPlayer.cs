@@ -8,20 +8,22 @@ namespace Synthii
 	public class MusicPlayer : MonoBehaviour
 	{
 		[SerializeField]
-		Track currentTrack;
-
-		[SerializeField]
 		TrackAudioSource currentTrackSource;
 
-		[SerializeField, ReadOnly]
 		Dictionary<Track, TrackAudioSource> trackSources = new Dictionary<Track, TrackAudioSource>();
 		
 
 		public void Play(MusicZone zone) 
 		{
-			// Ignore request if the zone is already playing
-			if (currentTrackSource && currentTrackSource.musicZone == zone) 
-					return;
+			if (currentTrackSource) {
+				// Ignore request if the zone is already playing
+				if (currentTrackSource.musicZone == zone) 
+						return;
+
+				// Pause the currently playing audio source
+				if (zone.musicTrack != currentTrackSource.musicZone.musicTrack) 
+					currentTrackSource.Pause(1);
+			}
 
 			TrackAudioSource newTrackAudioSource = null;
 
@@ -36,7 +38,6 @@ namespace Synthii
 			// if we don't have an audio source stack for this track yet, 
 			// build one and set it as the new current track
 			newTrackAudioSource = BuildNewTrackAudioSource(zone);
-			newTrackAudioSource.BuildAudioSources(zone);
 			currentTrackSource = newTrackAudioSource;
 		}
 
@@ -47,8 +48,24 @@ namespace Synthii
 			newGO.transform.parent = transform;
 			newGO.transform.localPosition = Vector3.zero;
 			TrackAudioSource newTrack = newGO.AddComponent<TrackAudioSource>();
+			newTrack.BuildAudioSources(newZone);
+
 			trackSources.Add(newZone.musicTrack, newTrack);
 			return newTrack;
+		}
+
+		public void LoopTrack(MusicZone musicZone) 
+		{
+			// remove the old one from the dictionary
+			var t = musicZone.musicTrack;
+			trackSources.Remove(t);
+
+			// re-create it
+			var newTrackSource = BuildNewTrackAudioSource(musicZone);
+
+			// if the looping track was the current playing, carryover that status
+			if (currentTrackSource.musicZone == musicZone)
+				currentTrackSource = newTrackSource;
 		}
 
 

@@ -12,6 +12,8 @@ namespace Synthii {
 		Paused,
 	}
 
+	[TypeInfoBox("This is an audio source for a music track. It is not meant to be manually added to anything - " +
+	"it will be automatically created by Music Player component.")]
 	public class TrackAudioSource : MonoBehaviour
 	{
 
@@ -52,7 +54,7 @@ namespace Synthii {
 			float startVolume = mainVolume;
 			float progress = 0;
 			while (progress < 1) {
-				progress += Time.deltaTime / duration;
+				progress += Time.unscaledDeltaTime / duration;
 				mainVolume = Mathf.Lerp(startVolume, newVolume, progress);
 				yield return null;
 			}
@@ -75,7 +77,7 @@ namespace Synthii {
 		{
 			float progress = 0;
 			while (progress < 1) {
-				progress += Time.deltaTime / duration;
+				progress += Time.unscaledDeltaTime / duration;
 				trackVolumes = TrackVolumes.Lerp(start, finish, progress);
 				UpdateAudioSourcesVolume();
 				yield return null;
@@ -96,8 +98,6 @@ namespace Synthii {
 				"have the same tracks.", gameObject);
 				return;
 			}
-
-			Debug.Log(name + " changing music zone from " + musicZone.name + " to " + newMusicZone.name, gameObject);
 
 			musicZone = newMusicZone;
 			LerpLayerVolumes(newMusicZone.GenerateVolumes());
@@ -130,6 +130,26 @@ namespace Synthii {
 		}
 
 
+		[Button]
+		void Loop() 
+		{
+			// Tell music player to duplicate this object
+			GetComponentInParent<MusicPlayer>().LoopTrack(musicZone);
+
+			// fade this object out and destroy
+			LerpMainVolume(0, 1, DestroyMe);
+		}
+
+		void DestroyMe() {Destroy(gameObject);}
+
+
+		void UpdateAudioSourcesVolume() 
+		{
+			for (int i = 0; i < sources.Count; i++)
+				sources[i].volume = mainVolume * trackVolumes.volumes[i];
+		}
+
+
 		[ButtonGroup]
 		public void Play(float fadeDuration = 1) 
 		{
@@ -149,12 +169,6 @@ namespace Synthii {
 		{
 			if (!Application.isPlaying || !musicZone) return;
 			LerpMainVolume(0, fadeDuration, PauseSources);
-		}
-
-		void UpdateAudioSourcesVolume() 
-		{
-			for (int i = 0; i < sources.Count; i++)
-				sources[i].volume = mainVolume * trackVolumes.volumes[i];
 		}
 
 

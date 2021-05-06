@@ -58,8 +58,6 @@ namespace Synthii
 		{
 			float remainder = totalBeats % 1;
 			float total = remainder + croppedEndBeats;
-			Debug.Log("Total cropped beats: " + total);
-
 			croppedEndTime = total * BeatDuration(bpm);
 		}
 	}
