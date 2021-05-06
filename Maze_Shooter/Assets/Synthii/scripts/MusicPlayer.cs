@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using Sirenix.OdinInspector;
 
 namespace Synthii
@@ -9,6 +10,9 @@ namespace Synthii
 	{
 		[SerializeField]
 		TrackAudioSource currentTrackSource;
+
+		[SerializeField]
+		AudioMixerGroup mixerGroup;
 
 		Dictionary<Track, TrackAudioSource> trackSources = new Dictionary<Track, TrackAudioSource>();
 		
@@ -20,9 +24,11 @@ namespace Synthii
 				if (currentTrackSource.musicZone == zone) 
 						return;
 
+				float fadeOutTime = currentTrackSource.musicZone ? currentTrackSource.musicZone.fadeOutTime : 1;
+
 				// Pause the currently playing audio source
 				if (zone.musicTrack != currentTrackSource.musicZone.musicTrack) 
-					currentTrackSource.Pause(1);
+					currentTrackSource.Pause(fadeOutTime);
 			}
 
 			TrackAudioSource newTrackAudioSource = null;
@@ -31,7 +37,8 @@ namespace Synthii
 			// music track of this zone, just change zones on it.
 			if (trackSources.TryGetValue(zone.musicTrack, out newTrackAudioSource)) {
 				newTrackAudioSource.ChangeZones(zone);
-				newTrackAudioSource.Play(1);
+				newTrackAudioSource.Play(zone.fadeInTime);
+				currentTrackSource = newTrackAudioSource;
 				return;
 			}
 
@@ -48,7 +55,7 @@ namespace Synthii
 			newGO.transform.parent = transform;
 			newGO.transform.localPosition = Vector3.zero;
 			TrackAudioSource newTrack = newGO.AddComponent<TrackAudioSource>();
-			newTrack.BuildAudioSources(newZone);
+			newTrack.BuildAudioSources(newZone, mixerGroup);
 
 			trackSources.Add(newZone.musicTrack, newTrack);
 			return newTrack;

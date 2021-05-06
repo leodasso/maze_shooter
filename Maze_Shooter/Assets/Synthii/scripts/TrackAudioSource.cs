@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using Sirenix.OdinInspector;
 
 namespace Synthii {
@@ -121,7 +122,7 @@ namespace Synthii {
 			LerpLayerVolumes(newMusicZone.GenerateVolumes());
 		}
 
-		public void BuildAudioSources(MusicZone newMusicZone, float fadeInTime = 1) 
+		public void BuildAudioSources(MusicZone newMusicZone, AudioMixerGroup mixerGroup) 
 		{
 			musicZone = newMusicZone;
 			trackVolumes = newMusicZone.GenerateVolumes();
@@ -138,13 +139,12 @@ namespace Synthii {
 				newAudioSource.loop = false;
 				newAudioSource.volume = 0;	
 				newAudioSource.playOnAwake = false;	
-
-				// TODO set the correct mixer group
+				newAudioSource.outputAudioMixerGroup = mixerGroup;
 
 				sources.Add(newAudioSource);
 			}
 
-			Play(fadeInTime);
+			Play(musicZone.fadeInTime);
 		}
 
 
@@ -172,7 +172,8 @@ namespace Synthii {
 		public void Play(float fadeDuration = 1) 
 		{
 			if (!Application.isPlaying || !musicZone) return;
-			LerpMainVolume(1, fadeDuration, PlaySources);
+			PlaySources();
+			LerpMainVolume(1, fadeDuration);
 		}
 
 		[ButtonGroup]

@@ -11,6 +11,11 @@ namespace Synthii {
 
 		public MusicPlayer testPlayer;
 
+		[MinValue(0.01)]
+		public float fadeInTime = 3;
+		[MinValue(0.01)]
+		public float fadeOutTime = 6;
+
 		[Button]
 		void Play() 
 		{
