@@ -93,9 +93,18 @@ namespace Synthii {
 			
 			TrackVolumes lerpResult = new TrackVolumes(A);
 			for (int i = 0; i < A.volumes.Count; i++) 
-				lerpResult.volumes.Add(Mathf.Lerp(A.volumes[i], B.volumes[i], progress));
+				lerpResult.volumes[i] = Mathf.Lerp(A.volumes[i], B.volumes[i], progress);
 
 			return lerpResult;
+		}
+
+		public override string ToString()
+		{
+			string s = "";
+			foreach(float f in volumes) 
+				s += "layer " + volumes.IndexOf(f) + ": " + f;
+			
+			return s;
 		}
 	}
 }

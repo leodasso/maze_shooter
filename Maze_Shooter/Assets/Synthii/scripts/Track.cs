@@ -21,7 +21,8 @@ namespace Synthii
 		[MinValue(1), OnValueChanged("UpdateBpm")]
 		public int bpm = 80;
 
-				[Tooltip("Number of beats to crop off the end of the track"), OnValueChanged("RecalculateCroppedEndTime")]
+		[Tooltip("Number of beats to crop off the end of the track"), OnValueChanged("RecalculateCroppedEndTime")]
+		[PropertyRange(0, "MaxCroppedBeats")]
 		public int croppedEndBeats = 2;
 
 		[ReadOnly, Tooltip("Track length in seconds"), HorizontalGroup("details"), LabelWidth(80)]
@@ -41,6 +42,8 @@ namespace Synthii
 		float MaxBeats => Mathf.RoundToInt(totalBeats);
 
 		bool MusicExists => musicClips != null && musicClips.Count > 0 &&  musicClips[0] != null;
+
+		int MaxCroppedBeats => Mathf.FloorToInt(totalBeats - 1);
 
 		void UpdateTrackDetails() 
 		{

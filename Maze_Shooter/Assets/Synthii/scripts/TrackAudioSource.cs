@@ -154,7 +154,8 @@ namespace Synthii {
 			GetComponentInParent<MusicPlayer>().LoopTrack(musicZone);
 
 			// fade this object out and destroy
-			LerpMainVolume(0, 1, DestroyMe);
+			float fadeTime = Mathf.Clamp(5, 0, MyTrack.croppedEndTime);
+			LerpMainVolume(0, fadeTime, DestroyMe);
 		}
 
 		void DestroyMe() {Destroy(gameObject);}
