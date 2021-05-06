@@ -8,6 +8,10 @@ namespace Synthii
 	[CreateAssetMenu(menuName = "Synthii/Track Stack")]
 	public class Track : ScriptableObject
 	{
+		static float BeatsPerSecond(int bpm) => bpm / 60f;
+		static float BeatDuration(int bpm) => 1 / BeatsPerSecond(bpm);
+
+
 		[	OnValueChanged("UpdateTrackDetails"), 
 			InlineEditor(inlineEditorMode: InlineEditorModes.SmallPreview), 
 			AssetSelector(Paths = "Assets/Audio/Music")]
@@ -29,10 +33,10 @@ namespace Synthii
 		[ReadOnly]
 		public float croppedEndTime;
 
-		static float BeatsPerSecond(int bpm) => bpm / 60f;
-
-		// Duration of 1 beat in seconds
-		static float BeatDuration(int bpm) => 1 / BeatsPerSecond(bpm);
+		/// <summary>
+		/// The timestamp in seconds that the song is marked to end and should loop back to beginning
+		/// </summary>
+		public float EndLoopTime => trackLength - croppedEndTime;
 
 		float MaxBeats => Mathf.RoundToInt(totalBeats);
 
@@ -59,6 +63,11 @@ namespace Synthii
 			float remainder = totalBeats % 1;
 			float total = remainder + croppedEndBeats;
 			croppedEndTime = total * BeatDuration(bpm);
+		}
+
+		public void RecalculateAll() 
+		{
+			UpdateTrackDetails();
 		}
 	}
 }

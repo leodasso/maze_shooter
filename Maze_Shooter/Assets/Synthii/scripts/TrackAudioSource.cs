@@ -10,6 +10,7 @@ namespace Synthii {
 		Playing,
 		Stopped,
 		Paused,
+		FadeToLoop,		// Fading out for a loop of the song
 	}
 
 	[TypeInfoBox("This is an audio source for a music track. It is not meant to be manually added to anything - " +
@@ -38,6 +39,23 @@ namespace Synthii {
 		List<AudioSource> sources = new List<AudioSource>();
 
 		float _mainVolume = 1;
+
+		float elapsedTime = 0;
+
+		Track MyTrack => musicZone != null ? musicZone.musicTrack : null;
+
+		void Update() 
+		{
+			elapsedTime = sources[0].time;
+			if (!MyTrack) return;
+			if (audioState != AudioState.Playing) return;
+
+			if (elapsedTime >= MyTrack.EndLoopTime) {
+				audioState = AudioState.FadeToLoop;
+				Loop();
+			}
+		}
+
 
 		public void LerpMainVolume(float newVolume, float duration) 
 		{
@@ -130,7 +148,6 @@ namespace Synthii {
 		}
 
 
-		[Button]
 		void Loop() 
 		{
 			// Tell music player to duplicate this object
