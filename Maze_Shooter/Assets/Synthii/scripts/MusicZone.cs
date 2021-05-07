@@ -6,21 +6,38 @@ using Sirenix.OdinInspector;
 namespace Synthii {
 	public class MusicZone : MonoBehaviour
 	{
+		[ToggleLeft, Tooltip("Will play as the default for this scene.")]
+		public bool isGlobal;
+
+		[Tooltip("Higher number takes priority over lower number")]
+		public int priority = 0;
+
+		[Space]
 		public Track musicTrack;
 		public List<TrackLayer> layers = new List<TrackLayer>();
-
-		public MusicPlayer testPlayer;
 
 		[MinValue(0.01)]
 		public float fadeInTime = 3;
 		[MinValue(0.01)]
 		public float fadeOutTime = 6;
 
-		[Button]
-		void Play() 
+		// Start is called before the first frame update
+		void Start()
 		{
-			if (!testPlayer) return;
-			testPlayer.Play(this);
+			if (isGlobal) 
+				MusicPlayer.SetGlobal(this);
+		}
+
+		[ButtonGroup]
+		public void Enter() 
+		{
+			MusicPlayer.Play(this);
+		}
+
+		[ButtonGroup]
+		public void Exit()
+		{
+			MusicPlayer.Stop(this);
 		}
 
 		[Button]
@@ -35,10 +52,6 @@ namespace Synthii {
 			}
 		}
 
-		void PlayTrack() 
-		{
-			
-		}
 		
 		/// <summary>
 		/// Generates the volumes as a nice struct
@@ -46,18 +59,6 @@ namespace Synthii {
 		public TrackVolumes GenerateVolumes() 
 		{
 			return new TrackVolumes(layers);
-		}
-
-		// Start is called before the first frame update
-		void Start()
-		{
-			
-		}
-
-		// Update is called once per frame
-		void Update()
-		{
-			
 		}
 	}
 

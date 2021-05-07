@@ -8,27 +8,72 @@ namespace Synthii
 {
 	public class MusicPlayer : MonoBehaviour
 	{
-		[SerializeField]
+		[SerializeField, ReadOnly]
 		TrackAudioSource currentTrackSource;
 
 		[SerializeField]
 		AudioMixerGroup mixerGroup;
 
 		Dictionary<Track, TrackAudioSource> trackSources = new Dictionary<Track, TrackAudioSource>();
-		
 
-		public void Play(MusicZone zone) 
+		static MusicPlayer instance;
+
+		MusicZone globalZone;
+
+		void Awake() 
+		{
+			Object.DontDestroyOnLoad(gameObject);
+			instance = this;
+		}
+
+		float CurrentTrackFadeOutTime ()
+		{
+			if (!currentTrackSource) return 1;
+			return currentTrackSource.musicZone ? currentTrackSource.musicZone.fadeOutTime : 1;
+		}
+		
+		public static void Play(MusicZone zone) 
+		{
+			if (!InstanceExists("play", zone)) return;
+			instance.InstancePlay(zone);
+		}
+
+
+		public static void Stop(MusicZone zone) 
+		{
+			if (!InstanceExists("stop", zone)) return;
+			instance.InstanceStop(zone);
+		}
+
+		public static void SetGlobal(MusicZone zone) 
+		{
+			if (!InstanceExists("set global", zone)) return;
+			instance.InstanceSetGlobal(zone);
+		}
+
+		static bool InstanceExists(string actionName, MusicZone zone) 
+		{
+			if (!instance) {
+				Debug.LogError("Trying to " + actionName + " for music zone " + zone.name + " but no music player exists!", zone);
+				return false;
+			}
+			return true;
+		}
+
+		void InstancePlay(MusicZone zone) 
 		{
 			if (currentTrackSource) {
 				// Ignore request if the zone is already playing
 				if (currentTrackSource.musicZone == zone) 
 						return;
 
-				float fadeOutTime = currentTrackSource.musicZone ? currentTrackSource.musicZone.fadeOutTime : 1;
+				// Ignore lower quality requests
+				if (currentTrackSource.musicZone && currentTrackSource.musicZone.priority > zone.priority)
+					return;
 
 				// Pause the currently playing audio source
 				if (zone.musicTrack != currentTrackSource.musicZone.musicTrack) 
-					currentTrackSource.Pause(fadeOutTime);
+					currentTrackSource.Pause(CurrentTrackFadeOutTime());
 			}
 
 			TrackAudioSource newTrackAudioSource = null;
@@ -46,6 +91,29 @@ namespace Synthii
 			// build one and set it as the new current track
 			newTrackAudioSource = BuildNewTrackAudioSource(zone);
 			currentTrackSource = newTrackAudioSource;
+		}
+
+
+
+		void InstanceStop(MusicZone zone) 
+		{
+			if (!currentTrackSource) return;
+			if (currentTrackSource.musicZone != zone) return;
+
+			currentTrackSource.Pause(CurrentTrackFadeOutTime());
+			if (globalZone)
+				InstancePlay(globalZone);
+		}
+
+		void InstanceSetGlobal(MusicZone zone)
+		{
+			if (globalZone) {
+				if (globalZone.priority > zone.priority) return;
+			}
+
+			globalZone = zone;
+			if (!currentTrackSource)
+				InstancePlay(globalZone);
 		}
 
 		TrackAudioSource BuildNewTrackAudioSource(MusicZone newZone) 
@@ -73,24 +141,6 @@ namespace Synthii
 			// if the looping track was the current playing, carryover that status
 			if (currentTrackSource.musicZone == musicZone)
 				currentTrackSource = newTrackSource;
-		}
-
-
-
-		public static void PlayTrack(Track track) 
-		{
-
-		}
-
-		void Awake() 
-		{
-			Object.DontDestroyOnLoad(gameObject);
-		}
-
-		// Update is called once per frame
-		void Update()
-		{
-			
 		}
 	}
 }

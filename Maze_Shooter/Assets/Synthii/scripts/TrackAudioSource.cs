@@ -41,17 +41,19 @@ namespace Synthii {
 
 		float _mainVolume = 1;
 
-		float elapsedTime = 0;
-
 		Track MyTrack => musicZone != null ? musicZone.musicTrack : null;
+
+
+
+
+
 
 		void Update() 
 		{
-			elapsedTime = sources[0].time;
 			if (!MyTrack) return;
 			if (audioState != AudioState.Playing) return;
 
-			if (elapsedTime >= MyTrack.EndLoopTime) {
+			if (sources[0].time >= MyTrack.EndLoopTime) {
 				audioState = AudioState.FadeToLoop;
 				Loop();
 			}
@@ -180,6 +182,7 @@ namespace Synthii {
 		public void Stop(float fadeDuration = 1) 
 		{
 			if (!Application.isPlaying || !musicZone) return;
+			audioState = AudioState.Stopped;
 			LerpMainVolume(0, fadeDuration, StopSources);
 		}
 
@@ -187,6 +190,7 @@ namespace Synthii {
 		public void Pause(float fadeDuration = 1) 
 		{
 			if (!Application.isPlaying || !musicZone) return;
+			audioState = AudioState.Paused;
 			LerpMainVolume(0, fadeDuration, PauseSources);
 		}
 
@@ -204,14 +208,12 @@ namespace Synthii {
 
 		void PauseSources() 
 		{
-			audioState = AudioState.Paused;
 			foreach (var source in sources)
 				source.Pause();
 		}	
 
 		void StopSources() 
 		{
-			audioState = AudioState.Stopped;
 			foreach (var source in sources)
 				source.Stop();
 		}
