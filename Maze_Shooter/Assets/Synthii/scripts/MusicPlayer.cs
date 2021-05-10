@@ -34,30 +34,28 @@ namespace Synthii
 		
 		public static void Play(MusicZone zone) 
 		{
-			if (!InstanceExists("play", zone)) return;
+			GuaranteeInstance();
 			instance.InstancePlay(zone);
 		}
 
 
 		public static void Stop(MusicZone zone) 
 		{
-			if (!InstanceExists("stop", zone)) return;
+			GuaranteeInstance();
 			instance.InstanceStop(zone);
 		}
 
 		public static void SetGlobal(MusicZone zone) 
 		{
-			if (!InstanceExists("set global", zone)) return;
+			GuaranteeInstance();
 			instance.InstanceSetGlobal(zone);
 		}
 
-		static bool InstanceExists(string actionName, MusicZone zone) 
+		static void GuaranteeInstance() 
 		{
-			if (!instance) {
-				Debug.LogError("Trying to " + actionName + " for music zone " + zone.name + " but no music player exists!", zone);
-				return false;
-			}
-			return true;
+			if (instance) return;
+			instance = Instantiate(GameMaster.Get().musicPlayerPrefab).GetComponent<MusicPlayer>();
+			DontDestroyOnLoad(instance.gameObject);
 		}
 
 		void InstancePlay(MusicZone zone) 

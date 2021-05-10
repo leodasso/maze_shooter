@@ -19,6 +19,12 @@ public class GameMaster : ScriptableObject
     public GateLink gateLink;
     public Collection playerInstancesCollection;
 
+	[AssetsOnly]
+	public GameObject audioListenerPrefab;
+
+	[AssetsOnly]
+	public GameObject musicPlayerPrefab;
+
     public SavedString savedStage;
     public SavedString savedCheckpoint;
     
@@ -29,6 +35,8 @@ public class GameMaster : ScriptableObject
 	public IntReference hpPerHeart;
 
     public static string saveFilesDirectory = "saveFiles/";
+
+	static GameObject audioListenerInstance;
 
     /// <summary>
     /// True when transitioning between scenes/stages
@@ -59,6 +67,13 @@ public class GameMaster : ScriptableObject
 	{
 		// TODO time since last checkpoint reminder
 		Application.Quit();
+	}
+
+	public static void AddAudioListener() 
+	{
+		if (audioListenerInstance) return;
+		audioListenerInstance = Instantiate(Get().audioListenerPrefab);
+		DontDestroyOnLoad(audioListenerInstance.gameObject);
 	}
 
     public static GameObject GetPlayerInstance()

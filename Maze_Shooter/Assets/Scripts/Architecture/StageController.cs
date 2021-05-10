@@ -38,6 +38,9 @@ public class StageController : MonoBehaviour
 			onStartFromGate.Invoke();
 		else
 			onStartFromCheckpoint.Invoke();
+
+		//ensure audio listener is in scene
+		GameMaster.AddAudioListener();
 		
 		GameMaster.CompleteGateLink();
 		
