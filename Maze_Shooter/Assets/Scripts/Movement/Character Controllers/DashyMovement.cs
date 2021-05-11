@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Character Controllers/Dashy")]
 public class DashyMovement : MovementBase
 {
 	[Tooltip("How quickly I stop when there's no")]

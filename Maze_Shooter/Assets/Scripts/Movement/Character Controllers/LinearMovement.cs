@@ -4,7 +4,7 @@ using Arachnid;
 using UnityEngine;
 
 
-
+[AddComponentMenu("Character Controllers/Linear mover")]
 public class LinearMovement : MovementBase
 {
     [Tooltip("The initial direction I'll move. This is previewed as the yellow line coming from me.")]

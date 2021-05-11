@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(TargetFinder))]
+[AddComponentMenu("Character Controllers/Pulse Movement")]
 public class PulseMovement : MonoBehaviour
 {
 	[TabGroup("main")]

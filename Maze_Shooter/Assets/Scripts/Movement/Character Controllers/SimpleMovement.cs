@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 [TypeInfoBox("Moves towards a target with physics. To set a target, add a targetFinder component.")]
+[AddComponentMenu("Character Controllers/Simple Movement")]
 public class SimpleMovement : MovementBase
 {    
     [Tooltip("The thing I'll move towards. Keep in mind if there's a targetFinder referenced, it will overwrite" +

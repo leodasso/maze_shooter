@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [TypeInfoBox("Moves along a path with physics.")]
+[AddComponentMenu("Character Controllers/Path movement")]
 public class PathMovement : MovementBase
 {    
 
