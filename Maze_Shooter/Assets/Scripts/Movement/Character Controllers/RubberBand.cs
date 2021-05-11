@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [AddComponentMenu("Character Controllers/Rubber Band")]
 public class RubberBand : MonoBehaviour, IControllable
 {
@@ -19,6 +20,9 @@ public class RubberBand : MonoBehaviour, IControllable
 
 	[Tooltip("The amount of force that will be applied to the rubber band rigidbody.")]
 	public float inputStrength = 1;
+
+	[Tooltip("When activating, how wobbly should this be?")]
+	public float initWobbliness = .5f;
 
 	[Space]
 	[Tooltip("Drag while pulling")]
@@ -66,6 +70,7 @@ public class RubberBand : MonoBehaviour, IControllable
 	public void ResetJoint() 
 	{
         joint.connectedAnchor = transform.TransformPoint(jointLocalInitPos);
+		joint.transform.localPosition = jointLocalInitPos + Random.onUnitSphere * initWobbliness;
 	}
 	
 
@@ -77,6 +82,7 @@ public class RubberBand : MonoBehaviour, IControllable
 
 	public void OnPlayerControlEnabled(bool isEnabled)
 	{
+		Debug.Log("Rubber band player control change. enabled: " + isEnabled);
 		if (!isEnabled)
 			_input = Vector2.zero;
 	}

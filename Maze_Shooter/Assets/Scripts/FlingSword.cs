@@ -51,11 +51,15 @@ public class FlingSword : MonoBehaviour
 			hauntReturnPos.position = transform.position + Vector3.Scale(hauntReturn, new Vector3(1, 0, 1));
 		}
 
-		if (rubberBand.NormalizedRadius >= flingThreshhold && canFling) {
-			canFling = false;
-			onFling.Invoke();
-		}
+		if (rubberBand.NormalizedRadius >= flingThreshhold && canFling) 
+			FlingEvent();
     }
+
+	void FlingEvent()
+	{
+		canFling = false;
+		onFling.Invoke();
+	}
 
 	public void AllowFling()
 	{

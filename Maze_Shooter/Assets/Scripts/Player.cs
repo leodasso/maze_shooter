@@ -101,14 +101,17 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	public void EnablePlayerControl() {
+	public void EnablePlayerControl() 
+	{
 		controlledByPlayer = true;
 		foreach (var controllable in controllables) 
 			controllable.OnPlayerControlEnabled(true);
 	}
 
-	public void DisablePlayerControl() {
+	public void DisablePlayerControl() 
+	{
 		controlledByPlayer = false;
+		ClearMoveInput();
 		foreach (var controllable in controllables) 
 			controllable.OnPlayerControlEnabled(false);
 
