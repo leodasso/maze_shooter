@@ -55,6 +55,10 @@ public class SpriteAnimationMovement : MonoBehaviour, IControllable
 	{
 	}
 
+	public void OnPlayerControlEnabled(bool isEnabled)
+	{
+	}
+
 	public string Name() 
 	{
 		return "Sprite Animation Movement " + name;

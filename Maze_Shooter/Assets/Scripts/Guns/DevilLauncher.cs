@@ -156,6 +156,8 @@ public class DevilLauncher : MonoBehaviour, IControllable
     
     public void ApplyLeftStickInput(Vector2 input){}
 
+	public void OnPlayerControlEnabled(bool isEnabled){}
+
     public string Name()
     {
         return "devil launcher: " + name;

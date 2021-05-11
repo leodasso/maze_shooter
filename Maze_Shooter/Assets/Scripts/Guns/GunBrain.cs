@@ -61,6 +61,12 @@ public class GunBrain : MonoBehaviour, IControllable
     public void DoActionAlpha()
     { }
 
+	public void OnPlayerControlEnabled(bool isEnabled)
+	{
+		if (!isEnabled)
+			fireInput = Vector2.zero;
+	}
+
     public string Name()
     {
         return "GunBrain: " + name;

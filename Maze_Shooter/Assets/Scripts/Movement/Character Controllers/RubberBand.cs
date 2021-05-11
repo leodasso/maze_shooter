@@ -20,15 +20,25 @@ public class RubberBand : MonoBehaviour, IControllable
 	[Tooltip("The amount of force that will be applied to the rubber band rigidbody.")]
 	public float inputStrength = 1;
 
+	[Space]
+	[Tooltip("Drag while pulling")]
+	public float pullingDrag;
+	public float normalDrag;
+
+	public float NormalizedRadius => radius / maxRadius;
+	public Vector3 FlingDirection => forceVector;
+
 	float radius;
 
 	Vector3 forceVector;
 	Vector2 _input;
+	Vector3 jointLocalInitPos;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+		jointLocalInitPos = joint.transform.localPosition;
+		ResetJoint();
     }
 
 	void Update()
@@ -38,6 +48,8 @@ public class RubberBand : MonoBehaviour, IControllable
 		radius = Mathf.Clamp(radius, 0, maxRadius);
 
 		bool playerPulling = _input.magnitude > .05f;
+
+		rubberBandRigidBody.drag = playerPulling ? pullingDrag : normalDrag;
 
 		if (!playerPulling) 
 			radius = 0.001f;
@@ -51,10 +63,22 @@ public class RubberBand : MonoBehaviour, IControllable
 		joint.linearLimit = linearLimit;
 	}
 
+	public void ResetJoint() 
+	{
+        joint.connectedAnchor = transform.TransformPoint(jointLocalInitPos);
+	}
+	
+
 	void FixedUpdate() 
 	{
 		forceVector = Arachnid.Math.Project2Dto3D(_input);
 		rubberBandRigidBody.AddForce(forceVector * inputStrength * Time.fixedDeltaTime * 1000);
+	}
+
+	public void OnPlayerControlEnabled(bool isEnabled)
+	{
+		if (!isEnabled)
+			_input = Vector2.zero;
 	}
 
 	public void ApplyLeftStickInput(Vector2 input) 

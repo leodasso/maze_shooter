@@ -36,6 +36,8 @@ namespace ShootyGhost
 
         public void ApplyLeftStickInput(Vector2 input) { }
 
+		public void OnPlayerControlEnabled(bool isEnabled) { }
+
         public string Name()
         {
             return "haunter " + name;

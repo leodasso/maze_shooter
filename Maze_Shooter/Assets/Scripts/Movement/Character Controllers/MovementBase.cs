@@ -149,6 +149,14 @@ public class MovementBase : MonoBehaviour, IControllable
 
     public virtual void DoActionAlpha() { }
 
+	public void OnPlayerControlEnabled(bool isEnabled)
+	{
+		if (!isEnabled) {
+			direction = Vector3.zero;
+			lastDirection = Vector3.zero;
+		}
+	}
+
     public string Name()
     {
         return GetType().ToString() + " " + name;

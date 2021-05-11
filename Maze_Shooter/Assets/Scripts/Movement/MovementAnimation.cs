@@ -71,6 +71,8 @@ public class MovementAnimation : MonoBehaviour, IControllable
     public void ApplyRightStickInput(Vector2 input)
     {}
 
+	public void OnPlayerControlEnabled(bool isEnabled)	{}
+
     public void DoActionAlpha() {}
 
     public string Name()
