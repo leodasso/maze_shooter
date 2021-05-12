@@ -37,14 +37,13 @@ namespace Synthii {
 		[Tooltip("The music zone that I'm playing")]
 		public MusicZone musicZone;
 
+		Track track;
+
 		List<AudioSource> sources = new List<AudioSource>();
 
 		float _mainVolume = 1;
 
-		Track MyTrack => musicZone != null ? musicZone.musicTrack : null;
-
-
-
+		public Track MyTrack => musicZone != null ? musicZone.musicTrack : track;
 
 
 
@@ -114,7 +113,7 @@ namespace Synthii {
 		public void ChangeZones(MusicZone newMusicZone, float fadeTime = 1)
 		{
 			if (newMusicZone == musicZone) return;
-			if (newMusicZone.musicTrack != musicZone.musicTrack) {
+			if (newMusicZone.musicTrack != MyTrack) {
 				Debug.LogError(name + " trying to change music zones, but the current and new zones don't " + 
 				"have the same tracks.", gameObject);
 				return;
@@ -127,6 +126,7 @@ namespace Synthii {
 		public void BuildAudioSources(MusicZone newMusicZone, AudioMixerGroup mixerGroup) 
 		{
 			musicZone = newMusicZone;
+			track = musicZone.musicTrack;
 			trackVolumes = newMusicZone.GenerateVolumes();
 
 			// Create an audio source for each layer

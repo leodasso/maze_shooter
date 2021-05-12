@@ -51,6 +51,12 @@ namespace Synthii
 			instance.InstanceSetGlobal(zone);
 		}
 
+		public static void RemoveGlobal(MusicZone zone)
+		{
+			GuaranteeInstance();
+			instance.InstanceRemoveGlobal(zone);
+		}
+
 		static void GuaranteeInstance() 
 		{
 			if (instance) return;
@@ -70,7 +76,7 @@ namespace Synthii
 					return;
 
 				// Pause the currently playing audio source
-				if (zone.musicTrack != currentTrackSource.musicZone.musicTrack) 
+				if (zone.musicTrack != currentTrackSource.MyTrack) 
 					currentTrackSource.Pause(CurrentTrackFadeOutTime());
 			}
 
@@ -112,6 +118,14 @@ namespace Synthii
 			globalZone = zone;
 			if (!currentTrackSource)
 				InstancePlay(globalZone);
+		}
+
+		void InstanceRemoveGlobal(MusicZone zone) 
+		{
+			if (globalZone == zone) {
+				globalZone = null;
+				InstanceStop(zone);
+			}
 		}
 
 		TrackAudioSource BuildNewTrackAudioSource(MusicZone newZone) 

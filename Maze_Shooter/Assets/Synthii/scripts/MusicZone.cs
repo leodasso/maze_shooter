@@ -52,6 +52,13 @@ namespace Synthii {
 			}
 		}
 
+		void OnDisable() 
+		{
+			if (isGlobal) 
+				MusicPlayer.RemoveGlobal(this);
+			Exit();
+		}
+
 		
 		/// <summary>
 		/// Generates the volumes as a nice struct
