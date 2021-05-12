@@ -34,6 +34,7 @@ public class RubberBand : MonoBehaviour, IControllable
 
 	float radius;
 
+	Vector3 pullVector;
 	Vector3 forceVector;
 	Vector2 _input;
 	Vector3 jointLocalInitPos;
@@ -48,8 +49,8 @@ public class RubberBand : MonoBehaviour, IControllable
 	void Update()
 	{
 		// grow the radius as player pulls
-		radius += _input.magnitude * Time.deltaTime * radiusGrowthRate.Evaluate(radius);
-		radius = Mathf.Clamp(radius, 0, maxRadius);
+		pullVector += (Vector3)_input * Time.deltaTime * radiusGrowthRate.Evaluate(radius);
+		radius = Mathf.Clamp(pullVector.magnitude, 0, maxRadius);
 
 		bool playerPulling = _input.magnitude > .05f;
 
@@ -82,9 +83,11 @@ public class RubberBand : MonoBehaviour, IControllable
 
 	public void OnPlayerControlEnabled(bool isEnabled)
 	{
-		Debug.Log("Rubber band player control change. enabled: " + isEnabled);
-		if (!isEnabled)
+		if (!isEnabled) {
 			_input = Vector2.zero;
+			pullVector = Vector3.zero;
+		}
+
 	}
 
 	public void ApplyLeftStickInput(Vector2 input) 
