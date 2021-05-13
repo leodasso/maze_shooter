@@ -17,6 +17,10 @@ public class FlingSword : MonoBehaviour
 	[Tooltip("distance that the ghost will be returned to when unhaunting.")]
 	public float ghostHauntReturnDist = 6;
 	public float flingSpeed = 10;
+	[Tooltip("When it hits a terrain or other object, how high it bounces")]
+	public float bounceHeight = 10;
+	[Range(0, 1), Tooltip("Horizontal bounciness when hitting an object")]
+	public float bounciness = .25f;
 
 	[Range(0, 1)]
 	[Tooltip("How hard the player needs to pull before flinging happens")]
@@ -54,6 +58,13 @@ public class FlingSword : MonoBehaviour
 		if (rubberBand.NormalizedRadius >= flingThreshhold && canFling) 
 			FlingEvent();
     }
+
+	public void Bounce() 
+	{
+		Vector3 bounceVel = rigidbody.velocity * -bounciness;
+		bounceVel = new Vector3(bounceVel.x, bounceHeight, bounceVel.z);
+		rigidbody.velocity = bounceVel;
+	}
 
 	void FlingEvent()
 	{
