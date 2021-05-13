@@ -7,9 +7,14 @@ using UnityEngine;
 public class RubberBand : MonoBehaviour, IControllable
 {
 	public Rigidbody rubberBandRigidBody;
+	[Tooltip("The object that connects to the ground ")]
+	public Transform foot;
 	public ConfigurableJoint joint;
 
 	public float maxRadius = 3;
+
+	[Tooltip("How far to translate the base from init local pos when pulling.")]
+	public float footMovement = .1f;
 
 	[Tooltip("Units per second the radius grows as player holds down joystick \n \n" + 
 	"x axis is radius, y axis is force applied when at that radius.")]
@@ -38,10 +43,12 @@ public class RubberBand : MonoBehaviour, IControllable
 	Vector3 forceVector;
 	Vector2 _input;
 	Vector3 jointLocalInitPos;
+	Vector3 footLocalInitPos;
 
     // Start is called before the first frame update
     void Start()
     {
+		footLocalInitPos = foot.transform.localPosition;
 		jointLocalInitPos = joint.transform.localPosition;
 		ResetJoint();
     }
@@ -54,15 +61,29 @@ public class RubberBand : MonoBehaviour, IControllable
 
 		bool playerPulling = _input.magnitude > .05f;
 
+		// move local pos from pulling
+		if (foot) {
+			if (playerPulling ) 
+				foot.transform.localPosition = pullVector.normalized * footMovement + footLocalInitPos;
+			else	
+				foot.transform.localPosition = footLocalInitPos;
+		}
+
+
 		rubberBandRigidBody.drag = playerPulling ? pullingDrag : normalDrag;
 
-		if (!playerPulling) 
+		// Reset radius when player lets go of stick
+		if (!playerPulling) {
+			pullVector = Vector3.zero;
 			radius = 0.001f;
+		}
 
+		// enable springiness when player lets go for fun bouncy effect
 		var linearLimitSpring = joint.linearLimitSpring;
 		linearLimitSpring.spring = playerPulling ? 0 : springForce;
 		joint.linearLimitSpring = linearLimitSpring;
 
+		// Apply the stretch radius to the joint
 		var linearLimit = joint.linearLimit;
 		linearLimit.limit = radius;
 		joint.linearLimit = linearLimit;

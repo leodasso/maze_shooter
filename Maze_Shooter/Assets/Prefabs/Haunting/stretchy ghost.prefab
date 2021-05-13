@@ -65,8 +65,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rubberBandRigidBody: {fileID: 7043974051997845180}
+  foot: {fileID: 7043974051798746696}
   joint: {fileID: 7043974051997845181}
   maxRadius: 3
+  footMovement: 0.1
   radiusGrowthRate:
     serializedVersion: 2
     m_Curve:
@@ -200,8 +202,8 @@ MonoBehaviour:
   - {fileID: 7043974051052312696}
   - {fileID: 7043974052222980714}
   m_Bounds:
-    m_Center: {x: 0.13916612, y: 1.8982655, z: -0.64813995}
-    m_Extent: {x: 2.9230733, y: 2.183667, z: 0.64813995}
+    m_Center: {x: 0.1491065, y: 2.1016912, z: -0.64814186}
+    m_Extent: {x: 3.131864, y: 2.1395762, z: 0.64814186}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!114 &7043974051035770415
@@ -298,6 +300,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7043974051052312696}
+  - component: {fileID: 4755324267160121183}
   m_Layer: 0
   m_Name: bone_1
   m_TagString: Untagged
@@ -313,13 +316,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7043974051052312699}
   m_LocalRotation: {x: 0, y: 0, z: 0.70076454, w: 0.7133927}
-  m_LocalPosition: {x: 0.062061768, y: -0.250041, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7043974052222980714}
   m_Father: {fileID: 7043974051035770414}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4755324267160121183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7043974051052312699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c51f91c04b19744a20b2fe3091d553, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToFollow: {fileID: 7043974051798746699}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &7043974051798746699
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,7 +348,7 @@ GameObject:
   - component: {fileID: 7043974051798746696}
   - component: {fileID: 7043974051798746697}
   m_Layer: 0
-  m_Name: base
+  m_Name: foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -636,7 +653,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7043974052222980717}
   m_LocalRotation: {x: 0, y: 0, z: 0.018794866, w: 0.9998234}
-  m_LocalPosition: {x: 2.0998812, y: 0.09957743, z: -1.2962828}
+  m_LocalPosition: {x: 1.8509885, y: 0.03306055, z: -1.2962828}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7043974051052312696}

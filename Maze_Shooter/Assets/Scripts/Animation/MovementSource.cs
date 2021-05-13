@@ -9,7 +9,7 @@ namespace ShootyGhost {
 	{
 
 		[HideLabel, SerializeField]
-		DirectionSourceType source = DirectionSourceType.Rigidbody;
+		public DirectionSourceType source = DirectionSourceType.Rigidbody;
 
 		[ShowIf("SourceIsCustom"), HideLabel, SerializeField]
 		public Vector3 customDirection;

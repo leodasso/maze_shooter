@@ -7,7 +7,6 @@ public class CreatureAnimator : MonoBehaviour
 {
 	public float idleSpeed = .5f;
 
-	[Tooltip("Optional - used to determine wheather this is grounded")]
 	public SpriteAnimationPlayer animationPlayer;
 
 	[InlineProperty]
