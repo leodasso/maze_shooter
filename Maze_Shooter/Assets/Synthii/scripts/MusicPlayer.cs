@@ -116,7 +116,7 @@ namespace Synthii
 			}
 
 			globalZone = zone;
-			if (!currentTrackSource)
+			if (!currentTrackSource || currentTrackSource.MyTrack == zone.musicTrack)
 				InstancePlay(globalZone);
 		}
 
