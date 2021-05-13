@@ -84,33 +84,24 @@ public class CharacterPathInspector : OdinEditor
 					// draw line between points
 					Handles.DrawDottedLine(prevPos, thisPos, 5);
 
-					if (allowEdit) {
-						// button for adding a new point in the path
-						Handles.color = Color.green;
-						Vector3 addBtnPos = (thisPos + prevPos) / 2;
-
-						float screenSize =  HandleUtility.GetHandleSize(addBtnPos);
-						if (Handles.Button(addBtnPos, Quaternion.identity, screenSize * .1f, screenSize * .3f, Handles.CircleHandleCap)) {
-							Undo.RecordObject(charPath, "Add Character Path Point");
-							charPath.InsertNewPoint(i, addBtnPos);
-							pathPositions.Insert(i, addBtnPos);
-						}
-
-						// button label
-						Handles.Label(addBtnPos, "+", labelStyle);
-					}
+					if (allowEdit) 
+						MakeAddButton(charPath, i, i-1, ref pathPositions, labelStyle);
 				}
 			}
 		}
 
+
+
 		Handles.color = Color.yellow;
 
 		// connect edges if the path is looped
-		if (charPath.looped) 
+		if (charPath.looped) {
 			Handles.DrawDottedLine(
 				PathPointPos(charPath, 0), 
 				PathPointPos(charPath, charPath.pathPoints.Count - 1), 5);
 
+			MakeAddButton(charPath, 0, charPath.pathPoints.Count -1, ref pathPositions, labelStyle);
+		}
 
 		if (indexToDelete >= 0 && mouseUp && allowEdit) {
 			Undo.RecordObject(charPath, "Delete Character Path Point");
@@ -126,6 +117,23 @@ public class CharacterPathInspector : OdinEditor
 				charPath.pathPoints[i].pos = newPos;
 			}
 		}
+	}
+
+	static void MakeAddButton(CharacterPath charPath, int startIndex, int endIndex, ref List<Vector3> pathPositions, GUIStyle labelStyle)
+	{
+		// button for adding a new point in the path
+		Handles.color = Color.green;
+		Vector3 addBtnPos = (PathPointPos(charPath, startIndex) + PathPointPos(charPath, endIndex)) / 2;
+
+		float screenSize =  HandleUtility.GetHandleSize(addBtnPos);
+		if (Handles.Button(addBtnPos, Quaternion.identity, screenSize * .2f, screenSize * .4f, Handles.SphereHandleCap)) {
+			Undo.RecordObject(charPath, "Add Character Path Point");
+			charPath.InsertNewPoint(startIndex, addBtnPos);
+			pathPositions.Insert(startIndex, addBtnPos);
+		}
+
+		// button label
+		Handles.Label(addBtnPos, "+", labelStyle);
 	}
 
     protected virtual void OnSceneGUI()
