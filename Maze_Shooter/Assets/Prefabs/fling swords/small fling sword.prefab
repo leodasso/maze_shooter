@@ -96,6 +96,53 @@ MonoBehaviour:
   playDelay: 0
   playOnAwake: 0
   playOnEnable: 0
+--- !u!1 &3584291025034920651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3419067606957654895}
+  - component: {fileID: 4688217803263750704}
+  m_Layer: 0
+  m_Name: sword hit effect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3419067606957654895
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3584291025034920651}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6004872227971875264}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4688217803263750704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3584291025034920651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de6c16f983620a4da43f9e72b293064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 8562051964781103744, guid: e9212b0601f11b94ab91358684e32fde,
+    type: 3}
+  lifetime: 5
+  delay: 0
 --- !u!1 &5474667376079214438
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,6 +490,7 @@ Transform:
   - {fileID: 6004872227541776804}
   - {fileID: 6004872227680572743}
   - {fileID: 7175249983274562240}
+  - {fileID: 3419067606957654895}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1993,13 +2041,28 @@ MonoBehaviour:
   ignoredColliders: []
   layersToDamage:
     serializedVersion: 2
-    m_Bits: 32769
+    m_Bits: 35329
   damage:
     useConstant: 0
     constantValue:
       fractions: 0
       hearts: 1
     valueObject: {fileID: 0}
+  onDoDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4688217803263750704}
+        m_TargetAssemblyTypeName: OnTriggerEffect, Assembly-CSharp
+        m_MethodName: InvokeEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!210 &6004872227971875275
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -2050,7 +2113,7 @@ MonoBehaviour:
   velocityRange: {x: 9.880522, y: 250}
   triggeringLayers:
     serializedVersion: 2
-    m_Bits: 33025
+    m_Bits: 35073
   onCollision:
     m_PersistentCalls:
       m_Calls:
@@ -2225,12 +2288,12 @@ PrefabInstance:
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 1.6979039
+      value: 1.6979058
       objectReference: {fileID: 0}
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
       propertyPath: m_Bounds.m_Center.z
-      value: 0.14901929
+      value: 0.1490231
       objectReference: {fileID: 0}
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
@@ -2240,7 +2303,7 @@ PrefabInstance:
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
       propertyPath: m_Bounds.m_Extent.y
-      value: 2.0924518
+      value: 2.09245
       objectReference: {fileID: 0}
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
@@ -2374,6 +2437,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeee7e368b191364fae438d8d219f4c0, type: 3}
+--- !u!4 &6004872227541776804 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7043974050966847713, guid: aeee7e368b191364fae438d8d219f4c0,
+    type: 3}
+  m_PrefabInstance: {fileID: 3644729785496549701}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6004872227541776810 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7043974050966847727, guid: aeee7e368b191364fae438d8d219f4c0,
@@ -2395,12 +2464,6 @@ GameObject:
 --- !u!1 &6004872227541776805 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7043974050966847712, guid: aeee7e368b191364fae438d8d219f4c0,
-    type: 3}
-  m_PrefabInstance: {fileID: 3644729785496549701}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &6004872227541776804 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7043974050966847713, guid: aeee7e368b191364fae438d8d219f4c0,
     type: 3}
   m_PrefabInstance: {fileID: 3644729785496549701}
   m_PrefabAsset: {fileID: 0}

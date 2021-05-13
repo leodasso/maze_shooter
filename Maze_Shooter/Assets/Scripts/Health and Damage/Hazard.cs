@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Arachnid;
+﻿using Arachnid;
 using UnityEngine;
+using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
 [TypeInfoBox("Add this component to any object with a 2D collider, and it will deal damage to other iDestructible objects" +
@@ -12,13 +11,20 @@ public class Hazard : ContactBase
     public LayerMask layersToDamage;
 	public HeartsRef damage;
 
+	[SerializeField]
+	UnityEvent onDoDamage;
+
     protected override void OnCollisionAction(Collision collision, Collider otherCol)
     {
         if (!enabled) return;
         if (!Math.LayerMaskContainsLayer(layersToDamage, otherCol.gameObject.layer)) return;
         
         IDestructible destructible = otherCol.GetComponent<IDestructible>();
-        destructible?.DoDamage(damage.Value, collision.GetContact(0).point, collision.GetContact(0).normal);
+
+		if (destructible != null) {
+        	destructible.DoDamage(damage.Value, collision.GetContact(0).point, collision.GetContact(0).normal);
+			onDoDamage.Invoke();
+		}
     }
 
     protected override void OnTriggerAction(Collider other)
@@ -27,7 +33,11 @@ public class Hazard : ContactBase
         if (!Math.LayerMaskContainsLayer(layersToDamage, other.gameObject.layer)) return;
         
         IDestructible destructible = other.GetComponent<IDestructible>();
-        destructible?.DoDamage(damage.Value, (transform.position + other.transform.position)/2, 
-            (transform.position - other.transform.position).normalized);
+
+		if (destructible != null) {
+			destructible.DoDamage(damage.Value, (transform.position + other.transform.position)/2, 
+				(transform.position - other.transform.position).normalized);
+			onDoDamage.Invoke();
+		}
     }
 }
