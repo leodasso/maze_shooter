@@ -85,17 +85,17 @@ public class Health : MonoBehaviour, IDestructible
 	{
 		Hearts newDamage = new Hearts();
 		newDamage.hearts = amount;
-		DoDamage(newDamage, transform.position, Vector3.forward);
+		DoDamage(newDamage, transform.position + Vector3.back * .25f, Vector3.forward);
 	}
 
 	public void DoDamage(Hearts amount) 
 	{
-		DoDamage(amount, transform.position, Vector3.forward);
+		DoDamage(amount, transform.position + Vector3.back * .25f, Vector3.forward);
 	}
 
 	public void DoDamage(Hearts amount, Vector3 pos, Vector3 dir)
 	{
-		if (IsInvulnerable || !enabled) return;
+		if (IsInvulnerable || !enabled || IsKilled) return;
 		
 		ActualHp -= amount;
 		if (ActualHp.TotalPoints <= 0)
@@ -136,6 +136,7 @@ public class Health : MonoBehaviour, IDestructible
 
 	public void Destruct()
 	{
+		if (_isKilled) return;
 		_isKilled = true;
 		onKilledEvent.Invoke();
 		if (mainHealth) mainHealth.onKilledEvent.Invoke();
