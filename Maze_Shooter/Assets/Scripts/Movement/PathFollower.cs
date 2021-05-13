@@ -17,16 +17,16 @@ public class PathFollower : MovementBase
 	public float maxSpeed = 5;
     [Tooltip("Speed of lerping position to the current point along the path.")]
     public float lerpSpeed = 10;
+
+	[PropertyRange(0, "PathLength")]
     public float pathPosition;
 
 	public bool clampPathPos;
+
+	[ShowIf("clampPathPos"), MinMaxSlider(0, "PathLength")]
+	public Vector2 clampedPathPos;
+
 	public bool orientToPath;
-
-	[ShowIf("clampPathPos"), HorizontalGroup("clamp"), LabelText("Min"), LabelWidth(40)]
-	public float minPathPos;
-
-	[ShowIf("clampPathPos"), HorizontalGroup("clamp"), LabelText("Max"), LabelWidth(40)]
-	public float maxPathPos;
     
     [Tooltip("Try to get it to match the collider approximately - this is used for faking collision.")]
     public float radius = 2;
@@ -37,7 +37,7 @@ public class PathFollower : MovementBase
     public LayerMask collisionLayerMask;
     
     [Space]
-    public CinemachineSmoothPath path;
+    public CinemachinePathBase path;
 
     bool _slowDown;
     Vector3 _pathTangent;
@@ -45,6 +45,7 @@ public class PathFollower : MovementBase
 
 	public float PathSpeed => _speedOnPath;
 	public float FinalRadius => radius * transform.localScale.x;
+	public float PathLength => path != null ? path.PathLength : 1;
     
     /// <summary>
     /// The dot product between the path tangent and the movement input direction.
@@ -85,7 +86,7 @@ public class PathFollower : MovementBase
         pathPosition += _speedOnPath * Time.deltaTime;
 
 		if (clampPathPos)
-			pathPosition = Mathf.Clamp(pathPosition, minPathPos, maxPathPos);
+			pathPosition = Mathf.Clamp(pathPosition, clampedPathPos.x, clampedPathPos.y);
 		
         // Loop the path position so it stays within the bounds of path length.
 		if (path.Looped) {
