@@ -17,6 +17,15 @@ public class CrescentGlyph : MonoBehaviour
 	[SerializeField]
 	UnityEvent onActivate;
 
+	[Tooltip("Not the actual facing of the transform, but the perceived facing direction of the graphic")]
+	public Vector3 facingDirection = new Vector3(1, 0, 1);
+
+	void OnDrawGizmosSelected()
+	{	
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawRay(transform.position, facingDirection.normalized);
+	}
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,5 +44,23 @@ public class CrescentGlyph : MonoBehaviour
 	public void Deactivate() 
 	{
 		spriteRenderer.sprite = crescentEmptySprite;
+	}
+
+	[ButtonGroup]
+	void FaceDownRight()
+	{
+		facingDirection = new Vector3(1, 0, -1);
+	}
+
+	[ButtonGroup]
+	void FaceDownLeft()
+	{
+		facingDirection = new Vector3(-1, 0, -1);
+	}
+
+	[ButtonGroup]
+	void FaceUp()
+	{
+		facingDirection = new Vector3(0, 1, 0);
 	}
 }

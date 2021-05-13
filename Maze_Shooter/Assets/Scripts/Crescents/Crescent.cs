@@ -3,14 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Arachnid;
+using Cinemachine;
 
 public class Crescent : MonoBehaviour
 {
-	public PrettyLerper lerper;
 	public Collection collection;
-	
-	public UnityEvent onCollected;
-	public UnityEvent onActivated;
+
+	[SerializeField]
+	CrescentPath pathPrefab;
+
+	[SerializeField]
+	PathFollower pathFollower;
+
+	[SerializeField]
+	UnityEvent onCollected;
+	[SerializeField]
+	UnityEvent onActivated;
+
+	[SerializeField]
+	[Tooltip("Curve for the progress of the crescent along the path (when you pick it up)" +
+	"\n x-axis: time \n y-axis: progress along path")]
+	AnimationCurve pathMovementCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
 	CrescentGroup myGroup;
 	CrescentGlyph glyph;
@@ -50,9 +63,30 @@ public class Crescent : MonoBehaviour
 	public void MoveToGlyph() 
 	{
 		glyph = myGroup.GetEmptyGlyph();
-		lerper.target = glyph.transform;
-		lerper.DoLerp();
-		lerper.onLerpComplete += ActivateGlyph;
+
+		// Instantiate path
+		CrescentPath pathInstance = Instantiate(pathPrefab, transform.position, Quaternion.identity);
+		pathInstance.SetupPath(this, glyph);
+		pathFollower.pathPosition = 0;
+		StartCoroutine(MoveAlongPath(pathInstance.GetComponent<CinemachinePath>()));
+	}
+
+	IEnumerator MoveAlongPath(CinemachinePath path) 
+	{
+		float duration = pathMovementCurve.Duration();
+		float progress = 0;
+		Debug.Log("Starting lerp with a duration of " + duration);
+
+		pathFollower.path = path;
+
+		while (progress < 1) {
+			progress += Time.deltaTime / duration;
+			Debug.Log("progress is now " + progress);
+			pathFollower.SetNormalizedPathPos(pathMovementCurve.Evaluate(progress * duration));
+			yield return null;
+		}
+
+		ActivateGlyph();
 	}
 
 	void ActivateGlyph() 

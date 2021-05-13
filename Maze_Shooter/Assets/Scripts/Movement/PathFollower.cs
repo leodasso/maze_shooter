@@ -11,6 +11,9 @@ public class PathFollower : MovementBase
              "player controlled path follower."), PropertyOrder(-999)]
     public bool master;
 
+	[Tooltip("If true, doesn't need dynamics profile or rigidbody. simply follows path."), PropertyOrder(-1000)]
+    public bool isKinematic;
+
     [Space]
     public float acceleration = 10;
     public float drag = 10;
@@ -78,8 +81,13 @@ public class PathFollower : MovementBase
 			MasterUpdate();
 
 		UpdatePosition();
-
     }
+
+	protected override void FixedUpdate()
+	{
+		if (!isKinematic)
+			base.FixedUpdate();
+	}
 
 	void UpdatePosition() 
 	{
@@ -168,6 +176,11 @@ public class PathFollower : MovementBase
     {
         _speedOnPath *= -.9f;
     }
+
+	public void SetNormalizedPathPos(float normalizedPos)
+	{
+		pathPosition = Mathf.Clamp01(normalizedPos) * PathLength;
+	}
 
 
     // Below functions are for easy interfacing with PlayMaker
