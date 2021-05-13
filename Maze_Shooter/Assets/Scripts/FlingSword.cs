@@ -56,7 +56,7 @@ public class FlingSword : MonoBehaviour
 		}
 
 		if (rubberBand.NormalizedRadius >= flingThreshhold && canFling) 
-			FlingEvent();
+			InvokeFling();
     }
 
 	public void Bounce() 
@@ -66,7 +66,7 @@ public class FlingSword : MonoBehaviour
 		rigidbody.velocity = bounceVel;
 	}
 
-	void FlingEvent()
+	void InvokeFling()
 	{
 		canFling = false;
 		onFling.Invoke();
