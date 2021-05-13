@@ -147,7 +147,8 @@ public class PathMovement : MovementBase
 		}
 
 		// Check for edges of the path 
-		if (!path.IsInRange(pathIndex + directionOnPath)) {
+		int nextPathIndex = pathIndex + directionOnPath;
+		if (!path.IsInRange(nextPathIndex)) {
 			if (pathEndAction == PathEndAction.PingPong)
 				ReverseDirection();
 
@@ -156,6 +157,16 @@ public class PathMovement : MovementBase
 		}
 
 		pathIndex += directionOnPath;
+
+		// Looping the index
+		if (path.looped) {
+			if (pathIndex >= path.pathPoints.Count)
+				pathIndex = 0;
+
+			else if (pathIndex < 0)
+				pathIndex = path.pathPoints.Count - 1;
+		}
+
 		destination = path.GetWorldPos(pathIndex);
 	}
 
