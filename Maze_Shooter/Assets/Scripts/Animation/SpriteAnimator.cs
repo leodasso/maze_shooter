@@ -25,6 +25,8 @@ public class SpriteAnimator : MonoBehaviour
 	[ShowIf("playSelf")]
 	public float frameRate = 12;
 
+	public bool resetOnEnable;
+
 	public bool setProgressOnStart;
 	[Range(0, 1), ShowIf("setProgressOnStart")]
 	public float startProgress;
@@ -60,10 +62,7 @@ public class SpriteAnimator : MonoBehaviour
 		if (sprites.Count < 1) return;
 		if (!IsPlaying) return;
 
-		int spriteIndex = Mathf.FloorToInt(progress * sprites.Count);
-        if (spriteIndex >= sprites.Count) 
-            spriteIndex = sprites.Count - 1;
-        spriteRenderer.sprite = sprites[spriteIndex];
+		Recalculate();
 
 		if (playSelf) SelfPlayUpdate();
 
@@ -72,6 +71,23 @@ public class SpriteAnimator : MonoBehaviour
 	}
 
 	bool IsPlaying => loop || _plays < 1;
+
+	/// <summary>
+	/// Sets the progress and recalculates to show the correct frame
+	/// </summary>
+	public void SetProgress(float newProgress)
+	{
+		progress = newProgress;
+		Recalculate();
+	}
+
+	void Recalculate()
+	{
+		int spriteIndex = Mathf.FloorToInt(progress * sprites.Count);
+        if (spriteIndex >= sprites.Count) 
+            spriteIndex = sprites.Count - 1;
+        spriteRenderer.sprite = sprites[spriteIndex];
+	}
 
 	void SelfPlayUpdate() 
 	{
@@ -91,6 +107,12 @@ public class SpriteAnimator : MonoBehaviour
 		progress = Mathf.Clamp01(progress);
 		if (progress == 0) _plays++;
 
+	}
+
+	void OnEnable()
+	{
+		if (resetOnEnable)
+			Reset();
 	}
 
 	[Button]

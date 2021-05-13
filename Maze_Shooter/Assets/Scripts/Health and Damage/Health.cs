@@ -15,8 +15,8 @@ public class Health : MonoBehaviour, IDestructible
 	[TabGroup("main"), LabelText("Current HP")]
 	public HeartsRef currentHp;
 
-	[ToggleLeft, TabGroup("main")]
-	public bool setHpOnStart;
+	[ToggleLeft, TabGroup("main"), Tooltip("Set the current HP to max HP on start")]
+	public bool setHpOnStart = true;
 
 	[Tooltip("How long after damaged will I be invulnerable?"), TabGroup("main"), Space]
 	public FloatReference invulnerableTime;
@@ -58,6 +58,10 @@ public class Health : MonoBehaviour, IDestructible
 			else currentHp.Value = value;
 		}
 	} 
+
+	public float NormalizedHp => (float)ActualHp.TotalPoints / (float)maxHearts.Value.TotalPoints;
+
+
 	bool _isKilled;
 
 	void Awake ()
@@ -75,6 +79,18 @@ public class Health : MonoBehaviour, IDestructible
 	{
 		if (_invulnerableTimer > 0)
 			_invulnerableTimer -= Time.deltaTime;
+	}
+
+	public void DoDamage(int amount) 
+	{
+		Hearts newDamage = new Hearts();
+		newDamage.hearts = amount;
+		DoDamage(newDamage, transform.position, Vector3.forward);
+	}
+
+	public void DoDamage(Hearts amount) 
+	{
+		DoDamage(amount, transform.position, Vector3.forward);
 	}
 
 	public void DoDamage(Hearts amount, Vector3 pos, Vector3 dir)
