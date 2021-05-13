@@ -1,11 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using Arachnid;
 
-
-[ExecuteInEditMode]
 public class SpriteShapeCollider : MonoBehaviour
 {
 	public float height = 5;
@@ -15,12 +11,6 @@ public class SpriteShapeCollider : MonoBehaviour
 	[SerializeField]
 	GameObject[] colliders = new GameObject[999];
 	
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
 	[ButtonGroup]
 	void BuildCollider() 
 	{
@@ -37,9 +27,11 @@ public class SpriteShapeCollider : MonoBehaviour
 		}
 
 		// build the very last collider from last point to the first point
-		Vector3 last = spriteShapeController.spline.GetPosition(points-1);
-		Vector3 first = spriteShapeController.spline.GetPosition(0);
-		BuildColliderSegment(last, first, points);
+		if (!spriteShapeController.spline.isOpenEnded) {
+			Vector3 last = spriteShapeController.spline.GetPosition(points-1);
+			Vector3 first = spriteShapeController.spline.GetPosition(0);
+			BuildColliderSegment(last, first, points);
+		}
 	}
 
 	[ButtonGroup]
