@@ -27,22 +27,22 @@ namespace ShootyGhost {
 		public float frameRateMultiplier = 1;
 		
 		[HideIf("IsOneWay")]
-		[PreviewField, HorizontalGroup("frames", marginLeft:2, marginRight:2, MaxWidth = 45)]
+		[PreviewField(120, ObjectFieldAlignment.Center), HorizontalGroup("frames")]
 		public List<Sprite> north = new List<Sprite>();
 		
 		[LabelText("NE")]
-		[ShowIf("IsEightWay"), PreviewField, HorizontalGroup("frames", marginLeft:2, marginRight:2, MaxWidth = 45)]
+		[ShowIf("IsEightWay"), PreviewField(120, ObjectFieldAlignment.Center), HorizontalGroup("frames")]
 		public List<Sprite> northEast = new List<Sprite>();
 		
-		[PreviewField, HorizontalGroup("frames", marginLeft:2, marginRight:2, MaxWidth = 45)]
+		[PreviewField(120, ObjectFieldAlignment.Center), HorizontalGroup("frames")]
 		public List<Sprite> east = new List<Sprite>();
 		
 		[LabelText("SE")]
-		[ShowIf("IsEightWay"), PreviewField, HorizontalGroup("frames", marginLeft:2, marginRight:2, MaxWidth = 45)]
+		[ShowIf("IsEightWay"), PreviewField(120, ObjectFieldAlignment.Center), HorizontalGroup("frames")]
 		public List<Sprite> southeast = new List<Sprite>();
 		
 		[HideIf("IsOneWay")]
-		[PreviewField, HorizontalGroup("frames", marginLeft:2, marginRight:2, MaxWidth = 45)]
+		[PreviewField(120, ObjectFieldAlignment.Center), HorizontalGroup("frames")]
 		public List<Sprite> south = new List<Sprite>();
 
 		bool IsEightWay => directionsCount == DirectionsType.EightWay;
