@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 5163224469147742592}
   - component: {fileID: 6606978137104790566}
   - component: {fileID: 2931427643442937694}
-  - component: {fileID: 1720179627860724953}
+  - component: {fileID: 3337162437748303701}
   m_Layer: 0
   m_Name: sprite
   m_TagString: Untagged
@@ -199,7 +199,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1720179627860724953
+--- !u!114 &3337162437748303701
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1720179627860724952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179e69d6d8964f641b12f296bfb58a6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 62f7588a22a3c6d47b7dcb4265f2ca96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   idleSpeed: 0.5
@@ -220,9 +220,9 @@ MonoBehaviour:
     mover: {fileID: 0}
     pseudoVelocity: {fileID: 0}
   overrideAnim: {fileID: 0}
+  spawn: {fileID: 11400000, guid: 76522ebc6f75b7d4399793db162fa48c, type: 2}
   idle: {fileID: 11400000, guid: 6007bc8fa8549cf48ba9fb9f51a47e80, type: 2}
   run: {fileID: 11400000, guid: dabbf43fc5827004c8a8ba8191662a86, type: 2}
-  spawnAnim: {fileID: 11400000, guid: 76522ebc6f75b7d4399793db162fa48c, type: 2}
 --- !u!1 &4383984515097431520
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,6 +558,7 @@ MonoBehaviour:
   shadowPrefab: {fileID: 5155450454445014131, guid: eb00369e30f58ab4dbc201708bd91644,
     type: 3}
   shadowScale: 1
+  castCameraDown: 0
   castingMask:
     serializedVersion: 2
     m_Bits: 2097152
@@ -593,6 +594,9 @@ MonoBehaviour:
       fractions: 0
       hearts: 1
     valueObject: {fileID: 0}
+  onDoDamage:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2983699378186447308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688,7 +692,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: TeardropAnimator
+          value: CreatureAnimator
         - useVariable: 0
           name: 
           tooltip: 
@@ -879,7 +883,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: TeardropAnimator
+          value: CreatureAnimator
         - useVariable: 0
           name: 
           tooltip: 

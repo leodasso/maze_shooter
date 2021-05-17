@@ -6,19 +6,15 @@ public class FastGuyAnimator : CreatureAnimator
 {
 	public SpriteAnimation flying;
 
-	bool _isFlying;
-
-	public void BeginFlying() {_isFlying = true;}
-	public void EndFlying() 
+	public void BeginFlying() 
 	{
-		_isFlying = false;
-		SetAnimImmediate(idle);
+		overrideAnim = flying;
+		SetAnimImmediate(flying);
 	}
 
-
-	protected override void Update()
+	public void EndFlying() 
 	{
-		base.Update();
-		if (_isFlying) SetAnim(flying);
+		ClearOverride();
+		SetAnimImmediate(idle);
 	}
 }

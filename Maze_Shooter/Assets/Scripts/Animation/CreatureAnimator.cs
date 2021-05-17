@@ -16,6 +16,7 @@ public class CreatureAnimator : MonoBehaviour
 	public SpriteAnimation overrideAnim;
 
 	[Space]
+	public SpriteAnimation spawn;
 	public SpriteAnimation idle;
 	public SpriteAnimation run;
 
@@ -26,11 +27,19 @@ public class CreatureAnimator : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+		if (overrideAnim) return;
+
 		if (velocitySource.GetMovementVector().magnitude > idleSpeed) {
 			SetAnim(run);
 		}
 		else SetAnim(idle);
     }
+
+	public void SetSpawn()
+	{
+		overrideAnim = spawn;
+		SetAnimImmediate(spawn);
+	}
 
 	public void ClearOverride() {
 		overrideAnim = null;

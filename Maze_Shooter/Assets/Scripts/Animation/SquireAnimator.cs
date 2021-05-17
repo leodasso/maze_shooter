@@ -1,18 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ShootyGhost;
 
-public class SquireAnimator : MonoBehaviour
+[AddComponentMenu("Animation/Squire Animator")]
+public class SquireAnimator : CreatureAnimator
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public SpriteAnimation attack;
+	public SpriteAnimation block;
+	public SpriteAnimation panic;
+	public SpriteAnimation pull;
+	public SpriteAnimation spawn;
+	public SpriteAnimation surprised;
 }

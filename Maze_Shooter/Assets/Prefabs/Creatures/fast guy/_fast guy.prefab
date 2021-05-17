@@ -430,6 +430,7 @@ MonoBehaviour:
     mover: {fileID: 0}
     pseudoVelocity: {fileID: 0}
   overrideAnim: {fileID: 0}
+  spawn: {fileID: 0}
   idle: {fileID: 11400000, guid: 5199745fba6c1fd48964d7b179a15019, type: 2}
   run: {fileID: 11400000, guid: def397426a9ee6a49b259085b32e082d, type: 2}
   flying: {fileID: 11400000, guid: 134710d2222b3b7408d5f9ae290971d4, type: 2}
@@ -710,8 +711,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  hauntableType: {fileID: 11400000, guid: a0cd012af2541804eaed73bc5eaa78df, type: 2}
   linkHealth: 1
+  customTransitionTime: 0
+  transitionTime: 0
+  allowManualExit: 1
+  customReturnPos: 0
+  returnPos: {fileID: 0}
+  hauntableType: {fileID: 11400000, guid: a0cd012af2541804eaed73bc5eaa78df, type: 2}
   health: {fileID: 2053979096284153871}
   hauntConstellationPrefab: {fileID: 7346983384601703694, guid: 1523824622d49d742babc4ca79311c7c,
     type: 3}
@@ -1196,7 +1202,7 @@ MonoBehaviour:
         - 
         - 
         actionEnabled: 010101010101010101
-        actionIsOpen: 000001000000010101
+        actionIsOpen: 000001010100010101
         actionStartIndex: 00000000050000000c0000000d000000140000001b00000022000000270000002c000000
         actionHashCodes: 3a4cad0559f9a0047f1a710359f9a00459f9a00459f9a0043a4cad05b2cf10008d4bb503
         unityObjectParams:
@@ -1576,7 +1582,7 @@ MonoBehaviour:
         - end flying animation
         - 
         actionEnabled: 0101010101010101
-        actionIsOpen: 0101000100000001
+        actionIsOpen: 0101000100010101
         actionStartIndex: 00000000030000000a0000001100000012000000190000002000000027000000
         actionHashCodes: 48c011015552ad0559f9a0047f1a710359f9a00459f9a00459f9a0048d4bb503
         unityObjectParams:
@@ -1973,6 +1979,7 @@ MonoBehaviour:
   shadowPrefab: {fileID: 1842192282749746345, guid: 227ba945210d0e749b7d50ea5f33ff96,
     type: 3}
   shadowScale: 1
+  castCameraDown: 0
   castingMask:
     serializedVersion: 2
     m_Bits: 2097152
