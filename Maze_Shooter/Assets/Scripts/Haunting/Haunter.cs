@@ -41,8 +41,16 @@ namespace ShootyGhost
 		[Tooltip("The time it takes to move the haunt trigger through the full animation")]
         public FloatReference hauntAnimDuration;
 
+		[Space]
+		[SerializeField, Tooltip("Layers that I will collide with when returning from a haunted object")]
+		LayerMask hauntReturnColliders;
+
+		[SerializeField, Tooltip("Ref to my capsule collider. Used when casting to return from haunt")]
+		CapsuleCollider collider;
+
         [ReadOnly]
         public GhostState ghostState = GhostState.Normal;
+
 
         /// <summary> The actual hauntable currently being controlled/haunted </summary>
         [Tooltip("The actual hauntable currently being controlled/haunted")]
@@ -249,13 +257,28 @@ namespace ShootyGhost
         /// </summary>
         public void EndHaunt(GameObject overrideHauntedObject = null, bool useTransition = true)
         {
-			GameObject container = overrideHauntedObject ? overrideHauntedObject : haunted.gameObject;
-
             if (haunted)
             {
-                transform.position = haunted.GetReturnPosition();
-                if (useTransition)
-					SpawnTransitionObject(HauntTransition.Out, transform.position, container);
+				// store return position so we can raycast to it and make sure we don't cross any boundaries
+				Vector3 destination = haunted.GetReturnPosition();
+				Vector3 returnPos = destination;
+				Vector3 destinationVector = destination - transform.position;
+
+				RaycastHit hit;
+				if (Physics.CapsuleCast(
+					transform.position, 
+					transform.position + collider.height * Vector3.up, 
+					collider.radius,
+					destinationVector, out hit, 30, hauntReturnColliders)) {
+					returnPos = hit.point - destinationVector.normalized * collider.radius * 1.1f;
+				}
+
+				transform.position = GhostTools.GroundPoint(returnPos);
+
+                if (useTransition) {
+					GameObject hauntedObject = overrideHauntedObject ? overrideHauntedObject : haunted.gameObject;
+					SpawnTransitionObject(HauntTransition.Out, transform.position, hauntedObject);
+				}
                 haunted.OnUnHaunted();
             }
             
@@ -263,6 +286,7 @@ namespace ShootyGhost
             playMaker.SendEvent("endHaunt");
             haunted = null;
         }
+
 
 		public void MigrateHaunt(Hauntable newHauntable) {
 			BeginHaunt(newHauntable);
