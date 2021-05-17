@@ -5014,6 +5014,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  playMaker: {fileID: 4991704436452651579}
   transitionIn:
     m_PersistentCalls:
       m_Calls:
@@ -5368,12 +5369,12 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 1
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
+        - useVariable: 1
+          name: transitionDuration
+          tooltip: time it takes to transition
+          showInInspector: 1
           networkSync: 0
-          value: 0.45
+          value: 0.4
         - useVariable: 1
           name: 
           tooltip: 
@@ -5914,12 +5915,12 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 0
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
+        - useVariable: 1
+          name: transitionDuration
+          tooltip: time it takes to transition
+          showInInspector: 1
           networkSync: 0
-          value: 0.3
+          value: 0.4
         - useVariable: 1
           name: 
           tooltip: 
@@ -6052,6 +6053,12 @@ MonoBehaviour:
         showInInspector: 0
         networkSync: 0
         value: 0
+      - useVariable: 1
+        name: transitionDuration
+        tooltip: time it takes to transition
+        showInInspector: 1
+        networkSync: 0
+        value: 0.4
       intVariables: []
       boolVariables: []
       stringVariables: []
@@ -6068,7 +6075,7 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs: 00000000
+      variableCategoryIDs: 0000000000000000
     description: 
     docUrl: 
     showStateLabel: 0
@@ -6078,12 +6085,12 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 1
+    preprocessed: 0
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
     EnableBreakpoints: 1
-    editorFlags: 1
+    editorFlags: 3
     activeStateName: 
     mouseEvents: 0
     handleLevelLoaded: 0

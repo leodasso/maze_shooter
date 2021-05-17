@@ -46,7 +46,7 @@ namespace ShootyGhost
 		LayerMask hauntReturnColliders;
 
 		[SerializeField, Tooltip("Ref to my capsule collider. Used when casting to return from haunt")]
-		CapsuleCollider collider;
+		new CapsuleCollider collider;
 
         [ReadOnly]
         public GhostState ghostState = GhostState.Normal;
@@ -255,7 +255,7 @@ namespace ShootyGhost
         /// <summary>
         /// Returns the ghost from posessing whatever it is currently haunting to its true form.
         /// </summary>
-        public void EndHaunt(GameObject overrideHauntedObject = null, bool useTransition = true)
+        public void EndHaunt(GameObject overrideHauntedObject = null, bool useTransition = true, float transitionDuration = .35f)
         {
             if (haunted)
             {
@@ -269,7 +269,7 @@ namespace ShootyGhost
 					transform.position, 
 					transform.position + collider.height * Vector3.up, 
 					collider.radius,
-					destinationVector, out hit, 30, hauntReturnColliders)) {
+					destinationVector, out hit, destinationVector.magnitude, hauntReturnColliders)) {
 					returnPos = hit.point - destinationVector.normalized * collider.radius * 1.1f;
 				}
 
@@ -277,12 +277,13 @@ namespace ShootyGhost
 
                 if (useTransition) {
 					GameObject hauntedObject = overrideHauntedObject ? overrideHauntedObject : haunted.gameObject;
-					SpawnTransitionObject(HauntTransition.Out, transform.position, hauntedObject);
+					SpawnTransitionObject(HauntTransition.Out, transform.position, hauntedObject, transitionDuration);
 				}
                 haunted.OnUnHaunted();
             }
             
             ghostState = GhostState.Normal;
+			playMaker.FsmVariables.GetFsmFloat("transitionDuration").Value = transitionDuration + .05f;
             playMaker.SendEvent("endHaunt");
             haunted = null;
         }
@@ -293,12 +294,13 @@ namespace ShootyGhost
 		}
 
         
-        ArcMover SpawnTransitionObject(HauntTransition transitionType, Vector3 start, GameObject destination)
+        ArcMover SpawnTransitionObject(HauntTransition transitionType, Vector3 start, GameObject destination, float duration = .45f)
         {
             GameObject transition = Instantiate(transitionEffect, transform.position, transform.rotation);
             ArcMover arcMover = transition.GetComponent<ArcMover>();
             arcMover.startPosition = start;
             arcMover.end = destination;
+			arcMover.SetTransitionDuration(duration);
             
             if (transitionType == HauntTransition.In)
                 arcMover.transitionIn.Invoke();

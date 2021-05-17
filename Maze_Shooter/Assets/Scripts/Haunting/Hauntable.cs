@@ -17,6 +17,12 @@ namespace ShootyGhost
 		[Space, ToggleLeft]
 		public bool linkHealth;
 
+		[SerializeField, ToggleLeft, Tooltip("Have a special transition duration for exiting this haunter?")]
+		bool customTransitionTime;
+
+		[SerializeField, ShowIf("customTransitionTime")]
+		float transitionTime;
+
 		[ToggleLeft, Tooltip("Allow the player to exit this hauntable whenever the want")]
 		public bool allowManualExit = true;
 
@@ -130,7 +136,11 @@ namespace ShootyGhost
 		/// </summary>
 		public void EndHaunt() {
 			if (!haunter) return;
-			haunter.EndHaunt();
+
+			if (customTransitionTime)
+				haunter.EndHaunt(transitionDuration: transitionTime);
+			else
+				haunter.EndHaunt();
 		}
 
 		public void EndHauntWithNoTransition() {

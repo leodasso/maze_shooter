@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
+using PlayMaker;
 
 [ExecuteAlways]
 public class ArcMover : MonoBehaviour
@@ -9,7 +10,10 @@ public class ArcMover : MonoBehaviour
     public float progress = 0;
     public Vector3 startPosition;
     public GameObject end;
-    public AnimationCurve heightCurve;
+	[SerializeField]
+    AnimationCurve heightCurve;
+	[SerializeField]
+	PlayMakerFSM playMaker;
 
     public UnityEvent transitionIn;
     public UnityEvent transitionOut;
@@ -27,6 +31,12 @@ public class ArcMover : MonoBehaviour
         _y = heightCurve.Evaluate(progress);
         transform.position = Vector3.Lerp(startPosition, end.transform.position, progress) + Vector3.up * _y;
     }
+
+	public void SetTransitionDuration(float duration) 
+	{
+		playMaker.FsmVariables.GetFsmFloat("transitionDuration").Value = duration;
+
+	}
 
     // Below functions are for easy interfacing with PlayMaker
     public void BeginTrailEmit()
