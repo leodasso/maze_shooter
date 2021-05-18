@@ -108,8 +108,13 @@ public class RubberBand : MonoBehaviour, IControllable
 		linearLimit.limit = radius;
 		joint.linearLimit = linearLimit;
 
+		if (radius < .01f && !canFling)
+			AllowFling();
+
+
 		if (NormalizedRadius >= flingThreshhold && canFling) 
 			InvokeFling();
+
 
 
 		if (hauntReturnPos) {

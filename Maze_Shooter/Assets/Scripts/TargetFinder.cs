@@ -64,6 +64,7 @@ public class TargetFinder : MonoBehaviour
 		targetsInRange.Clear();
 		foreach (var target in targets.elements)
 		{
+			if (!target.gameObject.activeInHierarchy) continue;
 			if (Vector3.SqrMagnitude(target.transform.position - transform.position) < maxAqcuireRange * maxAqcuireRange)
 				targetsInRange.Add(target.gameObject);
 		}

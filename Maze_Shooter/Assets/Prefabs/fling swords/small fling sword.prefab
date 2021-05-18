@@ -489,6 +489,8 @@ GameObject:
   - component: {fileID: 6004872227971875275}
   - component: {fileID: 6004872227971875273}
   - component: {fileID: 913759075450784576}
+  - component: {fileID: 4852471380855947214}
+  - component: {fileID: 6998678214731905887}
   m_Layer: 0
   m_Name: small fling sword
   m_TagString: Untagged
@@ -2183,6 +2185,32 @@ MonoBehaviour:
     type: 3}
   lifetime: 5
   delay: 0
+--- !u!114 &4852471380855947214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6004872227971875267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 219da9824ea70fd4882cd1b0bb8203cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collection: {fileID: 11400000, guid: e9e15459d01075b48b2dbbb2f1fc4714, type: 2}
+--- !u!114 &6998678214731905887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6004872227971875267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 219da9824ea70fd4882cd1b0bb8203cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collection: {fileID: 11400000, guid: 4899b6ac98c121f4bb1766f2d8c967f7, type: 2}
 --- !u!1 &9200747808901403606
 GameObject:
   m_ObjectHideFlags: 0
@@ -2376,12 +2404,12 @@ PrefabInstance:
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 1.6979039
+      value: 1.6979058
       objectReference: {fileID: 0}
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
       propertyPath: m_Bounds.m_Center.z
-      value: 0.14901929
+      value: 0.1490231
       objectReference: {fileID: 0}
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
@@ -2391,7 +2419,7 @@ PrefabInstance:
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
       propertyPath: m_Bounds.m_Extent.y
-      value: 2.0924518
+      value: 2.09245
       objectReference: {fileID: 0}
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
@@ -2525,6 +2553,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeee7e368b191364fae438d8d219f4c0, type: 3}
+--- !u!1 &6004872227541776805 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7043974050966847712, guid: aeee7e368b191364fae438d8d219f4c0,
+    type: 3}
+  m_PrefabInstance: {fileID: 3644729785496549701}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6004872227541776804 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7043974050966847713, guid: aeee7e368b191364fae438d8d219f4c0,
@@ -2546,12 +2580,6 @@ MonoBehaviour:
 --- !u!1 &6004872227500119908 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7043974051035770401, guid: aeee7e368b191364fae438d8d219f4c0,
-    type: 3}
-  m_PrefabInstance: {fileID: 3644729785496549701}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6004872227541776805 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7043974050966847712, guid: aeee7e368b191364fae438d8d219f4c0,
     type: 3}
   m_PrefabInstance: {fileID: 3644729785496549701}
   m_PrefabAsset: {fileID: 0}
