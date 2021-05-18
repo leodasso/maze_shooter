@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using ShootyGhost;
 using Sirenix.OdinInspector;
 
@@ -52,5 +52,14 @@ public class CreatureAnimator : MonoBehaviour
 	protected void SetAnimImmediate(SpriteAnimation newAnim) {
 		animationPlayer.spriteAnimation = newAnim;
 		animationPlayer.PlayClipFromBeginning();
+	}
+
+	/// <summary>
+	/// Overrides and immediately plays the given animation clip
+	/// </summary>
+	protected void OverrideAnimImmediate(SpriteAnimation newAnim) 
+	{
+		overrideAnim = newAnim;
+		SetAnimImmediate(newAnim);
 	}
 }

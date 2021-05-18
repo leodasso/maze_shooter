@@ -13,6 +13,8 @@ public class SimpleMovement : MovementBase
     public GameObject target;
 
     public bool useTargetFinder = true;
+
+	public bool updateTargetDirectionEveryFrame = true;
     
     [Tooltip("(optional) Will just use whatever target the targetfinder has if this is set."), ShowIf("useTargetFinder")]
     public TargetFinder targetFinder;
@@ -28,11 +30,17 @@ public class SimpleMovement : MovementBase
     
     protected override void FixedUpdate()
     {
-        if (target && useTargetFinder) 
-            direction = (target.transform.position - transform.position).normalized;
+        if (useTargetFinder && updateTargetDirectionEveryFrame) 
+			UpdateDirectionToTarget();
         
 		base.FixedUpdate();
     }
+
+	public void UpdateDirectionToTarget()
+	{
+		if (target)
+			direction = (target.transform.position - transform.position).normalized;
+	}
 
     // These functions are for playmaker to easily interface with this behavior
     public void DisableTargeting()
