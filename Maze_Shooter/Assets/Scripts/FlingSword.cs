@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class FlingSword : MonoBehaviour
@@ -22,21 +19,7 @@ public class FlingSword : MonoBehaviour
 	[Range(0, 1), Tooltip("Horizontal bounciness when hitting an object")]
 	public float bounciness = .25f;
 
-	[Range(0, 1)]
-	[Tooltip("How hard the player needs to pull before flinging happens")]
-	public float flingThreshhold = .9f;
-
-	public UnityEvent onFling;
-
 	Vector3 flingDirection;
-
-	bool canFling;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        canFling = true;
-    }
 
 	public void Fling() 
 	{
@@ -54,9 +37,6 @@ public class FlingSword : MonoBehaviour
 				hauntReturn = Vector3.right * 3;
 			hauntReturnPos.position = transform.position + Vector3.Scale(hauntReturn, new Vector3(1, 0, 1));
 		}
-
-		if (rubberBand.NormalizedRadius >= flingThreshhold && canFling) 
-			InvokeFling();
     }
 
 	public void Bounce() 
@@ -64,17 +44,5 @@ public class FlingSword : MonoBehaviour
 		Vector3 bounceVel = rigidbody.velocity * -bounciness;
 		bounceVel = new Vector3(bounceVel.x, bounceHeight, bounceVel.z);
 		rigidbody.velocity = bounceVel;
-	}
-
-	void InvokeFling()
-	{
-		canFling = false;
-		onFling.Invoke();
-	}
-
-	public void AllowFling()
-	{
-		Debug.Log("allowing fling");
-		canFling = true;
 	}
 }

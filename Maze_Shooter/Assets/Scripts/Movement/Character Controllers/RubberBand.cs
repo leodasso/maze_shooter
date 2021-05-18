@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 [AddComponentMenu("Character Controllers/Rubber Band")]
@@ -29,6 +30,10 @@ public class RubberBand : MonoBehaviour, IControllable
 	[Tooltip("When activating, how wobbly should this be?")]
 	public float initWobbliness = .5f;
 
+	[Range(0, 1)]
+	[Tooltip("How hard the player needs to pull before flinging happens. \n 'flinging' can be anything - just link it up in the onFling event below")]
+	public float flingThreshhold = .9f;
+
 	[Space]
 	[Tooltip("Drag while pulling")]
 	public float pullingDrag;
@@ -36,6 +41,9 @@ public class RubberBand : MonoBehaviour, IControllable
 
 	public float NormalizedRadius => radius / maxRadius;
 	public Vector3 FlingDirection => forceVector;
+
+	[SerializeField]
+	UnityEvent onFling;
 
 	float radius;
 
@@ -45,12 +53,17 @@ public class RubberBand : MonoBehaviour, IControllable
 	Vector3 jointLocalInitPos;
 	Vector3 footLocalInitPos;
 
+	bool canFling;
+
+
     // Start is called before the first frame update
     void Start()
     {
 		footLocalInitPos = foot.transform.localPosition;
 		jointLocalInitPos = joint.transform.localPosition;
 		ResetJoint();
+
+		canFling = true;
     }
 
 	void Update()
@@ -69,6 +82,7 @@ public class RubberBand : MonoBehaviour, IControllable
 				foot.transform.localPosition = footLocalInitPos;
 		}
 
+		joint.connectedAnchor = transform.TransformPoint(jointLocalInitPos);
 
 		rubberBandRigidBody.drag = playerPulling ? pullingDrag : normalDrag;
 
@@ -87,6 +101,21 @@ public class RubberBand : MonoBehaviour, IControllable
 		var linearLimit = joint.linearLimit;
 		linearLimit.limit = radius;
 		joint.linearLimit = linearLimit;
+
+		if (NormalizedRadius >= flingThreshhold && canFling) 
+			InvokeFling();
+	}
+
+	void InvokeFling()
+	{
+		canFling = false;
+		onFling.Invoke();
+	}
+
+	public void AllowFling()
+	{
+		Debug.Log("allowing fling");
+		canFling = true;
 	}
 
 	public void ResetJoint() 
