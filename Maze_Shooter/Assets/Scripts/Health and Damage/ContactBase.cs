@@ -50,16 +50,18 @@ public class ContactBase : MonoBehaviour
 		Vector3 direction = transform.position - _prevPosition;
 		Ray castingRay = new Ray(_prevPosition, direction);
 		RaycastHit hit;
-		if (Physics.Raycast(castingRay, out hit, direction.magnitude))
-		if (CanHitCollider(hit.collider))
-		{
-			if (debug)
+		if (Physics.Raycast(castingRay, out hit, direction.magnitude)) {
+			if (CanHitCollider(hit.collider))
 			{
-				Debug.Log(name + " casted against " + hit.collider.name, gameObject);
+				if (debug)
+				{
+					Debug.Log(name + " casted against " + hit.collider.name, gameObject);
+				}
+				transform.position = hit.point;
+				Triggered(hit.collider);
 			}
-			transform.position = hit.point;
-			Triggered(hit.collider);
 		}
+
 		// Reset previous position for next frame
 		_prevPosition = transform.position;
 	}
@@ -77,7 +79,14 @@ public class ContactBase : MonoBehaviour
 	{
 		Collider otherCol = other.GetContact(0).otherCollider;
 
-		if (!CanHitCollider(otherCol)) return;
+		if (debug)
+			Debug.Log(name + " collided with " + other.gameObject.name);
+
+		if (!CanHitCollider(otherCol)) {
+			if (debug)
+				Debug.Log("    The collider " + otherCol.name + " is in the 'cant hit' list, so this is ignored.");
+			return;
+		}
 		        
 		OnCollisionAction(other, otherCol);
 		

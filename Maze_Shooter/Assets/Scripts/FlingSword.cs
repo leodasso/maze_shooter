@@ -19,17 +19,21 @@ public class FlingSword : MonoBehaviour
 	[Range(0, 1), Tooltip("Horizontal bounciness when hitting an object")]
 	public float bounciness = .25f;
 
-	Vector3 flingDirection;
+	[Space, Tooltip("Direction sword will go when Fling() is invoked")]
+	public Vector3 flingDirection;
 
 	public void Fling() 
 	{
-		rigidbody.velocity = flingDirection.normalized * flingSpeed;
+		Vector3 flingVel = flingDirection.normalized * flingSpeed;
+		Debug.Log("Flinging at " + flingVel);
+		rigidbody.velocity = flingVel;
 	}
 
     // Update is called once per frame
     void Update()
     {
-        flingDirection = rubberBand.FlingDirection;
+		if (rubberBand)
+        	flingDirection = rubberBand.forceVector;
 
 		if (hauntReturnPos) {
 			Vector3 hauntReturn = flingDirection * ghostHauntReturnDist;

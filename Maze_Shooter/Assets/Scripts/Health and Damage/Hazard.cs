@@ -21,6 +21,9 @@ public class Hazard : ContactBase
         
         IDestructible destructible = otherCol.GetComponent<IDestructible>();
 
+		if (debug)
+			Debug.Log(name + " dealing damage to " + otherCol.name);
+
 		if (destructible != null) {
         	destructible.DoDamage(damage.Value, collision.GetContact(0).point, collision.GetContact(0).normal);
 			onDoDamage.Invoke();
@@ -34,10 +37,15 @@ public class Hazard : ContactBase
         
         IDestructible destructible = other.GetComponent<IDestructible>();
 
+		if (debug)
+			Debug.Log(name + " dealing damage via to trigger " + other.name);
+
+
 		if (destructible != null) {
 			destructible.DoDamage(damage.Value, (transform.position + other.transform.position)/2, 
 				(transform.position - other.transform.position).normalized);
 			onDoDamage.Invoke();
 		}
     }
+
 }

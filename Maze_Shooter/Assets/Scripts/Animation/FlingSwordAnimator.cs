@@ -23,7 +23,7 @@ public class FlingSwordAnimator : CreatureAnimator
 		if (rubberBand && rubberBand.NormalizedRadius > .1f) {
 			SetAnim(beingPulled);
 			animationPlayer.direction.source = DirectionSourceType.Custom;
-			animationPlayer.direction.customDirection = rubberBand.FlingDirection;
+			animationPlayer.direction.customDirection = rubberBand.forceVector;
 		}
 		else {
 			animationPlayer.direction.source = DirectionSourceType.Rigidbody;

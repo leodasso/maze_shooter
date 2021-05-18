@@ -40,7 +40,6 @@ public class RubberBand : MonoBehaviour, IControllable
 	public float normalDrag;
 
 	public float NormalizedRadius => radius / maxRadius;
-	public Vector3 FlingDirection => forceVector;
 
 	[SerializeField]
 	UnityEvent onFling;
@@ -48,7 +47,7 @@ public class RubberBand : MonoBehaviour, IControllable
 	float radius;
 
 	Vector3 pullVector;
-	Vector3 forceVector;
+	public Vector3 forceVector;
 	Vector2 _input;
 	Vector3 jointLocalInitPos;
 	Vector3 footLocalInitPos;

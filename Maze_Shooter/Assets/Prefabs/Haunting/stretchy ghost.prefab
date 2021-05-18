@@ -202,8 +202,8 @@ MonoBehaviour:
   - {fileID: 7043974051052312696}
   - {fileID: 7043974052222980714}
   m_Bounds:
-    m_Center: {x: 0.1491065, y: 2.1016912, z: -0.64814186}
-    m_Extent: {x: 3.131864, y: 2.1395762, z: 0.64814186}
+    m_Center: {x: 0.54245114, y: 2.5116487, z: -0.0000020681298}
+    m_Extent: {x: 3.1235468, y: 2.5978775, z: 0.0000021065123}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!114 &7043974051035770415
@@ -232,6 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rubberBand: {fileID: 7043974050966847727}
   spriteAnimationPlayer: {fileID: 7767700010329134479}
+  stretchAmt: 0
   animations:
   - {fileID: 11400000, guid: 2c8b5596d62396349a8819ccd3883a84, type: 2}
   - {fileID: 11400000, guid: c1cc482f216f54441817db2c018de5f6, type: 2}
@@ -302,7 +303,7 @@ GameObject:
   - component: {fileID: 7043974051052312696}
   - component: {fileID: 4755324267160121183}
   m_Layer: 0
-  m_Name: bone_1
+  m_Name: foot bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -639,7 +640,7 @@ GameObject:
   - component: {fileID: 7043974052222980715}
   - component: {fileID: 2546459712362479796}
   m_Layer: 0
-  m_Name: bone_2
+  m_Name: head bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -688,6 +689,7 @@ MonoBehaviour:
   shadowPrefab: {fileID: 1024560133667443443, guid: 197d5c7da3c5ae849952a8a55cad5e77,
     type: 3}
   shadowScale: 1
+  castCameraDown: 0
   castingMask:
     serializedVersion: 2
     m_Bits: 2097152
