@@ -1987,9 +1987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rubberBand: {fileID: 6004872227541776810}
-  hauntReturnPos: {fileID: 6004872227680572743}
   rigidbody: {fileID: 6004872227971875270}
-  ghostHauntReturnDist: 6
   flingSpeed: 35
   bounceHeight: 35
   bounciness: 0.25
@@ -2360,6 +2358,11 @@ PrefabInstance:
       propertyPath: onFling.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7043974050966847727, guid: aeee7e368b191364fae438d8d219f4c0,
+        type: 3}
+      propertyPath: hauntReturnPos
+      value: 
+      objectReference: {fileID: 6004872227680572743}
     - target: {fileID: 7043974051035770401, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
       propertyPath: m_IsActive

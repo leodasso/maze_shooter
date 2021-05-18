@@ -41,15 +41,18 @@ public class CreatureAnimator : MonoBehaviour
 		SetAnimImmediate(spawn);
 	}
 
-	public void ClearOverride() {
+	public virtual void ClearOverride() 
+	{
 		overrideAnim = null;
 	}
 
-	protected void SetAnim(SpriteAnimation newAnim) {
+	protected void SetAnim(SpriteAnimation newAnim) 
+	{
 		animationPlayer.spriteAnimation = newAnim;
 	}
 
-	protected void SetAnimImmediate(SpriteAnimation newAnim) {
+	protected void SetAnimImmediate(SpriteAnimation newAnim) 
+	{
 		animationPlayer.spriteAnimation = newAnim;
 		animationPlayer.PlayClipFromBeginning();
 	}

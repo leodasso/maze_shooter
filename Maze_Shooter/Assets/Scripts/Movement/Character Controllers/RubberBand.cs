@@ -7,6 +7,13 @@ using UnityEngine.Events;
 [AddComponentMenu("Character Controllers/Rubber Band")]
 public class RubberBand : MonoBehaviour, IControllable
 {
+	[Tooltip("Transform where ghost will return when haunting complete. This is moved by this component")]
+	public Transform hauntReturnPos;
+
+	[Tooltip("distance that the ghost will be returned to when unhaunting.")]
+	public float ghostHauntReturnDist = 6;
+
+	[Space]
 	public Rigidbody rubberBandRigidBody;
 	[Tooltip("The object that connects to the ground ")]
 	public Transform foot;
@@ -103,6 +110,14 @@ public class RubberBand : MonoBehaviour, IControllable
 
 		if (NormalizedRadius >= flingThreshhold && canFling) 
 			InvokeFling();
+
+
+		if (hauntReturnPos) {
+			Vector3 hauntReturn = forceVector * ghostHauntReturnDist;
+			if (hauntReturn.magnitude < 3)
+				hauntReturn = Vector3.right * 3;
+			hauntReturnPos.position = transform.position + Vector3.Scale(hauntReturn, new Vector3(1, 0, 1));
+		}
 	}
 
 	void InvokeFling()
@@ -123,7 +138,6 @@ public class RubberBand : MonoBehaviour, IControllable
 		joint.transform.localPosition = jointLocalInitPos + Random.onUnitSphere * initWobbliness;
 	}
 	
-
 	void FixedUpdate() 
 	{
 		forceVector = Arachnid.Math.Project2Dto3D(_input);
@@ -144,13 +158,9 @@ public class RubberBand : MonoBehaviour, IControllable
 		_input = input;
 	}
 
-	public void ApplyRightStickInput(Vector2 input) 
-	{
-	}
+	public void ApplyRightStickInput(Vector2 input) {}
 
-	public void DoActionAlpha() 
-	{
-	}
+	public void DoActionAlpha() {}
 
 	public string Name() 
 	{

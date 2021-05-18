@@ -26,8 +26,6 @@ public class SquireAnimator : CreatureAnimator
 
 	protected override void Update()
 	{
-		base.Update();
-
 		// we need to set a custom movement source for when 
 		// the player is haunting the dude's sword.
 		if (isHaunted) 
@@ -37,17 +35,26 @@ public class SquireAnimator : CreatureAnimator
 			overrideAnim = anim;
 			SetAnim(anim);
 		}
+		else base.Update();
+	}
+
+	public override void ClearOverride()
+	{
+		isHaunted = false;
+		base.ClearOverride();
 	}
 
 	public void SetSurprised()
 	{
 		OverrideAnimImmediate(surprised);
 	}
+	
 
 	public void SetPanic()
 	{
 		overrideAnim = panic;
 		SetAnim(panic);
+		ExitHaunted();
 	}
 
 	public void SetBlock()
@@ -68,6 +75,7 @@ public class SquireAnimator : CreatureAnimator
 	public void SetAttack()
 	{
 		OverrideAnimImmediate(attack);
+		ExitHaunted();
 	}
 
 	public void SetAttackDash()
