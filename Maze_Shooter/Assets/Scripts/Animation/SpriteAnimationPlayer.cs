@@ -16,6 +16,9 @@ namespace ShootyGhost {
 	[AddComponentMenu("Animation/Sprite Animation Player")]
 	public class SpriteAnimationPlayer : MonoBehaviour
 	{
+		[ToggleLeft, SerializeField]
+		bool debug;
+		[Space]
 		public float speedMultiplier = 1;
 		public float frameRate = 12;
 		public bool realTime;
@@ -75,7 +78,6 @@ namespace ShootyGhost {
 			if (speedChangesFramerate) 
 				speedMultiplier = speedToFramerate.Evaluate(speedSource.GetMovementVector().magnitude);
 
-			// determine the sprite list to use based on direction
 			_frameProgress += deltaTime;
 			if (_frameProgress >= FrameDuration)
 			{
@@ -122,11 +124,19 @@ namespace ShootyGhost {
 			spriteRenderer.flipX = dot < 0;
 		}
 
+		public void SetMovementSourceType(DirectionSourceType sourceType)
+		{
+			direction.source = sourceType;
+		}
+
 
 		void NextFrame()
 		{
 			_currentAnimClip = spriteAnimation.ClipForDirection(new Vector2(_forward.x, _forward.z));
 			_currentFrame++;
+
+			if (debug)
+				Debug.Log("anim frames: " + _currentFrame + "/" + _currentAnimClip.Count);
 
 			if (_currentFrame >= _currentAnimClip.Count) {
 
@@ -139,8 +149,11 @@ namespace ShootyGhost {
 				// handle looping / clamp
 				if (spriteAnimation.playMode == PlayMode.Loop)
 					_currentFrame = 0;
-				else _currentFrame--;
+				else _currentFrame = _currentAnimClip.Count - 1;
 			}
+
+			if (debug)
+				Debug.Log("    clamped current frame: "+ _currentFrame + "/" + _currentAnimClip.Count );
 
 			spriteRenderer.sprite = _currentAnimClip[_currentFrame];
 		}
