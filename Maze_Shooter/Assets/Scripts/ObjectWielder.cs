@@ -87,10 +87,10 @@ public class ObjectWielder : MonoBehaviour
     void Update()
     {
 		if (wieldedObject) return;
-
 		if (!weaponFinder) return;
 
 		if (weaponFinder.currentTarget) {
+
 			if (Vector3.Distance(transform.position, weaponFinder.currentTarget.transform.position) < pickupDistance) 
 				PickUp(weaponFinder.currentTarget);
 		}

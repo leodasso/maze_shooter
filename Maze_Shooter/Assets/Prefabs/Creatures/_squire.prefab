@@ -2851,19 +2851,19 @@ MonoBehaviour:
         tooltip: ' how long I will be still when surprised'
         showInInspector: 1
         networkSync: 0
-        value: 0.75
+        value: 0.5
       - useVariable: 1
         name: dashTime
         tooltip: How long I dash for when attacking
         showInInspector: 1
         networkSync: 0
-        value: 0.4
+        value: 0.35
       - useVariable: 1
         name: panicTime
         tooltip: how long i will panic for when i lose my weapon
         showInInspector: 1
         networkSync: 0
-        value: 5
+        value: 2.5
       intVariables: []
       boolVariables: []
       stringVariables: []
@@ -3284,6 +3284,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoAcquire: 0
+  useLayerMask: 0
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 0
   targets: {fileID: 11400000, guid: 35831a8bfbcf71f4fb702f50d0ec7816, type: 2}
   targetToAimAt: 0
   maxAqcuireRange: 16
@@ -3386,8 +3390,8 @@ MonoBehaviour:
   usePosition: 1
   positionFrequency: 0.2
   noiseSpeed: 0.05
-  noise: {x: -0.1569032, y: -0.11819959, z: 0.0025283694}
-  normalizedOutput: 0.3430968
+  noise: {x: -0.3169751, y: 0.1683029, z: 0.07002884}
+  normalizedOutput: 0.18302491
 --- !u!1 &7751873293997602002
 GameObject:
   m_ObjectHideFlags: 0
@@ -3811,6 +3815,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoAcquire: 0
+  useLayerMask: 1
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 1
   targets: {fileID: 11400000, guid: e9e15459d01075b48b2dbbb2f1fc4714, type: 2}
   targetToAimAt: 0
   maxAqcuireRange: 60
@@ -3871,6 +3879,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Bounds.m_Extent.z
       value: 0.0034064949
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004872227500119913, guid: 65ea174ba6cce5241a09b76c8a496916,
+        type: 3}
+      propertyPath: m_Bounds.m_Center.x
+      value: 0.28176975
       objectReference: {fileID: 0}
     - target: {fileID: 6004872227718455613, guid: 65ea174ba6cce5241a09b76c8a496916,
         type: 3}
@@ -3955,7 +3968,7 @@ PrefabInstance:
     - target: {fileID: 6004872227971875268, guid: 65ea174ba6cce5241a09b76c8a496916,
         type: 3}
       propertyPath: ignoredColliders.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6004872227971875268, guid: 65ea174ba6cce5241a09b76c8a496916,
         type: 3}
@@ -3971,6 +3984,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004872227971875271, guid: 65ea174ba6cce5241a09b76c8a496916,
+        type: 3}
+      propertyPath: fsm.variables.floatVariables.Array.data[0].value
+      value: 0.59
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65ea174ba6cce5241a09b76c8a496916, type: 3}

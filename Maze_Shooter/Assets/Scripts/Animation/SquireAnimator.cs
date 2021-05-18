@@ -52,8 +52,7 @@ public class SquireAnimator : CreatureAnimator
 
 	public void SetPanic()
 	{
-		overrideAnim = panic;
-		SetAnim(panic);
+		OverrideAnimImmediate(panic);
 		ExitHaunted();
 	}
 

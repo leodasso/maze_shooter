@@ -13,6 +13,11 @@ public class TargetFinder : MonoBehaviour
 {
 	[Tooltip("Searches for targets in radius every .5 seconds. You can manually search by calling FindTarget()"), ToggleLeft]
 	public bool autoAcquire = true;
+
+	[ToggleLeft]
+	public bool useLayerMask;
+	[ShowIf("useLayerMask")]
+	public LayerMask targetLayers;
 	
 	[Space]
 	public Collection targets;
@@ -59,12 +64,23 @@ public class TargetFinder : MonoBehaviour
 
 	public void FindTarget()
 	{
+		if (currentTarget) {
+			if (!currentTarget.activeInHierarchy) 
+				ClearTarget();
+			if (useLayerMask && !Arachnid.Math.LayerMaskContainsLayer(targetLayers, currentTarget.gameObject.layer)) 
+				ClearTarget();
+		}
+
 		if (targets == null || targets.elements.Count < 1) return;
 		
 		targetsInRange.Clear();
 		foreach (var target in targets.elements)
 		{
 			if (!target.gameObject.activeInHierarchy) continue;
+			if (useLayerMask && !Arachnid.Math.LayerMaskContainsLayer(targetLayers, target.gameObject.layer)) 
+					continue;
+			
+
 			if (Vector3.SqrMagnitude(target.transform.position - transform.position) < maxAqcuireRange * maxAqcuireRange)
 				targetsInRange.Add(target.gameObject);
 		}
@@ -88,6 +104,7 @@ public class TargetFinder : MonoBehaviour
 
 		if (targetToAimAt == TargetType.Nearest)
 			SetTarget(targetsInRange.First());
+
 	}
 
 	public void ClearTarget() 
