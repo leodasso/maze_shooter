@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 6004872226318944157}
   - component: {fileID: 6004872226318944130}
   - component: {fileID: 6004872226318944131}
+  - component: {fileID: 2749498055034422823}
   m_Layer: 0
   m_Name: sprite
   m_TagString: Untagged
@@ -363,10 +364,30 @@ MonoBehaviour:
     mover: {fileID: 0}
     pseudoVelocity: {fileID: 0}
   overrideAnim: {fileID: 0}
+  spawn: {fileID: 0}
   idle: {fileID: 11400000, guid: 060e90e286104a0428285e35484e4398, type: 2}
   run: {fileID: 11400000, guid: fabe321ad28f4774fb9e4c2b7b104fbd, type: 2}
   beingPulled: {fileID: 11400000, guid: 060e90e286104a0428285e35484e4398, type: 2}
   rubberBand: {fileID: 6004872227541776810}
+--- !u!114 &2749498055034422823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6004872226318944159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe6141f844198b439629637c169cd3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowPrefab: {fileID: 8013752625393328871, guid: 5259947f76f1af94db6eebe08e18c536,
+    type: 3}
+  shadowScale: 1.15
+  castCameraDown: 0
+  castingMask:
+    serializedVersion: 2
+    m_Bits: 2097152
 --- !u!1 &6004872227680572736
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,7 +486,6 @@ GameObject:
   - component: {fileID: 6004872227971875270}
   - component: {fileID: 6004872227971875268}
   - component: {fileID: 6004872227971875275}
-  - component: {fileID: 6004872227971875274}
   - component: {fileID: 6004872227971875273}
   - component: {fileID: 913759075450784576}
   m_Layer: 0
@@ -2076,25 +2096,6 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &6004872227971875274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6004872227971875267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fe6141f844198b439629637c169cd3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shadowPrefab: {fileID: 8013752625393328871, guid: 5259947f76f1af94db6eebe08e18c536,
-    type: 3}
-  shadowScale: 1.15
-  castCameraDown: 0
-  castingMask:
-    serializedVersion: 2
-    m_Bits: 2097152
 --- !u!114 &6004872227971875273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2290,12 +2291,12 @@ PrefabInstance:
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 1.6979039
+      value: 1.6979058
       objectReference: {fileID: 0}
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
       propertyPath: m_Bounds.m_Center.z
-      value: 0.14901929
+      value: 0.1490231
       objectReference: {fileID: 0}
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
@@ -2305,7 +2306,7 @@ PrefabInstance:
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
       propertyPath: m_Bounds.m_Extent.y
-      value: 2.0924518
+      value: 2.09245
       objectReference: {fileID: 0}
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}

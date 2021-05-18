@@ -13,12 +13,6 @@ public class LerpToTarget : MonoBehaviour
 	[Tooltip("The max distance from start to finish. If a longer lerp is requested, its magnitude will be clamped")]
 	public float maxDistance = 250;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
 	public void DoLerp()
 	{
 		Vector3 endPos = targetFinder.currentTarget.transform.position;
