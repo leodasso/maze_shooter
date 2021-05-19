@@ -8,6 +8,9 @@ using ShootyGhost;
 
 public class ObjectWielder : MonoBehaviour
 {
+	[ToggleLeft, Tooltip("Disables collider for a short time when spawning new ammo to prevent colliding with self")]
+	public bool preventCollisionWithSelf = true;
+
 	[SerializeField, Tooltip("Local position of an object while i wield it.")]
 	Vector3 wieldedObjectOffset = Vector3.up;
 
@@ -48,6 +51,14 @@ public class ObjectWielder : MonoBehaviour
 
 	public void FlingMyObject()
 	{
+		if (preventCollisionWithSelf) {
+			var flingCollider = wieldedObject.GetComponent<Collider>();
+			if (flingCollider != null) {
+				flingCollider.enabled = false;
+				StartCoroutine(EnableCollider(flingCollider, .3f));
+			} 
+		}
+
 		// Disable the flingSword behavior so it doesn't get fling direction from its own rubber band
 		wieldedObject.enabled = false;
 		wieldedObject.gameObject.SetActive(true);
@@ -57,6 +68,12 @@ public class ObjectWielder : MonoBehaviour
 		wieldedObjectFSM.SendEvent("fling");
 
 		wieldedObject = null;
+	}
+
+	IEnumerator EnableCollider(Collider col, float delay) 
+	{
+		yield return new WaitForSeconds(delay);
+		col.enabled = true;
 	}
 
 	void PickUp(GameObject newWeapon)
