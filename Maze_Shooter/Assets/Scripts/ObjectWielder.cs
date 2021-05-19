@@ -29,6 +29,9 @@ public class ObjectWielder : MonoBehaviour
 	[SerializeField]
 	TargetFinder weaponFinder;
 
+	[SerializeField]
+	LayerMask layersCanPickUp;
+
 	[SerializeField, Tooltip("Within this range, i will pick up a weapon.")]
 	float pickupDistance = 1;
 
@@ -78,6 +81,9 @@ public class ObjectWielder : MonoBehaviour
 
 	void PickUp(GameObject newWeapon)
 	{
+		if (!Arachnid.Math.LayerMaskContainsLayer(layersCanPickUp, newWeapon.layer))
+			return;
+
 		FlingSword newWeaponSword = newWeapon.GetComponent<FlingSword>();
 		if (!newWeaponSword) {
 			Debug.LogError(name + " tried to pickup weapon but it has no fling sword component.", newWeapon);

@@ -64,6 +64,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e805afcafa4f845978241175d9ff3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hauntReturnPos: {fileID: 0}
+  ghostHauntReturnDist: 6
   rubberBandRigidBody: {fileID: 7043974051997845180}
   foot: {fileID: 7043974051798746696}
   joint: {fileID: 7043974051997845181}
@@ -96,8 +98,13 @@ MonoBehaviour:
   springForce: 350
   inputStrength: 8
   initWobbliness: 0.5
+  flingThreshhold: 0.9
   pullingDrag: 12
   normalDrag: 1
+  onFling:
+    m_PersistentCalls:
+      m_Calls: []
+  forceVector: {x: 0, y: 0, z: 0}
 --- !u!1 &7043974051035770401
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +160,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e052a258183f4f4468c56a642bf59f5b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -250,6 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b424b41f41d9e7429bb3c5296a25754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   speedMultiplier: 1
   frameRate: 12
   realTime: 0

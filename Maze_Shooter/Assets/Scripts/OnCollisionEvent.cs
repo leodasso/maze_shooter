@@ -12,6 +12,9 @@ public class OnCollisionEvent : EffectsBase
     [ToggleLeft, Tooltip("Spawn an effect at the collision point? If not, you can ignore " +
                          " the effectPrefab, Lifetime, and Delay properties."), PropertyOrder(-999)]
     public bool spawnEffect;
+
+	[SerializeField]
+	List<string> tagsToIgnore;
     
     [Tooltip("For collisions within this velocity range, the events will trigger"), MinMaxSlider(0, 250, true)]
     public Vector2 velocityRange = new Vector2(0, 25);
@@ -24,6 +27,9 @@ public class OnCollisionEvent : EffectsBase
 
     void OnCollisionEnter(Collision other)
     {
+		if (tagsToIgnore.Contains(other.gameObject.tag))
+			return;
+
 		if (debug) Debug.Log(other.gameObject.name + " collided with " + gameObject.name);
 
         if (!Math.LayerMaskContainsLayer(triggeringLayers, other.collider.gameObject.layer)) {

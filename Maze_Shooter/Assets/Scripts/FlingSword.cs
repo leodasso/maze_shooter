@@ -8,6 +8,13 @@ public class FlingSword : MonoBehaviour
 
 	public new Rigidbody rigidbody;
 
+	public SpriteRenderer aimIndicator;
+
+	public float maxAim = 10;
+
+	public AnimationCurve aimIndicatorAlpha = AnimationCurve.Linear(0, 0, 1, 1);
+
+	[Space]
 	public float flingSpeed = 10;
 	[Tooltip("When it hits a terrain or other object, how high it bounces")]
 	public float bounceHeight = 10;
@@ -29,6 +36,12 @@ public class FlingSword : MonoBehaviour
     {
 		if (rubberBand)
         	flingDirection = rubberBand.forceVector;
+
+		if (aimIndicator) {
+			aimIndicator.transform.localPosition = flingDirection.normalized * maxAim;
+			float normalizedAimPower = rubberBand.forceVector.magnitude;
+			aimIndicator.color = new Color(aimIndicator.color.r, aimIndicator.color.g, aimIndicator.color.b, aimIndicatorAlpha.Evaluate(normalizedAimPower));
+		}
     }
 
 	public void Bounce() 
