@@ -38,7 +38,7 @@ public class Hazard : ContactBase
         IDestructible destructible = other.GetComponent<IDestructible>();
 
 		if (debug)
-			Debug.Log(name + " dealing damage via to trigger " + other.name);
+			Debug.Log(name + " dealing damage via OnTriggerAction to " + other.name);
 
 
 		if (destructible != null) {

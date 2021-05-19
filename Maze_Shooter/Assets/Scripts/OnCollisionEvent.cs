@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using  Sirenix.OdinInspector;
 
-[TypeInfoBox("Can call an event when this object collides with other 2D objects. Optionally can instantiate" + 
+[TypeInfoBox("Can call an event when this object collides with other objects. Optionally can instantiate" + 
              " an effect at the collision point.")]
 public class OnCollisionEvent : EffectsBase
 {
@@ -24,11 +24,16 @@ public class OnCollisionEvent : EffectsBase
 
     void OnCollisionEnter(Collision other)
     {
-        if (!Math.LayerMaskContainsLayer(triggeringLayers, other.collider.gameObject.layer)) return;
+		if (debug) Debug.Log(other.gameObject.name + " collided with " + gameObject.name);
 
+        if (!Math.LayerMaskContainsLayer(triggeringLayers, other.collider.gameObject.layer)) {
+			if (debug) Debug.Log("Layer of " + other.collider.gameObject.name + " isn't in my layer mask. ", gameObject);
+			return;
+		}
         float vel = other.relativeVelocity.magnitude;
-        Debug.Log("Collisions velocity was " + vel);
+        if (debug) Debug.Log("   Collisions velocity was " + vel);
         if (vel < velocityRange.x || vel > velocityRange.y) return;
+        if (debug) Debug.Log("   Success!");
 
         if (spawnEffect)
             InstantiateEffect(other.contacts[0].point);
