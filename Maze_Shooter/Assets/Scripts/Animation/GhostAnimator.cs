@@ -5,18 +5,13 @@ using ShootyGhost;
 using Sirenix.OdinInspector;
 
 [AddComponentMenu("Animation/Ghost Animator")]
-public class GhostAnimator : MonoBehaviour
+public class GhostAnimator : CreatureAnimator
 {
-	public SpriteRenderer spriteRenderer;
-	public SpriteAnimationPlayer animationPlayer;
-	public new Rigidbody rigidbody;
-	public Haunter haunter;
-	public SpriteAnimation idle;
-	public SpriteAnimation run;
 	public SpriteAnimation appear;
-	public float idleSpeed = .25f;
 
-	bool _playingAppearAnim;
+	[Space]
+	public SpriteRenderer spriteRenderer;
+	public new Rigidbody rigidbody;
 
 	[ButtonGroup]
 	public void Hide() 
@@ -27,24 +22,7 @@ public class GhostAnimator : MonoBehaviour
 	[ButtonGroup]
 	public void Appear() 
 	{
-		_playingAppearAnim = true;
-		animationPlayer.PlayClipFromBeginning(appear, FinishAppearAnimation);
+		OverrideAnimImmediate(appear);
 		spriteRenderer.enabled = true;
 	}
-
-	void FinishAppearAnimation() 
-	{
-		_playingAppearAnim = false;
-	}
-
-
-    // Update is called once per frame
-    void Update()
-    {
-		if (haunter.ghostState == GhostState.Normal && !_playingAppearAnim) 
-		{
-			animationPlayer.spriteAnimation =
-				rigidbody.velocity.magnitude > idleSpeed ? run : idle;
-		}
-    }
 }

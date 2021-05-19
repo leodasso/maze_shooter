@@ -1,20 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using Rewired;
 using Arachnid;
-using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
 namespace ShootyGhost
 {
-    public enum GhostState
-    {
-        Normal = 0, 
-        Targeting = 1,     // searching for a target to haunt
-        Haunting = 2,      // currently controlling a hauntable thing
-    }
-
     public enum HauntTransition
     {
         In,    // Moving into the haunted thing
@@ -35,9 +26,6 @@ namespace ShootyGhost
 		[Tooltip("The max distance you can haunt")]
         public FloatReference hauntDistance;
 
-        [Tooltip("The cooldown for returning to targeting mode once it's exited")]
-        public FloatReference targetingModeCooldown;
-
 		[Tooltip("The time it takes to move the haunt trigger through the full animation")]
         public FloatReference hauntAnimDuration;
 
@@ -48,18 +36,10 @@ namespace ShootyGhost
 		[SerializeField, Tooltip("Ref to my capsule collider. Used when casting to return from haunt")]
 		new CapsuleCollider collider;
 
-        [ReadOnly]
-        public GhostState ghostState = GhostState.Normal;
-
-
         /// <summary> The actual hauntable currently being controlled/haunted </summary>
         [Tooltip("The actual hauntable currently being controlled/haunted")]
         [ReadOnly]
         public Hauntable haunted;
-        
-        [Tooltip("Delay between a successful haunt and actually placing this object inside" +
-                                   " the haunted transform.")]
-        public float hauntMovementDelay = .25f;
         
         [Range(0, 1), Space]
         [Tooltip("When 'exiting' a haunted thing, the haunted object blows up like a balloon, about to pop. The amount it's" +
@@ -78,17 +58,10 @@ namespace ShootyGhost
 		[Tooltip("This component calls events: beginHauntTargeting, endHauntTargeting, haunt, endHaunt")]
 		public PlayMakerFSM playMaker;
 
-        Rigidbody _rigidbody;
-        float _targetingModeTimer = 0;
         GameObject _indicator;
-
 		Vector2 _moveInput;
 		Vector2 _fireInput;
-
 		Vector3 _hauntDirection = Vector3.right;
-
-        bool CanBeginHauntTargeting => ghostState == GhostState.Normal && _targetingModeTimer <= 0;
-        bool CanHaunt => ghostState == GhostState.Targeting;
 
 		/// <summary>
 		/// Returns the direction that the haunty ghost will shoot towards if activated (based on player input)
@@ -106,8 +79,6 @@ namespace ShootyGhost
         void Start()
         {
             _player = ReInput.players.GetPlayer(0);
-            _rigidbody = GetComponent<Rigidbody>();
-            // hauntStars = savedHauntStars.GetValue();
 			ResetHauntTrigger();
         }
 
@@ -117,51 +88,48 @@ namespace ShootyGhost
 			_fireInput = new Vector2(_player.GetAxis("fireX"), _player.GetAxis("fireY"));
 		}
 
+
         // Update is called once per frame
         void Update()
         {
             if (_player == null) return;
-
 			RefreshInput();
+            if (_player.GetButtonDown("haunt") || _fireInput.magnitude > .25f)
+				playMaker.SendEvent("beginHauntTargeting");
+        }
 
-            // Cooldown for targeting mode entry. Prevents player from spamming targeting mode quickly
-            if (_targetingModeTimer >= 0)
-                _targetingModeTimer -= Time.unscaledDeltaTime;
+		public void ClearHauntBurstEffect()
+		{
+			hauntBurstIntensity = 0;
+            hauntBurstIntensityRef.Value = hauntBurstIntensity;
+		}
 
 
-            // Input for entering haunt targeting mode
-            if (HauntRequested() && CanBeginHauntTargeting)
-				BeginHauntTargeting();
-
-            if (ghostState == GhostState.Haunting)
-            {
-                if (haunted)
-                    transform.position = haunted.transform.position;
-            }
-            
-            // Input for leaving a haunted object. The player must hold down 
-            // the haunt button until intensity reaches 1 to exit.
+		// Input for leaving a haunted object. The player must hold down 
+		// the haunt button until intensity reaches 1 to exit.
+		public void CheckForUnHauntInput()
+		{
             if (CanUnHaunt() && _player.GetButton("haunt"))
             {
                 hauntBurstIntensity += Time.unscaledDeltaTime * 2;
                 if (hauntBurstIntensity >= 1)
                     EndHaunt();
-            }
-            else hauntBurstIntensity = 0;
 
-            hauntBurstIntensityRef.Value = hauntBurstIntensity;
-        }
+				hauntBurstIntensityRef.Value = hauntBurstIntensity;
+            }
+			else ClearHauntBurstEffect();
+		}
+
+
+		public void MatchHauntedPosition()
+		{
+			transform.position = haunted.transform.position;
+		}
 
 		bool CanUnHaunt() 
 		{
-			if (ghostState != GhostState.Haunting) return false;
 			if (haunted && !haunted.allowManualExit) return false;
 			return true;
-		}
-
-		bool HauntRequested() 
-		{
-			return _player.GetButtonDown("haunt") || _fireInput.magnitude > .25f;
 		}
 
 		public void AnimateHauntTarget() 
@@ -185,18 +153,7 @@ namespace ShootyGhost
 				hauntTrigger.transform.localPosition = Vector3.Lerp(Vector3.zero, finalLocalPos, progress);
 				yield return null;
 			}
-
 			ResetHauntTrigger();
-
-		}
-
-		/// <summary>
-		/// If no hauntable was caught in the trigger by the end of the animation,
-		/// just return to normal mode
-		/// </summary>
-		public void TryReturnToNormal() 
-		{
-			if (ghostState == GhostState.Targeting) EndHauntTargeting();
 		}
 
 		void ResetHauntTrigger() 
@@ -205,52 +162,20 @@ namespace ShootyGhost
 			hauntTrigger.transform.localPosition = Vector3.zero;
 		}
 
-
-        /// <summary>
-        /// Quits all forms of haunting, whether its targeting or actively haunting a target
-        /// </summary>
-        void QuitHaunting()
-        {
-            if (ghostState == GhostState.Haunting)
-                EndHaunt();
-            else EndHauntTargeting();
-        }
-
-
-        /// <summary>
-        /// Haunt targeting is the state where time slows down
-        /// as the player searches for an object or enemy to haunt.
-        /// </summary>
-        void BeginHauntTargeting()
-        {
-            ghostState = GhostState.Targeting;
-			playMaker.SendEvent("beginHauntTargeting");
-        }
-
-        
-        void EndHauntTargeting()
-        {
-            if (_indicator) 
-                Destroy(_indicator);
-            
-			ghostState = GhostState.Normal;
-            
-			playMaker.SendEvent("endHauntTargeting");
-            _targetingModeTimer = targetingModeCooldown.Value;
-        }
+		public void MigrateHaunt(Hauntable newHauntable) 
+		{
+			BeginHaunt(newHauntable);
+		}
 
         public void BeginHaunt(Hauntable newHaunted)
         {
 			ResetHauntTrigger();
             haunted = newHaunted;
             playMaker.SendEvent("haunt");
-            _rigidbody.isKinematic = true;
 
 			newHaunted.haunter = this;
 			newHaunted.AttemptHaunt(this);
-            ghostState = GhostState.Haunting;
         }
-
 
         /// <summary>
         /// Returns the ghost from posessing whatever it is currently haunting to its true form.
@@ -282,17 +207,10 @@ namespace ShootyGhost
                 haunted.OnUnHaunted();
             }
             
-            ghostState = GhostState.Normal;
 			playMaker.FsmVariables.GetFsmFloat("transitionDuration").Value = transitionDuration + .05f;
-            playMaker.SendEvent("endHaunt");
+			playMaker.SendEvent("endHaunt");
             haunted = null;
         }
-
-
-		public void MigrateHaunt(Hauntable newHauntable) {
-			BeginHaunt(newHauntable);
-		}
-
         
         ArcMover SpawnTransitionObject(HauntTransition transitionType, Vector3 start, GameObject destination, float duration = .45f)
         {
@@ -310,13 +228,9 @@ namespace ShootyGhost
             return arcMover;
         }
         
-
-        // Make sure we're not leaving anything hanging if this is destroyed during targeting
         void OnDestroy()
         {
-            // savedHauntStars.Save(hauntStars);
-            playMaker.SendEvent("endHaunt");
-            hauntBurstIntensityRef.Value = 0;
+            ClearHauntBurstEffect();
         }
     }
 }

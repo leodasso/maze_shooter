@@ -268,6 +268,37 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   comment: 
+--- !u!1 &2140167060680705257
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1466386840609618297}
+  m_Layer: 9
+  m_Name: effects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1466386840609618297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140167060680705257}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 124776362579424783}
+  m_Father: {fileID: 3596233078318729541}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2524650446538718891
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,6 +523,7 @@ Transform:
   - {fileID: 7276455702296974480}
   - {fileID: 326339311406208306}
   - {fileID: 1841089000175383003}
+  - {fileID: 1466386840609618297}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -556,6 +588,7 @@ MonoBehaviour:
       m_Calls: []
   target: {fileID: 0}
   useTargetFinder: 0
+  updateTargetDirectionEveryFrame: 1
   targetFinder: {fileID: 0}
 --- !u!114 &3490914254658770499
 MonoBehaviour:
@@ -742,6 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de6c16f983620a4da43f9e72b293064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   effectPrefab: {fileID: 1861621852070230, guid: 12967c0110b77c243a38077c43ebae61,
     type: 3}
   lifetime: 5
@@ -758,6 +792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97e8ed2baea5324b9e68bb303521efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   effectPrefab: {fileID: 1683140746699096, guid: 12cf7c031b3d05b478b63e1682982904,
     type: 3}
   lifetime: 5
@@ -782,10 +817,6 @@ MonoBehaviour:
     useConstant: 0
     constantValue: 10
     valueObject: {fileID: 0}
-  targetingModeCooldown:
-    useConstant: 1
-    constantValue: 0
-    valueObject: {fileID: 11400000, guid: 55649e3d357d6a34da406c464c431cb8, type: 2}
   hauntAnimDuration:
     useConstant: 0
     constantValue: 0.5
@@ -794,9 +825,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 33025
   collider: {fileID: 3594317241385997712}
-  ghostState: 0
   haunted: {fileID: 0}
-  hauntMovementDelay: 0.1
   hauntBurstIntensity: 0
   hauntBurstIntensityRef: {fileID: 11400000, guid: a47f501d351525c46bb4c6976b6573c4,
     type: 2}
@@ -857,15 +886,15 @@ MonoBehaviour:
     dataVersion: 2
     usedInTemplate: {fileID: 0}
     name: FSM
-    startState: default
+    startState: default plus cooldown
     states:
     - name: default
       description: 
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 139
-        y: 106
+        x: 402
+        y: 113
         width: 168
         height: 32
       isBreakpoint: 0
@@ -881,137 +910,51 @@ MonoBehaviour:
         linkConstraint: 0
         colorIndex: 0
       actionData:
-        actionNames:
-        - HutongGames.PlayMaker.Actions.EnableBehaviour
-        - HutongGames.PlayMaker.Actions.SetLayer
-        - SetMoveSpeedMultiplier
-        - HutongGames.PlayMaker.Actions.EnableBehaviour
-        customNames:
-        - 
-        - 
-        - 
-        - Enable Collider
-        actionEnabled: 01010101
-        actionIsOpen: 01010101
-        actionStartIndex: 0000000005000000070000000a000000
-        actionHashCodes: 3a4cad052f7290007d042b043a4cad05
-        unityObjectParams:
-        - {fileID: 3594317241385997712}
-        - {fileID: 3196075495648318836}
-        - {fileID: 3594317241385997712}
+        actionNames: []
+        customNames: []
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
+        unityObjectParams: []
         fsmGameObjectParams: []
-        fsmOwnerDefaultParams:
-        - ownerOption: 0
-          gameObject:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 0}
-        - ownerOption: 0
-          gameObject:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 0}
-        - ownerOption: 0
-          gameObject:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 0}
+        fsmOwnerDefaultParams: []
         animationCurveParams: []
         functionCallParams: []
         fsmTemplateControlParams: []
         fsmEventTargetParams: []
         fsmPropertyParams: []
         layoutOptionParams: []
-        fsmStringParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 
+        fsmStringParams: []
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
         fsmEnumParams: []
         fsmFloatParams: []
         fsmIntParams: []
-        fsmBoolParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 1
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 1
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
+        fsmBoolParams: []
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData: 090000000000803f00
+        byteData: 
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 140000001200000005000000110000001100000014000000000000000500000002000000010000001400000012000000050000001100000011000000
-        paramName:
-        - gameObject
-        - behaviour
-        - component
-        - enable
-        - resetOnExit
-        - gameObject
-        - layer
-        - mover
-        - multiplier
-        - resetOnExit
-        - gameObject
-        - behaviour
-        - component
-        - enable
-        - resetOnExit
-        paramDataPos: 000000000000000000000000000000000100000001000000000000000100000004000000080000000200000001000000020000000200000003000000
-        paramByteDataSize: 000000000000000000000000000000000000000000000000040000000000000004000000010000000000000000000000000000000000000000000000
+        paramDataType: 
+        paramName: []
+        paramDataPos: 
+        paramByteDataSize: 
     - name: targeting mode
       description: the ghost 'dashes' in the direction the player presses
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 383
-        y: 125
+        x: 686
+        y: 221
         width: 200
         height: 48
       isBreakpoint: 0
@@ -1022,7 +965,7 @@ MonoBehaviour:
           name: endHauntTargeting
           isSystemEvent: 0
           isGlobal: 0
-        toState: return to default
+        toState: reform
         linkStyle: 0
         linkConstraint: 0
         colorIndex: 0
@@ -1041,31 +984,23 @@ MonoBehaviour:
         - HutongGames.PlayMaker.Actions.InvokeMethod
         - SetMoveSpeedMultiplier
         - HutongGames.PlayMaker.Actions.InvokeMethod
-        - HutongGames.PlayMaker.Actions.InvokeMethod
+        - HutongGames.PlayMaker.Actions.Wait
         customNames:
         - 
         - 
         - Animate Haunt Target
         - 
-        - 
         - hide main ghost sprite
+        - 
         actionEnabled: 010101010101
         actionIsOpen: 010101000101
         actionStartIndex: 0000000001000000030000000a0000000d00000014000000
-        actionHashCodes: 7f1a71032f72900059f9a0047d042b0459f9a00459f9a004
+        actionHashCodes: 7f1a71032f72900059f9a0047d042b0459f9a00448c01101
         unityObjectParams:
         - {fileID: 11400000, guid: ed93eef6b07c8f541a90564924082ee8, type: 2}
         - {fileID: 3196075495648318836}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
-        - ownerOption: 0
-          gameObject:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 0}
         - ownerOption: 0
           gameObject:
             useVariable: 0
@@ -1114,18 +1049,6 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: ShootyGhost.Haunter
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: TryReturnToNormal
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
           value: GhostAnimator
         - useVariable: 0
           name: 
@@ -1155,18 +1078,6 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: 0.5
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 1
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
           value: 0
         - useVariable: 0
           name: 
@@ -1174,20 +1085,14 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 1
+        - useVariable: 1
+          name: hauntDashTime
+          tooltip: duration of a haunt dash
+          showInInspector: 0
+          networkSync: 0
+          value: 0.75
         fsmIntParams: []
         fsmBoolParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
         - useVariable: 0
           name: 
           tooltip: 
@@ -1217,13 +1122,14 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
-        byteData: 0c0000000000000000
+        stringParams:
+        - endHauntTargeting
+        byteData: 0c000000000000000000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 0500000014000000000000001400000012000000120000000f000000110000000f000000110000000500000002000000010000001400000012000000120000000f000000110000000f000000110000001400000012000000120000000f000000110000000f00000011000000
+        paramDataType: 0500000014000000000000001400000012000000120000000f000000110000000f000000110000000500000002000000010000001400000012000000120000000f000000110000000f000000110000000f0000001700000001000000
         paramName:
         - gameEvent
         - gameObject
@@ -1245,23 +1151,21 @@ MonoBehaviour:
         - repeating
         - repeatDelay
         - cancelOnExit
-        - gameObject
-        - behaviour
-        - methodName
-        - delay
-        - repeating
-        - repeatDelay
-        - cancelOnExit
-        paramDataPos: 000000000000000000000000010000000000000001000000000000000000000001000000010000000100000004000000080000000200000002000000030000000200000002000000030000000300000003000000040000000500000004000000040000000500000005000000
-        paramByteDataSize: 000000000000000004000000000000000000000000000000000000000000000000000000000000000000000004000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-    - name: return to default
-      description: 
+        - time
+        - finishEvent
+        - realTime
+        paramDataPos: 0000000000000000000000000100000000000000010000000000000000000000010000000100000001000000040000000800000002000000020000000300000002000000020000000300000003000000040000000000000009000000
+        paramByteDataSize: 0000000000000000040000000000000000000000000000000000000000000000000000000000000000000000040000000100000000000000000000000000000000000000000000000000000000000000000000000000000001000000
+    - name: reform
+      description: 'play animation of ghost coming out of ground
+
+'
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 149
-        y: 202
-        width: 138
+        x: 68
+        y: 252
+        width: 190
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -1271,7 +1175,7 @@ MonoBehaviour:
           name: FINISHED
           isSystemEvent: 1
           isGlobal: 0
-        toState: default
+        toState: default plus cooldown
         linkStyle: 0
         linkConstraint: 1
         colorIndex: 0
@@ -1419,8 +1323,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 462
-        y: 283
+        x: 632
+        y: 418
         width: 200
         height: 32
       isBreakpoint: 0
@@ -1441,25 +1345,22 @@ MonoBehaviour:
         - InvokeGameEvent
         - HutongGames.PlayMaker.Actions.EnableBehaviour
         - HutongGames.PlayMaker.Actions.EnableBehaviour
-        - HutongGames.PlayMaker.Actions.InvokeMethod
-        - HutongGames.PlayMaker.Actions.ActivateGameObject
-        - HutongGames.PlayMaker.Actions.EnableBehaviour
+        - HutongGames.PlayMaker.Actions.CallMethod
+        - HutongGames.PlayMaker.Actions.CallMethod
         customNames:
         - 
         - 
-        - 
-        - Disable Collider
-        - main sprite reappear
-        - 
+        - disable player
         - Disable Health
-        actionEnabled: 01010101010101
-        actionIsOpen: 01010101000001
-        actionStartIndex: 000000000200000003000000080000000d0000001400000019000000
-        actionHashCodes: 15264c017f1a71033a4cad053a4cad0559f9a004b2cf10003a4cad05
+        - 
+        - 
+        actionEnabled: 010101010101
+        actionIsOpen: 010101010101
+        actionStartIndex: 000000000200000003000000080000000d00000013000000
+        actionHashCodes: 15264c017f1a71033a4cad053a4cad05ca51e900ca51e900
         unityObjectParams:
         - {fileID: 11400000, guid: 9882b07d380c9ba49a5f7ea2e089e68e, type: 2}
         - {fileID: 3491025872995073933}
-        - {fileID: 3594317241385997712}
         - {fileID: 0}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
@@ -1487,30 +1388,6 @@ MonoBehaviour:
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
-        - ownerOption: 1
-          gameObject:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 3594942849639997181}
-        - ownerOption: 1
-          gameObject:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 3594942849639997181}
-        - ownerOption: 0
-          gameObject:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 0}
         animationCurveParams: []
         functionCallParams: []
         fsmTemplateControlParams: []
@@ -1529,42 +1406,86 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: 
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: GhostAnimator
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: Appear
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
           value: Health
-        fsmObjectParams: []
-        fsmVarParams: []
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: MatchHauntedPosition
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: CheckForUnHauntInput
+        fsmObjectParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          typeName: ShootyGhost.Haunter
+          value: {fileID: 4151602328836940682}
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          typeName: ShootyGhost.Haunter
+          value: {fileID: 4151602328836940682}
+        fsmVarParams:
+        - variableName: 
+          objectType: 
+          useVariable: 0
+          type: -1
+          floatValue: 0
+          intValue: 0
+          boolValue: 0
+          stringValue: 
+          vector4Value: {x: 0, y: 0, z: 0, w: 0}
+          objectReference: {fileID: 0}
+          arrayValue:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            type: -1
+            objectTypeName: 
+            floatValues: []
+            intValues: 
+            boolValues: 
+            stringValues: []
+            vector4Values: []
+            objectReferences: []
+        - variableName: 
+          objectType: 
+          useVariable: 0
+          type: -1
+          floatValue: 0
+          intValue: 0
+          boolValue: 0
+          stringValue: 
+          vector4Value: {x: 0, y: 0, z: 0, w: 0}
+          objectReference: {fileID: 0}
+          arrayValue:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            type: -1
+            objectTypeName: 
+            floatValues: []
+            intValues: 
+            boolValues: 
+            stringValues: []
+            vector4Values: []
+            objectReferences: []
         fsmArrayParams: []
         fsmEnumParams: []
-        fsmFloatParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 1
+        fsmFloatParams: []
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 0
@@ -1597,54 +1518,20 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 0
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData: 0000
-        arrayParamSizes: 
-        arrayParamTypes: []
+        byteData: 01000100
+        arrayParamSizes: 0000000000000000
+        arrayParamTypes:
+        - HutongGames.PlayMaker.FsmVar
+        - HutongGames.PlayMaker.FsmVar
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 140000001100000005000000140000001200000005000000110000001100000014000000120000000500000011000000110000001400000012000000120000000f000000110000000f0000001100000014000000110000001100000001000000010000001400000012000000050000001100000011000000
+        paramDataType: 1400000011000000050000001400000012000000050000001100000011000000140000001200000005000000110000001100000018000000120000000c00000027000000010000000100000018000000120000000c000000270000000100000001000000
         paramName:
         - gameObject
         - isKinematic
@@ -1659,32 +1546,27 @@ MonoBehaviour:
         - component
         - enable
         - resetOnExit
-        - gameObject
         - behaviour
         - methodName
-        - delay
-        - repeating
-        - repeatDelay
-        - cancelOnExit
-        - gameObject
-        - activate
-        - recursive
-        - resetOnExit
+        - parameters
+        - storeResult
         - everyFrame
-        - gameObject
+        - manualUI
         - behaviour
-        - component
-        - enable
-        - resetOnExit
-        paramDataPos: 00000000000000000000000001000000000000000100000001000000020000000200000001000000020000000300000004000000030000000200000003000000000000000500000001000000060000000400000007000000080000000000000001000000050000000400000003000000090000000a000000
-        paramByteDataSize: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000010000000000000000000000000000000000000000000000
+        - methodName
+        - parameters
+        - storeResult
+        - everyFrame
+        - manualUI
+        paramDataPos: 00000000000000000000000001000000000000000100000001000000020000000200000001000000020000000300000004000000000000000200000000000000000000000000000001000000010000000300000001000000010000000200000003000000
+        paramByteDataSize: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000001000000000000000000000000000000000000000100000001000000
     - name: wait for transition
       description: wait for the transition object to complete its animation
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 210.70312
-        y: 287.39844
+        x: 302.70312
+        y: 448.39844
         width: 200
         height: 32
       isBreakpoint: 0
@@ -1702,8 +1584,8 @@ MonoBehaviour:
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Actions.Wait
-        - InvokeGameEvent
         - HutongGames.PlayMaker.Actions.PlayAudioAction
+        - HutongGames.PlayMaker.Actions.CallMethod
         customNames:
         - 
         - 
@@ -1711,9 +1593,8 @@ MonoBehaviour:
         actionEnabled: 010101
         actionIsOpen: 010101
         actionStartIndex: 000000000300000004000000
-        actionHashCodes: 48c011017f1a71038d4bb503
-        unityObjectParams:
-        - {fileID: 11400000, guid: db5779892c7dd924197a09407136f5a4, type: 2}
+        actionHashCodes: 48c011018d4bb503ca51e900
+        unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
         - ownerOption: 1
@@ -1730,16 +1611,53 @@ MonoBehaviour:
         fsmEventTargetParams: []
         fsmPropertyParams: []
         layoutOptionParams: []
-        fsmStringParams: []
-        fsmObjectParams: []
-        fsmVarParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: ClearHauntBurstEffect
+        fsmObjectParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          typeName: ShootyGhost.Haunter
+          value: {fileID: 4151602328836940682}
+        fsmVarParams:
+        - variableName: 
+          objectType: 
+          useVariable: 0
+          type: -1
+          floatValue: 0
+          intValue: 0
+          boolValue: 0
+          stringValue: 
+          vector4Value: {x: 0, y: 0, z: 0, w: 0}
+          objectReference: {fileID: 0}
+          arrayValue:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            type: -1
+            objectTypeName: 
+            floatValues: []
+            intValues: 
+            boolValues: 
+            stringValues: []
+            vector4Values: []
+            objectReferences: []
         fsmArrayParams: []
         fsmEnumParams: []
         fsmFloatParams:
         - useVariable: 1
           name: transitionDuration
           tooltip: 
-          showInInspector: 0
+          showInInspector: 1
           networkSync: 0
           value: 0.3
         fsmIntParams: []
@@ -1751,27 +1669,33 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - FINISHED
-        byteData: 01
-        arrayParamSizes: 
-        arrayParamTypes: []
+        byteData: 010000
+        arrayParamSizes: 00000000
+        arrayParamTypes:
+        - HutongGames.PlayMaker.FsmVar
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 0f00000017000000010000000500000014000000
+        paramDataType: 0f00000017000000010000001400000018000000120000000c000000270000000100000001000000
         paramName:
         - time
         - finishEvent
         - realTime
-        - gameEvent
         - gameObject
-        paramDataPos: 0000000000000000000000000000000000000000
-        paramByteDataSize: 0000000000000000010000000000000000000000
+        - behaviour
+        - methodName
+        - parameters
+        - storeResult
+        - everyFrame
+        - manualUI
+        paramDataPos: 00000000000000000000000000000000000000000000000000000000000000000100000002000000
+        paramByteDataSize: 00000000000000000100000000000000000000000000000000000000000000000100000001000000
     - name: haunt exit
       description: 
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 56.789062
-        y: 274.78906
+        x: 63.5625
+        y: 398.78906
         width: 100
         height: 32
       isBreakpoint: 0
@@ -1782,18 +1706,19 @@ MonoBehaviour:
           name: FINISHED
           isSystemEvent: 1
           isGlobal: 0
-        toState: default
+        toState: reform
         linkStyle: 0
         linkConstraint: 1
         colorIndex: 0
       actionData:
         actionNames:
-        - HutongGames.PlayMaker.Actions.ActivateGameObject
         - HutongGames.PlayMaker.Actions.SetIsKinematic
         - HutongGames.PlayMaker.Actions.SetColliderIsTrigger
         - HutongGames.PlayMaker.Actions.EnableBehaviour
         - HutongGames.PlayMaker.Actions.EnableBehaviour
         - HutongGames.PlayMaker.Actions.PlayAudioAction
+        - HutongGames.PlayMaker.Actions.CallMethod
+        - InvokeGameEvent
         customNames:
         - 
         - 
@@ -1801,23 +1726,17 @@ MonoBehaviour:
         - 
         - 
         - 
-        actionEnabled: 010101010101
-        actionIsOpen: 000001010101
-        actionStartIndex: 0000000005000000070000000a0000000f00000014000000
-        actionHashCodes: b2cf100015264c018d1e88033a4cad053a4cad058d4bb503
+        - 
+        actionEnabled: 01010101010101
+        actionIsOpen: 01010101010101
+        actionStartIndex: 0000000002000000050000000a0000000f0000001000000016000000
+        actionHashCodes: 15264c018d1e88033a4cad053a4cad058d4bb503ca51e9007f1a7103
         unityObjectParams:
         - {fileID: 3491025872995073933}
         - {fileID: 0}
+        - {fileID: 11400000, guid: db5779892c7dd924197a09407136f5a4, type: 2}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
-        - ownerOption: 1
-          gameObject:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 3594942849639997181}
         - ownerOption: 0
           gameObject:
             useVariable: 0
@@ -1877,25 +1796,50 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: Health
-        fsmObjectParams: []
-        fsmVarParams: []
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: InvokeEffect
+        fsmObjectParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          typeName: OnTriggerEffect
+          value: {fileID: 1030660432068361508}
+        fsmVarParams:
+        - variableName: 
+          objectType: 
+          useVariable: 0
+          type: -1
+          floatValue: 0
+          intValue: 0
+          boolValue: 0
+          stringValue: 
+          vector4Value: {x: 0, y: 0, z: 0, w: 0}
+          objectReference: {fileID: 0}
+          arrayValue:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            type: -1
+            objectTypeName: 
+            floatValues: []
+            intValues: 
+            boolValues: 
+            stringValues: []
+            vector4Values: []
+            objectReferences: []
         fsmArrayParams: []
         fsmEnumParams: []
         fsmFloatParams: []
         fsmIntParams: []
         fsmBoolParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 1
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
         - useVariable: 0
           name: 
           tooltip: 
@@ -1939,17 +1883,13 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 000000
-        arrayParamSizes: 
-        arrayParamTypes: []
+        arrayParamSizes: 00000000
+        arrayParamTypes:
+        - HutongGames.PlayMaker.FsmVar
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 140000001100000011000000010000000100000014000000110000001400000011000000010000001400000012000000050000001100000011000000140000001200000005000000110000001100000014000000
+        paramDataType: 1400000011000000140000001100000001000000140000001200000005000000110000001100000014000000120000000500000011000000110000001400000018000000120000000c00000027000000010000000100000005000000
         paramName:
-        - gameObject
-        - activate
-        - recursive
-        - resetOnExit
-        - everyFrame
         - gameObject
         - isKinematic
         - gameObject
@@ -1966,8 +1906,219 @@ MonoBehaviour:
         - enable
         - resetOnExit
         - gameObject
-        paramDataPos: 000000000000000001000000000000000100000001000000020000000200000003000000020000000300000000000000000000000400000005000000040000000100000001000000060000000700000005000000
-        paramByteDataSize: 000000000000000000000000010000000100000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+        - behaviour
+        - methodName
+        - parameters
+        - storeResult
+        - everyFrame
+        - manualUI
+        - gameEvent
+        paramDataPos: 0000000000000000010000000100000000000000020000000000000000000000020000000300000003000000010000000100000004000000050000000400000000000000020000000000000000000000010000000200000002000000
+        paramByteDataSize: 0000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000100000000000000
+    - name: default plus cooldown
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 167.5
+        y: 109.5
+        width: 159
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: FINISHED
+          isSystemEvent: 1
+          isGlobal: 0
+        toState: default
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.EnableBehaviour
+        - HutongGames.PlayMaker.Actions.SetLayer
+        - SetMoveSpeedMultiplier
+        - HutongGames.PlayMaker.Actions.EnableBehaviour
+        - HutongGames.PlayMaker.Actions.Wait
+        - HutongGames.PlayMaker.Actions.CallMethod
+        customNames:
+        - 
+        - 
+        - 
+        - Enable Collider
+        - 
+        - 
+        actionEnabled: 010101010101
+        actionIsOpen: 010101010101
+        actionStartIndex: 0000000005000000070000000a0000000f00000012000000
+        actionHashCodes: 3a4cad052f7290007d042b043a4cad0548c01101ca51e900
+        unityObjectParams:
+        - {fileID: 3594317241385997712}
+        - {fileID: 3196075495648318836}
+        - {fileID: 3594317241385997712}
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams: []
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: ClearOverride
+        fsmObjectParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          typeName: GhostAnimator
+          value: {fileID: 529407112023919641}
+        fsmVarParams:
+        - variableName: 
+          objectType: UnityEngine.Object
+          useVariable: 1
+          type: -1
+          floatValue: 0
+          intValue: 0
+          boolValue: 0
+          stringValue: 
+          vector4Value: {x: 0, y: 0, z: 0, w: 0}
+          objectReference: {fileID: 0}
+          arrayValue:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            type: -1
+            objectTypeName: 
+            floatValues: []
+            intValues: 
+            boolValues: 
+            stringValues: []
+            vector4Values: []
+            objectReferences: []
+        fsmArrayParams: []
+        fsmEnumParams: []
+        fsmFloatParams:
+        - useVariable: 1
+          name: hauntCooldown
+          tooltip: cooldown between returning from haunt and haunting again
+          showInInspector: 0
+          networkSync: 0
+          value: 0.8
+        fsmIntParams: []
+        fsmBoolParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        fsmVector2Params: []
+        fsmVector3Params: []
+        fsmColorParams: []
+        fsmRectParams: []
+        fsmQuaternionParams: []
+        stringParams:
+        - FINISHED
+        byteData: 090000000000803f00000000
+        arrayParamSizes: 00000000
+        arrayParamTypes:
+        - HutongGames.PlayMaker.FsmVar
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 1400000012000000050000001100000011000000140000000000000005000000020000000100000014000000120000000500000011000000110000000f000000170000000100000018000000120000000c000000270000000100000001000000
+        paramName:
+        - gameObject
+        - behaviour
+        - component
+        - enable
+        - resetOnExit
+        - gameObject
+        - layer
+        - mover
+        - multiplier
+        - resetOnExit
+        - gameObject
+        - behaviour
+        - component
+        - enable
+        - resetOnExit
+        - time
+        - finishEvent
+        - realTime
+        - behaviour
+        - methodName
+        - parameters
+        - storeResult
+        - everyFrame
+        - manualUI
+        paramDataPos: 000000000000000000000000000000000100000001000000000000000100000004000000080000000200000001000000020000000200000003000000000000000000000009000000000000000200000000000000000000000a0000000b000000
+        paramByteDataSize: 000000000000000000000000000000000000000000000000040000000000000004000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000100000001000000
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -1993,6 +2144,18 @@ MonoBehaviour:
         showInInspector: 1
         networkSync: 0
         value: 0.3
+      - useVariable: 1
+        name: hauntCooldown
+        tooltip: cooldown between returning from haunt and haunting again
+        showInInspector: 0
+        networkSync: 0
+        value: 0.8
+      - useVariable: 1
+        name: hauntDashTime
+        tooltip: duration of a haunt dash
+        showInInspector: 0
+        networkSync: 0
+        value: 0.75
       intVariables: []
       boolVariables: []
       stringVariables: []
@@ -2009,7 +2172,7 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs: 00000000
+      variableCategoryIDs: 000000000000000000000000
     description: 
     docUrl: 
     showStateLabel: 0
@@ -2347,7 +2510,6 @@ GameObject:
   - component: {fileID: 529407112023919641}
   - component: {fileID: 2790715351501112535}
   - component: {fileID: 1374170497471438033}
-  - component: {fileID: 7650560304715948519}
   m_Layer: 9
   m_Name: body
   m_TagString: Untagged
@@ -2432,14 +2594,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36991b5ec351624d9f107cd87edbe4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 3680872684990957169}
+  idleSpeed: 0.3
   animationPlayer: {fileID: 2790715351501112535}
-  rigidbody: {fileID: 3594317241385997713}
-  haunter: {fileID: 4151602328836940682}
+  velocitySource:
+    source: 1
+    customDirection: {x: 0, y: 0, z: 0}
+    rigidbody: {fileID: 0}
+    mover: {fileID: 3196075495648318836}
+    pseudoVelocity: {fileID: 0}
+  overrideAnim: {fileID: 0}
+  spawn: {fileID: 0}
   idle: {fileID: 11400000, guid: f5f309166b8850949beb97c36a97298a, type: 2}
   run: {fileID: 11400000, guid: 0abce78cfa57f7842a44f360b1e7de60, type: 2}
   appear: {fileID: 11400000, guid: 556ffb0308a84184c92d2d9649415173, type: 2}
-  idleSpeed: 1.5
+  spriteRenderer: {fileID: 3680872684990957169}
+  rigidbody: {fileID: 3594317241385997713}
 --- !u!114 &2790715351501112535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2452,6 +2621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b424b41f41d9e7429bb3c5296a25754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   speedMultiplier: 1
   frameRate: 10
   realTime: 0
@@ -2506,22 +2676,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7650560304715948519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3594942849639997181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0782ae9df3ff5ae4ab9e6e1985a49bf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectPrefab: {fileID: 8235049919360912495, guid: eb89d813987295f48aa4df9253e1e2e0,
-    type: 3}
-  lifetime: 5
-  delay: 0
 --- !u!1 &3647332056736414577
 GameObject:
   m_ObjectHideFlags: 0
@@ -2825,6 +2979,54 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   comment: 
+--- !u!1 &8635325111391743664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 124776362579424783}
+  - component: {fileID: 1030660432068361508}
+  m_Layer: 9
+  m_Name: reappear effect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &124776362579424783
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8635325111391743664}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1466386840609618297}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1030660432068361508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8635325111391743664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de6c16f983620a4da43f9e72b293064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  effectPrefab: {fileID: 8235049919360912495, guid: eb89d813987295f48aa4df9253e1e2e0,
+    type: 3}
+  lifetime: 5
+  delay: 0
 --- !u!1 &8762180183152181880
 GameObject:
   m_ObjectHideFlags: 0
