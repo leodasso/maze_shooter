@@ -125,6 +125,20 @@ public class RubberBand : MonoBehaviour, IControllable
 		}
 	}
 
+	void OnDisable() 
+	{
+		FullReset();
+	}
+
+
+	void FullReset() 
+	{
+		AllowFling();
+		pullVector = Vector3.zero;
+		radius = 0;
+		_input = Vector2.zero;
+	}
+
 	void InvokeFling()
 	{
 		canFling = false;
@@ -151,11 +165,8 @@ public class RubberBand : MonoBehaviour, IControllable
 
 	public void OnPlayerControlEnabled(bool isEnabled)
 	{
-		if (!isEnabled) {
-			_input = Vector2.zero;
-			pullVector = Vector3.zero;
-		}
-
+		if (!isEnabled) 
+			FullReset();
 	}
 
 	public void ApplyLeftStickInput(Vector2 input) 
