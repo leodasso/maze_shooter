@@ -31,12 +31,14 @@ namespace Synthii {
 		[ButtonGroup]
 		public void Enter() 
 		{
+			if (isGlobal) return;
 			MusicPlayer.Play(this);
 		}
 
 		[ButtonGroup]
 		public void Exit()
 		{
+			if (isGlobal) return;
 			MusicPlayer.Stop(this);
 		}
 
