@@ -211,6 +211,14 @@ namespace ShootyGhost
 			playMaker.SendEvent("endHaunt");
             haunted = null;
         }
+
+		/// <summary>
+		/// Doesn't do all unhaunt behaviors, just sends events to haunted (if any)
+		/// </summary>
+		public void EndHauntForHaunted() 
+		{
+			if (haunted) haunted.OnUnHaunted();
+		}
         
         ArcMover SpawnTransitionObject(HauntTransition transitionType, Vector3 start, GameObject destination, float duration = .45f)
         {

@@ -12,9 +12,14 @@ using Random = UnityEngine.Random;
              "to give feedback that something bad is going to happen soon.")]
 public class HellSpawner : MonoBehaviour
 {
-    public UnityEvent onEnterDarkness;
-    public UnityEvent onEnterLight;
-    public UnityEvent onGameOver;
+	[Tooltip("Ref to the float value which holds the darkness value.")]
+    public FloatValue darknessLevel;
+
+    [Tooltip("How long can the player be in the darkness before they die?")]
+    public FloatReference timeToDeath;
+
+	[SerializeField]
+	PlayMakerFSM playMaker;
     
     [Space]
     public List<GameObject> evilEyesPrefabs = new List<GameObject>();
@@ -23,12 +28,6 @@ public class HellSpawner : MonoBehaviour
     public GameObject bigEvilEyesPrefab;
     
     public Collection collectionToFollow;
-    
-    [Tooltip("Ref to the float value which holds the darkness value.")]
-    public FloatValue darknessLevel;
-
-    [Tooltip("How long can the player be in the darkness before they die?")]
-    public FloatReference timeToDeath;
     
     [Tooltip("Radius around the player that evil eyes can be spawned.")]
     public float spawnRadius = 10;
@@ -65,9 +64,9 @@ public class HellSpawner : MonoBehaviour
     List<GameObject> _instances = new List<GameObject>();
 
     GameObject _hellSpawnParent;
-    bool _inDarkness;
     float _timeInDarkness;
-    bool _gameOver;
+
+	Vector3 playerPos;
 
     void OnDrawGizmosSelected()
     {
@@ -75,58 +74,43 @@ public class HellSpawner : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, spawnRadius);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (_gameOver) return;
-        CalculateSpawnFrequency();
-        FollowPlayer();
+	void Update()
+	{
+		var player = Player();
+		if (player)
+			playerPos = player.transform.position;
+	}
 
-        if (InDarkness())
-        {
-            // If the player spends too much time in the darkness, it's game over man, game over
-            _timeInDarkness += Time.deltaTime;
-            if (_timeInDarkness >= timeToDeath.Value)
-            {
-                _gameOver = true;
-                SpawnGameOverObject();
-                onGameOver.Invoke();
-            }
-            
-            // Call the event for entering darkness
-            if (!_inDarkness)
-            {
-                _inDarkness = true;
-                onEnterDarkness.Invoke();
-            }
-            
-            spawnDelay -= Time.deltaTime;
-            if (spawnDelay <= 0)
-                Spawn();
-        }
+	public void DarknessUpdate()
+	{
+		CalculateSpawnFrequency();
+        transform.position = playerPos;
 
-        // When the player returns to fully lit areas,
-        // reset the spawn delay so the eye's don't immediately start appearing when they enter darkness.
-        if (InFullLight())
-        {
-            _timeInDarkness = 0;
-            
-            // Call the event for entering light
-            if (_inDarkness)
-            {
-                _inDarkness = false;
-                onEnterLight.Invoke();
-            }
-            
-            spawnDelay = 1;
-            DestroyDemons();
-        }
-    }
+		// If the player spends too much time in the darkness, it's game over man, game over
+		_timeInDarkness += Time.deltaTime;
+		if (_timeInDarkness >= timeToDeath.Value)
+			playMaker.SendEvent("fullDark");
+
+		float normalizedTime = _timeInDarkness / timeToDeath.Value;
+		darknessLevel.Value = normalizedTime;
+		
+		spawnDelay -= Time.deltaTime;
+		if (spawnDelay <= 0)
+			Spawn();
+	}
+
+	public void SetFullLight()
+	{
+		DestroyDemons();
+		darknessLevel.Value = 0;
+		_timeInDarkness = 0;
+		_spawnFrequency = 0;
+	}
 
     /// <summary>
     /// Sequentially destroys all the demons that have been spawned while in the dark.
     /// </summary>
-    void DestroyDemons()
+    public void DestroyDemons()
     {
         if (_instances.Count <= 0) return;
         StartCoroutine(DestroyDemonsSequence());
@@ -153,9 +137,6 @@ public class HellSpawner : MonoBehaviour
 
     void Spawn()
     {
-        // Failsafe so we never spawn evil eyes in the light
-        if (!InDarkness()) return;
-
         // Pick the prefab and a random location, then spawn an instance
         var toSpawn = Math.RandomElementOfList(evilEyesPrefabs);
         Vector3 pos = Random.onUnitSphere * spawnRadius;
@@ -174,35 +155,18 @@ public class HellSpawner : MonoBehaviour
         newInstance.transform.parent = HellSpawnParent().transform;
     }
 
-    void FollowPlayer()
-    {
-        if (!collectionToFollow) return;
+	GameObject Player()
+	{
+		if (!collectionToFollow) return null;
         var firstPlayer = collectionToFollow.GetFirstElement();
-        if (!firstPlayer) return;
-        transform.position = firstPlayer.transform.position;
-    }
+        if (!firstPlayer) return null;
+        return firstPlayer.gameObject;
+	}
 
     void CalculateSpawnFrequency()
     {
-        if (!darknessLevel) return;
-        if (InDarkness())
-        {
-            _spawnFrequency += spawnFrequencyIncreaseSpeed.Value * Time.deltaTime;
-            _spawnFrequency = Mathf.Clamp(_spawnFrequency, minSpawnFrequency, maxSpawnFrequency);
-        }
-        else _spawnFrequency = 0;
-    }
-
-    bool InDarkness()
-    {
-        if (!darknessLevel) return false;
-        return darknessLevel.Value >= .98f;
-    }
-    
-    bool InFullLight()
-    {
-        if (!darknessLevel) return false;
-        return darknessLevel.Value <= .8f;
+		_spawnFrequency += spawnFrequencyIncreaseSpeed.Value * Time.deltaTime;
+		_spawnFrequency = Mathf.Clamp(_spawnFrequency, minSpawnFrequency, maxSpawnFrequency);
     }
 
     GameObject HellSpawnParent()

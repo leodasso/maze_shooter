@@ -111,5 +111,11 @@ namespace Arachnid
 			float remainder = inputAngle % 360;
 			return 360 - remainder;
 		}
+
+
+		public static bool IsInRange(Vector3 vector, float maxRange) 
+		{
+			return vector.sqrMagnitude <= (maxRange * maxRange);
+		}
 	}
 }
