@@ -47,7 +47,12 @@ public class PlayerHealth : HealthPlugin
         }
     }
 
-    public void CheckForCritical()
+	public void ProcessHpChange()
+	{
+		CheckForCritical();
+	}
+
+    void CheckForCritical()
     {
         if (health.currentHp.Value < criticalHealth.Value)
             onHealthCritical.Invoke();

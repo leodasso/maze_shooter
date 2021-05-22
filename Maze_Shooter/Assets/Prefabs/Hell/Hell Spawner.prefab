@@ -170,7 +170,7 @@ MonoBehaviour:
   isGlobal: 1
   blendDistance: 0
   weight: 0
-  priority: 9
+  priority: 25
 --- !u!114 &1357592682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +281,7 @@ MonoBehaviour:
   bigEvilEyesPrefab: {fileID: 389346113364943590, guid: 9c8e61057751fd841b68f119db742394,
     type: 3}
   collectionToFollow: {fileID: 11400000, guid: 35831a8bfbcf71f4fb702f50d0ec7816, type: 2}
-  spawnRadius: 8
+  spawnRadius: 18
   spawnDelay: 0.4
   destroyTime: 0.5
   minSpawnScale: 0.4
@@ -650,12 +650,13 @@ MonoBehaviour:
         fsmArrayParams: []
         fsmEnumParams: []
         fsmFloatParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
+        - useVariable: 1
+          name: lightAgainDelay
+          tooltip: wait time between returning player to a safe position and turning
+            the light back on
+          showInInspector: 1
           networkSync: 0
-          value: 1
+          value: 2
         fsmIntParams: []
         fsmBoolParams: []
         fsmVector2Params: []
@@ -693,7 +694,14 @@ MonoBehaviour:
       isGlobal: 0
     globalTransitions: []
     variables:
-      floatVariables: []
+      floatVariables:
+      - useVariable: 1
+        name: lightAgainDelay
+        tooltip: wait time between returning player to a safe position and turning
+          the light back on
+        showInInspector: 1
+        networkSync: 0
+        value: 2
       intVariables: []
       boolVariables: []
       stringVariables: []
@@ -710,7 +718,7 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs: 
+      variableCategoryIDs: 00000000
     description: 
     docUrl: 
     showStateLabel: 0

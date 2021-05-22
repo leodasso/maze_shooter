@@ -3431,6 +3431,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7053877751264444189}
   - component: {fileID: 7616550962789141332}
+  - component: {fileID: 3564993883152760563}
   m_Layer: 9
   m_Name: HP Events
   m_TagString: Untagged
@@ -3472,6 +3473,36 @@ MonoBehaviour:
       - m_Target: {fileID: 7952798998470580956}
         m_TargetAssemblyTypeName: PlayerHealth, Assembly-CSharp
         m_MethodName: ApplySavedHp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  comment: 
+--- !u!114 &3564993883152760563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8102419370672171535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83b5d72ab14f3f4c8442f76808cf317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - {fileID: 11400000, guid: 7754da83de5fff447a55ada7994fcd73, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7952798998470580956}
+        m_TargetAssemblyTypeName: PlayerHealth, Assembly-CSharp
+        m_MethodName: ProcessHpChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
