@@ -21,7 +21,7 @@ public class HellSpawner : MonoBehaviour
 	[SerializeField]
 	PlayMakerFSM playMaker;
     
-    [Space]
+    [Space, Title("Evil Eyes")]
     public List<GameObject> evilEyesPrefabs = new List<GameObject>();
 
     [Tooltip("The main evil eyes that spawns right before the player dies"), AssetsOnly]
@@ -40,12 +40,11 @@ public class HellSpawner : MonoBehaviour
     public float destroyTime = .5f;
     
     [Tooltip("The min scale of a spawned evil eye.")]
-    [BoxGroup("scale", GroupName = "Spawn Scale")]
-    [HorizontalGroup("scale/minMax"), LabelText("Min"), LabelWidth(60)]
+    [HorizontalGroup("minMax"), LabelText("Min"), LabelWidth(60)]
     public float minSpawnScale = .7f;
     
     [Tooltip("The max scale of a spawned evil eye.")]
-    [HorizontalGroup("scale/minMax"), LabelText("Max"), LabelWidth(60)]
+    [HorizontalGroup("minMax"), LabelText("Max"), LabelWidth(60)]
     public float maxSpawnScale = 1.2f;
     
     [BoxGroup("freq", GroupName = "Spawn Frequency"), LabelText("Increase Speed")]

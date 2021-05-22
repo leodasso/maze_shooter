@@ -9,11 +9,19 @@ using Arachnid;
              "needs to be combined with a Health component.")]
 public class PlayerHealth : HealthPlugin
 {
-	public HeartsRef minStartHp;
+	[SerializeField]
+	HeartsRef minStartHp;
+	[SerializeField]
+	HeartsRef criticalHealth;
+
+	[Space]
     public SavedInt savedPlayerHealth;
 	public SavedInt savedPlayerMaxHealth;
-    public UnityEvent onHealthCritical;
-    public UnityEvent onHealthOkay;
+
+	[SerializeField, Space]
+    UnityEvent onHealthCritical;
+	[SerializeField]
+    UnityEvent onHealthOkay;
 
 	protected override void Start()
 	{
@@ -39,22 +47,9 @@ public class PlayerHealth : HealthPlugin
         }
     }
 
-    protected override void Damaged(int newHp)
+    public void CheckForCritical()
     {
-        base.Damaged(newHp);
-        CheckForCritical();
-    }
-
-    protected override void Healed(int newHp)
-    {
-        base.Healed(newHp);
-        if (newHp > 1)
-            onHealthOkay.Invoke();
-    }
-
-    void CheckForCritical()
-    {
-        if (health.currentHp.Value.hearts < 2)
+        if (health.currentHp.Value < criticalHealth.Value)
             onHealthCritical.Invoke();
 		else onHealthOkay.Invoke();
     }

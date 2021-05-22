@@ -81,6 +81,7 @@ public class Health : MonoBehaviour, IDestructible
 			_invulnerableTimer -= Time.deltaTime;
 	}
 
+	[Button]
 	public void DoDamage(int amount) 
 	{
 		Hearts newDamage = new Hearts();

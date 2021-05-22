@@ -4,7 +4,10 @@ using Sirenix.OdinInspector;
 
 public class HudElement : MonoBehaviour
 {
-	[SerializeField]
+	[SerializeField, ToggleLeft]
+	bool autoHide = true;
+
+	[SerializeField, ShowIf("autoHide")]
 	float showTime = 5;
 
 	[ShowInInspector, ReadOnly]
@@ -26,7 +29,7 @@ public class HudElement : MonoBehaviour
 		if (showTimer > 0) 
 			showTimer -= Time.unscaledDeltaTime;
 
-		if (showTimer <= 0 && isShowing) 
+		if (autoHide && showTimer <= 0 && isShowing) 
 			Hide();
 	}
 

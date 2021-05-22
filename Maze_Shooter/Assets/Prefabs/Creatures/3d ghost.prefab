@@ -691,7 +691,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3490375850402369535}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: OnTriggerEffect, Assembly-CSharp
         m_MethodName: InvokeEffect
         m_Mode: 1
         m_Arguments:
@@ -703,7 +703,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 11400000, guid: e66f1f621714cb14b948b5cd949db696, type: 2}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: Arachnid.GameEvent, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
@@ -743,6 +743,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 0}
   minStartHp:
+    useConstant: 0
+    constantValue:
+      fractions: 0
+      hearts: 2
+    valueObject: {fileID: 0}
+  criticalHealth:
     useConstant: 0
     constantValue:
       fractions: 0
