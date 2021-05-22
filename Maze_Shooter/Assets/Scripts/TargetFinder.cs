@@ -11,39 +11,38 @@ using UnityEngine.Events;
              " which need a target specified.")]
 public class TargetFinder : MonoBehaviour
 {
+	[Tooltip("Searches for targets in radius every .5 seconds. You can manually search by calling FindTarget()"), ToggleLeft]
 	public bool autoAcquire = true;
+
+	[ToggleLeft]
+	public bool useLayerMask;
+	[ShowIf("useLayerMask")]
+	public LayerMask targetLayers;
 	
-	[ShowIf("autoAcquire")]
+	[Space]
 	public Collection targets;
 	
-	[ShowIf("autoAcquire")]
 	public TargetType targetToAimAt;
 
-	[ShowIf("autoAcquire")]
 	public float maxAqcuireRange = 100;
 
 	public GameObject currentTarget;
 
-	public UnityEvent onTargetFound;
+	[SerializeField]
+	UnityEvent onTargetFound;
 	
 	List<GameObject> targetsInRange = new List<GameObject>();
 
 	void OnDrawGizmosSelected()
 	{
-		if (autoAcquire)
-		{
-			Gizmos.color = new Color(1, 1, .3f);
-			Gizmos.DrawWireSphere(transform.position, maxAqcuireRange);
-		}
+		Gizmos.color = new Color(1, 1, .3f);
+		Gizmos.DrawWireSphere(transform.position, maxAqcuireRange);
 	}
 
 	void OnDrawGizmos()
 	{
-		if (autoAcquire)
-		{
-			Gizmos.color = new Color(1, 1, .3f, .15f);
-			Gizmos.DrawWireSphere(transform.position, maxAqcuireRange);
-		}
+		Gizmos.color = new Color(1, 1, .3f, .15f);
+		Gizmos.DrawWireSphere(transform.position, maxAqcuireRange);
 	}
 
 	// Use this for initialization
@@ -63,14 +62,25 @@ public class TargetFinder : MonoBehaviour
 		FindTarget();
 	}
 
-	void FindTarget()
+	public void FindTarget()
 	{
-		if (targets == null || !autoAcquire) return;
-		if (targets.elements.Count < 1) return;
+		if (currentTarget) {
+			if (!currentTarget.activeInHierarchy) 
+				ClearTarget();
+			if (useLayerMask && !Arachnid.Math.LayerMaskContainsLayer(targetLayers, currentTarget.gameObject.layer)) 
+				ClearTarget();
+		}
+
+		if (targets == null || targets.elements.Count < 1) return;
 		
 		targetsInRange.Clear();
 		foreach (var target in targets.elements)
 		{
+			if (!target.gameObject.activeInHierarchy) continue;
+			if (useLayerMask && !Arachnid.Math.LayerMaskContainsLayer(targetLayers, target.gameObject.layer)) 
+					continue;
+			
+
 			if (Vector3.SqrMagnitude(target.transform.position - transform.position) < maxAqcuireRange * maxAqcuireRange)
 				targetsInRange.Add(target.gameObject);
 		}
@@ -94,6 +104,12 @@ public class TargetFinder : MonoBehaviour
 
 		if (targetToAimAt == TargetType.Nearest)
 			SetTarget(targetsInRange.First());
+
+	}
+
+	public void ClearTarget() 
+	{
+		currentTarget = null;
 	}
 
 	public void SetTarget(GameObject newTarget)

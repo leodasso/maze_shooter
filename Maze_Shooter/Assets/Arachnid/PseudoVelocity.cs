@@ -13,7 +13,7 @@ public class PseudoVelocity : MonoBehaviour {
     [ReadOnly]
     public Vector3 velocity;
 
-    readonly List<Vector3> _velocities = new List<Vector3>();
+    List<Vector3> _velocities = new List<Vector3>();
     Vector3 _compoundVelocity = Vector3.zero;
     Vector3 _previousPos = Vector3.zero;
 

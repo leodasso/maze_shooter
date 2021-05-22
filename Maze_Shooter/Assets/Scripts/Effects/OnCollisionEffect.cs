@@ -1,6 +1,7 @@
 ﻿using Arachnid;
 using UnityEngine;
 
+[AddComponentMenu("Effects/Effect Spawners/On Collision Effect")]
 public class OnCollisionEffect : EffectsBase
 {
     public FloatReference minCollisionVelocity;

@@ -3,6 +3,8 @@ using UnityEngine;
 
 [TypeInfoBox("Controls particle emmission based on a given shadow object's distance " +
              "from its caster.")]
+
+[AddComponentMenu("Shadows/Shadow Plugin Particles")]
 public class ShadowObjectPluginParticles : ShadowObjectPlugin
 {
     public new ParticleSystem particleSystem;

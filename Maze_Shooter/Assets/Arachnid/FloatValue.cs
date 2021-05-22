@@ -10,7 +10,7 @@ namespace Arachnid
     {
         [ToggleLeft]
         public bool readOnly;
-        [SerializeField, ShowInInspector]
+        [SerializeField, ShowInInspector, OnValueChanged("RaiseEvents")]
         float myValue;
         
         public float Value
@@ -26,7 +26,7 @@ namespace Arachnid
                         return;
                     }
                     myValue = value;
-                    foreach (var e in onValueChange) e.Raise();
+					RaiseEvents();
                 }
             }
         }
@@ -51,5 +51,10 @@ namespace Arachnid
         {
             Value = 0;
         }
+
+		void RaiseEvents() {
+			if (!Application.isPlaying) return;
+			foreach (var e in onValueChange) e.Raise();
+		}
     }
 }

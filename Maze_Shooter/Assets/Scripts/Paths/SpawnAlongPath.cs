@@ -21,8 +21,6 @@ public class SpawnAlongPath : MonoBehaviour
     
     [Tooltip("One or more prefabs to be spawned along the path. If more than one, they'll be randomly selected.")]
     public List<GameObject> prefabsToSpawn = new List<GameObject>();
-
-    [ReadOnly]
     public List<GameObject> instances = new List<GameObject>();
 
     // Start is called before the first frame update

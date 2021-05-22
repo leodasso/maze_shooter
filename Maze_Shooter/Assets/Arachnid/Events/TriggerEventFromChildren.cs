@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 namespace Arachnid
 {
+	[AddComponentMenu("Triggers/Children Change Trigger")]
     public class TriggerEventFromChildren : MonoBehaviour
     {
         [AssetsOnly]

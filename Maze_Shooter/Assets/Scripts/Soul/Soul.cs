@@ -1,5 +1,6 @@
 ﻿using Arachnid;
 using UnityEngine;
+using UnityEngine.Events;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 
@@ -7,37 +8,59 @@ using System.Collections.Generic;
              "soul is drained. When soul is empty, the spirit will be dragged into hell.")]
 public class Soul : MonoBehaviour
 {
-    [Range(0, 1)]
-    public float lightness = 1;
-    public FloatReference darkness;
+	[ToggleLeft, SerializeField]
+	bool debug;
+
+	[ShowInInspector, ReadOnly]
+	bool isLit = false;
+
+	[SerializeField, Space]
+	UnityEvent onEnterDark;
+
+	[SerializeField]
+	UnityEvent onEnterLight;
     
-    public List<SoulLight> lightSources = new List<SoulLight>();
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        UpdateDarkness();
-    }
+    List<SoulLight> lightSources = new List<SoulLight>();
+
+	Vector3 lastSafePos;
 
     // Update is called once per frame
     void Update()
     {
-        lightness = 0;
+        bool litThisFrame = false;
+
         foreach (SoulLight soulLight in lightSources)
         {
             if (!soulLight.isActiveAndEnabled) continue;
-            lightness += soulLight.LightIntensity(transform.position);
-            if (lightness > 1)
-                lightness = 1;
+            if (soulLight.DoesLightPoint(transform.position)) {
+				litThisFrame = true;
+				break;
+			}
         }
 
-        UpdateDarkness();
+		if (!isLit && litThisFrame) {
+			isLit = true;
+			onEnterLight.Invoke();
+			if (debug)
+				Debug.Log(name + " has entered the LIGHT");
+		}
+
+		else if (isLit && !litThisFrame) {
+			isLit = false;
+			onEnterDark.Invoke();
+			if (debug)
+				Debug.Log(name + " has entered the DARK");
+		}
+
+		// remember safe / lit position
+		if (isLit) 
+			lastSafePos = transform.position;
     }
 
-    void UpdateDarkness()
-    {
-        darkness.Value = 1 - lightness;
-    }
+	public void ReturnToSafePos() 
+	{
+		transform.position = lastSafePos;
+	}
 
     public void Reset()
     {

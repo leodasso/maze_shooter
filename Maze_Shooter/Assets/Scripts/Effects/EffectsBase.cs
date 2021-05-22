@@ -5,6 +5,9 @@ using Sirenix.OdinInspector;
 
 public class EffectsBase : MonoBehaviour
 {
+	[SerializeField, ToggleLeft]
+	protected bool debug;
+
 	[AssetsOnly, AssetList(Path = "Prefabs/Effects/")]
 	public GameObject effectPrefab;
 

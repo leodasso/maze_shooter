@@ -19,6 +19,6 @@ public class Billboard : MonoBehaviour
     {
         if (!_camera) return;
         
-        transform.eulerAngles = new Vector3(_camera.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
+        transform.eulerAngles = new Vector3(_camera.eulerAngles.x, _camera.eulerAngles.y, transform.eulerAngles.z);
     }   
 }

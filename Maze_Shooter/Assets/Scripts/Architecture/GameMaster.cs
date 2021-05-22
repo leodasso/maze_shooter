@@ -19,6 +19,12 @@ public class GameMaster : ScriptableObject
     public GateLink gateLink;
     public Collection playerInstancesCollection;
 
+	[AssetsOnly]
+	public GameObject audioListenerPrefab;
+
+	[AssetsOnly]
+	public GameObject musicPlayerPrefab;
+
     public SavedString savedStage;
     public SavedString savedCheckpoint;
     
@@ -26,7 +32,11 @@ public class GameMaster : ScriptableObject
 
     public UnityEvent onBeginLoadSavedGame;
 
+	public IntReference hpPerHeart;
+
     public static string saveFilesDirectory = "saveFiles/";
+
+	static GameObject audioListenerInstance;
 
     /// <summary>
     /// True when transitioning between scenes/stages
@@ -40,15 +50,31 @@ public class GameMaster : ScriptableObject
         return _gameMaster;
     }
 
+	public static int FractionsPerHeart => Get().hpPerHeart.Value;
+
     [Button, DisableInEditorMode]
     public void BeginGame()
     {
         onBeginLoadSavedGame.Invoke();
         // find the stage to load from list
         Stage stageToLoad = GetStage(savedStage.GetValue());
+
         // Load with a delay so there's time for the transition to fade in
         stageToLoad.Load(1);
     }
+
+	public void QuitToDesktop()
+	{
+		// TODO time since last checkpoint reminder
+		Application.Quit();
+	}
+
+	public static void AddAudioListener() 
+	{
+		if (audioListenerInstance) return;
+		audioListenerInstance = Instantiate(Get().audioListenerPrefab);
+		DontDestroyOnLoad(audioListenerInstance.gameObject);
+	}
 
     public static GameObject GetPlayerInstance()
     {

@@ -16,6 +16,9 @@ public class TimeController : ScriptableObject
 
     bool _active = false;
 
+	static float BentTimeScale = 1;
+	public static float GetBentTimeScale => BentTimeScale;
+
     [ButtonGroup()]
     public void DoTimeBend()
     {
@@ -33,7 +36,7 @@ public class TimeController : ScriptableObject
     public void EndTimeBend()
     {
         _active = false;
-        Time.timeScale = 1;
+        SetTimeScale(1);
     }
 
     IEnumerator BendTime()
@@ -44,16 +47,29 @@ public class TimeController : ScriptableObject
         {
             if (!_active)
             {
-                Time.timeScale = 1;
+                SetTimeScale(1);
                 yield break;
             }
-            Time.timeScale = timeBendCurve.Evaluate(elapsed);
+            SetTimeScale(timeBendCurve.Evaluate(elapsed));
             elapsed += Time.unscaledDeltaTime;
             yield return null;
         }
         
         // If there isn't a limited duration, just keep time at what it was at the end of the curve.
         if (hasDuration)
-            Time.timeScale = 1;
+            SetTimeScale(1);
     }
+
+	void SetTimeScale(float newScale) {
+		Time.timeScale = newScale;
+		BentTimeScale = newScale;
+	}
+
+	/// <summary>
+	/// Returns the timescale to the one managed by timeController.
+	/// Use this if you modify the time outside of timeController and want to return to it.
+	/// </summary>
+	public static void ReturnTimeScale() {
+		Time.timeScale = BentTimeScale;
+	}
 }

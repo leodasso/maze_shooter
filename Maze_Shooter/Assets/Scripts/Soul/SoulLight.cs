@@ -1,35 +1,18 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using Arachnid;
 
 [TypeInfoBox("Soul lights restore the soul of anything they touch.")]
 public class SoulLight : MonoBehaviour
 {
-    public float intensity = 1;
     float _distance = 0;
-    float _normalizedDist;
-
-    [Tooltip("The x axis is normalized distance from center (0-1), and y axis is intensity multiplier.")]
-    public AnimationCurve intensityCurve;
     public new SphereCollider collider;
 
-	// leave this in so the little intensity toggle thing is available
-	void Start() {
-
-	}
-
     /// <summary>
-    /// Returns the intensity of light at the given point
+    /// Returns if the given point is lit by this soul light
     /// </summary>
-    public float LightIntensity(Vector3 point)
+    public bool DoesLightPoint(Vector3 point)
     {
-		if (!enabled) return 0;
-        _distance = Vector3.Distance(point, transform.position);
-        _normalizedDist = _distance / (collider.radius * ScaleMagnitude());
-        return intensity * intensityCurve.Evaluate(_normalizedDist);
-    }
-
-    float ScaleMagnitude()
-    {
-        return transform.lossyScale.x;
+        return Math.IsInRange(transform.position - point, collider.radius);
     }
 }

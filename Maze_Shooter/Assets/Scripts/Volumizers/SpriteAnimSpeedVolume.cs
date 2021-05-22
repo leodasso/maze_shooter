@@ -1,6 +1,6 @@
 ﻿public class SpriteAnimSpeedVolume : Volume
 {
-    public SpriteAnimationPlayer spriteAnimationPlayer;
+    public ShootyGhost.SpriteAnimationPlayer spriteAnimationPlayer;
     
     public override void ApplyVolume(float newValue)
     {

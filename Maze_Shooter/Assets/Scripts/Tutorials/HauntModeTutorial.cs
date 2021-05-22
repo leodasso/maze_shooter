@@ -4,8 +4,6 @@ using UnityEngine.Events;
 
 public class HauntModeTutorial : MonoBehaviour
 {
-    [Tooltip("How much haunt juice does the player need before showing this tutorial?")]
-    public int minHauntJuice = 5;
     public UnityEvent showTutorial;
 
     Haunter _playerHaunter;
@@ -22,7 +20,6 @@ public class HauntModeTutorial : MonoBehaviour
     public void TryShowTutorial()
     {
         if (!_playerHaunter) return;
-        if (_playerHaunter.hauntJuice < minHauntJuice) return;
         ShowTutorial();
     }
 

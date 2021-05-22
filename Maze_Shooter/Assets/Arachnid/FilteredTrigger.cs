@@ -9,8 +9,11 @@ namespace Arachnid
 	public class FilteredTrigger : MonoBehaviour
 	{
 
-		[ToggleLeft]
-		public bool debug;
+		[ToggleLeft, SerializeField]
+		protected bool debug;
+
+		[ToggleLeft, SerializeField, Tooltip("Process onCollisionEnter events in addition to trigger events (use this if the collider isn't a trigger)")]
+		bool processCollisionEvents;
 
 		[ToggleLeft, Tooltip("Call 'OnTriggerExit' on awake, even if there is no trigger exit.")]
 		public bool triggerExitOnAwake;
@@ -36,6 +39,25 @@ namespace Arachnid
 			if (triggerExitOnAwake) OnTriggerExited(null);
 		}
 
+		void OnCollisionEnter(Collision other) 
+		{
+			if (!processCollisionEvents) return;
+
+			if (!filterTriggers)
+			{
+				Trigger(other.collider);
+				return;
+			}
+
+			foreach (var c in triggerers)
+			{
+				if (c.ContainsGameObject(other.gameObject))
+				{
+					Trigger(other.collider);
+					return;
+				}
+			}
+		}
 
 		void OnTriggerEnter(Collider other)
 		{
@@ -95,7 +117,7 @@ namespace Arachnid
 		{
 			if (useLayerMask && !Math.LayerMaskContainsLayer(layerMask, other.gameObject.layer))
 			{
-				Debug.Log(other.name + " is in a layer that doesn't trigger " + name, gameObject);
+				//Debug.Log(other.name + " is in a layer that doesn't trigger " + name, gameObject);
 				return false;
 			}
 

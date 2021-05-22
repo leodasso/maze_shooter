@@ -40,6 +40,12 @@ public class Instantiator : MonoBehaviour
 
 	[ToggleLeft, Tooltip("Apply my scale to the new instance")]
 	public bool applyScale;
+
+	[ToggleLeft, Tooltip("Apply a random scale to the new instance")]
+	public bool randomScale;
+
+	[ShowIf("randomScale"), MinMaxSlider(0.01f, 10)]
+	public Vector2 randomScaleRange = Vector2.one;
 	
 	[AssetsOnly, HideIf("instantiateStagePlayer"), PreviewField]
 	public GameObject prefabToInstantiate;
@@ -152,6 +158,10 @@ public class Instantiator : MonoBehaviour
 		
 		_instance = Instantiate(ToInstantiate, transform.position, rotation, parent);
 		if (applyScale) _instance.transform.localScale = transform.localScale;
+		if (randomScale) {
+			float scale = Random.Range(randomScaleRange.x, randomScaleRange.y);
+			_instance.transform.localScale *= scale;
+		}
 	}
 
 	// left public to be accesible from Unity Events

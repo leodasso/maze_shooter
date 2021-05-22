@@ -8,6 +8,8 @@ public class LineRendererStraight : MonoBehaviour
         InfoMessageType.Warning, "showLineRendererWarning")]
     public LineRenderer lineRenderer;
 
+	[Range(2, 30)]
+	public int vertices = 2;
     public Transform startPoint;
     public Transform endPoint;
 
@@ -21,9 +23,17 @@ public class LineRendererStraight : MonoBehaviour
     void LateUpdate()
     {
         if (!lineRenderer || !startPoint || !endPoint) return;
+        lineRenderer.positionCount = vertices;
 
-        lineRenderer.positionCount = 2;
-        lineRenderer.SetPosition(0, startPoint.position);
-        lineRenderer.SetPosition(1, endPoint.position);
+		float max = vertices - 1;
+		float progress = 0;
+		Vector3 pos = startPoint.position;
+
+		for (int i = 0; i < vertices; i++) 
+		{
+			progress = (float)i/max;
+			pos = Vector3.Lerp(startPoint.position, endPoint.position, progress);
+			lineRenderer.SetPosition(i, pos);
+		}
     }
 }

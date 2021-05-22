@@ -12,8 +12,10 @@ public class MovementAnimation : MonoBehaviour, IControllable
         PseudoVelocity,
     }
     
-    [Tooltip("Animator to send speed and movement angle to")]
+    [Tooltip("(optional) Animator to send speed and movement angle to")]
     public Animator animator;
+
+	public SpriteAnimator spriteAnimator;
 
     [ToggleGroup("setSpeed")]
     public bool setSpeed;
@@ -27,6 +29,9 @@ public class MovementAnimation : MonoBehaviour, IControllable
     
     [ToggleGroup("setSpeed"), HideIf("UsesRigidbody")]
     public PseudoVelocity pseudoVelocity;
+
+	[ToggleGroup("setSpeed")]
+	public AnimationCurve speedToFramerate = AnimationCurve.Linear(0, 0, 10, 12);
 
     [ToggleGroup("setMoveAngle")] 
     public bool setMoveAngle;
@@ -42,18 +47,19 @@ public class MovementAnimation : MonoBehaviour, IControllable
     
     void Update()
     {
-        if (!animator) return;
         if (setSpeed) SetSpeedUpdate();
     }
 
-        void SetSpeedUpdate()
-        {
-            if (UsesRigidbody && !rigidbody) return;
-            if (!UsesRigidbody && !pseudoVelocity) return;
+	void SetSpeedUpdate()
+	{
+		if (UsesRigidbody && !rigidbody) return;
+		if (!UsesRigidbody && !pseudoVelocity) return;
 
-            _velocity = UsesRigidbody ? rigidbody.velocity.magnitude : pseudoVelocity.velocity.magnitude;
-            animator.SetFloat("speed", _velocity);
-        }
+		_velocity = UsesRigidbody ? rigidbody.velocity.magnitude : pseudoVelocity.velocity.magnitude;
+
+		if (spriteAnimator) spriteAnimator.frameRate = speedToFramerate.Evaluate(_velocity);
+		if (animator) animator.SetFloat("speed", _velocity);
+	}
 
     public void ApplyLeftStickInput(Vector2 input)
     {
@@ -64,6 +70,8 @@ public class MovementAnimation : MonoBehaviour, IControllable
 
     public void ApplyRightStickInput(Vector2 input)
     {}
+
+	public void OnPlayerControlEnabled(bool isEnabled)	{}
 
     public void DoActionAlpha() {}
 

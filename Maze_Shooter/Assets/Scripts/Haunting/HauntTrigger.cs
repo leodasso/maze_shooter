@@ -23,7 +23,8 @@ namespace ShootyGhost
         {
             Hauntable hauntable = other.GetComponent<Hauntable>();
             if (!hauntable) return;
-                haunter.BeginHaunt(hauntable);
+			if (!hauntable.enabled) return;
+			haunter.BeginHaunt(hauntable);
         }
 
         

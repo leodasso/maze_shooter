@@ -11,13 +11,21 @@ public class Coin : MonoBehaviour
     public new Rigidbody rigidbody;
     public float destroyDelay = .5f;
     public UnityEvent onGrabbed;
+	public bool jumpOnStart;
     
     public int value = 1;
+
+	public void Jump() 
+	{
+		rigidbody.isKinematic = false;
+        rigidbody.velocity = spawnVelocity + Random.insideUnitSphere * spawnVelocityRandomness;
+	}
+
     // Start is called before the first frame update
     void Start()
-    {
-        rigidbody.velocity = spawnVelocity + Random.insideUnitSphere * spawnVelocityRandomness;
-    }
+    {  
+		if (jumpOnStart) Jump();
+	}
 
     public void Grab()
     {

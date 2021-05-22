@@ -1,18 +1,19 @@
-﻿// Copyright (c) 2015 Augie R. Maddox, Guavaman Enterprises. All rights reserved.
+// Copyright (c) 2015 Augie R. Maddox, Guavaman Enterprises. All rights reserved.
 #pragma warning disable 0219
 #pragma warning disable 0618
 #pragma warning disable 0649
 
 namespace Rewired.UI.ControlMapper {
 
+    using System;
     using UnityEngine;
     using System.Collections;
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
     using Rewired;
 
-    public class LanguageData : ScriptableObject {
-
+    [Serializable]
+    public class LanguageData : LanguageDataBase {
         [SerializeField]
         private string _yes = "Yes";
         [SerializeField]
@@ -140,6 +141,8 @@ namespace Rewired.UI.ControlMapper {
         [SerializeField]
         private string _calibrateWindow_calibrateButtonLabel = "Calibrate";
         [SerializeField]
+        private ModifierKeys _modifierKeys;
+        [SerializeField]
         private CustomEntry[] _customEntries;
 
         // Working vars
@@ -147,113 +150,223 @@ namespace Rewired.UI.ControlMapper {
         private Dictionary<string, string> customDict;
 
         // Public Methods / Properties
-        
-        public void Initialize() {
+
+        public override void Initialize() {
             if(_initialized) return;
             customDict = CustomEntry.ToDictionary(_customEntries);
             _initialized = true;
         }
 
-        public string GetCustomEntry(string key) {
+        public override string GetCustomEntry(string key) {
             if(string.IsNullOrEmpty(key)) return string.Empty;
             string value;
             if(!customDict.TryGetValue(key, out value)) return string.Empty;
             return value;
         }
 
-        public bool ContainsCustomEntryKey(string key) {
+        public override bool ContainsCustomEntryKey(string key) {
             if(string.IsNullOrEmpty(key)) return false;
             return customDict.ContainsKey(key);
         }
 
-        public string yes { get { return _yes; } }
-        public string no { get { return _no; } }
-        public string add { get { return _add; } }
-        public string replace { get { return _replace; } }
-        public string remove { get { return _remove; } }
-        public string swap { get { return _swap; } }
-        public string cancel { get { return _cancel; } }
-        public string none { get { return _none; } }
-        public string okay { get { return _okay; } }
-        public string done { get { return _done; } }
-        public string default_ { get { return _default; } }  
-        public string assignControllerWindowTitle { get { return _assignControllerWindowTitle; } }
-        public string assignControllerWindowMessage { get { return _assignControllerWindowMessage; } }
-        public string controllerAssignmentConflictWindowTitle { get { return _controllerAssignmentConflictWindowTitle; } }
-        public string elementAssignmentPrePollingWindowMessage { get { return _elementAssignmentPrePollingWindowMessage; } }
-        public string elementAssignmentConflictWindowMessage { get { return _elementAssignmentConflictWindowMessage; } }
-        public string mouseAssignmentConflictWindowTitle { get { return _mouseAssignmentConflictWindowTitle; } }
-        public string calibrateControllerWindowTitle { get { return _calibrateControllerWindowTitle; } }
-        public string calibrateAxisStep1WindowTitle { get { return _calibrateAxisStep1WindowTitle; } }
-        public string calibrateAxisStep2WindowTitle { get { return _calibrateAxisStep2WindowTitle; } }
-        public string inputBehaviorSettingsWindowTitle { get { return _inputBehaviorSettingsWindowTitle; } }
-        public string restoreDefaultsWindowTitle { get { return _restoreDefaultsWindowTitle; } }
-        public string actionColumnLabel { get { return _actionColumnLabel; } }
-        public string keyboardColumnLabel { get { return _keyboardColumnLabel; } }
-        public string mouseColumnLabel { get { return _mouseColumnLabel; } }
-        public string controllerColumnLabel { get { return _controllerColumnLabel; } }
-        public string removeControllerButtonLabel { get { return _removeControllerButtonLabel; } }
-        public string calibrateControllerButtonLabel { get { return _calibrateControllerButtonLabel; } }
-        public string assignControllerButtonLabel { get { return _assignControllerButtonLabel; } }
-        public string inputBehaviorSettingsButtonLabel { get { return _inputBehaviorSettingsButtonLabel; } }
-        public string doneButtonLabel { get { return _doneButtonLabel; } }
-        public string restoreDefaultsButtonLabel { get { return _restoreDefaultsButtonLabel; } }
-        public string controllerSettingsGroupLabel { get { return _controllerSettingsGroupLabel; } }
-        public string playersGroupLabel { get { return _playersGroupLabel; } }
-        public string assignedControllersGroupLabel { get { return _assignedControllersGroupLabel; } }
-        public string settingsGroupLabel { get { return _settingsGroupLabel; } }
-        public string mapCategoriesGroupLabel { get { return _mapCategoriesGroupLabel; } }
-        public string restoreDefaultsWindowMessage {
+        public override string yes { get { return _yes; } }
+        public override string no { get { return _no; } }
+        public override string add { get { return _add; } }
+        public override string replace { get { return _replace; } }
+        public override string remove { get { return _remove; } }
+        public override string swap { get { return _swap; } }
+        public override string cancel { get { return _cancel; } }
+        public override string none { get { return _none; } }
+        public override string okay { get { return _okay; } }
+        public override string done { get { return _done; } }
+        public override string default_ { get { return _default; } }
+        public override string assignControllerWindowTitle { get { return _assignControllerWindowTitle; } }
+        public override string assignControllerWindowMessage { get { return _assignControllerWindowMessage; } }
+        public override string controllerAssignmentConflictWindowTitle { get { return _controllerAssignmentConflictWindowTitle; } }
+        public override string elementAssignmentPrePollingWindowMessage { get { return _elementAssignmentPrePollingWindowMessage; } }
+        public override string elementAssignmentConflictWindowMessage { get { return _elementAssignmentConflictWindowMessage; } }
+        public override string mouseAssignmentConflictWindowTitle { get { return _mouseAssignmentConflictWindowTitle; } }
+        public override string calibrateControllerWindowTitle { get { return _calibrateControllerWindowTitle; } }
+        public override string calibrateAxisStep1WindowTitle { get { return _calibrateAxisStep1WindowTitle; } }
+        public override string calibrateAxisStep2WindowTitle { get { return _calibrateAxisStep2WindowTitle; } }
+        public override string inputBehaviorSettingsWindowTitle { get { return _inputBehaviorSettingsWindowTitle; } }
+        public override string restoreDefaultsWindowTitle { get { return _restoreDefaultsWindowTitle; } }
+        public override string actionColumnLabel { get { return _actionColumnLabel; } }
+        public override string keyboardColumnLabel { get { return _keyboardColumnLabel; } }
+        public override string mouseColumnLabel { get { return _mouseColumnLabel; } }
+        public override string controllerColumnLabel { get { return _controllerColumnLabel; } }
+        public override string removeControllerButtonLabel { get { return _removeControllerButtonLabel; } }
+        public override string calibrateControllerButtonLabel { get { return _calibrateControllerButtonLabel; } }
+        public override string assignControllerButtonLabel { get { return _assignControllerButtonLabel; } }
+        public override string inputBehaviorSettingsButtonLabel { get { return _inputBehaviorSettingsButtonLabel; } }
+        public override string doneButtonLabel { get { return _doneButtonLabel; } }
+        public override string restoreDefaultsButtonLabel { get { return _restoreDefaultsButtonLabel; } }
+        public override string controllerSettingsGroupLabel { get { return _controllerSettingsGroupLabel; } }
+        public override string playersGroupLabel { get { return _playersGroupLabel; } }
+        public override string assignedControllersGroupLabel { get { return _assignedControllersGroupLabel; } }
+        public override string settingsGroupLabel { get { return _settingsGroupLabel; } }
+        public override string mapCategoriesGroupLabel { get { return _mapCategoriesGroupLabel; } }
+        public override string restoreDefaultsWindowMessage {
             get {
                 if(Rewired.ReInput.players.playerCount > 1) return _restoreDefaultsWindowMessage_multiPlayer;
                 else return _restoreDefaultsWindowMessage_onePlayer;
             }
         }
-        public string calibrateWindow_deadZoneSliderLabel { get { return _calibrateWindow_deadZoneSliderLabel; } }
-        public string calibrateWindow_zeroSliderLabel { get { return _calibrateWindow_zeroSliderLabel; } }
-        public string calibrateWindow_sensitivitySliderLabel { get { return _calibrateWindow_sensitivitySliderLabel; } }
-        public string calibrateWindow_invertToggleLabel { get { return _calibrateWindow_invertToggleLabel; } }
-        public string calibrateWindow_calibrateButtonLabel { get { return _calibrateWindow_calibrateButtonLabel; } }
+        public override string calibrateWindow_deadZoneSliderLabel { get { return _calibrateWindow_deadZoneSliderLabel; } }
+        public override string calibrateWindow_zeroSliderLabel { get { return _calibrateWindow_zeroSliderLabel; } }
+        public override string calibrateWindow_sensitivitySliderLabel { get { return _calibrateWindow_sensitivitySliderLabel; } }
+        public override string calibrateWindow_invertToggleLabel { get { return _calibrateWindow_invertToggleLabel; } }
+        public override string calibrateWindow_calibrateButtonLabel { get { return _calibrateWindow_calibrateButtonLabel; } }
 
-        public string GetControllerAssignmentConflictWindowMessage(string joystickName, string otherPlayerName, string currentPlayerName) {
+        public override string GetControllerAssignmentConflictWindowMessage(string joystickName, string otherPlayerName, string currentPlayerName) {
             return string.Format(_controllerAssignmentConflictWindowMessage, joystickName, otherPlayerName, currentPlayerName);
         }
-        public string GetJoystickElementAssignmentPollingWindowMessage(string actionName) {
+        public override string GetJoystickElementAssignmentPollingWindowMessage(string actionName) {
             return string.Format(_joystickElementAssignmentPollingWindowMessage, actionName);
         }
-        public string GetJoystickElementAssignmentPollingWindowMessage_FullAxisFieldOnly(string actionName) {
+        public override string GetJoystickElementAssignmentPollingWindowMessage_FullAxisFieldOnly(string actionName) {
             return string.Format(_joystickElementAssignmentPollingWindowMessage_fullAxisFieldOnly, actionName);
         }
-        public string GetKeyboardElementAssignmentPollingWindowMessage(string actionName) {
+        public override string GetKeyboardElementAssignmentPollingWindowMessage(string actionName) {
             return string.Format(_keyboardElementAssignmentPollingWindowMessage, actionName);
         }
-        public string GetMouseElementAssignmentPollingWindowMessage(string actionName) {
+        public override string GetMouseElementAssignmentPollingWindowMessage(string actionName) {
             return string.Format(_mouseElementAssignmentPollingWindowMessage, actionName);
         }
-        public string GetMouseElementAssignmentPollingWindowMessage_FullAxisFieldOnly(string actionName) {
+        public override string GetMouseElementAssignmentPollingWindowMessage_FullAxisFieldOnly(string actionName) {
             return string.Format(_mouseElementAssignmentPollingWindowMessage_fullAxisFieldOnly, actionName);
         }
-        public string GetElementAlreadyInUseBlocked(string elementName) {
+        public override string GetElementAlreadyInUseBlocked(string elementName) {
             return string.Format(_elementAlreadyInUseBlocked, elementName);
         }
-        public string GetElementAlreadyInUseCanReplace(string elementName, bool allowConflicts) {
+        public override string GetElementAlreadyInUseCanReplace(string elementName, bool allowConflicts) {
             if(!allowConflicts) return string.Format(_elementAlreadyInUseCanReplace, elementName);
             return string.Format(_elementAlreadyInUseCanReplace_conflictAllowed, elementName);
         }
-        public string GetMouseAssignmentConflictWindowMessage(string otherPlayerName, string thisPlayerName) {
+        public override string GetMouseAssignmentConflictWindowMessage(string otherPlayerName, string thisPlayerName) {
             return string.Format(_mouseAssignmentConflictWindowMessage, otherPlayerName, thisPlayerName);
         }
-        public string GetCalibrateAxisStep1WindowMessage(string axisName) {
+        public override string GetCalibrateAxisStep1WindowMessage(string axisName) {
             return string.Format(_calibrateAxisStep1WindowMessage, axisName);
         }
-        public string GetCalibrateAxisStep2WindowMessage(string axisName) {
+        public override string GetCalibrateAxisStep2WindowMessage(string axisName) {
             return string.Format(_calibrateAxisStep2WindowMessage, axisName);
+        }
+
+        // Translation of Rewired core items
+
+        public override string GetPlayerName(int playerId) {
+            Player player = ReInput.players.GetPlayer(playerId);
+            if(player == null) throw new ArgumentException("Invalid player id: " + playerId);
+            return player.descriptiveName;
+        }
+
+        public override string GetControllerName(Controller controller) {
+            if(controller == null) throw new ArgumentNullException("controller");
+            return controller.name;
+        }
+
+        public override string GetElementIdentifierName(ActionElementMap actionElementMap) {
+            if(actionElementMap == null) throw new ArgumentNullException("actionElementMap");
+            if(actionElementMap.controllerMap.controllerType == ControllerType.Keyboard) return GetElementIdentifierName(actionElementMap.keyCode, actionElementMap.modifierKeyFlags);
+            return GetElementIdentifierName(actionElementMap.controllerMap.controller, actionElementMap.elementIdentifierId, actionElementMap.axisRange);
+        }
+        public override string GetElementIdentifierName(Controller controller, int elementIdentifierId, AxisRange axisRange) {
+            if(controller == null) throw new ArgumentNullException("controller");
+            ControllerElementIdentifier eid = controller.GetElementIdentifierById(elementIdentifierId);
+            if(eid == null) throw new ArgumentException("Invalid element identifier id: " + elementIdentifierId);
+            Controller.Element element = controller.GetElementById(elementIdentifierId);
+            switch(element.type) {
+                case ControllerElementType.Axis:
+                    return eid.GetDisplayName(element.type, axisRange);
+                case ControllerElementType.Button:
+                    return eid.name;
+                default:
+                    return eid.name;
+            }
+        }
+        public override string GetElementIdentifierName(KeyCode keyCode, ModifierKeyFlags modifierKeyFlags) {
+            if(modifierKeyFlags != ModifierKeyFlags.None) {
+                return string.Format(
+                    "{0}{1}{2}",
+                    ModifierKeyFlagsToString(modifierKeyFlags),
+                    _modifierKeys.separator,
+                    Keyboard.GetKeyName(keyCode)
+                );
+            } else {
+                return Keyboard.GetKeyName(keyCode);
+            }
+        }
+
+        public override string GetActionName(int actionId) {
+            InputAction action = ReInput.mapping.GetAction(actionId);
+            if(action == null) throw new ArgumentException("Invalid action id: " + actionId);
+            return action.descriptiveName;
+        }
+        public override string GetActionName(int actionId, AxisRange axisRange) {
+            InputAction action = ReInput.mapping.GetAction(actionId);
+            if(action == null) throw new ArgumentException("Invalid action id: " + actionId);
+            switch(axisRange) {
+                case AxisRange.Full:
+                    return action.descriptiveName;
+                case AxisRange.Positive:
+                    return !string.IsNullOrEmpty(action.positiveDescriptiveName) ? action.positiveDescriptiveName : action.descriptiveName + " +";
+                case AxisRange.Negative:
+                    return !string.IsNullOrEmpty(action.negativeDescriptiveName) ? action.negativeDescriptiveName : action.descriptiveName + " -";
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+        public override string GetMapCategoryName(int id) {
+            InputMapCategory category = ReInput.mapping.GetMapCategory(id);
+            if(category == null) throw new ArgumentException("Invalid map category id: " + id);
+            return category.descriptiveName;
+        }
+
+        public override string GetLayoutName(ControllerType controllerType, int id) {
+            InputLayout layout = ReInput.mapping.GetLayout(controllerType, id);
+            if(layout == null) throw new ArgumentException("Invalid " + controllerType + " layout id: " + id);
+            return layout.descriptiveName;
+        }
+
+        public override string ModifierKeyFlagsToString(ModifierKeyFlags flags) {
+            int count = 0;
+            string label = string.Empty;
+
+            // TODO: Make this use the HardwareMap so languages can be supported
+
+            if(Keyboard.ModifierKeyFlagsContain(flags, ModifierKey.Control)) {
+                label += _modifierKeys.control;
+                count++;
+            }
+
+            if(Keyboard.ModifierKeyFlagsContain(flags, ModifierKey.Command)) {
+                if(count > 0 && !string.IsNullOrEmpty(_modifierKeys.separator)) label += _modifierKeys.separator;
+                label += _modifierKeys.command;
+                count++;
+            }
+
+            if(Keyboard.ModifierKeyFlagsContain(flags, ModifierKey.Alt)) {
+                if(count > 0 && !string.IsNullOrEmpty(_modifierKeys.separator)) label += _modifierKeys.separator;
+                label += _modifierKeys.alt;
+                count++;
+            }
+            if(count >= 3) return label; // hit the limit of 3 modifiers
+
+            if(Keyboard.ModifierKeyFlagsContain(flags, ModifierKey.Shift)) {
+                if(count > 0 && !string.IsNullOrEmpty(_modifierKeys.separator)) label += _modifierKeys.separator;
+                label += _modifierKeys.shift;
+                count++;
+            }
+
+            return label;
         }
 
         // Classes
 
         [System.Serializable]
-        private class CustomEntry {
+        protected class CustomEntry {
             public string key;
             public string value;
 
@@ -267,7 +380,7 @@ namespace Rewired.UI.ControlMapper {
 
             public static Dictionary<string, string> ToDictionary(CustomEntry[] array) {
                 if(array == null) return new Dictionary<string, string>();
-                Dictionary<string, string> dict = new Dictionary<string,string>();
+                Dictionary<string, string> dict = new Dictionary<string, string>();
                 for(int i = 0; i < array.Length; i++) {
                     if(array[i] == null) continue;
                     if(string.IsNullOrEmpty(array[i].key) || string.IsNullOrEmpty(array[i].value)) continue;
@@ -279,7 +392,15 @@ namespace Rewired.UI.ControlMapper {
                 }
                 return dict;
             }
+        }
 
+        [System.Serializable]
+        protected class ModifierKeys {
+            public string control = "Control";
+            public string alt = "Alt";
+            public string shift = "Shift";
+            public string command = "Command";
+            public string separator = " + ";
         }
     }
 }

@@ -2,24 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ShootyGhost;
+using Sirenix.OdinInspector;
 
-public class GhostAnimator : MonoBehaviour
+[AddComponentMenu("Animation/Ghost Animator")]
+public class GhostAnimator : CreatureAnimator
 {
-	public SpriteAnimationPlayer animationPlayer;
+	public SpriteAnimation appear;
+
+	[Space]
+	public SpriteRenderer spriteRenderer;
 	public new Rigidbody rigidbody;
-	public Haunter haunter;
-	public SpriteAnimation idle;
-	public SpriteAnimation run;
-	public SpriteAnimation haunt;
-	public float idleSpeed = .25f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        animationPlayer.spriteAnimation =
-            rigidbody.velocity.magnitude > idleSpeed ? run : idle;
+	[ButtonGroup]
+	public void Hide() 
+	{
+		spriteRenderer.enabled = false;
+	}
 
-		if (haunter.ghostState == GhostState.Targeting) 
-			animationPlayer.spriteAnimation = haunt;
-    }
+	[ButtonGroup]
+	public void Appear() 
+	{
+		OverrideAnimImmediate(appear);
+		spriteRenderer.enabled = true;
+	}
 }

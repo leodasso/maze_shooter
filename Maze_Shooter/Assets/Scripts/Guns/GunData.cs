@@ -11,15 +11,15 @@ public class GunData : ScriptableObject
 	                                " and max is when they're at full tilt.")]
 	public Vector2 firingRate;
 
-	[Tooltip("how wide is the firing spread angle? Larger values here will mean less accuracy. 0 is perfectly accurate."), MinValue(0)]
-	public float firingSpread;
-	
-	[Tooltip("Multiple firing patterns can be assigned so that this gun can level up")]
-	public List<FiringPattern> firingPatterns = new List<FiringPattern>();
+	[Tooltip("spreads the bullets randomly. Higher value means less accurate. (euler angle)"), MinValue(0)]
+	public float randomSpread;
 
 	[AssetsOnly, PreviewField, AssetList(AutoPopulate = false, Path = "Prefabs/Ammo")]
 	public GameObject ammo;
 
-	public int MaxLevel => Mathf.Max(0, firingPatterns.Count - 1);
-
+	[Space]
+	public AudioCollection fireSound;
+	[Tooltip("SFX for when try to fire but there's no ammo left")]
+	public AudioCollection dryShotSound;
+	public AudioCollection reloadSound;
 }

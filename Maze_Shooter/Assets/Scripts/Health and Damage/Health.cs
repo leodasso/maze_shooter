@@ -3,18 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using Arachnid;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Sirenix.OdinInspector;
 using UnityEngine.Events;
 
 public class Health : MonoBehaviour, IDestructible
 {
-	[TabGroup("main")]
-	public IntReference hitPoints;
+	[TabGroup("main"), LabelText("Max HP"), FormerlySerializedAs("hitPoints")]
+	public HeartsRef maxHearts;
 	
-	[ShowInInspector, DisplayAsString, Indent, TabGroup("main")]
-	int _currentHealth;
+	[TabGroup("main"), LabelText("Current HP")]
+	public HeartsRef currentHp;
 
-	[Tooltip("How long after damaged will I be invulnerable?"), TabGroup("main")]
+	[ToggleLeft, TabGroup("main"), Tooltip("Set the current HP to max HP on start")]
+	public bool setHpOnStart = true;
+
+	[Tooltip("How long after damaged will I be invulnerable?"), TabGroup("main"), Space]
 	public FloatReference invulnerableTime;
 	
 	[ToggleLeft, TabGroup("main")]
@@ -23,8 +27,14 @@ public class Health : MonoBehaviour, IDestructible
 	[AssetsOnly, AssetList(Path = "Prefabs/Effects/"), ShowIf("createDamageEffect"), Indent, TabGroup("main")]
 	public GameObject damagedEffect;
 
+	[TabGroup("main"), Tooltip("Destroy this gameobject when killed (HP reaches 0)"), ToggleLeft]
+	public bool destroyWhenKilled = true;
+
 	[ShowIf("createDamageEffect"), Indent, TabGroup("main")]
 	public float damageEffectLifetime = 5;
+
+	[TabGroup("main"), Tooltip("(optional) events will be called on mainHealth as if it is damaged/killed")]
+	public Health mainHealth;
 
 	[DrawWithUnity, TabGroup("events")]
 	public UnityEvent onDamagedEvent;
@@ -39,12 +49,30 @@ public class Health : MonoBehaviour, IDestructible
 
 	public bool IsInvulnerable => _invulnerableTimer > 0;
 	public bool IsKilled => _isKilled;
-	public int CurrentHealth => _currentHealth;
+	public Hearts ActualHp {
+		get {
+			return mainHealth == null ? currentHp.Value : mainHealth.currentHp.Value;
+		}
+		set {
+			if (mainHealth) mainHealth.currentHp.Value = value;
+			else currentHp.Value = value;
+		}
+	} 
+
+	public float NormalizedHp => (float)ActualHp.TotalPoints / (float)maxHearts.Value.TotalPoints;
+
+
 	bool _isKilled;
 
 	void Awake ()
 	{
-		_currentHealth = hitPoints.Value;
+		// if (savedMaxHp != null) maxHearts.Value = savedMaxHp.GetValue();
+		if (setHpOnStart) ResetHp();
+	}
+
+	public void ResetHp() 
+	{
+		currentHp.Value = maxHearts.Value;
 	}
 
 	void Update()
@@ -53,12 +81,25 @@ public class Health : MonoBehaviour, IDestructible
 			_invulnerableTimer -= Time.deltaTime;
 	}
 
-	public void DoDamage(int amount, Vector3 pos, Vector3 dir)
+	[Button]
+	public void DoDamage(int amount) 
 	{
-		if (IsInvulnerable || !enabled) return;
+		Hearts newDamage = new Hearts();
+		newDamage.hearts = amount;
+		DoDamage(newDamage, transform.position + Vector3.back * .25f, Vector3.forward);
+	}
+
+	public void DoDamage(Hearts amount) 
+	{
+		DoDamage(amount, transform.position + Vector3.back * .25f, Vector3.forward);
+	}
+
+	public void DoDamage(Hearts amount, Vector3 pos, Vector3 dir)
+	{
+		if (IsInvulnerable || !enabled || IsKilled) return;
 		
-		_currentHealth -= amount;
-		if (_currentHealth <= 0)
+		ActualHp -= amount;
+		if (ActualHp.TotalPoints <= 0)
 		{
 			Destruct();
 			return;
@@ -73,28 +114,33 @@ public class Health : MonoBehaviour, IDestructible
 		if (invulnerableTime.Value > 0)
 			_invulnerableTimer = invulnerableTime.Value;
 		
-		onDamaged?.Invoke(_currentHealth);
+		onDamaged?.Invoke(ActualHp.TotalPoints);
 		onDamagedEvent.Invoke();
+
+		// invoke events from the main health component
+		if (mainHealth) mainHealth.onDamagedEvent.Invoke();
 	}
 
 	public void Heal(int amount)
 	{
 		if (!enabled) return;
-		_currentHealth += amount;
-		_currentHealth = Mathf.Clamp(_currentHealth, 0, hitPoints.Value);
+		ActualHp += amount;
+		ActualHp = Mathf.Clamp(ActualHp.TotalPoints, 0, maxHearts.Value.TotalPoints);
 		if (onHealed != null) onHealed.Invoke(amount);
 	}
 
-	public void SetHp(int newHp)
+	public void SetHp(Hearts newHp)
 	{
 		if (!enabled) return;
-		_currentHealth = newHp;
+		currentHp.Value = newHp;
 	}
 
 	public void Destruct()
 	{
+		if (_isKilled) return;
 		_isKilled = true;
 		onKilledEvent.Invoke();
-		Destroy(gameObject);
+		if (mainHealth) mainHealth.onKilledEvent.Invoke();
+		if (destroyWhenKilled) Destroy(gameObject);
 	}
 }

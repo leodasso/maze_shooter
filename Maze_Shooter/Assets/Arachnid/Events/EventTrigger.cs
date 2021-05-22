@@ -7,6 +7,7 @@ using UnityEngine.Events;
 namespace Arachnid {
 
     [RequireComponent(typeof(Collider))]
+	[AddComponentMenu("Triggers/Event Trigger")]
     public class EventTrigger : FilteredTrigger
     {
         [AssetsOnly]

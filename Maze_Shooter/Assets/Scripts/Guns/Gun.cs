@@ -4,30 +4,29 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Math = Arachnid.Math;
 
-[TypeInfoBox("Fires things in the local Y axis")]
+[TypeInfoBox("Fires things in the local Z forward axis")]
 public class Gun : GunBase
 {
+	public bool limitAmmo;
+	[ShowIf("limitAmmo")]
+	public int maxAmmo;
+
+	[ShowIf("limitAmmo")]
+	public int currentAmmo;
+
 	[Range(0, 1)]
 	[Tooltip("Determines how intense the fire rate is. 0 is the lowest fire rate of the selected gun," +
 	         " and 1 is the highest rate.")]
-	public float fireRateIntensity = 1;
-	
-	FiringPattern FiringPattern {
-		get
-		{
-			if (!HasGunData) return firingPattern;
-			if (GunData.firingPatterns.Count < 1) return firingPattern;
-			int maxAvailableFiringPattern = GunData.firingPatterns.Count - 1;
-			int index = Mathf.Clamp(Level, 0, maxAvailableFiringPattern);
-			return GunData.firingPatterns[index];
-		}
-	}
-	
+	public float fireRateIntensity = 1;	
+
+	[Tooltip("Used to play sfx for this gun")]
+	public AudioAction audioAction;
+
 	Vector2 FireRateRange => HasGunData ? GunData.firingRate : firingRate;
 	float FireRate => Mathf.Lerp(FireRateRange.x, FireRateRange.y, fireRateIntensity);
 	float Cooldown => 1f / FireRate;
 	bool IsCoolingDown => _cooldownTimer < Cooldown;
-	float RandomSpreadAngle => HasGunData ? Random.Range(-GunData.firingSpread, GunData.firingSpread) : 0;
+	float RandomSpreadAngle => HasGunData ? Random.Range(-GunData.randomSpread, GunData.randomSpread) : 0;
 	float _cooldownTimer;
 
 	protected override void Start()
@@ -58,32 +57,33 @@ public class Gun : GunBase
 			return;
 		}
 
-		if (FiringPattern)
-			StartCoroutine(FireRoutine());
-		else 
+		if (audioAction) {
+			audioAction.audioCollection = HasAmmo ? gunData.fireSound : gunData.dryShotSound;
+			audioAction.Play();
+		}
+
+		
+		if (HasAmmo) {
+			SpendAmmo();
 			CreateBullet(Vector2.zero, RandomSpreadAngle);
+		}
 
 		_cooldownTimer = 0;
 	}
 
-	IEnumerator FireRoutine()
+	public override void Reload()
 	{
-		float angle;
-		float x;
-		float y;
-		float progress = 0;
-			
-		for (int i = 0; i < FiringPattern.bullets; i++)
-		{
-			int switcher = i % 2 == 0 ? 1 : -1;
-			progress = (float) i / Mathf.Max(1, FiringPattern.bullets - 1);
-			
-			x = Mathf.Lerp(0, FiringPattern.widthSpread, progress) * switcher;
-			y = Mathf.Lerp(0, FiringPattern.heightSpread, progress);
-			angle = Mathf.Lerp(0, FiringPattern.angleSpread, progress) * switcher;
+		base.Reload();
+		currentAmmo = maxAmmo;
+		audioAction.audioCollection = gunData.reloadSound;
+		audioAction.Play();
+	}
 
-			CreateBullet(new Vector2(x, y), -Math.RoundToNearest(angle, FiringPattern.snapAngle) + RandomSpreadAngle );
-			yield return new WaitForSeconds(FiringPattern.interval);
-		}
+	bool HasAmmo => limitAmmo? currentAmmo > 0 : true;
+
+	void SpendAmmo() 
+	{
+		if (!HasAmmo || !limitAmmo) return;
+		currentAmmo--;
 	}
 }

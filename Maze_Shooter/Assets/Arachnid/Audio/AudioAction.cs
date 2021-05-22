@@ -11,6 +11,8 @@ public class AudioAction : MonoBehaviour
 	[Range(0, 1), Tooltip("Multiplies by the volume of the audio collection.")]
 	public float volume = 1;
 
+	public float playDelay = 0;
+
 	[ToggleLeft]
 	public bool playOnAwake = false;
 	[ToggleLeft]
@@ -39,6 +41,18 @@ public class AudioAction : MonoBehaviour
 	[Button]
 	public void Play()
 	{
+		if (playDelay < Mathf.Epsilon) ActualPlay();
+		else StartCoroutine(DelayAndPlay());
+	}
+
+	IEnumerator DelayAndPlay() 
+	{
+		yield return new WaitForSeconds(playDelay);
+		ActualPlay();
+	}
+
+	void ActualPlay() 
+	{
 		if (!Application.isPlaying)
 		{
 			Debug.LogWarning("Audio playing is only supporting while game is running.");
@@ -55,7 +69,8 @@ public class AudioAction : MonoBehaviour
 		audioGO.transform.parent = AudioParent().transform;
 		audioGO.transform.position = transform.position;
 		AudioSource newSource = audioGO.AddComponent<AudioSource>();
-		newSource.spread = 25;
+		newSource.spread = 180;
+		newSource.dopplerLevel = 0;
 		newSource.rolloffMode = AudioRolloffMode.Linear;
 		newSource.clip = audioCollection.GetRandomClip();
 		newSource.playOnAwake = false;
