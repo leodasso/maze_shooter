@@ -554,7 +554,6 @@ GameObject:
   - component: {fileID: 3490500826504311321}
   - component: {fileID: 4151602328836940682}
   - component: {fileID: 3594317241385997713}
-  - component: {fileID: 3594317241385997724}
   - component: {fileID: 6539296253958561908}
   - component: {fileID: 8336307118180865852}
   - component: {fileID: 3470813710061164947}
@@ -586,6 +585,7 @@ Transform:
   - {fileID: 326339311406208306}
   - {fileID: 1841089000175383003}
   - {fileID: 1466386840609618297}
+  - {fileID: 3180225567042919293}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -920,49 +920,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 2
---- !u!114 &3594317241385997724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3594317241385997719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae4854aa33dab8a439ac761b9dedca02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debug: 0
-  onEnterDark:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 0d5b188ef9ecf42448dc12af4ee91216, type: 2}
-        m_TargetAssemblyTypeName: Arachnid.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onEnterLight:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: d2c7847a9b2adf143907bcefedb057ee, type: 2}
-        m_TargetAssemblyTypeName: Arachnid.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &6539296253958561908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2369,7 +2326,7 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           typeName: Soul
-          value: {fileID: 3594317241385997724}
+          value: {fileID: 0}
         - useVariable: 0
           name: 
           tooltip: 
@@ -3653,6 +3610,128 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   comment: 
+--- !u!1001 &2047417157355419941
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3596233078318729541}
+    m_Modifications:
+    - target: {fileID: 2016560714818744396, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: onEnterDark.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016560714818744396, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: onEnterLight.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016560714818744396, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: onEnterDark.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 0d5b188ef9ecf42448dc12af4ee91216,
+        type: 2}
+    - target: {fileID: 2016560714818744396, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: onEnterDark.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Arachnid.GameEvent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016560714818744396, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: onEnterDark.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Raise
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016560714818744396, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: onEnterDark.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016560714818744396, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: onEnterDark.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016560714818744396, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: onEnterDark.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016560714818744396, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: onEnterLight.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: d2c7847a9b2adf143907bcefedb057ee,
+        type: 2}
+    - target: {fileID: 2016560714818744396, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: onEnterLight.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Arachnid.GameEvent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016560714818744396, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: onEnterLight.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Raise
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016560714818744396, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: onEnterLight.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016560714818744396, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: onEnterLight.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016560714818744396, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: onEnterLight.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3480030456747975256, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3480030456747975256, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3480030456747975256, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3480030456747975256, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3480030456747975256, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 3973404460210159413, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: m_Name
+      value: Soul
+      objectReference: {fileID: 0}
+    - target: {fileID: 4270265545224485225, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6a7c7f88bf870264eb9614aab9d58180, type: 3}
+--- !u!4 &3180225567042919293 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3480030456747975256, guid: 6a7c7f88bf870264eb9614aab9d58180,
+    type: 3}
+  m_PrefabInstance: {fileID: 2047417157355419941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3189742950165517473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3743,15 +3822,15 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8050917244385575065, guid: eabc9b650459ba94296987e09a5aeeda, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eabc9b650459ba94296987e09a5aeeda, type: 3}
---- !u!1 &326339311406208307 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2937294253991182738, guid: eabc9b650459ba94296987e09a5aeeda,
-    type: 3}
-  m_PrefabInstance: {fileID: 3189742950165517473}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &326339311406208306 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2937294253991182739, guid: eabc9b650459ba94296987e09a5aeeda,
+    type: 3}
+  m_PrefabInstance: {fileID: 3189742950165517473}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &326339311406208307 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2937294253991182738, guid: eabc9b650459ba94296987e09a5aeeda,
     type: 3}
   m_PrefabInstance: {fileID: 3189742950165517473}
   m_PrefabAsset: {fileID: 0}
