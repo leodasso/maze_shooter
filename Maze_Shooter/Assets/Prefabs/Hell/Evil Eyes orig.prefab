@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1765630234537402831}
   - component: {fileID: 7333208649198051673}
+  - component: {fileID: 2482202064889252336}
   m_Layer: 0
   m_Name: Evil Eyes orig
   m_TagString: Untagged
@@ -45,11 +46,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97e8ed2baea5324b9e68bb303521efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   effectPrefab: {fileID: 5463601250970529732, guid: 0ac416835f0652b47a581497d7c1afdf,
     type: 3}
   lifetime: 5
   delay: 0
   ignoreMinLifetime: 0
+--- !u!114 &2482202064889252336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6155762964191326801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d30f831d9d1b84ba9603356f7a8290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioCollection: {fileID: 11400000, guid: 79f50b489d4183c4da355367d002232f, type: 2}
+  volume: 1
+  playDelay: 0.09
+  playOnAwake: 1
+  playOnEnable: 0
 --- !u!1 &8661140931827367428
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,7 +120,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a2c9c5a086ebd3441b4a065e93470e96, type: 2}
+  - {fileID: 2100000, guid: 1b6eb281fdbcd4b4e9909841a63f8f87, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
