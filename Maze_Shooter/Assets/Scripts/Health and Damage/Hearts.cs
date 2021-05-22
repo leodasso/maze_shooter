@@ -83,11 +83,36 @@ public struct Hearts
 		return left.TotalPoints != right.TotalPoints;
 	}
 
+	public static bool operator <(Hearts left, Hearts right) 
+	{
+		return left.TotalPoints < right.TotalPoints;
+	}
+
+	public static bool operator >(Hearts left, Hearts right) 
+	{
+		return left.TotalPoints > right.TotalPoints;
+	}
+
+	public static bool operator <=(Hearts left, Hearts right) 
+	{
+		return left.TotalPoints <= right.TotalPoints;
+	}
+
+	public static bool operator >=(Hearts left, Hearts right) 
+	{
+		return left.TotalPoints >= right.TotalPoints;
+	}
+
 	public static implicit operator Hearts(int qty) {
 		Hearts newHp = new Hearts();
 		newHp.hearts = qty;
 		newHp.fractions = 0;
 		return newHp;
+	}
+
+	public override string ToString()
+	{
+		return  hearts +"♥ " + fractions + "/" + PointsPerHeart;
 	}
 }
 
