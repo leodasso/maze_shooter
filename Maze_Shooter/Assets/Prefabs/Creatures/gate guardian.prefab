@@ -101,15 +101,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   master: 1
+  isKinematic: 0
   acceleration: 100
   drag: 25
   maxSpeed: 3
   lerpSpeed: 25
   pathPosition: 0
   clampPathPos: 0
+  clampedPathPos: {x: 0, y: 0}
   orientToPath: 0
-  minPathPos: 0
-  maxPathPos: 0
   radius: 2
   inputDirectionForgiveness: 2
   collisionLayerMask:
@@ -248,8 +248,13 @@ MonoBehaviour:
           m_StringArgument: endHaunt
           m_BoolArgument: 0
         m_CallState: 2
-  hauntableType: {fileID: 11400000, guid: 20611d043fb455746b166c8120e55d41, type: 2}
   linkHealth: 0
+  customTransitionTime: 0
+  transitionTime: 0
+  allowManualExit: 1
+  customReturnPos: 0
+  returnPos: {fileID: 0}
+  hauntableType: {fileID: 11400000, guid: 20611d043fb455746b166c8120e55d41, type: 2}
   health: {fileID: 0}
   hauntConstellationPrefab: {fileID: 6312336650189920229, guid: 324a1b01a48fd064b97a70b344a58712,
     type: 3}
@@ -994,8 +999,6 @@ GameObject:
   - component: {fileID: 2346832611299250036}
   - component: {fileID: 2346832611299250039}
   - component: {fileID: 2346832611299250038}
-  - component: {fileID: 772293218}
-  - component: {fileID: 772293219}
   m_Layer: 0
   m_Name: sprite
   m_TagString: Untagged
@@ -1037,7 +1040,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 073978bd3b010154f9eec9de6e71139a, type: 2}
+  - {fileID: 2100000, guid: f80fe3dc1cf86ee439c2e81b5d05bea1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1058,7 +1061,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1d1c1aed8276e32408e51cc6e8f473c7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ea32f1a9d9308a840aea4006b2c89b20, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1093,7 +1096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a05506e86408f4bae29a22b776d5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progress: 0.8195995
+  progress: 0.1622261
   spriteRenderer: {fileID: 2346832611299250036}
   sprites:
   - {fileID: 21300000, guid: 7ec8fe91c7c6b9642b4d5a9c6a2a7525, type: 3}
@@ -1106,33 +1109,10 @@ MonoBehaviour:
   pingPong: 1
   loop: 1
   frameRate: 7
+  resetOnEnable: 0
   setProgressOnStart: 0
   startProgress: 0
---- !u!114 &772293218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2346832611299250040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1625263d85e5d554284989eb9052e863, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  updateEveryFrame: 0
---- !u!114 &772293219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2346832611299250040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  spriteAnimEvents: []
 --- !u!1 &5434897576883963708
 GameObject:
   m_ObjectHideFlags: 0
