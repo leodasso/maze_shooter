@@ -20,9 +20,13 @@ public class SpriteShapeCollider : MonoBehaviour
 	[ToggleLeft, Tooltip("Fill the shape with voxel colliders")]
 	public bool filled;
 
-	[Tooltip("Voxel size for fill")]
-	[MinValue(1f), ShowIf("filled")]
-	public float voxelSize = 1;
+	[Tooltip("Width of voxel bars"), TitleGroup("Voxel Size", "Width / Height")]
+	[MinValue(1f), ShowIf("filled"), HideLabel, HorizontalGroup("Voxel Size/voxels")]
+	public float voxelWidth = 5;
+
+	[TitleGroup("Voxel Size")]
+	[MinValue(.5f), ShowIf("filled"), HideLabel, HorizontalGroup("Voxel Size/voxels")]
+	public float voxelHeight = .5f;
 
 	public float height = 5;
 
@@ -64,7 +68,7 @@ public class SpriteShapeCollider : MonoBehaviour
 			bounds.Encapsulate(transform.TransformPoint(pt));
 		}
 
-		bounds.size += new Vector3(voxelSize * 2, 0, voxelSize * 2);
+		bounds.size += new Vector3(voxelWidth * 2, 0, voxelHeight * 2);
 
 		return bounds;
 	}
@@ -174,12 +178,13 @@ public class SpriteShapeCollider : MonoBehaviour
 			Vector3 prev = voxelPos;
 
 			bool inside = false;
+			bool previouslyInside = false;
 
 			// iterate z
 			while (voxelPos.z < bounds.max.z) {
 
 				// raycast from prev point to next
-				foreach (var hit in Physics.RaycastAll(prev, voxelPos - prev, voxelSize, LayerMask.GetMask("Default", "Terrain"))) {
+				foreach (var hit in Physics.RaycastAll(prev, voxelPos - prev, voxelHeight, LayerMask.GetMask("Default", "Terrain"))) {
 					
 					// if the parent of the hit isnt this, we can ignore it
 					if (hit.transform.parent != transform) continue;
@@ -192,18 +197,31 @@ public class SpriteShapeCollider : MonoBehaviour
 
 				// create voxel collider
 				if (inside) {
-					GameObject newVoxel = new GameObject("voxel");
-					newVoxel.transform.parent = transform;
-					newVoxel.transform.position = FlatVoxelPos(voxelPos);
-					var boxCol = newVoxel.AddComponent<BoxCollider>();
-					boxCol.size = new Vector3(voxelSize, height, voxelSize);
-					voxels.Add(newVoxel);
+
+					// if we were previously inside too, just extend the previous box collider
+					// this way we can reduce the total number of box colliders needed
+					if (previouslyInside) {
+						GameObject previousVoxel = voxels[voxels.Count - 1];
+						BoxCollider boxCol = previousVoxel.GetComponent<BoxCollider>();
+						boxCol.size += Vector3.forward * voxelHeight;
+						boxCol.center += Vector3.forward * voxelHeight/2;
+					}
+
+					else {
+						GameObject newVoxel = new GameObject("voxel");
+						newVoxel.transform.parent = transform;
+						newVoxel.transform.position = FlatVoxelPos(voxelPos);
+						var boxCol = newVoxel.AddComponent<BoxCollider>();
+						boxCol.size = new Vector3(voxelWidth, height, voxelHeight);
+						voxels.Add(newVoxel);
+					}
 				}
 
+				previouslyInside = inside;
 				prev = voxelPos;
-				voxelPos += Vector3.forward * voxelSize;
+				voxelPos += Vector3.forward * voxelHeight;
 			}
-			voxelPos += Vector3.right * voxelSize;
+			voxelPos += Vector3.right * voxelWidth;
 		}
 
 		thickness = prevThickness;
