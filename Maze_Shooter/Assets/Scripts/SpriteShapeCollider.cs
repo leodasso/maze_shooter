@@ -1,49 +1,261 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using Arachnid;
+using System.Collections.Generic;
 
 public class SpriteShapeCollider : MonoBehaviour
 {
+	public enum ColliderLayer {
+		Default,
+		Terrain,
+		SoulLight,
+	}
+
+	[EnumToggleButtons, OnValueChanged("UpdateLayer")]
+	public ColliderLayer colliderLayer;
+
+	[ToggleLeft, OnValueChanged("SetIsTrigger")]
+	public bool isTrigger;
+
+	[ToggleLeft, Tooltip("Fill the shape with voxel colliders")]
+	public bool filled;
+
+	[Tooltip("Voxel size for fill")]
+	[MinValue(.25f), ShowIf("filled")]
+	public float voxelSize = 1;
+
 	public float height = 5;
+
+	[Range(1, 30), Tooltip("The number of segments to break curved pieces into")]
+	public int curveSegments = 5;
+
+	[Tooltip("Hint: To make a trigger that more or less matches this sprite shape, just set the thickness to a negative number.")]
 	public float thickness = 1;
 	public UnityEngine.U2D.SpriteShapeController spriteShapeController;
 
-	[SerializeField]
-	GameObject[] colliders = new GameObject[999];
+	[SerializeField, ReadOnly]
+	List<Vector3> points = new List<Vector3>();
+
+	[SerializeField, ReadOnly]
+	List<GameObject> walls = new List<GameObject>();
+
+	[SerializeField, ReadOnly]
+	List<GameObject> voxels = new List<GameObject>();
+
+
+	void OnDrawGizmosSelected()
+	{
+		var bounds = GetBounds();
+		Gizmos.DrawWireCube(bounds.center, bounds.size);
+
+		Gizmos.color = Color.cyan;
+		for ( int i = 1; i < points.Count; i++)
+			Gizmos.DrawLine(transform.TransformPoint(points[i-1]), transform.TransformPoint(points[i]));
+	}
+
+
+	Bounds GetBounds() 
+	{
+		GenerateSegments();
+		Bounds bounds = new Bounds(transform.position, Vector3.one);
+
+		for (int i = 0; i < points.Count; i++) {
+			Vector3 pt = points[i];
+			bounds.Encapsulate(transform.TransformPoint(pt));
+		}
+
+		bounds.size += new Vector3(voxelSize * 2, 0, voxelSize * 2);
+
+		return bounds;
+	}
+
+	void GenerateSegments()
+	{
+		points.Clear();
+		int pointCount = spriteShapeController.spline.GetPointCount();
+
+		for (int i = 1; i < pointCount; i++) 
+			GenerateSingleSegment(i-1, i);
+	
+		// build the very last collider from last point to the first point
+		if (!spriteShapeController.spline.isOpenEnded) 
+			GenerateSingleSegment(pointCount - 1, 0);
+	}
+
+	void GenerateSingleSegment(int leftIndex, int rightIndex)
+	{
+		//failsafe for creating infinite points
+		if (curveSegments < 1) return;
+
+		Vector3 pt1 = spriteShapeController.spline.GetPosition(leftIndex);
+		Vector3 pt2 = spriteShapeController.spline.GetPosition(rightIndex);
+
+		Vector3 tangent1 = spriteShapeController.spline.GetRightTangent(leftIndex);
+		Vector3 tangent2 = spriteShapeController.spline.GetLeftTangent(rightIndex);
+
+		// check if this is curved
+		bool curved = tangent1.magnitude > .1f || tangent2.magnitude > .1f;
+
+		if (! curved) {
+			points.Add(pt1);
+			points.Add(pt2);
+			return;
+		}
+
+		// generate curve
+		Vector3 anchor1 = pt1 + tangent1;
+		Vector3 anchor2 = pt2 + tangent2;
+
+		float segmentLength = 1f / (float)curveSegments;
+
+		for (float i = 0; i < 1; i += segmentLength){
+			points.Add(Math.GetBezier(i, pt1, anchor1, anchor2, pt2));
+		}
+	}
 	
 	[ButtonGroup]
-	void BuildCollider() 
+	void BuildCollider()
 	{
-		// destroy any previous colliders
-		RemoveCollider();
+		ClearAllColliders();
+		GenerateSegments();
+		
+		if (!filled)
+			BuildWalls(thickness);
 
-		int points = spriteShapeController.spline.GetPointCount();
-		Debug.Log("Found " + points + " points on sprite shape " + name);
+		if (filled)
+			BuildFill();
 
-		for (int i = 1; i < points; i++) {
-			Vector3 pt1 = spriteShapeController.spline.GetPosition(i-1);
-			Vector3 pt2 = spriteShapeController.spline.GetPosition(i);
-			BuildColliderSegment(pt1, pt2, i);
-		}
+		SetIsTrigger();
+
+		UpdateLayer();
+	}
+
+	void UpdateLayer()
+	{
+		SetLayer(colliderLayer.ToString());
+	}
+
+	void SetLayer(string layerName)
+	{
+		foreach (var wall in walls)
+			wall.layer = LayerMask.NameToLayer(layerName);
+
+		foreach (var voxel in voxels)
+			voxel.layer = LayerMask.NameToLayer(layerName);
+	}
+
+	void BuildWalls(float thickness) 
+	{
+		for (int i = 1; i < points.Count; i++) 
+			BuildColliderSegment(points[i-1], points[i], i, thickness);
 
 		// build the very last collider from last point to the first point
-		if (!spriteShapeController.spline.isOpenEnded) {
-			Vector3 last = spriteShapeController.spline.GetPosition(points-1);
-			Vector3 first = spriteShapeController.spline.GetPosition(0);
-			BuildColliderSegment(last, first, points);
-		}
+		if (!spriteShapeController.spline.isOpenEnded) 
+			BuildColliderSegment(points[points.Count - 1], points[0], points.Count, thickness);
 	}
+
+	[Button]
+	void BuildFill()
+	{
+		float prevThickness = thickness;
+
+		RemoveWalls();
+
+		// make thin borders so we can use them to calculate
+		BuildWalls(.01f);
+
+		Bounds bounds = GetBounds();
+		Vector3 voxelPos = FlatVoxelPos(bounds.min);
+
+		// iterate X
+		while (voxelPos.x < bounds.max.x) {
+
+			voxelPos = new Vector3(voxelPos.x, voxelPos.y, bounds.min.z);
+			Vector3 prev = voxelPos;
+
+			bool inside = false;
+
+			// iterate z
+			while (voxelPos.z < bounds.max.z) {
+
+				// raycast from prev point to next
+				foreach (var hit in Physics.RaycastAll(prev, voxelPos - prev, voxelSize, LayerMask.GetMask("Default", "Terrain"))) {
+					
+					// if the parent of the hit isnt this, we can ignore it
+					if (hit.transform.parent != transform) continue;
+					// ignore other voxels
+					if (voxels.Contains(hit.transform.gameObject)) continue;
+
+					// flip inside status
+					inside = !inside;
+				}
+
+				// create voxel collider
+				if (inside) {
+					GameObject newVoxel = new GameObject("voxel");
+					newVoxel.transform.parent = transform;
+					newVoxel.transform.position = FlatVoxelPos(voxelPos);
+					var boxCol = newVoxel.AddComponent<BoxCollider>();
+					boxCol.size = new Vector3(voxelSize, height, voxelSize);
+					voxels.Add(newVoxel);
+				}
+
+				prev = voxelPos;
+				voxelPos += Vector3.forward * voxelSize;
+			}
+			voxelPos += Vector3.right * voxelSize;
+		}
+
+		thickness = prevThickness;
+		BuildWalls(prevThickness);
+	}
+
+	Vector3 FlatVoxelPos (Vector3 input) => new Vector3(input.x, transform.position.y + height / 2, input.z);
 
 	[ButtonGroup]
-	void RemoveCollider()
+	void ClearAllColliders()
 	{
-		for (int i = 0; i < colliders.Length; i++) {
-			if (colliders[i] != null) 
-				DestroyImmediate(colliders[i]);
+		RemoveWalls();
+		RemoveVoxels();
+	}
+
+	void RemoveWalls()
+	{
+		for (int i = 0; i < walls.Count; i++) {
+			if (walls[i] != null) 
+				DestroyImmediate(walls[i]);
+		}
+		walls.Clear();
+	}
+
+	void RemoveVoxels()
+	{
+		for (int i = 0; i < voxels.Count; i++) {
+			if (voxels[i] != null) 
+				DestroyImmediate(voxels[i]);
+		}
+		voxels.Clear();
+	}
+
+	/// <summary>
+	/// For editor use only!
+	/// </summary>
+	void SetIsTrigger()
+	{
+		foreach (GameObject collider in walls)
+		{
+			if (!collider) continue;
+			collider.GetComponent<Collider>().isTrigger = isTrigger;
+		}
+
+		foreach (GameObject col in voxels)
+		{
+			if (!col) continue;
+			col.gameObject.GetComponent<Collider>().isTrigger = isTrigger;
 		}
 	}
 
-	void BuildColliderSegment(Vector3 pt1, Vector3 pt2, int index) 
+	void BuildColliderSegment(Vector3 pt1, Vector3 pt2, int index, float thickness) 
 	{
 		// calculate the angle to rotate the collider to
 		Vector3 offset = pt2 - pt1;
@@ -51,7 +263,7 @@ public class SpriteShapeCollider : MonoBehaviour
 
 		GameObject newCol = new GameObject("col " + index);
 		newCol.transform.parent = transform;
-		colliders[index] = newCol;
+		walls.Add(newCol);
 
 		var newBox = newCol.AddComponent<BoxCollider>();
 
