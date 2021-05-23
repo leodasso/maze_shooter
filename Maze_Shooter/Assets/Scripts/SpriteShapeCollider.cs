@@ -33,6 +33,9 @@ public class SpriteShapeCollider : MonoBehaviour
 	[Range(1, 30), Tooltip("The number of segments to break curved pieces into")]
 	public int curveSegments = 5;
 
+	[Range(0, .1f), Tooltip("Higher numbers means it will remove minor details")]
+	public float simplify = .005f;
+
 	[Tooltip("Hint: To make a trigger that more or less matches this sprite shape, just set the thickness to a negative number.")]
 	public float thickness = 1;
 	public UnityEngine.U2D.SpriteShapeController spriteShapeController;
@@ -73,18 +76,50 @@ public class SpriteShapeCollider : MonoBehaviour
 		return bounds;
 	}
 
-	void GenerateSegments()
+	// ignore points if the difference between the two segments is really negligable (as determined by wiggleRoom)
+	List<int> UsableIndexes()
 	{
-		points = new List<Vector3>();
-		int pointCount = spriteShapeController.spline.GetPointCount();
+		List<int> usable = new List<int>();
 
-		for (int i = 1; i < pointCount; i++) 
-			GenerateSingleSegment(i-1, i);
+		// Add first point
+		usable.Add(0);
+
+		int pointCount = spriteShapeController.spline.GetPointCount();
+		for (int i = 1; i < pointCount - 1; i++) {
+
+			Vector3 pt1 = spriteShapeController.spline.GetPosition(i-1);
+			Vector3 pt2 = spriteShapeController.spline.GetPosition(i);
+			Vector3 pt3 = spriteShapeController.spline.GetPosition(i + 1);
+
+			Vector3 prevDirection = pt2 - pt1;
+			Vector3 nextDirection = pt3 - pt2;
+			float dot = Vector3.Dot(prevDirection.normalized, nextDirection.normalized);
+
+			if (Mathf.Abs(dot) < 1 - simplify) 
+				usable.Add(i);
+		}
+
+		// add last point
+		usable.Add(pointCount - 1);
+		return usable;
+	}
+
+	void GenerateSegments()
+	{	
+		points.Clear();
+		points = new List<Vector3>();
+
+		// Generate a list of usable indexes. Basically, ignore ones that make lines that are ALMOST the same direction
+		var usable = UsableIndexes();
+
+		for (int i = 1; i < usable.Count; i++) 
+				GenerateSingleSegment(usable[i-1], usable[i]);
 	
 		// build the very last collider from last point to the first point
 		if (!spriteShapeController.spline.isOpenEnded) 
-			GenerateSingleSegment(pointCount - 1, 0);
+			GenerateSingleSegment(usable[usable.Count - 1], usable[0]);
 	}
+
 
 	void GenerateSingleSegment(int leftIndex, int rightIndex)
 	{
