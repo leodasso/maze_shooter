@@ -21,7 +21,7 @@ public class SpriteShapeCollider : MonoBehaviour
 	public bool filled;
 
 	[Tooltip("Voxel size for fill")]
-	[MinValue(.25f), ShowIf("filled")]
+	[MinValue(1f), ShowIf("filled")]
 	public float voxelSize = 1;
 
 	public float height = 5;

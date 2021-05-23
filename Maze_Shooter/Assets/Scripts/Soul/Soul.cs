@@ -9,6 +9,8 @@ using System.Collections.Generic;
 			 " this object should always be SoulLight layer! It checks for trigger enters of other soul lights.")]
 public class Soul : MonoBehaviour
 {
+	public GameObject soulOwner;
+
 	[ToggleLeft, SerializeField]
 	bool debug;
 
@@ -59,7 +61,7 @@ public class Soul : MonoBehaviour
 
 	public void ReturnToSafePos() 
 	{
-		transform.position = lastSafePos;
+		soulOwner.transform.position = lastSafePos;
 	}
 
     public void Reset()

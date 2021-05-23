@@ -2200,8 +2200,8 @@ MonoBehaviour:
         - HutongGames.PlayMaker.Actions.InvokeMethod
         - SetMoveSpeedMultiplier
         - HutongGames.PlayMaker.Actions.CallMethod
-        - HutongGames.PlayMaker.Actions.CallMethod
         - HutongGames.PlayMaker.Actions.Wait
+        - HutongGames.PlayMaker.Actions.CallMethod
         customNames:
         - 
         - 
@@ -2211,12 +2211,12 @@ MonoBehaviour:
         - hide main ghost sprite
         - 
         - ~AutoName
-        - ~AutoName
+        - 
         - 
         actionEnabled: 01010101010101010101
         actionIsOpen: 01000000000100010101
-        actionStartIndex: 0000000006000000080000000b00000010000000150000001c0000001f000000250000002c000000
-        actionHashCodes: ca51e90015264c018d1e88033a4cad053a4cad0559f9a0047d042b04ca51e900ca51e90048c01101
+        actionStartIndex: 0000000006000000080000000b00000010000000150000001c0000001f0000002600000029000000
+        actionHashCodes: ca51e90015264c018d1e88033a4cad053a4cad0559f9a0047d042b04ca51e90048c01101ca51e900
         unityObjectParams:
         - {fileID: 3491025872995073933}
         - {fileID: 0}
@@ -2305,13 +2305,13 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: ReturnToSafePos
+          value: DoDamage
         - useVariable: 0
           name: 
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: DoDamage
+          value: ReturnToSafePos
         fsmObjectParams:
         - useVariable: 0
           name: 
@@ -2325,40 +2325,16 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          typeName: Soul
-          value: {fileID: 0}
+          typeName: Health
+          value: {fileID: 3490914254658770499}
         - useVariable: 0
           name: 
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          typeName: Health
-          value: {fileID: 3490914254658770499}
+          typeName: Soul
+          value: {fileID: 546519159315548521}
         fsmVarParams:
-        - variableName: 
-          objectType: 
-          useVariable: 0
-          type: -1
-          floatValue: 0
-          intValue: 0
-          boolValue: 0
-          stringValue: 
-          vector4Value: {x: 0, y: 0, z: 0, w: 0}
-          objectReference: {fileID: 0}
-          arrayValue:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            type: -1
-            objectTypeName: 
-            floatValues: []
-            intValues: 
-            boolValues: 
-            stringValues: []
-            vector4Values: []
-            objectReferences: []
         - variableName: 
           objectType: 
           useVariable: 0
@@ -2410,6 +2386,30 @@ MonoBehaviour:
         - variableName: 
           objectType: 
           useVariable: 1
+          type: -1
+          floatValue: 0
+          intValue: 0
+          boolValue: 0
+          stringValue: 
+          vector4Value: {x: 0, y: 0, z: 0, w: 0}
+          objectReference: {fileID: 0}
+          arrayValue:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            type: -1
+            objectTypeName: 
+            floatValues: []
+            intValues: 
+            boolValues: 
+            stringValues: []
+            vector4Values: []
+            objectReferences: []
+        - variableName: 
+          objectType: 
+          useVariable: 0
           type: -1
           floatValue: 0
           intValue: 0
@@ -2509,15 +2509,15 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - FINISHED
-        byteData: 00000000000000000000000001
-        arrayParamSizes: 000000000000000001000000
+        byteData: 00000000000000000000010000
+        arrayParamSizes: 000000000100000000000000
         arrayParamTypes:
         - HutongGames.PlayMaker.FsmVar
         - HutongGames.PlayMaker.FsmVar
         - HutongGames.PlayMaker.FsmVar
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 18000000120000000c0000002700000001000000010000001400000011000000140000001100000001000000140000001200000005000000110000001100000014000000120000000500000011000000110000001400000012000000120000000f000000110000000f0000001100000005000000020000000100000018000000120000000c00000027000000010000000100000018000000120000000c000000270000002700000001000000010000000f0000001700000001000000
+        paramDataType: 18000000120000000c0000002700000001000000010000001400000011000000140000001100000001000000140000001200000005000000110000001100000014000000120000000500000011000000110000001400000012000000120000000f000000110000000f0000001100000005000000020000000100000018000000120000000c000000270000002700000001000000010000000f000000170000000100000018000000120000000c000000270000000100000001000000
         paramName:
         - behaviour
         - methodName
@@ -2553,12 +2553,6 @@ MonoBehaviour:
         - behaviour
         - methodName
         - parameters
-        - storeResult
-        - everyFrame
-        - manualUI
-        - behaviour
-        - methodName
-        - parameters
         - 
         - storeResult
         - everyFrame
@@ -2566,8 +2560,14 @@ MonoBehaviour:
         - time
         - finishEvent
         - realTime
-        paramDataPos: 0000000000000000000000000000000000000000010000000000000000000000010000000100000002000000020000000100000000000000020000000300000003000000020000000100000004000000050000000400000003000000040000000000000006000000010000000700000002000000030000000700000001000000050000000100000001000000080000000900000002000000060000000200000002000000030000000a0000000b00000002000000000000000c000000
-        paramByteDataSize: 0000000000000000000000000000000001000000010000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000040000000100000000000000000000000000000000000000010000000100000000000000000000000000000000000000000000000100000001000000000000000000000001000000
+        - behaviour
+        - methodName
+        - parameters
+        - storeResult
+        - everyFrame
+        - manualUI
+        paramDataPos: 000000000000000000000000000000000000000001000000000000000000000001000000010000000200000002000000010000000000000002000000030000000300000002000000010000000400000005000000040000000300000004000000000000000600000001000000070000000200000003000000070000000100000005000000010000000100000002000000080000000900000002000000000000000a000000020000000600000002000000030000000b0000000c000000
+        paramByteDataSize: 0000000000000000000000000000000001000000010000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000040000000100000000000000000000000000000000000000000000000100000001000000000000000000000001000000000000000000000000000000000000000100000001000000
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -3689,6 +3689,11 @@ PrefabInstance:
       propertyPath: onEnterLight.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2016560714818744396, guid: 6a7c7f88bf870264eb9614aab9d58180,
+        type: 3}
+      propertyPath: soulOwner
+      value: 
+      objectReference: {fileID: 3594317241385997719}
     - target: {fileID: 3480030456747975256, guid: 6a7c7f88bf870264eb9614aab9d58180,
         type: 3}
       propertyPath: m_RootOrder
@@ -3732,6 +3737,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2047417157355419941}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &546519159315548521 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2016560714818744396, guid: 6a7c7f88bf870264eb9614aab9d58180,
+    type: 3}
+  m_PrefabInstance: {fileID: 2047417157355419941}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae4854aa33dab8a439ac761b9dedca02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3189742950165517473
 PrefabInstance:
   m_ObjectHideFlags: 0
