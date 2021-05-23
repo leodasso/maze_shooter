@@ -117,5 +117,36 @@ namespace Arachnid
 		{
 			return vector.sqrMagnitude <= (maxRange * maxRange);
 		}
+
+		public static Vector3 Center(List<Vector3> points) 
+		{
+			Vector3 sum = Vector3.zero;
+			for (int i = 0; i < points.Count; i++) {
+				sum += points[i];
+			}
+
+			return sum / points.Count;
+		}
+
+		/// <summary>
+		/// Returns a point at time t for a bezier curve. Why does this work? I have no idea.
+		/// </summary>
+		/// <param name="t">time of the curve between 0 and 1</param>
+		/// <param name="startPoint"></param>
+		/// <param name="startAnchor"></param>
+		/// <param name="endAnchor"></param>
+		/// <param name="endPoint"></param>
+		/// <returns></returns>
+		public static Vector3 GetBezier(float t, Vector3 startPoint, Vector3 startAnchor, Vector3 endAnchor, Vector3 endPoint)
+		{
+			Vector3 c = 3 * (startAnchor - startPoint);
+			Vector3 b = 3 * (endAnchor - startAnchor) - c;
+			Vector3 a = endPoint - startPoint - c - b;
+
+			float Cube = t * t * t;
+			float Square = t * t;
+
+			return (a * Cube) + (b * Square) + (c * t) + startPoint;
+		}
 	}
 }
