@@ -274,6 +274,7 @@ MonoBehaviour:
   - {fileID: 6155762964191326801, guid: 0c3f01e88b83ba54f8950c11243331ed, type: 3}
   - {fileID: 6155762964191326801, guid: 0c3f01e88b83ba54f8950c11243331ed, type: 3}
   - {fileID: 6155762964191326801, guid: 0c3f01e88b83ba54f8950c11243331ed, type: 3}
+  - {fileID: 6937503820875422520, guid: 083996b602cbbad4784e54811085a332, type: 3}
   - {fileID: 3977796414700213780, guid: 61fe193d9d0619d44b9d8369e88a62b4, type: 3}
   - {fileID: 1438711829364603170, guid: a1091afeac9984642b3e16d84dee9837, type: 3}
   - {fileID: 1438711829364603170, guid: a1091afeac9984642b3e16d84dee9837, type: 3}
@@ -286,12 +287,30 @@ MonoBehaviour:
   destroyTime: 0.5
   minSpawnScale: 0.4
   maxSpawnScale: 1
-  spawnFrequencyIncreaseSpeed:
-    useConstant: 0
-    constantValue: 1
-    valueObject: {fileID: 0}
-  minSpawnFrequency: 0.2
-  maxSpawnFrequency: 4
+  spawnFrequency:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.039604
+      inSlope: 0.3428885
+      outSlope: 0.3428885
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.08650594
+    - serializedVersion: 3
+      time: 1
+      value: 6.0641174
+      inSlope: 2.3752298
+      outSlope: 2.3752298
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08685446
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1310278863
 MonoBehaviour:
   m_ObjectHideFlags: 0

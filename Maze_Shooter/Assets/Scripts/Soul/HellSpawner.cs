@@ -46,25 +46,15 @@ public class HellSpawner : MonoBehaviour
     [Tooltip("The max scale of a spawned evil eye.")]
     [HorizontalGroup("minMax"), LabelText("Max"), LabelWidth(60)]
     public float maxSpawnScale = 1.2f;
-    
-    [BoxGroup("freq", GroupName = "Spawn Frequency"), LabelText("Increase Speed")]
-    public FloatReference spawnFrequencyIncreaseSpeed;
-    
-    [HorizontalGroup("freq/minMax"), LabelText("Min"), LabelWidth(60)]
-    public float minSpawnFrequency;
-    
-    [HorizontalGroup("freq/minMax"), LabelText("Max"), LabelWidth(60)]
-    public float maxSpawnFrequency;
-    
-    [ShowInInspector, ReadOnly, BoxGroup("freq")]
-    float _spawnFrequency;
+
+	[Tooltip("X-axis is the normalized time in darkness (0-1) \n Y-axis is the number of spawns per second")]
+	public AnimationCurve spawnFrequency = AnimationCurve.Linear(0, 0, 1, 5);
     
     // Evil eye instances that have been spawned in
     List<GameObject> _instances = new List<GameObject>();
 
     GameObject _hellSpawnParent;
     float _timeInDarkness;
-
 	Vector3 playerPos;
 
     void OnDrawGizmosSelected()
@@ -82,7 +72,6 @@ public class HellSpawner : MonoBehaviour
 
 	public void DarknessUpdate()
 	{
-		CalculateSpawnFrequency();
         transform.position = playerPos;
 
 		// If the player spends too much time in the darkness, it's game over man, game over
@@ -103,7 +92,7 @@ public class HellSpawner : MonoBehaviour
 		DestroyDemons();
 		darknessLevel.Value = 0;
 		_timeInDarkness = 0;
-		_spawnFrequency = 0;
+		spawnDelay = 2;
 	}
 
     /// <summary>
@@ -145,7 +134,7 @@ public class HellSpawner : MonoBehaviour
         _instances.Add(newInstance);
         
         // Setup for the next spawn
-        spawnDelay = 1 / _spawnFrequency;
+        spawnDelay = 1 / spawnFrequency.Evaluate(darknessLevel.Value);
     }
 
     void SpawnGameOverObject()
@@ -161,12 +150,6 @@ public class HellSpawner : MonoBehaviour
         if (!firstPlayer) return null;
         return firstPlayer.gameObject;
 	}
-
-    void CalculateSpawnFrequency()
-    {
-		_spawnFrequency += spawnFrequencyIncreaseSpeed.Value * Time.deltaTime;
-		_spawnFrequency = Mathf.Clamp(_spawnFrequency, minSpawnFrequency, maxSpawnFrequency);
-    }
 
     GameObject HellSpawnParent()
     {

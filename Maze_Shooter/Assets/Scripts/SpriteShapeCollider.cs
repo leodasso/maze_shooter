@@ -75,7 +75,7 @@ public class SpriteShapeCollider : MonoBehaviour
 
 	void GenerateSegments()
 	{
-		points.Clear();
+		points = new List<Vector3>();
 		int pointCount = spriteShapeController.spline.GetPointCount();
 
 		for (int i = 1; i < pointCount; i++) 
@@ -233,6 +233,7 @@ public class SpriteShapeCollider : MonoBehaviour
 	[ButtonGroup]
 	void ClearAllColliders()
 	{
+		points = new List<Vector3>();
 		RemoveWalls();
 		RemoveVoxels();
 	}
@@ -243,7 +244,7 @@ public class SpriteShapeCollider : MonoBehaviour
 			if (walls[i] != null) 
 				DestroyImmediate(walls[i]);
 		}
-		walls.Clear();
+		walls = new List<GameObject>();
 	}
 
 	void RemoveVoxels()
@@ -252,7 +253,7 @@ public class SpriteShapeCollider : MonoBehaviour
 			if (voxels[i] != null) 
 				DestroyImmediate(voxels[i]);
 		}
-		voxels.Clear();
+		voxels = new List<GameObject>();
 	}
 
 	/// <summary>
