@@ -17,6 +17,9 @@ public class Soul : MonoBehaviour
 	[ShowInInspector, ReadOnly]
 	bool isLit = false;
 
+	[ShowInInspector, ReadOnly]
+	bool inInterior = false;
+
 	[SerializeField, Space]
 	UnityEvent onEnterDark;
 
@@ -30,7 +33,7 @@ public class Soul : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool litThisFrame = false;
+        bool litThisFrame = inInterior;
 
         foreach (var soulLight in lightSources)
         {
@@ -58,6 +61,16 @@ public class Soul : MonoBehaviour
 		if (isLit) 
 			lastSafePos = transform.position;
     }
+
+	public void EnterInterior() 
+	{
+		inInterior = true;
+	}
+
+	public void ExitInterior()
+	{
+		inInterior = false;
+	}
 
 	public void ReturnToSafePos() 
 	{
