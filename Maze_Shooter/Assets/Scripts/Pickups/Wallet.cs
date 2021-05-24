@@ -2,12 +2,9 @@
 using UnityEngine;
 using Arachnid;
 
-public class Wallet : MonoBehaviour
+public class Wallet : PickupGulper
 {
     public SavedInt savedMoneyValue;
-
-	[SerializeField]
-	float coinInWalletDelay = .5f;
     
 	[SerializeField]
 	IntValue _money;
@@ -33,17 +30,15 @@ public class Wallet : MonoBehaviour
         TrySave();
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        Coin otherCoin = other.GetComponent<Coin>();
-        if (!otherCoin) return;
-		StartCoroutine(AddCoin(otherCoin.value));
-        otherCoin.Grab();
-    }
+	protected override void OnTriggerEnter(Collider other)
+	{
+		TryGulpPickup<Coin>(other);
+	}
 
-	IEnumerator AddCoin(int value) {
-		yield return new WaitForSecondsRealtime(coinInWalletDelay);
-		_money.Value += value;
+	protected override void OnGulp<T>(T pickup)
+	{
+		Coin coin = pickup as Coin;
+		_money.Value += coin.value;
 	}
 
     void TrySave()

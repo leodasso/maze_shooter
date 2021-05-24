@@ -28,7 +28,7 @@ public class Pickup : MonoBehaviour
         rigidbody.velocity = spawnVelocity + Random.insideUnitSphere * spawnVelocityRandomness;
 	}
 
-	public void Grab()
+	public void GetGulped()
     {
         onGrabbed.Invoke();
         Destroy(gameObject, destroyDelay);
