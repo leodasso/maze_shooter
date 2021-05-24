@@ -63,9 +63,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0485e8f6c81ea574eb6f002af7b277d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnVelocity: {x: 0, y: 10, z: 0}
-  spawnVelocityRandomness: 3
-  rigidbody: {fileID: 1264617879074373012}
+  jumpOnStart: 0
+  jumpVelocity: {x: 0, y: 10, z: 0}
+  jumpVelocityRandomness: 3
   destroyDelay: 0.3
   onGrabbed:
     m_PersistentCalls:
@@ -82,18 +82,6 @@ MonoBehaviour:
           m_StringArgument: grab
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1264617879074373014}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 122613635808517137}
         m_TargetAssemblyTypeName: AudioAction, Assembly-CSharp
         m_MethodName: Play
@@ -106,7 +94,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  jumpOnStart: 0
+  rigidbody: {fileID: 1264617879074373012}
   value: 1
 --- !u!54 &1264617879074373012
 Rigidbody:
@@ -158,6 +146,7 @@ MonoBehaviour:
   shadowPrefab: {fileID: 1024560133667443443, guid: 197d5c7da3c5ae849952a8a55cad5e77,
     type: 3}
   shadowScale: 1
+  castCameraDown: 0
   castingMask:
     serializedVersion: 2
     m_Bits: 2097152
@@ -186,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioCollection: {fileID: 11400000, guid: c3a593691936cd8448f57ff8e7034aac, type: 2}
   volume: 1
+  playDelay: 0
   playOnAwake: 0
   playOnEnable: 0
 --- !u!1 &7202734879623207424
@@ -5111,7 +5101,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ade28402e2251854ba0de1dfb1701960, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9682f69ca2e7aa84596792aaa296460d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5134,7 +5124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a05506e86408f4bae29a22b776d5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progress: 0.511485
+  progress: 0.3072096
   spriteRenderer: {fileID: 1469797232963627782}
   sprites:
   - {fileID: 21300000, guid: 50700d8d3977ff34b903588454cd5016, type: 3}
@@ -5150,8 +5140,10 @@ MonoBehaviour:
   pingPong: 0
   loop: 1
   frameRate: 7
+  resetOnEnable: 0
   setProgressOnStart: 0
   startProgress: 0
+  spriteAnimEvents: []
 --- !u!114 &7533122127102144165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5176,6 +5168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97e8ed2baea5324b9e68bb303521efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   effectPrefab: {fileID: 6055410014917391117, guid: a55d474928c2cbf4e8e2a18716873a1f,
     type: 3}
   lifetime: 5
