@@ -158,8 +158,8 @@ MonoBehaviour:
         serializedVersion: 2
         x: 272
         y: 106
-        width: 122
-        height: 48
+        width: 100
+        height: 32
       isBreakpoint: 0
       isSequence: 0
       hideUnused: 0
@@ -172,27 +172,23 @@ MonoBehaviour:
         linkStyle: 0
         linkConstraint: 0
         colorIndex: 0
-      - fsmEvent:
-          name: moneyChanged
-          isSystemEvent: 0
-          isGlobal: 0
-        toState: 
-        linkStyle: 0
-        linkConstraint: 0
-        colorIndex: 0
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Actions.CallMethod
         - HutongGames.PlayMaker.Actions.Wait
         - HutongGames.PlayMaker.Actions.CallMethod
+        - HutongGames.PlayMaker.Actions.CallMethod
+        - HutongGames.PlayMaker.Actions.CallMethod
         customNames:
         - ~AutoName
         - 
         - ~AutoName
-        actionEnabled: 010101
-        actionIsOpen: 010101
-        actionStartIndex: 000000000600000009000000
-        actionHashCodes: ca51e90048c01101ca51e900
+        - ~AutoName
+        - ~AutoName
+        actionEnabled: 0101010101
+        actionIsOpen: 0101010101
+        actionStartIndex: 0000000006000000090000000f00000016000000
+        actionHashCodes: ca51e90048c01101ca51e900ca51e900ca51e900
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -215,6 +211,18 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: UpdateText
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: DoShake
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: DoShake
         fsmObjectParams:
         - useVariable: 0
           name: 
@@ -230,12 +238,122 @@ MonoBehaviour:
           networkSync: 0
           typeName: IntValueDisplay
           value: {fileID: 3206705462706482645}
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          typeName: Shaker
+          value: {fileID: 4780579289360043203}
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          typeName: Shaker
+          value: {fileID: 7441373838960065909}
         fsmVarParams:
         - variableName: 
           objectType: 
           useVariable: 0
           type: -1
           floatValue: 0
+          intValue: 0
+          boolValue: 0
+          stringValue: 
+          vector4Value: {x: 0, y: 0, z: 0, w: 0}
+          objectReference: {fileID: 0}
+          arrayValue:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            type: -1
+            objectTypeName: 
+            floatValues: []
+            intValues: 
+            boolValues: 
+            stringValues: []
+            vector4Values: []
+            objectReferences: []
+        - variableName: 
+          objectType: 
+          useVariable: 0
+          type: -1
+          floatValue: 0
+          intValue: 0
+          boolValue: 0
+          stringValue: 
+          vector4Value: {x: 0, y: 0, z: 0, w: 0}
+          objectReference: {fileID: 0}
+          arrayValue:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            type: -1
+            objectTypeName: 
+            floatValues: []
+            intValues: 
+            boolValues: 
+            stringValues: []
+            vector4Values: []
+            objectReferences: []
+        - variableName: 
+          objectType: UnityEngine.Object
+          useVariable: 0
+          type: 0
+          floatValue: 0.3
+          intValue: 0
+          boolValue: 0
+          stringValue: 
+          vector4Value: {x: 0, y: 0, z: 0, w: 0}
+          objectReference: {fileID: 0}
+          arrayValue:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            type: -1
+            objectTypeName: 
+            floatValues: []
+            intValues: 
+            boolValues: 
+            stringValues: []
+            vector4Values: []
+            objectReferences: []
+        - variableName: 
+          objectType: 
+          useVariable: 0
+          type: -1
+          floatValue: 0
+          intValue: 0
+          boolValue: 0
+          stringValue: 
+          vector4Value: {x: 0, y: 0, z: 0, w: 0}
+          objectReference: {fileID: 0}
+          arrayValue:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            type: -1
+            objectTypeName: 
+            floatValues: []
+            intValues: 
+            boolValues: 
+            stringValues: []
+            vector4Values: []
+            objectReferences: []
+        - variableName: 
+          objectType: UnityEngine.Object
+          useVariable: 0
+          type: 0
+          floatValue: 0.3
           intValue: 0
           boolValue: 0
           stringValue: 
@@ -297,14 +415,16 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - FINISHED
-        byteData: 0000010000
-        arrayParamSizes: 0000000000000000
+        byteData: 000001000000000000
+        arrayParamSizes: 00000000000000000100000001000000
         arrayParamTypes:
+        - HutongGames.PlayMaker.FsmVar
+        - HutongGames.PlayMaker.FsmVar
         - HutongGames.PlayMaker.FsmVar
         - HutongGames.PlayMaker.FsmVar
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 18000000120000000c0000002700000001000000010000000f000000170000000100000018000000120000000c000000270000000100000001000000
+        paramDataType: 18000000120000000c0000002700000001000000010000000f000000170000000100000018000000120000000c00000027000000010000000100000018000000120000000c0000002700000027000000010000000100000018000000120000000c00000027000000270000000100000001000000
         paramName:
         - behaviour
         - methodName
@@ -321,8 +441,22 @@ MonoBehaviour:
         - storeResult
         - everyFrame
         - manualUI
-        paramDataPos: 000000000000000000000000000000000000000001000000000000000000000002000000010000000100000001000000010000000300000004000000
-        paramByteDataSize: 000000000000000000000000000000000100000001000000000000000000000001000000000000000000000000000000000000000100000001000000
+        - behaviour
+        - methodName
+        - parameters
+        - 
+        - storeResult
+        - everyFrame
+        - manualUI
+        - behaviour
+        - methodName
+        - parameters
+        - 
+        - storeResult
+        - everyFrame
+        - manualUI
+        paramDataPos: 0000000000000000000000000000000000000000010000000000000000000000020000000100000001000000010000000100000003000000040000000200000002000000020000000200000003000000050000000600000003000000030000000300000004000000050000000700000008000000
+        paramByteDataSize: 0000000000000000000000000000000001000000010000000000000000000000010000000000000000000000000000000000000001000000010000000000000000000000000000000000000000000000010000000100000000000000000000000000000000000000000000000100000001000000
     - name: hidden
       description: 
       colorIndex: 0
@@ -510,7 +644,7 @@ MonoBehaviour:
           tooltip: How long to wait between getting money and showing the hud
           showInInspector: 1
           networkSync: 0
-          value: 0.6
+          value: 0.333
         fsmIntParams: []
         fsmBoolParams: []
         fsmVector2Params: []
@@ -717,6 +851,7 @@ GameObject:
   - component: {fileID: 3206705462656782586}
   - component: {fileID: 3206705462656782584}
   - component: {fileID: 3206705462656782587}
+  - component: {fileID: 4780579289360043203}
   m_Layer: 5
   m_Name: sprite
   m_TagString: Untagged
@@ -783,6 +918,44 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4780579289360043203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3206705462656782581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b58f3735ae92cda4bad8536225c14e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeIntensity: {x: 2, y: 2, z: 0}
+  shakeFrequency: 35
+  autoShakeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0017242432
+      value: 1.003315
+      inSlope: 0.13952291
+      outSlope: 0.13952291
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.035469364
+    - serializedVersion: 3
+      time: 0.99911183
+      value: -0.0016502142
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3206705462706482641
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,6 +968,7 @@ GameObject:
   - component: {fileID: 3206705462706482644}
   - component: {fileID: 3206705462706482647}
   - component: {fileID: 3206705462706482645}
+  - component: {fileID: 7441373838960065909}
   m_Layer: 5
   m_Name: count
   m_TagString: Untagged
@@ -819,7 +993,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -3.851}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 56.4, y: -4}
+  m_AnchoredPosition: {x: 49.4, y: -11.7}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3206705462706482644
@@ -935,6 +1109,44 @@ MonoBehaviour:
   text: {fileID: 3206705462706482647}
   intValue: {fileID: 11400000, guid: d37cb474f6b272043941496126fa7f86, type: 2}
   refreshOnUpdate: 0
+--- !u!114 &7441373838960065909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3206705462706482641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b58f3735ae92cda4bad8536225c14e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeIntensity: {x: -2, y: 3, z: 0}
+  shakeFrequency: 35
+  autoShakeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0017242432
+      value: 1.003315
+      inSlope: 0.13952291
+      outSlope: 0.13952291
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.035469364
+    - serializedVersion: 3
+      time: 0.99911183
+      value: -0.0016502142
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4312616051970143772
 GameObject:
   m_ObjectHideFlags: 0
