@@ -5,14 +5,20 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 
 [TypeInfoBox("Soul is nourished by the light. If a spirit strays too far from the light, " +
-             "soul is drained. When soul is empty, the spirit will be dragged into hell.")]
+             "soul is drained. When soul is empty, the spirit will be dragged into hell. \n " + 
+			 " this object should always be SoulLight layer! It checks for trigger enters of other soul lights.")]
 public class Soul : MonoBehaviour
 {
+	public GameObject soulOwner;
+
 	[ToggleLeft, SerializeField]
 	bool debug;
 
 	[ShowInInspector, ReadOnly]
 	bool isLit = false;
+
+	[ShowInInspector, ReadOnly]
+	bool inInterior = false;
 
 	[SerializeField, Space]
 	UnityEvent onEnterDark;
@@ -20,22 +26,21 @@ public class Soul : MonoBehaviour
 	[SerializeField]
 	UnityEvent onEnterLight;
     
-    List<SoulLight> lightSources = new List<SoulLight>();
+    List<Collider> lightSources = new List<Collider>();
 
 	Vector3 lastSafePos;
 
     // Update is called once per frame
     void Update()
     {
-        bool litThisFrame = false;
+        bool litThisFrame = inInterior;
 
-        foreach (SoulLight soulLight in lightSources)
+        foreach (var soulLight in lightSources)
         {
-            if (!soulLight.isActiveAndEnabled) continue;
-            if (soulLight.DoesLightPoint(transform.position)) {
-				litThisFrame = true;
-				break;
-			}
+            if (!soulLight.enabled) continue;
+			if (!soulLight.gameObject.activeInHierarchy) continue;
+			litThisFrame = true;
+			break;
         }
 
 		if (!isLit && litThisFrame) {
@@ -57,9 +62,19 @@ public class Soul : MonoBehaviour
 			lastSafePos = transform.position;
     }
 
+	public void EnterInterior() 
+	{
+		inInterior = true;
+	}
+
+	public void ExitInterior()
+	{
+		inInterior = false;
+	}
+
 	public void ReturnToSafePos() 
 	{
-		transform.position = lastSafePos;
+		soulOwner.transform.position = lastSafePos;
 	}
 
     public void Reset()
@@ -69,18 +84,12 @@ public class Soul : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        SoulLight soulLight = other.GetComponent<SoulLight>();
-        if (!soulLight) return;
-        
-        if (!lightSources.Contains(soulLight))
-            lightSources.Add(soulLight);
+        if (!lightSources.Contains(other))
+            lightSources.Add(other);
     }
 
     void OnTriggerExit(Collider other)
     {
-        SoulLight soulLight = other.GetComponent<SoulLight>();
-        if (!soulLight) return;
-
-        lightSources.Remove(soulLight);
+        lightSources.Remove(other);
     }
 }

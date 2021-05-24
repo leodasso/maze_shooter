@@ -9,9 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4605964757171427396}
-  - component: {fileID: 2019481208196158923}
   - component: {fileID: 8031817092020740933}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Soul Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,54 +31,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2019481208196158923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7034134504172605783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f62e0317862ed12419c5bdac94aeef61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  intensity: 1
-  intensityCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1.0045776
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.6580193
-      value: 0.70373267
-      inSlope: -1.4762028
-      outSlope: -1.4762028
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.9987793
-      value: -0.0030517578
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  collider: {fileID: 8031817092020740933}
-  souls: []
 --- !u!135 &8031817092020740933
 SphereCollider:
   m_ObjectHideFlags: 0
