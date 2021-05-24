@@ -1,36 +1,48 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 public class Pickup : MonoBehaviour
 {
-	public Vector3 spawnVelocity = new Vector3(0, 5, 0);
-    public float spawnVelocityRandomness = 3;
+	[ToggleLeft]
+	public bool jumpOnStart;
 
-	[SerializeField]
+	[FormerlySerializedAs("spawnVelocity")]
+	public Vector3 jumpVelocity = new Vector3(0, 5, 0);
+
+	[FormerlySerializedAs("spawnVelocityRandomness")]
+    public float jumpVelocityRandomness = 3;
+
+	[SerializeField, Tooltip("Delay in seconds between getting gulped and destroying"), MinValue(0)]
 	float destroyDelay = .5f;
 
 	[SerializeField]
     protected UnityEvent onGrabbed;
-	public bool jumpOnStart;
+
 
 	[SerializeField]
 	protected new Rigidbody rigidbody;
-
+ 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         if (jumpOnStart) Jump();
     }
 
+	[Button]
 	public void Jump() 
 	{
 		rigidbody.isKinematic = false;
-        rigidbody.velocity = spawnVelocity + Random.insideUnitSphere * spawnVelocityRandomness;
+        rigidbody.velocity = jumpVelocity + Random.insideUnitSphere * jumpVelocityRandomness;
 	}
 
 	public void GetGulped()
     {
         onGrabbed.Invoke();
+		var col = GetComponent<Collider>();
+		if (col)
+			col.enabled = false;
         Destroy(gameObject, destroyDelay);
     }
 }

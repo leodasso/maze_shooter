@@ -47,6 +47,7 @@ public class Health : MonoBehaviour, IDestructible
 
 	float _invulnerableTimer;
 
+	public bool HpIsFull => ActualHp >= maxHearts.Value;
 	public bool IsInvulnerable => _invulnerableTimer > 0;
 	public bool IsKilled => _isKilled;
 	public Hearts ActualHp {
@@ -121,12 +122,12 @@ public class Health : MonoBehaviour, IDestructible
 		if (mainHealth) mainHealth.onDamagedEvent.Invoke();
 	}
 
-	public void Heal(int amount)
+	public void Heal(Hearts amount)
 	{
 		if (!enabled) return;
 		ActualHp += amount;
-		ActualHp = Mathf.Clamp(ActualHp.TotalPoints, 0, maxHearts.Value.TotalPoints);
-		if (onHealed != null) onHealed.Invoke(amount);
+		ActualHp = Hearts.Clamp(ActualHp, 0, maxHearts.Value);
+		if (onHealed != null) onHealed.Invoke(amount.TotalPoints);
 	}
 
 	public void SetHp(Hearts newHp)
