@@ -5,6 +5,9 @@ using Sirenix.OdinInspector;
 
 public class Pickup : MonoBehaviour
 {
+	[SerializeField]
+	protected new Rigidbody rigidbody;
+
 	[ToggleLeft]
 	public bool jumpOnStart;
 
@@ -14,15 +17,16 @@ public class Pickup : MonoBehaviour
 	[FormerlySerializedAs("spawnVelocityRandomness")]
     public float jumpVelocityRandomness = 3;
 
-	[SerializeField, Tooltip("Delay in seconds between getting gulped and destroying"), MinValue(0)]
-	float destroyDelay = .5f;
+	[SerializeField, Tooltip("Destroy when grabbed"), ToggleLeft, Space]
+	protected bool autoDestroy = true;
+
+	[ShowIf("autoDestroy"), SerializeField, Tooltip("Delay in seconds between getting gulped and destroying"), MinValue(0)]
+	protected float destroyDelay = .5f;
 
 	[SerializeField]
     protected UnityEvent onGrabbed;
 
 
-	[SerializeField]
-	protected new Rigidbody rigidbody;
  
     // Start is called before the first frame update
     protected virtual void Start()
@@ -37,12 +41,14 @@ public class Pickup : MonoBehaviour
         rigidbody.velocity = jumpVelocity + Random.insideUnitSphere * jumpVelocityRandomness;
 	}
 
-	public void GetGulped()
+	public virtual void GetGulped()
     {
         onGrabbed.Invoke();
 		var col = GetComponent<Collider>();
 		if (col)
 			col.enabled = false;
-        Destroy(gameObject, destroyDelay);
+
+		if (autoDestroy)
+        	Destroy(gameObject, destroyDelay);
     }
 }

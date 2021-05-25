@@ -15,13 +15,14 @@ public class HeartGulper : PickupGulper
 	{
 		HeartPickup heart = pickup as HeartPickup;
 
-		// if player has full hp? TODO
+		// if player has full hp? 
 		if (health.HpIsFull) {
-			Debug.Log("Want to heal " + health.name + " but its HP is full. maybe spawn coins?");
+			heart.BreakApart();
 			return;
 		}
 
 		// otherwise add to player HP
+		heart.AddHearts();
 		health.Heal(heart.amount);
 	}
 }

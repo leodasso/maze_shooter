@@ -45,7 +45,6 @@ GameObject:
   - component: {fileID: 8329381951491282885}
   - component: {fileID: 8329381951491282875}
   - component: {fileID: 8329381951491282881}
-  - component: {fileID: 8329381951491282880}
   m_Layer: 15
   m_Name: crystal chest
   m_TagString: Untagged
@@ -172,6 +171,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   linkHealth: 0
+  customTransitionTime: 0
+  transitionTime: 0
   allowManualExit: 1
   customReturnPos: 0
   returnPos: {fileID: 0}
@@ -322,32 +323,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de6c16f983620a4da43f9e72b293064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   effectPrefab: {fileID: 168880279961541572, guid: a56013af621401649bcca4ccd79d8ccc,
     type: 3}
   lifetime: 5
   delay: 0
---- !u!114 &8329381951491282880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8329381951491282872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 997b69907ee6a7244944c6de53f6f4af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  instantiateStagePlayer: 0
-  allowMultipleInstances: 0
-  applyScale: 0
-  randomScale: 0
-  randomScaleRange: {x: 1, y: 1}
-  prefabToInstantiate: {fileID: 0}
-  createInstance: 0
-  destroyInstance: 0
-  instancePlaceInHierarchy: 0
-  instanceRotation: 0
 --- !u!1 &8329381951518258476
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a05506e86408f4bae29a22b776d5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progress: 0.654032
+  progress: 0.6783693
   spriteRenderer: {fileID: 8329381953610170948}
   sprites:
   - {fileID: 21300000, guid: 1313bfdb52ce8fb45a2ef4d50062b25a, type: 3}
@@ -798,7 +778,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f23cfb66a7217a14ea8caf84c3c63f2c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 89e261f99d13c854fbb8c79326966090, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
