@@ -47,10 +47,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8359534170292264252}
   - component: {fileID: 8359534170292264255}
-  - component: {fileID: 8359534170292264254}
   - component: {fileID: 644429535258030666}
   - component: {fileID: 2442505056104991679}
   - component: {fileID: 6579821444462136105}
+  - component: {fileID: 8359534170292264254}
+  - component: {fileID: 7661321740085720305}
+  - component: {fileID: 1363955259954285747}
   m_Layer: 5
   m_Name: HUD HP
   m_TagString: Untagged
@@ -101,48 +103,6 @@ MonoBehaviour:
   - {fileID: 8359534171415995667}
   - {fileID: 8359534170385881361}
   - {fileID: 8359534171346419450}
---- !u!114 &8359534170292264254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8359534170292264253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a83b5d72ab14f3f4c8442f76808cf317, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvents:
-  - {fileID: 11400000, guid: 7754da83de5fff447a55ada7994fcd73, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6579821444462136105}
-        m_TargetAssemblyTypeName: PlayMakerFSM, PlayMaker
-        m_MethodName: SendEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: hpChange
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8359534170292264255}
-        m_TargetAssemblyTypeName: HpGui, Assembly-CSharp
-        m_MethodName: FetchNewValue
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  comment: 
 --- !u!114 &644429535258030666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,8 +189,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 58
-        y: 112
+        x: 170.92188
+        y: 108.921875
         width: 161.5
         height: 32
       isBreakpoint: 0
@@ -301,22 +261,14 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 352
-        y: 123
+        x: 443.72656
+        y: 132.84375
         width: 100
-        height: 32
+        height: 16
       isBreakpoint: 0
       isSequence: 0
       hideUnused: 0
-      transitions:
-      - fsmEvent:
-          name: hpChange
-          isSystemEvent: 0
-          isGlobal: 0
-        toState: show
-        linkStyle: 0
-        linkConstraint: 0
-        colorIndex: 0
+      transitions: []
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Actions.CallMethod
@@ -402,14 +354,14 @@ MonoBehaviour:
         - manualUI
         paramDataPos: 000000000000000000000000000000000000000001000000
         paramByteDataSize: 000000000000000000000000000000000100000001000000
-    - name: show
-      description: HP changed so we show the HP hud
+    - name: show damage
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 316
-        y: 257
-        width: 164.5
+        x: 57.335938
+        y: 334.77344
+        width: 112
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -525,8 +477,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 570
-        y: 254
+        x: 216.90625
+        y: 345.77344
         width: 186.5
         height: 32
       isBreakpoint: 0
@@ -647,8 +599,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 624
-        y: 124
+        x: 435.64062
+        y: 205.16406
         width: 122
         height: 32
       isBreakpoint: 0
@@ -760,6 +712,188 @@ MonoBehaviour:
         - manualUI
         paramDataPos: 000000000000000000000000000000000000000000000000000000000100000002000000
         paramByteDataSize: 000000000000000001000000000000000000000000000000000000000100000001000000
+    - name: show healed
+      description: HP changed so we show the HP hud
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 805.08594
+        y: 339.65625
+        width: 171
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: FINISHED
+          isSystemEvent: 1
+          isGlobal: 0
+        toState: shake hearts
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.Wait
+        - HutongGames.PlayMaker.Actions.CallMethod
+        customNames:
+        - 
+        - ~AutoName
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000003000000
+        actionHashCodes: 48c01101ca51e900
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams: []
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams: []
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: Show
+        fsmObjectParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          typeName: HudElement
+          value: {fileID: 644429535258030666}
+        fsmVarParams:
+        - variableName: 
+          objectType: 
+          useVariable: 0
+          type: -1
+          floatValue: 0
+          intValue: 0
+          boolValue: 0
+          stringValue: 
+          vector4Value: {x: 0, y: 0, z: 0, w: 0}
+          objectReference: {fileID: 0}
+          arrayValue:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            type: -1
+            objectTypeName: 
+            floatValues: []
+            intValues: 
+            boolValues: 
+            stringValues: []
+            vector4Values: []
+            objectReferences: []
+        fsmArrayParams: []
+        fsmEnumParams: []
+        fsmFloatParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0.5
+        fsmIntParams: []
+        fsmBoolParams: []
+        fsmVector2Params: []
+        fsmVector3Params: []
+        fsmColorParams: []
+        fsmRectParams: []
+        fsmQuaternionParams: []
+        stringParams:
+        - FINISHED
+        byteData: 010000
+        arrayParamSizes: 00000000
+        arrayParamTypes:
+        - HutongGames.PlayMaker.FsmVar
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 0f000000170000000100000018000000120000000c000000270000000100000001000000
+        paramName:
+        - time
+        - finishEvent
+        - realTime
+        - behaviour
+        - methodName
+        - parameters
+        - storeResult
+        - everyFrame
+        - manualUI
+        paramDataPos: 000000000000000000000000000000000000000000000000000000000100000002000000
+        paramByteDataSize: 000000000000000001000000000000000000000000000000000000000100000001000000
+    - name: shake hearts
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 614.6328
+        y: 343.5
+        width: 106
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: FINISHED
+          isSystemEvent: 1
+          isGlobal: 0
+        toState: show new value
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - InvokeGameEvent
+        customNames:
+        - 
+        actionEnabled: 01
+        actionIsOpen: 01
+        actionStartIndex: 00000000
+        actionHashCodes: 7f1a7103
+        unityObjectParams:
+        - {fileID: 11400000, guid: 04bbb4f487d587a46b5dfbe713bc857c, type: 2}
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams: []
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams: []
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams: []
+        fsmObjectParams: []
+        fsmVarParams: []
+        fsmArrayParams: []
+        fsmEnumParams: []
+        fsmFloatParams: []
+        fsmIntParams: []
+        fsmBoolParams: []
+        fsmVector2Params: []
+        fsmVector3Params: []
+        fsmColorParams: []
+        fsmRectParams: []
+        fsmQuaternionParams: []
+        stringParams: []
+        byteData: 
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 05000000
+        paramName:
+        - gameEvent
+        paramDataPos: 00000000
+        paramByteDataSize: 00000000
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -767,12 +901,26 @@ MonoBehaviour:
     - name: hpChange
       isSystemEvent: 0
       isGlobal: 0
+    - name: hpDecreased
+      isSystemEvent: 0
+      isGlobal: 0
+    - name: hpIncreased
+      isSystemEvent: 0
+      isGlobal: 0
     globalTransitions:
     - fsmEvent:
-        name: hpChange
+        name: hpDecreased
         isSystemEvent: 0
         isGlobal: 0
-      toState: show
+      toState: show damage
+      linkStyle: 0
+      linkConstraint: 0
+      colorIndex: 0
+    - fsmEvent:
+        name: hpIncreased
+        isSystemEvent: 0
+        isGlobal: 0
+      toState: show healed
       linkStyle: 0
       linkConstraint: 0
       colorIndex: 0
@@ -851,6 +999,96 @@ MonoBehaviour:
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
   eventHandlerComponentsAdded: 0
+--- !u!114 &8359534170292264254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8359534170292264253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83b5d72ab14f3f4c8442f76808cf317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - {fileID: 11400000, guid: 7754da83de5fff447a55ada7994fcd73, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8359534170292264255}
+        m_TargetAssemblyTypeName: HpGui, Assembly-CSharp
+        m_MethodName: FetchNewValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  comment: 
+--- !u!114 &7661321740085720305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8359534170292264253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83b5d72ab14f3f4c8442f76808cf317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - {fileID: 11400000, guid: 5122a9777daff41468702e0f2f39767c, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6579821444462136105}
+        m_TargetAssemblyTypeName: PlayMakerFSM, PlayMaker
+        m_MethodName: SendEvent
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: hpIncreased
+          m_BoolArgument: 0
+        m_CallState: 2
+  comment: 
+--- !u!114 &1363955259954285747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8359534170292264253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83b5d72ab14f3f4c8442f76808cf317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - {fileID: 11400000, guid: 5b05834360594d1499eeb99a32502772, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6579821444462136105}
+        m_TargetAssemblyTypeName: PlayMakerFSM, PlayMaker
+        m_MethodName: SendEvent
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: hpDecreased
+          m_BoolArgument: 0
+        m_CallState: 2
+  comment: 
 --- !u!1 &8359534171102896168
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,12 +1874,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 126c16a2f2e28964cb90447b3d07520c, type: 3}
---- !u!224 &8984183072975880903 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 625211922791935155, guid: 126c16a2f2e28964cb90447b3d07520c,
-    type: 3}
-  m_PrefabInstance: {fileID: 8359534172147297908}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8359534170352492766 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1963822762, guid: 126c16a2f2e28964cb90447b3d07520c,
@@ -1654,6 +1886,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5c6949d1bcd3a46a6e4b16d8a0e512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &8984183072975880903 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 625211922791935155, guid: 126c16a2f2e28964cb90447b3d07520c,
+    type: 3}
+  m_PrefabInstance: {fileID: 8359534172147297908}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8359534172315490235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1910,6 +2148,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 126c16a2f2e28964cb90447b3d07520c, type: 3}
+--- !u!224 &8359534170395414701 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 625211922791935155, guid: 126c16a2f2e28964cb90447b3d07520c,
+    type: 3}
+  m_PrefabInstance: {fileID: 8984183074446294046}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8984183073021047476 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1963822762, guid: 126c16a2f2e28964cb90447b3d07520c,
@@ -1922,9 +2166,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5c6949d1bcd3a46a6e4b16d8a0e512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &8359534170395414701 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 625211922791935155, guid: 126c16a2f2e28964cb90447b3d07520c,
-    type: 3}
-  m_PrefabInstance: {fileID: 8984183074446294046}
-  m_PrefabAsset: {fileID: 0}
