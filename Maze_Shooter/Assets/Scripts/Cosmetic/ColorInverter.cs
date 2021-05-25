@@ -10,12 +10,12 @@ public class ColorInverter : MonoBehaviour
 	public List<SpriteRenderer> sprites = new List<SpriteRenderer>();
 
 	[ButtonGroup]
-	void SetColorsInverted() {
+	public void SetColorsInverted() {
 		SetColors(inverted);
 	}
 	
 	[ButtonGroup]
-	void SetColorsRegular() {
+	public void SetColorsRegular() {
 		SetColors(regular);
 	}
 
