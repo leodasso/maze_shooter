@@ -20,7 +20,7 @@ public class Shaker : MonoBehaviour
     void Start()
     {
 		initPos = transform.localPosition;
-		offset = Random.insideUnitSphere;
+		Randomize();
 		totalShakeIntensity = 0;
     }
 
@@ -41,6 +41,11 @@ public class Shaker : MonoBehaviour
 		transform.localPosition = initPos + Vector3.Scale(newPos, shakeIntensity) * totalShakeIntensity;
     }
 
+	void Randomize()
+	{
+		offset = Random.insideUnitSphere * Mathf.PI * 2;
+	}
+
 	public void BeginShake()
 	{
 		totalShakeIntensity = 1;
@@ -59,7 +64,7 @@ public class Shaker : MonoBehaviour
 
 	public void DoShake(float duration)
 	{
-		offset = Random.insideUnitSphere;
+		Randomize();
 		StopAllCoroutines();
 		StartCoroutine(ShakeSequence(duration));
 	}
