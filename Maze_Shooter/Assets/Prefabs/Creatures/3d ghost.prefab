@@ -47,6 +47,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7276455702296974480}
   - component: {fileID: 8148412217808610619}
+  - component: {fileID: 8727138806637109450}
+  - component: {fileID: 930976860793093677}
   m_Layer: 13
   m_Name: Trigger
   m_TagString: Untagged
@@ -81,6 +83,33 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8727138806637109450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282527148991704385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10cfc14ec2c5b894d9ab02779712e521, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  savedMoneyValue: {fileID: 11400000, guid: 6fa10a28faa7e1245a0e629911c6bf44, type: 2}
+  _money: {fileID: 11400000, guid: d37cb474f6b272043941496126fa7f86, type: 2}
+--- !u!114 &930976860793093677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282527148991704385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 695dc45cb6d5afc489c346d78f5068dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 3490914254658770499}
 --- !u!1 &492080902267716462
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,7 +608,6 @@ GameObject:
   - component: {fileID: 4151602328836940682}
   - component: {fileID: 3594317241385997713}
   - component: {fileID: 6539296253958561908}
-  - component: {fileID: 8336307118180865852}
   - component: {fileID: 3470813710061164947}
   - component: {fileID: -4507166122488525800}
   - component: {fileID: 55019532670799612}
@@ -2701,21 +2729,6 @@ MonoBehaviour:
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
   eventHandlerComponentsAdded: 1
---- !u!114 &8336307118180865852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3594317241385997719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10cfc14ec2c5b894d9ab02779712e521, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  savedMoneyValue: {fileID: 11400000, guid: 6fa10a28faa7e1245a0e629911c6bf44, type: 2}
-  coinInWalletDelay: 0.4
-  _money: {fileID: 11400000, guid: d37cb474f6b272043941496126fa7f86, type: 2}
 --- !u!114 &3470813710061164947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3863,15 +3876,15 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8050917244385575065, guid: eabc9b650459ba94296987e09a5aeeda, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eabc9b650459ba94296987e09a5aeeda, type: 3}
---- !u!4 &326339311406208306 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2937294253991182739, guid: eabc9b650459ba94296987e09a5aeeda,
-    type: 3}
-  m_PrefabInstance: {fileID: 3189742950165517473}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &326339311406208307 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2937294253991182738, guid: eabc9b650459ba94296987e09a5aeeda,
+    type: 3}
+  m_PrefabInstance: {fileID: 3189742950165517473}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &326339311406208306 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2937294253991182739, guid: eabc9b650459ba94296987e09a5aeeda,
     type: 3}
   m_PrefabInstance: {fileID: 3189742950165517473}
   m_PrefabAsset: {fileID: 0}

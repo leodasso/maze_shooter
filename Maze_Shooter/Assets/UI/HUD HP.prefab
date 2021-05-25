@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daaa0849218f3d64391cf1d78a2e24b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashesPerSecond: 3
+  flashesPerSecond: 6
   currentHp: {fileID: 11400000, guid: 9d9c43989d3763c44955c49f97c504b5, type: 2}
   maxHp: {fileID: 11400000, guid: cce982abeb95e8141a65aa8a4e13a8bb, type: 2}
   hearts:
@@ -491,7 +491,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: 0.3
+          value: 0.5
         fsmIntParams: []
         fsmBoolParams: []
         fsmVector2Params: []
@@ -545,14 +545,17 @@ MonoBehaviour:
         actionNames:
         - HutongGames.PlayMaker.Actions.CallMethod
         - HutongGames.PlayMaker.Actions.Wait
+        - InvokeGameEvent
         customNames:
         - ~AutoName
         - 
-        actionEnabled: 0101
-        actionIsOpen: 0101
-        actionStartIndex: 0000000006000000
-        actionHashCodes: ca51e90048c01101
-        unityObjectParams: []
+        - 
+        actionEnabled: 010101
+        actionIsOpen: 010101
+        actionStartIndex: 000000000600000009000000
+        actionHashCodes: ca51e90048c011017f1a7103
+        unityObjectParams:
+        - {fileID: 11400000, guid: 04bbb4f487d587a46b5dfbe713bc857c, type: 2}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
         animationCurveParams: []
@@ -609,7 +612,7 @@ MonoBehaviour:
           tooltip: How long to flash between old / new values
           showInInspector: 1
           networkSync: 0
-          value: 2
+          value: 1.5
         fsmIntParams: []
         fsmBoolParams: []
         fsmVector2Params: []
@@ -625,7 +628,7 @@ MonoBehaviour:
         - HutongGames.PlayMaker.FsmVar
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 18000000120000000c0000002700000001000000010000000f0000001700000001000000
+        paramDataType: 18000000120000000c0000002700000001000000010000000f000000170000000100000005000000
         paramName:
         - behaviour
         - methodName
@@ -636,8 +639,9 @@ MonoBehaviour:
         - time
         - finishEvent
         - realTime
-        paramDataPos: 000000000000000000000000000000000000000001000000000000000000000002000000
-        paramByteDataSize: 000000000000000000000000000000000100000001000000000000000000000001000000
+        - gameEvent
+        paramDataPos: 00000000000000000000000000000000000000000100000000000000000000000200000000000000
+        paramByteDataSize: 00000000000000000000000000000000010000000100000000000000000000000100000000000000
     - name: show new value
       description: 
       colorIndex: 0
@@ -779,7 +783,7 @@ MonoBehaviour:
         tooltip: How long to flash between old / new values
         showInInspector: 1
         networkSync: 0
-        value: 2
+        value: 1.5
       - useVariable: 1
         name: showTime
         tooltip: additional time the HUD element will remain visible

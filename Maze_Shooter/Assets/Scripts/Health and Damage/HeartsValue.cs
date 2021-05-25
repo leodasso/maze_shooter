@@ -9,9 +9,9 @@ public class HeartsValue : ScriptableObject
 {
 	[ToggleLeft]
 	public bool readOnly;
-	[SerializeField, ShowInInspector, OnValueChanged("RaiseEvents")]
 	Hearts myValue;
 	
+	[ShowInInspector]
 	public Hearts Value
 	{
 		get { return myValue; }
@@ -24,19 +24,34 @@ public class HeartsValue : ScriptableObject
 					Debug.LogWarning(name + " value can't be set because it's readonly.", this);
 					return;
 				}
+
+				if (value > myValue)
+					RaiseEvents(onValueIncrease);
+
+				if (value < myValue)
+					RaiseEvents(onValueDecrease);
+
 				myValue = value;
-				RaiseEvents();
+				RaiseEvents(onValueChange);
 			}
 		}
 	}
 
-	[AssetsOnly]
-	public List<GameEvent> onValueChange;
+	[AssetsOnly, SerializeField]
+	List<GameEvent> onValueChange;
+
+	[AssetsOnly, SerializeField]
+	List<GameEvent> onValueIncrease;
+
+	[AssetsOnly, SerializeField]
+	List<GameEvent> onValueDecrease;
+
 	[MultiLineProperty(5)]
 	public string comments;
 
-	void RaiseEvents() {
+	void RaiseEvents(List<GameEvent> eventList) 
+	{
 		if (!Application.isPlaying) return;
-		foreach (var e in onValueChange) e.Raise();
+		foreach (var e in eventList) e.Raise();
 	}
 }

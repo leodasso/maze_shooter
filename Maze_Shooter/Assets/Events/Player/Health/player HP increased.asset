@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b00426e719fc9f14ebe33e6466ffdc03, type: 3}
-  m_Name: hearts current
+  m_Script: {fileID: 11500000, guid: ad82d867e45a0d54e820f85e0fae95d9, type: 3}
+  m_Name: player HP increased
   m_EditorClassIdentifier: 
-  readOnly: 0
-  onValueChange:
-  - {fileID: 11400000, guid: 7754da83de5fff447a55ada7994fcd73, type: 2}
-  onValueIncrease: []
-  onValueDecrease: []
-  comments: 
+  enabled: 1
+  debug: 1
+  delay: 0
+  onEventRaised:
+    m_PersistentCalls:
+      m_Calls: []
+  description: 
