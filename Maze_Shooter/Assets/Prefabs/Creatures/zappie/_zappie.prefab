@@ -123,7 +123,7 @@ MonoBehaviour:
     useConstant: 0
     constantValue:
       fractions: 0
-      hearts: 0
+      hearts: 1
     valueObject: {fileID: 0}
   onDoDamage:
     m_PersistentCalls:
@@ -269,6 +269,7 @@ MonoBehaviour:
       m_Calls: []
   target: {fileID: 0}
   useTargetFinder: 0
+  updateTargetDirectionEveryFrame: 1
   targetFinder: {fileID: 0}
 --- !u!114 &1245006598563395979
 MonoBehaviour:
@@ -381,6 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97e8ed2baea5324b9e68bb303521efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   effectPrefab: {fileID: 5763987487998127141, guid: 6ec3698fdd3470349a0dfee9b757768d,
     type: 3}
   lifetime: 5
@@ -6317,6 +6319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b424b41f41d9e7429bb3c5296a25754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   speedMultiplier: 1
   frameRate: 8
   realTime: 0
@@ -6380,6 +6383,7 @@ MonoBehaviour:
     mover: {fileID: 0}
     pseudoVelocity: {fileID: 0}
   overrideAnim: {fileID: 0}
+  spawn: {fileID: 0}
   idle: {fileID: 11400000, guid: 90c4f99eb6ca5cf45928528481e7b467, type: 2}
   run: {fileID: 11400000, guid: ffa33eff982a696418b6fbdcaccd6c7d, type: 2}
   chargingAnim: {fileID: 11400000, guid: 7a8c015fb95b4104dac62e7e4ede42b8, type: 2}

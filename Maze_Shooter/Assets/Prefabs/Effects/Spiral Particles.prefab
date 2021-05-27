@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5242195440903704436}
   - component: {fileID: 5242195440903704437}
   - component: {fileID: 5242195440903704434}
-  - component: {fileID: 5242195440903704432}
   m_Layer: 0
   m_Name: Spiral Particles
   m_TagString: Untagged
@@ -660,11 +659,11 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 0
+    type: 10
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 0.06
+    radiusThickness: 0.11
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
@@ -747,7 +746,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.27
+      value: 1.01
       mode: 0
       spread: 0
       speed:
@@ -1371,8 +1370,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -1490,7 +1489,8 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: -7987229236018970811, guid: b3d9ac83b35c7364c8bf95e5302dc499,
+        type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -3943,7 +3943,7 @@ ParticleSystem:
         m_RotationOrder: 4
     maxLights: 20
   TrailModule:
-    enabled: 0
+    enabled: 1
     mode: 0
     ratio: 1
     lifetime:
@@ -4006,7 +4006,7 @@ ParticleSystem:
     worldSpace: 0
     dieWithParticles: 1
     sizeAffectsWidth: 1
-    sizeAffectsLifetime: 0
+    sizeAffectsLifetime: 1
     inheritParticleColor: 1
     generateLightingData: 0
     splitSubEmitterRibbons: 0
@@ -4076,7 +4076,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     widthOverTrail:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 1
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -4084,21 +4084,21 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
+          value: 0.4888897
+          inSlope: -0.4346745
+          outSlope: -0.4346745
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.33333334
+          outWeight: 0.10224949
         - serializedVersion: 3
           time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
+          value: 0
+          inSlope: -0.67916685
+          outSlope: -0.67916685
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.08997953
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -4776,7 +4776,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: eddb562e57b7f234390e2d0c57822bf1, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4797,7 +4798,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 2092656439
   m_SortingLayer: -3
   m_SortingOrder: 0
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
@@ -4822,74 +4823,3 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &5242195440903704432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5242195440903704433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 198ada6227b2f4c419bd5cbefdf722f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shaderFamily: ParticlesAdditive
-  blendMode: 24
-  renderMode: 0
-  maskMode: 0
-  maskBehaviour: 0
-  overlayColor: {r: 1, g: 1, b: 1, a: 1}
-  overlayTexture: {fileID: 0}
-  overlayTextureOffset: {x: 0, y: 0}
-  overlayTextureScale: {x: 1, y: 1}
-  framebufferEnabled: 0
-  unifiedGrabEnabled: 0
-  shareMaterial: 0
-  blendMaterial: {fileID: 0}
-  componentExtensionState:
-    extendedComponent: {fileID: 5242195440903704434}
-    shaderProperties:
-    - name: _MainTex
-      type: 3
-      colorValue: {r: 1, g: 1, b: 1, a: 1}
-      vectorValue: {x: 0, y: 0, z: 0, w: 0}
-      floatValue: 0
-      textureValue: {fileID: 10307, guid: 0000000000000000f000000000000000, type: 0}
-    - name: _TintColor
-      type: 0
-      colorValue: {r: 1, g: 1, b: 1, a: 1}
-      vectorValue: {x: 0, y: 0, z: 0, w: 0}
-      floatValue: 0
-      textureValue: {fileID: 0}
-    - name: _InvFade
-      type: 2
-      colorValue: {r: 1, g: 1, b: 1, a: 1}
-      vectorValue: {x: 0, y: 0, z: 0, w: 0}
-      floatValue: 1
-      textureValue: {fileID: 0}
-    - name: _Hue
-      type: 2
-      colorValue: {r: 1, g: 1, b: 1, a: 1}
-      vectorValue: {x: 0, y: 0, z: 0, w: 0}
-      floatValue: 0
-      textureValue: {fileID: 0}
-    - name: _Saturation
-      type: 2
-      colorValue: {r: 1, g: 1, b: 1, a: 1}
-      vectorValue: {x: 0, y: 0, z: 0, w: 0}
-      floatValue: 0
-      textureValue: {fileID: 0}
-    - name: _Brightness
-      type: 2
-      colorValue: {r: 1, g: 1, b: 1, a: 1}
-      vectorValue: {x: 0, y: 0, z: 0, w: 0}
-      floatValue: 0
-      textureValue: {fileID: 0}
-    - name: _Contrast
-      type: 2
-      colorValue: {r: 1, g: 1, b: 1, a: 1}
-      vectorValue: {x: 0, y: 0, z: 0, w: 0}
-      floatValue: 0
-      textureValue: {fileID: 0}
-  stencilId: 1
