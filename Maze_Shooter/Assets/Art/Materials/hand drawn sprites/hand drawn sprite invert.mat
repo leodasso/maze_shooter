@@ -9,7 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: hand drawn sprite invert
   m_Shader: {fileID: 4800000, guid: a36b7719ff0465b42ab1407d67672c5f, type: 3}
-  m_ShaderKeywords: ATLAS_ON DOODLE_ON ETC1_EXTERNAL_ALPHA NEGATIVE_ON
+  m_ShaderKeywords: ATLAS_ON DOODLE_ON ETC1_EXTERNAL_ALPHA MANUALWIND_ON NEGATIVE_ON
+    _GRASSMANUALTOGGLE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -135,10 +136,10 @@ Material:
     - _Glow: 10
     - _GlowTexUsed: 0
     - _GradBlend: 1
-    - _GrassManualAnim: 1
-    - _GrassManualToggle: 0
+    - _GrassManualAnim: 0.108
+    - _GrassManualToggle: 1
     - _GrassSpeed: 2
-    - _GrassWind: 20
+    - _GrassWind: 0.6
     - _GreyscaleLuminosity: 0
     - _GreyscaleOutline: 0
     - _HandDrawnAmount: 0.5
