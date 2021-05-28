@@ -95,4 +95,9 @@ public class CameraZone : MonoBehaviour
 			vCam.Priority = initPriority;
 	}
 
+	void OnDisable()
+	{
+		ExitAction(null);
+	}
+
 }

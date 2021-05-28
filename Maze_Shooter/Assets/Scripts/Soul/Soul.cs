@@ -71,6 +71,7 @@ public class Soul : MonoBehaviour
 
 	public void ReturnToSafePos() 
 	{
+		Debug.DrawLine(transform.position, lastSafePos, Color.blue, 30);
 		soulOwner.transform.position = lastSafePos;
 	}
 
