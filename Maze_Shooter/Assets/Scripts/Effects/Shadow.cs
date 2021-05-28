@@ -21,6 +21,8 @@ public class Shadow : MonoBehaviour
     ShadowObject _shadowObject;
 	Transform _camera;
 
+	static GameObject shadowParent;
+
 	Vector3 CastingDir() 
 	{
 		if (!castCameraDown) return Vector3.down;
@@ -36,8 +38,12 @@ public class Shadow : MonoBehaviour
 
     void OnEnable()
     {
+		if (shadowParent == null) 
+			shadowParent = new GameObject("Shadows");
+
         shadowInstance = Instantiate(shadowPrefab, transform.position, shadowPrefab.transform.rotation);
         shadowInstance.transform.localScale *= shadowScale;
+		shadowInstance.transform.parent = shadowParent.transform;
         _shadowObject = shadowInstance.GetComponent<ShadowObject>();
     }
     
