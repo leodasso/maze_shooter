@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 637826335896500392}
   - component: {fileID: 6963567288685217553}
   - component: {fileID: 6627347596470738413}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Haunt Juice Add
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 865203041114130626}
   - component: {fileID: 2116119004407674497}
   - component: {fileID: 6495265303183996671}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Haunt Burst
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1737812943130379500}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Post Processing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,9 +342,58 @@ Transform:
   - {fileID: 1932314915766771133}
   - {fileID: 1109198108675404565}
   - {fileID: 6645923857133671937}
+  - {fileID: 5995012819666738472}
   m_Father: {fileID: 4544171246489010}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4517107571940373228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5995012819666738472}
+  - component: {fileID: 5018008405692873348}
+  m_Layer: 0
+  m_Name: Default
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5995012819666738472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4517107571940373228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1737812943130379500}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5018008405692873348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4517107571940373228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: e3099957f9c7e8d4597cf9a3882ae810, type: 2}
 --- !u!1001 &1767424362217982998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -417,6 +466,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Critical Health
+      objectReference: {fileID: 0}
+    - target: {fileID: 3485509252305403931, guid: 213b993368631434ca17c3295069e842,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6548448886324087722, guid: 213b993368631434ca17c3295069e842,
         type: 3}
@@ -526,6 +580,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: haunt constellation
       objectReference: {fileID: 0}
+    - target: {fileID: 3485509252305403931, guid: 213b993368631434ca17c3295069e842,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6548448886324087722, guid: 213b993368631434ca17c3295069e842,
         type: 3}
       propertyPath: sharedProfile
@@ -627,6 +686,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Galactic
+      objectReference: {fileID: 0}
+    - target: {fileID: 3485509252305403931, guid: 213b993368631434ca17c3295069e842,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8219240230075903987, guid: 213b993368631434ca17c3295069e842,
         type: 3}
