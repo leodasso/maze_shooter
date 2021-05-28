@@ -1359,7 +1359,7 @@ MonoBehaviour:
       colorTag: 0
   - name: Plants
     brushes:
-    - name: plant prop (1) Variant
+    - name: small plants
       settings:
         brushRadius: 3.82
         brushSpacing: 0.5
@@ -1396,7 +1396,149 @@ MonoBehaviour:
         scalePerAxisMin: {x: 1, y: 1, z: 1}
         scalePerAxisMax: {x: 1, y: 1, z: 1}
         scaleAux: 1
-        multibrushEnabled: 0
+        multibrushEnabled: 1
+        multibrushSlots:
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 0.62857145
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        multibrushPaintSelectedSlot: 0
+        multibrushMode: 0
+        multibrushPattern: 0 1 2 3 5 6 7 8 9
+        multibrushPatternContinue: 0
+        advancedSettingsEnabled: 0
+        roundScale: 0
+        roundScaleValue: 0
+        roundRotation: 0
+        roundRotationValue: 0
+        slopeEnabled: 0
+        slopeAngleMin: 0
+        slopeAngleMax: 35
+        slopeVector: 1
+        slopeVectorCustom: {x: 0, y: 1, z: 0}
+        slopeVectorFlip: 0
+        gridEnabled: 0
+        gridOrigin: {x: 0, y: 0}
+        gridStep: {x: 5, y: 5}
+        gridPlane: 1
+        gridNormal: {x: 0, y: 1, z: 0}
+        gridAngle: 0
+      prefabSlots:
+      - gameObject: {fileID: 7400303734886043862, guid: 2513c045642692747bdfdd52f2b3093b,
+          type: 3}
+      - gameObject: {fileID: 7726173794855605029, guid: bdaae02d739a2f0458c2a3ec12ba5599,
+          type: 3}
+      - gameObject: {fileID: 5431701113466136134, guid: 5784a0148370caf48a82882cd064143f,
+          type: 3}
+      - gameObject: {fileID: 8747475223744637834, guid: c787812f93f8146479534aa2d4275752,
+          type: 3}
+      - gameObject: {fileID: 2273283860458317991, guid: 80688bbc051d8864cb1f5de0f75c6007,
+          type: 3}
+      - gameObject: {fileID: 264145483280360212, guid: 3115fbe28e7aaae4a85e5edc417c2856,
+          type: 3}
+      - gameObject: {fileID: 3506614404824149288, guid: 444bdc8b0a039be4dbffe86e8b04c825,
+          type: 3}
+      - gameObject: {fileID: 4130622135684261832, guid: 1c7a2fa9287facb41b0938530ece3270,
+          type: 3}
+      - gameObject: {fileID: 0}
+      - gameObject: {fileID: 0}
+      selectedSlot: 0
+      selected: 1
+      colorTag: 0
+    - name: bulb groups
+      settings:
+        brushRadius: 3.82
+        brushSpacing: 0.5
+        brushOverallScale: 1
+        brushOverlapCheck: 0
+        brushOverlapCheckMode: 0
+        brushOverlapDistance: 0.5
+        brushOverlapCheckObjects: 1
+        brushOverlapCheckLayers:
+          serializedVersion: 2
+          m_Bits: 0
+        maxAlpha: 1
+        minAlpha: 1
+        ppOrientationMode: 0
+        ppFlipOrientation: 0
+        ppFixedRotation: 0
+        ppFixedRotationValue: {x: 0, y: 0, z: 0}
+        ppFixedRotationTransformMode: 0
+        ppFixedScale: 0
+        ppFixedScaleValue: {x: 1, y: 1, z: 1}
+        ppFixedScaleTransformMode: 0
+        positionOffset: {x: 0, y: 0, z: 0}
+        orientationTransformMode: 0
+        orientationMode: 1
+        flipOrientation: 0
+        rotation: {x: 0, y: 0, z: 0}
+        randomizeOrientationX: 0
+        randomizeOrientationY: 0
+        randomizeOrientationZ: 0
+        scaleTransformMode: 0
+        scaleMode: 0
+        scaleUniformMin: 1
+        scaleUniformMax: 1
+        scalePerAxisMin: {x: 1, y: 1, z: 1}
+        scalePerAxisMax: {x: 1, y: 1, z: 1}
+        scaleAux: 1
+        multibrushEnabled: 1
         multibrushSlots:
         - enabled: 1
           raiting: 1
@@ -1480,7 +1622,9 @@ MonoBehaviour:
         gridNormal: {x: 0, y: 1, z: 0}
         gridAngle: 0
       prefabSlots:
-      - gameObject: {fileID: 7400303734886043862, guid: 2513c045642692747bdfdd52f2b3093b,
+      - gameObject: {fileID: 4946519890477120290, guid: 2a5a9923c4c903248b950da52dee5fa7,
+          type: 3}
+      - gameObject: {fileID: 3648139657068028411, guid: e8130102bda3a5b499473d8cde131e5a,
           type: 3}
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
@@ -1490,9 +1634,285 @@ MonoBehaviour:
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
+      selectedSlot: 4
+      selected: 0
+      colorTag: 0
+    - name: grass groups big
+      settings:
+        brushRadius: 4.55
+        brushSpacing: 3.54
+        brushOverallScale: 1
+        brushOverlapCheck: 0
+        brushOverlapCheckMode: 0
+        brushOverlapDistance: 0.5
+        brushOverlapCheckObjects: 1
+        brushOverlapCheckLayers:
+          serializedVersion: 2
+          m_Bits: 0
+        maxAlpha: 1
+        minAlpha: 1
+        ppOrientationMode: 0
+        ppFlipOrientation: 0
+        ppFixedRotation: 0
+        ppFixedRotationValue: {x: 0, y: 0, z: 0}
+        ppFixedRotationTransformMode: 0
+        ppFixedScale: 0
+        ppFixedScaleValue: {x: 1, y: 1, z: 1}
+        ppFixedScaleTransformMode: 0
+        positionOffset: {x: 0, y: 0, z: 0}
+        orientationTransformMode: 0
+        orientationMode: 1
+        flipOrientation: 0
+        rotation: {x: 0, y: 0, z: 0}
+        randomizeOrientationX: 0
+        randomizeOrientationY: 0
+        randomizeOrientationZ: 0
+        scaleTransformMode: 0
+        scaleMode: 0
+        scaleUniformMin: 1
+        scaleUniformMax: 1.15
+        scalePerAxisMin: {x: 1, y: 1, z: 1}
+        scalePerAxisMax: {x: 1, y: 1, z: 1}
+        scaleAux: 1.3
+        multibrushEnabled: 1
+        multibrushSlots:
+        - enabled: 1
+          raiting: 0.5714286
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 0.7
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 0.5857143
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 0.47142857
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        multibrushPaintSelectedSlot: 0
+        multibrushMode: 1
+        multibrushPattern: 0 1 2 3 4 5 6
+        multibrushPatternContinue: 1
+        advancedSettingsEnabled: 0
+        roundScale: 0
+        roundScaleValue: 0
+        roundRotation: 0
+        roundRotationValue: 0
+        slopeEnabled: 0
+        slopeAngleMin: 0
+        slopeAngleMax: 35
+        slopeVector: 1
+        slopeVectorCustom: {x: 0, y: 1, z: 0}
+        slopeVectorFlip: 0
+        gridEnabled: 0
+        gridOrigin: {x: 0, y: 0}
+        gridStep: {x: 5, y: 5}
+        gridPlane: 1
+        gridNormal: {x: 0, y: 1, z: 0}
+        gridAngle: 0
+      prefabSlots:
+      - gameObject: {fileID: 4743284407310382330, guid: 2e67194853aa01843b07ecdb9ab847ab,
+          type: 3}
+      - gameObject: {fileID: 8450823809983046425, guid: 32b40028e3f525e4690e9c15b90a0e13,
+          type: 3}
+      - gameObject: {fileID: 3088154735418539249, guid: 0852a533402313545bd5e80f9dc0715b,
+          type: 3}
+      - gameObject: {fileID: 2091937015906180541, guid: bfce76816ed1eff47bf086c15a818c1f,
+          type: 3}
+      - gameObject: {fileID: 5332728248502794335, guid: 1d8f839a4c3c15841954e39ccbb27f0e,
+          type: 3}
+      - gameObject: {fileID: 5729414648880189125, guid: dd5d3b83d9751924489ea6d326c0b768,
+          type: 3}
+      - gameObject: {fileID: 4639839023453778410, guid: be124b84606b130499d14bd470dc7e66,
+          type: 3}
       - gameObject: {fileID: 0}
-      selectedSlot: 0
-      selected: 1
+      - gameObject: {fileID: 0}
+      - gameObject: {fileID: 0}
+      selectedSlot: 4
+      selected: 0
+      colorTag: 0
+    - name: grass groups small
+      settings:
+        brushRadius: 3.82
+        brushSpacing: 1.156
+        brushOverallScale: 1
+        brushOverlapCheck: 0
+        brushOverlapCheckMode: 0
+        brushOverlapDistance: 0.5
+        brushOverlapCheckObjects: 1
+        brushOverlapCheckLayers:
+          serializedVersion: 2
+          m_Bits: 0
+        maxAlpha: 1
+        minAlpha: 1
+        ppOrientationMode: 0
+        ppFlipOrientation: 0
+        ppFixedRotation: 0
+        ppFixedRotationValue: {x: 0, y: 0, z: 0}
+        ppFixedRotationTransformMode: 0
+        ppFixedScale: 0
+        ppFixedScaleValue: {x: 1, y: 1, z: 1}
+        ppFixedScaleTransformMode: 0
+        positionOffset: {x: 0, y: 0, z: 0}
+        orientationTransformMode: 0
+        orientationMode: 1
+        flipOrientation: 0
+        rotation: {x: 0, y: 0, z: 0}
+        randomizeOrientationX: 0
+        randomizeOrientationY: 0
+        randomizeOrientationZ: 0
+        scaleTransformMode: 0
+        scaleMode: 0
+        scaleUniformMin: 0.91
+        scaleUniformMax: 1.02
+        scalePerAxisMin: {x: 1, y: 1, z: 1}
+        scalePerAxisMax: {x: 1, y: 1, z: 1}
+        scaleAux: 1.3
+        multibrushEnabled: 1
+        multibrushSlots:
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 0.57857144
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 0.7
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 0.5857143
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 0.47142857
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        - enabled: 1
+          raiting: 1
+          position: {x: 0, y: 0, z: 0}
+          rotation: {x: 0, y: 0, z: 0}
+          scale: {x: 1, y: 1, z: 1}
+          pivotOffset: {x: 0, y: 0, z: 0}
+        multibrushPaintSelectedSlot: 0
+        multibrushMode: 0
+        multibrushPattern: 0 1 2 3 5 6 7 8 9
+        multibrushPatternContinue: 0
+        advancedSettingsEnabled: 0
+        roundScale: 0
+        roundScaleValue: 0
+        roundRotation: 0
+        roundRotationValue: 0
+        slopeEnabled: 0
+        slopeAngleMin: 0
+        slopeAngleMax: 35
+        slopeVector: 1
+        slopeVectorCustom: {x: 0, y: 1, z: 0}
+        slopeVectorFlip: 0
+        gridEnabled: 0
+        gridOrigin: {x: 0, y: 0}
+        gridStep: {x: 5, y: 5}
+        gridPlane: 1
+        gridNormal: {x: 0, y: 1, z: 0}
+        gridAngle: 0
+      prefabSlots:
+      - gameObject: {fileID: 3127944599880561300, guid: c962373f5c934a2449cb327bd50b346a,
+          type: 3}
+      - gameObject: {fileID: 5729414648880189125, guid: dd5d3b83d9751924489ea6d326c0b768,
+          type: 3}
+      - gameObject: {fileID: 0}
+      - gameObject: {fileID: 0}
+      - gameObject: {fileID: 0}
+      - gameObject: {fileID: 0}
+      - gameObject: {fileID: 0}
+      - gameObject: {fileID: 0}
+      - gameObject: {fileID: 0}
+      - gameObject: {fileID: 0}
+      selectedSlot: 3
+      selected: 0
       colorTag: 0
   activeTab: 2
   paintOnSelected: 1
@@ -1505,7 +1925,7 @@ MonoBehaviour:
   placeUnder: 2
   overwritePrefabLayer: 0
   prefabPlaceLayer: 5
-  groupPrefabs: 1
+  groupPrefabs: 0
   overwriteColorCategory: 0
   ppSnapRotationValue: 15
   ppSnapScaleValue: 0.1
