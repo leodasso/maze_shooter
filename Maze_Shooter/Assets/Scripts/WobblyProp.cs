@@ -118,6 +118,6 @@ public class WobblyProp : MonoBehaviour
 
     public void SetWobble(Vector3 vector)
     {
-        wobbleVel += vector;
+        wobbleVel += Vector3.Scale(vector, transform.localScale);
     }
 }

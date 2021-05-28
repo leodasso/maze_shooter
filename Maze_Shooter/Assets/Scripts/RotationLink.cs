@@ -17,9 +17,7 @@ public class RotationLink : MonoBehaviour
 	[Range(-1, 1)]
 	public float weight = .95f;
 
-	[SerializeField]
 	Quaternion offsetRot;
-
 	Quaternion initRot;
 
 	Transform Master => useParentAsMaster ? transform.parent : customMasterTransform;
@@ -30,16 +28,12 @@ public class RotationLink : MonoBehaviour
 
 	Quaternion MasterRotation => framesOfDelay > 0 ? masterRotations[0] : Master.localRotation;
 
-	[Button]
-	void CaptureOffsetRotation()
-	{
-		offsetRot = Quaternion.Euler(transform.localEulerAngles - Master.localEulerAngles);
-	}
 
     // Start is called before the first frame update
     void Start()
     {
 		initRot = transform.localRotation;
+		offsetRot = Quaternion.Euler(transform.localEulerAngles - Master.localEulerAngles);
 		masterRotations.Add(Master.localRotation);
     }
 
