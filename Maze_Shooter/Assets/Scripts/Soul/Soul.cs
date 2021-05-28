@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System.Linq;
 
 [TypeInfoBox("Soul is nourished by the light. If a spirit strays too far from the light, " +
              "soul is drained. When soul is empty, the spirit will be dragged into hell. \n " + 
@@ -35,13 +36,9 @@ public class Soul : MonoBehaviour
     {
         bool litThisFrame = inInterior;
 
-        foreach (var soulLight in lightSources)
-        {
-            if (!soulLight.enabled) continue;
-			if (!soulLight.gameObject.activeInHierarchy) continue;
-			litThisFrame = true;
-			break;
-        }
+		lightSources = lightSources.Where(x => x.enabled && x.gameObject.activeInHierarchy).ToList();
+
+		litThisFrame = lightSources.Count > 0;
 
 		if (!isLit && litThisFrame) {
 			isLit = true;
