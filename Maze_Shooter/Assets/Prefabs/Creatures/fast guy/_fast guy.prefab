@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de6c16f983620a4da43f9e72b293064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   effectPrefab: {fileID: 2962734160709507652, guid: 5eb8e919455dd4f44a37b53d6917ef2f,
     type: 3}
   lifetime: 5
@@ -346,6 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b424b41f41d9e7429bb3c5296a25754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   speedMultiplier: 1
   frameRate: 6
   realTime: 0
@@ -409,6 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateDuringGameplay: 0
 --- !u!114 &1129931954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,6 +458,7 @@ GameObject:
   - component: {fileID: 2053979096284153871}
   - component: {fileID: 8216780596284228574}
   - component: {fileID: 7076856052713985655}
+  - component: {fileID: 8412953064150171031}
   m_Layer: 0
   m_Name: _fast guy
   m_TagString: Untagged
@@ -573,9 +577,6 @@ MonoBehaviour:
   onUnGrounded:
     m_PersistentCalls:
       m_Calls: []
-  drag: 15
-  bounceHeightSpeed: 35
-  bounceHorizontalSpeed: 12
   dashSpeedMultiplier:
     serializedVersion: 2
     m_Curve:
@@ -611,8 +612,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   spawnSpikesPercentage: 0.85
   dashCooldown: 1
-  omitBounceTags:
-  - Small
   playMaker: {fileID: 737290452}
 --- !u!136 &7577387461302741263
 CapsuleCollider:
@@ -764,16 +763,27 @@ MonoBehaviour:
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Actions.EnableBehaviour
+        - HutongGames.PlayMaker.Actions.EnableBehaviour
         customNames:
-        - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 3a4cad05
+        - ~AutoName
+        - ~AutoName
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000005000000
+        actionHashCodes: 3a4cad053a4cad05
         unityObjectParams:
         - {fileID: 0}
+        - {fileID: 8412953064150171031}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
         - ownerOption: 0
           gameObject:
             useVariable: 0
@@ -795,6 +805,12 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: DashyMovement
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: Bouncer
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -814,6 +830,18 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
@@ -825,15 +853,20 @@ MonoBehaviour:
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 1400000012000000050000001100000011000000
+        paramDataType: 14000000120000000500000011000000110000001400000012000000050000001100000011000000
         paramName:
         - gameObject
         - behaviour
         - component
         - enable
         - resetOnExit
-        paramDataPos: 0000000000000000000000000000000001000000
-        paramByteDataSize: 0000000000000000000000000000000000000000
+        - gameObject
+        - behaviour
+        - component
+        - enable
+        - resetOnExit
+        paramDataPos: 00000000000000000000000000000000010000000100000001000000010000000200000003000000
+        paramByteDataSize: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
     - name: dashing
       description: 
       colorIndex: 0
@@ -869,16 +902,19 @@ MonoBehaviour:
         - HutongGames.PlayMaker.Actions.InvokeMethod
         - HutongGames.PlayMaker.Actions.ActivateGameObject
         - HutongGames.PlayMaker.Actions.PlayAudioAction
+        - HutongGames.PlayMaker.Actions.EnableBehaviour
         customNames:
         - instantiate spikes
         - start trail
         - 
         - 
-        actionEnabled: 01010101
-        actionIsOpen: 01010101
-        actionStartIndex: 00000000070000000e00000013000000
-        actionHashCodes: 59f9a00459f9a004b2cf10008d4bb503
-        unityObjectParams: []
+        - ~AutoName
+        actionEnabled: 0101010101
+        actionIsOpen: 0101010101
+        actionStartIndex: 00000000070000000e0000001300000014000000
+        actionHashCodes: 59f9a00459f9a004b2cf10008d4bb5033a4cad05
+        unityObjectParams:
+        - {fileID: 0}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
         - ownerOption: 1
@@ -913,6 +949,14 @@ MonoBehaviour:
             showInInspector: 0
             networkSync: 0
             value: {fileID: 8508307345089045345}
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
         animationCurveParams: []
         functionCallParams: []
         fsmTemplateControlParams: []
@@ -944,6 +988,12 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: Play
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: Bouncer
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -1011,6 +1061,18 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
@@ -1022,7 +1084,7 @@ MonoBehaviour:
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 1400000012000000120000000f000000110000000f000000110000001400000012000000120000000f000000110000000f00000011000000140000001100000011000000010000000100000014000000
+        paramDataType: 1400000012000000120000000f000000110000000f000000110000001400000012000000120000000f000000110000000f000000110000001400000011000000110000000100000001000000140000001400000012000000050000001100000011000000
         paramName:
         - gameObject
         - behaviour
@@ -1044,8 +1106,13 @@ MonoBehaviour:
         - resetOnExit
         - everyFrame
         - gameObject
-        paramDataPos: 0000000000000000010000000000000000000000010000000100000001000000020000000300000002000000020000000300000003000000020000000400000005000000000000000100000003000000
-        paramByteDataSize: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000100000000000000
+        - gameObject
+        - behaviour
+        - component
+        - enable
+        - resetOnExit
+        paramDataPos: 00000000000000000100000000000000000000000100000001000000010000000200000003000000020000000200000003000000030000000200000004000000050000000000000001000000030000000400000004000000000000000600000007000000
+        paramByteDataSize: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000001000000000000000000000000000000000000000000000000000000
     - name: cooldown
       description: 
       colorIndex: 0
@@ -1183,7 +1250,6 @@ MonoBehaviour:
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Actions.EnableBehaviour
-        - HutongGames.PlayMaker.Actions.InvokeMethod
         - InvokeGameEvent
         - HutongGames.PlayMaker.Actions.InvokeMethod
         - HutongGames.PlayMaker.Actions.InvokeMethod
@@ -1193,7 +1259,6 @@ MonoBehaviour:
         - HutongGames.PlayMaker.Actions.PlayAudioAction
         customNames:
         - Disable movement
-        - Invoke bounce
         - 
         - Show flying anim
         - Show flying anim on ghost
@@ -1201,24 +1266,16 @@ MonoBehaviour:
         - 
         - 
         - 
-        actionEnabled: 010101010101010101
-        actionIsOpen: 000001010100010101
-        actionStartIndex: 00000000050000000c0000000d000000140000001b00000022000000270000002c000000
-        actionHashCodes: 3a4cad0559f9a0047f1a710359f9a00459f9a00459f9a0043a4cad05b2cf10008d4bb503
+        actionEnabled: 0101010101010101
+        actionIsOpen: 0001010100010101
+        actionStartIndex: 0000000005000000060000000d000000140000001b0000002000000025000000
+        actionHashCodes: 3a4cad057f1a710359f9a00459f9a00459f9a0043a4cad05b2cf10008d4bb503
         unityObjectParams:
         - {fileID: 0}
         - {fileID: 11400000, guid: 12ac11e6cd9be7f4f8dee5e8f41baca4, type: 2}
         - {fileID: 0}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
-        - ownerOption: 0
-          gameObject:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 0}
         - ownerOption: 0
           gameObject:
             useVariable: 0
@@ -1293,18 +1350,6 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: DashyMovement
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: BounceBack
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
           value: FastGuyAnimator
         - useVariable: 0
           name: 
@@ -1347,18 +1392,6 @@ MonoBehaviour:
         fsmArrayParams: []
         fsmEnumParams: []
         fsmFloatParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 1
         - useVariable: 0
           name: 
           tooltip: 
@@ -1456,18 +1489,6 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: 0
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
           value: 1
         - useVariable: 0
           name: 
@@ -1492,20 +1513,13 @@ MonoBehaviour:
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 14000000120000000500000011000000110000001400000012000000120000000f000000110000000f00000011000000050000001400000012000000120000000f000000110000000f000000110000001400000012000000120000000f000000110000000f000000110000001400000012000000120000000f000000110000000f000000110000001400000012000000050000001100000011000000140000001100000011000000010000000100000014000000
+        paramDataType: 1400000012000000050000001100000011000000050000001400000012000000120000000f000000110000000f000000110000001400000012000000120000000f000000110000000f000000110000001400000012000000120000000f000000110000000f000000110000001400000012000000050000001100000011000000140000001100000011000000010000000100000014000000
         paramName:
         - gameObject
         - behaviour
         - component
         - enable
         - resetOnExit
-        - gameObject
-        - behaviour
-        - methodName
-        - delay
-        - repeating
-        - repeatDelay
-        - cancelOnExit
         - gameEvent
         - gameObject
         - behaviour
@@ -1539,8 +1553,8 @@ MonoBehaviour:
         - resetOnExit
         - everyFrame
         - gameObject
-        paramDataPos: 000000000000000000000000000000000100000001000000010000000200000000000000020000000100000003000000010000000200000003000000040000000200000004000000030000000500000003000000050000000600000004000000060000000500000007000000040000000700000008000000060000000800000007000000090000000500000009000000020000000a0000000b000000060000000c0000000d000000000000000100000007000000
-        paramByteDataSize: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000100000000000000
+        paramDataPos: 0000000000000000000000000000000001000000010000000100000001000000020000000000000002000000010000000300000002000000030000000400000002000000040000000300000005000000030000000500000006000000040000000600000005000000070000000400000007000000020000000800000009000000050000000a0000000b000000000000000100000006000000
+        paramByteDataSize: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000100000000000000
     - name: landing and recover
       description: 
       colorIndex: 0
@@ -1582,7 +1596,7 @@ MonoBehaviour:
         - end flying animation
         - 
         actionEnabled: 0101010101010101
-        actionIsOpen: 0101000100010101
+        actionIsOpen: 0101010100010101
         actionStartIndex: 00000000030000000a0000001100000012000000190000002000000027000000
         actionHashCodes: 48c011015552ad0559f9a0047f1a710359f9a00459f9a00459f9a0048d4bb503
         unityObjectParams:
@@ -1649,7 +1663,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: DashyMovement
+          value: Bouncer
         - useVariable: 0
           name: 
           tooltip: 
@@ -2093,6 +2107,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63361a88b819fb140806962e1069b475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8412953064150171031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7577387461302741259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ca585be678b9d4db632895ae1d136e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoBounce: 1
+  controlRigidbodyConstraints: 1
+  bounceDirectionSource:
+    source: 1
+    customDirection: {x: 0, y: 0, z: 0}
+    rigidbody: {fileID: 0}
+    mover: {fileID: 7577387461302741261}
+    pseudoVelocity: {fileID: 0}
+  horizontalSpeed: {x: 10, y: 12}
+  bounceHeightSpeed: 35
+  rigidbody: {fileID: 7577387461302741262}
+  controlledBounceImpacts:
+    serializedVersion: 2
+    m_Bits: 35585
+  omitBounceTags:
+  - Small
+  onBounceCollision:
+    m_PersistentCalls:
+      m_Calls: []
+  onBounceBegin:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 737290452}
+        m_TargetAssemblyTypeName: PlayMakerFSM, PlayMaker
+        m_MethodName: SendEvent
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: dashBump
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8508307345089045345
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,15 +2490,15 @@ PrefabInstance:
       objectReference: {fileID: 7577387461302741262}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57bd5d454961d1845895291283d0b548, type: 3}
---- !u!1 &2263512468907504545 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 944744569446246448, guid: 57bd5d454961d1845895291283d0b548,
-    type: 3}
-  m_PrefabInstance: {fileID: 1330238332792511377}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2263512468907504548 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 944744569446246453, guid: 57bd5d454961d1845895291283d0b548,
+    type: 3}
+  m_PrefabInstance: {fileID: 1330238332792511377}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2263512468907504545 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 944744569446246448, guid: 57bd5d454961d1845895291283d0b548,
     type: 3}
   m_PrefabInstance: {fileID: 1330238332792511377}
   m_PrefabAsset: {fileID: 0}
@@ -2764,15 +2824,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5002275caf6512849b502fc14a98c7c7, type: 3}
---- !u!198 &316125695566457257 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 3764227881770986091, guid: 5002275caf6512849b502fc14a98c7c7,
-    type: 3}
-  m_PrefabInstance: {fileID: 3485262699993498562}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2953022042938987817 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1775858696183535339, guid: 5002275caf6512849b502fc14a98c7c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 3485262699993498562}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &316125695566457257 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3764227881770986091, guid: 5002275caf6512849b502fc14a98c7c7,
     type: 3}
   m_PrefabInstance: {fileID: 3485262699993498562}
   m_PrefabAsset: {fileID: 0}

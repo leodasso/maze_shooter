@@ -1,24 +1,14 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [AddComponentMenu("Character Controllers/Dashy")]
 public class DashyMovement : MovementBase
 {
-	[Tooltip("How quickly I stop when there's no")]
-	public float drag = 10;
-
-	[Tooltip("Vertical velocity applied when bouncing")]
-	public float bounceHeightSpeed = 15;
-	public float bounceHorizontalSpeed = 10;
-
 	public AnimationCurve dashSpeedMultiplier = AnimationCurve.Constant(0, 1, 1);
 	[Range(0, 1), Tooltip("Percentage of the dash in which spikes are spawned. ")]
 	public float spawnSpikesPercentage = .85f;
 	public float dashCooldown = 2;
-
-	[Tooltip("If collides with objects with these tags while dashing, won't bounce.")]
-	public List<string> omitBounceTags = new List<string>();
 
 	[Tooltip("Sends events 'dash', 'dashFinish', 'cooldownFinish', 'dashBump'")]
 	public PlayMakerFSM playMaker;
@@ -28,13 +18,9 @@ public class DashyMovement : MovementBase
 	float _dashMultiplier = 1;
 	Vector3 _dashDirection;
 
-	RigidbodyConstraints initConstraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
-	RigidbodyConstraints bounceConstraints = RigidbodyConstraints.FreezeRotation;
-
 	protected override void Start()
 	{
 		base.Start();
-		_rigidbody.constraints = initConstraints;
 	}
 
 	protected override void CalculateTotalVelocity()
@@ -85,25 +71,5 @@ public class DashyMovement : MovementBase
 	{
 		base.DoActionAlpha();
 		Dash();
-	}
-
-	protected override void OnCollisionEnter(Collision other)
-	{
-		base.OnCollisionEnter(other);
-		if (_dashing) {
-			if (omitBounceTags.Contains(other.gameObject.tag)) return;
-			playMaker.SendEvent("dashBump");
-		}
-	}
-
-	public void BounceBack() 
-	{
-		_rigidbody.constraints = bounceConstraints;
-		Vector3 bounceVel = -lastDirection * bounceHorizontalSpeed;
-		_rigidbody.velocity = new Vector3(bounceVel.x, bounceHeightSpeed, bounceVel.z);
-	}
-
-	public void ResetConstraints() {
-		_rigidbody.constraints = initConstraints;
 	}
 }
