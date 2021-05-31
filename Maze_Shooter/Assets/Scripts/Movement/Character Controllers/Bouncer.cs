@@ -1,14 +1,22 @@
 ﻿using Arachnid;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using ShootyGhost;
 
 public class Bouncer : MonoBehaviour
 {
-	[ToggleLeft, Tooltip( "Automatically invoke bounce when colliding with something of the right layer & tags. Will use the opposite of rigidbody direction to calculate bounce direction." + 
-	" \n if you want bounces to be tightly controlled from another script, disable autoBounce and call Bounce() or Bounce(Vector3)")]
+	public enum BounceType {
+		PercentageOfVelocity,
+		SetVelocity,
+	}
+	[ToggleLeft, SerializeField]
+	bool debug;
+
+	[ToggleLeft, Tooltip( "Automatically invoke bounce when colliding with something of the right layer & tags. Will use the opposite of rigidbody direction to calculate bounce direction."
+	 + " \n if you want bounces to be tightly controlled from another script, disable autoBounce and call Bounce() or Bounce(Vector3)")]
 	public bool autoBounce = true;
 
 	[ToggleLeft, Tooltip("Freezes Y position when not bouncing, and frees it when bouncing.")]
@@ -17,14 +25,20 @@ public class Bouncer : MonoBehaviour
 	[InlineProperty]
 	public MovementSource bounceDirectionSource;
 
-	[MinMaxSlider(0, 999, true), Tooltip("Horizontal bounce speed will be a random value between these two numbers.")]
+	public BounceType horizontalBounceType = BounceType.SetVelocity;
+
+	[MinMaxSlider(0, 999, true), Tooltip("Horizontal bounce speed will be a random value between these two numbers."), HideIf("isPercentageType")]
 	/// note that X and Y here are min and max, not axes in 3d space
 	public Vector2 horizontalSpeed = new Vector2(10, 12);
+
+	[Range(0,1), ShowIf("isPercentageType"), Tooltip("Amount of horizontal velocity to keep when bouncing")]
+	public float horizontalBouncePercent = .75f;
+
 	public float bounceHeightSpeed = 15;
     public new Rigidbody rigidbody;
 
-    [SerializeField, Tooltip("Only collisions with objects of these layers will have a bounce controlled by this component")]
-    LayerMask controlledBounceImpacts;
+    [SerializeField, Tooltip("Only regocnize collisions in these layers"), FormerlySerializedAs("controlledBounceImpacts")]
+    LayerMask layerMask;
 
 	[SerializeField, Tooltip("If collides with objects with these tags, won't bounce.")]
 	public List<string> omitBounceTags = new List<string>();
@@ -38,6 +52,8 @@ public class Bouncer : MonoBehaviour
 	RigidbodyConstraints initConstraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 	RigidbodyConstraints bounceConstraints = RigidbodyConstraints.FreezeRotation;
 
+	bool isPercentageType => horizontalBounceType == BounceType.PercentageOfVelocity;
+
 	void Start()
 	{
 		if (controlRigidbodyConstraints)
@@ -48,31 +64,42 @@ public class Bouncer : MonoBehaviour
     {
 		if (!enabled) return;
 		if (omitBounceTags.Contains(other.gameObject.tag)) return;
+		if (!Math.LayerMaskContainsLayer(layerMask, other.gameObject.layer)) return;
+
+		if (debug) 
+			Debug.Log(name + " colliding with " + other.gameObject.name + " in layer " + LayerMask.LayerToName(other.gameObject.layer));
 
 		onBounceCollision.Invoke();
 
-		if (!autoBounce) return;
-
-        if (Math.LayerMaskContainsLayer(controlledBounceImpacts, other.gameObject.layer))
-            Bounce(-bounceDirectionSource.GetMovementVector());
+		if (autoBounce) 
+			Bounce(-bounceDirectionSource.GetMovementVector());
     }
 
-	public void Bounce(Vector3 normalizedDirection) 
+	Vector3 BounceVelocity(Vector3 input)
 	{
-		normalizedDirection.Normalize();
-		BounceInternal(normalizedDirection * Random.Range(horizontalSpeed.x, horizontalSpeed.y) + Vector3.up * bounceHeightSpeed);
+		if (isPercentageType)
+			return new Vector3(input.x * horizontalBouncePercent, bounceHeightSpeed, input.z * horizontalBouncePercent);
+
+		else
+			return input.normalized * Random.Range(horizontalSpeed.x, horizontalSpeed.y) + Vector3.up * bounceHeightSpeed;
+	}
+
+	public void Bounce(Vector3 dir) 
+	{
+		dir.Normalize();
+		BounceInternal(BounceVelocity(dir));
 	}
 
     public void Bounce()
     {
         float yVelocity = bounceHeightSpeed;
-		BounceInternal(Vector3.up * yVelocity + HorizontalBounceSpeed);
+		BounceInternal(BounceVelocity(HorizontalBounceSpeed));
     }
 
 	Vector3 HorizontalBounceSpeed => new Vector3(
-                Random.Range(horizontalSpeed.x, horizontalSpeed.y), 
-                0,
-                Random.Range(horizontalSpeed.x, horizontalSpeed.y)
+                Random.Range(horizontalSpeed.x, horizontalSpeed.y), // X
+                0,													// Y
+                Random.Range(horizontalSpeed.x, horizontalSpeed.y)	// Z
             );
 
 	void BounceInternal(Vector3 velocity)
