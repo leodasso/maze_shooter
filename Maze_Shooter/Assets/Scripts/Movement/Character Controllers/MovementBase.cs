@@ -3,6 +3,7 @@ using UnityEngine.Events;
 using Arachnid;
 using Sirenix.OdinInspector;
 using ShootyGhost;
+using System.Collections.Generic;
 
 public class MovementBase : MonoBehaviour, IControllable
 {	
@@ -49,6 +50,19 @@ public class MovementBase : MonoBehaviour, IControllable
 	[ShowInInspector, ReadOnly]
 	bool _isGrounded;
 
+	[ShowInInspector, ReadOnly]
+	HashSet<MovementMod> mods = new HashSet<MovementMod>();
+
+	public void AddMod(MovementMod mod) 
+	{
+		mods.Add(mod);
+	}
+
+	public void RemoveMod(MovementMod mod)
+	{
+		mods.Remove(mod);
+	}
+
     protected float TotalSpeedMultiplier()
     {
         if (!useSpeedCurve) return speedMultiplier;
@@ -85,9 +99,11 @@ public class MovementBase : MonoBehaviour, IControllable
 	{
 		CalculateTotalVelocity();
 
+		// if a move is desired, apply move velocity
 		if (direction.magnitude > moveInputThreshold)
 			_rigidbody.velocity = new Vector3(totalVelocity.x, _rigidbody.velocity.y, totalVelocity.z);
 
+		// otherwise drag to a halt
 		else {
 			Vector3 zeroSpeed = new Vector3(0, _rigidbody.velocity.y, 0);
 			totalVelocity = Vector3.Lerp(totalVelocity, Vector3.zero, Time.fixedDeltaTime * movementProfile.drag);
@@ -99,6 +115,9 @@ public class MovementBase : MonoBehaviour, IControllable
 	{
 		totalVelocity += direction * TotalAcceleration * Time.fixedDeltaTime;
 		totalVelocity = Vector3.ClampMagnitude(totalVelocity, TotalMaxSpeed * direction.magnitude);
+
+		foreach (var mod in mods)
+			totalVelocity = mod.ModifyVelocity(totalVelocity);
 	}
 
 	protected virtual void OnCollisionEnter(Collision other) 
@@ -126,6 +145,11 @@ public class MovementBase : MonoBehaviour, IControllable
         return direction;
     }
 
+	public Vector3 GetLastDirection()
+	{
+		return lastDirection;
+	}
+
 
     public void IncreaseSpeedMultiplier(float amt)
     {
@@ -147,7 +171,11 @@ public class MovementBase : MonoBehaviour, IControllable
 
     public virtual void ApplyRightStickInput(Vector2 input) { }
 
-    public virtual void DoActionAlpha() { }
+    public virtual void DoActionAlpha() 
+	{
+		foreach (var mod in mods)
+			mod.DoActionAlpha();
+	}
 
 	public void OnPlayerControlEnabled(bool isEnabled)
 	{

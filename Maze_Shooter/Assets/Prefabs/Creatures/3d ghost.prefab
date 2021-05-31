@@ -598,6 +598,7 @@ GameObject:
   - component: {fileID: 3594317241385997712}
   - component: {fileID: 3491025872995073933}
   - component: {fileID: 3196075495648318836}
+  - component: {fileID: 3576742318269258064}
   - component: {fileID: 3490914254658770499}
   - component: {fileID: 7952798998470580956}
   - component: {fileID: 3490623736127823015}
@@ -704,6 +705,53 @@ MonoBehaviour:
   useTargetFinder: 0
   updateTargetDirectionEveryFrame: 1
   targetFinder: {fileID: 0}
+--- !u!114 &3576742318269258064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3594317241385997719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a8c76841c5c76c48bed9397656dcbd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementBase: {fileID: 3196075495648318836}
+  dashSpeedMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.00033077598
+      value: 4.9982347
+      inSlope: -0.1185668
+      outSlope: -0.1185668
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.109294385
+    - serializedVersion: 3
+      time: 0.20152593
+      value: 4.9556375
+      inSlope: -0.5169221
+      outSlope: -0.5169221
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.20559742
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.25014976
+      value: 1.0044861
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  playMaker: {fileID: 6539296253958561908}
 --- !u!114 &3490914254658770499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -996,9 +1044,9 @@ MonoBehaviour:
       position:
         serializedVersion: 2
         x: 626
-        y: 113
-        width: 168
-        height: 32
+        y: 145
+        width: 156
+        height: 48
       isBreakpoint: 0
       isSequence: 0
       hideUnused: 0
@@ -1008,6 +1056,14 @@ MonoBehaviour:
           isSystemEvent: 0
           isGlobal: 0
         toState: targeting mode
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      - fsmEvent:
+          name: dash
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: dashing
         linkStyle: 0
         linkConstraint: 0
         colorIndex: 0
@@ -1056,7 +1112,7 @@ MonoBehaviour:
       position:
         serializedVersion: 2
         x: 910
-        y: 221
+        y: 253
         width: 200
         height: 48
       isBreakpoint: 0
@@ -1266,7 +1322,7 @@ MonoBehaviour:
       position:
         serializedVersion: 2
         x: 350.21875
-        y: 241.78906
+        y: 273.78906
         width: 190
         height: 32
       isBreakpoint: 0
@@ -1426,7 +1482,7 @@ MonoBehaviour:
       position:
         serializedVersion: 2
         x: 856
-        y: 418
+        y: 450
         width: 200
         height: 32
       isBreakpoint: 0
@@ -1668,7 +1724,7 @@ MonoBehaviour:
       position:
         serializedVersion: 2
         x: 569.7344
-        y: 424.33594
+        y: 456.33594
         width: 200
         height: 32
       isBreakpoint: 0
@@ -1797,7 +1853,7 @@ MonoBehaviour:
       position:
         serializedVersion: 2
         x: 371.09375
-        y: 421.5625
+        y: 453.5625
         width: 100
         height: 32
       isBreakpoint: 0
@@ -2023,7 +2079,7 @@ MonoBehaviour:
       position:
         serializedVersion: 2
         x: 391.5
-        y: 109.5
+        y: 141.5
         width: 159
         height: 32
       isBreakpoint: 0
@@ -2227,7 +2283,7 @@ MonoBehaviour:
       position:
         serializedVersion: 2
         x: 61.796875
-        y: 232.71094
+        y: 264.71094
         width: 152
         height: 32
       isBreakpoint: 0
@@ -2620,11 +2676,123 @@ MonoBehaviour:
         - manualUI
         paramDataPos: 000000000000000000000000000000000000000001000000000000000000000001000000010000000200000002000000010000000000000002000000030000000300000002000000010000000400000005000000040000000300000004000000000000000600000001000000070000000200000003000000070000000100000005000000010000000100000002000000080000000900000002000000000000000a000000020000000600000002000000030000000b0000000c000000
         paramByteDataSize: 0000000000000000000000000000000001000000010000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000040000000100000000000000000000000000000000000000000000000100000001000000000000000000000001000000000000000000000000000000000000000100000001000000
+    - name: dashing
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 905
+        y: 100
+        width: 100
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: dashFinish
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: default
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.CallMethod
+        customNames:
+        - 
+        actionEnabled: 01
+        actionIsOpen: 01
+        actionStartIndex: 00000000
+        actionHashCodes: ca51e900
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams: []
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams: []
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: Dash
+        fsmObjectParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          typeName: GenericDash
+          value: {fileID: 3576742318269258064}
+        fsmVarParams:
+        - variableName: 
+          objectType: 
+          useVariable: 0
+          type: -1
+          floatValue: 0
+          intValue: 0
+          boolValue: 0
+          stringValue: 
+          vector4Value: {x: 0, y: 0, z: 0, w: 0}
+          objectReference: {fileID: 0}
+          arrayValue:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            type: -1
+            objectTypeName: 
+            floatValues: []
+            intValues: 
+            boolValues: 
+            stringValues: []
+            vector4Values: []
+            objectReferences: []
+        fsmArrayParams: []
+        fsmEnumParams: []
+        fsmFloatParams: []
+        fsmIntParams: []
+        fsmBoolParams: []
+        fsmVector2Params: []
+        fsmVector3Params: []
+        fsmColorParams: []
+        fsmRectParams: []
+        fsmQuaternionParams: []
+        stringParams: []
+        byteData: 0000
+        arrayParamSizes: 00000000
+        arrayParamTypes:
+        - HutongGames.PlayMaker.FsmVar
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 18000000120000000c000000270000000100000001000000
+        paramName:
+        - behaviour
+        - methodName
+        - parameters
+        - storeResult
+        - everyFrame
+        - manualUI
+        paramDataPos: 000000000000000000000000000000000000000001000000
+        paramByteDataSize: 000000000000000000000000000000000100000001000000
     events:
     - name: FINISHED
       isSystemEvent: 1
       isGlobal: 0
     - name: beginHauntTargeting
+      isSystemEvent: 0
+      isGlobal: 0
+    - name: dash
+      isSystemEvent: 0
+      isGlobal: 0
+    - name: dashFinish
       isSystemEvent: 0
       isGlobal: 0
     - name: endHaunt
@@ -2741,7 +2909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a991c2366dcd24c9e87020766883d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minVelocity: 5
+  minVelocity: 7
   layerMask:
     serializedVersion: 2
     m_Bits: 33025
@@ -2750,7 +2918,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: aab09b8da784a95408d91774eca91514, type: 2}
         m_TargetAssemblyTypeName: Arachnid.GameEvent, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3173,6 +3341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateDuringGameplay: 0
 --- !u!1 &3647332056736414577
 GameObject:
   m_ObjectHideFlags: 0
