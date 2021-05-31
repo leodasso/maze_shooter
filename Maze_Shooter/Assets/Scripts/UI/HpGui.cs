@@ -32,7 +32,7 @@ public class HpGui : MonoBehaviour
 		prevHearts = currentHearts;
 		currentHearts = currentHp.Value;
 
-		Debug.Log("Fetched new value. Prev hearts and current hearts: " + prevHearts + " " + currentHearts);
+		// Debug.Log("Fetched new value. Prev hearts and current hearts: " + prevHearts + " " + currentHearts);
 	}
 
     public void Refresh(Hearts displayedValue) 
