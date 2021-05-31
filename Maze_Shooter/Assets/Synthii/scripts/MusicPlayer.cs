@@ -66,14 +66,19 @@ namespace Synthii
 
 		void InstancePlay(MusicZone zone) 
 		{
+			Debug.Log("Attempting a play of " + zone.name);
 			if (currentTrackSource) {
 				// Ignore request if the zone is already playing
-				if (currentTrackSource.musicZone == zone) 
-						return;
+				if (currentTrackSource.musicZone == zone) {
+					Debug.Log("   zone " + zone.name + " is already the current track! cancelling request.");
+					return;
+				}
 
 				// Ignore lower quality requests
-				if (currentTrackSource.musicZone && currentTrackSource.musicZone.priority > zone.priority)
+				if (currentTrackSource.musicZone && currentTrackSource.musicZone.priority > zone.priority) {
+					Debug.Log("   Current playing zone " + currentTrackSource.musicZone.name + " has a higher priority than " + zone.name + ", cancelling.");
 					return;
+				}
 
 				// Pause the currently playing audio source
 				if (zone.musicTrack != currentTrackSource.MyTrack) 
@@ -111,18 +116,23 @@ namespace Synthii
 
 		void InstanceSetGlobal(MusicZone zone)
 		{
+			Debug.Log("Attempting to set " + zone.name + " as the new global music...");
 			if (globalZone) {
-				if (globalZone.priority > zone.priority) return;
+				if (globalZone.priority > zone.priority) {
+					Debug.Log("   The current global zone " + globalZone.name + " has a higher priority than incoming zone " + zone.name + ", so cancelling.");
+					return;
+				}
 			}
 
 			globalZone = zone;
-			if (!currentTrackSource || currentTrackSource.MyTrack == zone.musicTrack)
-				InstancePlay(globalZone);
+			
+			InstancePlay(globalZone);
 		}
 
 		void InstanceRemoveGlobal(MusicZone zone) 
 		{
 			if (globalZone == zone) {
+				Debug.Log("Removing track " + zone.name + " from global music.");
 				globalZone = null;
 				InstanceStop(zone);
 			}

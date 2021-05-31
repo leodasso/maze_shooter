@@ -32,7 +32,11 @@ namespace Synthii {
 			}
 		}
 
+		// what track volumes get set to
 		TrackVolumes trackVolumes;
+
+		// raw output - thing that does the lerping
+		TrackVolumes trackVolumesOutput;
 
 		[Tooltip("The music zone that I'm playing")]
 		public MusicZone musicZone;
@@ -56,16 +60,21 @@ namespace Synthii {
 				audioState = AudioState.FadeToLoop;
 				Loop();
 			}
+
+			trackVolumesOutput = TrackVolumes.Lerp(trackVolumesOutput, trackVolumes, Time.deltaTime * 3);
+			UpdateAudioSourcesVolume();
 		}
 
 
 		public void LerpMainVolume(float newVolume, float duration) 
 		{
+			StopAllCoroutines();
 			StartCoroutine(LerpMainVolumeRoutine(newVolume, duration, null));
 		}
 
 		public void LerpMainVolume(float newVolume, float duration, System.Action onLerpComplete) 
 		{
+			StopAllCoroutines();
 			StartCoroutine(LerpMainVolumeRoutine(newVolume, duration, onLerpComplete));
 		}
 
@@ -85,34 +94,15 @@ namespace Synthii {
 		}
 
 		/// <summary>
-		/// Keeps the same music track, but fades the layer volumes
-		/// from the settings in the previous zone to the new zone
-		/// </summary>
-		void LerpLayerVolumes(TrackVolumes newVolumes) 
-		{
-			StartCoroutine(LerpLayerVolumesRoutine(trackVolumes, newVolumes, 2));
-		}
-
-		IEnumerator LerpLayerVolumesRoutine(TrackVolumes start, TrackVolumes finish, float duration) 
-		{
-			float progress = 0;
-			while (progress < 1) {
-				progress += Time.unscaledDeltaTime / duration;
-				trackVolumes = TrackVolumes.Lerp(start, finish, progress);
-				UpdateAudioSourcesVolume();
-				yield return null;
-			}
-			trackVolumes = finish;
-			UpdateAudioSourcesVolume();
-		}
-
-		/// <summary>
 		/// Change the music zone I'm playing for.
 		/// This ONLY supports swapping between zones that share the same track! 
 		/// </summary>
 		public void ChangeZones(MusicZone newMusicZone, float fadeTime = 1)
 		{
 			if (newMusicZone == musicZone) return;
+
+			string oldName = musicZone ? musicZone.name : "null";
+			Debug.Log("Track " + MyTrack.name + " is changing zones from " + oldName + " to " + newMusicZone.name);
 			if (newMusicZone.musicTrack != MyTrack) {
 				Debug.LogError(name + " trying to change music zones, but the current and new zones don't " + 
 				"have the same tracks.", gameObject);
@@ -120,14 +110,14 @@ namespace Synthii {
 			}
 
 			musicZone = newMusicZone;
-			LerpLayerVolumes(newMusicZone.GenerateVolumes());
+			trackVolumes = newMusicZone.GenerateVolumes();
 		}
 
 		public void BuildAudioSources(MusicZone newMusicZone, AudioMixerGroup mixerGroup) 
 		{
 			musicZone = newMusicZone;
 			track = musicZone.musicTrack;
-			trackVolumes = newMusicZone.GenerateVolumes();
+			trackVolumes = trackVolumesOutput = newMusicZone.GenerateVolumes();
 
 			// Create an audio source for each layer
 			for (int i = 0; i < musicZone.layers.Count; i++) {
@@ -166,7 +156,7 @@ namespace Synthii {
 		void UpdateAudioSourcesVolume() 
 		{
 			for (int i = 0; i < sources.Count; i++)
-				sources[i].volume = mainVolume * trackVolumes.volumes[i];
+				sources[i].volume = mainVolume * trackVolumesOutput.volumes[i];
 		}
 
 
@@ -182,7 +172,7 @@ namespace Synthii {
 		public void Stop(float fadeDuration = 1) 
 		{
 			if (!Application.isPlaying || !musicZone) return;
-			audioState = AudioState.Stopped;
+			Debug.Log(name + " is stopping.");
 			LerpMainVolume(0, fadeDuration, StopSources);
 		}
 
@@ -190,7 +180,7 @@ namespace Synthii {
 		public void Pause(float fadeDuration = 1) 
 		{
 			if (!Application.isPlaying || !musicZone) return;
-			audioState = AudioState.Paused;
+			Debug.Log(name + " is pausing.");
 			LerpMainVolume(0, fadeDuration, PauseSources);
 		}
 
@@ -202,18 +192,27 @@ namespace Synthii {
 			// allow for play to be called multiple times without interruption
 			if (audioState == AudioState.Playing) return;
 			audioState = AudioState.Playing;
+
+			Debug.Log(name + " playing all audio sources.");
+
 			foreach (var source in sources)
 				source.Play();
 		}
 
 		void PauseSources() 
 		{
+			audioState = AudioState.Paused;
+			Debug.Log(name + " pausing all audio sources.");
+
 			foreach (var source in sources)
 				source.Pause();
 		}	
 
 		void StopSources() 
 		{
+			audioState = AudioState.Stopped;
+			Debug.Log(name + " stopping all audio sources.");
+
 			foreach (var source in sources)
 				source.Stop();
 		}

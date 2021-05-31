@@ -117,7 +117,7 @@ namespace Synthii {
 		{
 			string s = "";
 			foreach(float f in volumes) 
-				s += "layer " + volumes.IndexOf(f) + ": " + f;
+				s += "  layer " + volumes.IndexOf(f) + ": " + f;
 			
 			return s;
 		}
