@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 8329381951491282885}
   - component: {fileID: 8329381951491282875}
   - component: {fileID: 8329381951491282881}
+  - component: {fileID: 3642844437816431853}
   m_Layer: 15
   m_Name: crystal chest
   m_TagString: Untagged
@@ -328,6 +329,37 @@ MonoBehaviour:
     type: 3}
   lifetime: 5
   delay: 0
+--- !u!114 &3642844437816431853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8329381951491282872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1a991c2366dcd24c9e87020766883d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minVelocity: 30
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1752865
+  onBump:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8329381951491282875}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: DoDamage
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8329381951518258476
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,7 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a05506e86408f4bae29a22b776d5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progress: 0.6783693
+  progress: 0.8157873
   spriteRenderer: {fileID: 8329381953610170948}
   sprites:
   - {fileID: 21300000, guid: 1313bfdb52ce8fb45a2ef4d50062b25a, type: 3}
@@ -801,6 +833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateDuringGameplay: 0
 --- !u!210 &8329381953610170951
 SortingGroup:
   m_ObjectHideFlags: 0

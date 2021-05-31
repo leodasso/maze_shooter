@@ -97,5 +97,10 @@ namespace HutongGames.PlayMaker.Actions
 	        var comp = go.GetComponent(ReflectionUtils.GetGlobalType(behaviour.Value)) as Behaviour;
 	        return comp != null ? null : "Behaviour missing";
 	    }
+
+		public override string AutoName()
+		{
+			return enable.Value ? "Enable Behavior" : "Disable Behavior";
+		}
 	}
 }
