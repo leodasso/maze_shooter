@@ -94,7 +94,7 @@ namespace ShootyGhost
         {
             if (_player == null) return;
 			RefreshInput();
-            if (_player.GetButtonDown("haunt") || _fireInput.magnitude > .25f)
+            if (_player.GetButton("haunt") && _fireInput.magnitude > .25f)
 				playMaker.SendEvent("beginHauntTargeting");
         }
 
