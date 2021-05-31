@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: scene loaded
   m_EditorClassIdentifier: 
   enabled: 1
-  debug: 1
+  debug: 0
   delay: 0
   onEventRaised:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: c790b694fbd0b284b858b074c5ba9411, type: 2}
+        m_TargetAssemblyTypeName: GameMaster, Assembly-CSharp
         m_MethodName: SetTransitioning
         m_Mode: 6
         m_Arguments:
@@ -30,6 +31,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 11400000, guid: a92e24161040e0041bb8f1b885be5fbb, type: 2}
+        m_TargetAssemblyTypeName: Arachnid.FloatValue, Assembly-CSharp
         m_MethodName: set_Value
         m_Mode: 4
         m_Arguments:
@@ -40,6 +42,4 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   description: The scene has loaded
