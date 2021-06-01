@@ -603,15 +603,16 @@ GameObject:
   - component: {fileID: 7952798998470580956}
   - component: {fileID: 3490623736127823015}
   - component: {fileID: 4284562827944292654}
-  - component: {fileID: 3490994886253425537}
   - component: {fileID: 3490375850402369535}
   - component: {fileID: 3490500826504311321}
   - component: {fileID: 4151602328836940682}
   - component: {fileID: 3594317241385997713}
   - component: {fileID: 6539296253958561908}
   - component: {fileID: 3470813710061164947}
-  - component: {fileID: -4507166122488525800}
   - component: {fileID: 55019532670799612}
+  - component: {fileID: 3039237054168312611}
+  - component: {fileID: 3490994886253425537}
+  - component: {fileID: -4507166122488525800}
   m_Layer: 9
   m_Name: 3d ghost
   m_TagString: Untagged
@@ -718,12 +719,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementBase: {fileID: 3196075495648318836}
+  energy: {fileID: 3039237054168312611}
+  energyCost:
+    useConstant: 0
+    constantValue: 0.5
+    valueObject: {fileID: 0}
   dashSpeedMultiplier:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: -0.00033077598
-      value: 4.9982347
+      value: 3.0154746
       inSlope: -0.1185668
       outSlope: -0.1185668
       tangentMode: 0
@@ -731,8 +737,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.109294385
     - serializedVersion: 3
-      time: 0.20152593
-      value: 4.9556375
+      time: 0.26057065
+      value: 2.9940252
       inSlope: -0.5169221
       outSlope: -0.5169221
       tangentMode: 0
@@ -740,7 +746,7 @@ MonoBehaviour:
       inWeight: 0.20559742
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.25014976
+      time: 0.32341734
       value: 1.0044861
       inSlope: 0
       outSlope: 0
@@ -918,19 +924,6 @@ MonoBehaviour:
     useConstant: 1
     constantValue: 0
     valueObject: {fileID: 11400000, guid: a172aa1166137fb4b831df41ca8c2977, type: 2}
---- !u!114 &3490994886253425537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3594317241385997719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 219da9824ea70fd4882cd1b0bb8203cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collection: {fileID: 11400000, guid: 35831a8bfbcf71f4fb702f50d0ec7816, type: 2}
 --- !u!114 &3490375850402369535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2909,7 +2902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a991c2366dcd24c9e87020766883d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minVelocity: 7
+  minVelocity: 15
   layerMask:
     serializedVersion: 2
     m_Bits: 33025
@@ -2928,6 +2921,52 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &55019532670799612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3594317241385997719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d138179413203db409dd6b4061dfce3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3039237054168312611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3594317241385997719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f77f1c23ebedbbb46803007d6470d856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energy: {fileID: 11400000, guid: 651dd68a3dd043b4c96c4c20baf06958, type: 2}
+  maxEnergy:
+    useConstant: 1
+    constantValue: 0
+    valueObject: {fileID: 11400000, guid: 8fdd42da6ec273041902e3561ed8810f, type: 2}
+  energyRechargeRate:
+    useConstant: 0
+    constantValue: 0.1
+    valueObject: {fileID: 0}
+--- !u!114 &3490994886253425537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3594317241385997719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 219da9824ea70fd4882cd1b0bb8203cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collection: {fileID: 11400000, guid: 35831a8bfbcf71f4fb702f50d0ec7816, type: 2}
 --- !u!114 &-4507166122488525800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2941,18 +2980,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collection: {fileID: 11400000, guid: 839e133f31967294e9506eee8e22ac14, type: 2}
---- !u!114 &55019532670799612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3594317241385997719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d138179413203db409dd6b4061dfce3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3594392540580026823
 GameObject:
   m_ObjectHideFlags: 0

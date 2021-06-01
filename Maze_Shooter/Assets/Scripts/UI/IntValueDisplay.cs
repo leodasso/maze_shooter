@@ -2,7 +2,7 @@
 using TMPro;
 using Arachnid;
 
-public class IntValueDisplay : MonoBehaviour
+public class IntValueDisplay : InfoDisplay
 {
 	[SerializeField]
 	TextMeshProUGUI text;
@@ -10,22 +10,7 @@ public class IntValueDisplay : MonoBehaviour
 	[SerializeField]
 	IntValue intValue;
 
-	[SerializeField, Tooltip("Refreshes the text every update frame")]
-	bool refreshOnUpdate;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-		UpdateText();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (refreshOnUpdate) UpdateText();
-    }
-
-	public void UpdateText() 
+	public override void UpdateDisplay() 
 	{
         text.text = intValue.Value.ToString();
 	}

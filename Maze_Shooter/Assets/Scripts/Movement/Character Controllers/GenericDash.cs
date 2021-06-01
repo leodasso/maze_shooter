@@ -1,13 +1,19 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using ShootyGhost;
 using Sirenix.OdinInspector;
+using Arachnid;
 
 [AddComponentMenu("Character Controllers/Generic Dash")]
 public class GenericDash : MovementMod
 {
-	public AnimationCurve dashSpeedMultiplier = AnimationCurve.Constant(0, 1, 1);
+	[SerializeField]
+	Energy energy;
+
+	[SerializeField]
+	FloatReference energyCost;
+
+	[SerializeField]
+	AnimationCurve dashSpeedMultiplier = AnimationCurve.Constant(0, 1, 1);
 
 	[Tooltip("Sends events 'dash', 'dashFinish'")]
 	public PlayMakerFSM playMaker;
@@ -47,6 +53,7 @@ public class GenericDash : MovementMod
 
 	public override void DoActionAlpha()
 	{
-		playMaker.SendEvent("dash");
+		if (energy.ConsumeEnergy(energyCost.Value))
+			playMaker.SendEvent("dash");
 	}
 }
