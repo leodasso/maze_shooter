@@ -69,7 +69,7 @@ public class WobblyProp : MonoBehaviour
     void Update()
     {
 		// Improve performance by only calculating when its moving
-		if (wobbleVel.sqrMagnitude < .01f && !HasNoise) return;
+		if (wobbleVel.sqrMagnitude < .01f && wobblePoint.sqrMagnitude < .01f && !HasNoise) return;
 
 		// Lerp the wobble velocity to the negative wobble point
         wobbleVel = Vector3.Lerp(wobbleVel, -wobblePoint, Time.deltaTime * stiffness);
