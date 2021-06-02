@@ -13,14 +13,17 @@ public class WobblyProp : MonoBehaviour
     [Tooltip("Layers that cause this prop to wobble")]
     public LayerMask layerMask;
 
-    [Tooltip("(optional) Perlin noise profile, for adding ambient wobble, like wind blowing.")]
+	[ToggleLeft, Tooltip("Use noise to gently wobble always. This has a performance hit if there are thousands of instances.")]
+	public bool useNoise;
+
+    [Tooltip("(optional) Perlin noise profile, for adding ambient wobble, like wind blowing."), ShowIf("useNoise")]
     public NoiseProfile noiseProfile;
 
-    [Tooltip("The default object to wobble is this. Use this toggle if you want the collisions/triggers from this object " +
+    [ToggleLeft, Tooltip("The default object to wobble is this. Use this toggle if you want the collisions/triggers from this object " +
              "to wobble another object.")]
     public bool wobbleOtherObject;
 
-    [ShowIf("wobbleOtherObject")]
+    [ShowIf("wobbleOtherObject"), Indent]
     public Transform wobbler;
     
     [ShowIf("HasNoise")]
@@ -28,6 +31,8 @@ public class WobblyProp : MonoBehaviour
     public float wobbliness = 1;
     public float stiffness = 1;
     public Vector3 wobbleScale = Vector3.one;
+	[Tooltip("When something triggers this, its perceived velocity will be clamped to max velocity.")]
+	public float maxVelocity = 10;
 
     [ReadOnly]
     public Vector3 wobbleVel = Vector3.zero;
@@ -37,7 +42,7 @@ public class WobblyProp : MonoBehaviour
 
     Quaternion initRotation;
 
-    bool HasNoise => noiseProfile != null;
+    bool HasNoise => useNoise && noiseProfile != null;
 
     Vector2 _noiseScrollPoint;
     Vector2 _currentNoiseValue;
@@ -63,8 +68,16 @@ public class WobblyProp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		// Improve performance by only calculating when its moving
+		if (wobbleVel.sqrMagnitude < .01f && !HasNoise) return;
+
+		// Lerp the wobble velocity to the negative wobble point
         wobbleVel = Vector3.Lerp(wobbleVel, -wobblePoint, Time.deltaTime * stiffness);
+
+		// Add the wobble velocity to the wobble point 
         wobblePoint += wobbliness * Time.deltaTime * wobbleVel;
+
+		// scale the wobble point based on the exposed wobbleScale (to give more design/control)
         Vector3 scaledWobblePoint = Vector3.Scale(wobbleScale, wobblePoint);
         
         if (HasNoise)
@@ -73,7 +86,11 @@ public class WobblyProp : MonoBehaviour
             _currentNoiseValue = GeneratedPerlinVector() * noiseMultiplier * noiseProfile.strength;
         }
         
-        Quaternion rot = Quaternion.Euler(scaledWobblePoint.z + _currentNoiseValue.x, scaledWobblePoint.y, -scaledWobblePoint.x + _currentNoiseValue.y);
+        Quaternion rot = Quaternion.Euler(
+			scaledWobblePoint.z + _currentNoiseValue.x, 	// X
+			scaledWobblePoint.y, 							// Y
+			-scaledWobblePoint.x + _currentNoiseValue.y);	// Z
+
         ObjectToWobble.localRotation = initRotation * rot;
     }
     
@@ -118,6 +135,6 @@ public class WobblyProp : MonoBehaviour
 
     public void SetWobble(Vector3 vector)
     {
-        wobbleVel += Vector3.Scale(vector, transform.localScale);
+        wobbleVel += Vector3.ClampMagnitude( Vector3.Scale(vector, transform.localScale), maxVelocity);
     }
 }

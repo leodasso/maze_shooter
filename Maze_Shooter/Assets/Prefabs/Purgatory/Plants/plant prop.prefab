@@ -64,6 +64,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 3585
+  useNoise: 0
   noiseProfile: {fileID: 11400000, guid: 2bfce57e53118f14b8693670304e351e, type: 2}
   wobbleOtherObject: 1
   wobbler: {fileID: 1386039018424405054}
@@ -71,6 +72,7 @@ MonoBehaviour:
   wobbliness: 15
   stiffness: 12
   wobbleScale: {x: 5, y: 0, z: 3}
+  maxVelocity: 10
   wobbleVel: {x: 0, y: 0, z: 0}
   wobblePoint: {x: 0, y: 0, z: 0}
 --- !u!114 &5451269134597802957
@@ -147,6 +149,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -200,3 +203,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateDuringGameplay: 0
