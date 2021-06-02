@@ -1,26 +1,21 @@
 ﻿using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.PostProcessing;
 using Sirenix.OdinInspector;
 
-[RequireComponent(typeof(PostProcessVolume))]
-public class PostProcessVolumeHelper : MonoBehaviour
+public class PostProcessVolumeHelper : PostProcessBase
 {
     public float lerpSpeed = 10;
     [ReadOnly]
     public bool active;
-    PostProcessVolume _volume;
     
-    void Awake()
-    {
-        _volume = GetComponent<PostProcessVolume>();
-    }
 
     /// <summary>
     /// Snaps the volume's weight to the given value without lerping
     /// </summary>
     public void SnapVolumeWeight(float snapTo)
     {
-        _volume.weight = snapTo;
+        weight = snapTo;
     }
 
     /// <summary>
@@ -28,7 +23,7 @@ public class PostProcessVolumeHelper : MonoBehaviour
     /// </summary>
     public void AddVolumeWeight(float amt)
     {
-        _volume.weight += amt;
+        weight += amt;
     }
 
     // Active and inactive functions are for UnityEvent to ref
@@ -46,7 +41,7 @@ public class PostProcessVolumeHelper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float weight = active ? 1 : 0;
-        _volume.weight = Mathf.Lerp(_volume.weight, weight, Time.unscaledDeltaTime * lerpSpeed);
+        float newWeight = active ? 1 : 0;
+        weight = Mathf.Lerp(weight, newWeight, Time.unscaledDeltaTime * lerpSpeed);
     }
 }

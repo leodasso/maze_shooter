@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 795577574}
-  - component: {fileID: 795577576}
+  - component: {fileID: 915647572245688409}
   - component: {fileID: 795577575}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Darkness PP
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 522022562580709262}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &795577576
+--- !u!114 &915647572245688409
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,14 +41,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 795577573}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: dcc07d6116c01dc4ab153232d2d98bd2, type: 2}
   isGlobal: 1
+  priority: 10
   blendDistance: 0
   weight: 0
-  priority: 20
+  sharedProfile: {fileID: 11400000, guid: c18cecf32ba1f554d950fe2a9e014c6e, type: 2}
 --- !u!114 &795577575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,20 +73,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.20178404
       value: 0.0056060934
-      inSlope: 0.04663995
-      outSlope: 0.04663995
+      inSlope: 1.8001798
+      outSlope: 1.8001798
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.07936286
+      outWeight: 0.03882651
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1.8090072
-      outSlope: 1.8090072
+      inSlope: 1.2948903
+      outSlope: 1.2948903
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.0465918
+      inWeight: 0.039689314
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -131,9 +131,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1357592681}
-  - component: {fileID: 1357592683}
+  - component: {fileID: 5260327701148842178}
   - component: {fileID: 1357592682}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Full Darkness PP
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ Transform:
   m_Father: {fileID: 522022562580709262}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1357592683
+--- !u!114 &5260327701148842178
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,14 +163,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1357592680}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: fccc65124d6960b469b32f0e5f859698, type: 2}
   isGlobal: 1
+  priority: 11
   blendDistance: 0
   weight: 0
-  priority: 25
+  sharedProfile: {fileID: 11400000, guid: d9217f2c45b1cee4e9b71d145cd9f95b, type: 2}
 --- !u!114 &1357592682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,8 +193,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.9094116
-      value: 0
+      time: 0.8671684
+      value: 0.0064007714
       inSlope: 4.3823013
       outSlope: 4.3823013
       tangentMode: 0
@@ -204,11 +204,11 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 10.249025
-      outSlope: 10.249025
+      inSlope: 6.9665008
+      outSlope: 6.9665008
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.090163924
+      inWeight: 0.062479068
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
