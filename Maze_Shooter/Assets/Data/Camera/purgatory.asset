@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65e486e4de6e5448a8fbb43dc8756a0, type: 3}
   m_Name: Grain
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -163,10 +163,10 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.4
+    value: 1
   threshold:
     overrideState: 1
-    value: 0
+    value: 0.65
   softKnee:
     overrideState: 1
     value: 0.594
@@ -217,7 +217,7 @@ MonoBehaviour:
     defaultState: 1
   tonemapper:
     overrideState: 1
-    value: 1
+    value: 2
   toneCurveToeStrength:
     overrideState: 0
     value: 0
@@ -251,7 +251,7 @@ MonoBehaviour:
     value: 1
   colorFilter:
     overrideState: 1
-    value: {r: 0.43329477, g: 0.8584906, b: 0.55330974, a: 1}
+    value: {r: 0.5801887, g: 1, b: 0.6995846, a: 1}
   hueShift:
     overrideState: 0
     value: 5
@@ -263,10 +263,10 @@ MonoBehaviour:
     value: 0
   postExposure:
     overrideState: 1
-    value: -0.27
+    value: 0.1
   contrast:
     overrideState: 1
-    value: 10
+    value: 5.2
   mixerRedOutRedIn:
     overrideState: 0
     value: 100
@@ -295,13 +295,13 @@ MonoBehaviour:
     overrideState: 0
     value: 100
   lift:
-    overrideState: 1
-    value: {x: 0.97313994, y: 1, z: 0.9755966, w: 0.021141648}
+    overrideState: 0
+    value: {x: 0.9633423, y: 0.989713, z: 1, w: 0.021141648}
   gamma:
-    overrideState: 1
+    overrideState: 0
     value: {x: 0.94757336, y: 1, z: 0.9879173, w: 0.4017279}
   gain:
-    overrideState: 1
+    overrideState: 0
     value: {x: 0.99984205, y: 1, z: 0.93755126, w: -0.026178002}
   masterCurve:
     overrideState: 0
@@ -1356,18 +1356,18 @@ MonoBehaviour:
       - 0.5292659
       - 0.5228958
       - 0.5167898
-      - 0.5109735
+      - 0.51097345
       - 0.50547266
       - 0.5003128
-      - 0.49551973
-      - 0.49111903
-      - 0.4871364
-      - 0.48359746
+      - 0.4955197
+      - 0.491119
+      - 0.48713636
+      - 0.48359743
       - 0.48052788
       - 0.47795337
       - 0.47589958
-      - 0.47439215
-      - 0.47345674
+      - 0.47439212
+      - 0.4734567
       - 0.47311902
       - 0.4731183
       - 0.4731183
@@ -1557,7 +1557,7 @@ MonoBehaviour:
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.48
+    value: 0.33
   smoothness:
     overrideState: 1
     value: 0.626
