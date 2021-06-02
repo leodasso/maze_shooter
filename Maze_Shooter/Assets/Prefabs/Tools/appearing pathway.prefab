@@ -44,6 +44,7 @@ SpriteShapeRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 0
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -52,8 +53,8 @@ SpriteShapeRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f80fe3dc1cf86ee439c2e81b5d05bea1, type: 2}
+  - {fileID: 2100000, guid: f80fe3dc1cf86ee439c2e81b5d05bea1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,10 +78,12 @@ SpriteShapeRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_MaskInteraction: 2
   m_ShapeTexture: {fileID: 2800000, guid: ed73db8c7dd30524983535d7bc3cfdde, type: 3}
-  m_Sprites: []
+  m_Sprites:
+  - {fileID: 8241641821305170311, guid: 1a15112bc0706b1438c3e5224084c923, type: 3}
+  - {fileID: 536622554916108044, guid: 1a15112bc0706b1438c3e5224084c923, type: 3}
   m_LocalAABB:
-    m_Center: {x: 23.565077, y: 18.279236, z: 0}
-    m_Extent: {x: 29.845781, y: 34.071255, z: 0}
+    m_Center: {x: 23.492418, y: 18.278948, z: -0.00014999999}
+    m_Extent: {x: 31.315754, y: 35.613743, z: 0.00014999999}
 --- !u!114 &1586115952270342628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,6 +274,7 @@ MonoBehaviour:
   m_OptimizeGeometry: 1
   m_EnableTangents: 0
   m_GeometryCached: 0
+  m_UTess2D: 0
 --- !u!114 &6507362670185992532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,9 +290,11 @@ MonoBehaviour:
   colliderLayer: 2
   isTrigger: 1
   filled: 1
-  voxelSize: 2
+  voxelWidth: 5
+  voxelHeight: 0.5
   height: 5
   curveSegments: 6
+  simplify: 0.005
   thickness: -3
   spriteShapeController: {fileID: 1586115952270342628}
   points:
