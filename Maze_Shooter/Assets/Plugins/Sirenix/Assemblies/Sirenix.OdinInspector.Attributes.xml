@@ -647,6 +647,11 @@
             Indicates that the member should not be drawn as a value reference, if it becomes a reference to another value in the tree. Beware, and use with care! This may lead to infinite draw loops!
             </summary>
         </member>
+        <member name="T:Sirenix.OdinInspector.DontValidateAttribute">
+            <summary>
+            Tells the validation system that this member should not be validated. It will not show validation messages in the inspector, and it will not be scanned by the project validator.
+            </summary>
+        </member>
         <member name="T:Sirenix.OdinInspector.EnableGUIAttribute">
             <summary>
             <para>An attribute that enables GUI.</para>
@@ -2068,6 +2073,11 @@
             Gets or sets the title for the dropdown. Null by default.
             </summary>
         </member>
+        <member name="F:Sirenix.OdinInspector.TypeFilterAttribute.DrawValueNormally">
+            <summary>
+            If true, the value will be drawn normally after the type selector dropdown has been drawn. False by default.
+            </summary>
+        </member>
         <member name="M:Sirenix.OdinInspector.TypeFilterAttribute.#ctor(System.String)">
             <summary>
             Creates a dropdown menu for a property.
@@ -2851,6 +2861,11 @@
         <member name="F:Sirenix.OdinInspector.InlineButtonAttribute.Label">
             <summary>
             Optional label of the button.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.InlineButtonAttribute.ShowIf">
+            <summary>
+            Optional resolved string that specifies a condition for whether to show the inline button or not.
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.InlineButtonAttribute.#ctor(System.String,System.String)">
@@ -4500,6 +4515,11 @@
         <member name="F:Sirenix.OdinInspector.OnValueChangedAttribute.InvokeOnUndoRedo">
             <summary>
             Whether to perform the action when an undo or redo event occurs via UnityEditor.Undo.undoRedoPerformed. True by default.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.OnValueChangedAttribute.InvokeOnInitialize">
+            <summary>
+            Whether to perform the action when the property is initialized. This will generally happen when the property is first viewed/queried (IE when the inspector is first opened, or when its containing foldout is first expanded, etc), and whenever its type or a parent type changes, or it is otherwise forced to rebuild.
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.OnValueChangedAttribute.#ctor(System.String,System.Boolean)">
