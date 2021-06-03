@@ -1,11 +1,26 @@
 ﻿using UnityEngine;
+using UnityEngine.U2D;
 using Sirenix.OdinInspector;
 using Arachnid;
 using System.Collections.Generic;
 
+public struct ShapePoint 
+{
+	public Vector3 pos;
+	public float height;
+
+	public ShapePoint(Vector3 newPos, float newHeight)
+	{
+		pos = newPos;
+		height = newHeight;
+	}
+}
+
 public class SpriteShapeCollider : MonoBehaviour
 {
-	public UnityEngine.U2D.SpriteShapeController spriteShapeController;
+
+
+	public SpriteShapeController spriteShapeController;
 	
 	public enum ColliderLayer {
 		Default,
@@ -32,14 +47,17 @@ public class SpriteShapeCollider : MonoBehaviour
 
 	public float height = 5;
 
-	[Range(1, 30), Tooltip("The number of segments to break curved pieces into")]
+	[Range(1, 30), Tooltip("The number of segments to break curved pieces into"), TitleGroup("Edges")]
 	public int curveSegments = 5;
 
 	[Range(0, .1f), Tooltip("Higher numbers means it will remove minor details")]
 	public float simplify = .005f;
 
-	[Tooltip("Hint: To make a trigger that more or less matches this sprite shape, just set the thickness to a negative number.")]
+	[Tooltip("Thickness of the border colliders.")]
 	public float thickness = 1;
+
+	[Tooltip("SpriteShape has something called 'height', whcih is the thickness of the border. This controls how much that height affects the total thickness of the collider.")]
+	public float thicknessFromShape = 1;
 
 	[Range(-.5f, .5f), Tooltip("Offset of the collider from the path line. 0 means the collider will be centered over the path line.")]
 	public float offset = .5f;
@@ -48,7 +66,7 @@ public class SpriteShapeCollider : MonoBehaviour
 	public float overlap = .15f;
 
 	[SerializeField, ReadOnly, Space, PropertyOrder(200)]
-	List<Vector3> points = new List<Vector3>();
+	List<ShapePoint> points = new List<ShapePoint>();
 
 	[SerializeField, ReadOnly, PropertyOrder(200)]
 	List<GameObject> walls = new List<GameObject>();
@@ -66,7 +84,7 @@ public class SpriteShapeCollider : MonoBehaviour
 
 		Gizmos.color = Color.cyan;
 		for ( int i = 1; i < points.Count; i++)
-			Gizmos.DrawLine(transform.TransformPoint(points[i-1]), transform.TransformPoint(points[i]));
+			Gizmos.DrawLine(transform.TransformPoint(points[i-1].pos), transform.TransformPoint(points[i].pos));
 	}
 
 
@@ -76,7 +94,7 @@ public class SpriteShapeCollider : MonoBehaviour
 		Bounds bounds = new Bounds(transform.position, Vector3.one);
 
 		for (int i = 0; i < points.Count; i++) {
-			Vector3 pt = points[i];
+			Vector3 pt = points[i].pos;
 			bounds.Encapsulate(transform.TransformPoint(pt));
 		}
 
@@ -116,7 +134,7 @@ public class SpriteShapeCollider : MonoBehaviour
 	void GenerateSegments()
 	{	
 		points.Clear();
-		points = new List<Vector3>();
+		points = new List<ShapePoint>();
 
 		// Generate a list of usable indexes. Basically, ignore ones that make lines that are ALMOST the same direction
 		var usable = UsableIndexes();
@@ -129,14 +147,20 @@ public class SpriteShapeCollider : MonoBehaviour
 			GenerateSingleSegment(usable[usable.Count - 1], usable[0]);
 	}
 
+	static ShapePoint GetShapePoint(SpriteShapeController spriteShape, int index)
+		=> new ShapePoint(
+			spriteShape.spline.GetPosition(index),
+			spriteShape.spline.GetHeight(index)
+		);
+
 
 	void GenerateSingleSegment(int leftIndex, int rightIndex)
 	{
 		//failsafe for creating infinite points
 		if (curveSegments < 1) return;
 
-		Vector3 pt1 = spriteShapeController.spline.GetPosition(leftIndex);
-		Vector3 pt2 = spriteShapeController.spline.GetPosition(rightIndex);
+		ShapePoint pt1 = GetShapePoint(spriteShapeController, leftIndex);
+		ShapePoint pt2 = GetShapePoint(spriteShapeController, rightIndex);
 
 		Vector3 tangent1 = spriteShapeController.spline.GetRightTangent(leftIndex);
 		Vector3 tangent2 = spriteShapeController.spline.GetLeftTangent(rightIndex);
@@ -151,13 +175,15 @@ public class SpriteShapeCollider : MonoBehaviour
 		}
 
 		// generate curve
-		Vector3 anchor1 = pt1 + tangent1;
-		Vector3 anchor2 = pt2 + tangent2;
+		Vector3 anchor1 = pt1.pos + tangent1;
+		Vector3 anchor2 = pt2.pos + tangent2;
 
 		float segmentLength = 1f / (float)curveSegments;
 
 		for (float i = 0; i < 1; i += segmentLength){
-			points.Add(Math.GetBezier(i, pt1, anchor1, anchor2, pt2));
+			float height = Mathf.Lerp(pt1.height, pt2.height, i);
+			Vector3 ptPos = Math.GetBezier(i, pt1.pos, anchor1, anchor2, pt2.pos);
+			points.Add(new ShapePoint(ptPos, height));
 		}
 	}
 	
@@ -202,7 +228,7 @@ public class SpriteShapeCollider : MonoBehaviour
 			BuildColliderSegment(points[points.Count - 1], points[0], points.Count, thickness);
 	}
 
-	[Button]
+
 	void BuildFill()
 	{
 		float prevThickness = thickness;
@@ -277,7 +303,8 @@ public class SpriteShapeCollider : MonoBehaviour
 	[ButtonGroup]
 	void ClearAllColliders()
 	{
-		points = new List<Vector3>();
+		points.Clear();
+		points = new List<ShapePoint>();
 		RemoveWalls();
 		RemoveVoxels();
 	}
@@ -318,11 +345,11 @@ public class SpriteShapeCollider : MonoBehaviour
 		}
 	}
 
-	void BuildColliderSegment(Vector3 pt1, Vector3 pt2, int index, float thickness) 
+	void BuildColliderSegment(ShapePoint pt1, ShapePoint pt2, int index, float thickness) 
 	{
 		// calculate the angle to rotate the collider to
-		Vector3 offset = pt2 - pt1;
-		float angle = Math.AngleFromVector2(offset, -90);
+		Vector3 dir = pt2.pos - pt1.pos;
+		float angle = Math.AngleFromVector2(dir, -90);
 
 		GameObject newCol = new GameObject("col " + index);
 		newCol.transform.parent = transform;
@@ -330,11 +357,15 @@ public class SpriteShapeCollider : MonoBehaviour
 
 		var newBox = newCol.AddComponent<BoxCollider>();
 
-		float segmentLength = Vector3.Distance(pt1, pt2);
-		float lengthMultiplier = 1 + overlap;
-		newBox.size = new Vector3(segmentLength * lengthMultiplier, height, thickness);
-		newBox.center = new Vector3(segmentLength / 2, height / 2, thickness/2);
-		newBox.transform.localPosition = pt1;
+		float segmentLength = Vector3.Distance(pt1.pos, pt2.pos);
+		float overlapLength = segmentLength * overlap;
+
+		// thickness should be influenced by 'height' (which is basically what spriteShape calls border thickness)
+		thickness += thicknessFromShape * pt1.height;
+
+		newBox.size = new Vector3(segmentLength + overlapLength, height, thickness);
+		newBox.center = new Vector3(segmentLength / 2, height / 2, thickness * offset);
+		newBox.transform.localPosition = pt1.pos;
 		newBox.transform.localEulerAngles = new Vector3(angle, -90, 90);
 	}
 }
