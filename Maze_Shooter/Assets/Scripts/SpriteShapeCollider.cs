@@ -5,13 +5,15 @@ using System.Collections.Generic;
 
 public class SpriteShapeCollider : MonoBehaviour
 {
+	public UnityEngine.U2D.SpriteShapeController spriteShapeController;
+	
 	public enum ColliderLayer {
 		Default,
 		Terrain,
 		SoulLight,
 	}
 
-	[EnumToggleButtons, OnValueChanged("UpdateLayer")]
+	[EnumToggleButtons, OnValueChanged("UpdateLayer"), Space]
 	public ColliderLayer colliderLayer;
 
 	[ToggleLeft, OnValueChanged("SetIsTrigger")]
@@ -38,20 +40,27 @@ public class SpriteShapeCollider : MonoBehaviour
 
 	[Tooltip("Hint: To make a trigger that more or less matches this sprite shape, just set the thickness to a negative number.")]
 	public float thickness = 1;
-	public UnityEngine.U2D.SpriteShapeController spriteShapeController;
 
-	[SerializeField, ReadOnly]
+	[Range(-.5f, .5f), Tooltip("Offset of the collider from the path line. 0 means the collider will be centered over the path line.")]
+	public float offset = .5f;
+
+	[Range(-.05f, 1), Tooltip("How much edge colliders overlap as a percentage")]
+	public float overlap = .15f;
+
+	[SerializeField, ReadOnly, Space, PropertyOrder(200)]
 	List<Vector3> points = new List<Vector3>();
 
-	[SerializeField, ReadOnly]
+	[SerializeField, ReadOnly, PropertyOrder(200)]
 	List<GameObject> walls = new List<GameObject>();
 
-	[SerializeField, ReadOnly]
+	[SerializeField, ReadOnly, PropertyOrder(200)]
 	List<GameObject> voxels = new List<GameObject>();
 
 
 	void OnDrawGizmosSelected()
 	{
+		if (!spriteShapeController) return;
+
 		var bounds = GetBounds();
 		Gizmos.DrawWireCube(bounds.center, bounds.size);
 
@@ -322,7 +331,8 @@ public class SpriteShapeCollider : MonoBehaviour
 		var newBox = newCol.AddComponent<BoxCollider>();
 
 		float segmentLength = Vector3.Distance(pt1, pt2);
-		newBox.size = new Vector3(segmentLength, height, thickness);
+		float lengthMultiplier = 1 + overlap;
+		newBox.size = new Vector3(segmentLength * lengthMultiplier, height, thickness);
 		newBox.center = new Vector3(segmentLength / 2, height / 2, thickness/2);
 		newBox.transform.localPosition = pt1;
 		newBox.transform.localEulerAngles = new Vector3(angle, -90, 90);
