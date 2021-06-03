@@ -4,23 +4,10 @@ using Sirenix.OdinInspector;
 using Arachnid;
 using System.Collections.Generic;
 
-public struct ShapePoint 
-{
-	public Vector3 pos;
-	public float height;
 
-	public ShapePoint(Vector3 newPos, float newHeight)
-	{
-		pos = newPos;
-		height = newHeight;
-	}
-}
-
+[RequireComponent(typeof(SpriteShapeAnalyzer))]
 public class SpriteShapeCollider : MonoBehaviour
 {
-
-
-	public SpriteShapeController spriteShapeController;
 	
 	public enum ColliderLayer {
 		Default,
@@ -47,12 +34,6 @@ public class SpriteShapeCollider : MonoBehaviour
 
 	public float height = 5;
 
-	[Range(1, 30), Tooltip("The number of segments to break curved pieces into"), TitleGroup("Edges")]
-	public int curveSegments = 5;
-
-	[Range(0, .1f), Tooltip("Higher numbers means it will remove minor details")]
-	public float simplify = .005f;
-
 	[Tooltip("Thickness of the border colliders.")]
 	public float thickness = 1;
 
@@ -65,36 +46,30 @@ public class SpriteShapeCollider : MonoBehaviour
 	[Range(-.05f, 1), Tooltip("How much edge colliders overlap as a percentage")]
 	public float overlap = .15f;
 
-	[SerializeField, ReadOnly, Space, PropertyOrder(200)]
-	List<ShapePoint> points = new List<ShapePoint>();
-
 	[SerializeField, ReadOnly, PropertyOrder(200)]
 	List<GameObject> walls = new List<GameObject>();
 
 	[SerializeField, ReadOnly, PropertyOrder(200)]
 	List<GameObject> voxels = new List<GameObject>();
 
-
-	void OnDrawGizmosSelected()
-	{
-		if (!spriteShapeController) return;
-
-		var bounds = GetBounds();
-		Gizmos.DrawWireCube(bounds.center, bounds.size);
-
-		Gizmos.color = Color.cyan;
-		for ( int i = 1; i < points.Count; i++)
-			Gizmos.DrawLine(transform.TransformPoint(points[i-1].pos), transform.TransformPoint(points[i].pos));
+	SpriteShapeAnalyzer analyzer {
+		get {
+			if (_analyzer) return _analyzer;
+			_analyzer = GetComponent<SpriteShapeAnalyzer>();
+			return _analyzer;
+		}
 	}
+
+	SpriteShapeAnalyzer _analyzer;
 
 
 	Bounds GetBounds() 
 	{
-		GenerateSegments();
+		analyzer.Analyze();
 		Bounds bounds = new Bounds(transform.position, Vector3.one);
 
-		for (int i = 0; i < points.Count; i++) {
-			Vector3 pt = points[i].pos;
+		for (int i = 0; i < analyzer.points.Count; i++) {
+			Vector3 pt = analyzer.points[i].pos;
 			bounds.Encapsulate(transform.TransformPoint(pt));
 		}
 
@@ -103,95 +78,14 @@ public class SpriteShapeCollider : MonoBehaviour
 		return bounds;
 	}
 
-	// ignore points if the difference between the two segments is really negligable (as determined by wiggleRoom)
-	List<int> UsableIndexes()
-	{
-		List<int> usable = new List<int>();
-
-		// Add first point
-		usable.Add(0);
-
-		int pointCount = spriteShapeController.spline.GetPointCount();
-		for (int i = 1; i < pointCount - 1; i++) {
-
-			Vector3 pt1 = spriteShapeController.spline.GetPosition(i-1);
-			Vector3 pt2 = spriteShapeController.spline.GetPosition(i);
-			Vector3 pt3 = spriteShapeController.spline.GetPosition(i + 1);
-
-			Vector3 prevDirection = pt2 - pt1;
-			Vector3 nextDirection = pt3 - pt2;
-			float dot = Vector3.Dot(prevDirection.normalized, nextDirection.normalized);
-
-			if (Mathf.Abs(dot) < 1 - simplify) 
-				usable.Add(i);
-		}
-
-		// add last point
-		usable.Add(pointCount - 1);
-		return usable;
-	}
-
-	void GenerateSegments()
-	{	
-		points.Clear();
-		points = new List<ShapePoint>();
-
-		// Generate a list of usable indexes. Basically, ignore ones that make lines that are ALMOST the same direction
-		var usable = UsableIndexes();
-
-		for (int i = 1; i < usable.Count; i++) 
-				GenerateSingleSegment(usable[i-1], usable[i]);
-	
-		// build the very last collider from last point to the first point
-		if (!spriteShapeController.spline.isOpenEnded) 
-			GenerateSingleSegment(usable[usable.Count - 1], usable[0]);
-	}
-
-	static ShapePoint GetShapePoint(SpriteShapeController spriteShape, int index)
-		=> new ShapePoint(
-			spriteShape.spline.GetPosition(index),
-			spriteShape.spline.GetHeight(index)
-		);
 
 
-	void GenerateSingleSegment(int leftIndex, int rightIndex)
-	{
-		//failsafe for creating infinite points
-		if (curveSegments < 1) return;
-
-		ShapePoint pt1 = GetShapePoint(spriteShapeController, leftIndex);
-		ShapePoint pt2 = GetShapePoint(spriteShapeController, rightIndex);
-
-		Vector3 tangent1 = spriteShapeController.spline.GetRightTangent(leftIndex);
-		Vector3 tangent2 = spriteShapeController.spline.GetLeftTangent(rightIndex);
-
-		// check if this is curved
-		bool curved = tangent1.magnitude > .1f || tangent2.magnitude > .1f;
-
-		if (! curved) {
-			points.Add(pt1);
-			points.Add(pt2);
-			return;
-		}
-
-		// generate curve
-		Vector3 anchor1 = pt1.pos + tangent1;
-		Vector3 anchor2 = pt2.pos + tangent2;
-
-		float segmentLength = 1f / (float)curveSegments;
-
-		for (float i = 0; i < 1; i += segmentLength){
-			float height = Mathf.Lerp(pt1.height, pt2.height, i);
-			Vector3 ptPos = Math.GetBezier(i, pt1.pos, anchor1, anchor2, pt2.pos);
-			points.Add(new ShapePoint(ptPos, height));
-		}
-	}
 	
 	[ButtonGroup]
 	void BuildCollider()
 	{
 		ClearAllColliders();
-		GenerateSegments();
+		analyzer.Analyze();
 		
 		if (!filled)
 			BuildWalls(thickness);
@@ -220,12 +114,12 @@ public class SpriteShapeCollider : MonoBehaviour
 
 	void BuildWalls(float thickness) 
 	{
-		for (int i = 1; i < points.Count; i++) 
-			BuildColliderSegment(points[i-1], points[i], i, thickness);
+		for (int i = 1; i < analyzer.points.Count; i++) 
+			BuildColliderSegment(analyzer.points[i-1], analyzer.points[i], i, thickness);
 
 		// build the very last collider from last point to the first point
-		if (!spriteShapeController.spline.isOpenEnded) 
-			BuildColliderSegment(points[points.Count - 1], points[0], points.Count, thickness);
+		if (!analyzer.IsOpenEnded) 
+			BuildColliderSegment(analyzer.points[analyzer.points.Count - 1], analyzer.points[0], analyzer.points.Count, thickness);
 	}
 
 
@@ -303,8 +197,7 @@ public class SpriteShapeCollider : MonoBehaviour
 	[ButtonGroup]
 	void ClearAllColliders()
 	{
-		points.Clear();
-		points = new List<ShapePoint>();
+		analyzer.Reset();
 		RemoveWalls();
 		RemoveVoxels();
 	}
