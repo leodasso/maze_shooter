@@ -185,6 +185,10 @@ public class SpriteShapeCollider : MonoBehaviour
 		}
 
 		thickness = prevThickness;
+
+		// remove the temporary walls that were put in place to build voxels
+		RemoveWalls();
+
 		BuildWalls(prevThickness);
 	}
 
