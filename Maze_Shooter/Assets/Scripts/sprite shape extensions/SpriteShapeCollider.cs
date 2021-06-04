@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.U2D;
 using Sirenix.OdinInspector;
 using Arachnid;
 using System.Collections.Generic;
@@ -36,9 +35,6 @@ public class SpriteShapeCollider : MonoBehaviour
 
 	[Tooltip("Thickness of the border colliders.")]
 	public float thickness = 1;
-
-	[Tooltip("SpriteShape has something called 'height', whcih is the thickness of the border. This controls how much that height affects the total thickness of the collider.")]
-	public float thicknessFromShape = 1;
 
 	[Range(-.5f, .5f), Tooltip("Offset of the collider from the path line. 0 means the collider will be centered over the path line.")]
 	public float offset = .5f;
@@ -112,14 +108,14 @@ public class SpriteShapeCollider : MonoBehaviour
 			voxel.layer = LayerMask.NameToLayer(layerName);
 	}
 
-	void BuildWalls(float thickness) 
+	void BuildWalls(float thickness, bool addHeightThickness = true) 
 	{
 		for (int i = 1; i < analyzer.points.Count; i++) 
-			BuildColliderSegment(analyzer.points[i-1], analyzer.points[i], i, thickness);
+			BuildColliderSegment(analyzer.points[i-1], analyzer.points[i], i, thickness, addHeightThickness);
 
 		// build the very last collider from last point to the first point
 		if (!analyzer.IsOpenEnded) 
-			BuildColliderSegment(analyzer.points[analyzer.points.Count - 1], analyzer.points[0], analyzer.points.Count, thickness);
+			BuildColliderSegment(analyzer.points[analyzer.points.Count - 1], analyzer.points[0], analyzer.points.Count, thickness, addHeightThickness);
 	}
 
 
@@ -130,7 +126,7 @@ public class SpriteShapeCollider : MonoBehaviour
 		RemoveWalls();
 
 		// make thin borders so we can use them to calculate
-		BuildWalls(.01f);
+		BuildWalls(.01f, false);
 
 		Bounds bounds = GetBounds();
 		Vector3 voxelPos = FlatVoxelPos(bounds.min);
@@ -238,7 +234,7 @@ public class SpriteShapeCollider : MonoBehaviour
 		}
 	}
 
-	void BuildColliderSegment(ShapePoint pt1, ShapePoint pt2, int index, float thickness) 
+	void BuildColliderSegment(ShapePoint pt1, ShapePoint pt2, int index, float thickness, bool addHeightThickness = true) 
 	{
 		// calculate the angle to rotate the collider to
 		Vector3 dir = pt2.pos - pt1.pos;
@@ -251,10 +247,11 @@ public class SpriteShapeCollider : MonoBehaviour
 		var newBox = newCol.AddComponent<BoxCollider>();
 
 		float segmentLength = Vector3.Distance(pt1.pos, pt2.pos);
-		float overlapLength = segmentLength * overlap;
+		float overlapLength = addHeightThickness ? segmentLength * overlap : 0;
 
 		// thickness should be influenced by 'height' (which is basically what spriteShape calls border thickness)
-		thickness += thicknessFromShape * pt1.height;
+		if (addHeightThickness)
+			thickness += analyzer.heightFactor * pt1.height * 2;
 
 		newBox.size = new Vector3(segmentLength + overlapLength, height, thickness);
 		newBox.center = new Vector3(segmentLength / 2, height / 2, thickness * offset);

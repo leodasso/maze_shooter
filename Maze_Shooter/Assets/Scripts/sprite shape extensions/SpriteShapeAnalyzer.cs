@@ -37,9 +37,18 @@ public class SpriteShapeAnalyzer : MonoBehaviour
 
 	[ReadOnly, Space, PropertyOrder(200)]
 	public List<ShapePoint> points = new List<ShapePoint>();
-
+	
 	public bool IsOpenEnded => spriteShapeController ? spriteShapeController.spline.isOpenEnded : false;
 
+
+	public List<Vector3> PathPoints()
+	{
+		var pathPoints = new List<Vector3>();
+		foreach (var p in points)
+			pathPoints.Add(transform.TransformPoint(p.pos));
+
+		return pathPoints;
+	}
 
 
 	void OnDrawGizmosSelected()
@@ -52,14 +61,34 @@ public class SpriteShapeAnalyzer : MonoBehaviour
 			Vector3 p1 = transform.TransformPoint(points[i-1].pos);
 			Vector3 p2 = transform.TransformPoint(points[i].pos);
 			Gizmos.DrawLine(p1, p2);
+		}
+
+		var borders = BorderPoints();
+		for (int i = 0; i < borders.Count; i++)
+		{
+			Gizmos.DrawWireSphere(borders[i], .25f);
+			if (i > 0) 
+				Gizmos.DrawLine(borders[i-1], borders[i]);
+		}
+	}
+
+	public List<Vector3> BorderPoints()
+	{
+		List<Vector3> borders = new List<Vector3>();
+
+		for ( int i = 1; i < points.Count; i++) {
+			Vector3 p1 = transform.TransformPoint(points[i-1].pos);
+			Vector3 p2 = transform.TransformPoint(points[i].pos);
 
 			Vector3 vector = p2 - p1;
 			Vector3 right = Vector3.Cross(vector, Vector3.up).normalized * heightFactor * points[i-1].height;
 			Vector3 left = -right;
 
-			Gizmos.DrawWireSphere(p1 + left, .25f);
-			Gizmos.DrawWireSphere(p1 + right, .25f);
+			borders.Insert(i-1, p1 + left);
+			borders.Insert(i, p1 + right);
 		}
+
+		return borders;
 	}
 
 

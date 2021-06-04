@@ -31,7 +31,7 @@ public class SpawnCollection : ScriptableObject
     [System.Serializable]
     public class SpawnCollectionItem
     {
-        [HorizontalGroup(), HideLabel]
+        [HorizontalGroup(), HideLabel, PreviewField]
         public GameObject gameObject;
         
         [Range(0, 1), HorizontalGroup(), HideLabel]
