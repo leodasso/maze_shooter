@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6419005131196041444}
   - component: {fileID: 6419005131196041467}
   m_Layer: 0
-  m_Name: ground circle
+  m_Name: lit ground circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,6 +43,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -51,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 073978bd3b010154f9eec9de6e71139a, type: 2}
+  - {fileID: 2100000, guid: f80fe3dc1cf86ee439c2e81b5d05bea1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,6 +93,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4605964757171427396, guid: e5887c9f5ff1da4489878e2c1bdf4658,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605964757171427396, guid: e5887c9f5ff1da4489878e2c1bdf4658,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -107,6 +113,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4605964757171427396, guid: e5887c9f5ff1da4489878e2c1bdf4658,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605964757171427396, guid: e5887c9f5ff1da4489878e2c1bdf4658,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -118,16 +129,6 @@ PrefabInstance:
     - target: {fileID: 4605964757171427396, guid: e5887c9f5ff1da4489878e2c1bdf4658,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4605964757171427396, guid: e5887c9f5ff1da4489878e2c1bdf4658,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4605964757171427396, guid: e5887c9f5ff1da4489878e2c1bdf4658,
-        type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4605964757171427396, guid: e5887c9f5ff1da4489878e2c1bdf4658,

@@ -5702,6 +5702,14 @@
             <param name="icon">The icon for the toggle.</param>
             <returns>The state of the toggle.</returns>
         </member>
+        <member name="M:Sirenix.Utilities.Editor.SirenixEditorGUI.ToolbarToggle(System.Boolean,UnityEngine.Texture)">
+            <summary>
+            Draws a toolbar toggle.
+            </summary>
+            <param name="isActive">Current state of the toggle.</param>
+            <param name="icon">The icon for the toggle.</param>
+            <returns>The state of the toggle.</returns>
+        </member>
         <member name="M:Sirenix.Utilities.Editor.SirenixEditorGUI.ToolbarToggle(System.Boolean,UnityEngine.GUIContent)">
             <summary>
             Draws a toolbar toggle.
@@ -7739,15 +7747,16 @@
         </member>
         <member name="T:Sirenix.OdinInspector.Editor.UnityEditorEventUtility">
             <summary>
-            Sometimes, an idiot overrides a delay action subscription to <see cref="F:UnityEditor.EditorApplication.delayCall"/>,
-            which can be done because the people at Unity didn't know what events were once upon a time.
-            This method subscribes to a lot of different callbacks, in the hopes of catching at least one.
+            This class contains utility methods for subscribing to various UnityEditor events reliably and safely across all Odin-supported versions of Unity.
             </summary>
         </member>
         <member name="M:Sirenix.OdinInspector.Editor.UnityEditorEventUtility.DelayActionThreadSafe(System.Action)">
             <summary>
-            Sometimes, an idiot overrides a delay action subscription to <see cref="F:UnityEditor.EditorApplication.delayCall"/>,
-            which can be done because the people at Unity didn't know what events were once upon a time.
+            Sometimes, someone accidentally overrides a delay action subscription to <see cref="F:UnityEditor.EditorApplication.delayCall"/> 
+            by setting the value instead of using the += operator as should be done,
+            which can be done because in many versions of Unity it is a field, and not an event. 
+            (In some versions of Unity it is an event, though, and in this case, this method acts as a wrapper 
+            to subscribe reliably, no matter the nature of the backing event.)
             This method subscribes to a lot of different callbacks, in the hopes of catching at least one.
             <para />
             As opposed to <see cref="M:Sirenix.OdinInspector.Editor.UnityEditorEventUtility.DelayAction(System.Action)"/>, this method is safe to call from any thread, and will

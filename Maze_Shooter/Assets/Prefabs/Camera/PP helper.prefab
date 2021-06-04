@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1721376550755909379}
-  - component: {fileID: 6548448886324087722}
+  - component: {fileID: 8571505064055617935}
   - component: {fileID: 8219240230075903987}
   - component: {fileID: 1967656025302367366}
   - component: {fileID: 8131284683282758637}
   m_Layer: 14
-  m_Name: Galactic
+  m_Name: PP helper
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6548448886324087722
+--- !u!114 &8571505064055617935
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,14 +43,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3485509252305403931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 0aa1127257b92584e96f9e2d01c7da8c, type: 2}
   isGlobal: 1
+  priority: 0
   blendDistance: 0
-  weight: 0
-  priority: 10
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: d3cd7981f1ef56b4aa7ad366b1a6d44d, type: 2}
 --- !u!114 &8219240230075903987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,6 +83,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8219240230075903987}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SetActive
         m_Mode: 1
         m_Arguments:
@@ -93,8 +94,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   comment: 
 --- !u!114 &8131284683282758637
 MonoBehaviour:
@@ -114,6 +113,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8219240230075903987}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SetInactive
         m_Mode: 1
         m_Arguments:
@@ -124,6 +124,4 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   comment: 

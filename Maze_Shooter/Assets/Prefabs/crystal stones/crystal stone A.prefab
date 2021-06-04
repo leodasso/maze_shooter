@@ -92,10 +92,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52bf0bef0b6348140ac4cd8efa3e70f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints:
+  maxHearts:
     useConstant: 0
-    constantValue: 3
+    constantValue:
+      fractions: 0
+      hearts: 0
     valueObject: {fileID: 0}
+  currentHp:
+    useConstant: 0
+    constantValue:
+      fractions: 0
+      hearts: 0
+    valueObject: {fileID: 0}
+  setHpOnStart: 1
   invulnerableTime:
     useConstant: 0
     constantValue: 0.5
@@ -191,6 +200,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -220,7 +230,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c4dbeb8e69623d64e99511012db47c82, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eda732ae7b7834949862df2f1ccf22c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -243,6 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateDuringGameplay: 0
 --- !u!114 &8259018381122873335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a05506e86408f4bae29a22b776d5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progress: 0.25023162
+  progress: 0.16683505
   spriteRenderer: {fileID: 6290345462286288819}
   sprites:
   - {fileID: 21300000, guid: eda732ae7b7834949862df2f1ccf22c1, type: 3}
@@ -273,8 +284,10 @@ MonoBehaviour:
   pingPong: 1
   loop: 1
   frameRate: 8
+  resetOnEnable: 0
   setProgressOnStart: 0
   startProgress: 0
+  spriteAnimEvents: []
 --- !u!1 &6290345462967181776
 GameObject:
   m_ObjectHideFlags: 0
