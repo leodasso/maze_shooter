@@ -28,8 +28,8 @@ public class SpriteShapePopulator : MonoBehaviour
 	[MinValue(0)]
 	public float randomness = .5f;
 
-	[Range(0, 1)]
-	public float pathPos = .1f;
+	
+	public float offsetFromBorder = .1f;
 
 	float TotalPathLength(List<Vector3> points) 
 	{
@@ -65,15 +65,21 @@ public class SpriteShapePopulator : MonoBehaviour
 		bool breakNext = false;
 		while (iterations < 9999)
 		{
+			// get the direction to the next 
+			Vector3 nextPos = points[next];
+			Vector3 dir = nextPos - pos;
+
 			// determine final position and instantiate
 			Vector3 finalPos = pos + Random.insideUnitSphere * randomness;
+
+			// add right/left offset from border
+			finalPos += Vector3.Cross(dir.normalized, Vector3.up) * offsetFromBorder;
+
+			// Y of final pos should just be the same as this object (flat)
 			finalPos = new Vector3(finalPos.x, transform.position.y, finalPos.z);
 			Instantiate(finalPos);
 
-			Vector3 nextPos = points[next];
-
 			// crawl point towards next pos
-			Vector3 dir = nextPos - pos;
 			pos += dir.normalized * spacing;
 
 			// check if close enough to next pos
