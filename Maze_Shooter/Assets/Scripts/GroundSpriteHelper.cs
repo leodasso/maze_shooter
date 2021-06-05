@@ -8,10 +8,12 @@ public class GroundSpriteHelper : MonoBehaviour
 	[ButtonGroup]
 	void ShowGroundSprite() {
 		groundSprite.SetActive(true);
+		groundSprite.GetComponent<SpriteRenderer>().color = Color.white;
 	}
 
 	[ButtonGroup]
 	void HideGroundSprite() {
-		groundSprite.SetActive(false);
+		groundSprite.SetActive(true);
+		groundSprite.GetComponent<SpriteRenderer>().color = Color.black;
 	}
 }
