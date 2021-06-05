@@ -9,6 +9,7 @@ public class SpawnOnDisable : MonoBehaviour {
 	void OnDisable()
     {
         if (!toSpawn) return;
-        Instantiate(toSpawn, transform.position, transform.rotation);
+		if (GhostTools.SafeToInstantiate(gameObject))
+        	Instantiate(toSpawn, transform.position, transform.rotation);
     }
 }

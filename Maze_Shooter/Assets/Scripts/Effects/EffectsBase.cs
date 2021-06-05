@@ -50,9 +50,8 @@ public class EffectsBase : MonoBehaviour
 
 	protected virtual void InstantiateEffect(Vector3 position)
 	{
-		if (!Application.isPlaying) return;
+		if (!GhostTools.SafeToInstantiate(gameObject)) return;
 		if (Time.unscaledTime < Mathf.Epsilon) return;
-		
 		if (_actor && _actor.culled) return;
 		
 		// If this is being disabled because we're loading a scene, we don't want it to create an effect.
@@ -63,6 +62,8 @@ public class EffectsBase : MonoBehaviour
 			Debug.LogWarning("Effect prefab is not set for " + name, gameObject);
 			return;
 		}
+
+		Debug.Log("Instantiating effect.", gameObject);
 
 		if (delay > Mathf.Epsilon)
 			StartCoroutine(DelayedInstantiate());

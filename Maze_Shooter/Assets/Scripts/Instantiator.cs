@@ -114,15 +114,7 @@ public class Instantiator : MonoBehaviour
 	// left public to be accesible from Unity Events
 	public void Instantiate()
 	{		
-		#if UNITY_EDITOR
-		if (!EditorApplication.isPlayingOrWillChangePlaymode || EditorApplication.isPaused)
-		{
-			Debug.LogWarning(name + " tried to instantiate when editor is paused or about to change playmode.", gameObject);
-			return;
-		}
-		#endif
-
-		if (!Application.isPlaying) return;
+		if (!GhostTools.SafeToInstantiate(gameObject)) return;
 		if (_instance != null && !allowMultipleInstances) return;
 		
 		if (ToInstantiate == null)

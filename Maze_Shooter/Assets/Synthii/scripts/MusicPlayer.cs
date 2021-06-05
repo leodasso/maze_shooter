@@ -55,6 +55,9 @@ namespace Synthii
 
 		static void GuaranteeInstance() 
 		{
+			// Prevent objects from being spawned on un-play
+			if (!GhostTools.SafeToInstantiate()) return;
+
 			if (instance) return;
 			instance = Instantiate(GameMaster.Get().musicPlayerPrefab).GetComponent<MusicPlayer>();
 			DontDestroyOnLoad(instance.gameObject);

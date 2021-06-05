@@ -17,4 +17,21 @@ public static class GhostTools
 		}
 		return point;
 	}
+
+
+	/// <summary>
+	/// For things that instantiate in onDisable or onDestroy, this checks if it's safe.
+	/// If the editor is destroying things because it's exiting playmode, this will return false.
+	/// For builds, always returns true
+	/// </summary>
+	public static bool SafeToInstantiate(GameObject caller = null)
+	{
+		#if UNITY_EDITOR
+		if (!UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode && UnityEditor.EditorApplication.isPlaying ) {
+			Debug.Log("Tried to instantiate but editor was about to exit playmode, so ignoring instantiate.", caller);
+			return false;
+		}
+		#endif
+		return true;
+	}
 }
