@@ -16,7 +16,7 @@ public class MovementBase : MonoBehaviour, IControllable
 	[Range(0, 1), Tooltip("If movement input is less than this, drag kicks in.")]
 	public float moveInputThreshold = .25f;
 
-    [Tooltip("Use an animation curve to control the speed over time? This is a multiplier.")]
+    [Tooltip("Use an animation curve to control the speed over time? This is a multiplier."), ToggleLeft]
     public bool useSpeedCurve;
     
     [ShowIf("useSpeedCurve")]
@@ -47,10 +47,10 @@ public class MovementBase : MonoBehaviour, IControllable
 
     float _speedCurveTime;
 
-	[ShowInInspector, ReadOnly]
+	[ShowInInspector, ReadOnly, PropertyOrder(890), ToggleLeft, Space]
 	bool _isGrounded;
 
-	[ShowInInspector, ReadOnly]
+	[ShowInInspector, ReadOnly, PropertyOrder(895)]
 	HashSet<MovementMod> mods = new HashSet<MovementMod>();
 
 	public void AddMod(MovementMod mod) 

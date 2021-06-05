@@ -12,8 +12,10 @@ public class SimpleMovement : MovementBase
              " whatever you put in here.")]
     public GameObject target;
 
+	[ToggleLeft]
     public bool useTargetFinder = true;
 
+	[ToggleLeft]
 	public bool updateTargetDirectionEveryFrame = true;
     
     [Tooltip("(optional) Will just use whatever target the targetfinder has if this is set."), ShowIf("useTargetFinder")]
