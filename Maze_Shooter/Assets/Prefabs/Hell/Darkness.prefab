@@ -228,6 +228,8 @@ GameObject:
   - component: {fileID: 1310278864}
   - component: {fileID: 1310278865}
   - component: {fileID: 6508008543439366954}
+  - component: {fileID: 6469882541526311963}
+  - component: {fileID: 1278331399569179149}
   m_Layer: 0
   m_Name: Darkness
   m_TagString: Untagged
@@ -332,10 +334,10 @@ MonoBehaviour:
     states:
     - name: light
       description: 
-      colorIndex: 0
+      colorIndex: 2
       position:
         serializedVersion: 2
-        x: 51
+        x: 115
         y: 115
         width: 100
         height: 32
@@ -451,8 +453,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 250
-        y: 118
+        x: 318
+        y: 115
         width: 100
         height: 48
       isBreakpoint: 0
@@ -466,7 +468,7 @@ MonoBehaviour:
         toState: light
         linkStyle: 0
         linkConstraint: 0
-        colorIndex: 0
+        colorIndex: 2
       - fsmEvent:
           name: fullDark
           isSystemEvent: 0
@@ -575,8 +577,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 258
-        y: 224
+        x: 360
+        y: 355
         width: 118
         height: 48
       isBreakpoint: 0
@@ -659,8 +661,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 224
-        y: 314
+        x: 129
+        y: 227
         width: 175
         height: 32
       isBreakpoint: 0
@@ -674,7 +676,7 @@ MonoBehaviour:
         toState: light
         linkStyle: 0
         linkConstraint: 0
-        colorIndex: 0
+        colorIndex: 2
       actionData:
         actionNames:
         - InvokeGameEvent
@@ -736,8 +738,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 504
-        y: 244
+        x: 50.960938
+        y: 358
         width: 119
         height: 32
       isBreakpoint: 0
@@ -748,10 +750,10 @@ MonoBehaviour:
           name: cutsceneDone
           isSystemEvent: 0
           isGlobal: 1
-        toState: return player to safe pos
+        toState: light
         linkStyle: 0
-        linkConstraint: 0
-        colorIndex: 0
+        linkConstraint: 1
+        colorIndex: 2
       actionData:
         actionNames: []
         customNames: []
@@ -968,6 +970,66 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: angelCutscene
+          m_BoolArgument: 0
+        m_CallState: 2
+  comment: 
+--- !u!114 &6469882541526311963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522022562580709260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83b5d72ab14f3f4c8442f76808cf317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - {fileID: 11400000, guid: 133aea40a04f872409b4eeb33c8d9537, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 522022562580709261}
+        m_TargetAssemblyTypeName: HellSpawner, Assembly-CSharp
+        m_MethodName: SetFullLight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  comment: 
+--- !u!114 &1278331399569179149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522022562580709260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83b5d72ab14f3f4c8442f76808cf317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - {fileID: 11400000, guid: 34bdb9c21f587cd41b0cb67e8117db2f, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1310278863}
+        m_TargetAssemblyTypeName: PlayMakerFSM, PlayMaker
+        m_MethodName: SendEvent
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: cutsceneDone
           m_BoolArgument: 0
         m_CallState: 2
   comment: 
