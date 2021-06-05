@@ -4,16 +4,20 @@ using Arachnid;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-[RequireComponent(typeof(Health)), RequireComponent(typeof(Flasher))]
+[TypeInfoBox("When the referenced health is invulnerable, flashes the renderers using Flasher component.")]
+[RequireComponent(typeof(Flasher))]
 public class InvulnerableFlash : MonoBehaviour
 {
 	Flasher _flasher;
+
+	[SerializeField]
 	Health _health;
 
 	// Use this for initialization
 	void Start ()
 	{
-		_health = GetComponent<Health>();
+		if (_health == null)
+			_health = GetComponent<Health>();
 		_flasher = GetComponent<Flasher>();
 	}
 	
