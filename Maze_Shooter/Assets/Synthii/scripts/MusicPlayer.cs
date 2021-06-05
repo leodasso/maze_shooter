@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
 using Sirenix.OdinInspector;
@@ -17,11 +18,15 @@ namespace Synthii
 		[SerializeField]
 		AudioMixerGroup mixerGroup;
 
+		// Whenever active zones has a member added/removed, it re-creates ordered zones and orders it by priority
+		HashSet<MusicZone> activeZones = new HashSet<MusicZone>();
+
+		[ShowInInspector, ReadOnly, Tooltip("List of all active music zones in order of priority. The highest priority get index 0")]
+		List<MusicZone> orderedZones = new List<MusicZone>();
+
 		Dictionary<Track, TrackAudioSource> trackSources = new Dictionary<Track, TrackAudioSource>();
 
 		static MusicPlayer instance;
-
-		MusicZone globalZone;
 
 		void Awake() 
 		{
@@ -35,29 +40,17 @@ namespace Synthii
 			return currentTrackSource.musicZone ? currentTrackSource.musicZone.fadeOutTime : 1;
 		}
 		
-		public static void Play(MusicZone zone) 
+		public static void EnterZone(MusicZone zone) 
 		{
 			GuaranteeInstance();
-			instance.InstancePlay(zone);
+			instance.I_EnterZone(zone);
 		}
 
 
-		public static void Stop(MusicZone zone) 
+		public static void ExitZone(MusicZone zone) 
 		{
 			GuaranteeInstance();
-			instance.InstanceStop(zone);
-		}
-
-		public static void SetGlobal(MusicZone zone) 
-		{
-			GuaranteeInstance();
-			instance.InstanceSetGlobal(zone);
-		}
-
-		public static void RemoveGlobal(MusicZone zone)
-		{
-			GuaranteeInstance();
-			instance.InstanceRemoveGlobal(zone);
+			instance.I_ExitZone(zone);
 		}
 
 		static void GuaranteeInstance() 
@@ -67,23 +60,54 @@ namespace Synthii
 			DontDestroyOnLoad(instance.gameObject);
 		}
 
-		void InstancePlay(MusicZone zone) 
+		void I_EnterZone(MusicZone zone)
+		{
+			if (activeZones.Add(zone)) {
+				if (debug)
+					Debug.Log("Music zone " + zone + " was newly entered.");
+
+				RecalculatePriority();
+			}
+		}
+
+		void I_ExitZone(MusicZone zone)
+		{
+			if (activeZones.Remove(zone)) {
+				if (debug)
+					Debug.Log("Music zone " + zone + " was exited.");
+
+				RecalculatePriority();
+			}
+		}
+
+		void RecalculatePriority()
+		{
+			if (debug)
+				Debug.Log("Recalculating music zone priorities...");
+
+			orderedZones.Clear();
+			orderedZones = activeZones.OrderByDescending(track => track.priority).ToList();
+
+			// If there are no music zones left, just pause whatever is playing.
+			if (orderedZones.Count < 1)
+			{
+				if (currentTrackSource)
+					currentTrackSource.Pause();
+
+				return;
+			}
+
+			// Play the highest priority music zone from the list (index 0)
+			var topMusicZone  = orderedZones[0];
+			Play(topMusicZone);
+		}
+
+		void Play(MusicZone zone) 
 		{
 			if (debug) Debug.Log("Attempting a play of " + zone.name);
+
 			if (currentTrackSource) {
-				// Ignore request if the zone is already playing
-				if (currentTrackSource.musicZone == zone) {
-					if (debug) Debug.Log("   zone " + zone.name + " is already the current track! cancelling request.");
-					return;
-				}
-
-				// Ignore lower quality requests
-				if (currentTrackSource.musicZone && currentTrackSource.musicZone.priority > zone.priority) {
-					if (debug) Debug.Log("   Current playing zone " + currentTrackSource.musicZone.name + " has a higher priority than " + zone.name + ", cancelling.");
-					return;
-				}
-
-				// Pause the currently playing audio source
+				// Pause the currently playing audio source if it's playing a different track than the requested zone
 				if (zone.musicTrack != currentTrackSource.MyTrack) 
 					currentTrackSource.Pause(CurrentTrackFadeOutTime());
 			}
@@ -107,39 +131,14 @@ namespace Synthii
 
 
 
-		void InstanceStop(MusicZone zone) 
+		void Stop(MusicZone zone) 
 		{
 			if (!currentTrackSource) return;
 			if (currentTrackSource.musicZone != zone) return;
 
 			currentTrackSource.Pause(CurrentTrackFadeOutTime());
-			if (globalZone)
-				InstancePlay(globalZone);
 		}
 
-		void InstanceSetGlobal(MusicZone zone)
-		{
-			Debug.Log("Attempting to set " + zone.name + " as the new global music...");
-			if (globalZone) {
-				if (globalZone.priority > zone.priority) {
-					if (debug) Debug.Log("   The current global zone " + globalZone.name + " has a higher priority than incoming zone " + zone.name + ", so cancelling.");
-					return;
-				}
-			}
-
-			globalZone = zone;
-			
-			InstancePlay(globalZone);
-		}
-
-		void InstanceRemoveGlobal(MusicZone zone) 
-		{
-			if (globalZone == zone) {
-				if (debug) Debug.Log("Removing track " + zone.name + " from global music.");
-				globalZone = null;
-				InstanceStop(zone);
-			}
-		}
 
 		TrackAudioSource BuildNewTrackAudioSource(MusicZone newZone) 
 		{

@@ -6,8 +6,8 @@ using Sirenix.OdinInspector;
 namespace Synthii {
 	public class MusicZone : MonoBehaviour
 	{
-		[ToggleLeft, Tooltip("Will play as the default for this scene.")]
-		public bool isGlobal;
+		[SerializeField, ToggleLeft, Tooltip("Will play as the default for this scene. For non-global music zones, a trigger is needed.")]
+		bool isGlobal;
 
 		[Tooltip("Higher number takes priority over lower number")]
 		public int priority = 0;
@@ -25,21 +25,19 @@ namespace Synthii {
 		void Start()
 		{
 			if (isGlobal) 
-				MusicPlayer.SetGlobal(this);
+				Enter();
 		}
 
 		[ButtonGroup]
 		public void Enter() 
 		{
-			if (isGlobal) return;
-			MusicPlayer.Play(this);
+			MusicPlayer.EnterZone(this);
 		}
 
 		[ButtonGroup]
 		public void Exit()
 		{
-			if (isGlobal) return;
-			MusicPlayer.Stop(this);
+			MusicPlayer.ExitZone(this);
 		}
 
 		[Button]
@@ -56,8 +54,6 @@ namespace Synthii {
 
 		void OnDisable() 
 		{
-			if (isGlobal) 
-				MusicPlayer.RemoveGlobal(this);
 			Exit();
 		}
 
