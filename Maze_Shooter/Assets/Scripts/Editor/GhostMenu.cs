@@ -5,7 +5,7 @@ using UnityEditor;
 
 public class GhostMenu 
 {
-	[MenuItem("Ghost/Set Scene Cam")]
+	[MenuItem("Hauntii/Set Scene Cam")]
 	public static void SetCameraAngle() 
 	{
 		Camera cam = Camera.main;
@@ -15,5 +15,11 @@ public class GhostMenu
 
 		SceneView.lastActiveSceneView.rotation = camRotation;
         SceneView.lastActiveSceneView.Repaint();
+	}
+
+	[MenuItem("Hauntii/Game Master")]
+	public static void SelectGameMaster()
+	{
+		Selection.activeObject = AssetDatabase.LoadMainAssetAtPath("Assets/Resources/game master.asset");
 	}
 }
