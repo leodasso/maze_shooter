@@ -17,14 +17,21 @@ public class SpriteShapePopulator : MonoBehaviour
 
 	public ShapeMode shapeMode;
 
+	[Tooltip("Parent of populated objects. If left empty, this transform will be used.")]
+	public Transform parent;
+
 	[Tooltip("Uses prefabs from this collection to spawn along path")]
 	public SpawnCollection toSpawn;
 
 	[PropertyOrder(250)]
 	public List<GameObject> instances = new List<GameObject>();
 
-	[Range(0.1f, 1)]
+	[Range(0.1f, 9)]
 	public float spacing = .3f;
+
+	[MinMaxSlider(0.01f, 3, true)]
+	public Vector2 spawnedScale = Vector2.one;
+
 	[MinValue(0)]
 	public float randomness = .5f;
 
@@ -110,8 +117,10 @@ public class SpriteShapePopulator : MonoBehaviour
 		#if UNITY_EDITOR
 		var prefab = toSpawn.GetRandom();
 		var instance = UnityEditor.PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+		float newScale = Random.Range(spawnedScale.x, spawnedScale.y);
+		instance.transform.localScale *= newScale;
 		instance.transform.position = pos;
-		instance.transform.parent = transform;
+		instance.transform.parent = parent ? parent : transform;
 		instances.Add(instance);
 		#endif
 	}
