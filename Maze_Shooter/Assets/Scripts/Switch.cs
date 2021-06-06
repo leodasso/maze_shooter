@@ -12,9 +12,13 @@ public class Switch : MonoBehaviour
 			return isOn;
 		}
 		set {
+
+			if (oneOff && beenSwitched) return;
+
 			// ignore switching to same state
 			if (isOn == value) return;
 			isOn = value;
+			beenSwitched = true;
 
 			if (isOn) onTurnedOn.Invoke();
 			if (!isOn) onTurnedOff.Invoke();
@@ -26,6 +30,9 @@ public class Switch : MonoBehaviour
 			}
 		}
 	}
+
+	[ToggleLeft, Tooltip("Only allow this to switch one time.")]
+	public bool oneOff;
 
 	[Space, SerializeField, Tooltip("Sends events 'turnOn' and 'turnOff'")]
 	PlayMakerFSM playMaker;
@@ -39,6 +46,8 @@ public class Switch : MonoBehaviour
 
 	[SerializeField]
 	UnityEvent<bool> onSwitched;
+
+	bool beenSwitched = false;
 	
 
 	[SerializeField, HideInInspector]
