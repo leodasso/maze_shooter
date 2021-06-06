@@ -45,6 +45,11 @@ public class PlayerHealth : HealthPlugin
             health.SetHp(newStartHearts);
             CheckForCritical();
         }
+
+		else {
+			// If there's no saved value, just set HP to max.
+			health.SetHp(savedPlayerMaxHealth.GetValue());
+		}
     }
 
 	public void ProcessHpChange()
