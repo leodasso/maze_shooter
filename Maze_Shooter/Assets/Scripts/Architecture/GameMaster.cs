@@ -10,12 +10,16 @@ using UnityEngine.Events;
 [CreateAssetMenu(menuName = "Ghost/Game Master")]
 public class GameMaster : ScriptableObject
 {
+	[LabelText("Save File")]
+	public SaveDataAvatar currentAvatar;
+
+	[Space]
     public GameObject defaultPlayerShip;
     public Stage currentStage;
     [ReadOnly]
     public Stage justCompletedStage;
     static GameMaster _gameMaster;
-    public SaveDataAvatar currentAvatar;
+
     public GateLink gateLink;
     public Collection playerInstancesCollection;
 
