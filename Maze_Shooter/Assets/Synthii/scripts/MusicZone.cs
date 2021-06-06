@@ -25,19 +25,21 @@ namespace Synthii {
 		void Start()
 		{
 			if (isGlobal) 
-				Enter();
+				MusicPlayer.EnterZone(this);
 		}
 
 		[ButtonGroup]
 		public void Enter() 
 		{
-			MusicPlayer.EnterZone(this);
+			if (!isGlobal)
+				MusicPlayer.EnterZone(this);
 		}
 
 		[ButtonGroup]
 		public void Exit()
 		{
-			MusicPlayer.ExitZone(this);
+			if (!isGlobal)
+				MusicPlayer.ExitZone(this);
 		}
 
 		[Button]
@@ -54,7 +56,7 @@ namespace Synthii {
 
 		void OnDisable() 
 		{
-			Exit();
+			MusicPlayer.ExitZone(this);
 		}
 
 		
