@@ -469,9 +469,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe6141f844198b439629637c169cd3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadowPrefab: {fileID: 8013752625393328871, guid: 5259947f76f1af94db6eebe08e18c536,
+  shadowPrefab: {fileID: 2418172932704104243, guid: b15b9acb510b9464eaa4e93d2a3c1963,
     type: 3}
-  shadowScale: 1.15
+  shadowScale: 0.37
+  shadowScaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -0.1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 10
+      value: 0
+      inSlope: -0.1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   castCameraDown: 0
   castingMask:
     serializedVersion: 2
@@ -2652,12 +2676,12 @@ PrefabInstance:
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 1.6979039
+      value: 1.6979058
       objectReference: {fileID: 0}
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
       propertyPath: m_Bounds.m_Center.z
-      value: 0.14901929
+      value: 0.1490231
       objectReference: {fileID: 0}
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
@@ -2667,7 +2691,7 @@ PrefabInstance:
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}
       propertyPath: m_Bounds.m_Extent.y
-      value: 2.0924518
+      value: 2.09245
       objectReference: {fileID: 0}
     - target: {fileID: 7043974051035770412, guid: aeee7e368b191364fae438d8d219f4c0,
         type: 3}

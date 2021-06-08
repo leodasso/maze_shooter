@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1264617879074373015}
   - component: {fileID: 1264617879074373012}
   - component: {fileID: 9133136081894106821}
-  - component: {fileID: 8699341115704775891}
   - component: {fileID: 6742517268841581259}
   - component: {fileID: 122613635808517137}
   m_Layer: 13
@@ -132,25 +131,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8699341115704775891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1264617879074373013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fe6141f844198b439629637c169cd3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shadowPrefab: {fileID: 2418172932704104243, guid: b15b9acb510b9464eaa4e93d2a3c1963,
-    type: 3}
-  shadowScale: 0.43
-  castCameraDown: 0
-  castingMask:
-    serializedVersion: 2
-    m_Bits: 2097152
 --- !u!210 &6742517268841581259
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -5046,6 +5026,7 @@ GameObject:
   - component: {fileID: 3654084170573377067}
   - component: {fileID: 7533122127102144165}
   - component: {fileID: 5225807986930734467}
+  - component: {fileID: 8709950760924613612}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -5132,7 +5113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a05506e86408f4bae29a22b776d5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progress: 0.06455942
+  progress: 0.1168922
   spriteRenderer: {fileID: 1469797232963627782}
   sprites:
   - {fileID: 21300000, guid: 50700d8d3977ff34b903588454cd5016, type: 3}
@@ -5183,3 +5164,55 @@ MonoBehaviour:
   lifetime: 5
   delay: 0
   ignoreMinLifetime: 0
+--- !u!114 &8709950760924613612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7297092442188708017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe6141f844198b439629637c169cd3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowPrefab: {fileID: 2418172932704104243, guid: b15b9acb510b9464eaa4e93d2a3c1963,
+    type: 3}
+  shadowScale: 0.43
+  shadowScaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.042166118
+      outSlope: -0.042166118
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.21429215
+    - serializedVersion: 3
+      time: 1.5013336
+      value: 0.9599075
+      inSlope: -0.16139776
+      outSlope: -0.16139776
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.109665796
+    - serializedVersion: 3
+      time: 3.0601192
+      value: 0
+      inSlope: -0.1
+      outSlope: -0.1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  castCameraDown: 0
+  castingMask:
+    serializedVersion: 2
+    m_Bits: 2097152

@@ -152,6 +152,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -209,10 +210,11 @@ MonoBehaviour:
   - {fileID: 7043974051052312696}
   - {fileID: 7043974052222980714}
   m_Bounds:
-    m_Center: {x: 0.54245114, y: 2.5116487, z: -0.0000020681298}
-    m_Extent: {x: 3.1235468, y: 2.5978775, z: 0.0000021065123}
+    m_Center: {x: 0.1491065, y: 2.1016912, z: -0.64814186}
+    m_Extent: {x: 3.131864, y: 2.1395762, z: 0.64814186}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
+  m_AutoRebind: 0
 --- !u!114 &7043974051035770415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateDuringGameplay: 0
 --- !u!114 &3174690425300161450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,6 +347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c51f91c04b19744a20b2fe3091d553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  x: 1
+  y: 1
+  z: 1
   objectToFollow: {fileID: 7043974051798746699}
   offset: {x: 0, y: 0, z: 0}
 --- !u!1 &7043974051798746699
@@ -388,6 +394,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -473,6 +480,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -525,6 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateDuringGameplay: 0
 --- !u!54 &7043974051997845180
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -549,6 +558,7 @@ ConfigurableJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7043974051997845168}
   m_ConnectedBody: {fileID: 0}
+  m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: -0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
@@ -680,6 +690,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c51f91c04b19744a20b2fe3091d553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  x: 1
+  y: 1
+  z: 1
   objectToFollow: {fileID: 7043974051997845168}
   offset: {x: 0, y: 0, z: 0}
 --- !u!114 &2546459712362479796
@@ -694,10 +707,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe6141f844198b439629637c169cd3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadowPrefab: {fileID: 1024560133667443443, guid: 197d5c7da3c5ae849952a8a55cad5e77,
+  shadowPrefab: {fileID: 2418172932704104243, guid: b15b9acb510b9464eaa4e93d2a3c1963,
     type: 3}
-  shadowScale: 1
-  castCameraDown: 0
+  shadowScale: 0.75
+  shadowScaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -0.1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 10
+      value: 0
+      inSlope: -0.1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  castCameraDown: 1
   castingMask:
     serializedVersion: 2
     m_Bits: 2097152

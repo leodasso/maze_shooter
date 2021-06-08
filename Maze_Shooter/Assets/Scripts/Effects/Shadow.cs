@@ -11,6 +11,9 @@ public class Shadow : MonoBehaviour
 
     public float shadowScale = 1;
 
+	[Tooltip("Multiplies by the shadow scale")]
+	public AnimationCurve shadowScaleCurve = AnimationCurve.Linear(0, 1, 10, 0);
+
 	[ToggleLeft, Tooltip("If true, will cast in the camera down direction rather than world down. Useful when combined with billboards")]
 	public bool castCameraDown;
 
@@ -61,14 +64,20 @@ public class Shadow : MonoBehaviour
     void LateUpdate()
     {
         Vector3 shadowPos = transform.position;
+		float distanceToShadow = 0;
         if (Physics.Raycast(transform.position, CastingDir(), out hit, 100, castingMask))
         {
             shadowPos = hit.point;
+			distanceToShadow = hit.distance;
         }
         
         shadowInstance.transform.position = shadowPos;
-        if (_shadowObject)
-            _shadowObject.SetDistance(transform.position.y);
+        if (_shadowObject) {
+            _shadowObject.SetDistance(distanceToShadow);
+
+			float scale = shadowScale * shadowScaleCurve.Evaluate(distanceToShadow);
+			_shadowObject.SetScale(scale);
+		}
     }
 
     void OnDisable()

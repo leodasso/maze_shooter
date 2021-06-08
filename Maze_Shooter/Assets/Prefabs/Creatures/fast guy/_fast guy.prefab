@@ -1991,9 +1991,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe6141f844198b439629637c169cd3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadowPrefab: {fileID: 1842192282749746345, guid: 227ba945210d0e749b7d50ea5f33ff96,
+  shadowPrefab: {fileID: 2418172932704104243, guid: b15b9acb510b9464eaa4e93d2a3c1963,
     type: 3}
   shadowScale: 1
+  shadowScaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.016319353
+      outSlope: -0.016319353
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.0696909
+    - serializedVersion: 3
+      time: 5.1791773
+      value: 0.20253363
+      inSlope: -0.078525886
+      outSlope: -0.078525886
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.10926857
+    - serializedVersion: 3
+      time: 10
+      value: 0
+      inSlope: -0.0049678828
+      outSlope: -0.0049678828
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10794697
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   castCameraDown: 0
   castingMask:
     serializedVersion: 2
