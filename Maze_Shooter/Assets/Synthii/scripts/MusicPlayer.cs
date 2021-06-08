@@ -120,7 +120,7 @@ namespace Synthii
 			// If an audio source stack has already been built for the 
 			// music track of this zone, just change zones on it.
 			if (trackSources.TryGetValue(zone.musicTrack, out newTrackAudioSource)) {
-				newTrackAudioSource.ChangeZones(zone);
+				newTrackAudioSource.ChangeZones(zone, zone.fadeInTime);
 				newTrackAudioSource.Play(zone.fadeInTime);
 				currentTrackSource = newTrackAudioSource;
 				return;

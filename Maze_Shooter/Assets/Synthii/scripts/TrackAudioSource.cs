@@ -49,6 +49,8 @@ namespace Synthii {
 
 		public Track MyTrack => musicZone != null ? musicZone.musicTrack : track;
 
+		float fadeInTime;
+		float trackVolumesLerpSpeed => 1 / fadeInTime;
 
 
 		void Update() 
@@ -61,7 +63,7 @@ namespace Synthii {
 				Loop();
 			}
 
-			trackVolumesOutput = TrackVolumes.Lerp(trackVolumesOutput, trackVolumes, Time.deltaTime * 3);
+			trackVolumesOutput = TrackVolumes.Lerp(trackVolumesOutput, trackVolumes, Time.deltaTime * trackVolumesLerpSpeed);
 			UpdateAudioSourcesVolume();
 		}
 
@@ -97,7 +99,7 @@ namespace Synthii {
 		/// Change the music zone I'm playing for.
 		/// This ONLY supports swapping between zones that share the same track! 
 		/// </summary>
-		public void ChangeZones(MusicZone newMusicZone, float fadeTime = 1)
+		public void ChangeZones(MusicZone newMusicZone, float newFadeTime = 1)
 		{
 			if (newMusicZone == musicZone) return;
 
@@ -111,6 +113,7 @@ namespace Synthii {
 
 			musicZone = newMusicZone;
 			trackVolumes = newMusicZone.GenerateVolumes();
+			fadeInTime = newFadeTime;
 		}
 
 		public void BuildAudioSources(MusicZone newMusicZone, AudioMixerGroup mixerGroup) 
