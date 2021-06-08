@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: hand drawn sprite
+  m_Name: wavy
   m_Shader: {fileID: 4800000, guid: a36b7719ff0465b42ab1407d67672c5f, type: 3}
-  m_ShaderKeywords: ATLAS_ON DOODLE_ON ETC1_EXTERNAL_ALPHA FOG_ON
+  m_ShaderKeywords: ATLAS_ON DOODLE_ON ETC1_EXTERNAL_ALPHA FOG_ON WAVEUV_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -142,7 +142,7 @@ Material:
     - _GrassWind: 20
     - _GreyscaleLuminosity: 0
     - _GreyscaleOutline: 0
-    - _HandDrawnAmount: 0.5
+    - _HandDrawnAmount: 0.35
     - _HandDrawnSpeed: 5.4
     - _HitEffectBlend: 1
     - _HitEffectGlow: 5
@@ -157,11 +157,11 @@ Material:
     - _InnerOutlineAlpha: 1
     - _InnerOutlineGlow: 1
     - _InnerOutlineThickness: 1
-    - _MaxXUV: 0.74
-    - _MaxYUV: 0.98
+    - _MaxXUV: 1
+    - _MaxYUV: 1
     - _Metallic: 0
-    - _MinXUV: 0.72
-    - _MinYUV: 0.96
+    - _MinXUV: 0
+    - _MinYUV: 0
     - _Mode: 0
     - _MotionBlurAngle: 0.1
     - _MotionBlurDist: 1.25
@@ -218,11 +218,11 @@ Material:
     - _TwistUvPosY: 0.5
     - _TwistUvRadius: 0.75
     - _UVSec: 0
-    - _WaveAmount: 2.5
-    - _WaveSpeed: 4.5
-    - _WaveStrength: 0.7
-    - _WaveX: 0.246
-    - _WaveY: 0.328
+    - _WaveAmount: 20.23
+    - _WaveSpeed: 2.89
+    - _WaveStrength: 0.8
+    - _WaveX: 0.265
+    - _WaveY: 0.785
     - _ZTestMode: 4
     - _ZWrite: 0
     - _ZoomUvAmount: 0.5
