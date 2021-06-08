@@ -9,7 +9,9 @@ public class ShadowObject : MonoBehaviour
     [Tooltip("When calculating shadow color, the distance between caster and shadow will be clamped to this value.")]
     public float maxDistance = 10;
     public Gradient colorByDistance;
+	// TODO change this to scale by distance
     public List<SpriteRenderer> sprites = new List<SpriteRenderer>();
+	public Transform mask;
     
     List<ShadowObjectPlugin> _plugins = new List<ShadowObjectPlugin>();
     float _dist;
@@ -39,6 +41,11 @@ public class ShadowObject : MonoBehaviour
     {
         _plugins.Add(newPlugin);
     }
+
+	public void SetScale(float scale)
+	{
+		mask.transform.localScale = Vector3.one * scale;
+	}
 
     void SetColor(Color color)
     {

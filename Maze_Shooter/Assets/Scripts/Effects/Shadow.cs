@@ -30,6 +30,16 @@ public class Shadow : MonoBehaviour
 		return -_camera.up;
 	}
 
+	void OnDrawGizmosSelected()
+	{
+		const float shadowScaleConstant = 2;
+
+		Gizmos.color = new Color(0, 0, 0, .1f);
+		Gizmos.DrawSphere(transform.position, shadowScale * shadowScaleConstant);
+		Gizmos.color = Color.black;
+		GizmoExtensions.DrawCircle(transform.position, shadowScale * shadowScaleConstant);
+	}
+
 	void Start()
     {
 		if (!Camera.main) return;
@@ -42,9 +52,9 @@ public class Shadow : MonoBehaviour
 			shadowParent = new GameObject("Shadows");
 
         shadowInstance = Instantiate(shadowPrefab, transform.position, shadowPrefab.transform.rotation);
-        shadowInstance.transform.localScale *= shadowScale;
 		shadowInstance.transform.parent = shadowParent.transform;
         _shadowObject = shadowInstance.GetComponent<ShadowObject>();
+		_shadowObject.SetScale(shadowScale);
     }
     
     // Update is called once per frame
