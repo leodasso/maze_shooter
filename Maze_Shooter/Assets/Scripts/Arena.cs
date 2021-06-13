@@ -10,11 +10,20 @@ public class Arena : MonoBehaviour
 	public Vector3 CirclePos (ArenaCircle circle) => transform.TransformPoint(circle.offset);
 
 	void OnDrawGizmos() {
+
+		Gizmos.color = new Color(0, 1, 1, .5f);
+		foreach (var circle in arenaCircles)
+		{
+			GizmoExtensions.DrawCircle(CirclePos(circle), circle.radius);
+		}
+	}
+
+	void OnDrawGizmosSelected() {
 		Gizmos.color = Color.cyan;
 
 		foreach (var circle in arenaCircles)
 		{
-			GizmoExtensions.DrawCircle(CirclePos(circle), circle.radius);
+			GizmoExtensions.DrawCircle(CirclePos(circle), circle.radius, true);
 		}
 	}
 

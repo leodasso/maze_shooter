@@ -8,10 +8,6 @@ using UnityEngine;
 [AddComponentMenu("Character Controllers/Simple Movement")]
 public class SimpleMovement : MovementBase
 {    
-    [Tooltip("The thing I'll move towards. Keep in mind if there's a targetFinder referenced, it will overwrite" +
-             " whatever you put in here.")]
-    public GameObject target;
-
 	[ToggleLeft]
     public bool useTargetFinder = true;
 
@@ -21,14 +17,7 @@ public class SimpleMovement : MovementBase
     [Tooltip("(optional) Will just use whatever target the targetfinder has if this is set."), ShowIf("useTargetFinder")]
     public TargetFinder targetFinder;
 
-    // Update is called once per frame
-    protected override void Update()
-    {
-        base.Update();
-        
-        if (targetFinder && targetFinder.currentTarget && useTargetFinder) 
-            target = targetFinder.currentTarget.gameObject;
-    }
+	GameObject currentTarget => targetFinder ? targetFinder.currentTarget : null;
     
     protected override void FixedUpdate()
     {
@@ -40,8 +29,8 @@ public class SimpleMovement : MovementBase
 
 	public void UpdateDirectionToTarget()
 	{
-		if (target)
-			direction = (target.transform.position - transform.position).normalized;
+		if (currentTarget)
+			direction = (currentTarget.transform.position - transform.position).normalized;
 	}
 
     // These functions are for playmaker to easily interface with this behavior

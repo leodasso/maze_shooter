@@ -36,13 +36,13 @@ public class TargetFinder : MonoBehaviour
 	void OnDrawGizmosSelected()
 	{
 		Gizmos.color = new Color(1, 1, .3f);
-		Gizmos.DrawWireSphere(transform.position, maxAqcuireRange);
+		GizmoExtensions.DrawCircle(transform.position, maxAqcuireRange, true);
 	}
 
 	void OnDrawGizmos()
 	{
-		Gizmos.color = new Color(1, 1, .3f, .15f);
-		Gizmos.DrawWireSphere(transform.position, maxAqcuireRange);
+		Gizmos.color = new Color(1, 1, .3f, .3f);
+		GizmoExtensions.DrawCircle(transform.position, maxAqcuireRange);
 	}
 
 	// Use this for initialization
@@ -53,10 +53,10 @@ public class TargetFinder : MonoBehaviour
 	
 	void OnEnable()
 	{
-		InvokeRepeating(nameof(TryFindTarget), 0, .5f);
+		InvokeRepeating(nameof(AutoAquireLoop), 0, .5f);
 	}
 	
-	void TryFindTarget()
+	void AutoAquireLoop()
 	{
 		if (currentTarget != null || !autoAcquire) return;
 		FindTarget();

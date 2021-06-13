@@ -31,7 +31,6 @@ public class MovementBase : MonoBehaviour, IControllable
     protected Rigidbody _rigidbody;
 
 	public bool IsGrounded => _isGrounded;
-    
     /// <summary>
     /// The intended direction of movement. Differs from velocity in that if there's a wall or blocker and
     /// velocity is 0, this will still show the intended direction.
@@ -89,9 +88,13 @@ public class MovementBase : MonoBehaviour, IControllable
     {
         if (useSpeedCurve)
         {
-            _speedCurveTime += Time.deltaTime;
-            if (_speedCurveTime > speedCurve.Duration())
-                _speedCurveTime = 0;
+			if (direction.magnitude > moveInputThreshold) {
+				_speedCurveTime += Time.deltaTime;
+				if (_speedCurveTime > speedCurve.Duration())
+					_speedCurveTime = 0;
+			} else {
+				_speedCurveTime = 0;
+			}
         }
     }
 
