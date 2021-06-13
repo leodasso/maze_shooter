@@ -1,33 +1,68 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Arena : MonoBehaviour
 {
-	public float radius = 10;
+	public List<ArenaCircle> arenaCircles = new List<ArenaCircle>();
+
+	public Vector3 CirclePos (ArenaCircle circle) => transform.TransformPoint(circle.offset);
 
 	void OnDrawGizmos() {
 		Gizmos.color = Color.cyan;
-		GizmoExtensions.DrawCircle(transform.position, radius);
+
+		foreach (var circle in arenaCircles)
+		{
+			GizmoExtensions.DrawCircle(CirclePos(circle), circle.radius);
+		}
+	}
+
+	public bool ContainsObject(Transform t)
+	{
+		for (int i = 0; i < arenaCircles.Count; i++)
+		{
+			if (Arachnid.Math.IsInRange(t.position - CirclePos(arenaCircles[i]), arenaCircles[i].radius))
+				return true;
+		}
+
+		return false;
 	}
 
 	/// <summary>
 	/// Returns a random point within the arena.
 	/// </summary>
 	public Vector3 GetPoint() {
-		Vector3 random = Random.insideUnitSphere * radius;
-		return new Vector3(random.x + transform.position.x, transform.position.y, random.z + transform.position.z);
+		int randomIndex = Random.Range(0, arenaCircles.Count);
+		ArenaCircle selectedCircle = arenaCircles[randomIndex];
+
+		Vector3 randomPt = Random.insideUnitSphere * selectedCircle.radius;
+		Vector3 circlePos = CirclePos(selectedCircle);
+		return new Vector3(
+			circlePos.x + randomPt.x,
+			transform.position.y,
+			circlePos.z + randomPt.z
+		);
 	}
 
 	[Button]
 	void Test() {
-		Vector3 pt = GetPoint();
-		Debug.DrawLine(pt, pt + Vector3.up, Color.red, 5);
+		for (int i = 0; i < 100; i++){
+			Vector3 pt = GetPoint();
+			Debug.DrawLine(pt, pt + Vector3.up, Color.red, 5);
+		}
 	}
 
-	public bool ContainsObject(Transform t) 
+	[System.Serializable]
+	public class ArenaCircle
 	{
-		return Vector2.Distance(
-			new Vector2(transform.position.x, transform.position.z), 
-			new Vector2(t.position.x, t.position.z)) <= radius;
+		public float radius = 10;
+
+		[HorizontalGroup, LabelText("X"), LabelWidth(20)]
+		public float offsetX;
+		[HorizontalGroup, LabelText("Z"), LabelWidth(20)]
+		public float offsetZ;
+
+		public Vector3 offset => new Vector3(offsetX, 0, offsetZ);
 	}
 }
