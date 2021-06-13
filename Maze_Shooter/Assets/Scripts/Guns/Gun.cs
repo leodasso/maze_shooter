@@ -11,8 +11,7 @@ public class Gun : GunBase
 	[ShowIf("limitAmmo")]
 	public int maxAmmo;
 
-	[ShowIf("limitAmmo")]
-	public int currentAmmo;
+	int currentAmmo;
 
 	[Range(0, 1)]
 	[Tooltip("Determines how intense the fire rate is. 0 is the lowest fire rate of the selected gun," +
@@ -33,6 +32,7 @@ public class Gun : GunBase
 	{
 		base.Start();
 		_cooldownTimer = 0;
+		currentAmmo = maxAmmo;
 	}
 	
 	// Update is called once per frame

@@ -60,7 +60,10 @@ public class GunBase : MonoBehaviour
         Vector3 localOffset = transform.TransformPoint(offset);
         Debug.DrawLine(transform.position, localOffset, Color.yellow, 1);
         var newAmmo = Instantiate(Ammo, localOffset, transform.rotation);
-        newAmmo.transform.Rotate(0, angle, 0, Space.World);
+        
+		Projectile p = newAmmo.GetComponent<Projectile>();
+		if (p)
+			p.Fire(transform.forward);
 
         Hazard hazard = newAmmo.GetComponent<Hazard>();
         if (hazard)
