@@ -5,10 +5,21 @@ using Arachnid;
 
 public static class GizmoExtensions
 {
-    public static void DrawCircle(Vector3 pos, float radius)
+    public static void DrawCircle(Vector3 pos, float radius, bool fill = false)
     {
+		Color color = Gizmos.color;
 		for (int i = 0; i < 360; i+= 10) {
 			Gizmos.DrawLine(pos + PointAtAngle(i, radius), pos + PointAtAngle(i + 10, radius));
+		}
+
+		if (fill)
+		{
+			Gizmos.color = new Color(color.r, color.g, color.b, color.a * .3f);
+			for (float r = 0.5f; r < radius; r += .5f)
+			{
+				DrawCircle(pos, r);
+			}
+			Gizmos.color = color;
 		}
     }
 
