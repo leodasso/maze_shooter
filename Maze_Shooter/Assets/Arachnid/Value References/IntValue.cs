@@ -5,6 +5,10 @@ namespace Arachnid
 	[CreateAssetMenu(menuName ="Arachnid/Int Value")]
 	public class IntValue : ValueAsset<int>
 	{
+		protected override void ProcessValueChange(int newValue)
+		{
+		}
+
 		protected override bool ValueHasChanged(int newValue) 
 		{
 			return newValue != myValue;

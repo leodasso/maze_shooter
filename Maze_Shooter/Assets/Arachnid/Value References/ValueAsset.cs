@@ -13,18 +13,13 @@ namespace Arachnid {
 	/// <typeparam name="T">Type of the value this holds</typeparam>
 	public abstract class ValueAsset<T> : ScriptableObject
 	{
-		[ToggleLeft]
+		[ToggleLeft, PropertyOrder(-50)]
         public bool readOnly;
 
-		[SerializeField, ShowInInspector, OnValueChanged("RaiseEvents")]
+		[SerializeField, HideInInspector]
 		protected T myValue;
 
-		[AssetsOnly]
-        public List<GameEvent> onValueChange;
-
-        [MultiLineProperty(5)]
-        public string comments;
-
+		[ShowInInspector, PropertyOrder(-40)]
 		public T Value
 		{
 			get { return myValue; }
@@ -37,15 +32,32 @@ namespace Arachnid {
 						Debug.LogWarning(name + " value can't be set because it's readonly.", this);
 						return;
 					}
+
+					ProcessValueChange(value);
+
 					myValue = value;
 					RaiseEvents();
 				}
 			}
 		}
 
-		void RaiseEvents() {
+		[AssetsOnly, PropertyOrder(200)]
+        public List<GameEvent> onValueChange;
+
+        [MultiLineProperty(5), HideLabel, Title("Comments", bold: false)]
+        public string comments;
+
+		protected abstract void ProcessValueChange(T newValue);
+
+		protected void RaiseEvents() 
+		{
+			RaiseEvents(onValueChange);
+		}
+
+		protected void RaiseEvents(List<GameEvent> eventList) 
+		{
 			if (!Application.isPlaying) return;
-			foreach (var e in onValueChange) e.Raise();
+			foreach (var e in eventList) e.Raise();
 		}
 
 		protected abstract bool ValueHasChanged(T newValue);

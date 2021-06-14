@@ -5,40 +5,23 @@ using Sirenix.OdinInspector;
 using Arachnid;
 
 [CreateAssetMenu(menuName ="Arachnid/Hearts Value")]
-public class HeartsValue : ScriptableObject
+public class HeartsValue : ValueAsset<Hearts>
 {
-	[ToggleLeft]
-	public bool readOnly;
-	Hearts myValue;
-	
-	[ShowInInspector]
-	public Hearts Value
+
+	protected override bool ValueHasChanged(Hearts newValue)
 	{
-		get { return myValue; }
-		set {
-			// If the value is changing, raise the onValueChange events
-			if (value != myValue)
-			{
-				if (readOnly)
-				{
-					Debug.LogWarning(name + " value can't be set because it's readonly.", this);
-					return;
-				}
-
-				if (value > myValue)
-					RaiseEvents(onValueIncrease);
-
-				if (value < myValue)
-					RaiseEvents(onValueDecrease);
-
-				myValue = value;
-				RaiseEvents(onValueChange);
-			}
-		}
+		return newValue != myValue;
 	}
 
-	[AssetsOnly, SerializeField]
-	List<GameEvent> onValueChange;
+	protected override void ProcessValueChange(Hearts newValue)
+	{
+		if (newValue > myValue)
+			RaiseEvents(onValueIncrease);
+
+		if (newValue < myValue)
+			RaiseEvents(onValueDecrease);
+	}
+
 
 	[AssetsOnly, SerializeField]
 	List<GameEvent> onValueIncrease;
@@ -46,12 +29,4 @@ public class HeartsValue : ScriptableObject
 	[AssetsOnly, SerializeField]
 	List<GameEvent> onValueDecrease;
 
-	[MultiLineProperty(5)]
-	public string comments;
-
-	void RaiseEvents(List<GameEvent> eventList) 
-	{
-		if (!Application.isPlaying) return;
-		foreach (var e in eventList) e.Raise();
-	}
 }

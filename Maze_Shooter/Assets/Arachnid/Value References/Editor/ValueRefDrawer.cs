@@ -6,6 +6,8 @@ namespace Arachnid
 {
     public abstract class ValueRefDrawer<T> : PropertyDrawer
     {
+		protected virtual float ObjRefWidth => .7f;
+		
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             // Using BeginProperty / EndProperty on the parent property means that
@@ -14,6 +16,9 @@ namespace Arachnid
 
             // Draw label
             position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
+
+			// add some extra width to position
+			position = new Rect(position.x - 20, position.y, position.width + 20, position.height);
 
             // Don't make child fields be indented
             var indent = EditorGUI.indentLevel;
@@ -38,7 +43,7 @@ namespace Arachnid
 
 			if (enumIndex == 1) {
 				// divide the rects
-				float leftRectWidth = valueRect.width * .7f;
+				float leftRectWidth = valueRect.width * ObjRefWidth;
 				var leftRect = new Rect(valueRect.x, valueRect.y, leftRectWidth, valueRect.height);
 				var rightRect = new Rect(valueRect.x + leftRectWidth, valueRect.y, valueRect.width - leftRectWidth, valueRect.height);
 
