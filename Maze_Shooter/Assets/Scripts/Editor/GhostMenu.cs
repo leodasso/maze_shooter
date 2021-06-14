@@ -4,9 +4,12 @@ using System.Reflection;
 using UnityEngine;
 using UnityEditor;
 
+
+// https://docs.unity3d.com/ScriptReference/MenuItem.html
+
 public class GhostMenu 
 {
-	[MenuItem("Hauntii/Set Scene Cam")]
+	[MenuItem("Hauntii/Set Scene Cam %&c")]
 	public static void SetCameraAngle() 
 	{
 		Camera cam = Camera.main;
