@@ -60,8 +60,28 @@ namespace Arachnid
 			EditorGUI.PropertyField(enumRect, property.FindPropertyRelative("useConstant"), GUIContent.none);
 			if (enumIndex == 0)
 				EditorGUI.PropertyField(valueRect, property.FindPropertyRelative("constantValue"), GUIContent.none);
-			if (enumIndex == 1)
-				EditorGUI.PropertyField(valueRect, property.FindPropertyRelative("valueObject"), GUIContent.none);
+			if (enumIndex == 1) {
+
+				// divide the rects
+				float leftRectWidth = valueRect.width * .7f;
+				var leftRect = new Rect(valueRect.x, valueRect.y, leftRectWidth, valueRect.height);
+				var rightRect = new Rect(valueRect.x + leftRectWidth, valueRect.y, valueRect.width - leftRectWidth, valueRect.height);
+
+				// ref to the asset in project folder that holds the value
+				var globalObject = property.FindPropertyRelative("valueObject");
+
+				// draw the property for the object ref
+				EditorGUI.PropertyField(leftRect, globalObject, GUIContent.none);
+
+				// draw the property for the actual value
+				var obj = globalObject.objectReferenceValue;
+				if (obj != null) {
+					SerializedObject serializedObject = new SerializedObject(obj);
+					SerializedProperty intValue = serializedObject.FindProperty("myValue");
+					EditorGUI.PropertyField(rightRect, intValue, GUIContent.none);
+					serializedObject.ApplyModifiedProperties();
+				}
+			}
 
 			// Set indent back to what it was
 			EditorGUI.indentLevel = indent;
