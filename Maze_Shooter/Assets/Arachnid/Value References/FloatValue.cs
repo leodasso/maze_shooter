@@ -6,35 +6,12 @@ using Sirenix.OdinInspector;
 namespace Arachnid
 {
     [CreateAssetMenu(menuName ="Arachnid/Float Value")]
-    public class FloatValue : ScriptableObject
+    public class FloatValue : ValueAsset<float>
     {
-        [ToggleLeft]
-        public bool readOnly;
-        [SerializeField, ShowInInspector, OnValueChanged("RaiseEvents")]
-        float myValue;
-        
-        public float Value
-        {
-            get { return myValue; }
-            set {
-                // If the value is changing, raise the onValueChange events
-                if (System.Math.Abs(value - myValue) > Mathf.Epsilon)
-                {
-                    if (readOnly)
-                    {
-                        Debug.LogWarning(name + " value can't be set because it's readonly.", this);
-                        return;
-                    }
-                    myValue = value;
-					RaiseEvents();
-                }
-            }
-        }
-
-        [AssetsOnly]
-        public List<GameEvent> onValueChange;
-        [MultiLineProperty(5)]
-        public string comments;
+		protected override bool ValueHasChanged(float newValue)
+		{
+			return System.Math.Abs(newValue - myValue) > Mathf.Epsilon;
+		}		
 
         /// <summary>
         /// Increases the value by the given amount
@@ -51,10 +28,5 @@ namespace Arachnid
         {
             Value = 0;
         }
-
-		void RaiseEvents() {
-			if (!Application.isPlaying) return;
-			foreach (var e in onValueChange) e.Raise();
-		}
     }
 }
