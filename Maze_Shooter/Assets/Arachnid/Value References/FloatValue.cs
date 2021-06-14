@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Sirenix.OdinInspector;
+﻿using UnityEngine;
 
 namespace Arachnid
 {
@@ -13,17 +10,11 @@ namespace Arachnid
 			return System.Math.Abs(newValue - myValue) > Mathf.Epsilon;
 		}		
 
-        /// <summary>
-        /// Increases the value by the given amount
-        /// </summary>
         public void IterateValue (float amount)
         {
             Value += amount;
         }
 
-        /// <summary>
-        /// Resets the value back to zero.
-        /// </summary>
         public void ResetValue()
         {
             Value = 0;
