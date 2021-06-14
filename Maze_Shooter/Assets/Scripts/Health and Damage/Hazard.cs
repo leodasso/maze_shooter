@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
-[TypeInfoBox("Add this component to any object with a 2D collider, and it will deal damage to other iDestructible objects" +
+[TypeInfoBox("Add this component to any object with a collider, and it will deal damage to other iDestructible objects" +
              "that it comes into contact with.")]
 public class Hazard : ContactBase
 {

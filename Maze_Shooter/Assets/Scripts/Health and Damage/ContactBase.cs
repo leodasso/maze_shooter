@@ -22,9 +22,8 @@ public class ContactBase : MonoBehaviour
 	public LayerMask layersThatDestroyThis;
 
 	[BoxGroup("contact")]
-	[Tooltip("Is this hazard expected to move at high velocity? If so, does a raycast check to make sure it doesn't go through" +
-	         " any colliders.")]
-	[PropertyOrder(-100)]
+	[Tooltip("Is this hazard expected to move at high velocity? If so, does a raycast check to make sure it doesn't go through any colliders.")]
+	[PropertyOrder(-100), ToggleLeft]
 	public bool highVelocity = false;
 
 	[BoxGroup("contact")]

@@ -4,10 +4,14 @@ using Sirenix.OdinInspector;
 
 public abstract class Projectile: MonoBehaviour
 {
-	public FloatReference lifetime;
-	Gun _whoFiredMe;
-	protected float _lifetimeTimer;
+	public FloatReference speed;
 
+	[Tooltip("Lifetime of the projectile in seconds. When the lifetime is up, the projectile will destroy itself.")]
+	public FloatReference lifetime;
+
+	Gun _whoFiredMe;
+
+	protected float _lifetimeTimer;
 	protected Vector3 fireDirection;
 
 	protected virtual void OnEnable()
@@ -27,5 +31,6 @@ public abstract class Projectile: MonoBehaviour
 	public virtual void Fire(Vector3 dir)
 	{
 		fireDirection = dir;
+		Debug.DrawRay(transform.position, fireDirection, Color.red, 50);
 	}
 }

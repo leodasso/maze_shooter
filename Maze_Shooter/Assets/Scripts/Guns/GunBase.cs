@@ -37,6 +37,24 @@ public class GunBase : MonoBehaviour
     protected bool HasGunData => GunData != null;
     protected GameObject Ammo => HasGunData ? GunData.ammo : ammo;
     protected bool AllowFiring => _startFiringTimer <= 0;
+
+	void OnDrawGizmos()
+	{
+		Gizmos.color = new Color(1, .6f, 0, .3f);
+		DrawGizmo();
+	}
+
+	void OnDrawGizmosSelected()
+	{
+		Gizmos.color = new Color(1, .6f, 0, 1);
+		DrawGizmo();
+	}
+
+	void DrawGizmo()
+	{
+		Gizmos.DrawRay(transform.position, transform.forward * 2);
+		Gizmos.DrawSphere(transform.position, .4f);
+	}
     
     // Use this for initialization
     protected virtual void Start()
@@ -59,7 +77,7 @@ public class GunBase : MonoBehaviour
 		offset = Math.Project2Dto3D(offset);
         Vector3 localOffset = transform.TransformPoint(offset);
         Debug.DrawLine(transform.position, localOffset, Color.yellow, 1);
-        var newAmmo = Instantiate(Ammo, localOffset, transform.rotation);
+        var newAmmo = Instantiate(Ammo, localOffset, Quaternion.identity);
         
 		Projectile p = newAmmo.GetComponent<Projectile>();
 		if (p)
