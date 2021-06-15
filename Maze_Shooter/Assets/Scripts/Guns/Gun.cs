@@ -4,6 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Math = Arachnid.Math;
 using Arachnid;
+using UnityEngine.Events;
 
 [TypeInfoBox("Fires things in the local Z forward axis")]
 public class Gun : GunBase
@@ -21,6 +22,9 @@ public class Gun : GunBase
 
 	[Tooltip("Used to play sfx for this gun")]
 	public AudioAction audioAction;
+
+	[SerializeField]
+	UnityEvent onTryFireWhenEmpty;
 
 	Vector2 FireRateRange => HasGunData ? GunData.firingRate : firingRate;
 	float FireRate => Mathf.Lerp(FireRateRange.x, FireRateRange.y, fireRateIntensity);
@@ -67,7 +71,8 @@ public class Gun : GunBase
 		if (HasAmmo) {
 			SpendAmmo();
 			CreateBullet(Vector2.zero, RandomSpreadAngle);
-		}
+		} else
+			onTryFireWhenEmpty.Invoke();
 
 		_cooldownTimer = 0;
 	}

@@ -52,13 +52,18 @@ public class Health : MonoBehaviour, IDestructible
 	public bool IsKilled => _isKilled;
 	public Hearts ActualHp {
 		get {
-			return mainHealth == null ? currentHp.Value : mainHealth.currentHp.Value;
+			return currentHp.Value;
 		}
 		set {
-			if (mainHealth) mainHealth.currentHp.Value = value;
-			else currentHp.Value = value;
+			currentHp.Value = value;
 		}
 	} 
+
+	float ActualInvulnerableTime {
+		get {
+			return mainHealth ? mainHealth.invulnerableTime.Value : invulnerableTime.Value;
+		}
+	}
 
 	public float NormalizedHp => (float)ActualHp.TotalPoints / (float)maxHearts.Value.TotalPoints;
 
@@ -98,6 +103,11 @@ public class Health : MonoBehaviour, IDestructible
 	public void DoDamage(Hearts amount, Vector3 pos, Vector3 dir)
 	{
 		if (IsInvulnerable || !enabled || IsKilled) return;
+		if (mainHealth)
+		{
+			mainHealth.DoDamage(amount, pos, dir);
+			return;
+		}
 		
 		ActualHp -= amount;
 		if (ActualHp.TotalPoints <= 0)
@@ -112,14 +122,11 @@ public class Health : MonoBehaviour, IDestructible
 			Destroy(Instantiate(damagedEffect, pos, effectRotation), damageEffectLifetime);
 		}
 
-		if (invulnerableTime.Value > 0)
-			_invulnerableTimer = invulnerableTime.Value;
+		if (ActualInvulnerableTime > 0)
+			_invulnerableTimer = ActualInvulnerableTime;
 		
 		onDamaged?.Invoke(ActualHp.TotalPoints);
 		onDamagedEvent.Invoke();
-
-		// invoke events from the main health component
-		if (mainHealth) mainHealth.onDamagedEvent.Invoke();
 	}
 
 	public void Heal(Hearts amount)

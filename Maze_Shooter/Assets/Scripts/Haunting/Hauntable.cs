@@ -14,9 +14,6 @@ namespace ShootyGhost
         public UnityEvent onHaunted;
         public UnityEvent onUnHaunted;
 
-		[Space, ToggleLeft]
-		public bool linkHealth;
-
 		[SerializeField, ToggleLeft, Tooltip("Have a special transition duration for exiting this haunter?")]
 		bool customTransitionTime;
 
@@ -33,16 +30,21 @@ namespace ShootyGhost
 
 		public Collection hauntableType;
 
-		[ShowIf("linkHealth")]
-		public Health health;
-
 		[AssetsOnly]
 		public GameObject hauntConstellationPrefab;
 
 		[ReadOnly]
 		public Haunter haunter;
 
-		void Start() {}
+		Health health;
+
+		int initLayer;
+
+		void Start() 
+		{
+			initLayer = gameObject.layer;
+			health = GetComponent<Health>();
+		}
 
         /// <summary>
         /// Calculates and returns the position that the ghost should go to once exiting after haunt
@@ -95,13 +97,15 @@ namespace ShootyGhost
 				haunted.Add(hauntableType);
 
 			onHaunted.Invoke();
-			if (linkHealth) LinkHealth();
+			LinkHealth();
+
+			gameObject.layer = LayerMask.NameToLayer("Player");
 		}
 
 		void LinkHealth() 
 		{
 			if (!health || !haunter) {
-				Debug.LogWarning("Components are missing for health link!", gameObject);
+				Debug.Log("Components are missing for health link!", gameObject);
 				return;
 			}
 
@@ -127,7 +131,7 @@ namespace ShootyGhost
         public void OnUnHaunted()
         {
             onUnHaunted.Invoke();
-			if (linkHealth) UnlinkHealth();
+			UnlinkHealth();
 			haunter = null;
         }
 
@@ -141,11 +145,18 @@ namespace ShootyGhost
 				haunter.EndHaunt(transitionDuration: transitionTime);
 			else
 				haunter.EndHaunt();
+
+			gameObject.layer = initLayer;
 		}
 
 		public void EndHauntWithNoTransition() {
 			if (!haunter) return;
 			haunter.EndHaunt(null, false);
+		}
+
+		void OnDisable()
+		{
+			EndHaunt();
 		}
     }
 }

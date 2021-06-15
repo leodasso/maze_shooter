@@ -17,11 +17,10 @@ namespace Arachnid {
 		[ToggleLeft, PropertyOrder(-50)]
         public bool readOnly;
 
-		[SerializeField, HideInInspector]
+		[SerializeField]
 		protected T myValue;
 
 		[TableColumnWidth(150)]
-		[ShowInInspector, PropertyOrder(-40)]
 		public T Value
 		{
 			get { return myValue; }

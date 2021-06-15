@@ -24,12 +24,15 @@ public class ArcMover : MonoBehaviour
 
     float _y;
 
+	Vector3 endPos;
+
     // Update is called once per frame
     void Update()
     {
-        if (!end) return;
+        if (end) 
+			endPos = end.transform.position;
         _y = heightCurve.Evaluate(progress);
-        transform.position = Vector3.Lerp(startPosition, end.transform.position, progress) + Vector3.up * _y;
+        transform.position = Vector3.Lerp(startPosition, endPos, progress) + Vector3.up * _y;
     }
 
 	public void SetTransitionDuration(float duration) 

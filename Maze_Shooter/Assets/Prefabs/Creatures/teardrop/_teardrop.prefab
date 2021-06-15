@@ -444,7 +444,7 @@ MonoBehaviour:
     useConstant: 0
     constantValue: 0.3
     valueObject: {fileID: 0}
-  createDamageEffect: 0
+  createDamageEffect: 1
   damagedEffect: {fileID: 1388326714027936, guid: 3a54c4e88b19c6a43939dd58735c7c9b,
     type: 3}
   destroyWhenKilled: 1
@@ -563,6 +563,30 @@ MonoBehaviour:
   shadowPrefab: {fileID: 5155450454445014131, guid: eb00369e30f58ab4dbc201708bd91644,
     type: 3}
   shadowScale: 1
+  shadowScaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -0.1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 10
+      value: 0
+      inSlope: -0.1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   castCameraDown: 0
   castingMask:
     serializedVersion: 2
