@@ -15,12 +15,18 @@ public class Actor : MonoBehaviour
     
     [ShowInInspector, ReadOnly]
     public bool culled;
-    ActorPlaceholder _placeholderInstance;
+
+	public static HashSet<Actor> allActors = new HashSet<Actor>();
 
     void Awake()
     {
-        Deactivate();
+		allActors.Add(this);
     }
+
+	void OnDestroy()
+	{
+		allActors.Remove(this);
+	}
 
     public void Activate()
     {
@@ -29,8 +35,6 @@ public class Actor : MonoBehaviour
 
         gameObject.SetActive(true);
         culled = false;
-        if (_placeholderInstance)
-            _placeholderInstance.gameObject.SetActive(false);
     }
 
     public void Deactivate()
@@ -38,17 +42,7 @@ public class Actor : MonoBehaviour
 		if (debug)
 			Debug.Log(name + " is deactivating.", gameObject);
 
-        if (!_placeholderInstance) InstantiatePlaceholder();
-        _placeholderInstance.gameObject.SetActive(true);
-        _placeholderInstance.transform.position = transform.position;
         culled = true;
         gameObject.SetActive(false);
-    }
-
-    void InstantiatePlaceholder()
-    {
-        _placeholderInstance = Instantiate(placeholderPrefab, transform.position, transform.rotation, transform.parent)
-            .GetComponent<ActorPlaceholder>();
-        _placeholderInstance.actor = this;
     }
 }

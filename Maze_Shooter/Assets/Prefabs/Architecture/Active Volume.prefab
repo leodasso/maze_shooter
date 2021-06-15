@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 956480597264479040}
   - component: {fileID: 956480597264479043}
   - component: {fileID: 956480597264479042}
-  - component: {fileID: 956480597264479045}
   - component: {fileID: 4662114704897918304}
   m_Layer: 13
   m_Name: Active Volume
@@ -62,19 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29cc292f9f1b2a3428447270375c49d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &956480597264479045
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 956480597264479044}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 100
-  m_Center: {x: 0, y: 0, z: 0}
+  radius: 100
 --- !u!114 &4662114704897918304
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,17 +5,25 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class ActiveVolume : MonoBehaviour
 {
-    void OnTriggerEnter(Collider other)
-    {
-        ActorPlaceholder otherActor = other.GetComponent<ActorPlaceholder>();
-        if (!otherActor) return;
-        otherActor.Activate();
-    }
+	public float radius;
 
-    void OnTriggerExit(Collider other)
-    {
-        Actor otherActor = other.GetComponent<Actor>();
-        if (!otherActor) return;
-        otherActor.Deactivate();
-    }
+	void OnDrawGizmosSelected()
+	{
+		Gizmos.color = Color.cyan;
+		Gizmos.DrawWireSphere(transform.position, radius);
+	}
+
+	void Update()
+	{
+		foreach ( var actor in Actor.allActors) 
+		{
+			bool isInRange = Arachnid.Math.IsInRange(transform.position - actor.transform.position, radius);
+
+			if (actor.culled && isInRange)
+				actor.Activate();
+
+			else if (!actor.culled && !isInRange)
+				actor.Deactivate();
+		}
+	}
 }
