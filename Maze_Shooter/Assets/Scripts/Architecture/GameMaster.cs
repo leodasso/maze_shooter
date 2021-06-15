@@ -10,33 +10,35 @@ using UnityEngine.Events;
 [CreateAssetMenu(menuName = "Ghost/Game Master")]
 public class GameMaster : ScriptableObject
 {
-	[LabelText("Save File")]
+	[LabelText("Save File"), Title("General")]
 	public SaveDataAvatar currentAvatar;
+	public GameEvent saveFileAccessedEvent;
+	public IntReference hpPerHeart;
+	public UnityEvent onBeginLoadSavedGame;
 
-	[Space]
+	[Space, Title("Player")]
     public GameObject defaultPlayerShip;
+	public Collection playerInstancesCollection;
+
+	[Space, Title("Stages")]
+	public List<Stage> allStages = new List<Stage>();
     public Stage currentStage;
     [ReadOnly]
     public Stage justCompletedStage;
-    static GameMaster _gameMaster;
 
+	public SavedString savedStage;
+    public SavedString savedCheckpoint;
+
+	[ReadOnly]
     public GateLink gateLink;
-    public Collection playerInstancesCollection;
 
-	[AssetsOnly]
+	[AssetsOnly, Space, Title("Audio & Music")]
 	public GameObject audioListenerPrefab;
 
 	[AssetsOnly]
 	public GameObject musicPlayerPrefab;
 
-    public SavedString savedStage;
-    public SavedString savedCheckpoint;
-    
-    public List<Stage> allStages = new List<Stage>();
-
-    public UnityEvent onBeginLoadSavedGame;
-
-	public IntReference hpPerHeart;
+    static GameMaster _gameMaster;
 
     public static string saveFilesDirectory = "saveFiles/";
 
@@ -136,9 +138,19 @@ public class GameMaster : ScriptableObject
     }
 
     #region Load-Save
+
+	public static void OnSaveFileAccessed()
+	{
+		// TODO maybe logging or analytics?
+
+		if (!Get().saveFileAccessedEvent) return;
+		Get().saveFileAccessedEvent.Raise();
+	}
     
     public void VerifyMainSaveFile()
     {
+		OnSaveFileAccessed();
+
         if (ES3.FileExists("main.es3"))
             Debug.Log("Main save data exists.");
         else
@@ -163,6 +175,8 @@ public class GameMaster : ScriptableObject
     
     public static bool AvatarIsUsedBySaveFile(SaveDataAvatar avatar)
     {
+		OnSaveFileAccessed();
+
         return ES3.FileExists(saveFilesDirectory + avatar.name + ".es3");
     }
     
@@ -176,6 +190,8 @@ public class GameMaster : ScriptableObject
             Debug.Log("Avatar doesn't have any save data.");
             return;
         }
+
+		OnSaveFileAccessed();
         
         ES3.DeleteFile(saveFilesDirectory + avatar.name + ".es3");
     }
@@ -189,12 +205,15 @@ public class GameMaster : ScriptableObject
     /// <param name="requester">The object that is requesting for a value to be saved.</param>
     public static void SaveToCurrentFile<T>(string saveKey, T value, Object requester)
     {
+
         string saveDir;
-        if (Get().TryGetSaveFileDirectory(out saveDir))
+        if (Get().TryGetSaveFileDirectory(out saveDir)) 
             ES3.Save<T>(saveKey, value, saveDir);
         
         else 
             Debug.LogError("Error saving " + saveKey + " value from " + requester.name, requester);
+
+		OnSaveFileAccessed();
     }
     
 
@@ -207,6 +226,8 @@ public class GameMaster : ScriptableObject
     /// <param name="requester">The object requesting for the value.</param>
     public static T LoadFromCurrentFile<T>(string saveKey, T defaultValue, Object requester)
     {
+		OnSaveFileAccessed();
+
         string saveDir;
         if (Get().TryGetSaveFileDirectory(out saveDir))
             return ES3.Load<T>(saveKey, saveDir, defaultValue);
@@ -216,6 +237,7 @@ public class GameMaster : ScriptableObject
 
     public static bool DoesKeyExist(string saveKey)
     {
+		OnSaveFileAccessed();
         string saveDir;
         if (Get().TryGetSaveFileDirectory(out saveDir))
             return ES3.KeyExists(saveKey, saveDir);
