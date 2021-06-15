@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
@@ -10,6 +11,7 @@ public class SpriteAnimator : MonoBehaviour
 	[Range(0, 1)]
 	public float progress = 0;
     public SpriteRenderer spriteRenderer;
+	public Image image;
     public List<Sprite> sprites = new List<Sprite>();
 
 	[Space]
@@ -58,7 +60,6 @@ public class SpriteAnimator : MonoBehaviour
     
 	public void Update() 
 	{
-		if (!spriteRenderer) return;
 		if (sprites.Count < 1) return;
 		if (!IsPlaying) return;
 
@@ -86,7 +87,12 @@ public class SpriteAnimator : MonoBehaviour
 		int spriteIndex = Mathf.FloorToInt(progress * sprites.Count);
         if (spriteIndex >= sprites.Count) 
             spriteIndex = sprites.Count - 1;
-        spriteRenderer.sprite = sprites[spriteIndex];
+
+		if (spriteRenderer)
+        	spriteRenderer.sprite = sprites[spriteIndex];
+
+		if (image)
+			image.sprite = sprites[spriteIndex];
 	}
 
 	void SelfPlayUpdate() 

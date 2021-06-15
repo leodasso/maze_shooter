@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8041844817822675062}
+  - component: {fileID: 8609452230146880868}
   m_Layer: 5
   m_Name: content
   m_TagString: Untagged
@@ -160,6 +161,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &8609452230146880868
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437508760527071879}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2222701392895244145
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,6 +466,7 @@ MonoBehaviour:
         toState: showing
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -559,6 +573,7 @@ MonoBehaviour:
         toState: hidden
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -692,10 +707,13 @@ MonoBehaviour:
     password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 0
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 1
