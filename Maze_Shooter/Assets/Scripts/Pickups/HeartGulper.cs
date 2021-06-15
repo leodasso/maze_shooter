@@ -14,15 +14,11 @@ public class HeartGulper : PickupGulper
 	protected override void OnGulp<T>(T pickup)
 	{
 		HeartPickup heart = pickup as HeartPickup;
-
-		// if player has full hp? 
-		if (health.HpIsFull) {
-			heart.BreakApart();
-			return;
-		}
-
-		// otherwise add to player HP
-		heart.AddHearts();
 		health.Heal(heart.amount);
+	}
+
+	protected override bool IsFull()
+	{
+		return health.HpIsFull;
 	}
 }

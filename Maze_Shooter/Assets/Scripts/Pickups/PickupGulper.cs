@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using Arachnid;
+using Sirenix.OdinInspector;
+
 
 public abstract class PickupGulper : MonoBehaviour
 {
@@ -8,8 +11,8 @@ public abstract class PickupGulper : MonoBehaviour
 	// Failsafe to prevent from saving to file when no value loaded
 	bool savedValueLoaded = false;
 
-    // Failsafe to prevent from saving to file when no value loaded
-	bool valueLoaded = false;
+	[SerializeField, PropertyOrder(300)]
+	UnityEvent onTooFullToGulp;
 
 	/// <summary>
 	/// Checks the type of the other pickup, and if it's a match, calls OnGulp with the other pickup.
@@ -22,11 +25,18 @@ public abstract class PickupGulper : MonoBehaviour
 		T otherPickup = other.GetComponent<T>();
 		if (!otherPickup) return;
 
+		if (IsFull()) {
+			otherPickup.GulpAttemptedButFull();
+			onTooFullToGulp.Invoke();
+			return;
+		}
+
 		otherPickup.GetGulped();
 		OnGulp<T>(otherPickup);
 	}
 
 	protected abstract void OnGulp<T>(T pickup) where T : Pickup;
+
 
 
 	/// <summary>
@@ -59,4 +69,6 @@ public abstract class PickupGulper : MonoBehaviour
 
 		valueSaveFile.Save(valueAsset.Value);
     }
+
+	protected abstract bool IsFull();
 }

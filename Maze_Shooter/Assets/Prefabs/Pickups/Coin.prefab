@@ -95,6 +95,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onTriedToGrabButFull:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1264617879074373015}
+        m_TargetAssemblyTypeName: Pickup, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   value: 1
 --- !u!54 &1264617879074373012
 Rigidbody:
@@ -5113,8 +5128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a05506e86408f4bae29a22b776d5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progress: 0.73737246
+  progress: 0.6657815
   spriteRenderer: {fileID: 1469797232963627782}
+  image: {fileID: 0}
   sprites:
   - {fileID: 21300000, guid: 50700d8d3977ff34b903588454cd5016, type: 3}
   - {fileID: 21300000, guid: 04a765de6909d9d42802b901c59ca816, type: 3}

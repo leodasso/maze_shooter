@@ -31,4 +31,10 @@ public class CandleGulper : PickupGulper
 		CandlePickup candle = pickup as CandlePickup;
 		candles.Value += candle.value;
 	}
+
+	protected override bool IsFull()
+	{
+		// TODO we need to have max candles eventaully mate lol
+		return false;
+	}
 }

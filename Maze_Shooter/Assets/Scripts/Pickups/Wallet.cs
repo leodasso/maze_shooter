@@ -9,6 +9,9 @@ public class Wallet : PickupGulper
     
 	[SerializeField]
 	IntValue _money;
+
+	[SerializeField]
+	IntValue maxMoney;
     
     void Awake()
     {
@@ -31,5 +34,10 @@ public class Wallet : PickupGulper
 	{
 		Coin coin = pickup as Coin;
 		_money.Value += coin.value;
+	}
+
+	protected override bool IsFull()
+	{
+		return _money.Value >= maxMoney.Value;
 	}
 }

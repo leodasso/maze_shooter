@@ -26,6 +26,8 @@ public class Pickup : MonoBehaviour
 	[SerializeField]
     protected UnityEvent onGrabbed;
 
+	[SerializeField]
+	protected UnityEvent onTriedToGrabButFull;
 
  
     // Start is called before the first frame update
@@ -39,6 +41,11 @@ public class Pickup : MonoBehaviour
 	{
 		rigidbody.isKinematic = false;
         rigidbody.velocity = jumpVelocity + Random.insideUnitSphere * jumpVelocityRandomness;
+	}
+
+	public virtual void GulpAttemptedButFull()
+	{
+		onTriedToGrabButFull.Invoke();
 	}
 
 	public virtual void GetGulped()
