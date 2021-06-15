@@ -45,6 +45,11 @@ public class CheckpointTool : EditorWindow
 			if (GUILayout.Button("Spawn from " + checkpoint.name)) {
 				checkpoint.SetAsActiveCheckpoint();
 				EditorGUIUtility.PingObject(checkpoint);
+
+ 				Selection.activeGameObject = checkpoint.gameObject;
+ 				SceneView.FrameLastActiveSceneView();
+				 SceneView.lastActiveSceneView.size = 30;
+
 			}
 		}
 
