@@ -117,6 +117,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7240a95320bc4f8a98e3f5cdfd3a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customTransitionTime: 0
+  linkHealth: 0
+  transitionTime: 0
+  allowManualExit: 1
+  customReturnPos: 0
+  returnPos: {fileID: 0}
+  hauntableType: {fileID: 0}
+  hauntConstellationPrefab: {fileID: 6312336650189920229, guid: 324a1b01a48fd064b97a70b344a58712,
+    type: 3}
+  haunter: {fileID: 0}
   onHaunted:
     m_PersistentCalls:
       m_Calls:
@@ -171,17 +181,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  linkHealth: 0
-  customTransitionTime: 0
-  transitionTime: 0
-  allowManualExit: 1
-  customReturnPos: 0
-  returnPos: {fileID: 0}
-  hauntableType: {fileID: 0}
-  health: {fileID: 0}
-  hauntConstellationPrefab: {fileID: 6312336650189920229, guid: 324a1b01a48fd064b97a70b344a58712,
-    type: 3}
-  haunter: {fileID: 0}
 --- !u!114 &8329381951491282885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a05506e86408f4bae29a22b776d5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progress: 0.8147309
+  progress: 0.9713688
   spriteRenderer: {fileID: 8329381953610170948}
   sprites:
   - {fileID: 21300000, guid: 1313bfdb52ce8fb45a2ef4d50062b25a, type: 3}
@@ -812,7 +811,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1921123767bcdeb4fb14a651b1e4fc09, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1f5fb4aa2c046e2469a86849afea92a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

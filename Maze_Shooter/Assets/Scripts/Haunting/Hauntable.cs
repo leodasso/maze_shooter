@@ -11,11 +11,11 @@ namespace ShootyGhost
     {
 		static List<Collection> haunted = new List<Collection>();
 
-        public UnityEvent onHaunted;
-        public UnityEvent onUnHaunted;
-
 		[SerializeField, ToggleLeft, Tooltip("Have a special transition duration for exiting this haunter?")]
 		bool customTransitionTime;
+
+		[SerializeField, ToggleLeft, Tooltip("Damage the haunter (if any) rather than this object")]
+		bool linkHealth = true;
 
 		[SerializeField, ShowIf("customTransitionTime")]
 		float transitionTime;
@@ -35,6 +35,10 @@ namespace ShootyGhost
 
 		[ReadOnly]
 		public Haunter haunter;
+
+		[Space]
+		public UnityEvent onHaunted;
+        public UnityEvent onUnHaunted;
 
 		Health health;
 
@@ -97,7 +101,8 @@ namespace ShootyGhost
 				haunted.Add(hauntableType);
 
 			onHaunted.Invoke();
-			LinkHealth();
+			if (linkHealth)
+				LinkHealth();
 
 			gameObject.layer = LayerMask.NameToLayer("Player");
 		}

@@ -261,7 +261,7 @@ MonoBehaviour:
       position:
         serializedVersion: 2
         x: 58
-        y: 116
+        y: 100
         width: 103
         height: 48
       isBreakpoint: 0
@@ -275,6 +275,7 @@ MonoBehaviour:
         toState: chase target
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: stun
@@ -283,6 +284,7 @@ MonoBehaviour:
         toState: dummy mode
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -435,7 +437,7 @@ MonoBehaviour:
       position:
         serializedVersion: 2
         x: 291.46094
-        y: 107.625
+        y: 91.625
         width: 105
         height: 48
       isBreakpoint: 0
@@ -449,6 +451,7 @@ MonoBehaviour:
         toState: dummy mode
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: stun
@@ -457,6 +460,7 @@ MonoBehaviour:
         toState: dummy mode
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -482,10 +486,10 @@ MonoBehaviour:
         fsmArrayParams: []
         fsmEnumParams: []
         fsmFloatParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
+        - useVariable: 1
+          name: chaseTime
+          tooltip: how long to chase target before getting tired
+          showInInspector: 1
           networkSync: 0
           value: 8
         fsmIntParams: []
@@ -515,7 +519,7 @@ MonoBehaviour:
       position:
         serializedVersion: 2
         x: 63
-        y: 222.11719
+        y: 206.11719
         width: 172
         height: 32
       isBreakpoint: 0
@@ -529,6 +533,7 @@ MonoBehaviour:
         toState: wandering
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -707,8 +712,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 535
-        y: 158
+        x: 346.34375
+        y: 320.39844
         width: 100
         height: 48
       isBreakpoint: 0
@@ -722,6 +727,7 @@ MonoBehaviour:
         toState: exit haunt
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: shrivel
@@ -730,6 +736,7 @@ MonoBehaviour:
         toState: shrivelling
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -985,7 +992,7 @@ MonoBehaviour:
       position:
         serializedVersion: 2
         x: 335
-        y: 201
+        y: 185
         width: 100
         height: 32
       isBreakpoint: 0
@@ -999,6 +1006,7 @@ MonoBehaviour:
         toState: dummy mode
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1253,8 +1261,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 688
-        y: 203
+        x: 504.625
+        y: 352.39062
         width: 100
         height: 32
       isBreakpoint: 0
@@ -1265,9 +1273,10 @@ MonoBehaviour:
           name: FINISHED
           isSystemEvent: 1
           isGlobal: 0
-        toState: end haunt
+        toState: release ghost
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1325,7 +1334,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: 0.8
+          value: 0.7
         - useVariable: 0
           name: 
           tooltip: 
@@ -1400,8 +1409,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 994
-        y: 222
+        x: 824.3047
+        y: 371.98438
         width: 100
         height: 16
       isBreakpoint: 0
@@ -1432,7 +1441,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: Destruct
+          value: HaunterSafeDestruct
         fsmObjectParams:
         - useVariable: 0
           name: 
@@ -1493,14 +1502,14 @@ MonoBehaviour:
         - manualUI
         paramDataPos: 000000000000000000000000000000000000000001000000
         paramByteDataSize: 000000000000000000000000000000000100000001000000
-    - name: end haunt
+    - name: release ghost
       description: 
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 836
-        y: 206
-        width: 100
+        x: 650.8047
+        y: 361.21875
+        width: 110
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -1513,6 +1522,7 @@ MonoBehaviour:
         toState: destroy
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1665,9 +1675,16 @@ MonoBehaviour:
       toState: haunted
       linkStyle: 0
       linkConstraint: 0
+      linkTarget: 0
       colorIndex: 0
     variables:
-      floatVariables: []
+      floatVariables:
+      - useVariable: 1
+        name: chaseTime
+        tooltip: how long to chase target before getting tired
+        showInInspector: 1
+        networkSync: 0
+        value: 8
       intVariables: []
       boolVariables: []
       stringVariables: []
@@ -1684,7 +1701,7 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs: 
+      variableCategoryIDs: 00000000
     description: 
     docUrl: 
     showStateLabel: 0
@@ -1693,13 +1710,16 @@ MonoBehaviour:
     password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 0
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
-    editorFlags: 1
+    editorFlags: 33
     activeStateName: 
     mouseEvents: 0
     handleLevelLoaded: 0
@@ -1758,6 +1778,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7240a95320bc4f8a98e3f5cdfd3a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customTransitionTime: 0
+  linkHealth: 1
+  transitionTime: 0
+  allowManualExit: 1
+  customReturnPos: 0
+  returnPos: {fileID: 0}
+  hauntableType: {fileID: 0}
+  hauntConstellationPrefab: {fileID: 6312336650189920229, guid: 324a1b01a48fd064b97a70b344a58712,
+    type: 3}
+  haunter: {fileID: 0}
   onHaunted:
     m_PersistentCalls:
       m_Calls:
@@ -1788,17 +1818,6 @@ MonoBehaviour:
           m_StringArgument: endHaunt
           m_BoolArgument: 0
         m_CallState: 2
-  linkHealth: 0
-  customTransitionTime: 0
-  transitionTime: 0
-  allowManualExit: 1
-  customReturnPos: 0
-  returnPos: {fileID: 0}
-  hauntableType: {fileID: 0}
-  health: {fileID: 0}
-  hauntConstellationPrefab: {fileID: 6312336650189920229, guid: 324a1b01a48fd064b97a70b344a58712,
-    type: 3}
-  haunter: {fileID: 0}
 --- !u!114 &709230677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1840,7 +1859,7 @@ PrefabInstance:
     - target: {fileID: 381962356759342433, guid: be8df666b469ece46b86c84d7833616f,
         type: 3}
       propertyPath: m_Name
-      value: ectoplasm
+      value: _ectoplasm
       objectReference: {fileID: 0}
     - target: {fileID: 381962356759342433, guid: be8df666b469ece46b86c84d7833616f,
         type: 3}

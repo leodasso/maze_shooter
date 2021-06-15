@@ -9,6 +9,8 @@ using UnityEngine;
 /// </summary>
 public class Actor : MonoBehaviour
 {
+	[SerializeField, ToggleLeft]
+	bool debug;
     public GameObject placeholderPrefab;
     
     [ShowInInspector, ReadOnly]
@@ -22,6 +24,9 @@ public class Actor : MonoBehaviour
 
     public void Activate()
     {
+		if (debug)
+			Debug.Log(name + " is activating.", gameObject);
+
         gameObject.SetActive(true);
         culled = false;
         if (_placeholderInstance)
@@ -30,6 +35,9 @@ public class Actor : MonoBehaviour
 
     public void Deactivate()
     {
+		if (debug)
+			Debug.Log(name + " is deactivating.", gameObject);
+
         if (!_placeholderInstance) InstantiatePlaceholder();
         _placeholderInstance.gameObject.SetActive(true);
         _placeholderInstance.transform.position = transform.position;

@@ -63,8 +63,6 @@ public class EffectsBase : MonoBehaviour
 			return;
 		}
 
-		Debug.Log("Instantiating effect.", gameObject);
-
 		if (delay > Mathf.Epsilon)
 			StartCoroutine(DelayedInstantiate());
 		

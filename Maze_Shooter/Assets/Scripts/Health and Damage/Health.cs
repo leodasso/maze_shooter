@@ -33,7 +33,7 @@ public class Health : MonoBehaviour, IDestructible
 	[ShowIf("createDamageEffect"), Indent, TabGroup("main")]
 	public float damageEffectLifetime = 5;
 
-	[TabGroup("main"), Tooltip("(optional) events will be called on mainHealth as if it is damaged/killed")]
+	[TabGroup("main"), Tooltip("(optional) events will be called on mainHealth as if it is damaged/killed"), ReadOnly]
 	public Health mainHealth;
 
 	[DrawWithUnity, TabGroup("events")]
@@ -141,6 +141,15 @@ public class Health : MonoBehaviour, IDestructible
 	{
 		if (!enabled) return;
 		currentHp.Value = newHp;
+	}
+
+	public void HaunterSafeDestruct()
+	{
+		if (_isKilled) return;
+		Debug.Log("HAunter safe destruct");
+		_isKilled = true;
+		onKilledEvent.Invoke();
+		if (destroyWhenKilled) Destroy(gameObject);
 	}
 
 	public void Destruct()
