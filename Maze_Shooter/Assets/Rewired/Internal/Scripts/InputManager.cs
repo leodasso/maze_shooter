@@ -76,6 +76,7 @@ namespace Rewired {
     using UnityEngine.SceneManagement;
 #endif
 
+    [AddComponentMenu("Rewired/Input Manager")]
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
     public sealed class InputManager : InputManager_Base {
 
@@ -183,6 +184,10 @@ namespace Rewired {
             platform = Platform.PS4;
 #endif
 
+#if UNITY_PS5
+            platform = Platform.PS5;
+#endif
+
 #if UNITY_PSP2
             platform = Platform.PSVita;
 #endif
@@ -195,8 +200,14 @@ namespace Rewired {
             platform = Platform.Xbox360;
 #endif
 
-#if UNITY_XBOXONE
+#if UNITY_GAMECORE_XBOXONE
+            platform = Platform.GameCoreXboxOne;
+#elif UNITY_XBOXONE
             platform = Platform.XboxOne;
+#endif
+
+#if UNITY_GAMECORE_SCARLETT
+            platform = Platform.GameCoreScarlett;
 #endif
 
 #if UNITY_WII
