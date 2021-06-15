@@ -239,6 +239,8 @@ namespace ShootyGhost
         void OnDestroy()
         {
             ClearHauntBurstEffect();
+			if (haunted)
+				haunted.OnHaunterDestroyed();
         }
     }
 }

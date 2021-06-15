@@ -140,6 +140,13 @@ namespace ShootyGhost
 			haunter = null;
         }
 
+		public void OnHaunterDestroyed()
+		{
+			if (linkHealth)
+				health.HaunterSafeDestruct();
+
+		}
+
 		/// <summary>
 		/// Forces haunter to un-haunt this instance.
 		/// </summary>
