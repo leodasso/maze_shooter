@@ -16,7 +16,6 @@ public class PlayerHealth : HealthPlugin
 
 	[Space]
     public SavedInt savedPlayerHealth;
-	public SavedInt savedPlayerMaxHealth;
 
 	[SerializeField, Space]
     UnityEvent onHealthCritical;
@@ -26,13 +25,7 @@ public class PlayerHealth : HealthPlugin
 	protected override void Start()
 	{
 		base.Start();
-		ApplyMaxHp();
 		CheckForCritical();
-	}
-
-	void ApplyMaxHp() 
-	{
-		health.maxHearts.Value = savedPlayerMaxHealth.GetValue();
 	}
 
     public void ApplySavedHp()
@@ -43,12 +36,12 @@ public class PlayerHealth : HealthPlugin
 			newStartHearts.SetTotalPoints(savedPlayerHealth.GetValue());
 			newStartHearts = Hearts.Clamp(newStartHearts, minStartHp.Value, 100);
             health.SetHp(newStartHearts);
-            CheckForCritical();
+            CheckForCritical(); 
         }
 
 		else {
 			// If there's no saved value, just set HP to max.
-			health.SetHp(savedPlayerMaxHealth.GetValue());
+			health.SetHp(health.maxHearts.Value);
 		}
     }
 

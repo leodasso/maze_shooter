@@ -9,6 +9,9 @@ public class CandleGulper : PickupGulper
     
 	[SerializeField]
 	FloatValue candles;
+
+	[SerializeField]
+	FloatValue maxCandles;
     
     void Awake()
     {
@@ -34,7 +37,6 @@ public class CandleGulper : PickupGulper
 
 	protected override bool IsFull()
 	{
-		// TODO we need to have max candles eventaully mate lol
-		return false;
+		return candles.Value >= maxCandles.Value;
 	}
 }
