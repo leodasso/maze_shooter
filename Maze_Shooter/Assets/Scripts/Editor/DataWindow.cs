@@ -12,9 +12,6 @@ namespace ShootyGhost
 	using Arachnid;
 	using System.Collections.Generic;
 
-    // 
-    // Be sure to check out OdinMenuStyleExample.cs as well. It shows you various ways to customize the look and behaviour of OdinMenuTrees.
-    // 
 
     public class DataWindow : OdinMenuEditorWindow
     {
@@ -28,18 +25,25 @@ namespace ShootyGhost
         protected override OdinMenuTree BuildMenuTree()
         {
             OdinMenuTree tree = new OdinMenuTree(true);
+			tree.DrawSearchToolbar();
 
 			tree.DefaultMenuStyle = OdinMenuStyle.TreeViewStyle;
         	tree.Add("Menu Style", 		tree.DefaultMenuStyle, 	EditorIcons.SettingsCog);
 			tree.Add("Game Master", 	GameMaster.Get(), 		EditorIcons.PacmanGhost);
 
-			tree.AddAllAssetsAtPath("Data", "Assets/Data", typeof(IntValue), true);
-			tree.AddAllAssetsAtPath("Data", "Assets/Data", typeof(FloatValue), true);
-			tree.AddAllAssetsAtPath("Data", "Assets/Data", typeof(HeartsValue), true);
-			tree.AddAllAssetsAtPath("Data", "Assets/Data", typeof(DynamicsProfile), true);
+			tree.AddAllAssetsAtPath("Data", "Assets/Data", typeof(IntValue), true).AddThumbnailIcons();
+			tree.AddAllAssetsAtPath("Data", "Assets/Data", typeof(FloatValue), true).AddThumbnailIcons();
+			tree.AddAllAssetsAtPath("Data", "Assets/Data", typeof(HeartsValue), true).AddThumbnailIcons();
+			tree.AddAllAssetsAtPath("Data", "Assets/Data", typeof(DynamicsProfile), true).AddThumbnailIcons();
 
 			tree.Add("Audio", 	null, 		EditorIcons.Sound);
-			tree.AddAllAssetsAtPath("Audio", "Assets/Audio/Audio Collections", typeof(AudioCollection), true);
+			tree.AddAllAssetsAtPath("Audio", "Assets/Audio/Audio Collections", typeof(AudioCollection), true).AddThumbnailIcons();
+
+			tree.Add("Save Data", null, EditorIcons.GridBlocks);
+			tree.AddAllAssetsAtPath("Save Data", "Assets/Save File Data", typeof(SavedInt), true).AddThumbnailIcons();
+			tree.AddAllAssetsAtPath("Save Data", "Assets/Save File Data", typeof(SavedFloat), true).AddThumbnailIcons();
+			tree.AddAllAssetsAtPath("Save Data", "Assets/Save File Data", typeof(SavedBool), true).AddThumbnailIcons();
+			tree.AddAllAssetsAtPath("Save Data", "Assets/Save File Data", typeof(SavedString), true).AddThumbnailIcons();
 
             return tree;
         }
