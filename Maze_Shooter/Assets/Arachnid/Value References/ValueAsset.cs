@@ -13,12 +13,14 @@ namespace Arachnid {
 	/// <typeparam name="T">Type of the value this holds</typeparam>
 	public abstract class ValueAsset<T> : ScriptableObject
 	{
+		[TableColumnWidth(100, false)]
 		[ToggleLeft, PropertyOrder(-50)]
         public bool readOnly;
 
 		[SerializeField, HideInInspector]
 		protected T myValue;
 
+		[TableColumnWidth(150)]
 		[ShowInInspector, PropertyOrder(-40)]
 		public T Value
 		{
@@ -44,7 +46,7 @@ namespace Arachnid {
 		[AssetsOnly, PropertyOrder(200)]
         public List<GameEvent> onValueChange;
 
-        [MultiLineProperty(5), HideLabel, Title("Comments", bold: false)]
+        [MultiLineProperty(4), HideLabel, Title("Comments", bold: false)]
         public string comments;
 
 		protected abstract void ProcessValueChange(T newValue);
