@@ -1,4 +1,4 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2016. All rights reserved.
+﻿// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -6,21 +6,19 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
 	[Tooltip("Sets the playback position in the recording buffer. When in playback mode (use AnimatorStartPlayback), this value is used for controlling the current playback position in the buffer (in seconds). The value can range between recordingStartTime and recordingStopTime ")]
-	public class SetAnimatorPlayBackTime: FsmStateAction
+	public class SetAnimatorPlayBackTime: ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The Target. An Animator component is required")]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("The GameObject with an Animator Component.")]
+        public FsmOwnerDefault gameObject;
 		
-		[Tooltip("The playBack time")]
+		[Tooltip("The playback time")]
 		public FsmFloat playbackTime;
 		
 		[Tooltip("Repeat every frame. Useful for changing over time.")]
 		public bool everyFrame;
-		
-		private Animator _animator;
-		
+        
 		public override void Reset()
 		{
 			gameObject = null;
@@ -30,24 +28,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-			
-			DoPlaybackTime();
+            DoPlaybackTime();
 			
 			if (!everyFrame) 
 			{
@@ -59,17 +40,13 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			DoPlaybackTime();
 		}
-		
-		
-		void DoPlaybackTime()
-		{		
-			if (_animator==null)
-			{
-				return;
-			}
-			
-			_animator.playbackTime = playbackTime.Value;
-			
+
+        private void DoPlaybackTime()
+		{
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                cachedComponent.playbackTime = playbackTime.Value;
+            }
 		}
 		
 	}

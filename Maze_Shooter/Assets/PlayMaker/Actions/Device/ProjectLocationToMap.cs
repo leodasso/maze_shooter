@@ -15,8 +15,8 @@ namespace HutongGames.PlayMaker.Actions
 			Mercator
 		}
 
-		[Tooltip("Location vector in degrees longitude and latitude. Typically returned by the Get Location Info action.")]
-		public FsmVector3 GPSLocation;
+        [Tooltip("Location vector in degrees longitude and latitude. Typically returned by the {{Get Location Info}} action.")]
+        public FsmVector3 GPSLocation;
 		
 		[Tooltip("The projection used by the map.")]
 		public MapProjection mapProjection;
@@ -26,24 +26,32 @@ namespace HutongGames.PlayMaker.Actions
 		//TODO: FsmRect screen region
 
 		[HasFloatSlider(-180,180)]
+        [Tooltip("The minimum Longitude shown on the map.")]
 		public FsmFloat minLongitude;
 		
 		[HasFloatSlider(-180,180)]
+        [Tooltip("The maximum Longitude show on the map.")]
 		public FsmFloat maxLongitude;
 		
 		[HasFloatSlider(-90,90)]
+        [Tooltip("The minimum Latitude shown on the map.")]
 		public FsmFloat minLatitude;
 		
 		[HasFloatSlider(-90,90)]
+        [Tooltip("The maximum Latitude shown on the map.")]
 		public FsmFloat maxLatitude;
 		
 		[ActionSection("Screen Region")]
 
-		//TODO: FsmRect screen region
+        //TODO: FsmRect screen region
 
+        [Tooltip("The screen coordinate of the left edge of the map image.")]
 		public FsmFloat minX;
+        [Tooltip("The screen coordinate of the top edge of the map image.")]
 		public FsmFloat minY;
+        [Tooltip("The width of the map image in screen coordinates.")]
 		public FsmFloat width;
+        [Tooltip("The height of the map in screen coordinates.")]
 		public FsmFloat height;
 		
 		[ActionSection("Projection")]
@@ -58,8 +66,9 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[Tooltip("If true all coordinates in this action are normalized (0-1); otherwise coordinates are in pixels.")]
 		public FsmBool normalized;
-		
-		public bool everyFrame;
+
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 		
 		private float x,y;
 		

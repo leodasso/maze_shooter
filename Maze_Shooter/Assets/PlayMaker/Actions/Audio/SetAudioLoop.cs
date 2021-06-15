@@ -10,7 +10,10 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(AudioSource))]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("A GameObject with an AudioSource component.")]
+        public FsmOwnerDefault gameObject;
+
+        [Tooltip("Set the Audio Source looping.")]
 		public FsmBool loop;
 
 		public override void Reset()
@@ -21,8 +24,7 @@ namespace HutongGames.PlayMaker.Actions
 
 		public override void OnEnter()
 		{
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			if (UpdateCache(go))
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
 			{
 		        audio.loop = loop.Value;
 			}

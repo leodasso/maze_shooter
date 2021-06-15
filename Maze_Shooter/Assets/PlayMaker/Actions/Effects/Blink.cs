@@ -9,7 +9,7 @@ namespace HutongGames.PlayMaker.Actions
 	public class Blink : ComponentAction<Renderer>
 	{
 		[RequiredField]
-        [Tooltip("The GameObject to blink on/off.")]
+        [Tooltip("The Game Object to blink on/off.")]
 		public FsmOwnerDefault gameObject;
 
 		[HasFloatSlider(0, 5)]
@@ -20,7 +20,7 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("Time to stay on in seconds.")]
         public FsmFloat timeOn;
 		
-        [Tooltip("Should the object start in the active/visible state?")]
+        [Tooltip("Start in the on state.")]
 		public FsmBool startOn;
 
         [Tooltip("Only effect the renderer, keeping other components active.")]

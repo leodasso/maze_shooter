@@ -50,7 +50,7 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmVector3 storeHitPoint;
 		
 		[UIHint(UIHint.Variable)]
-		[Tooltip("Store the surface normal vector where the object was touched.")]
+		[Tooltip("Store the surface normal vector where the object was touched. \nNote, this is a direction vector not a rotation. Use Look At Direction to rotate a GameObject to this direction.")]
 		public FsmVector3 storeHitNormal;
 
 		public override void Reset()

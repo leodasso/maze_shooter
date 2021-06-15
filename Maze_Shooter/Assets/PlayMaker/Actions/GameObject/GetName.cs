@@ -7,12 +7,15 @@ namespace HutongGames.PlayMaker.Actions
 	public class GetName : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("The Game Object target.")]
 		public FsmGameObject gameObject;
 		
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the Game Object name in a String Variable.")]
 		public FsmString storeName;
-		
+
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 
 		public override void Reset()

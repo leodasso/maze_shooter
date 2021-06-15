@@ -9,8 +9,11 @@ namespace HutongGames.PlayMaker.Actions
 	public class SetLayer : FsmStateAction
 	{
 		[RequiredField]
-		public FsmOwnerDefault gameObject;
-		[UIHint(UIHint.Layer)]
+        [Tooltip("The Game Object to set.")]
+        public FsmOwnerDefault gameObject;
+
+        [Tooltip("The new layer.")]
+        [UIHint(UIHint.Layer)]
 		public int layer;
 
 		public override void Reset()

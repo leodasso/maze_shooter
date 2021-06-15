@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -31,7 +31,7 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("Store the result of this test in a bool variable. Useful if other actions depend on this test.")]
 		public FsmBool storeResult;
 
-        [Tooltip("Repeat every frame. Useful if you're waiting for a particular state.")]
+        [Tooltip("Repeat every frame. Useful if you want to wait for an FSM to be in a particular state before sending an event.")]
 		public bool everyFrame;
 		
 		// store game object last frame so we know when it's changed

@@ -3,7 +3,7 @@
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.UI)]
-	[Tooltip("Sets the wholeNumbers property of a UI Slider component. This defines if the slider will be constrained to integer values ")]
+	[Tooltip("Sets the wholeNumbers property of a UI Slider component. This defines if the slider will be constrained to integer values.")]
 	public class UiSliderSetWholeNumbers : ComponentAction<UnityEngine.UI.Slider>
 	{
 		[RequiredField]

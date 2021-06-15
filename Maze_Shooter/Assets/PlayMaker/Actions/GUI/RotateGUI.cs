@@ -9,12 +9,21 @@ namespace HutongGames.PlayMaker.Actions
 	public class RotateGUI : FsmStateAction
 	{
 		[RequiredField]
-		public FsmFloat angle;
+        [Tooltip("Angle to rotate in degrees.")]
+        public FsmFloat angle;
+
 		[RequiredField]
-		public FsmFloat pivotX;
+        [Tooltip("X coordinate of pivot.")]
+        public FsmFloat pivotX;
+
 		[RequiredField]
-		public FsmFloat pivotY;
-		public bool normalized;
+        [Tooltip("Y coordinate of pivot.")]
+        public FsmFloat pivotY;
+
+        [Tooltip("Use normalized screen coordinates (0-1).")]
+        public bool normalized;
+
+        [Tooltip("Apply to all GUI actions in all FSMs.")]
 		public bool applyGlobally;
 
 		bool applied;

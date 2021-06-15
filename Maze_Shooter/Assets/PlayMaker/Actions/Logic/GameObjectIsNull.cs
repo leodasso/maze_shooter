@@ -21,7 +21,7 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("Store the result in a bool variable.")]
 		public FsmBool storeResult;
 
-        [Tooltip("Repeat every frame.")]
+        [Tooltip("Repeat every frame. Useful if you want to wait for a GameObject variable to be not null (or null) then send an event.")]
 		public bool everyFrame;
 
 		public override void Reset()

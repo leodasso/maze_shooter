@@ -19,9 +19,9 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[Tooltip("Check on if you want the angle expressed in degrees.")]
 		public FsmBool RadToDeg;
-		
-				
-		public bool everyFrame;
+
+        [Tooltip("Repeat Every Frame")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

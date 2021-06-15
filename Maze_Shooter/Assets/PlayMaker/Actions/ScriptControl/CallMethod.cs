@@ -10,34 +10,36 @@ using HutongGames.PlayMaker;
 namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory(ActionCategory.ScriptControl)]
-    [Tooltip("Call a method in a component on a GameObject.")]
+    [Tooltip("Lets you call a method in a script on a Game Object." +
+             "\nUnlike {{Invoke Method}}, or {{Send Message}}, " +
+             "you can use multiple parameters and get a return value.")]
     public class CallMethod : FsmStateAction
     {
         [ObjectType(typeof(Component))]
-        [Tooltip("The behaviour on a GameObject that has the method you want to call. " +
+        [Tooltip("The behaviour on a Game Object that has the method you want to call. " +
                  "Drag the script component from the Unity inspector into this slot. " +
                  "HINT: Use Lock if the script is on another GameObject." +
-                 "\n\nNOTE: Unity Object fields only show the GameObject name, " +
-                 "so for clarity we show the Behaviour name in a readonly field below.")]
+                 "\n\nNOTE: Unity Object fields show the GameObject name, " +
+                 "so for clarity we show the Behaviour name as well below.")]
         public FsmObject behaviour;
 
         //[UIHint(UIHint.Method)]
-        [Tooltip("Name of the method to call on the component")]
+        [Tooltip("Select from a list of available methods.\n\nNOTE: The full method signature is visible below.")]
         public FsmString methodName;
 
-        [Tooltip("Method parameters. NOTE: these must match the method's signature!")]
+        [Tooltip("Method parameters.\n\nNOTE: This UI is built automatically when you select the method.")]
         public FsmVar[] parameters;
 
         [ActionSection("Store Result")]
 
         [UIHint(UIHint.Variable)]
-        [Tooltip("Store the result of the method call.")]
+        [Tooltip("If the Method has a return, use this to store it in a variable.")]
         public FsmVar storeResult;
 
         [Tooltip("Repeat every frame.")]
         public bool everyFrame;
 
-        [Tooltip("Use the old manual editor UI.")]
+        [Tooltip("Revert to the old Manual UI where all parameters had to be configured manually.")]
         public bool manualUI;
 
         private FsmObject cachedBehaviour;
@@ -290,7 +292,7 @@ namespace HutongGames.PlayMaker.Actions
 
             if (!storeResult.IsNone)
             {
-                name = storeResult.variableName + "=" + name;
+                name = storeResult.variableName + " = " + name;
             }
 
             return name;

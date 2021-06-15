@@ -5,7 +5,8 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.GameObject)]
-	[Tooltip("Finds the Child of a GameObject by Name.\nNote, you can specify a path to the child, e.g., LeftShoulder/Arm/Hand/Finger. If you need to specify a tag, use GetChild.")]
+	[Tooltip("Finds the Child of a GameObject by Name.\nNote, you can specify a path to the child, e.g., LeftShoulder/Arm/Hand/Finger. " +
+             "If you need to specify a tag, use {{GetChild}}.")]
 	public class FindChild : FsmStateAction
 	{
 		[RequiredField]
@@ -46,5 +47,12 @@ namespace HutongGames.PlayMaker.Actions
 			var transform = go.transform.Find(childName.Value);
 			storeResult.Value = transform != null ? transform.gameObject : null;
 		}
-	}
+
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName(this, childName, storeResult);
+        }
+#endif
+    }
 }

@@ -21,41 +21,28 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The float value to assign to the animator parameter")]
 		public FsmFloat Value;
 		
-		[Tooltip("Optional: The time allowed to parameter to reach the value. Requires everyFrame Checked on")]
+		[Tooltip("Optional: The time allowed to parameter to reach the value. Requires Every Frame to be checked.")]
 		public FsmFloat dampTime;
 
-		private Animator _animator;
-		private int _paramID;
-		
-		public override void Reset()
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
+
+        private string cachedParameter;
+        private int paramID;
+
+        public override void Reset()
 		{
 			base.Reset();
 			gameObject = null;
 			parameter = null;
-			dampTime = new FsmFloat() {UseVariable=true};
+			dampTime = new FsmFloat {UseVariable=true};
 			Value = null;
 		}
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);		
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-
-			// get hash from the param for efficiency:
-			_paramID = Animator.StringToHash(parameter.Value);
-			
 			SetParameter();
 			
 			if (!everyFrame) 
@@ -68,18 +55,28 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			SetParameter();
 		}
-		
-		void SetParameter()
+
+        private void SetParameter()
 		{
-		    if (_animator == null) return;
-		    
-            if (dampTime.Value>0f)
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
+
+            if (cachedParameter != parameter.Value)
+            {
+                cachedParameter = parameter.Value;
+                paramID = Animator.StringToHash(parameter.Value);
+            }
+
+            if (dampTime.Value > 0f)
 		    {
-		        _animator.SetFloat(_paramID,Value.Value,dampTime.Value,Time.deltaTime);
+		        animator.SetFloat(paramID, Value.Value, dampTime.Value, Time.deltaTime);
 		    }
 		    else
 		    {
-		        _animator.SetFloat(_paramID,Value.Value) ;
+		        animator.SetFloat(paramID, Value.Value) ;
 		    }
 		}
 	}

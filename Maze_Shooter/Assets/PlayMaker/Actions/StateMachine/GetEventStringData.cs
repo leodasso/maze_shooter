@@ -27,7 +27,7 @@ namespace HutongGames.PlayMaker.Actions
 #if UNITY_EDITOR
         public override string AutoName()
         {
-            return "Get Event String > " + ActionHelpers.GetValueLabel(getStringData);
+            return ActionHelpers.AutoName("GetEventString", getStringData);
         }
 #endif
     }

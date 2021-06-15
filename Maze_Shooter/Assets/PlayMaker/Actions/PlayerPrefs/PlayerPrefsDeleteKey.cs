@@ -8,6 +8,7 @@ namespace HutongGames.PlayMaker.Actions
 	[Tooltip("Removes key and its corresponding value from the preferences.")]
 	public class PlayerPrefsDeleteKey : FsmStateAction
 	{
+        [Tooltip("The name of the PlayerPref.")]
 		public FsmString key;
 				
 		public override void Reset()

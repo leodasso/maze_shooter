@@ -10,13 +10,18 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmString stringVariable;
-		public FsmString replace;
-		public FsmString with;
+        [Tooltip("The String Variable to examine.")]
+        public FsmString stringVariable;
+        [Tooltip("Replace this string...")]
+        public FsmString replace;
+        [Tooltip("... with this string.")]
+        public FsmString with;
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmString storeResult;
-		public bool everyFrame;
+        [Tooltip("Store the result in a string variable.")]
+        public FsmString storeResult;
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

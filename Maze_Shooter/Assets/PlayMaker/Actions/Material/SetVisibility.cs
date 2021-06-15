@@ -11,7 +11,8 @@ namespace HutongGames.PlayMaker.Actions
     {
 		[RequiredField]
 		[CheckForComponent(typeof(Renderer))]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("The GameObject to effect. Note: Needs a Renderer component.")]
+        public FsmOwnerDefault gameObject;
 
 		//[UIHint(UIHint.Variable)]
         [Tooltip("Should the object visibility be toggled?\nHas priority over the 'visible' setting")]

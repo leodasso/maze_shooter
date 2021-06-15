@@ -8,7 +8,7 @@ namespace HutongGames.PlayMaker.Actions
 	[Tooltip("Sets a named float in a game object's material.")]
 	public class SetMaterialFloat : ComponentAction<Renderer>
 	{
-		[Tooltip("The GameObject that the material is applied to.")]
+		[Tooltip("The Game Object that the material is applied to.")]
 		[CheckForComponent(typeof(Renderer))]
 		public FsmOwnerDefault gameObject;
 

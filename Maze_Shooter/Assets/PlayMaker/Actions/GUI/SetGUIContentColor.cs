@@ -9,8 +9,11 @@ namespace HutongGames.PlayMaker.Actions
 	public class SetGUIContentColor : FsmStateAction
 	{
 		[RequiredField]
-		public FsmColor contentColor;
-		public FsmBool applyGlobally;
+        [Tooltip("Tint color for all text rendered by the GUI.")]
+        public FsmColor contentColor;
+
+        [Tooltip("Apply this setting to all GUI calls, even in other scripts.")]
+        public FsmBool applyGlobally;
 	
 		public override void Reset()
 		{

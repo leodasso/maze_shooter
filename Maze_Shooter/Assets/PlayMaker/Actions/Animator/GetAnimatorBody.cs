@@ -5,12 +5,14 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
-	[Tooltip("Gets the avatar body mass center position and rotation. Optionally accepts a GameObject to get the body transform. \nThe position and rotation are local to the gameobject")]
+	[Tooltip("Gets the avatar body mass center position and rotation. " +
+             "Optionally accepts a GameObject to get the body transform. " +
+             "\nThe position and rotation are local to the GameObject")]
 	public class GetAnimatorBody: FsmStateActionAnimatorBase
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The target. An Animator component is required")]
+		[Tooltip("The target. An Animator component and a PlayMakerAnimatorProxy component are required.")]
 		public FsmOwnerDefault gameObject;
 		
 		[ActionSection("Results")]
@@ -26,9 +28,13 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("If set, apply the body mass center position and rotation to this gameObject")]
 		public FsmGameObject bodyGameObject;
 
-		private Animator _animator;
-		
-		private Transform _transform;
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
+
+        private GameObject cachedBodyGameObject;
+        private Transform _transform;
 		
 		public override void Reset()
 		{
@@ -38,39 +44,13 @@ namespace HutongGames.PlayMaker.Actions
 			bodyPosition= null;
 			bodyRotation = null;
 			bodyGameObject = null;
-			this.everyFrame = false;
-			this.everyFrameOption = AnimatorFrameUpdateSelector.OnAnimatorIK;
+			everyFrame = false;
+			everyFrameOption = AnimatorFrameUpdateSelector.OnAnimatorIK;
 		}
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-
-			GameObject _body = bodyGameObject.Value;
-			if (_body!=null)
-			{
-				_transform = _body.transform;
-			}
-
-			if (this.everyFrameOption != AnimatorFrameUpdateSelector.OnAnimatorIK)
-			{
-				this.everyFrameOption = AnimatorFrameUpdateSelector.OnAnimatorIK;
-			}
+            everyFrameOption = AnimatorFrameUpdateSelector.OnAnimatorIK;
 		}
 	
 		public override void OnActionUpdate()
@@ -81,31 +61,39 @@ namespace HutongGames.PlayMaker.Actions
 			{
 				Finish();
 			}
-		}	
-		
-		void DoGetBodyPosition()
-		{		
-			if (_animator==null)
+		}
+
+        private void DoGetBodyPosition()
+        {
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
+
+            bodyPosition.Value = animator.bodyPosition;
+			bodyRotation.Value = animator.bodyRotation;
+
+            if (cachedBodyGameObject != bodyGameObject.Value)
+            {
+                cachedBodyGameObject = bodyGameObject.Value;
+                _transform = cachedBodyGameObject != null ? cachedBodyGameObject.transform : null;
+            }
+
+            if (_transform != null)
 			{
-				return;
-			}
-			
-			bodyPosition.Value = _animator.bodyPosition;
-			bodyRotation.Value = _animator.bodyRotation;
-			
-			if (_transform!=null)
-			{
-				_transform.position = _animator.bodyPosition;
-				_transform.rotation = _animator.bodyRotation;
+				_transform.position = animator.bodyPosition;
+				_transform.rotation = animator.bodyRotation;
 			}
 		}
 
 		public override string ErrorCheck()
 		{
-			if ( this.everyFrameOption != AnimatorFrameUpdateSelector.OnAnimatorIK)
+			if ( everyFrameOption != AnimatorFrameUpdateSelector.OnAnimatorIK)
 			{
 				return "Getting Body Position should only be done in OnAnimatorIK";
 			}
+
 			return string.Empty;
 		}
 

@@ -12,11 +12,11 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.ScriptControl)]
-	[Tooltip("Start a Coroutine in a Behaviour on a Game Object. See Unity StartCoroutine docs.")]
-	public class StartCoroutine : FsmStateAction
+    [Tooltip("Starts a Coroutine in a Behaviour on a Game Object.\nSee Unity <a href=\"http://unity3d.com/support/documentation/ScriptReference/MonoBehaviour.StartCoroutine.html\">StartCoroutine</a> docs for more details.")]
+    public class StartCoroutine : FsmStateAction
 	{
 		[RequiredField]
-        [Tooltip("The game object that owns the Behaviour.")]
+        [Tooltip("The Game Object that owns the Behaviour.")]
 		public FsmOwnerDefault gameObject;
 		
         [RequiredField]

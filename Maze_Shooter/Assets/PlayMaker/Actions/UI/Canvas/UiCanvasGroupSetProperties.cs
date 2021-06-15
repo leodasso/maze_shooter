@@ -30,7 +30,8 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Reset when exiting this state. Leave as None for no effect")]
 		public FsmBool resetOnExit;
 
-		public bool everyFrame;
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 
 	    private CanvasGroup component;
 

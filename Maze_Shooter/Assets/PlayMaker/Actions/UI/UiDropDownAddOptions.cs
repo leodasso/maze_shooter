@@ -15,11 +15,12 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The GameObject with the UI DropDown component.")]
 		public FsmOwnerDefault gameObject;
 
-		[Tooltip("The Options.")]
 		[CompoundArray("Options","Text","Image")]
-		public FsmString[] optionText;
+        [Tooltip("The text to use for this option.")]
+        public FsmString[] optionText;
 		[ObjectType(typeof(Sprite))]
-		public FsmObject[] optionImage;
+        [Tooltip("The image to use for this option.")]
+        public FsmObject[] optionImage;
 
 
 	    private UnityEngine.UI.Dropdown dropDown;

@@ -10,9 +10,14 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Light))]
+        [Tooltip("The Game Object with the Light Component.")]
 		public FsmOwnerDefault gameObject;
-		public FsmFloat lightRange;
-		public bool everyFrame;
+
+        [Tooltip("The range of the light.")]
+        public FsmFloat lightRange;
+
+        [Tooltip("Update every frame. Useful if the range is changing.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

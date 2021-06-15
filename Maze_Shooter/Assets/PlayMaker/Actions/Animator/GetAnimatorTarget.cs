@@ -11,7 +11,7 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The target. An Animator component is required")]
+        [Tooltip("The GameObject with an Animator Component.")]
 		public FsmOwnerDefault gameObject;
 		
 		[ActionSection("Results")]
@@ -27,9 +27,13 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("If set, apply the position and rotation to this gameObject")]
 		public FsmGameObject targetGameObject;
 
-		private Animator _animator;
-		
-		private Transform _transform;
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
+
+        private GameObject cachedTargetGameObject;
+        private Transform _transform;
 		
 		public override void Reset()
 		{
@@ -44,30 +48,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-
-			GameObject _target = targetGameObject.Value;
-			if (_target!=null)
-			{
-				_transform = _target.transform;
-			}
-			
-			DoGetTarget();
+            DoGetTarget();
 			
 			if (!everyFrame)
 			{
@@ -80,20 +61,27 @@ namespace HutongGames.PlayMaker.Actions
 			DoGetTarget();
 		}
 
-		void DoGetTarget()
-		{		
-			if (_animator==null)
-			{
-				return;
-			}
+        private void DoGetTarget()
+		{
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
+
+            if (cachedTargetGameObject != targetGameObject.Value)
+            {
+                cachedTargetGameObject = targetGameObject.Value;
+                _transform = cachedTargetGameObject != null ? cachedTargetGameObject.transform : null;
+            }
+
+            targetPosition.Value = animator.targetPosition;
+			targetRotation.Value = animator.targetRotation;
 			
-			targetPosition.Value = _animator.targetPosition;
-			targetRotation.Value = _animator.targetRotation;
-			
-			if (_transform!=null)
+			if (_transform != null)
 			{
-				_transform.position = _animator.targetPosition;
-				_transform.rotation = _animator.targetRotation;
+				_transform.position = animator.targetPosition;
+				_transform.rotation = animator.targetRotation;
 			}
 		}
 	}

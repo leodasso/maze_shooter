@@ -7,13 +7,17 @@ namespace HutongGames.PlayMaker.Actions
 	public class TransformDirection : FsmStateAction
 	{
 		[RequiredField]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("The Game Object that defines local space.")]
+        public FsmOwnerDefault gameObject;
 		[RequiredField]
-		public FsmVector3 localDirection;
+        [Tooltip("A direction vector in the object's local space.")]
+        public FsmVector3 localDirection;
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmVector3 storeResult;
-		public bool everyFrame;
+        [Tooltip("Store the transformed direction vector, now in world space, in a Vector3 Variable.")]
+        public FsmVector3 storeResult;
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

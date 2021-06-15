@@ -10,8 +10,9 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animation))]
-		public FsmOwnerDefault gameObject;
-		[Tooltip("Leave empty to stop all playing animations.")]
+        [Tooltip("The Game Object playing the animation.")]
+        public FsmOwnerDefault gameObject;
+		[Tooltip("The name of the animation to stop. Leave empty to stop all playing animations.")]
 		[UIHint(UIHint.Animation)]
 		public FsmString animName;
 

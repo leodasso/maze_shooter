@@ -11,15 +11,18 @@ namespace HutongGames.PlayMaker.Actions
 	public class SendEventToFsm : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("The game object that owns the other FSM.")]
 		public FsmOwnerDefault gameObject;
 		[UIHint(UIHint.FsmName)]
-		[Tooltip("Optional name of Fsm on Game Object")]
+		[Tooltip("Optional name of FSM on Game Object")]
 		public FsmString fsmName;
 		[RequiredField]
 		[UIHint(UIHint.FsmEvent)]
-		public FsmString sendEvent;
+        [Tooltip("The Event to send.")]
+        public FsmString sendEvent;
 		[HasFloatSlider(0, 10)]
-		public FsmFloat delay;
+        [Tooltip("Optional delay in seconds.")]
+        public FsmFloat delay;
 		bool requireReceiver;
 
 		private GameObject go;

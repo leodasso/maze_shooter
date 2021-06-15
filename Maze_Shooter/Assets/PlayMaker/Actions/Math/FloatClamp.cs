@@ -14,11 +14,11 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmFloat floatVariable;
 
 		[RequiredField]
-        [Tooltip("The minimum value.")]
+        [Tooltip("The minimum value allowed.")]
 		public FsmFloat minValue;
 
 		[RequiredField]
-        [Tooltip("The maximum value.")]
+        [Tooltip("The maximum value allowed.")]
 		public FsmFloat maxValue;
 
         [Tooltip("Repeat every frame. Useful if the float variable is changing.")]

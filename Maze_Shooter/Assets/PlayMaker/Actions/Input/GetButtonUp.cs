@@ -9,14 +9,14 @@ namespace HutongGames.PlayMaker.Actions
 	public class GetButtonUp : FsmStateAction
 	{
 		[RequiredField]
-        [Tooltip("The name of the button. Set in the Unity Input Manager.")]
+        [Tooltip("The name of the button. Defined in the Unity Input Manager.")]
 		public FsmString buttonName;
 
         [Tooltip("Event to send if the button is released.")]
 		public FsmEvent sendEvent;
 
 		[UIHint(UIHint.Variable)]
-		[Tooltip("Set to True if the button is released.")]
+		[Tooltip("Set to True if the button is released, otherwise False.")]
         public FsmBool storeResult;
 		
 		public override void Reset()
@@ -37,5 +37,12 @@ namespace HutongGames.PlayMaker.Actions
 			
 			storeResult.Value = buttonUp;
 		}
-	}
+
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName(this, buttonName) + " " + (sendEvent != null ? sendEvent.Name : "");
+        }
+#endif
+    }
 }

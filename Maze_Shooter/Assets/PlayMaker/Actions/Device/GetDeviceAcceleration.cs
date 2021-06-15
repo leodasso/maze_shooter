@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -20,14 +20,25 @@ namespace HutongGames.PlayMaker.Actions
 */
 
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the acceleration in a Vector3 Variable.")]
 		public FsmVector3 storeVector;
-		[UIHint(UIHint.Variable)]
+
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Store the x component of the acceleration in a Float Variable.")]
 		public FsmFloat storeX;
-		[UIHint(UIHint.Variable)]
+
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Store the y component of the acceleration in a Float Variable.")]
 		public FsmFloat storeY;
-		[UIHint(UIHint.Variable)]
+
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Store the z component of the acceleration in a Float Variable.")]
 		public FsmFloat storeZ;
+
+        [Tooltip("Multiply the acceleration by a float value.")]
 		public FsmFloat multiplier;
+
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 		
 		public override void Reset()

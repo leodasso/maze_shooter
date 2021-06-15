@@ -7,7 +7,8 @@ namespace HutongGames.PlayMaker.Actions
 	public class SequenceEvent : FsmStateAction
 	{
 		[HasFloatSlider(0, 10)]
-		public FsmFloat delay;
+        [Tooltip("Delay before sending the event in seconds.")]
+        public FsmFloat delay;
 
         [UIHint(UIHint.Variable)]
         [Tooltip("Assign a variable to control reset. Set it to True to reset the sequence. Value is set to False after resetting.")]

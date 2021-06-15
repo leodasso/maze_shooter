@@ -60,11 +60,8 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			go = Fsm.GetOwnerDefaultTarget(gameObject);
 			goTarget = targetObject.Value;
-			
-			if (go == null || targetObject == null)
-			{
-				return;
-			}
+
+            if (go == null || goTarget == null) return;
 			
 			var diff = goTarget.transform.position - go.transform.position;
 			diff.Normalize();

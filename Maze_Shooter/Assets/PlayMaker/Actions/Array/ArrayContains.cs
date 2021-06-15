@@ -1,4 +1,4 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2014. All rights reserved.
+﻿// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using System;
 using UnityEngine;
@@ -25,14 +25,14 @@ namespace HutongGames.PlayMaker.Actions
 		[UIHint(UIHint.Variable)]
 		public FsmInt index;
 
-		[Tooltip("Store in a bool whether it contains that element or not (described below)")]
+		[Tooltip("Store in a bool whether it contains that element or not.")]
 		[UIHint(UIHint.Variable)]
 		public FsmBool isContained;
 
-		[Tooltip("Event sent if the array contains that element (described below)")]
+		[Tooltip("Event sent if the array contains that element.")]
 		public FsmEvent isContainedEvent;
 
-		[Tooltip("Event sent if the array does not contains that element (described below)")]
+		[Tooltip("Event sent if the array does not contain that element.")]
 		public FsmEvent isNotContainedEvent;
 
 		public override void Reset ()

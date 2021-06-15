@@ -1,12 +1,19 @@
 ﻿// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
 
+#define PM_POOL
+
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using HutongGames.PlayMakerEditor;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
 
+#if UNITY_2019_1_OR_NEWER
+using UnityEditor.ShortcutManagement;
+#endif
+
 [Localizable(false)]
+[SuppressMessage("ReSharper", "UnusedMember.Global")]
 internal static class PlayMakerMainMenu
 {
     // Change MenuRoot to move the Playmaker Menu
@@ -28,143 +35,85 @@ internal static class PlayMakerMainMenu
     private const string editorsRoot = MenuRoot + "Editor Windows/";
     private const int iEditors = 1; //10;
 
-    [MenuItem(editorsRoot + "Action Browser", true)]
-    public static bool ValidateOpenActionWindow()
-    {
-        return FsmEditorWindow.IsOpen();
-    }
-
     [MenuItem(editorsRoot + "Action Browser", false, iEditors)]
     public static void OpenActionWindow()
     {
-        FsmEditor.OpenActionWindow();
-    }
-
-    [MenuItem(editorsRoot + "State Browser", true)]
-    public static bool ValidateOpenStateSelectorWindow()
-    {
-        return FsmEditorWindow.IsOpen();
+        FsmEditorWindow.OpenToolWindow<FsmActionWindow>();
     }
 
     [MenuItem(editorsRoot + "State Browser", false, iEditors + 1)]
     public static void OpenStateSelectorWindow()
     {
-        FsmEditor.OpenStateSelectorWindow();
+        FsmEditorWindow.OpenToolWindow<FsmStateWindow>();
     }
-
-    [MenuItem(editorsRoot + "FSM Browser", true)]
-	public static bool ValidateOpenFsmSelectorWindow()
-	{
-		return FsmEditorWindow.IsOpen();
-	}
 
 	[MenuItem(editorsRoot + "FSM Browser", false, iEditors + 2)]
 	public static void OpenFsmSelectorWindow()
 	{
-		FsmEditor.OpenFsmSelectorWindow();
-	}
-
-	[MenuItem(editorsRoot + "Templates Browser", true)]
-	public static bool ValidateOpenFsmTemplateWindow()
-	{
-		return FsmEditorWindow.IsOpen();
+        FsmEditorWindow.OpenToolWindow<FsmSelectorWindow>();
 	}
 
     [MenuItem(editorsRoot + "Templates Browser", false, iEditors + 3)]
 	public static void OpenFsmTemplateWindow()
 	{
-		FsmEditor.OpenFsmTemplateWindow();
+        FsmEditorWindow.OpenToolWindow<FsmTemplateWindow>();
 	}
-
-    [MenuItem(editorsRoot + "Event Browser", true)]
-    public static bool ValidateOpenGlobalEventsWindow()
-    {
-        return FsmEditorWindow.IsOpen();
-    }
 
     [MenuItem(editorsRoot + "Event Browser", false, iEditors + 4)]
     public static void OpenGlobalEventsWindow()
     {
-        FsmEditor.OpenGlobalEventsWindow();
+        FsmEditorWindow.OpenToolWindow<FsmEventsWindow>();
     }
-
-	[MenuItem(editorsRoot + "Global Variables", true)]
-	public static bool ValidateOpenGlobalVariablesWindow()
-	{
-		return FsmEditorWindow.IsOpen();
-	}
 
     [MenuItem(editorsRoot + "Global Variables", false, iEditors + 5)]
 	public static void OpenGlobalVariablesWindow()
 	{
-		FsmEditor.OpenGlobalVariablesWindow();
+        FsmEditorWindow.OpenToolWindow<FsmGlobalsWindow>();
 	}
 
-    [MenuItem(editorsRoot + "Edit Tools", true)]
-    public static bool ValidateOpenToolWindow()
+    #if PM_POOL && PLAYMAKER_SOURCE
+    
+	[MenuItem(editorsRoot + "Pool Browser", false, iEditors + 6)]
+	public static void OpenPoolBrowserWindow()
+	{
+		FsmEditorWindow.OpenToolWindow<PoolBrowser>();
+	}
+
+    #endif
+
+    [MenuItem(editorsRoot + "FSM Controls", false, iEditors + 6)]
+    public static void OpenFsmControlsWindow()
     {
-        return FsmEditorWindow.IsOpen();
+        FsmEditorWindow.OpenToolWindow<FsmControlsWindow>();
     }
 
     [MenuItem(editorsRoot + "Edit Tools", false, iEditors + 6)]
     public static void OpenToolWindow()
     {
-        FsmEditor.OpenToolWindow();
+        FsmEditorWindow.OpenToolWindow<ContextToolWindow>();
     }
 
     // -----------------------------------------
 
-    [MenuItem(editorsRoot + "Timeline Log", true)]
-    public static bool ValidateOpenTimelineWindow()
-    {
-        return FsmEditorWindow.IsOpen();
-    }
-
     [MenuItem(editorsRoot + "Timeline Log", false, iEditors + 17)]
     public static void OpenTimelineWindow()
     {
-        FsmEditor.OpenTimelineWindow();
+        FsmEditorWindow.OpenToolWindow<FsmTimelineWindow>();
     }
-
-	[MenuItem(editorsRoot + "FSM Log", true)]
-	public static bool ValidateOpenFsmLogWindow()
-	{
-		return FsmEditorWindow.IsOpen();
-	}
 
     [MenuItem(editorsRoot + "FSM Log", false, iEditors + 18)]
 	public static void OpenFsmLogWindow()
 	{
-		FsmEditor.OpenFsmLogWindow();
-	}
-
-	[MenuItem(editorsRoot + "Editor Log", true)]
-	public static bool ValidateOpenReportWindow()
-	{
-		return FsmEditorWindow.IsOpen();
+        FsmEditorWindow.OpenToolWindow<FsmLogWindow>();
 	}
 
     [MenuItem(editorsRoot + "Editor Log", false, iEditors + 29)]
 	public static void OpenReportWindow()
 	{
-		FsmEditor.OpenReportWindow();
+        FsmEditorWindow.OpenToolWindow<ReportWindow>();
 	}
 
-/* Enable when window is implemeneted
-    [MenuItem(editorsRoot + "Search", true)]
-    public static bool ValidateOpenSearchWindow()
-    {
-        return FsmEditorWindow.IsOpen();
-    }
-
-    [MenuItem(editorsRoot + "Search", false, 19)]
-    public static void OpenSearchWindow()
-    {
-        FsmEditor.OpenSearchWindow();
-    }
-*/
-
-	#endregion
+    #endregion
 
 	#region COMPONENTS
 
@@ -196,6 +145,41 @@ internal static class PlayMakerMainMenu
 		PlayMakerGUI.Instance.enabled = true;
 	}
 
+
+
+#if PM2    
+    
+    [MenuItem(MenuRoot + "Components/Add PlayMakerGlobals Asset to Project")]
+    public static void CreatePlayMakerGlobals()
+    {
+        AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<PlayMakerGlobals>(),"Assets/PlayMakerGlobals.asset");
+    }
+
+#if PM_SOURCE
+
+    [MenuItem(MenuRoot + "Experimental/Undefine PM2")]
+    public static void UnDefinePM2()
+    {
+        PlayMakerDefines.RemoveScriptingDefineSymbolFromAllTargets("PM2");
+    }
+
+#endif
+
+#else
+
+#if PM_SOURCE
+
+    [MenuItem(MenuRoot + "Experimental/Define PM2")]
+    public static void DefinePM2()
+    {
+        PlayMakerDefines.AddScriptingDefineSymbolToAllTargets("PM2");
+    }
+
+#endif
+
+#endif
+
+
 	#endregion
 
 	#region TOOLS
@@ -216,15 +200,15 @@ internal static class PlayMakerMainMenu
     }
 
     [MenuItem(toolsRoot + "Custom Action Wizard", false, iTools + 12)]
-    public static void CreateWizard()
+    public static PlayMakerCustomActionWizard CreateWizard()
     {
-        EditorWindow.GetWindow<PlayMakerCustomActionWizard>(true);
+        return EditorWindow.GetWindow<PlayMakerCustomActionWizard>(true, "Custom Action Wizard");
     }
 
     [MenuItem(toolsRoot + "Documentation Helpers", false, iTools + 13)]
     public static void DocHelpers()
     {
-        EditorWindow.GetWindow<PlayMakerDocHelpers>(true);
+        EditorWindow.GetWindow<PlayMakerDocHelpers>(true, "Doc Helpers");
     }
 
     /* In PlayMakerProjectTools.cs
@@ -256,9 +240,9 @@ internal static class PlayMakerMainMenu
     }
 
     [MenuItem(toolsRoot + "Submit Bug Report", false,  iTools + 86)]
-    public static void SubmitBug()
+    public static PlayMakerBugReportWindow SubmitBug()
     {
-        EditorWindow.GetWindow<PlayMakerBugReportWindow>(true);
+        return EditorWindow.GetWindow<PlayMakerBugReportWindow>(true, "Bug Report Window");
     }
 
 #if UNITY_5_0 || UNITY_5
@@ -317,10 +301,21 @@ internal static class PlayMakerMainMenu
     [MenuItem(helpRoot + "About PlayMaker...", false, iHelp + 40)]
     public static void OpenAboutWindow()
     {
-        EditorWindow.GetWindow<AboutWindow>(true);
+        EditorWindow.GetWindow<AboutWindow>(true, "About PlayMaker");
     }
 
-	#endregion
+    #endregion
+
+
+#if PM2
+
+    [MenuItem(MenuRoot + "Notes", false, iHelp + 1)]
+    public static void Notes()
+    {
+        PlayMakerNotesWindow.Open();
+    }
+
+#endif
 
     // PlayMakerWelcomeWindow.cs
     //[MenuItem("PlayMaker/Welcome Screen", false, 1000)]
@@ -349,5 +344,15 @@ internal static class PlayMakerMainMenu
 
     #endregion
 
-    
+
+#if UNITY_2019_1_OR_NEWER
+
+    [Shortcut("PlayMaker/Toggle Lock Selection", KeyCode.L, ShortcutModifiers.Action)]
+    public static void ToggleFsmEditorLock()
+    {
+        FsmEditor.ToggleLockSelection();
+    }
+
+#endif
+
 }

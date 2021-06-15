@@ -10,7 +10,7 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The target. An Animator component is required")]
+        [Tooltip("The GameObject with an Animator Component.")]
 		public FsmOwnerDefault gameObject;
 		
 		[RequiredField]
@@ -18,16 +18,18 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The animator parameter")]
 		public FsmString parameter;
 
-		[ActionSection("Results")]
-		
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
 		[Tooltip("The float value of the animator parameter")]
 		public FsmFloat result;
 
-		private Animator _animator;
-		
-		private int _paramID;
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
+
+        private string cachedParameter;
+        private int paramID;
 		
 		public override void Reset()
 		{
@@ -40,26 +42,6 @@ namespace HutongGames.PlayMaker.Actions
 
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-
-			// get hash from the param for efficiency:
-			_paramID = Animator.StringToHash(parameter.Value);
-			
 			GetParameter();
 			
 			if (!everyFrame) 
@@ -72,14 +54,23 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			GetParameter();
 		}
-		
-		void GetParameter()
-		{		
-			if (_animator!=null)
-			{
-				result.Value = _animator.GetFloat(_paramID);
-			}
-		}
+
+        private void GetParameter()
+        {
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
+
+            if (cachedParameter != parameter.Value)
+            {
+                cachedParameter = parameter.Value;
+                paramID = Animator.StringToHash(parameter.Value);
+            }
+
+            result.Value = animator.GetFloat(paramID);
+        }
 
 #if UNITY_EDITOR
 	    public override string AutoName()

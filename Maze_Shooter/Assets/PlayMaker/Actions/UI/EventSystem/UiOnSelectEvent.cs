@@ -7,8 +7,8 @@ using UnityEngine.EventSystems;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.UI)]
-	[Tooltip("Sends event when Called by the EventSystem when a Select event occurs." +
-		"\n Use GetLastPointerDataInfo action to get info from the event")]
+	[Tooltip("Sends event when Called by the EventSystem when a Select event occurs. " +
+		"\nUse GetLastPointerDataInfo action to get info from the event")]
 	public class UiOnSelectEvent : EventTriggerActionBase
 	{
 		[UIHint(UIHint.Variable)]

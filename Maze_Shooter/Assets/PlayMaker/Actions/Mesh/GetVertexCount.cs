@@ -18,6 +18,7 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Store the vertex count in a variable.")]
 		public FsmInt storeCount;
 
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 
 		public override void Reset()

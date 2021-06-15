@@ -27,7 +27,7 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			gameObject = null;
 		    text = null;
-            eventTarget = FsmEventTarget.Self;
+            eventTarget = null;
 			sendEvent = null;
 		}
 		

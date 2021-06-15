@@ -5,7 +5,8 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Color)]
-	[Tooltip("Samples a Color on a continuous Colors gradient.")]
+	[Tooltip("Sample a color on a continuous color gradient. Define the gradient with a color array. " +
+             "Use Sample At to get an interpolated color.\n\nFor example:\nIf Element 1 is black and Element 2 is red:\n<ul><li>Sample At 1 = black</li><li>Sample At 2 = red</li><li>Sample At 1.5 = dark red</li></ul>")]
 	public class ColorRamp : FsmStateAction
 	{
 		[RequiredField]

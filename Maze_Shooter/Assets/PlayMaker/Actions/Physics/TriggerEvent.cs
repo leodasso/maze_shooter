@@ -5,8 +5,10 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Physics)]
-	[Tooltip("Detect trigger collisions between GameObjects that have RigidBody/Collider components.")]
-	public class TriggerEvent : FsmStateAction
+    [Tooltip("Sends an event when the owner collides with a tagged trigger (see Unity Tag and Trigger docs). " +
+             "Optionally send an event and store the collider for later use. " +
+             "NOTE: Collisions are processed after other actions, so this action should be ordered last in the list.")]
+    public class TriggerEvent : FsmStateAction
 	{
         [Tooltip("The GameObject to detect trigger events on.")]
 	    public FsmOwnerDefault gameObject;
@@ -15,8 +17,8 @@ namespace HutongGames.PlayMaker.Actions
 		public TriggerType trigger;
 		
         [UIHint(UIHint.TagMenu)]
-        [Tooltip("Filter by Tag.")]
-		public FsmString collideTag;
+        [Tooltip("Only collide with triggers that have this tag.")]
+        public FsmString collideTag;
 
         [Tooltip("Event to send if the trigger event is detected.")]
 		public FsmEvent sendEvent;

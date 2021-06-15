@@ -9,6 +9,7 @@ namespace HutongGames.PlayMaker.Actions
 	public class GetLastEvent : FsmStateAction
 	{
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the name of the last event in a String Variable.")]
 		public FsmString storeEvent;
 
 		public override void Reset()

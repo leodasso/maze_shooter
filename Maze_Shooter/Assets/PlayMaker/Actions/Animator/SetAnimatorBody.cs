@@ -6,11 +6,11 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
 	[Tooltip("Sets the position and rotation of the body. A GameObject can be set to control the position and rotation, or it can be manually expressed.")]
-	public class SetAnimatorBody: FsmStateAction
+	public class SetAnimatorBody: ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The target. An Animator component is required")]
+        [Tooltip("The GameObject with an Animator Component.")]
 		public FsmOwnerDefault gameObject;
 		
 		[Tooltip("The gameObject target of the ik goal")]
@@ -25,9 +25,13 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 
-		private Animator _animator;
-		
-		private Transform _transform;
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
+
+        private GameObject cachedTarget;
+        private Transform _transform;
 		
 		public override void Reset()
 		{
@@ -44,33 +48,6 @@ namespace HutongGames.PlayMaker.Actions
 			Fsm.HandleAnimatorIK = true;
 		}
 
-		public override void OnEnter()
-		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-
-			GameObject _target = target.Value;
-			if (_target!=null)
-			{
-				_transform = _target.transform;
-			}
-
-		}
-
 		public override void DoAnimatorIK (int layerIndex)
 		{
 			DoSetBody();
@@ -81,38 +58,49 @@ namespace HutongGames.PlayMaker.Actions
 			}
 		}
 
-		void DoSetBody()
-		{		
-			if (_animator==null)
-			{
-				return;
-			}
-			
-			if (_transform!=null)
+        private void DoSetBody()
+		{
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
+
+            if (cachedTarget != target.Value)
+            {
+                cachedTarget = target.Value;
+                _transform = cachedTarget != null ? cachedTarget.transform : null;
+            }
+
+            if (_transform != null)
 			{
 				if (position.IsNone)
 				{
-					_animator.bodyPosition = _transform.position;
+					animator.bodyPosition = _transform.position;
 				}else{
-					_animator.bodyPosition = _transform.position+position.Value;
+					animator.bodyPosition = _transform.position+position.Value;
 				}
 				
 				if (rotation.IsNone)
 				{
-					_animator.bodyRotation = _transform.rotation;
-				}else{
-					_animator.bodyRotation = _transform.rotation*rotation.Value;
+					animator.bodyRotation = _transform.rotation;
 				}
-			}else{
+                else
+                {
+					animator.bodyRotation = _transform.rotation*rotation.Value;
+				}
+			}
+            else
+            {
 				
 				if (!position.IsNone)
 				{
-					_animator.bodyPosition = position.Value;
+					animator.bodyPosition = position.Value;
 				}
 				
 				if (!rotation.IsNone)
 				{
-					_animator.bodyRotation = rotation.Value;
+					animator.bodyRotation = rotation.Value;
 				}
 			}
 

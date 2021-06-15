@@ -9,8 +9,11 @@ namespace HutongGames.PlayMaker.Actions
 	public class SetFogDensity : FsmStateAction
 	{
 		[RequiredField]
-		public FsmFloat fogDensity;
-		public bool everyFrame;
+        [Tooltip("The density of the fog.")]
+        public FsmFloat fogDensity;
+
+        [Tooltip("Update every frame. Useful if the fog density is animated.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

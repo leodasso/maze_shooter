@@ -53,5 +53,14 @@ namespace HutongGames.PlayMaker.Actions
 			
 			storeResult.Value = buttonUp;
 		}
-	}
+
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return string.Format("GetMouseButtonUp: {0} {1}", 
+                sendEvent != null ? sendEvent.Name : "", 
+                storeResult.IsNone ? "" : storeResult.Name) ;
+        }
+#endif
+    }
 }

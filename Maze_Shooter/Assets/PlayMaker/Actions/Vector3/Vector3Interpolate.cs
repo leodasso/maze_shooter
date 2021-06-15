@@ -8,18 +8,24 @@ namespace HutongGames.PlayMaker.Actions
 	[Tooltip("Interpolates between 2 Vector3 values over a specified Time.")]
 	public class Vector3Interpolate : FsmStateAction
 	{
-		public InterpolationType mode;
+        [Tooltip("The type of interpolation to use.")]
+        public InterpolationType mode;
 		[RequiredField]
-		public FsmVector3 fromVector;
+        [Tooltip("The start vector.")]
+        public FsmVector3 fromVector;
 		[RequiredField]
-		public FsmVector3 toVector;
+        [Tooltip("The end vector.")]
+        public FsmVector3 toVector;
 		[RequiredField]
-		public FsmFloat time;
+        [Tooltip("How long it should take to interpolate from start to end.")]
+        public FsmFloat time;
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmVector3 storeResult;
-		public FsmEvent finishEvent;
-		[Tooltip("Ignore TimeScale")]
+        [Tooltip("Store the interpolated vector in a Vector3 Variable.")]
+        public FsmVector3 storeResult;
+        [Tooltip("Optionally send this event when finished.")]
+        public FsmEvent finishEvent;
+		[Tooltip("Ignore TimeScale e.g., if the game is paused.")]
 		public bool realTime;
 
 		private float startTime;

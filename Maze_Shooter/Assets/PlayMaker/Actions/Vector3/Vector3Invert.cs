@@ -8,8 +8,10 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmVector3 vector3Variable;
+        [Tooltip("The vector3 variable to invert.")]
+        public FsmVector3 vector3Variable;
 
+        [Tooltip("Repeat every frame")]
 		public bool everyFrame;
 
 		public override void Reset()

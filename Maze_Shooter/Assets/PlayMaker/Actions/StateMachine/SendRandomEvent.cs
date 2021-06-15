@@ -9,9 +9,14 @@ namespace HutongGames.PlayMaker.Actions
 	public class SendRandomEvent : FsmStateAction
 	{
 		[CompoundArray("Events", "Event", "Weight")]
+        [Tooltip("A possible Event choice.")]
 		public FsmEvent[] events;
 		[HasFloatSlider(0, 1)]
-		public FsmFloat[] weights;
+        [Tooltip("The relative probability of this Event being picked. " +
+                 "E.g. a weight of 0.5 is half as likely to be picked as a weight of 1.")]
+        public FsmFloat[] weights;
+
+        [Tooltip("Optional delay in seconds before sending the event.")]
 		public FsmFloat delay;
 
 		DelayedEvent delayedEvent;

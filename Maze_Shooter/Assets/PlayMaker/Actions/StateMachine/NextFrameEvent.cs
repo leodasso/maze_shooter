@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC. All rights reserved.
 
 namespace HutongGames.PlayMaker.Actions
 {
@@ -7,6 +7,7 @@ namespace HutongGames.PlayMaker.Actions
 	public class NextFrameEvent : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("The Event to send.")]
 		public FsmEvent sendEvent;
 
 		public override void Reset()
@@ -29,7 +30,7 @@ namespace HutongGames.PlayMaker.Actions
 #if UNITY_EDITOR
         public override string AutoName()
         {
-            return "Next Frame Event: " + (sendEvent != null ? sendEvent.Name : "[none]");
+            return "NextFrameEvent: " + (sendEvent != null ? sendEvent.Name : "[none]");
         }
 #endif
 	}

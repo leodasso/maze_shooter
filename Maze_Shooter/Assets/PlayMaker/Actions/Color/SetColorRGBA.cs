@@ -10,20 +10,26 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmColor colorVariable;
+        [Tooltip("The Color Variable to set.")]
+        public FsmColor colorVariable;
 		
 		[HasFloatSlider(0,1)]
+        [Tooltip("Set the red channel of the color variable.")]
 		public FsmFloat red;
 		
 		[HasFloatSlider(0,1)]
+        [Tooltip("Set the green channel of the color variable.")]
 		public FsmFloat green;
 		
 		[HasFloatSlider(0,1)]
+        [Tooltip("Set the blue channel of the color variable.")]
 		public FsmFloat blue;
 		
 		[HasFloatSlider(0,1)]
+        [Tooltip("Set the alpha channel of the color variable.")]
 		public FsmFloat alpha;
 		
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 
 		public override void Reset()

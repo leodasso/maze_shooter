@@ -1,4 +1,4 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2018. All rights reserved.
+﻿// (c) Copyright HutongGames, LLC 2010-2021. All rights reserved.
 
 using UnityEngine.EventSystems;
 
@@ -24,7 +24,7 @@ namespace HutongGames.PlayMaker.Actions
         public override void Reset()
         {
             gameObject = null;
-            eventTarget = FsmEventTarget.Self;
+            eventTarget = null;
         }
 
         protected void Init(EventTriggerType eventTriggerType, UnityEngine.Events.UnityAction<BaseEventData> call)
@@ -48,8 +48,15 @@ namespace HutongGames.PlayMaker.Actions
 		       
         public override void OnExit()
         {
-            entry.callback.RemoveAllListeners ();
-            trigger.triggers.Remove (entry);
+            if (entry != null && entry.callback != null)
+            {
+                entry.callback.RemoveAllListeners ();
+            }
+
+            if (trigger != null && trigger.triggers != null)
+            {
+                trigger.triggers.Remove(entry);
+            }
         }
     }
 }

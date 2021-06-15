@@ -1,4 +1,4 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+﻿// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -9,7 +9,7 @@ namespace HutongGames.PlayMaker.Actions
 	public class ActivateGameObject : FsmStateAction
 	{
 		[RequiredField]
-        [Tooltip("The GameObject to activate/deactivate.")]
+        [Tooltip("The Game Object to activate/deactivate.")]
         public FsmOwnerDefault gameObject;
 		
 		[RequiredField]
@@ -19,15 +19,15 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("Recursively activate/deactivate all children.")]
 		public FsmBool recursive; 
 		
-        [Tooltip("Reset the game objects when exiting this state. Useful if you want an object to be active only while this state is active.\nNote: Only applies to the last Game Object activated/deactivated (won't work if Game Object changes).")]
+        [Tooltip("Reset the Game Object's active state when exiting this state. Useful if you want an object to be active only while this state is active.\nNote: Only applies to the last Game Object activated/deactivated (won't work if Game Object changes).")]
 		public bool resetOnExit;
 		
-        [Tooltip("Repeat this action every frame. Useful if Activate changes over time.")]
+        [Tooltip("Repeat this action every frame. Useful if using a variable for Activate that can change over time.")]
 		public bool everyFrame;
 		
 		// store the game object that we activated on enter
 		// so we can deactivate it on exit.
-		GameObject activatedGameObject;
+		private GameObject activatedGameObject;
 
 		public override void Reset()
 		{

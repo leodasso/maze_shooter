@@ -10,6 +10,7 @@ namespace HutongGames.PlayMaker.Actions
 	public class GetFsmBool : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("The GameObject that owns the FSM.")]
 		public FsmOwnerDefault gameObject;
 		
         [UIHint(UIHint.FsmName)]
@@ -18,12 +19,15 @@ namespace HutongGames.PlayMaker.Actions
 		
         [RequiredField]
 		[UIHint(UIHint.FsmBool)]
+        [Tooltip("The name of the FSM variable to get.")]
 		public FsmString variableName;
 		
         [RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the value in a Bool variable in this FSM.")]
 		public FsmBool storeValue;
 		
+        [Tooltip("Repeat every frame. Useful if the value is changing.")]
         public bool everyFrame;
 
 	    private GameObject goLastFrame;
@@ -75,5 +79,13 @@ namespace HutongGames.PlayMaker.Actions
 			storeValue.Value = fsmBool.Value;
 		}
 
-	}
+#if UNITY_EDITOR
+
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName(this, variableName);
+        }
+
+#endif
+    }
 }

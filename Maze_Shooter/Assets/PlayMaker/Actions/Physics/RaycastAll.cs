@@ -47,7 +47,7 @@ namespace HutongGames.PlayMaker.Actions
         public FsmVector3 storeHitPoint;
 
         [UIHint(UIHint.Variable)]
-        [Tooltip("Get the normal at the hit point and store it in a variable.")]
+        [Tooltip("Get the normal at the hit point and store it in a variable.\nNote, this is a direction vector not a rotation. Use Look At Direction to rotate a GameObject to this direction.")]
         public FsmVector3 storeHitNormal;
 
         [UIHint(UIHint.Variable)]
@@ -56,7 +56,7 @@ namespace HutongGames.PlayMaker.Actions
 
         [ActionSection("Filter")] 
 
-        [Tooltip("Set how often to cast a ray. 0 = once, don't repeat; 1 = everyFrame; 2 = every other frame... \nSince raycasts can get expensive use the highest repeat interval you can get away with.")]
+        [Tooltip("Set how often to cast a ray. 0 = once, don't repeat; 1 = everyFrame; 2 = every other frame... \nBecause raycasts can get expensive use the highest repeat interval you can get away with.")]
         public FsmInt repeatInterval;
 
         [UIHint(UIHint.Layer)]
@@ -82,18 +82,18 @@ namespace HutongGames.PlayMaker.Actions
 			fromPosition = new FsmVector3 { UseVariable = true };
 			direction = new FsmVector3 { UseVariable = true };
 			space = Space.Self;
-			distance = 100;
+            distance = new FsmFloat {Value = 100};
 			hitEvent = null;
 			storeDidHit = null;
 			storeHitObjects = null;
 		    storeHitPoint = null;
 		    storeHitNormal = null;
 		    storeHitDistance = null;
-			repeatInterval = 1;
+            repeatInterval = new FsmInt {Value = 1};
 			layerMask = new FsmInt[0];
-			invertMask = false;
-			debugColor = Color.yellow;
-			debug = false;
+			invertMask = null;
+            debugColor = new FsmColor {Value = Color.yellow};
+			debug = null;
 		}
 
 		public override void OnEnter()

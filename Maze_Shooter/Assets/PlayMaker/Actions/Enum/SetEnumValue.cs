@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames. All rights reserved.
 
 namespace HutongGames.PlayMaker.Actions
 {
@@ -44,5 +44,11 @@ namespace HutongGames.PlayMaker.Actions
             enumVariable.Value = enumValue.Value;
         }
 
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoNameSetVar("SetEnum", enumVariable, enumValue);
+        }
+#endif
     }
 }

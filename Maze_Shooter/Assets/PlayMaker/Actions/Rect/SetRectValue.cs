@@ -1,4 +1,4 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+﻿// (c) Copyright HutongGames. All rights reserved.
 
 namespace HutongGames.PlayMaker.Actions
 {
@@ -8,10 +8,15 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmRect rectVariable;
+        [Tooltip("The Rect Variable to set.")]
+        public FsmRect rectVariable;
+
 		[RequiredField]
+        [Tooltip("The value to set it to.")]
 		public FsmRect rectValue;
-		public bool everyFrame;
+
+	    [Tooltip("Repeat every frame.")]
+	    public bool everyFrame;
 
 		public override void Reset()
 		{
@@ -34,5 +39,12 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			rectVariable.Value = rectValue.Value;
 		}
+
+#if UNITY_EDITOR
+	    public override string AutoName()
+	    {
+	        return ActionHelpers.AutoNameSetVar("SetRect", rectVariable, rectValue);
+	    }
+#endif
 	}
 }

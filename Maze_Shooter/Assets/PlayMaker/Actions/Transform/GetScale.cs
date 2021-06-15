@@ -11,22 +11,29 @@ namespace HutongGames.PlayMaker.Actions
     public class GetScale : FsmStateAction
     {
         [RequiredField]
+        [Tooltip("The Game Object.")]
         public FsmOwnerDefault gameObject;
         
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the scale in a Vector3 variable.")]
         public FsmVector3 vector;
         
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the X scale in a Float variable.")]
         public FsmFloat xScale;
         
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the Y scale in a Float variable.")]
         public FsmFloat yScale;
         
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the Z scale in a Float variable.")]
         public FsmFloat zScale;
+
+        [Tooltip("The coordinate space to get the rotation in.")]
+        public Space space;
         
-		public Space space;
-        
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 
         public override void Reset()

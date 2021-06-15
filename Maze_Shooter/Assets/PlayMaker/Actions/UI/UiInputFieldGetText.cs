@@ -15,8 +15,9 @@ namespace HutongGames.PlayMaker.Actions
 		[UIHint(UIHint.Variable)]
 		[Tooltip("The text value of the UI InputField component.")]
 		public FsmString text;
-		
-		public bool everyFrame;
+
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 		
 		private UnityEngine.UI.InputField inputField;
 		

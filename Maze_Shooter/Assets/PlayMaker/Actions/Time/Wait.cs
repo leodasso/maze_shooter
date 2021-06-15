@@ -1,16 +1,22 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC. All rights reserved.
 
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory(ActionCategory.Time)]
-    [Tooltip("Delays a State from finishing by the specified time. NOTE: Other actions continue, but FINISHED can't happen before Time.")]
+    [Tooltip("Delays a State from finishing. Optionally send an event after the specified time. " + 
+             "NOTE: Other actions continue running and can send events before this action finishes.")]
     public class Wait : FsmStateAction
     {
         [RequiredField]
+        [Tooltip("Time to wait in seconds.")]
         public FsmFloat time;
+
+        [Tooltip("Event to send after the specified time.")]
         public FsmEvent finishEvent;
+
+        [Tooltip("Ignore TimeScale. E.g., if the game is paused using Scale Time.")]
         public bool realTime;
 
         private float startTime;
@@ -65,7 +71,7 @@ namespace HutongGames.PlayMaker.Actions
 
         public override string AutoName()
         {
-            return ActionHelpers.AutoName(this, time);
+            return "Wait " + ActionHelpers.GetValueLabel(time) + "s" + " " + (finishEvent != null ? finishEvent.Name : "");
         }
 
         public override float GetProgress()

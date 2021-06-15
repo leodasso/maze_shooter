@@ -5,7 +5,9 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory(ActionCategory.Physics2D)]
-    [Tooltip("Detect 2D trigger collisions between Game Objects that have RigidBody2D/Collider2D components.")]
+    [Tooltip("Detect 2D trigger collisions between the Owner of this FSM and other Game Objects that have RigidBody2D components. " +
+             "NOTE: The system events, TRIGGER ENTER 2D, TRIGGER STAY 2D, and TRIGGER EXIT 2D are sent automatically on collisions triggers with any object. " +
+             "Use this action to filter collision triggers by Tag.")]
     public class Trigger2dEvent : FsmStateAction
     {
         [Tooltip("The GameObject to detect collisions on.")]

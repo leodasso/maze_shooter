@@ -15,7 +15,7 @@ namespace HutongGames.PlayMaker.Actions
 		public enum SceneReferenceOptions {SceneAtBuildIndex,SceneAtIndex,SceneByName,SceneByPath,SceneByGameObject};
 
 
-		[Tooltip("The reference options of the Scene")]
+		[Tooltip("The reference options of the Scene.")]
 		public SceneReferenceOptions sceneReference;
 
 		[Tooltip("The name of the scene to activate. The given sceneName can either be the last part of the path, without .unity extension or the full path still without the .unity extension")]
@@ -30,28 +30,28 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The scene Path.")]
 		public FsmString sceneByPath;
 
-		[Tooltip("The GameObject scene to activate")]
+		[Tooltip("The GameObject scene to activate.")]
 		public FsmOwnerDefault sceneByGameObject;
 
 
 		[ActionSection("Result")]
 
-		[Tooltip("True if set active succeeded")]
+		[Tooltip("True if set active succeeded.")]
 		[UIHint(UIHint.Variable)]
 		public FsmBool success;
 
-		[Tooltip("Event sent if setActive succeeded ")]
+		[Tooltip("Event sent if setActive succeeded.")]
 		public FsmEvent successEvent;
 
-		[Tooltip("True if SceneReference resolves to a scene")]
+		[Tooltip("True if SceneReference resolves to a scene.")]
 		[UIHint(UIHint.Variable)]
 		public FsmBool sceneFound;
 
-		[Tooltip("Event sent if scene not activated yet")]
+		[Tooltip("Event sent if scene not activated yet.")]
 		[UIHint(UIHint.Variable)]
 		public FsmEvent sceneNotActivatedEvent;
 
-		[Tooltip("Event sent if SceneReference do not resolve to a scene")]
+		[Tooltip("Event sent if SceneReference do not resolve to a scene.")]
 		public FsmEvent sceneNotFoundEvent;
 
 		Scene _scene;

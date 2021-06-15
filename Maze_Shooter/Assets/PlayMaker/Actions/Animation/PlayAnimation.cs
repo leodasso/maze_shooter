@@ -6,24 +6,26 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animation)]
-	[Tooltip("Plays an Animation on a Game Object. You can add named animation clips to the object in the Unity editor, or with the Add Animation Clip action.")]
+	[Tooltip("Plays an Animation on a Game Object. You can add named animation clips to the object " +
+             "in the Unity editor, or with the Add Animation Clip action. " +
+             "NOTE: The game object must have an Animation component.")]
 	public class PlayAnimation : BaseAnimationAction
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animation))]
-		[Tooltip("Game Object to play the animation on.")]
+        [Tooltip("The Game Object to play the animation on. NOTE: Must have an Animation Component.")]
 		public FsmOwnerDefault gameObject;
 		
 		[UIHint(UIHint.Animation)]
-		[Tooltip("The name of the animation to play.")]
-		public FsmString animName;
-		
-		[Tooltip("How to treat previously playing animations.")]
-		public PlayMode playMode;
+        [Tooltip("The name of the animation to play. Use the browse button to find animations on the specified Game Object.")]
+        public FsmString animName;
+
+        [Tooltip("Whether to stop all currently playing animations, or just the animations on the same layer as this animation.")]
+        public PlayMode playMode;
 		
 		[HasFloatSlider(0f, 5f)]
-		[Tooltip("Time taken to blend to this animation.")]
-		public FsmFloat blendTime;
+        [Tooltip("Time to cross-fade between animations (seconds).")]
+        public FsmFloat blendTime;
 		
 		[Tooltip("Event to send when the animation is finished playing. NOTE: Not sent with Loop or PingPong wrap modes!")]
 		public FsmEvent finishEvent;
@@ -126,5 +128,15 @@ namespace HutongGames.PlayMaker.Actions
 				animation.Stop(animName.Value);
 			}
 		}
+			
+		#if UNITY_EDITOR
+
+		public override float GetProgress()
+		{
+		return Mathf.Min((anim.time%anim.length)/anim.length , 1f);
+		}
+
+		#endif
+
 	}
 }

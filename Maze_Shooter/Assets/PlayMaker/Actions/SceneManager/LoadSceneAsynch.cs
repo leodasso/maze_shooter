@@ -125,6 +125,11 @@ namespace HutongGames.PlayMaker.Actions
 				}
 			}
 
+			if (_asyncOperation == null)
+			{
+				return false;
+			}
+
 			if (!operationPriority.IsNone) {
 				_asyncOperation.priority = operationPriority.Value;
 			}
@@ -187,6 +192,20 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			_asyncOperation = null;
 		}
+
+		#if UNITY_EDITOR
+
+		public override float GetProgress()
+		{
+			if (_asyncOperation!=null)
+			{
+				return _asyncOperation.progress;
+			}
+
+			return 0f;
+		}
+
+		#endif
 	}
 }
 

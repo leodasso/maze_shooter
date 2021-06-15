@@ -10,7 +10,7 @@ namespace HutongGames.PlayMaker.Actions
 	public class GetFsmEnum : FsmStateAction
 	{
 		[RequiredField]
-        [Tooltip("The target FSM")]
+        [Tooltip("The GameObject that owns the FSM.")]
 		public FsmOwnerDefault gameObject;
 		
         [UIHint(UIHint.FsmName)]
@@ -18,14 +18,16 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmString fsmName;
 		
         [RequiredField]
-		[UIHint(UIHint.FsmBool)]
-		public FsmString variableName;
+		[UIHint(UIHint.FsmEnum)]
+        [Tooltip("The name of the FSM variable to get.")]
+        public FsmString variableName;
 		
         [RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmEnum storeValue;
+        [Tooltip("Store the value in an Enum variable in this FSM.")]
+        public FsmEnum storeValue;
 		
-        [Tooltip("Repeat every frame")]
+        [Tooltip("Repeat every frame. Useful if the value is changing.")]
         public bool everyFrame;
 
         private GameObject goLastFrame;
@@ -77,5 +79,13 @@ namespace HutongGames.PlayMaker.Actions
 			storeValue.Value = fsmEnum.Value;
 		}
 
-	}
+#if UNITY_EDITOR
+
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName(this, variableName);
+        }
+
+#endif
+    }
 }

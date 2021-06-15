@@ -6,11 +6,11 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
 	[Tooltip("Returns if additional layers affects the mass center")]
-	public class GetAnimatorLayersAffectMassCenter : FsmStateAction
+	public class GetAnimatorLayersAffectMassCenter : ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The Target. An Animator component is required")]
+        [Tooltip("The GameObject with an Animator Component.")]
 		public FsmOwnerDefault gameObject;
 		
 		[ActionSection("Results")]
@@ -25,10 +25,8 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[Tooltip("Event send if additional layers do no affects the mass center")]
 		public FsmEvent doNotAffectMassCenterEvent;
-		
-		private Animator _animator;
-		
-		public override void Reset()
+
+        public override void Reset()
 		{
 			gameObject = null;
 			affectMassCenter = null;
@@ -38,48 +36,16 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-			
-			CheckAffectMassCenter();
-			
-			Finish();
-			
-		}
-	
-		void CheckAffectMassCenter()
-		{		
-			if (_animator==null)
-			{
-				return;
-			}
-			
-			bool _affect = _animator.layersAffectMassCenter;
-			
-			affectMassCenter.Value = _affect;
-			
-			if (_affect)
-			{
-				Fsm.Event(affectMassCenterEvent);
-			}else{
-				Fsm.Event(doNotAffectMassCenterEvent);
-			}
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                bool _affect = cachedComponent.layersAffectMassCenter;
 
-		}
-		
-	}
+                affectMassCenter.Value = _affect;
+
+                Fsm.Event(_affect ? affectMassCenterEvent : doNotAffectMassCenterEvent);
+            }
+
+            Finish();
+        }
+    }
 }

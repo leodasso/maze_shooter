@@ -7,12 +7,16 @@ namespace HutongGames.PlayMaker.Actions
 	public class TransformPoint : FsmStateAction
 	{
 		[RequiredField]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("The Game Object that defines local space.")]
+        public FsmOwnerDefault gameObject;
 		[RequiredField]
-		public FsmVector3 localPosition;
+        [Tooltip("A local position vector.")]
+        public FsmVector3 localPosition;
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmVector3 storeResult;
+        [Tooltip("Store the transformed position, now in world space, in a Vector3 Variable.")]
+        public FsmVector3 storeResult;
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 
 		public override void Reset()

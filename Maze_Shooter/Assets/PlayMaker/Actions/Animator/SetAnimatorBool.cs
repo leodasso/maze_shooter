@@ -10,8 +10,8 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The target")]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("The GameObject with an Animator Component.")]
+        public FsmOwnerDefault gameObject;
 
         [RequiredField]
         [UIHint(UIHint.AnimatorBool)]
@@ -21,41 +21,25 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The Bool value to assign to the animator parameter")]
 		public FsmBool Value;
 
-		private Animator _animator;
-		private int _paramID;
-		
-		public override void Reset()
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
+
+        private string cachedParameter;
+        private int paramID;
+
+        public override void Reset()
 		{
 			base.Reset();
 			gameObject = null;
 			parameter = null;
 			Value = null;
-		
-		}
+        }
 
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-
-			// get hash from the param for efficiency:
-			_paramID = Animator.StringToHash(parameter.Value);
-			
-			SetParameter();
+            SetParameter();
 			
 			if (!everyFrame) 
 			{
@@ -67,13 +51,22 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			SetParameter();
 		}
-		
-		void SetParameter()
-		{		
-			if (_animator!=null)
-			{
-				_animator.SetBool(_paramID,Value.Value) ;
-			}
+
+        private void SetParameter()
+		{
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
+
+            if (cachedParameter != parameter.Value)
+            {
+                cachedParameter = parameter.Value;
+                paramID = Animator.StringToHash(parameter.Value);
+            }
+
+            animator.SetBool(paramID, Value.Value) ;
 		}
 
 	}

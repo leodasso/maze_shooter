@@ -9,8 +9,10 @@ namespace HutongGames.PlayMaker.Actions
 	public class SetHaloStrength : FsmStateAction
 	{
 		[RequiredField]
-		public FsmFloat haloStrength;
-		public bool everyFrame;
+        [Tooltip("The size of light halos.")]
+        public FsmFloat haloStrength;
+        [Tooltip("Update every frame. Useful if the size is animated.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

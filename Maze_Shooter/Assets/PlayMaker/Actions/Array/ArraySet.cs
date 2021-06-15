@@ -40,7 +40,7 @@ namespace HutongGames.PlayMaker.Actions
 
         public override void OnEnter()
         {
-            DoGetValue();
+            DoSetValue();
 
             if (!everyFrame)
             {
@@ -50,10 +50,10 @@ namespace HutongGames.PlayMaker.Actions
 
         public override void OnUpdate()
         {
-            DoGetValue();
+            DoSetValue();
         }
 
-        private void DoGetValue()
+        private void DoSetValue()
         {
             if (array.IsNone)
             {

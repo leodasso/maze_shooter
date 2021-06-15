@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 /*
 TERMS OF USE - EASING EQUATIONS
@@ -21,14 +21,25 @@ namespace HutongGames.PlayMaker.Actions
 	public abstract class EaseFsmAction : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("How long the ease should take in seconds")]
 		public FsmFloat time;
+
+        [Tooltip("Optionally, use speed instead of time.")]
 		public FsmFloat speed;
+
+        [Tooltip("Optional delay in seconds before starting to ease.")]
 		public FsmFloat delay;
+
+        [Tooltip("The easing function to use.")]
 		public EaseType easeType = EaseType.linear;
-		public FsmBool reverse;
-		[Tooltip("Optionally send an Event when the animation finishes.")]
+
+        [Tooltip("Reverse the ease.")]
+        public FsmBool reverse;
+
+        [Tooltip("Optionally send an Event when the animation finishes.")]
 		public FsmEvent finishEvent;
-		[Tooltip("Ignore TimeScale. Useful if the game is paused.")]
+
+        [Tooltip("Ignore TimeScale. Useful if the game is paused.")]
 		public bool realTime;
 				
 		protected delegate float EasingFunction(float start, float end, float value);

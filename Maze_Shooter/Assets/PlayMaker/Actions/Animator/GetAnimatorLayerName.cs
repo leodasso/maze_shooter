@@ -6,11 +6,11 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
 	[Tooltip("Returns the name of a layer from its index")]
-	public class GetAnimatorLayerName : FsmStateAction
+	public class GetAnimatorLayerName : ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The Target. An Animator component is required")]
+        [Tooltip("The GameObject with an Animator Component.")]
 		public FsmOwnerDefault gameObject;
 
 		[RequiredField]
@@ -24,7 +24,6 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The layer name")]
 		public FsmString layerName;
 		
-		private Animator _animator;
 		
 		public override void Reset()
 		{
@@ -35,39 +34,12 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-			
-			DoGetLayerName();
-			
-			Finish();
-			
-		}
-		
-		void DoGetLayerName()
-		{		
-			if (_animator==null)
-			{
-				return;
-			}
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                layerName.Value = cachedComponent.GetLayerName(layerIndex.Value);
+            }
 
-			layerName.Value = _animator.GetLayerName(layerIndex.Value);
-			
-		}
-		
+			Finish();
+        }
 	}
 }

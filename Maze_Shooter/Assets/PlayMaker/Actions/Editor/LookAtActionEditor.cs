@@ -1,8 +1,5 @@
-﻿using HutongGames.PlayMaker.Actions;
-using HutongGames.PlayMakerEditor;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
-using System.Collections;
 
 namespace HutongGames.PlayMakerEditor
 {
@@ -16,7 +13,11 @@ namespace HutongGames.PlayMakerEditor
 
         public override void OnSceneGUI()
         {
-            var lookAtAction = (HutongGames.PlayMaker.Actions.LookAt)target;
+            var lookAtAction = target as HutongGames.PlayMaker.Actions.LookAt;
+            if (lookAtAction == null) // shouldn't happen!
+            {
+                return;
+            }
 
             if (lookAtAction.UpdateLookAtPosition())
             {

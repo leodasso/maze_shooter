@@ -10,12 +10,19 @@ namespace HutongGames.PlayMaker.Actions
 	public class GUILayoutBeginArea : FsmStateAction
 	{
 		[UIHint(UIHint.Variable)]
-		public FsmRect screenRect;
+        [Tooltip("Screen area.")]
+        public FsmRect screenRect;
+        [Tooltip("Left screen coordinate.")]
 		public FsmFloat left;
+        [Tooltip("Top screen coordinate.")]
 		public FsmFloat top;
+        [Tooltip("Width of area.")]
 		public FsmFloat width;
+        [Tooltip("Height of area.")]
 		public FsmFloat height;
+        [Tooltip("Use normalized screen coordinates (0-1).")]
 		public FsmBool normalized;
+        [Tooltip("Optional GUIStyle name in current GUISkin.")]
 		public FsmString style;
 		
 		private Rect rect;

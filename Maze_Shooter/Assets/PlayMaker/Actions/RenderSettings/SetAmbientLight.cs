@@ -9,8 +9,11 @@ namespace HutongGames.PlayMaker.Actions
 	public class SetAmbientLight : FsmStateAction
 	{
 		[RequiredField]
-		public FsmColor ambientColor;
-		public bool everyFrame;
+        [Tooltip("Color of the ambient light.")]
+        public FsmColor ambientColor;
+
+        [Tooltip("Update every frame. Useful if the color is animated.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

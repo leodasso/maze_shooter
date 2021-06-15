@@ -5,7 +5,7 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
-	[Tooltip("Sets the value of a int parameter")]
+	[Tooltip("Sets the value of an integer parameter")]
 	public class SetAnimatorInt : FsmStateActionAnimatorBase
 	{
 		[RequiredField]
@@ -21,11 +21,15 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The Int value to assign to the animator parameter")]
 		public FsmInt Value;
 
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
 
-		private Animator _animator;
-		private int _paramID;
-		
-		public override void Reset()
+        private string cachedParameter;
+        private int paramID;
+
+        public override void Reset()
 		{
 			base.Reset();
 			gameObject = null;
@@ -35,27 +39,7 @@ namespace HutongGames.PlayMaker.Actions
 
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-
-			// get hash from the param for efficiency:
-			_paramID = Animator.StringToHash(parameter.Value);
-			
-			SetParameter();
+            SetParameter();
 			
 			if (!everyFrame) 
 			{
@@ -67,13 +51,22 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			SetParameter();
 		}
-		
-		void SetParameter()
-		{		
-			if (_animator!=null)
-			{
-				_animator.SetInteger(_paramID,Value.Value) ;			
-			}
+
+        private void SetParameter()
+		{
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
+
+            if (cachedParameter != parameter.Value)
+            {
+                cachedParameter = parameter.Value;
+                paramID = Animator.StringToHash(parameter.Value);
+            }
+
+            animator.SetInteger(paramID,Value.Value) ;			
 		}
 	}
 }

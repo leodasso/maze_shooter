@@ -1,11 +1,11 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Physics)]
-	[Tooltip("Gets info on the last collision event and store in variables. See Unity Physics docs.")]
+	[Tooltip("Gets info on the last collision event. Typically used after a COLLISION ENTER, COLLISION STAY, or COLLISION EXIT system event or Collision Event action to get more info on the collision.")]
 	public class GetCollisionInfo : FsmStateAction
 	{
 		[UIHint(UIHint.Variable)]
@@ -29,7 +29,7 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmVector3 contactNormal;
 
 		[UIHint(UIHint.Variable)]
-		[Tooltip("Get the name of the physics material of the colliding GameObject. Useful for triggering different effects. Audio, particles...")]
+		[Tooltip("Get the name of the physics material on the Game Object Hit. Useful for triggering different effects. Audio, particles...")]
 		public FsmString physicsMaterialName;
 
 		public override void Reset()

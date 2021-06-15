@@ -1,17 +1,15 @@
 ﻿using UnityEditor;
-using UnityEngine.UI;
 
 namespace HutongGames.PlayMakerEditor
 {
     [InitializeOnLoad]
 	public static class UiIcons
-	{       
+	{      
+        /* Moved to Actions.cs
+        // But keeping this as an example of how third party code can add icons
         static UiIcons()
         {
-            Actions.AddCategoryIcon("UI", typeof(Button));
-            Actions.AddCategoryIcon("GUI", typeof(Button));
-            Actions.AddCategoryIcon("GUILayout", typeof(GridLayoutGroup));
-            Actions.AddCategoryIcon("Input", typeof(InputField));
-        }
+            Actions.AddCategoryIcon("UI", FsmEditorStyles.CanvasIcon);
+        }*/
 	}
 }

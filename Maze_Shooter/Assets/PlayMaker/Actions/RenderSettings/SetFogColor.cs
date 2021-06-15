@@ -9,8 +9,11 @@ namespace HutongGames.PlayMaker.Actions
 	public class SetFogColor : FsmStateAction
 	{
 		[RequiredField]
-		public FsmColor fogColor;
-		public bool everyFrame;
+        [Tooltip("The color of the fog.")]
+        public FsmColor fogColor;
+
+        [Tooltip("Update every frame. Useful if the color is animated.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

@@ -14,9 +14,9 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[Tooltip("A target GameObject.")]
 		public FsmGameObject targetObject;
-		
-		[Tooltip("A target position. If a Target Object is defined, this is used as a local offset.")]
-		public FsmVector3 targetPosition;
+
+        [Tooltip("A world position, or local offset if a Target Object is defined.")]
+        public FsmVector3 targetPosition;
 
 		[Tooltip("Used to keep the game object generally upright. If left undefined the world y axis is used.")]
 		public FsmVector3 upVector;
@@ -40,7 +40,10 @@ namespace HutongGames.PlayMaker.Actions
 		private GameObject previousGo; // track game object so we can re-initialize when it changes.
 		private Quaternion lastRotation;
 		private Quaternion desiredRotation;
-		
+
+
+		Vector3 lookAtPos;
+
 		public override void Reset()
 		{
 			gameObject = null;
@@ -94,7 +97,7 @@ namespace HutongGames.PlayMaker.Actions
 			
 			// desired look at position
 
-			Vector3 lookAtPos;
+
 			if (goTarget != null)
 			{
 				lookAtPos = !targetPosition.IsNone ?
@@ -113,7 +116,7 @@ namespace HutongGames.PlayMaker.Actions
 			
 			// smooth look at
 
-            var diff = lookAtPos - go.transform.position;
+          	var diff = lookAtPos - go.transform.position;
             if (diff != Vector3.zero && diff.sqrMagnitude > 0)
 			{
 				desiredRotation = Quaternion.LookRotation(diff, upVector.IsNone ? Vector3.up : upVector.Value);
@@ -142,6 +145,34 @@ namespace HutongGames.PlayMaker.Actions
 				}
 			}
 		}
+
+
+		#if UNITY_EDITOR
+
+		float _originalAngle = -1;
+
+		public override float GetProgress()
+		{
+			var go = Fsm.GetOwnerDefaultTarget(gameObject);
+			if (go == null)
+			{
+				return 0f;
+			}
+
+			var targetDir = lookAtPos - go.transform.position;
+			var angle = Mathf.Abs(Vector3.Angle(targetDir, go.transform.forward));
+
+			if (_originalAngle == -1) {
+				_originalAngle = angle;
+			}
+				
+			_originalAngle = Mathf.Max (_originalAngle, angle);
+
+
+			return Mathf.Max(0,Mathf.Min(1f-(angle/_originalAngle) , 1f));
+		}
+
+		#endif
 
 	}
 }

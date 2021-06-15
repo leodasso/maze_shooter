@@ -10,10 +10,15 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Light))]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("The Game Object with the Light Component.")]
+        public FsmOwnerDefault gameObject;
+
 		[RequiredField]
-		public FsmColor lightColor;
-		public bool everyFrame;
+        [Tooltip("The color of the light.")]
+        public FsmColor lightColor;
+
+        [Tooltip("Update every frame. Useful if the color is animated.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

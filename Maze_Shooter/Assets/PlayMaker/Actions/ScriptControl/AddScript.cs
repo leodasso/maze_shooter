@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -13,14 +13,14 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmOwnerDefault gameObject;
 		
 		[RequiredField]
-		[Tooltip("The Script to add to the GameObject.")]
+		[Tooltip("Select any script in your project. The script will be added to the Game Object when the state is entered.")]
 		[UIHint(UIHint.ScriptComponent)]
 		public FsmString script;
 		
 		[Tooltip("Remove the script from the GameObject when this State is exited.")]
 		public FsmBool removeOnExit;
 
-		Component addedComponent;
+		private Component addedComponent;
 
 		public override void Reset()
 		{

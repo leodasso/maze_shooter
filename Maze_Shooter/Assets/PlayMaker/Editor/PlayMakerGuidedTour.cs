@@ -1,4 +1,5 @@
 ﻿using HutongGames.Editor;
+using UnityEditor;
 
 namespace HutongGames.PlayMakerEditor
 {
@@ -30,13 +31,25 @@ namespace HutongGames.PlayMakerEditor
         protected override void OnEnable()
         {
             base.OnEnable();
-            instance = this;
+
+            if (instance == null)
+            {
+                instance = this;
+            }
+
+            titleContent.text = "PlayMaker";
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            instance = null;
+
+            if (instance == this)
+            {
+                instance = null;
+            }
+
+            HighlighterHelper.Enabled = false;
         }
 
         public override void Initialize()
@@ -45,13 +58,15 @@ namespace HutongGames.PlayMakerEditor
             needsMainEditor = true;
             SetTitle("PlayMaker");
             BuildGuide();
+
+            HighlighterHelper.Enabled = true;
         }
 
         public override void DoGUI()
         {
             FsmEditorStyles.Init();
             FsmEditorGUILayout.ToolWindowLargeTitle(this, "Guided Tour");
-            FsmEditorGUILayout.LabelWidth(200);
+            EditorGUIUtility.labelWidth = 200;
 
             //EditorGUILayout.HelpBox("NOTE: This is a BETA feature, please give feedback on the Playmaker Forums. Thanks!", MessageType.Info);
 
@@ -124,6 +139,12 @@ namespace HutongGames.PlayMakerEditor
                 "See also: <a href=\"W960\">FSM Inspector</a>", "", GetUrl(WikiPages.FsmInspector));
             fsmInspector.OnClick = () => FsmEditor.Inspector.SetMode(InspectorMode.FsmInspector);
             fsmInspector.Validate = () => FsmEditor.Inspector.Mode == InspectorMode.FsmInspector;
+            AddTopic(fsmInspector, "Settings","Core settings for the FSM.");
+            AddTopic(fsmInspector, "Inputs","Variables exposed as Inputs in the Variables Manager.");
+            AddTopic(fsmInspector, "Outputs", "Variables exposed as Outputs in the Variables Manager.");
+            AddTopic(fsmInspector, "Debug", "Debug Settings.");
+            AddTopic(fsmInspector, "Info", "Useful info about the FSM.\n\n" +
+                                           "Right-click items for more info.");
 
             var stateInspector = AddTopic(inspector, "State Inspector", 
                 "Edit the Actions run by the selected State.", 
@@ -131,6 +152,7 @@ namespace HutongGames.PlayMakerEditor
             stateInspector.OnClick = () => FsmEditor.Inspector.SetMode(InspectorMode.StateInspector);
             stateInspector.Validate = () => FsmEditor.Inspector.Mode == InspectorMode.StateInspector;        
             AddTopic(stateInspector, "Settings Menu");
+            AddTopic(stateInspector, "Action List", "Actions to run while the State is active.");
 
             var eventManager = AddTopic(inspector, "Event Manager", 
                 "Manage the Events used by the FSM.", 
@@ -211,10 +233,10 @@ namespace HutongGames.PlayMakerEditor
             AddTopic(root, "Settings Menu", "Settings for this window.");
             AddTopic(root, "Search", "Interactively search as you type.");
             AddTopic(root, "Search Mode", "Controls how to perform the search.");
+            AddTopic(root, "Refresh", "Update the variables list and used counts.");
             AddTopic(root, "Variables List", "A list of all global variables used in the project.", 
                 "Add or select a global variable to edit.\n\nClick column headers to sort the list.");
             AddTopic(root, "Variable Editor", "Add/Edit a variable.");
-            AddTopic(root, "Refresh Used Count", "Update the used count for this scene.");
         }
 
         private void BuildFsmBrowserGuide()
@@ -274,6 +296,13 @@ namespace HutongGames.PlayMakerEditor
                 "<b>Description</b>\nSearch template description also.\n");
             AddTopic(root, "Templates List", "", 
                 "Shows all the Templates in your project sorted by the categories you've defined.");
+            AddTopic(root, "Preview", "Preview the selected template's controls.",
+                "Templates can expose Input and Output variables. " +
+                "This lets you hide all the details inside a Template only exposing the important variables. " +
+                "\n\nVariables can be exposed in the Variables Manager." +
+                "\n\nSee <a href=\"W143\">Using Templates</a>").version = 191;
+            
+            /*
             AddTopic(root, "Category", "User defined category", 
                 "Use this field to edit the Template's Category. You can make as many Categories as you need for a project.");
             AddTopic(root, "Description", "User defined description of what the Template does.", 
@@ -281,7 +310,7 @@ namespace HutongGames.PlayMakerEditor
             AddTopic(root, "New Template", "Save a new Template asset", 
                 "NOTE: Template assets must be saved under the projects Assets folder. " +
                 "To transfer templates to another project export it in a unitypackage.");
-            AddTopic(root, "Load Add Templates", "Refresh the list of Templates.");
+            AddTopic(root, "Load Add Templates", "Refresh the list of Templates.");*/
         }
 
         private void BuildEventBrowserGuide()
@@ -296,6 +325,7 @@ namespace HutongGames.PlayMakerEditor
                 "The Used column shows how many loaded FSMs use the event.\n" +
                 "HINT: Right click on an event to see the FSMs that use it.\n\n" +
                 "NOTE: Events are created in the Events tab in the Main Editor.");
+            AddTopic(root, "Refresh", "Update the events list and used counts.");
         }
 
         private void BuildFsmTimelineGuide()

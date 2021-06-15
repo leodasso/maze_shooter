@@ -10,8 +10,11 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[HasFloatSlider(0,1)]
+        [Tooltip("Volume level (0-1).")]
 		public FsmFloat volume;
-		public bool everyFrame;
+
+        [Tooltip("Perform this action every frame. Useful if Volume is changing e.g., to fade up/down.")]
+        public bool everyFrame;
 		
 		public override void Reset()
 		{

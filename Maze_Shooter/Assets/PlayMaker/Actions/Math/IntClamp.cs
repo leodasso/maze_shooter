@@ -10,12 +10,19 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmInt intVariable;
+        [Tooltip("The variable to clamp.")]
+        public FsmInt intVariable;
+
 		[RequiredField]
-		public FsmInt minValue;
+        [Tooltip("Minimum allowed value.")]
+        public FsmInt minValue;
+
 		[RequiredField]
-		public FsmInt maxValue;
-		public bool everyFrame;
+        [Tooltip("Maximum allowed value.")]
+        public FsmInt maxValue;
+
+        [Tooltip("Perform this action every frame.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

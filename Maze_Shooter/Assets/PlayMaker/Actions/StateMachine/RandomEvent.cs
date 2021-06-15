@@ -6,11 +6,11 @@ using System.Collections.Generic;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.StateMachine)]
-	[Tooltip("Sends a Random State Event after an optional delay. Use this to transition to a random state from the current state.")]
+	[Tooltip("Sends a Random State Event after an optional delay. Use this to transition to a random state connected to the current state.")]
 	public class RandomEvent : FsmStateAction
 	{
 		[HasFloatSlider(0, 10)]
-        [Tooltip("Delay before sending the event.")]
+        [Tooltip("Delay before sending the event (seconds).")]
 		public FsmFloat delay;
 
         [Tooltip("Don't repeat the same event twice in a row.")]

@@ -6,11 +6,11 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
 	[Tooltip("Returns true if a parameter is controlled by an additional curve on an animation")]
-	public class GetAnimatorIsParameterControlledByCurve: FsmStateAction
+	public class GetAnimatorIsParameterControlledByCurve: ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The target. An Animator component is required")]
+        [Tooltip("The GameObject with an Animator Component.")]
 		public FsmOwnerDefault gameObject;
 
 		[Tooltip("The parameter's name")]
@@ -28,8 +28,6 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Event send if not controlled by curve")]
 		public FsmEvent isNotControlledByCurveEvent;
 
-		private Animator _animator;
-		
 		public override void Reset()
 		{
 			gameObject = null;
@@ -37,53 +35,20 @@ namespace HutongGames.PlayMaker.Actions
 			isControlledByCurve = null;
 			isControlledByCurveEvent = null;
 			isNotControlledByCurveEvent = null;
-
-		}
+        }
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                var _isControlledByCurve = cachedComponent.IsParameterControlledByCurve(parameterName.Value);
+                isControlledByCurve.Value = _isControlledByCurve;
 
-			
-			DoCheckIsParameterControlledByCurve();
+                Fsm.Event(_isControlledByCurve ? isControlledByCurveEvent : isNotControlledByCurveEvent);
+            }
 
 			Finish();
-
-		}
+        }
 		
-
-		void DoCheckIsParameterControlledByCurve()
-		{		
-			if (_animator==null)
-			{
-				return;
-			}
-			
-			bool _isControlledByCurve = _animator.IsParameterControlledByCurve(parameterName.Value);
-			isControlledByCurve.Value = _isControlledByCurve;
-			
-			if (_isControlledByCurve)
-			{
-				Fsm.Event(isControlledByCurveEvent);
-			}else{
-				Fsm.Event(isNotControlledByCurveEvent);
-			}
-		}
-
 	}
 }

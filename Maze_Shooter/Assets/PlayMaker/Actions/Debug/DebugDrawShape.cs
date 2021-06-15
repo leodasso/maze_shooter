@@ -3,8 +3,8 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory(ActionCategory.Debug)]
-    [Tooltip("Draw Gizmos in the Scene View.")]
-    public class DebugDrawShape : FsmStateAction
+    [Tooltip("Draw a debug Gizmo.\nNote: you can enable/disable Gizmos in the Game View toolbar.")]
+    public class DebugDrawShape : ComponentAction<Transform>
     {
         public enum ShapeType { Sphere, Cube, WireSphere, WireCube }
 
@@ -18,42 +18,60 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("The color to use.")]
         public FsmColor color;
         
+        [HideIf("HideRadius")]
         [Tooltip("Use this for sphere gizmos")]
         public FsmFloat radius;
         
+        [HideIf("HideSize")]
         [Tooltip("Use this for cube gizmos")]
         public FsmVector3 size;
+
+        public bool HideRadius()
+        {
+            return shape != ShapeType.Sphere && shape != ShapeType.WireSphere;
+        }
+
+        public bool HideSize()
+        {
+            return shape != ShapeType.Cube && shape != ShapeType.WireCube;
+        }
 
         public override void Reset()
         {
             gameObject = null;
             shape = ShapeType.Sphere;
-            color = Color.grey;
-            radius = 1f;
+            color = new FsmColor {Value = Color.grey};
+            radius = new FsmFloat {Value = 1f};
             size = new Vector3(1f, 1f, 1f);
+        }
+
+        public override void Awake()
+        {
+            BlocksFinish = false;
         }
 
         public override void OnDrawActionGizmos()
         {
-            var ownerTransform = Fsm.GetOwnerDefaultTarget(gameObject).transform;
-            if (ownerTransform == null)
-                return;
+            if (Fsm == null) return; 
+
+            var go = Fsm.GetOwnerDefaultTarget(gameObject);
+            if (!UpdateCachedTransform(go)) return;
 
             Gizmos.color = color.Value;
 
             switch (shape)
             {
                 case ShapeType.Sphere:
-                    Gizmos.DrawSphere(ownerTransform.position, radius.Value);
+                    Gizmos.DrawSphere(cachedTransform.position, radius.Value);
                     break;
                 case ShapeType.WireSphere:
-                    Gizmos.DrawWireSphere(ownerTransform.position, radius.Value);
+                    Gizmos.DrawWireSphere(cachedTransform.position, radius.Value);
                     break;
                 case ShapeType.Cube:
-                    Gizmos.DrawCube(ownerTransform.position, size.Value);
+                    Gizmos.DrawCube(cachedTransform.position, size.Value);
                     break;
                 case ShapeType.WireCube:
-                    Gizmos.DrawWireCube(ownerTransform.position, size.Value);
+                    Gizmos.DrawWireCube(cachedTransform.position, size.Value);
                     break;
                 default:
                     break;

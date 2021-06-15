@@ -5,7 +5,8 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Logic)]
-	[Tooltip("Tests if a GameObject is a Child of another GameObject.")]
+	[Tooltip("Tests if a game object is a child of another game object and stores the result in a bool variable." +
+             "\nE.g., Uses this to check if a collision object is the child of another object.")]
 	public class GameObjectIsChildOf : FsmStateAction
 	{
 		[RequiredField]

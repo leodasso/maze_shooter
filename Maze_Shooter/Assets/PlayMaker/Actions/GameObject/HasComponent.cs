@@ -10,15 +10,28 @@ namespace HutongGames.PlayMaker.Actions
 	public class HasComponent : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("The Game Object to check.")]
 		public FsmOwnerDefault gameObject;
+
 		[RequiredField]
 		[UIHint(UIHint.ScriptComponent)]
+        [Tooltip("The name of the component to check for.")]
 		public FsmString component;
+
+        [Tooltip("Remove the component on exiting the state.")]
 		public FsmBool removeOnExit;
+
+        [Tooltip("Event to send if the Game Object has the component.")]
 		public FsmEvent trueEvent;
+
+        [Tooltip("Event to send if the Game Object does not have the component.")]
 		public FsmEvent falseEvent;
+
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the result in a bool variable.")]
 		public FsmBool store;
+
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 
 		Component aComponent;

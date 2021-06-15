@@ -5,23 +5,32 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Physics)]
-	[Tooltip("Sets the Velocity of a Game Object. To leave any axis unchanged, set variable to 'None'. NOTE: Game object must have a rigidbody.")]
-	public class SetVelocity : ComponentAction<Rigidbody>
+    [Tooltip("Sets the velocity of a game object with a rigid body. To leave any axis unchanged, set variable to 'None'." +
+             "\nIn most cases you should not modify the velocity directly, as this can result in unrealistic behaviour. " +
+             "See unity docs: <a href=\"http://unity3d.com/support/documentation/ScriptReference/Rigidbody-velocity.html\">Rigidbody.velocity</a>.")]
+    public class SetVelocity : ComponentAction<Rigidbody>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Rigidbody))]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("The Game Object with the RigidBody component.")]
+        public FsmOwnerDefault gameObject;
 		
 		[UIHint(UIHint.Variable)]
-		public FsmVector3 vector;
-		
-		public FsmFloat x;
-		public FsmFloat y;
-		public FsmFloat z;
-		
-		public Space space;
-		
-		public bool everyFrame;
+        [Tooltip("Set velocity using Vector3 variable and/or individual channels below.")]
+        public FsmVector3 vector;
+
+        [Tooltip("Velocity in X axis.")]
+        public FsmFloat x;
+        [Tooltip("Velocity in Y axis.")]
+        public FsmFloat y;
+        [Tooltip("Velocity in Z axis.")]
+        public FsmFloat z;
+
+        [Tooltip("You can set velocity in world or local space.")]
+        public Space space;
+
+        [Tooltip("Set the velocity every frame.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{
@@ -59,15 +68,14 @@ namespace HutongGames.PlayMaker.Actions
 				Finish();
 		}
 
-		void DoSetVelocity()
+        private void DoSetVelocity()
 		{
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			if (!UpdateCache(go))
+            if (!UpdateCacheAndTransform(Fsm.GetOwnerDefaultTarget(gameObject)))
 			{
 				return;
 			}
 			
-			// init position
+			// init velocity
 			
 			Vector3 velocity;
 
@@ -75,7 +83,7 @@ namespace HutongGames.PlayMaker.Actions
 			{
 				velocity = space == Space.World ?
 					rigidbody.velocity : 
-					go.transform.InverseTransformDirection(rigidbody.velocity);
+					cachedTransform.InverseTransformDirection(rigidbody.velocity);
 			}
 			else
 			{
@@ -90,7 +98,7 @@ namespace HutongGames.PlayMaker.Actions
 
 			// apply
 			
-			rigidbody.velocity = space == Space.World ? velocity : go.transform.TransformDirection(velocity);
+			rigidbody.velocity = space == Space.World ? velocity : cachedTransform.TransformDirection(velocity);
 		}
 	}
 }

@@ -9,9 +9,12 @@ namespace HutongGames.PlayMaker.Actions
 	public class GetRandomChild : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("The parent Game Object.")]
 		public FsmOwnerDefault gameObject;
-		[RequiredField]
+
+        [RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the random child in a Game Object Variable.")]
 		public FsmGameObject storeResult;
 
 		public override void Reset()

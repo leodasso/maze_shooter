@@ -1,4 +1,4 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2016. All rights reserved.
+﻿// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -6,11 +6,11 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
 	[Tooltip("Sets an AvatarTarget and a targetNormalizedTime for the current state")]
-	public class SetAnimatorTarget : FsmStateAction
+	public class SetAnimatorTarget : ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The target.")]
+		[Tooltip("The GameObject with the Animator Component.")]
 		public FsmOwnerDefault gameObject;
 		
 		[Tooltip("The avatar target")]
@@ -22,8 +22,6 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Repeat every frame during OnAnimatorMove. Useful when changing over time.")]
 		public bool everyFrame;
 
-		private Animator _animator;
-		
 		public override void Reset()
 		{
 			gameObject = null;
@@ -39,24 +37,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-
-			SetTarget();
+            SetTarget();
 			
 			if (!everyFrame) 
 			{
@@ -70,10 +51,10 @@ namespace HutongGames.PlayMaker.Actions
 		}
 		
 		void SetTarget()
-		{		
-			if (_animator!=null)
-			{
-				_animator.SetTarget(avatarTarget,targetNormalizedTime.Value) ;
+		{
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                cachedComponent.SetTarget(avatarTarget,targetNormalizedTime.Value) ;
 			}
 		}
 	}

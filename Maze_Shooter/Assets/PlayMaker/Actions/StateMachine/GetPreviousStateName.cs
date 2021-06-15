@@ -9,6 +9,7 @@ namespace HutongGames.PlayMaker.Actions
 	public class GetPreviousStateName : FsmStateAction
 	{
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the name in a String Variable.")]
 		public FsmString storeName;
 		
 		public override void Reset()

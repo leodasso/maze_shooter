@@ -10,9 +10,12 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animation))]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("The Game Object playing the animation.")]
+        public FsmOwnerDefault gameObject;
+
 		[UIHint(UIHint.Animation)]
-		public FsmString animName;
+        [Tooltip("The name of the animation to rewind.")]
+        public FsmString animName;
 
 		public override void Reset()
 		{

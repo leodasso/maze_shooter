@@ -1,5 +1,7 @@
 ﻿// (c) Copyright HutongGames, LLC 2010-2018. All rights reserved.
 
+using UnityEngine;
+
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.UI)]
@@ -34,13 +36,15 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-		    var go = Fsm.GetOwnerDefaultTarget(gameObject);
-		    if (UpdateCache(go))
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
 		    {
-		        slider = cachedComponent;
-		    }
+                Finish();
+                return;
+            }
 
-			originalValue = slider.value;
+            slider = cachedComponent;
+
+            originalValue = slider.value;
 
 			DoSetValue();
 			
@@ -72,5 +76,13 @@ namespace HutongGames.PlayMaker.Actions
 				slider.value = originalValue;
 			}
 		}
-	}
+
+
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName("SliderSet", this.Fsm, gameObject, value);
+        }
+#endif
+    }
 }

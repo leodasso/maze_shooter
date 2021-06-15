@@ -10,12 +10,23 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmVector3 vector3Variable;
-		public FsmFloat addX;
-		public FsmFloat addY;
-		public FsmFloat addZ;
-		public bool everyFrame;
-		public bool perSecond;
+        [Tooltip("The Vector3 Variable to add to.")]
+        public FsmVector3 vector3Variable;
+
+        [Tooltip("Add to the X axis.")]
+        public FsmFloat addX;
+
+        [Tooltip("Add to the Y axis.")]
+        public FsmFloat addY;
+
+        [Tooltip("Add to the Z axis.")]
+        public FsmFloat addZ;
+
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
+
+        [Tooltip("Add over one second (multiplies values by Time.deltaTime). Note: Needs Every Frame checked.")]
+        public bool perSecond;
 
 		public override void Reset()
 		{

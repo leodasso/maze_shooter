@@ -19,7 +19,7 @@ namespace HutongGames.PlayMaker.Actions
         [RequiredField]
         [MatchElementType("array")]
         [UIHint(UIHint.Variable)] 
-        [Tooltip("Store the value in a variable.")] 
+        [Tooltip("Store the value in a variable. NOTE: must be of the same type as the array.")] 
         public FsmVar storeValue;
 
         [Tooltip("Repeat every frame while the state is active.")]
@@ -27,7 +27,7 @@ namespace HutongGames.PlayMaker.Actions
 
         [ActionSection("Events")]
 
-        [Tooltip("The event to trigger if the index is out of range")] 
+        [Tooltip("The event to trigger if the index is out of range.")] 
         public FsmEvent indexOutOfRange;
 
         public override void Reset()
@@ -87,7 +87,7 @@ namespace HutongGames.PlayMaker.Actions
 #if UNITY_EDITOR
         public override string AutoName()
         {
-            return ActionHelpers.GetValueLabel(storeValue.NamedVar) + "=" + array.Name + "[" + ActionHelpers.GetValueLabel(index) + "]";
+            return ActionHelpers.GetValueLabel(storeValue.NamedVar) + " = " + array.Name + "[" + ActionHelpers.GetValueLabel(index) + "]";
         }
 #endif
     }

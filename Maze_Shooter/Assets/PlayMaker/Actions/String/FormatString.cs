@@ -5,7 +5,8 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory(ActionCategory.String)]
-    [Tooltip("Replaces each format item in a specified string with the text equivalent of variable's value. Stores the result in a string variable.")]
+    [Tooltip("Replaces each format item in a specified string with the text equivalent of variable's value. Stores the result in a string variable." +
+             "\nSee C# <a href=\"http://msdn.microsoft.com/en-us/library/system.string.format(v=vs.90).aspx\" rel=\"nofollow\">string.Format documentation</a> for usage.")]
     public class FormatString : FsmStateAction
     {
         [RequiredField]
@@ -20,7 +21,7 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("Store the formatted result in a string variable.")]
         public FsmString storeResult;
 
-        [Tooltip("Repeat every frame. This is useful if the variables are changing.")]
+        [Tooltip("Repeat every frame. Useful if the variables are changing.")]
         public bool everyFrame;
 
         private object[] objectArray;

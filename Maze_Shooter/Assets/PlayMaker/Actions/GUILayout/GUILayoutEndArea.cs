@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.GUILayout)]
-	[Tooltip("Close a GUILayout group started with BeginArea.")]
+	[Tooltip("Close a GUILayout group started with {{GUILayoutBeginArea}}.")]
 	public class GUILayoutEndArea : FsmStateAction
 	{
 		public override void Reset()

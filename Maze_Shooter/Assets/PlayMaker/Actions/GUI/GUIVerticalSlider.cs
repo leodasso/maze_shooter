@@ -11,13 +11,22 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmFloat floatVariable;
+        [Tooltip("The Float Variable linked to the slider value.")]
+        public FsmFloat floatVariable;
+
 		[RequiredField]
-		public FsmFloat topValue;
+        [Tooltip("The value of the variable at the top of the slider.")]
+        public FsmFloat topValue;
+
 		[RequiredField]
-		public FsmFloat bottomValue;
-		public FsmString sliderStyle;
-		public FsmString thumbStyle;
+        [Tooltip("The value of the variable at the bottom of the slider.")]
+        public FsmFloat bottomValue;
+
+        [Tooltip("Optional GUIStyle for the slider track.")]
+        public FsmString sliderStyle;
+
+        [Tooltip("Optional GUIStyle for the slider thumb.")]
+        public FsmString thumbStyle;
 		
 		public override void Reset()
 		{

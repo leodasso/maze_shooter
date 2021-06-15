@@ -15,7 +15,9 @@ namespace HutongGames.PlayMaker.Actions
 
 		[CompoundArray("Tag Switches", "Compare Tag", "Send Event")]
 		[UIHint(UIHint.Tag)]
+        [Tooltip("Compare GameObject's Tag.")]
 		public FsmString[] compareTo;
+        [Tooltip("Send this event if Tag matches.")]
 		public FsmEvent[] sendEvent;
 		
         [Tooltip("Repeat every frame.")]

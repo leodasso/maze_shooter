@@ -15,7 +15,7 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmGameObject StoreGameObject;
 
         [UIHint(UIHint.Variable)]
-        [Tooltip("Event when the selected GameObject changes")]
+        [Tooltip("Event sent when the selected GameObject changes")]
         public FsmEvent ObjectChangedEvent;
 
         [UIHint(UIHint.Variable)]

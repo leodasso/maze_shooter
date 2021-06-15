@@ -10,10 +10,15 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(AudioSource))]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("A GameObject with an AudioSource component.")]
+        public FsmOwnerDefault gameObject;
+
 		[HasFloatSlider(0,1)]
-		public FsmFloat volume;
-		public bool everyFrame;
+        [Tooltip("Set the volume.")]
+        public FsmFloat volume;
+
+        [Tooltip("Repeat every frame. Useful if you're driving the volume with a float variable.")]
+        public bool everyFrame;
 		
 		public override void Reset()
 		{
@@ -39,8 +44,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		void DoSetAudioVolume()
 		{
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			if (UpdateCache(go))
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
 			{
 			    if (!volume.IsNone)
 			    {

@@ -9,9 +9,12 @@ namespace HutongGames.PlayMaker.Actions
 	public class GetRoot : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("The Game Object.")]
 		public FsmOwnerDefault gameObject;
+
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the root of the Game Object in a Game Object Variable.")]
 		public FsmGameObject storeRoot;
 
 		public override void Reset()

@@ -1,13 +1,15 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Character)]
-	[Tooltip("Gets the Collision Flags from a Character Controller on a Game Object. Collision flags give you a broad overview of where the character collided with any other object.")]
-	public class GetControllerCollisionFlags : FsmStateAction
-	{
+	[Tooltip("Gets the Collision Flags from a CharacterController on a GameObject. " +
+             "Collision flags give you a broad overview of where the character collided with another object.")]
+	public class GetControllerCollisionFlags : ComponentAction<CharacterController>
+    {
 		[RequiredField]
 		[CheckForComponent(typeof(CharacterController))]
         [Tooltip("The GameObject with a Character Controller component.")]
@@ -33,10 +35,12 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("True if the Character Controller capsule was hit from below.")]
 		public FsmBool below;
 		
-		private GameObject previousGo; // remember so we can get new controller only when it changes.
-		private CharacterController controller;
-		
-		public override void Reset()
+        private CharacterController controller
+        {
+            get { return cachedComponent; }
+        }
+
+        public override void Reset()
 		{
 			gameObject = null;
 			isGrounded = null;
@@ -46,29 +50,17 @@ namespace HutongGames.PlayMaker.Actions
 			below = null;
 		}
 
-		public override void OnUpdate()
+		[SuppressMessage("ReSharper", "BitwiseOperatorOnEnumWithoutFlags")]
+        public override void OnUpdate()
 		{
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			if (go == null)
-			{
-			    return;
-			}
-		
-			if (go != previousGo)
-			{
-				controller = go.GetComponent<CharacterController>();
-				previousGo = go;
-			}
-			
-			if (controller != null)
-			{
-				isGrounded.Value = controller.isGrounded;
-				none.Value = (controller.collisionFlags & CollisionFlags.None) != 0;
-				sides.Value = (controller.collisionFlags & CollisionFlags.Sides) != 0;
-				above.Value = (controller.collisionFlags & CollisionFlags.Above) != 0;
-				below.Value = (controller.collisionFlags & CollisionFlags.Below) != 0;
-			}
-			
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+                return;
+
+			isGrounded.Value = controller.isGrounded;
+			none.Value = controller.collisionFlags == CollisionFlags.None;
+			sides.Value = (controller.collisionFlags & CollisionFlags.Sides) != 0;
+			above.Value = (controller.collisionFlags & CollisionFlags.Above) != 0;
+			below.Value = (controller.collisionFlags & CollisionFlags.Below) != 0;
 		}
 	}
 }

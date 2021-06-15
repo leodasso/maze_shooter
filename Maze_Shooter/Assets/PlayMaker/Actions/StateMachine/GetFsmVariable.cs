@@ -23,7 +23,7 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Store the value of the FsmVariable")]
         public FsmVar storeValue;
 
-        [Tooltip("Repeat every frame.")]
+        [Tooltip("Repeat every frame. Useful if the value is changing.")]
         public bool everyFrame;
 
         private GameObject cachedGO;
@@ -96,7 +96,7 @@ namespace HutongGames.PlayMaker.Actions
 #if UNITY_EDITOR
         public override string AutoName()
         {
-            return ("Get FSM Variable: " + ActionHelpers.GetValueLabel(storeValue.NamedVar));
+            return "Get FSM Variable: " + ActionHelpers.GetValueLabel(storeValue.NamedVar);
         }
 #endif
     }

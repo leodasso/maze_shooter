@@ -5,12 +5,14 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Physics)]
-	[Tooltip("Forces a Game Object's Rigid Body to Sleep at least one frame.")]
-	public class Sleep : ComponentAction<Rigidbody>
+    [Tooltip("Forces a rigid body to sleep at least one frame. See unity docs: <a href=\"http://unity3d.com/support/documentation/ScriptReference/Rigidbody.Sleep.html\">Rigidbody.sleep</a>.")]
+
+    public class Sleep : ComponentAction<Rigidbody>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Rigidbody))]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("A Game Object with a Rigid Body.")]
+        public FsmOwnerDefault gameObject;
 
 		public override void Reset()
 		{

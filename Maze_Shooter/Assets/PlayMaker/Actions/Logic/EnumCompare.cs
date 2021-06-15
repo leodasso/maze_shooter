@@ -8,13 +8,17 @@ namespace HutongGames.PlayMaker.Actions
     {
         [RequiredField]
         [UIHint(UIHint.Variable)]
+        [Tooltip("The first Enum Variable.")]
         public FsmEnum enumVariable;
 
         [MatchFieldType("enumVariable")]
+        [Tooltip("The second Enum Variable.")]
         public FsmEnum compareTo;
 
+        [Tooltip("Event to send if the values are equal.")]
         public FsmEvent equalEvent;
 
+        [Tooltip("Event to send if the values are not equal.")]
         public FsmEvent notEqualEvent;
         
         [UIHint(UIHint.Variable)]

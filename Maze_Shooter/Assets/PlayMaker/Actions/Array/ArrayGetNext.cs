@@ -1,11 +1,11 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2014. All rights reserved.
+﻿// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Array)]
-	[Tooltip("Each time this action is called it gets the next item from a Array. \n" +
+	[Tooltip("Each time this action is called it gets the next item from a Array. " +
 	         "This lets you quickly loop through all the items of an array to perform actions on them.")]
 	public class ArrayGetNext : FsmStateAction
 	{
@@ -34,9 +34,11 @@ namespace HutongGames.PlayMaker.Actions
 
 		[MatchElementType("array")]
 		[UIHint(UIHint.Variable)]
-		public FsmVar result;
+        [Tooltip("Store the current array item in a variable of the same type.")]
+        public FsmVar result;
 
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the current array index in an int variable.")]
 		public FsmInt currentIndex;
 	
 		// increment that index as we loop through item

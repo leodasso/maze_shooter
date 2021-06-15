@@ -10,9 +10,14 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Camera))]
+        [Tooltip("The Game Object with the Camera component.")]
 		public FsmOwnerDefault gameObject;
+
 		[RequiredField]
-		public FsmFloat fieldOfView;
+        [Tooltip("Field of view in degrees.")]
+        public FsmFloat fieldOfView;
+
+        [Tooltip("Repeat every frame. Useful if the fov is animated.")]
 		public bool everyFrame;
 
 		public override void Reset()

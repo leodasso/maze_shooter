@@ -8,9 +8,11 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable), Readonly]
+        [Tooltip("The Object Variable to compare.")]
 		public FsmObject objectVariable;
 		
 		[RequiredField]
+        [Tooltip("The value to compare it to.")]
 		public FsmObject compareTo;
 
 		//[ActionSection("")]

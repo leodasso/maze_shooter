@@ -7,13 +7,15 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Transform)]
     [HelpUrl("http://hutonggames.com/playmakerforum/index.php?topic=4758.0")]
-	[Tooltip("Move a GameObject to another GameObject. Works like iTween Move To, but with better performance.")]
+	[Tooltip("Move a GameObject to another GameObject using easing functions. Works like iTween Move To, but with better performance.")]
     public class MoveObject : EaseFsmAction
     {
         [RequiredField]
+        [Tooltip("The GameObject to move.")]
         public FsmOwnerDefault objectToMove;
 
         [RequiredField]
+        [Tooltip("The target GamObject.")]
         public FsmGameObject destination;
 
         private FsmVector3 fromValue;

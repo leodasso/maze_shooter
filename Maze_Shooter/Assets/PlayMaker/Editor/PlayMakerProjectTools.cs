@@ -1,14 +1,7 @@
-#if (UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7 || UNITY_5_0 || UNITY_5_1 || UNITY_5_2)
-#define UNITY_PRE_5_3
-#endif
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
-#if (UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7)
-#define UNITY_PRE_5_0
-#endif
-
-#if UNITY_5_3_OR_NEWER || UNITY_5
-#define UNITY_5_OR_NEWER
-#endif
+// TODO: Only do this when necessary.
+// TODO: Manual option.
 
 // Unity 5.1 introduced a new networking library. 
 // Unless we define PLAYMAKER_LEGACY_NETWORK old network actions are disabled
@@ -29,9 +22,7 @@ using System.Linq;
 using System.Reflection;
 using HutongGames.PlayMaker;
 using UnityEditor;
-#if !UNITY_PRE_5_3
 using UnityEditor.SceneManagement;
-#endif
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
@@ -82,14 +73,13 @@ namespace HutongGames.PlayMakerEditor
             Debug.Log(logOutput);
         }
 
-
         /*WIP
         [MenuItem(MenuRoot + "Tools/Scan Scenes", false, 33)]
         public static void ScanScenesInProject()
         {
             FindAllScenes();
         }
-*/
+        */
 
         /// <summary>
         /// Collects all prefabs with FSMs referenced by scenes in the build.
@@ -100,6 +90,8 @@ namespace HutongGames.PlayMakerEditor
         /// </summary>
         private static string DoPreprocessPrefabFSMsInBuild()
         {
+            LogHelper.Log("DoPreprocessPrefabFSMsInBuild", LogColor.Yellow);
+
             var loadedScenes = GetLoadedScenes();
 
             var report = "Preprocess Prefab FSMs in Build:";
@@ -411,44 +403,27 @@ namespace HutongGames.PlayMakerEditor
                 // Re-initialize loads data and forces a dirty check
                 // so we can just call this and let it handle dirty etc.
 
-                fsm.Reinitialize();
+                fsm.Reload();
             }
         }
 
         private static void UpdateScenesInBuild()
         {
-            // Allow the user to save his work!
-#if UNITY_PRE_5_3
-            if (!EditorApplication.SaveCurrentSceneIfUserWantsTo())
-#else
-            if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
-#endif
-            {
-                return;
-            }
+            if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
 
             LoadPrefabsWithPlayMakerFSMComponents();
 
             foreach (var scene in EditorBuildSettings.scenes)
             {
                 Debug.Log("Open Scene: " + scene.path);
-#if UNITY_PRE_5_3
-                EditorApplication.OpenScene(scene.path);
-#else
-                EditorSceneManager.OpenScene(scene.path);
-#endif
 
-#if UNITY_5_OR_NEWER                
+                EditorSceneManager.OpenScene(scene.path);
+
                 UpdateGetSetPropertyActions();
-#endif
 
                 ReSaveAllLoadedFSMs();
 
-#if UNITY_PRE_5_3
-                if (!EditorApplication.SaveScene())
-#else
                 if (!EditorSceneManager.SaveOpenScenes())
-#endif
                 {
                     Debug.LogError("Could not save scene!");
                 }
@@ -481,8 +456,10 @@ namespace HutongGames.PlayMakerEditor
             FsmEditor.RebuildFsmList();
         }
 
-#if UNITY_5_OR_NEWER
-
+        /// <summary>
+        /// Older versions of Unity had built it properties to access common components.
+        /// These properties need to be fixed in GetProperty/SetProperty.
+        /// </summary>
         private static void UpdateGetSetPropertyActions()
         {
             var getPropertyActionType = ActionData.GetActionType("HutongGames.PlayMaker.Actions.GetProperty");
@@ -530,12 +507,7 @@ namespace HutongGames.PlayMakerEditor
 
 				    FsmEditor.SetFsmDirty(fsm, true);
 
-#if !UNITY_PRE_5_3
-                    UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(fsm.Owner.gameObject.scene);
-#elif !UNITY_PRE_5_0
-                    // Not sure if we need to do this...?
-                    UnityEditor.EditorApplication.MarkSceneDirty();
-#endif
+                    EditorSceneManager.MarkSceneDirty(fsm.Owner.gameObject.scene);
                 }
             }
         }
@@ -593,7 +565,6 @@ namespace HutongGames.PlayMakerEditor
             fsmProperty.TargetObject.ObjectType = componentType;
             return true;
         }
-#endif
 
         /* WIP
         [Localizable(false)]
@@ -619,7 +590,7 @@ namespace HutongGames.PlayMakerEditor
                 //var obj = AssetDatabase.
             }
         }
-         */
+        */
     }
 }
 

@@ -9,8 +9,8 @@ namespace HutongGames.PlayMakerEditor
     /// </summary>
 	public class PlayMakerAddonManager
     {
-        private const string urlAssetStoreRoot = "https://www.assetstore.unity3d.com/#!/content/";
-	    private const string urlPhotonAddon = "https://hutonggames.fogbugz.com/default.asp?W928";
+        private const string urlAssetStoreRoot = "https://assetstore.unity.com/packages/slug/"; 
+        private const string urlPhotonAddon = "https://hutonggames.fogbugz.com/default.asp?W928";
 	    private const string urlAddonsWiki = "https://hutonggames.fogbugz.com/default.asp?W714";
 	    private const string urlEcosystemWiki = "https://hutonggames.fogbugz.com/default.asp?W1181";
 	    private const string urlLegacyNetworkDocs = "https://hutonggames.fogbugz.com/default.asp?W852";
@@ -113,15 +113,29 @@ namespace HutongGames.PlayMakerEditor
 	            AddonDownload(photonTitle, photonTooltip, urlPhotonAddon, photonIcon);	            
 	        }
 
-	        AddonAsset("Easy Save",
+            AddonAsset("DOTween Actions",
+                "Use the fastest, most efficient and fully type-safe object-oriented animation engine with Playmaker.",
+                "49222");
+
+            AddonAsset("Easy Save",
 	            "The Fast and Simple way to Save and Load Data.",
 	            "768");
 
-	        AddonAsset("Pro Camera 2D",
+            AddonAsset("Oculus Touch Toolkit",
+                "Build your Oculus Touch game faster, with Oculus actions and scenes ready to get your game going!",
+                "90963");
+
+            AddonAsset("Pro Camera 2D",
 	            "Quickly set-up a camera for any kind of 2D game.",
 	            "42095");
 
-	        DoBottomSpacer();
+
+            
+
+
+
+
+            DoBottomSpacer();
 	    }
 
 	    private static void DoLegacyAddons()

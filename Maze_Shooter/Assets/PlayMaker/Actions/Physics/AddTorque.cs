@@ -1,16 +1,16 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Physics)]
-	[Tooltip("Adds torque (rotational force) to a Game Object.")]
+	[Tooltip("Adds torque (rotational force) to a Game Object. NOTE: The game object requires a Rigid Body.")]
 	public class AddTorque : ComponentAction<Rigidbody>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Rigidbody))]
-        [Tooltip("The GameObject to add torque to.")]
+        [Tooltip("The GameObject to add torque (rotational force) to.")]
 		public FsmOwnerDefault gameObject;
 		
 		[UIHint(UIHint.Variable)]
@@ -32,7 +32,7 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("The type of force to apply. See Unity Physics docs.")]
 		public ForceMode forceMode;
 
-        [Tooltip("Repeat every frame while the state is active.")]
+        [Tooltip("Apply the force every frame that the State is active.")]
 		public bool everyFrame;
 
 		public override void Reset()

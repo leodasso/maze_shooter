@@ -7,7 +7,7 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.UI)]
 	[Tooltip("Sends event when Called by the EventSystem when the object associated with this EventTrigger is updated." +
-		"\n Use GetLastPointerDataInfo action to get info from the event")]
+		"\nUse GetLastPointerDataInfo action to get info from the event")]
 	public class UiOnUpdateSelectedEvent : EventTriggerActionBase
 	{
 		[UIHint(UIHint.Variable)]

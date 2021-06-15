@@ -5,17 +5,21 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Transform)]
-	[Tooltip("Sets Random Rotation for a Game Object. Uncheck an axis to keep its current value.")]
+	[Tooltip("Sets Random Rotation for a Game Object. Uncheck an axis to keep the current rotation around that axis.")]
 	public class SetRandomRotation : FsmStateAction
 	{
 		[RequiredField]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("The Game Object to randomly rotate.")]
+        public FsmOwnerDefault gameObject;
 		[RequiredField]
-		public FsmBool x;
+        [Tooltip("Use X axis.")]
+        public FsmBool x;
 		[RequiredField]
-		public FsmBool y;
+        [Tooltip("Use Y axis.")]
+        public FsmBool y;
 		[RequiredField]
-		public FsmBool z;
+        [Tooltip("Use Z axis.")]
+        public FsmBool z;
 
 		public override void Reset()
 		{

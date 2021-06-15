@@ -10,8 +10,11 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Light))]
-		public FsmOwnerDefault gameObject;
-		public Flare lightFlare;
+        [Tooltip("The Game Object with the Light Component.")]
+        public FsmOwnerDefault gameObject;
+
+        [Tooltip("The flare to use.")]
+        public Flare lightFlare;
 
 		public override void Reset()
 		{

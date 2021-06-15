@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 namespace HutongGames.PlayMaker.Actions
 {
@@ -8,10 +8,15 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("The Vector3 variable to subtract from.")]
 		public FsmVector3 vector3Variable;
-		[RequiredField]
-		public FsmVector3 subtractVector;
-		public bool everyFrame;
+
+        [RequiredField]
+        [Tooltip("The Vector3 to subtract.")]
+        public FsmVector3 subtractVector;
+
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

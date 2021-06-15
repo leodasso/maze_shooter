@@ -30,14 +30,16 @@ namespace HutongGames.PlayMaker.Actions
 		[ActionSection("Transfer Options")]
 
 		[ObjectType(typeof(ArrayTransferType))]
+        [Tooltip("Copy Options.")]
 		public FsmEnum copyType;
 
 		[ObjectType(typeof(ArrayPasteType))]
+        [Tooltip("Paste Options")]
 		public FsmEnum pasteType;
 
 		[ActionSection("Result")]
 
-		[Tooltip("Event sent if this array source does not contains that element (described below)")]
+		[Tooltip("Event sent if the array source does not contains that element.")]
 		public FsmEvent indexOutOfRange;
 
 		public override void Reset ()

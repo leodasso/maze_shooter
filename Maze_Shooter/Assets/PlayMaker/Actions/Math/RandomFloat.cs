@@ -9,11 +9,16 @@ namespace HutongGames.PlayMaker.Actions
 	public class RandomFloat : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("Minimum value for the random number.")]
 		public FsmFloat min;
-		[RequiredField]
+		
+        [RequiredField]
+        [Tooltip("Maximum value for the random number.")]
 		public FsmFloat max;
-		[RequiredField]
+		
+        [RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the result in a Float variable.")]
 		public FsmFloat storeResult;
 
 		public override void Reset()
@@ -29,5 +34,13 @@ namespace HutongGames.PlayMaker.Actions
 			
 			Finish();
 		}
+
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName(this, storeResult, min, max);
+        }
+#endif
+
 	}
 }

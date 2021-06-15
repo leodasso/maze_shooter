@@ -6,11 +6,11 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
 	[Tooltip("Get the left foot bottom height.")]
-	public class GetAnimatorLeftFootBottomHeight : FsmStateAction
+	public class GetAnimatorLeftFootBottomHeight : ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The Target. An Animator component is required")]
+        [Tooltip("The GameObject with an Animator Component.")]
 		public FsmOwnerDefault gameObject;
 
 		[ActionSection("Result")]
@@ -22,10 +22,8 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[Tooltip("Repeat every frame. Useful when value is subject to change over time.")]
 		public bool everyFrame;
-		
-		private Animator _animator;
-		
-		public override void Reset()
+
+        public override void Reset()
 		{
 			gameObject = null;
 			leftFootHeight = null;
@@ -39,24 +37,7 @@ namespace HutongGames.PlayMaker.Actions
 
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_getLeftFootBottonHeight();
+			GetLeftFootBottomHeight();
 			
 			if (!everyFrame) 
 			{
@@ -66,15 +47,15 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnLateUpdate()
 		{
-			_getLeftFootBottonHeight();
+			GetLeftFootBottomHeight();
 		}
 		
-		void _getLeftFootBottonHeight()
-		{		
-			if (_animator!=null)
-			{
-				leftFootHeight.Value = _animator.leftFeetBottomHeight;
-			}
-		}
+		private void GetLeftFootBottomHeight()
+		{
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                leftFootHeight.Value = cachedComponent.leftFeetBottomHeight;
+            }
+        }
 	}
 }

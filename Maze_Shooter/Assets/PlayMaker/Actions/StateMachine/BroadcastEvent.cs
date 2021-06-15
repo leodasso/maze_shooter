@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using System;
 using UnityEngine;
@@ -8,16 +8,22 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[Obsolete("This action is obsolete; use Send Event with Event Target instead.")]
 	[ActionCategory(ActionCategory.StateMachine)]
-	[Tooltip("Sends an Event to all FSMs in the scene or to all FSMs on a Game Object.\nNOTE: This action won't work on the very first frame of the game...")]
+	[Tooltip("Sends an Event to all FSMs in the scene or to all FSMs on a Game Object. NOTE: This action won't work on the very first frame of the game...")]
 	public class BroadcastEvent : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("The event to broadcast.")]
 		public FsmString broadcastEvent;
-		[Tooltip("Optionally specify a game object to broadcast the event to all FSMs on that game object.")]
+
+		[Tooltip("By default, the event is broadcast to all FSMs in the scene. " +
+                 "Optionally you can specify a game object to target. The event will then be broadcast to all FSMs on that game object.")]
 		public FsmGameObject gameObject;
-		[Tooltip("Broadcast to all FSMs on the game object's children.")]
+
+        [Tooltip("Broadcast the event to all the Game Object's children too.")]
 		public FsmBool sendToChildren;
-		public FsmBool excludeSelf;
+
+        [Tooltip("Don't send the event to self.")]
+        public FsmBool excludeSelf;
 
 		public override void Reset()
 		{

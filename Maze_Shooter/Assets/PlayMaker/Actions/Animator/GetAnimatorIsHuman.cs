@@ -6,11 +6,11 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
 	[Tooltip("Returns true if the current rig is humanoid, false if it is generic. Can also sends events")]
-	public class GetAnimatorIsHuman : FsmStateAction
+	public class GetAnimatorIsHuman : ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The Target. An Animator component is required")]
+        [Tooltip("The GameObject with an Animator Component.")]
 		public FsmOwnerDefault gameObject;
 		
 		[ActionSection("Results")]
@@ -24,10 +24,8 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[Tooltip("Event send if rig is generic")]
 		public FsmEvent isGenericEvent;
-		
-		private Animator _animator;
-		
-		public override void Reset()
+
+        public override void Reset()
 		{
 			gameObject = null;
 			isHuman = null;
@@ -37,50 +35,19 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-			
-			DoCheckIsHuman();
-			
-			Finish();
-			
-		}
-	
-		void DoCheckIsHuman()
-		{		
-			if (_animator==null)
-			{
-				return;
-			}
-			
-			bool _isHuman = _animator.isHuman;
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                var _isHuman = cachedComponent.isHuman;
 
-			if (! isHuman.IsNone)
-			{
-				isHuman.Value = _isHuman;
-			}		
+                if (!isHuman.IsNone)
+                {
+                    isHuman.Value = _isHuman;
+                }
 
-			if (_isHuman)
-			{
-				Fsm.Event(isHumanEvent);
-			}else{
-				Fsm.Event(isGenericEvent);
-			}
-		}
-		
-	}
+                Fsm.Event(_isHuman ? isHumanEvent : isGenericEvent);
+            }
+
+            Finish();
+        }
+    }
 }

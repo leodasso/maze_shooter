@@ -6,20 +6,18 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
 	[Tooltip("Sets a trigger parameter to active. Triggers are parameters that act mostly like booleans, but get reset to inactive when they are used in a transition.")]
-	public class SetAnimatorTrigger : FsmStateAction
+	public class SetAnimatorTrigger : ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The target. An Animator component is required")]
+        [Tooltip("The GameObject with an Animator Component.")]
 		public FsmOwnerDefault gameObject;
 
         [RequiredField]
         [UIHint(UIHint.AnimatorTrigger)]
 		[Tooltip("The trigger name")]
 		public FsmString trigger;
-		
-		private Animator _animator;
-		
+        
 		public override void Reset()
 		{
 			gameObject = null;
@@ -28,32 +26,12 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-
-			SetTrigger();
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                cachedComponent.SetTrigger(trigger.Value);
+            }
 
 			Finish();
 		}
-		
-		void SetTrigger()
-		{		
-			if (_animator!=null)
-			{
-				_animator.SetTrigger(trigger.Value);
-			}
-		}
-	}
+    }
 }

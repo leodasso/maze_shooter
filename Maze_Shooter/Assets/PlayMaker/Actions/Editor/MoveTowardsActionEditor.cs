@@ -1,8 +1,5 @@
-﻿using HutongGames.PlayMaker.Actions;
-using HutongGames.PlayMakerEditor;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
-using System.Collections;
 
 namespace HutongGames.PlayMakerEditor
 {
@@ -16,7 +13,11 @@ namespace HutongGames.PlayMakerEditor
 
         public override void OnSceneGUI()
         {
-            var moveTowardsAction = (HutongGames.PlayMaker.Actions.MoveTowards) target;
+            var moveTowardsAction = target as HutongGames.PlayMaker.Actions.MoveTowards;
+            if (moveTowardsAction == null) // shouldn't happen!
+            {
+                return;
+            }
 
             if (moveTowardsAction.UpdateTargetPos())
             {

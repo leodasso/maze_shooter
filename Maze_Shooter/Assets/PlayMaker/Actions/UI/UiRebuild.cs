@@ -11,7 +11,8 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The GameObject with the UI Graphic component.")]
 		public FsmOwnerDefault gameObject;
 
-		public UnityEngine.UI.CanvasUpdate canvasUpdate;
+        [Tooltip("When to Update.")]
+        public UnityEngine.UI.CanvasUpdate canvasUpdate;
 
 		[Tooltip("Only Rebuild when state exits.")]
 		public bool rebuildOnExit;

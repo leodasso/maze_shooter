@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -10,18 +10,26 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("The float variable to animate.")]
 		public FsmFloat floatVariable;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("Animate from this value.")]
 		public FsmFloat fromValue;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("Animate to this value.")]
 		public FsmFloat toValue;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("The curve to use when animating.")]
 		public FsmAnimationCurve animCurve;
-		[Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue and toValue.")]
+
+        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue and toValue.")]
 		public Calculation calculation;
 		
 		
-		private bool finishInNextStep = false;
+		private bool finishInNextStep;
 				
 		public override void Reset()
 		{

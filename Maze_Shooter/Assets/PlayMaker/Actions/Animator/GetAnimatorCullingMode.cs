@@ -8,11 +8,11 @@ namespace HutongGames.PlayMaker.Actions
 	[Tooltip("Returns the culling of this Animator component. Optionally sends events.\n" +
 		"If true ('AlwaysAnimate'): always animate the entire character. Object is animated even when offscreen.\n" +
 		 "If False ('BasedOnRenderers') animation is disabled when renderers are not visible.")]
-	public class GetAnimatorCullingMode : FsmStateAction
+	public class GetAnimatorCullingMode : ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The Target. An Animator component is required")]
+        [Tooltip("The GameObject with an Animator Component.")]
 		public FsmOwnerDefault gameObject;
 		
 		[ActionSection("Results")]
@@ -27,9 +27,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[Tooltip("Event send if culling mode is 'BasedOnRenders'")]
 		public FsmEvent basedOnRenderersEvent;
-		
-		private Animator _animator;
-		
+        
 		public override void Reset()
 		{
 			gameObject = null;
@@ -40,48 +38,16 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-			
-			DoCheckCulling();
-			
-			Finish();
-			
-		}
-	
-		void DoCheckCulling()
-		{		
-			if (_animator==null)
-			{
-				return;
-			}
-			
-			bool _alwaysOn = _animator.cullingMode==AnimatorCullingMode.AlwaysAnimate?true:false;
-			
-			alwaysAnimate.Value = _alwaysOn;
-			
-			if (_alwaysOn)
-			{
-				Fsm.Event(alwaysAnimateEvent);
-			}else{
-				Fsm.Event(basedOnRenderersEvent);
-			}
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                var _alwaysOn = cachedComponent.cullingMode == AnimatorCullingMode.AlwaysAnimate;
 
-		}
-		
+                alwaysAnimate.Value = _alwaysOn;
+
+                Fsm.Event(_alwaysOn ? alwaysAnimateEvent : basedOnRenderersEvent);
+            }
+
+            Finish();
+        }
 	}
 }

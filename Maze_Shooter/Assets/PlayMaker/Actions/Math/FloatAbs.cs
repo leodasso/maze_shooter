@@ -41,5 +41,14 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			floatVariable.Value = Mathf.Abs(floatVariable.Value);
 		}
+
+#if UNITY_EDITOR
+
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName(this, floatVariable);
+        }
+
+#endif
 	}
 }

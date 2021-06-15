@@ -14,15 +14,19 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmGameObject gameObject;
 		
 		[RequiredField]
-		public FsmFloat offsetLeft;
+        [Tooltip("Left screen offset.")]
+        public FsmFloat offsetLeft;
 		
 		[RequiredField]
+        [Tooltip("Screen offset up.")]
 		public FsmFloat offsetTop;
 		
 		[RequiredField]
+        [Tooltip("Width of area.")]
 		public FsmFloat width;
 		
 		[RequiredField]
+        [Tooltip("Height of area.")]
 		public FsmFloat height;
 		
 		[Tooltip("Use normalized screen coordinates (0-1).")]

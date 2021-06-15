@@ -15,10 +15,13 @@ namespace HutongGames.PlayMaker.Actions
 		[UIHint(UIHint.Variable)]
 		[Tooltip("Use stored Vector3 value, and/or set each axis below.")]
 		public FsmVector3 vector;
-		
-		public FsmFloat x;
-		public FsmFloat y;
-		public FsmFloat z;
+
+        [Tooltip("Scale along the X axis (1 = normal).")]
+        public FsmFloat x;
+        [Tooltip("Scale along the Y axis (1 = normal).")]
+        public FsmFloat y;
+        [Tooltip("Scale along the Z axis (1 = normal).")]
+        public FsmFloat z;
 
 		[Tooltip("Repeat every frame.")]
 		public bool everyFrame;

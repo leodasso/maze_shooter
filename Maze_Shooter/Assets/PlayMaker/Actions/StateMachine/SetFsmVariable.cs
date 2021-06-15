@@ -21,6 +21,7 @@ namespace HutongGames.PlayMaker.Actions
         public FsmString variableName;
 
         [RequiredField]
+        [Tooltip("Set the value.")]
         public FsmVar setValue;
 
         [Tooltip("Repeat every frame.")]
@@ -77,6 +78,8 @@ namespace HutongGames.PlayMaker.Actions
                 }
                 cachedGameObject = go;
                 cachedFsmName = fsmName.Value;
+                
+                cachedVariableName = string.Empty; // invalidates variable cache
             }
 
             if (variableName.Value != cachedVariableName)

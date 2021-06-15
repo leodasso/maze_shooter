@@ -10,17 +10,30 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the screen height in a Float Variable")]
 		public FsmFloat storeScreenHeight;
 
+		[Tooltip("Repeat every frame")]
+		public bool everyFrame;
+		
 		public override void Reset()
 		{
 			storeScreenHeight = null;
+			everyFrame = false;
 		}
 		
 		public override void OnEnter()
 		{
 			storeScreenHeight.Value = Screen.height;
-			Finish();
+			if (!everyFrame)
+			{
+				Finish();
+			}
+		}
+		
+		public override void OnUpdate()
+		{
+			storeScreenHeight.Value = Screen.height;
 		}
 		
 	}

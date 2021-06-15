@@ -1,13 +1,14 @@
-﻿using System.Linq;
-using HutongGames.PlayMaker;
+﻿// (c) Copyright HutongGames, LLC. All rights reserved.
+
+//#define DEBUG_LOG
+
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.Callbacks;
-using UnityEngine.SceneManagement;
-
-#if UNITY_5_6_OR_NEWER
 using UnityEditor.Build;
-#endif
+using UnityEditor.Callbacks;
+using Debug = UnityEngine.Debug;
 
 #if UNITY_2018_3_OR_NEWER
 using UnityEditor.Build.Reporting;
@@ -15,6 +16,9 @@ using UnityEditor.Build.Reporting;
 
 namespace HutongGames.PlayMakerEditor
 {
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
+    public class PlayMakerBuildCallbacks
+    {
 #if UNITY_2018_3_OR_NEWER    
 
     public class PlayMakerPreProcessBuild : IPreprocessBuildWithReport
@@ -39,29 +43,17 @@ namespace HutongGames.PlayMakerEditor
             ProjectTools.PreprocessPrefabFSMs();
         }
     }
-
+         
 #endif
 
-
-    public class PlayMakerBuildCallbacks
-    {
-        [PostProcessSceneAttribute(2)]
-        public static void OnPostprocessScene()
+        [PostProcessScene(2)]
+        public static void OnPostProcessScene()
         {
-            /* TODO: Figure out if we need to do this!
-            // OnPostprocessScene is called when loading a scene in the editor 
-            // Might not want to post process in that case...?
-            if (EditorApplication.isPlayingOrWillChangePlaymode)
-            {
-                return;
-            }*/
+            // No need to post process if playing in editor,
+            // sine we're not really making a build
+            if (Application.isPlaying) return;
 
-            //Debug.Log("OnPostprocessScene: " + SceneManager.GetActiveScene().name);
-
-            if (Application.isPlaying) // playing in editor, not really making a build
-            {
-                return;
-            }
+            DebugLog("OnPostProcessScene", LogColor.Yellow);
 
             PlayMakerGlobals.IsBuilding = true;
             PlayMakerGlobals.InitApplicationFlags();
@@ -69,22 +61,60 @@ namespace HutongGames.PlayMakerEditor
             var fsmList = Resources.FindObjectsOfTypeAll<PlayMakerFSM>();
             foreach (var playMakerFSM in fsmList)
             {
-                if (playMakerFSM == null) continue; // not sure when this happens, but need to catch it...
+                // not sure when this happens, but need to catch it...
+                if (playMakerFSM == null) continue; 
                     
- #if UNITY_5_6_OR_NEWER                   
-                if (FsmPrefabs.IsPrefab(playMakerFSM)) 
-                {
-                    // already processed by PlayMakerPreProcessBuild
-                    continue;
-                }
-#endif
+                // PlayMakerPreProcessBuild has already processed prefabs
+                if (FsmPrefabs.IsPrefab(playMakerFSM)) continue;
 
                 playMakerFSM.Preprocess();
+
+                StripEditorData(playMakerFSM);
             }
 
             PlayMakerGlobals.IsBuilding = false;
 
             //Debug.Log("EndPostProcessScene");
         }
+
+        /// <summary>
+        /// Try to minimize size of data
+        /// </summary>
+        /// <param name="fsmComponent"></param>
+        private static void StripEditorData(PlayMakerFSM fsmComponent)
+        {
+            if (fsmComponent == null) return;
+            
+            var fsm = fsmComponent.Fsm;
+            if (fsm == null) return;
+
+            DebugLog("StripEditorData: " + Labels.GetFullFsmLabelWithInstanceID(fsm), LogColor.Yellow);
+
+#if PM2
+            fsm.EditorData = "";
+#endif
+
+            fsm.Description = "";
+            fsm.Watermark = "";
+
+            foreach (var state in fsm.States)
+            {
+                state.Description = "";
+            }
+
+            fsm.Variables.DeleteEmptyVariables();
+            fsm.Variables.StripEditorOnlyData();
+        }
+
+        #region Debug
+
+        [Conditional("DEBUG_LOG")]
+        private static void DebugLog(object message, LogColor logColor = LogColor.None)
+        {
+            LogHelper.Log("PlayMakerBuildCallbacks", message, logColor);
+        }
+
+        #endregion
+
     }
 }

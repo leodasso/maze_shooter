@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Scene)]
-	[Tooltip("Get a scene isDirty flag. true if the scene is modified. ")]
+	[Tooltip("Get a scene isDirty flag. True if the scene is modified.")]
 	public class GetSceneIsDirty : GetSceneActionBase
 	{
 		[ActionSection("Result")]

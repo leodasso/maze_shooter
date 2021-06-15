@@ -39,10 +39,9 @@ namespace HutongGames.PlayMakerEditor
                     if (instance == null)
                     {
                         instance = CreateInstance<EditorStartupPrefs>();
-                        // There are too many edge cases where Unity isn't ready to load resources
-                        // E.g., after importing a unitypackage
-                        // So we won't log a message to avoid support spam.
-                        //UnityEngine.Debug.Log("PlayMaker: Missing EditorStartupPrefs asset!");
+
+                        // Note: Save will be called after importing unitypackage
+                        // when the WelcomeScreen opens and sets WelcomeScreenVersion
                     }
                 }
                 return instance;
@@ -121,32 +120,20 @@ namespace HutongGames.PlayMakerEditor
             set { instance.useLegacyNetworking = value; Save(); }
         }
 
-        /*
-        public static bool UseLegacyGUI
-        {
-            get { return Instance.useLegacyGUI; }
-            set { instance.useLegacyGUI = value; Save(); }
-        }
-
-        public static bool UseITween
-        {
-            get { return Instance.useITween; }
-            set { instance.useITween = value; Save(); }
-        }*/     
-
         [Header("NOTE: Do not manually edit these parameters!")]
 
         // can't do this, see note above
         //[SerializeField] private string unityBuildVersion;
-        
+
         [SerializeField] private string welcomeScreenVersion;
         [SerializeField] private string playmakerVersion;
         [SerializeField] private bool showWelcomeScreen = true;
         [SerializeField] private bool showUpgradeGuide;
         [SerializeField] private string lastAutoUpdateSignature;
+
+        // Not the best place for this setting
+        // since it gets reset when updating Playmaker
         [SerializeField] private bool useLegacyNetworking;
-        //[SerializeField] private bool useLegacyGUI;
-        //[SerializeField] private bool useITween;
 
         public static void ResetForExport()
         {
@@ -155,8 +142,6 @@ namespace HutongGames.PlayMakerEditor
             PlaymakerVersion = string.Empty;
             WelcomeScreenVersion = string.Empty;
             UseLegacyNetworking = false;
-            //UseLegacyGUI = false;
-            //UseITween = false;
         }
 
         /// <summary>

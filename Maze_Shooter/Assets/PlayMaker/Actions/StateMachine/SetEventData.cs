@@ -1,28 +1,43 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2021. All rights reserved.
 
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.StateMachine)]
-	[Tooltip("Sets Event Data before sending an event. Get the Event Data, along with sender information, using Get Event Info action.")]
+	[Tooltip("Sets Event Data before sending an event. Get the Event Data, along with sender information, using the {{Get Event Info}} action.")]
 	public class SetEventData : FsmStateAction
 	{
-		public FsmGameObject setGameObjectData;
-		public FsmInt setIntData;
+        [Tooltip("Custom Game Object data.")]
+        public FsmGameObject setGameObjectData;
+        [Tooltip("Custom Int data.")]
+        public FsmInt setIntData;
+        [Tooltip("Custom Float data.")]
 		public FsmFloat setFloatData;
+        [Tooltip("Custom String data.")]
 		public FsmString setStringData;
+        [Tooltip("Custom Bool data.")]
 		public FsmBool setBoolData;
+        [Tooltip("Custom Vector2 data.")]
 		public FsmVector2 setVector2Data;
+        [Tooltip("Custom Vector3 data.")]
 		public FsmVector3 setVector3Data;
+        [Tooltip("Custom Rect data.")]
 		public FsmRect setRectData;
+        [Tooltip("Custom Quaternion data.")]
 		public FsmQuaternion setQuaternionData;
+        [Tooltip("Custom Color data.")]
 		public FsmColor setColorData;
+        [Tooltip("Custom Material data.")]
 		public FsmMaterial setMaterialData;
+        [Tooltip("Custom Texture data.")]
 		public FsmTexture setTextureData;
+        [Tooltip("Custom Object data.")]
 		public FsmObject setObjectData;
 
-		public override void Reset()
+        public bool everyFrame;
+
+        public override void Reset()
 		{
 			setGameObjectData = new FsmGameObject{UseVariable = true};
 			setIntData = new FsmInt { UseVariable = true };
@@ -37,25 +52,60 @@ namespace HutongGames.PlayMaker.Actions
 			setMaterialData = new FsmMaterial { UseVariable = true };
 			setTextureData = new FsmTexture { UseVariable = true };
 			setObjectData = new FsmObject { UseVariable = true };
-		}
+
+            everyFrame = false;
+        }
 
 		public override void OnEnter()
 		{
-			Fsm.EventData.BoolData = setBoolData.Value;
-			Fsm.EventData.IntData = setIntData.Value;
-			Fsm.EventData.FloatData = setFloatData.Value;
-			Fsm.EventData.Vector2Data = setVector2Data.Value;
-			Fsm.EventData.Vector3Data = setVector3Data.Value;
-			Fsm.EventData.StringData = setStringData.Value;
-			Fsm.EventData.GameObjectData = setGameObjectData.Value;
-			Fsm.EventData.RectData = setRectData.Value;
-			Fsm.EventData.QuaternionData = setQuaternionData.Value;
-			Fsm.EventData.ColorData = setColorData.Value;
-			Fsm.EventData.MaterialData = setMaterialData.Value;
-			Fsm.EventData.TextureData = setTextureData.Value;
-			Fsm.EventData.ObjectData = setObjectData.Value;
-		
-			Finish();
+            DoSetData();
+
+            if (!everyFrame)
+            {
+                Finish();
+            }
 		}
-	}
+
+        public override void OnUpdate()
+        {
+            DoSetData();
+        }
+
+        private void DoSetData()
+        {
+            Fsm.EventData.BoolData = setBoolData.Value;
+            Fsm.EventData.IntData = setIntData.Value;
+            Fsm.EventData.FloatData = setFloatData.Value;
+            Fsm.EventData.Vector2Data = setVector2Data.Value;
+            Fsm.EventData.Vector3Data = setVector3Data.Value;
+            Fsm.EventData.StringData = setStringData.Value;
+            Fsm.EventData.GameObjectData = setGameObjectData.Value;
+            Fsm.EventData.RectData = setRectData.Value;
+            Fsm.EventData.QuaternionData = setQuaternionData.Value;
+            Fsm.EventData.ColorData = setColorData.Value;
+            Fsm.EventData.MaterialData = setMaterialData.Value;
+            Fsm.EventData.TextureData = setTextureData.Value;
+            Fsm.EventData.ObjectData = setObjectData.Value;
+        }
+
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return "SetEventData: " + 
+                    (setBoolData.IsNone ? "" : ActionHelpers.GetValueLabel(setBoolData)) +
+                    (setIntData.IsNone ? "" : ActionHelpers.GetValueLabel(setIntData)) +
+                    (setFloatData.IsNone ? "" : ActionHelpers.GetValueLabel(setFloatData)) +
+                    (setVector2Data.IsNone ? "" : ActionHelpers.GetValueLabel(setVector2Data)) +
+                    (setStringData.IsNone ? "" : ActionHelpers.GetValueLabel(setStringData)) +
+                    (setGameObjectData.IsNone ? "" : ActionHelpers.GetValueLabel(setGameObjectData)) +
+                    (setRectData.IsNone ? "" : ActionHelpers.GetValueLabel(setRectData)) +
+                    (setQuaternionData.IsNone ? "" : ActionHelpers.GetValueLabel(setQuaternionData)) +
+                    (setColorData.IsNone ? "" : ActionHelpers.GetValueLabel(setColorData)) +
+                    (setMaterialData.IsNone ? "" : ActionHelpers.GetValueLabel(setMaterialData)) +
+                    (setTextureData.IsNone ? "" : ActionHelpers.GetValueLabel(setTextureData)) +
+                    (setObjectData.IsNone ? "" : ActionHelpers.GetValueLabel(setObjectData))
+                ;
+        }
+#endif
+    }
 }

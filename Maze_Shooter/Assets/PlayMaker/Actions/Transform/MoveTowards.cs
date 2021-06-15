@@ -15,21 +15,21 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("A target GameObject to move towards. Or use a world Target Position below.")]
 		public FsmGameObject targetObject;
 		
-		[Tooltip("A world position if no Target Object. Otherwise used as a local offset from the Target Object.")]
+		[Tooltip("A world position to move towards, if no Target Object is set. Otherwise used as a local offset from the Target Object.")]
 		public FsmVector3 targetPosition;
 		
 		[Tooltip("Ignore any height difference in the target.")]
 		public FsmBool ignoreVertical;
 		
 		[HasFloatSlider(0, 20)]
-		[Tooltip("The maximum movement speed. HINT: You can make this a variable to change it over time.")]
+		[Tooltip("The maximum movement speed (Unity units per second). HINT: You can make this a variable to change it over time.")]
 		public FsmFloat maxSpeed;
 		
 		[HasFloatSlider(0, 5)]
 		[Tooltip("Distance at which the move is considered finished, and the Finish Event is sent.")]
 		public FsmFloat finishDistance;
 		
-		[Tooltip("Event to send when the Finish Distance is reached.")]
+		[Tooltip("Event to send when the Finish Distance is reached. Use this to transition to the next state.")]
 		public FsmEvent finishEvent;
 
         private GameObject go;
@@ -112,5 +112,27 @@ namespace HutongGames.PlayMaker.Actions
         {
             return targetPosWithVertical;
         }
+
+
+        #if UNITY_EDITOR
+
+		float _originalDistance = -1;
+
+        public override float GetProgress()
+        {
+			float distance = (go.transform.position - targetPos).magnitude;
+
+			if (_originalDistance == -1) {
+				_originalDistance = distance;
+			}
+
+			_originalDistance = Mathf.Max (_originalDistance, distance);
+
+
+			return Mathf.Max(0,Mathf.Min(1f-(distance/_originalDistance) , 1f));
+        }
+
+		#endif
+
 	}
 }

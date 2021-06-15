@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 using System.Collections.Generic;
@@ -10,10 +10,15 @@ namespace HutongGames.PlayMaker.Actions
 	public class EaseColor : EaseFsmAction
 	{
 		[RequiredField]
+        [Tooltip("The Color value to ease from.")]
 		public FsmColor fromValue;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("The Color value to ease to.")]
 		public FsmColor toValue;
-		[UIHint(UIHint.Variable)]
+
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Store the result in a Color Variable.")]
 		public FsmColor colorVariable;
 		
 		private bool finishInNextStep = false;
@@ -42,7 +47,7 @@ namespace HutongGames.PlayMaker.Actions
 			toFloats[3] = toValue.Value.a;
 			resultFloats = new float[4];
 			finishInNextStep = false;
-		    colorVariable.Value = fromValue.Value;
+		    colorVariable.Value = reverse.IsNone ? fromValue.Value : reverse.Value ? toValue.Value : fromValue.Value;
 		}
 		
 		public override void OnExit (){

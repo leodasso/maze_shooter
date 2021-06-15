@@ -8,10 +8,15 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmInt intVariable;
+        [Tooltip("The variable to add to.")]
+        public FsmInt intVariable;
+
 		[RequiredField]
-		public FsmInt add;
-		public bool everyFrame;
+        [Tooltip("The value to add.")]
+        public FsmInt add;
+
+        [Tooltip("Repeat every frame. NOTE: This operation will NOT be frame rate independent!")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

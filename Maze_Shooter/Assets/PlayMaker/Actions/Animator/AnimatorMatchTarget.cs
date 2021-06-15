@@ -1,28 +1,28 @@
-// (c) Copyright HutongGames, LLC 2010-2016. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
-	[Tooltip("Automatically adjust the gameobject position and rotation so that the AvatarTarget reaches the matchPosition when the current state is at the specified progress")]
-	public class AnimatorMatchTarget: FsmStateAction
+	[Tooltip("Automatically adjust the GameObject position and rotation so that the AvatarTarget reaches the Match Position when the current animation state is at the specified progress.")]
+	public class AnimatorMatchTarget: ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The Target. An Animator component is required")]
+		[Tooltip("The GameObject with an Animator component.")]
 		public FsmOwnerDefault gameObject;
 		
-		[Tooltip("The body part that is involved in the match")]
+		[Tooltip("The body part that is used to match the target.")]
 		public AvatarTarget bodyPart;
 		
-		[Tooltip("The gameObject target to match")]
+		[Tooltip("A GameObject target to match. Leave empty to use position instead.")]
 		public FsmGameObject target;
 		
-		[Tooltip("The position of the ik goal. If Goal GameObject set, position is used as an offset from Goal")]
+		[Tooltip("A target position to match. If Target GameObject is set, this is used as an offset from the Target's position.")]
 		public FsmVector3 targetPosition;
 		
-		[Tooltip("The rotation of the ik goal.If Goal GameObject set, rotation is used as an offset from Goal")]
+		[Tooltip("A rotation to match. If Target GameObject is set, this is used as an offset from the Target's rotation.")]
 		public FsmQuaternion targetRotation;
 		
 		[Tooltip("The MatchTargetWeightMask Position XYZ weight")]
@@ -34,24 +34,30 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Start time within the animation clip (0 - beginning of clip, 1 - end of clip)")]
 		public FsmFloat startNormalizedTime;
 		
-		[Tooltip("End time within the animation clip (0 - beginning of clip, 1 - end of clip), values greater than 1 can be set to trigger a match after a certain number of loops. Ex: 2.3 means at 30% of 2nd loop")]
+		[Tooltip("End time within the animation clip (0 - beginning of clip, 1 - end of clip). " +
+                 "Values greater than 1 trigger a match after a certain number of loops. " +
+                 "Example: 2.3 means at 30% of 2nd loop.")]
 		public FsmFloat targetNormalizedTime;
 		
 		[Tooltip("Should always be true")]
 		public bool everyFrame;
-			
-		private Animator _animator;
-		
-		private Transform _transform;
-		
+
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
+
+        private GameObject cachedTarget;
+		private Transform targetTransform;
+        private MatchTargetWeightMask weightMask;
 		
 		public override void Reset()
 		{
 			gameObject = null;
 			bodyPart = AvatarTarget.Root;
 			target = null;
-			targetPosition = new FsmVector3() {UseVariable = true};
-			targetRotation = new FsmQuaternion() {UseVariable = true};
+			targetPosition = new FsmVector3 {UseVariable = true};
+			targetRotation = new FsmQuaternion {UseVariable = true};
 			positionWeight = Vector3.one;
 			rotationWeight = 0f;
 			startNormalizedTime = null;
@@ -61,75 +67,61 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-			
-			GameObject _target = target.Value;
-			if (_target!=null)
-			{
-				_transform = _target.transform;
-			}
-			
-			DoMatchTarget();
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
+
+            if (cachedTarget != target.Value)
+            {
+                cachedTarget = target.Value;
+                targetTransform = cachedTarget != null ? cachedTarget.transform : null;
+            }
+
+            weightMask = new MatchTargetWeightMask();
+
+            DoMatchTarget();
 			
 			if(!everyFrame)
 			{
 				Finish();
 			}
-			
-		}
+        }
 		
 		public override void OnUpdate()
 		{
 			DoMatchTarget();
 		}
-		
-	
-		void DoMatchTarget()
-		{		
-			if (_animator==null)
-			{
-				return;
-			}
+
+        private void DoMatchTarget()
+        {
+            if (animator == null) return;
 			
-			Vector3 _pos = Vector3.zero;
-			Quaternion _rot = Quaternion.identity;
+			var pos = Vector3.zero;
+			var rot = Quaternion.identity;
 			
-			if (_transform!=null)
+			if (targetTransform != null)
 			{
-				_pos = _transform.position;
-				_rot = _transform.rotation;
+				pos = targetTransform.position;
+				rot = targetTransform.rotation;
 			}
 			
 			if (!targetPosition.IsNone)
 			{
-				_pos += targetPosition.Value;
+				pos += targetPosition.Value;
 			}
 			
 			if (!targetRotation.IsNone)
 			{
-				_rot *= targetRotation.Value;
+				rot *= targetRotation.Value;
+            }
 
-			}
-		
-			MatchTargetWeightMask _weightMask = new MatchTargetWeightMask(positionWeight.Value, rotationWeight.Value);
-			_animator.MatchTarget(_pos,_rot, bodyPart, _weightMask, startNormalizedTime.Value, targetNormalizedTime.Value);
-			
-		}
+            weightMask.positionXYZWeight = positionWeight.Value;
+            weightMask.rotationWeight = rotationWeight.Value;
+
+            animator.MatchTarget(pos, rot, bodyPart, weightMask, startNormalizedTime.Value, targetNormalizedTime.Value);
+        }
 		
 	}
 }

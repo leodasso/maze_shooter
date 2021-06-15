@@ -5,7 +5,7 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Array)]
-	[Tooltip("Add values to an array.")]
+	[Tooltip("Add multiple items to the end of an array.\nNOTE: There is a bug in this action when resizing Variables. It will be fixed in the next update.")]
 	public class ArrayAddRange : FsmStateAction
 	{
 		[RequiredField]
@@ -15,7 +15,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[RequiredField]
 		[MatchElementType("array")]
-		[Tooltip("The variables to add.")]
+		[Tooltip("The items to add to the array.")]
 		public FsmVar[] variables;
 		
 		public override void Reset()

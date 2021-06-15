@@ -7,16 +7,22 @@ namespace HutongGames.PlayMaker.Actions
 	public class IntCompare : FsmStateAction
 	{
 		[RequiredField]
-		public FsmInt integer1;
+        [Tooltip("The first integer.")]
+        public FsmInt integer1;
+
 		[RequiredField]
-		public FsmInt integer2;
-		[Tooltip("Event sent if Int 1 equals Int 2")]
+        [Tooltip("The second integer.")]
+        public FsmInt integer2;
+
+		[Tooltip("Event sent if Integer 1 equals Integer 2")]
 		public FsmEvent equal;
-		[Tooltip("Event sent if Int 1 is less than Int 2")]
+		[Tooltip("Event sent if Integer 1 is less than Integer 2")]
 		public FsmEvent lessThan;
-		[Tooltip("Event sent if Int 1 is greater than Int 2")]
+		[Tooltip("Event sent if Integer 1 is greater than Integer 2")]
 		public FsmEvent greaterThan;
-		public bool everyFrame;
+
+        [Tooltip("Perform this action every frame. Useful if you want to wait for a comparison to be true before sending an event.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

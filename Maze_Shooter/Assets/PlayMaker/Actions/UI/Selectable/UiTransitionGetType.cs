@@ -1,5 +1,4 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2018. All rights reserved.
-
+﻿// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine.UI;
 
@@ -29,8 +28,8 @@ namespace HutongGames.PlayMaker.Actions
         public FsmEvent noTransitionEvent;
 
         private Selectable selectable;
-        private Selectable.Transition originalTransition;
-
+        
+        //private Selectable.Transition originalTransition;
 
         public override void Reset()
         {

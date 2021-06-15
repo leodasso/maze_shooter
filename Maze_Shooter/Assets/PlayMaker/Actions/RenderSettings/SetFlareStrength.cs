@@ -9,8 +9,11 @@ namespace HutongGames.PlayMaker.Actions
 	public class SetFlareStrength : FsmStateAction
 	{
 		[RequiredField]
-		public FsmFloat flareStrength;
-		public bool everyFrame;
+        [Tooltip("The intensity of flares in the scene.")]
+        public FsmFloat flareStrength;
+
+        [Tooltip("Update every frame. Useful if the intensity is animated.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

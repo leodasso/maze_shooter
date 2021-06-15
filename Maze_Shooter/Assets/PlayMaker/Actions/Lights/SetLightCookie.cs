@@ -10,8 +10,11 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Light))]
-		public FsmOwnerDefault gameObject;
-		public FsmTexture lightCookie;
+        [Tooltip("The Game Object with the Light Component.")]
+        public FsmOwnerDefault gameObject;
+
+        [Tooltip("The texture to project.")]
+        public FsmTexture lightCookie;
 
 		public override void Reset()
 		{

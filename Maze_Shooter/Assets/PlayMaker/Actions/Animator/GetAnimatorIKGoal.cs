@@ -10,7 +10,7 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The target. An Animator component is required")]
+        [Tooltip("The GameObject with an Animator Component.")]
 		public FsmOwnerDefault gameObject;
 		
 		[Tooltip("The IK goal")]
@@ -20,11 +20,11 @@ namespace HutongGames.PlayMaker.Actions
 		[ActionSection("Results")]
 
 		[UIHint(UIHint.Variable)]
-		[Tooltip("The gameObject to apply ik goal position and rotation to")]
+		[Tooltip("The gameObject to apply ik goal position and rotation to.")]
 		public FsmGameObject goal;
 		
 		[UIHint(UIHint.Variable)]
-		[Tooltip("Gets The position of the ik goal. If Goal GameObject define, position is used as an offset from Goal")]
+		[Tooltip("Gets The position of the ik goal. If Goal GameObject is defined, position is used as an offset from Goal")]
 		public FsmVector3 position;
 		
 		[UIHint(UIHint.Variable)]
@@ -39,11 +39,14 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Gets the rotational weight of an IK goal (0 = rotation before IK, 1 = rotation at the IK goal)")]
 		public FsmFloat rotationWeight;
 
-	 	Animator _animator;
-		
-		Transform _transform;
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
 
-		AvatarIKGoal _iKGoal;
+        private GameObject cachedGoal;
+        private Transform _transform;
+        private AvatarIKGoal _iKGoal;
 
 		public override void Reset()
 		{
@@ -63,30 +66,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-			
-			GameObject _goal = goal.Value;
-			if (_goal!=null)
-			{
-				_transform = _goal.transform;
-			}
-
-		}
+        }
 	
 		public override void OnActionUpdate()
 		{
@@ -97,40 +77,46 @@ namespace HutongGames.PlayMaker.Actions
 				Finish();
 			}
 		}
-		
-	
-		void DoGetIKGoal()
-		{		
-			if (_animator==null)
-			{
-				return;
-			}
 
-			_iKGoal = 	(AvatarIKGoal)iKGoal.Value;
+        private void DoGetIKGoal()
+        {
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
 
-			if (_transform!=null)
+            if (cachedGoal != goal.Value)
+            {
+                cachedGoal = goal.Value;
+                _transform = cachedGoal != null ? cachedGoal.transform : null;
+            }
+
+            _iKGoal = (AvatarIKGoal)iKGoal.Value;
+
+			if (_transform != null)
 			{
-				_transform.position = _animator.GetIKPosition(_iKGoal);
-				_transform.rotation = _animator.GetIKRotation(_iKGoal);
+				_transform.position = animator.GetIKPosition(_iKGoal);
+				_transform.rotation = animator.GetIKRotation(_iKGoal);
 			}
 			
 			if (!position.IsNone)
 			{
-				position.Value = _animator.GetIKPosition(_iKGoal);
+				position.Value = animator.GetIKPosition(_iKGoal);
 			}
 			
 			if (!rotation.IsNone)
 			{
-				rotation.Value =_animator.GetIKRotation(_iKGoal);
+				rotation.Value = animator.GetIKRotation(_iKGoal);
 			}
 			
 			if (!positionWeight.IsNone)
 			{
-				positionWeight.Value = _animator.GetIKPositionWeight(_iKGoal);
+				positionWeight.Value = animator.GetIKPositionWeight(_iKGoal);
 			}
 			if (!rotationWeight.IsNone)
 			{
-				rotationWeight.Value = _animator.GetIKRotationWeight(_iKGoal);
+				rotationWeight.Value = animator.GetIKRotationWeight(_iKGoal);
 			}
 		}
 		

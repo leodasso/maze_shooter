@@ -10,13 +10,19 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmVector3 vector3Variable;
+        [Tooltip("Vector3 variable to set.")]
+        public FsmVector3 vector3Variable;
+        [Tooltip("Set using another Vector3 variable and/or individual channels below.")]
 		[UIHint(UIHint.Variable)]
 		public FsmVector3 vector3Value;
-		public FsmFloat x;
-		public FsmFloat y;
-		public FsmFloat z;
-		public bool everyFrame;
+        [Tooltip("Set X channel.")]
+        public FsmFloat x;
+        [Tooltip("Set Y channel.")]
+        public FsmFloat y;
+        [Tooltip("Set Z channel.")]
+        public FsmFloat z;
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

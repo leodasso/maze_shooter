@@ -10,13 +10,22 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("The Vector3 variable to examine.")]
 		public FsmVector3 vector3Variable;
+
 		[UIHint(UIHint.Variable)]
-		public FsmFloat storeX;		
+        [Tooltip("Store X value in a float variable.")]
+        public FsmFloat storeX;		
+
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store Y value in a float variable.")]
 		public FsmFloat storeY;		
+
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store Z value in a float variable.")]
 		public FsmFloat storeZ;	
+
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 		
 		public override void Reset()

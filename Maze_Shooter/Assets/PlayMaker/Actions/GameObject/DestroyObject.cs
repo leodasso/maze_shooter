@@ -57,5 +57,15 @@ namespace HutongGames.PlayMaker.Actions
 			//delayedEvent.Update();
 		}
 
+        #if UNITY_EDITOR
+
+        public override string AutoName()
+        {
+            return "Destroy " + ActionHelpers.GetValueLabel(gameObject);
+        }
+
+
+#endif
+
 	}
 }

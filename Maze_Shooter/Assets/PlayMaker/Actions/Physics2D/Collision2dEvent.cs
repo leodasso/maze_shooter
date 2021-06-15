@@ -1,11 +1,13 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2016. All rights reserved.
+﻿// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory(ActionCategory.Physics2D)]
-    [Tooltip("Detect collisions between Game Objects that have RigidBody2D/Collider2D components.")]
+    [Tooltip("Detect collisions between the Owner of this FSM and other Game Objects that have RigidBody2D components. " +
+             "NOTE: The system events, COLLISION ENTER 2D, COLLISION STAY 2D, and COLLISION EXIT 2D are sent automatically " +
+             "on collisions with any object. Use this action instead to filter collisions by Tag.")]
     public class Collision2dEvent : FsmStateAction
     {
         [Tooltip("The GameObject to detect collisions on.")]
@@ -13,6 +15,9 @@ namespace HutongGames.PlayMaker.Actions
 
         [Tooltip("The type of collision to detect.")]
         public Collision2DType collision;
+
+        [Tooltip("If true, Collision that are not enabled will be ignored.")]
+        public FsmBool ignoreDisabled;
 
         [UIHint(UIHint.TagMenu)]
         [Tooltip("Filter by Tag.")]
@@ -39,6 +44,7 @@ namespace HutongGames.PlayMaker.Actions
             sendEvent = null;
             storeCollider = null;
             storeForce = null;
+            ignoreDisabled = false;
         }
 
         public override void OnPreprocess()
@@ -201,6 +207,11 @@ namespace HutongGames.PlayMaker.Actions
         {
             if (collision == Collision2DType.OnCollisionEnter2D)
             {
+                if (ignoreDisabled.Value && !collisionInfo.enabled)
+                {
+                    return;
+                }
+
                 if (TagMatches(collideTag, collisionInfo))
                 {
                     StoreCollisionInfo(collisionInfo);
@@ -213,6 +224,11 @@ namespace HutongGames.PlayMaker.Actions
         {
             if (collision == Collision2DType.OnCollisionStay2D)
             {
+                if (ignoreDisabled.Value && !collisionInfo.enabled)
+                {
+                    return;
+                }
+
                 if (TagMatches(collideTag, collisionInfo))
                 {
                     StoreCollisionInfo(collisionInfo);
@@ -225,6 +241,11 @@ namespace HutongGames.PlayMaker.Actions
         {
             if (collision == Collision2DType.OnCollisionExit2D)
             {
+                if (ignoreDisabled.Value && !collisionInfo.enabled)
+                {
+                    return;
+                }
+
                 if (TagMatches(collideTag, collisionInfo))
                 {
                     StoreCollisionInfo(collisionInfo);

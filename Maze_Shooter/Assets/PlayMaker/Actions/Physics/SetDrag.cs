@@ -12,13 +12,15 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Rigidbody))]
+        [Tooltip("The GameObject that owns the RigidBody.")]
 		public FsmOwnerDefault gameObject;
 		
 		[RequiredField]
 		[HasFloatSlider(0.0f,10f)]
+        [Tooltip("Set the Drag.")]
 		public FsmFloat drag;
 		
-		[Tooltip("Repeat every frame. Typically this would be set to True.")]
+		[Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 
 		public override void Reset()

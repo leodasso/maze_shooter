@@ -10,6 +10,7 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("The string to get characters from.")]
 		public FsmString stringVariable;
 		
         [Tooltip("Number of characters to get.")]
@@ -17,6 +18,7 @@ namespace HutongGames.PlayMaker.Actions
 		
         [RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the result in a string variable.")]
 		public FsmString storeResult;
 		
         [Tooltip("Repeat every frame.")]

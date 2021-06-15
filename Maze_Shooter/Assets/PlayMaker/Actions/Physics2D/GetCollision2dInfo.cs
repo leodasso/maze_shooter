@@ -11,8 +11,12 @@ namespace HutongGames.PlayMaker.Actions
 		[UIHint(UIHint.Variable)]
 		[Tooltip("Get the GameObject hit.")]
 		public FsmGameObject gameObjectHit;
-		
-		[UIHint(UIHint.Variable)]
+
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Get the enabled state collision. if false, collision had no effect, like when using the PlatformEffector2D component set to one way")]
+        public FsmBool enabled;
+
+        [UIHint(UIHint.Variable)]
 		[Tooltip("Get the relative velocity of the collision.")]
 		public FsmVector3 relativeVelocity;
 		
@@ -23,12 +27,20 @@ namespace HutongGames.PlayMaker.Actions
 		[UIHint(UIHint.Variable)]
 		[Tooltip("Get the world position of the collision contact. Useful for spawning effects etc.")]
 		public FsmVector3 contactPoint;
-		
-		[UIHint(UIHint.Variable)]
+
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Get the 2d world position of the collision contact. Useful for spawning effects etc.")]
+        public FsmVector2 contactPoint2d;
+
+        [UIHint(UIHint.Variable)]
 		[Tooltip("Get the collision normal vector. Useful for aligning spawned effects etc.")]
 		public FsmVector3 contactNormal;
 
-		[UIHint(UIHint.Variable)]
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Get the 2d collision normal vector. Useful for aligning spawned effects etc.")]
+        public FsmVector2 contactNormal2d;
+
+        [UIHint(UIHint.Variable)]
 		[Tooltip("The number of separate shaped regions in the collider.")]
 		public FsmInt shapeCount;
 		
@@ -43,15 +55,19 @@ namespace HutongGames.PlayMaker.Actions
 			relativeSpeed = null;
 			contactPoint = null;
 			contactNormal = null;
-			shapeCount = null;
+            contactPoint2d = null;
+            contactNormal2d = null;
+            shapeCount = null;
 			physics2dMaterialName = null;
-		}
+            enabled = null;
+        }
 		
 		void StoreCollisionInfo()
 		{
 		    if (Fsm.Collision2DInfo == null) return;
 
-			gameObjectHit.Value = Fsm.Collision2DInfo.gameObject;
+            enabled.Value = Fsm.Collision2DInfo.enabled;
+            gameObjectHit.Value = Fsm.Collision2DInfo.gameObject;
             relativeSpeed.Value = Fsm.Collision2DInfo.relativeVelocity.magnitude;
             relativeVelocity.Value = Fsm.Collision2DInfo.relativeVelocity;
             physics2dMaterialName.Value = Fsm.Collision2DInfo.collider.sharedMaterial != null ? Fsm.Collision2DInfo.collider.sharedMaterial.name : "";
@@ -60,9 +76,24 @@ namespace HutongGames.PlayMaker.Actions
 
             if (Fsm.Collision2DInfo.contacts != null && Fsm.Collision2DInfo.contacts.Length > 0)
 			{
-                contactPoint.Value = Fsm.Collision2DInfo.contacts[0].point;
-                contactNormal.Value = Fsm.Collision2DInfo.contacts[0].normal;
-			}
+                if (!contactPoint.IsNone)
+                {
+                    contactPoint.Value = Fsm.Collision2DInfo.contacts[0].point;
+                }
+                if (!contactNormal.IsNone)
+                {
+                    contactNormal.Value = Fsm.Collision2DInfo.contacts[0].normal;
+                }
+
+                if (!contactPoint2d.IsNone)
+                {
+                    contactPoint2d.Value = Fsm.Collision2DInfo.contacts[0].point;
+                }
+                if (!contactNormal2d.IsNone)
+                {
+                    contactNormal2d.Value = Fsm.Collision2DInfo.contacts[0].normal;
+                }
+            }
 		}
 		
 		public override void OnEnter()

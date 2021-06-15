@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC. All rights reserved.
 
 namespace HutongGames.PlayMaker.Actions
 {
@@ -8,10 +8,15 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Variable to set.")]
 		public FsmFloat floatVariable;
+
 		[RequiredField]
+        [Tooltip("Value to set it to.")]
 		public FsmFloat floatValue;
-		public bool everyFrame;
+
+        [Tooltip("Perform this action every frame. Useful if the Value is changing.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{
@@ -32,5 +37,12 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			floatVariable.Value = floatValue.Value;
 		}
+
+#if UNITY_EDITOR
+	    public override string AutoName()
+        {
+            return ActionHelpers.GetValueLabel(floatVariable) + " = " + ActionHelpers.GetValueLabel(floatValue);
+        }
+#endif
 	}
 }

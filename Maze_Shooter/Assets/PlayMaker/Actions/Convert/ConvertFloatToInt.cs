@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -25,8 +25,10 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("Store the result in an Integer variable.")]
 		public FsmInt intVariable;
 		
+        [Tooltip("Whether to round up or down.")]
 		public FloatRounding rounding;
 		
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 
 		public override void Reset()

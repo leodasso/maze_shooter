@@ -9,12 +9,16 @@ namespace HutongGames.PlayMaker.Actions
 	public class SelectRandomGameObject : FsmStateAction
 	{
 		[CompoundArray("Game Objects", "Game Object", "Weight")]
-		public FsmGameObject[] gameObjects;
+        [Tooltip("A possible GameObject choice.")]
+        public FsmGameObject[] gameObjects;
 		[HasFloatSlider(0, 1)]
-		public FsmFloat[] weights;
+        [Tooltip("The relative probability of this GameObject being picked. " +
+                 "E.g. a weight of 0.5 is half as likely to be picked as a weight of 1.")]
+        public FsmFloat[] weights;
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmGameObject storeGameObject;
+        [Tooltip("Store the selected GameObject in a GameObject Variable.")]
+        public FsmGameObject storeGameObject;
 		
 		public override void Reset ()
 		{

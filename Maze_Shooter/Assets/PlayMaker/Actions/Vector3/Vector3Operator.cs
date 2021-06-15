@@ -25,18 +25,26 @@ namespace HutongGames.PlayMaker.Actions
 		}
 
 		[RequiredField]
-		public FsmVector3 vector1;
+        [Tooltip("The first vector in the operation.")]
+        public FsmVector3 vector1;
+
 		[RequiredField]
-		public FsmVector3 vector2;
-		public Vector3Operation operation = Vector3Operation.Add;
+        [Tooltip("The second vector in the operation.")]
+        public FsmVector3 vector2;
+
+        [Tooltip("The operation to perform.")]
+        public Vector3Operation operation = Vector3Operation.Add;
 
 		[UIHint(UIHint.Variable)]
-		public FsmVector3 storeVector3Result;
+        [Tooltip("Store the result in a Vector3 Variable.")]
+        public FsmVector3 storeVector3Result;
 
 		[UIHint(UIHint.Variable)]
-		public FsmFloat storeFloatResult;
+        [Tooltip("Store a float result in a Float Variable (E.g., Dot, Distance, Angle)")]
+        public FsmFloat storeFloatResult;
 
-		public bool everyFrame;
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

@@ -62,7 +62,7 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmVector2 storeNextHitPoint;
 		
 		[UIHint(UIHint.Variable)]
-		[Tooltip("Get the 2d normal at the next hit point and store it in a variable.")]
+		[Tooltip("Get the 2d normal at the next hit point and store it in a variable.\nNote, this is a direction vector not a rotation.")]
 		public FsmVector2 storeNextHitNormal;
 		
 		[UIHint(UIHint.Variable)]

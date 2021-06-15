@@ -10,9 +10,14 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(AudioSource))]
-		public FsmOwnerDefault gameObject;
-		public FsmFloat pitch;
-		public bool everyFrame;
+        [Tooltip("A GameObject with an AudioSource component.")]
+        public FsmOwnerDefault gameObject;
+
+        [Tooltip("Set the pitch.")]
+        public FsmFloat pitch;
+
+        [Tooltip("Repeat every frame. Useful if you're driving pitch with a float variable.")]
+        public bool everyFrame;
 		
 		public override void Reset()
 		{
@@ -38,8 +43,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		void DoSetAudioPitch()
 		{
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			if (UpdateCache(go))
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
 			{
 			    if (!pitch.IsNone)
 			    {

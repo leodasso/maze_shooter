@@ -6,11 +6,13 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Input)]
     [ActionTarget(typeof(GameObject),"GameObject")]
-	[Tooltip("Sends Events based on mouse interactions with a Game Object: MouseOver, MouseDown, MouseUp, MouseOff. Use Ray Distance to set how close the camera must be to pick the object.\n\nNOTE: Picking uses the Main Camera.")]
+	[Tooltip("Sends Events based on mouse interactions with a Game Object: MouseOver, MouseDown, MouseUp, MouseOff. Use Ray Distance to set how close the camera must be to pick the object." +
+             "\nNOTE: Picking uses the Main Camera, so you must have a Camera in the scene tagged as Main Camera.")]
 	public class MousePickEvent : FsmStateAction
 	{
 		[CheckForComponent(typeof(Collider))]
-		public FsmOwnerDefault GameObject;
+        [Tooltip("The game object to test for mouse picking.")]
+        public FsmOwnerDefault GameObject;
 		
 		[Tooltip("Length of the ray to cast from the camera.")]
 		public FsmFloat rayDistance = 100f;

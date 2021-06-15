@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 using System.Collections.Generic;
@@ -10,11 +10,16 @@ namespace HutongGames.PlayMaker.Actions
 	public class EaseFloat : EaseFsmAction
 	{
 		[RequiredField]
+        [Tooltip("The float value to ease from.")]
 		public FsmFloat fromValue;
-		[RequiredField]
-		public FsmFloat toValue;
-		[UIHint(UIHint.Variable)]
-		public FsmFloat floatVariable;
+
+        [RequiredField]
+        [Tooltip("The float value to ease to.")]
+        public FsmFloat toValue;
+
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Store the result in a Float Variable.")]
+        public FsmFloat floatVariable;
 		
 		private bool finishInNextStep = false;
 		
@@ -36,7 +41,7 @@ namespace HutongGames.PlayMaker.Actions
 			toFloats[0] = toValue.Value;
 			resultFloats = new float[1];
 			finishInNextStep = false;
-            floatVariable.Value = fromValue.Value;
+            floatVariable.Value = reverse.IsNone ? fromValue.Value : reverse.Value ? toValue.Value : fromValue.Value;
 		}
 		
 		public override void OnExit (){

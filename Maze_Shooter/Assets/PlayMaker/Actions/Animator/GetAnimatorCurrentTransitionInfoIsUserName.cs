@@ -10,7 +10,7 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The target. An Animator component is required")]
+        [Tooltip("The GameObject with an Animator Component.")]
 		public FsmOwnerDefault gameObject;
 		
 		[RequiredField]
@@ -32,9 +32,12 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Event send if name doesn't match")]
 		public FsmEvent nameDoNotMatchEvent;
 
-		private Animator _animator;
-		
-		public override void Reset()
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
+
+        public override void Reset()
 		{
 			base.Reset();
 
@@ -51,24 +54,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-			
-			IsName();
+            IsName();
 			
 			if (!everyFrame)
 			{
@@ -80,27 +66,25 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			IsName();
 		}
-		
-		void IsName()
-		{		
-			if (_animator!=null)
-			{
-				AnimatorTransitionInfo _info = _animator.GetAnimatorTransitionInfo(layerIndex.Value);
 
-				bool _isMatch = _info.IsUserName(userName.Value);
+        private void IsName()
+        {
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
 
-				if (! nameMatch.IsNone)
-				{
-					nameMatch.Value = _isMatch;
-				}
+            var info = animator.GetAnimatorTransitionInfo(layerIndex.Value);
 
-				if (_isMatch)
-				{
-					Fsm.Event(nameMatchEvent);
-				}else{
-					Fsm.Event(nameDoNotMatchEvent);
-				}
-			}
-		}
+            var isMatch = info.IsUserName(userName.Value);
+
+            if (!nameMatch.IsNone)
+            {
+                nameMatch.Value = isMatch;
+            }
+
+            Fsm.Event(isMatch ? nameMatchEvent : nameDoNotMatchEvent);
+        }
 	}
 }

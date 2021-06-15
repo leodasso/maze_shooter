@@ -10,10 +10,15 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmVector3 vector3Variable;
+        [Tooltip("The Vector3 variable to clamp.")]
+        public FsmVector3 vector3Variable;
+
 		[RequiredField]
-		public FsmFloat maxLength;
-		public bool everyFrame;
+        [Tooltip("Clamp to this max length.")]
+        public FsmFloat maxLength;
+
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

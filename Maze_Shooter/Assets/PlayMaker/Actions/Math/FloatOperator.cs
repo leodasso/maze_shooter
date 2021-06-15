@@ -1,5 +1,6 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC. All rights reserved.
 
+using System;
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
@@ -15,7 +16,8 @@ namespace HutongGames.PlayMaker.Actions
 			Multiply,
 			Divide,
 			Min,
-			Max
+			Max,
+            Modulus
 		}
 
 		[RequiredField]
@@ -91,7 +93,39 @@ namespace HutongGames.PlayMaker.Actions
 				case Operation.Max:
 					storeResult.Value = Mathf.Max(v1, v2);
 					break;
+
+                case Operation.Modulus:
+                    storeResult.Value = v1 % v2;
+                    break;
 			}
 		}
+
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            var result = ActionHelpers.GetValueLabel(storeResult) + " = ";
+            var op1 = ActionHelpers.GetValueLabel(float1);
+            var op2 = ActionHelpers.GetValueLabel(float2);
+            switch (operation)
+            {
+                case Operation.Add:
+                    return result + op1 + " + " + op2;
+                case Operation.Subtract:
+                    return result + op1 + " - " + op2;
+                case Operation.Multiply:
+                    return result + op1 + " * " + op2;
+                case Operation.Divide:
+                    return result + op1 + " / " + op2;
+                case Operation.Min:
+                    return result + "Min(" + op1 + ", " + op2 + ")";
+                case Operation.Max:
+                    return result + "Max(" + op1 + ", " + op2 + ")";
+                case Operation.Modulus:
+                    return result + op1 + " % " + op2;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+#endif
 	}
 }

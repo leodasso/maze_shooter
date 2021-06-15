@@ -11,7 +11,7 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("Info, Warning, or Error.")]
         public LogLevel logLevel;
 
-        [HideTypeFilter]
+        //[HideTypeFilter]
         [UIHint(UIHint.Variable)]
         [Tooltip("The variable to debug.")]
         public FsmVar variable;
@@ -29,5 +29,12 @@ namespace HutongGames.PlayMaker.Actions
 
             Finish();
         }
+
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return "Debug: " + (variable.IsNone ? "[none]" : variable.variableName);
+        }
+#endif
     }
 }

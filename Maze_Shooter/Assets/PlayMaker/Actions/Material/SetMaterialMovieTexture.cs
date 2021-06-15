@@ -1,16 +1,24 @@
-﻿// (c) Copyright HutongGames, LLC. All rights reserved.
+﻿// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
-#if !(UNITY_2019_3_OR_NEWER ||UNITY_SWITCH || UNITY_TVOS || UNITY_IPHONE || UNITY_IOS || UNITY_ANDROID || UNITY_FLASH || UNITY_PS3 || UNITY_PS4 || UNITY_XBOXONE || UNITY_BLACKBERRY || UNITY_METRO || UNITY_WP8 || UNITY_PSM || UNITY_WEBGL)
+#if !(UNITY_SWITCH || UNITY_TVOS || UNITY_IPHONE || UNITY_IOS || UNITY_ANDROID || UNITY_FLASH || UNITY_PS3 || UNITY_PS4 || UNITY_XBOXONE || UNITY_BLACKBERRY || UNITY_METRO || UNITY_WP8 || UNITY_PSM || UNITY_WEBGL)
 
+using System;
 using UnityEngine;
 
-#pragma warning disable 618
+#if UNITY_2018_2_OR_NEWER
+#pragma warning disable 618  
+#endif
 
 namespace HutongGames.PlayMaker.Actions
 {
 
 	[ActionCategory(ActionCategory.Material)]
-	[Tooltip("Sets a named texture in a game object's material to a movie texture.")]
+#if UNITY_2019_3_OR_NEWER
+    // Mark Obsolete but keep parameters
+    // so user can convert them to new actions.
+    [Obsolete("Use VideoPlayer actions instead.")]
+#endif
+    [Tooltip("Sets a named texture in a game object's material to a movie texture.")]
 	public class SetMaterialMovieTexture : ComponentAction<Renderer>
 	{
 		[Tooltip("The GameObject that the material is applied to.")]
@@ -28,8 +36,11 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmString namedTexture;
 
 		[RequiredField]
-		[ObjectType(typeof(MovieTexture))]
-		public FsmObject movieTexture;
+#if !UNITY_2019_3_OR_NEWER
+        [ObjectType(typeof(MovieTexture))]
+#endif
+        [Tooltip("The Movie Texture to use.")]
+        public FsmObject movieTexture;
 
 		public override void Reset()
 		{
@@ -48,6 +59,7 @@ namespace HutongGames.PlayMaker.Actions
 
 		void DoSetMaterialTexture()
 		{
+#if !UNITY_2019_3_OR_NEWER
 			var movie = movieTexture.Value as MovieTexture;
 
 			var namedTex = namedTexture.Value;
@@ -81,8 +93,16 @@ namespace HutongGames.PlayMaker.Actions
 				materials[materialIndex.Value].SetTexture(namedTex, movie);
 				renderer.materials = materials;
 			}
-		}
-	}
+#endif
+        }
+
+#if UNITY_2019_3_OR_NEWER
+        public override string ErrorCheck()
+        {
+            return "MovieTexture is Obsolete. Use VideoPlayer actions instead.";
+        }
+#endif
+    }
 }
 
 #endif

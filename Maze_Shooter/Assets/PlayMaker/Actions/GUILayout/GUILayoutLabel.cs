@@ -8,10 +8,17 @@ namespace HutongGames.PlayMaker.Actions
 	[Tooltip("GUILayout Label.")]
 	public class GUILayoutLabel : GUILayoutAction
 	{
-		public FsmTexture image;
-		public FsmString text;
-		public FsmString tooltip;
-		public FsmString style;
+        [Tooltip("Texture to display.")]
+        public FsmTexture image;
+
+        [Tooltip("Text to display.")]
+        public FsmString text;
+
+        [Tooltip("The tooltip associated with this control. See {{GUI Tooltip}}")]
+        public FsmString tooltip;
+
+        [Tooltip("Optional named style in the current GUISkin")]
+        public FsmString style;
 		
 		public override void Reset()
 		{

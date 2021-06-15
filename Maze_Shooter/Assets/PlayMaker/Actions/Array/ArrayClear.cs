@@ -19,7 +19,7 @@ namespace HutongGames.PlayMaker.Actions
         public override void Reset()
         {
             array = null;
-            resetValue = new FsmVar() {useVariable = true};
+            resetValue = new FsmVar {useVariable = true};
         }
 
         public override void OnEnter()
@@ -40,5 +40,13 @@ namespace HutongGames.PlayMaker.Actions
             }
             Finish();
         }
+
+
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName(this, array);
+        }
+#endif
     }
 }

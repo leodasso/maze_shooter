@@ -9,16 +9,22 @@ namespace HutongGames.PlayMaker.Actions
 	public class GetLocationInfo : FsmStateAction
 	{
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the location in a Vector3 Variable.")]
 		public FsmVector3 vectorPosition;		
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the Longitude in a Float Variable.")]
 		public FsmFloat longitude;
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the Latitude in a Float Variable.")]
 		public FsmFloat latitude;
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the Altitude in a Float Variable.")]
 		public FsmFloat altitude;
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the horizontal accuracy of the location.")]
 		public FsmFloat horizontalAccuracy;
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the vertical accuracy of the location.")]
 		public FsmFloat verticalAccuracy;
 		// TODO: figure out useful way to expose timeStamp
 		// maybe how old is the location...?

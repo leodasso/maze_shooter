@@ -6,7 +6,7 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
 	[Tooltip("Sets the position, rotation and weights of an IK goal. A GameObject can be set to control the position and rotation, or it can be manually expressed.")]
-	public class SetAnimatorIKGoal: FsmStateAction
+	public class SetAnimatorIKGoal: ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
@@ -36,11 +36,15 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Repeat every frame. Useful when changing over time.")]
 		public bool everyFrame;
 
-		private Animator _animator;
-		
-		private Transform _transform;
-		
-		public override void Reset()
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
+
+        private GameObject cachedGoal;
+        private Transform _transform;
+
+        public override void Reset()
 		{
 			gameObject = null;
 			goal = null;
@@ -59,29 +63,7 @@ namespace HutongGames.PlayMaker.Actions
 
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-
-			GameObject _goal = goal.Value;
-			if (_goal!=null)
-			{
-				_transform = _goal.transform;
-			}
-		}
+        }
 	
 		public override void DoAnimatorIK (int layerIndex)
 		{
@@ -94,47 +76,60 @@ namespace HutongGames.PlayMaker.Actions
 		}	
 
 		void DoSetIKGoal()
-		{		
-			if (_animator==null)
-			{
-				return;
-			}
-			
-			if (_transform!=null)
+		{
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
+
+            if (cachedGoal != goal.Value)
+            {
+                cachedGoal = goal.Value;
+                _transform = cachedGoal != null ? cachedGoal.transform : null;
+            }
+
+            if (_transform!=null)
 			{
 				if (position.IsNone)
 				{
-					_animator.SetIKPosition(iKGoal,_transform.position);
-				}else{
-					_animator.SetIKPosition(iKGoal,_transform.position+position.Value);
+					animator.SetIKPosition(iKGoal,_transform.position);
+				}
+                else
+                {
+					animator.SetIKPosition(iKGoal,_transform.position+position.Value);
 				}
 				
 				if (rotation.IsNone)
 				{
-					_animator.SetIKRotation(iKGoal,_transform.rotation);
-				}else{
-					_animator.SetIKRotation(iKGoal,_transform.rotation*rotation.Value);
+					animator.SetIKRotation(iKGoal,_transform.rotation);
 				}
-			}else{
+                else
+                {
+					animator.SetIKRotation(iKGoal,_transform.rotation*rotation.Value);
+				}
+			}
+            else
+            {
 				
 				if (!position.IsNone)
 				{
-					_animator.SetIKPosition(iKGoal,position.Value);
+					animator.SetIKPosition(iKGoal,position.Value);
 				}
 				
 				if (!rotation.IsNone)
 				{
-					_animator.SetIKRotation(iKGoal,rotation.Value);
+					animator.SetIKRotation(iKGoal,rotation.Value);
 				}
 			}
 			
 			if (!positionWeight.IsNone)
 			{
-				_animator.SetIKPositionWeight(iKGoal,positionWeight.Value);
+				animator.SetIKPositionWeight(iKGoal,positionWeight.Value);
 			}
 			if (!rotationWeight.IsNone)
 			{
-				_animator.SetIKRotationWeight(iKGoal,rotationWeight.Value);
+				animator.SetIKRotationWeight(iKGoal,rotationWeight.Value);
 			}
 		}
 	}

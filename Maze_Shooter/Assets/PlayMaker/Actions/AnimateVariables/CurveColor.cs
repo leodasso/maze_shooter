@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -10,32 +10,48 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("The Color variable to animate.")]
 		public FsmColor colorVariable;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("Animate from this color.")]
 		public FsmColor fromValue;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("Animate to this color.")]
 		public FsmColor toValue;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("The curve used to animate the red value.")]
 		public FsmAnimationCurve curveR;
-		[Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.Red and toValue.Rec.")]
+
+        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.Red and toValue.Rec.")]
 		public Calculation calculationR;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("The curve used to animate the green value.")]
 		public FsmAnimationCurve curveG;
-		[Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.Green and toValue.Green.")]
+
+        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.Green and toValue.Green.")]
 		public Calculation calculationG;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("The curve used to animate the blue value.")]
 		public FsmAnimationCurve curveB;
-		[Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.Blue and toValue.Blue.")]
+
+        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.Blue and toValue.Blue.")]
 		public Calculation calculationB;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("The curve used to animate the alpha value.")]
 		public FsmAnimationCurve curveA;
-		[Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.Alpha and toValue.Alpha.")]
+
+        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.Alpha and toValue.Alpha.")]
 		public Calculation calculationA;
 		
 		
-		Color clr;
-		
-		private bool finishInNextStep = false;
+		private Color clr;
+        private bool finishInNextStep;
 				
 		public override void Reset()
 		{

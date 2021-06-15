@@ -7,8 +7,8 @@ namespace HutongGames.PlayMaker.Actions
 {
 	#pragma warning disable 618
 	[ActionCategory(ActionCategory.Physics2D)]
-	[Tooltip("Is the rigidbody2D constrained from rotating?" +
-	"Note: Prefer SetRigidBody2dConstraints when working in Unity 5")]
+	[Tooltip("Is the rigidbody2D constrained from rotating? " +
+             "Note: Prefer SetRigidBody2dConstraints when working in Unity 5 or higher.")]
     public class IsFixedAngle2d : ComponentAction<Rigidbody2D>
 	{
 		[RequiredField]

@@ -6,12 +6,12 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
 	[Tooltip("Sets the animator in playback mode.")]
-	public class AnimatorStartPlayback : FsmStateAction
+	public class AnimatorStartPlayback : ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The target. An Animator component is required")]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("The GameObject with an Animator Component.")]
+        public FsmOwnerDefault gameObject;
 		
 		public override void Reset()
 		{
@@ -20,26 +20,12 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			Animator _animator = go.GetComponent<Animator>();
-			
-			if (_animator!=null)
-			{
-				_animator.StartPlayback();
-			}
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                cachedComponent.StartPlayback();
+            }
 			
 			Finish();
-			
-		}
-		
-		
+        }
 	}
 }

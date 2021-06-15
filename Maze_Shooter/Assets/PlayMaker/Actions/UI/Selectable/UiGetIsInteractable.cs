@@ -24,8 +24,8 @@ namespace HutongGames.PlayMaker.Actions
         public FsmEvent isNotInteractableEvent;
 
         private Selectable selectable;
-        private bool originalState;
-
+        
+        //private bool originalState;
 
         public override void Reset()
         {
@@ -58,14 +58,7 @@ namespace HutongGames.PlayMaker.Actions
             var _flag = selectable.IsInteractable();
             isInteractable.Value = _flag;
 
-            if (_flag)
-            {
-                Fsm.Event(isInteractableEvent);
-            }
-            else
-            {
-                Fsm.Event(isNotInteractableEvent);
-            }
+            Fsm.Event(_flag ? isInteractableEvent : isNotInteractableEvent);
         }
     }
 }

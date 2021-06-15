@@ -9,9 +9,14 @@ namespace HutongGames.PlayMaker.Actions
 	public class GetKeyUp : FsmStateAction
 	{
 		[RequiredField]
-		public KeyCode key;
-		public FsmEvent sendEvent;
-		[UIHint(UIHint.Variable)]
+        [Tooltip("The key to detect.")]
+        public KeyCode key;
+
+        [Tooltip("The Event to send when the key is released.")]
+        public FsmEvent sendEvent;
+
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Store the result in a Bool Variable. True if released, otherwise False.")]
 		public FsmBool storeResult;
 		
 		public override void Reset()
@@ -30,5 +35,12 @@ namespace HutongGames.PlayMaker.Actions
 			
 			storeResult.Value = keyUp;
 		}
-	}
+
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName(this, key.ToString(), sendEvent != null ? sendEvent.Name : "");
+        }
+#endif
+    }
 }

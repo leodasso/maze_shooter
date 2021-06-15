@@ -9,8 +9,11 @@ namespace HutongGames.PlayMaker.Actions
 	public class SetGUIBackgroundColor : FsmStateAction
 	{
 		[RequiredField]
-		public FsmColor backgroundColor;
-		public FsmBool applyGlobally;
+        [Tooltip("The color for all background elements.")]
+        public FsmColor backgroundColor;
+
+        [Tooltip("Apply this setting to all GUI calls, even in other scripts.")]
+        public FsmBool applyGlobally;
 	
 		public override void Reset()
 		{

@@ -10,13 +10,19 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Rect Variable to set.")]
 		public FsmRect rectVariable;
 
-		public FsmFloat x;
-		public FsmFloat y;
-		public FsmFloat width;
-		public FsmFloat height;
+        [Tooltip("Set X value.")]
+        public FsmFloat x;
+        [Tooltip("Set Y value.")]
+        public FsmFloat y;
+        [Tooltip("Set Width.")]
+        public FsmFloat width;
+        [Tooltip("Set Height.")]
+        public FsmFloat height;
 		
+        [Tooltip("Repeat every frame. Useful if the fields are animated.")]
 		public bool everyFrame;
 
 		public override void Reset()

@@ -5,7 +5,8 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Character)]
-	[Tooltip("Gets info on the last Character Controller collision and store in variables.")]
+	[Tooltip("Gets info on the last Character Controller collision event. The owner of the FSM must have a character controller. " +
+             "Typically this action is used after a CONTROLLER COLLIDER HIT system event.")]
 	public class GetControllerHitInfo : FsmStateAction
 	{
 		[UIHint(UIHint.Variable)]

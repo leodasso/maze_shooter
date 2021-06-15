@@ -9,12 +9,16 @@ namespace HutongGames.PlayMaker.Actions
 	public class SampleCurve : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("Click to edit the curve.")]
 		public FsmAnimationCurve curve;
 		[RequiredField]
+        [Tooltip("Sample the curve at this point.")]
 		public FsmFloat sampleAt;
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the sampled value in a float variable.")]
 		public FsmFloat storeValue;
+        [Tooltip("Do it every frame. Useful if Sample At is changing.")]
 		public bool everyFrame;
 		
 		public override void Reset()

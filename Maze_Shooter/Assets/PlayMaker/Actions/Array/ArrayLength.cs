@@ -13,7 +13,7 @@ namespace HutongGames.PlayMaker.Actions
         public FsmArray array;
 
         [UIHint(UIHint.Variable)] 
-        [Tooltip("Store the length in an Int Variable.")]
+        [Tooltip("Store the length in an {{Int Variable}}.")]
         public FsmInt length;
 
         [Tooltip("Repeat every frame. Useful if the array is changing and you're waiting for a particular length.")]

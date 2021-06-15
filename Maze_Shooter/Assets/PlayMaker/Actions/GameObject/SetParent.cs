@@ -12,8 +12,13 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The Game Object to parent.")]
 		public FsmOwnerDefault gameObject;
 		
-		[Tooltip("The new parent for the Game Object.")]
+		[Tooltip("The new parent for the Game Object. Leave empty or None to un-parent the Game Object.")]
 		public FsmGameObject parent;
+
+        [Tooltip("If true, the parent-relative position, scale and rotation are modified " + 
+                 "such that the object keeps the same world space position, rotation and scale as before. " + 
+                 "Hint: Setting to False can fix common UI scaling issues.")]
+        public FsmBool worldPositionStays;
 
 		[Tooltip("Set the local position to 0,0,0 after parenting.")]
 		public FsmBool resetLocalPosition;
@@ -25,6 +30,7 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			gameObject = null;
 			parent = null;
+            worldPositionStays = true;
 			resetLocalPosition = null;
 			resetLocalRotation = null;
 		}
@@ -35,7 +41,7 @@ namespace HutongGames.PlayMaker.Actions
 
 			if (go != null)
 			{
-				go.transform.parent = parent.Value == null ? null : parent.Value.transform;
+                go.transform.SetParent(parent.Value == null ? null : parent.Value.transform, worldPositionStays.Value);
 
 				if (resetLocalPosition.Value)
 				{

@@ -43,7 +43,7 @@ namespace HutongGames.PlayMaker.Actions
             DoGetMouseButtonDown();
         }
 
-		void DoGetMouseButtonDown()
+        private void DoGetMouseButtonDown()
 		{
 			bool buttonDown = Input.GetMouseButtonDown((int)button);
 		    if (buttonDown)
@@ -53,5 +53,14 @@ namespace HutongGames.PlayMaker.Actions
 			
 			storeResult.Value = buttonDown;
 		}
-	}
+
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return string.Format("GetMouseButtonDown: {0} {1}",
+                sendEvent != null ? sendEvent.Name : "",
+                storeResult.IsNone ? "" : storeResult.Name);
+        }
+#endif
+    }
 }

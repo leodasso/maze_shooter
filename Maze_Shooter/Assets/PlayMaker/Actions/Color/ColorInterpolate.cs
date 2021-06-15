@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -9,11 +9,11 @@ namespace HutongGames.PlayMaker.Actions
 	public class ColorInterpolate : FsmStateAction
 	{
 		[RequiredField]
-		[Tooltip("Array of colors to interpolate through.")]
+		[Tooltip("An array of colors. Set the number of colors, then set each color.")]
 		public FsmColor[] colors;
 		
 		[RequiredField]
-		[Tooltip("Interpolation time.")]
+		[Tooltip("How long it should take to interpolate through all the colors in the array.")]
 		public FsmFloat time;
 		
 		[RequiredField]
@@ -24,7 +24,7 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Event to send when the interpolation finishes.")]
 		public FsmEvent finishEvent;
 		
-		[Tooltip("Ignore TimeScale")]
+		[Tooltip("Ignore TimeScale. Useful when the game is paused.")]
 		public bool realTime;
 
 		private float startTime;
@@ -118,5 +118,15 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			return colors.Length < 2 ? "Define at least 2 colors to make a gradient." : null;
 		}
+
+
+		#if UNITY_EDITOR
+
+		public override float GetProgress()
+		{
+			return Mathf.Min(currentTime/time.Value , 1f);
+		}
+
+		#endif
 	}
 }

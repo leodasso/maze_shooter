@@ -7,7 +7,7 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Logic)]
     [ActionTarget(typeof(GameObject), "gameObject")]
-	[Tooltip("Tests if a Game Object is visible.")]
+	[Tooltip("Tests if a Game Object is visible to any camera.\nNOTE: In the editor this includes the Scene View camera!")]
 	public class GameObjectIsVisible : ComponentAction<Renderer>
 	{
 		[RequiredField]
@@ -25,6 +25,7 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("Store the result in a bool variable.")]
 		public FsmBool storeResult;
 		
+        [Tooltip("Perform this action every frame.")]
 		public bool everyFrame;
 		
 		public override void Reset()

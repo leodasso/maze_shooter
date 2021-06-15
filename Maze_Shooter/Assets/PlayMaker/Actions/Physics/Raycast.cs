@@ -1,11 +1,11 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Physics)]
-	[Tooltip("Casts a Ray against all Colliders in the scene. Use either a Game Object or Vector3 world position as the origin of the ray. Use GetRaycastInfo to get more detailed info.")]
+	[Tooltip("Casts a Ray against all Colliders in the scene. Use either a Game Object or Vector3 world position as the origin of the ray. Use {{Get Raycast Info}} to get more detailed info.")]
 	public class Raycast : FsmStateAction
 	{
         //[ActionSection("Setup Raycast")]
@@ -44,7 +44,7 @@ namespace HutongGames.PlayMaker.Actions
         public FsmVector3 storeHitPoint;
 
         [UIHint(UIHint.Variable)]
-        [Tooltip("Get the normal at the hit point and store it in a variable.")]
+        [Tooltip("Get the normal at the hit point and store it in a variable.\nNote, this is a direction vector not a rotation. Use Look At Direction to rotate a GameObject to this direction.")]
         public FsmVector3 storeHitNormal;
 
         [UIHint(UIHint.Variable)]
@@ -53,7 +53,7 @@ namespace HutongGames.PlayMaker.Actions
 
         [ActionSection("Filter")] 
 
-        [Tooltip("Set how often to cast a ray. 0 = once, don't repeat; 1 = everyFrame; 2 = every other frame... \nSince raycasts can get expensive use the highest repeat interval you can get away with.")]
+        [Tooltip("Set how often to cast a ray. 0 = once, don't repeat; 1 = everyFrame; 2 = every other frame... \nBecause raycasts can get expensive use the highest repeat interval you can get away with.")]
         public FsmInt repeatInterval;
 
         [UIHint(UIHint.Layer)]
@@ -70,14 +70,16 @@ namespace HutongGames.PlayMaker.Actions
 
 		[Tooltip("Draw a debug line. Note: Check Gizmos in the Game View to see it in game.")]
 		public FsmBool debug;
-		
-		int repeat;
+
+        private int repeat;
+        private GameObject cachedGameObject;
+        private Transform cachedTransform;
 		
 		public override void Reset()
 		{
 			fromGameObject = null;
 			fromPosition = new FsmVector3 { UseVariable = true };
-			direction = new FsmVector3 { UseVariable = true };
+            direction = null; // new FsmVector3 { UseVariable = true };
 			space = Space.Self;
 			distance = 100;
 			hitEvent = null;
@@ -86,8 +88,8 @@ namespace HutongGames.PlayMaker.Actions
 		    storeHitPoint = null;
 		    storeHitNormal = null;
 		    storeHitDistance = null;
-			repeatInterval = 1;
-			layerMask = new FsmInt[0];
+            repeatInterval = new FsmInt { Value = 1 };
+            layerMask = new FsmInt[0];
 			invertMask = false;
 			debugColor = Color.yellow;
 			debug = false;
@@ -112,19 +114,21 @@ namespace HutongGames.PlayMaker.Actions
 				DoRaycast();
 			}
 		}
-		
-		void DoRaycast()
+
+        private void DoRaycast()
 		{
 			repeat = repeatInterval.Value;
 
-			if (distance.Value == 0)
-			{
-				return;
-			}
+            if (distance.Value < 0.001f) return;
 
 			var go = Fsm.GetOwnerDefaultTarget(fromGameObject);
+            if (go != cachedGameObject)
+            {
+                cachedGameObject = go;
+                cachedTransform = go != null ? go.transform : null;
+            }
 			
-			var originPos = go != null ? go.transform.position : fromPosition.Value;
+			var originPos = cachedTransform != null ? cachedTransform.position : fromPosition.Value;
 			
 			var rayLength = Mathf.Infinity;
 			if (distance.Value > 0 )
@@ -133,9 +137,9 @@ namespace HutongGames.PlayMaker.Actions
 			}
 
 			var dirVector = direction.Value;
-			if(go != null && space == Space.Self)
+			if (cachedTransform != null && space == Space.Self)
 			{
-				dirVector = go.transform.TransformDirection(direction.Value);
+				dirVector = cachedTransform.TransformDirection(direction.Value);
 			}
 
 			RaycastHit hitInfo;
@@ -159,8 +163,17 @@ namespace HutongGames.PlayMaker.Actions
 			if (debug.Value)
 			{
 				var debugRayLength = Mathf.Min(rayLength, 1000);
-				Debug.DrawLine(originPos, originPos + dirVector * debugRayLength, debugColor.Value);
-			}
+                var endPos = didHit ? storeHitPoint.Value : originPos + dirVector * debugRayLength;
+
+                if (repeatInterval.Value == 0)
+                {
+                    Debug.DrawLine(originPos, endPos, debugColor.Value, 0.1f);
+                }
+                else
+                {
+                    Debug.DrawLine(originPos, endPos, debugColor.Value);
+                }
+            }
 		}
 	}
 }

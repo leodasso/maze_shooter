@@ -8,8 +8,8 @@ namespace HutongGames.PlayMaker.Actions
 	[Tooltip("Sets a named texture in a game object's material.")]
 	public class SetMaterialTexture : ComponentAction<Renderer>
 	{
-		[Tooltip("The GameObject that the material is applied to.")]
 		[CheckForComponent(typeof(Renderer))]
+        [Tooltip("The GameObject that the material is applied to.")]
 		public FsmOwnerDefault gameObject;
 
 		[Tooltip("GameObjects can have multiple materials. Specify an index to target a specific material.")]
@@ -19,10 +19,11 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmMaterial material;
 
 		[UIHint(UIHint.NamedTexture)]
-		[Tooltip("A named parameter in the shader.")]
+		[Tooltip("A named parameter in the shader. Common names include: _MainTex, _BumpMap, _Cube...")]
 		public FsmString namedTexture;
-		
-		public FsmTexture texture;
+
+        [Tooltip("The texture to use.")]
+        public FsmTexture texture;
 
 		public override void Reset()
 		{

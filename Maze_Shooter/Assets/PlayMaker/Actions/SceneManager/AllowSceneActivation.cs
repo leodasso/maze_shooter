@@ -9,12 +9,12 @@ using UnityEngine.SceneManagement;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Scene)]
-	[Tooltip("Allow scenes to be activated. Use this after LoadSceneAsynch where you did not activated the scene upon loading")]
+	[Tooltip("Allow scenes to be activated. Use this after {{LoadSceneAsynch}} if you did not set the scene to activate after loading")]
 	public class AllowSceneActivation : FsmStateAction
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		[Tooltip("The name of the new scene. It cannot be empty or null, or same as the name of the existing scenes.")]
+		[Tooltip("The name of the new scene. It cannot be empty, null, or same as existing scenes.")]
 		public FsmInt aSynchOperationHashCode;
 
 		[Tooltip("Allow the scene to be activated")]
@@ -54,14 +54,18 @@ namespace HutongGames.PlayMaker.Actions
 
 		public override void OnUpdate()
 		{
-			if (!progress.IsNone)
-				progress.Value = LoadSceneAsynch.aSyncOperationLUT [aSynchOperationHashCode.Value].progress;
+            if (!progress.IsNone)
+            {
+                progress.Value = LoadSceneAsynch.aSyncOperationLUT [aSynchOperationHashCode.Value].progress;
+            }
 			
-			if (!isDone.IsNone) {
+			if (!isDone.IsNone)
+            {
 				isDone.Value = LoadSceneAsynch.aSyncOperationLUT [aSynchOperationHashCode.Value].isDone;
 			}
 
-			if (LoadSceneAsynch.aSyncOperationLUT [aSynchOperationHashCode.Value].isDone) {
+			if (LoadSceneAsynch.aSyncOperationLUT [aSynchOperationHashCode.Value].isDone)
+            {
 				LoadSceneAsynch.aSyncOperationLUT.Remove (aSynchOperationHashCode.Value);
 				Fsm.Event (doneEvent);
 				Finish ();

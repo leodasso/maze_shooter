@@ -20,12 +20,15 @@ namespace HutongGames.PlayMaker.Actions
 			RealTimeInCurrentState
 		}
 		
+        [Tooltip("Info to get.")]
 		public TimeInfo getInfo;
 		
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the time info in a float variable.")]
 		public FsmFloat storeValue;
 		
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 
 		public override void Reset()
@@ -96,7 +99,7 @@ namespace HutongGames.PlayMaker.Actions
 #if UNITY_EDITOR
 	    public override string AutoName()
 	    {
-	        return "GetTimeInfo : " + getInfo + " > " + ActionHelpers.GetValueLabel(storeValue);
+	        return string.Format("GetTimeInfo{0} {1} > {2}", ActionHelpers.colon, getInfo, ActionHelpers.GetValueLabel(storeValue));
 	    }
 #endif
 

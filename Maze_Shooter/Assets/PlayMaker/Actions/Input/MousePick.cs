@@ -25,7 +25,7 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmVector3 storePoint;
 		
         [UIHint(UIHint.Variable)]
-        [Tooltip("Store the normal at the point of contact.")]
+        [Tooltip("Store the normal at the point of contact.\nNote, this is a direction vector not a rotation. Use Look At Direction to rotate a GameObject to this direction.")]
 		public FsmVector3 storeNormal;
 		
         [UIHint(UIHint.Variable)]

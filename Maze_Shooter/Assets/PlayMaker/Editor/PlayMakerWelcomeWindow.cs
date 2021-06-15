@@ -1,4 +1,4 @@
-﻿// (c) Copyright HutongGames, LLC. All rights reserved.
+﻿// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 #if (UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7 || UNITY_5_0) 
 #define UNITY_PRE_5_1
@@ -18,14 +18,14 @@ namespace HutongGames.PlayMakerEditor
     public class PlayMakerWelcomeWindow : EditorWindow
     {
         // Remember to update version info since it's used by export scripts!
-        public const string InstallCurrentVersion = "1.9.0";
-        public const string InstallAssemblyVersion = "1.9.0.p19";
+        public const string InstallCurrentVersion = "1.9.1";
+        public const string InstallAssemblyVersion = "1.9.1.p5";
         public const string InstallBetaVersion = "";
         public const string Version = InstallCurrentVersion + " " + InstallBetaVersion;
 
         private const string editorPrefsSavedPage = "PlayMaker.WelcomeScreenPage";
-        private const string urlSamples = "http://www.hutonggames.com/samples.php";
-        private const string urlTutorials = "http://www.hutonggames.com/tutorials.html";
+        private const string urlSamples = "https://hutonggames.fogbugz.com/f/page?W880";
+        private const string urlTutorials = "https://hutonggames.com/tutorials-game-design-with-playmaker.php";
         private const string urlDocs = "https://hutonggames.fogbugz.com/default.asp?W1";
         private const string urlForums = "http://hutonggames.com/playmakerforum/index.php";
 
@@ -65,6 +65,7 @@ namespace HutongGames.PlayMakerEditor
         private static GUIStyle playMakerHeader;
         private static GUIStyle labelWithWordWrap;
         private static GUIStyle largeTitleWithLogo;
+        private static GUIStyle linkIcon;
         private static GUIStyle versionLabel;
         private static Texture samplesIcon;
         private static Texture checkIcon;
@@ -73,10 +74,11 @@ namespace HutongGames.PlayMakerEditor
         private static Texture forumsIcon;
         private static Texture addonsIcon;
         private static Texture backButton;
+        private static Texture updateIcon;
 
         private static bool stylesInitialized;
 
-#if PLAYMAKER_1_9_0
+#if PLAYMAKER_1_9_1
         [MenuItem("PlayMaker/Welcome Screen", false, 500)]
 #elif PLAYMAKER
         [MenuItem("PlayMaker/Update PlayMaker", false, 500)]
@@ -177,28 +179,27 @@ namespace HutongGames.PlayMakerEditor
 
         private static void GetPlayMakerVersion()
         {
+            currentVersionLabel = "Unknown Version";
+            currentVersionShort = "";
+            majorVersion = -1;
+
             var versionInfo = PlayMakerEditorStartup.GetType("HutongGames.PlayMakerEditor.VersionInfo");
             if (versionInfo != null)
             {
                 currentVersion = versionInfo.GetMethod("GetAssemblyInformationalVersion").Invoke(null, null) as string;
                 if (currentVersion != null)
                 {
-                    currentVersionShort = currentVersion.Substring(0, currentVersion.LastIndexOf('.'));
-                    currentVersionLabel = "version " + currentVersionShort;
-                    majorVersion = int.Parse(currentVersionShort.Substring(0, 3).Replace(".", ""));
+                    try
+                    {
+                        currentVersionShort = currentVersion.Substring(0, currentVersion.LastIndexOf('.'));
+                        currentVersionLabel = "version " + currentVersionShort;
+                        majorVersion = int.Parse(currentVersionShort.Substring(0, 3).Replace(".", ""));
+                    }
+                    catch (Exception)
+                    {
+                        // ignored
+                    }
                 }
-                else
-                {
-                    currentVersionLabel = "version unknown";
-                    currentVersionShort = "";
-                    majorVersion = -1;
-                }
-            }
-            else
-            {
-                currentVersionLabel = "Not installed";
-                currentVersionShort = "";
-                majorVersion = -1;
             }
         }
 
@@ -210,10 +211,11 @@ namespace HutongGames.PlayMakerEditor
                 {
                     normal =
                     {
-                        background = Resources.Load("playMakerHeader") as Texture2D,
+                        background = Resources.Load<Texture2D>("playMakerHeader"),
+                        scaledBackgrounds = new []{ Resources.Load<Texture2D>("playMakerHeader@2x")},
                         textColor = Color.white
                     },
-                    border = new RectOffset(253, 0, 0, 0),
+                    border = new RectOffset(250, 3, 0, 0),
                 };
 
                 largeTitleWithLogo = new GUIStyle
@@ -221,6 +223,7 @@ namespace HutongGames.PlayMakerEditor
                     normal =
                     {
                         background = Resources.Load("logoHeader") as Texture2D,
+                        scaledBackgrounds = new []{ Resources.Load<Texture2D>("logoHeader@2x") },
                         textColor = Color.white
                     },
                     border = new RectOffset(60, 0, 0, 0),
@@ -236,15 +239,27 @@ namespace HutongGames.PlayMakerEditor
                 labelWithWordWrap = new GUIStyle(EditorStyles.label) { wordWrap = true };
                 versionLabel = new GUIStyle(EditorStyles.label) { alignment = TextAnchor.LowerRight};
 
-                samplesIcon = (Texture) Resources.Load("linkSamples");
-                checkIcon = (Texture)Resources.Load("linkCheck");
-                videosIcon = (Texture)Resources.Load("linkVideos");
-                docsIcon = (Texture) Resources.Load("linkDocs");
-                forumsIcon = (Texture) Resources.Load("linkForums");
-                addonsIcon = (Texture) Resources.Load("linkAddons");
-                backButton = (Texture) Resources.Load("backButton");
+                linkIcon = new GUIStyle {fixedWidth = 48, fixedHeight = 48};
+
+                samplesIcon = LoadIcon("linkSamples");
+                checkIcon = LoadIcon("linkCheck");
+                videosIcon = LoadIcon("linkVideos");
+                docsIcon = LoadIcon("linkDocs");
+                forumsIcon = LoadIcon("linkForums");
+                addonsIcon = LoadIcon("linkAddons");
+                updateIcon = LoadIcon("linkUpdate");
+                backButton = LoadIcon("backButton");
             }
+
             stylesInitialized = true;
+        }
+
+        private static Texture LoadIcon(string resourceName)
+        {
+            if (EditorGUIUtility.pixelsPerPoint > 1)
+                resourceName += "@2x";
+
+            return Resources.Load<Texture>(resourceName);
         }
 
         public void OnGUI()
@@ -368,7 +383,7 @@ namespace HutongGames.PlayMakerEditor
                     GotoPage, Page.Install);
             }
 
-            DrawLink(docsIcon,
+            DrawLink(updateIcon,
                      "Upgrade Guide",
                      "Guide to upgrading Unity/PlayMaker.",
                      GotoPage, Page.UpgradeGuide);
@@ -389,7 +404,7 @@ namespace HutongGames.PlayMakerEditor
 
         private static void DoInstallPage()
         {
-            ShowBackupHelpBox();
+            DoBackupHelpBox();
 
             GUILayout.BeginVertical();
             GUILayout.Space(30);
@@ -442,31 +457,48 @@ namespace HutongGames.PlayMakerEditor
                  OpenUrl, urlTutorials);
 
             DrawLink(docsIcon,
-                 "Docs",
-                 "Browse the online manual.",
+                 "Documentation",
+                 "Browse the online docs.",
                  OpenUrl, urlDocs);
 
             DrawLink(forumsIcon,
                  "Forums",
-                 "Join the PlayMaker community!",
+                 "Join the PlayMaker community.",
                  OpenUrl, urlForums);
 
             GUILayout.FlexibleSpace();
             GUILayout.EndVertical();
         }
 
-        private void DoUpgradeGuidePage()
+        public static void DoReleaseNotes()
         {
-            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
+            // Version 1.9.1
 
-            ShowBackupHelpBox();
+            GUILayout.Label("Version 1.9.1", EditorStyles.boldLabel);
 
-            GUILayout.Label("Version 1.8+", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox(
-                "FSMs saved with 1.8+ cannot be opened in earlier versions of PlayMaker! Please BACKUP projects!",
-                MessageType.Warning);
+                "\nPlayMaker 1.9.1 adds some actions previously available on the Ecosystem." +
+                "\nUse the Pre-Update Check before installing to check for duplicate files." +
+                "\n" +
+                "\nCustom actions that use Event() should set HandlesOnEvent = true in Awake()." +
+                "\nSee IgnoreEvents for an example." +
+                "\n",
+                MessageType.Info);
+
+            // Version 1.9.0
+
+            GUILayout.Label("Version 1.9.0", EditorStyles.boldLabel);
+
+            EditorGUILayout.HelpBox(
+                "\nPlayMaker 1.9.0 integrates UI actions and events.\nYou no longer need to import the uGUI Add-on." +
+                "\n\nNOTE: If an existing project already uses the uGUI Add-on, do not remove it! The new UI integration can live side-by-side with the old uGUI Add-on." +
+                "\n",
+                MessageType.Info);
+
+            // Version 1.8.6
 
             GUILayout.Label("Version 1.8.6", EditorStyles.boldLabel);
+
             EditorGUILayout.HelpBox(
                 "\nPlayMaker 1.8.6 is more strict about changes allowed in Prefab Instances: "+
                 "If a Prefab Instance is modified in a way that is incompatible with the Prefab Parent it will be disconnected. " +
@@ -474,7 +506,10 @@ namespace HutongGames.PlayMakerEditor
                 "\n",
                 MessageType.Warning);
 
+            // Version 1.8.5
+
             GUILayout.Label("Version 1.8.5", EditorStyles.boldLabel);
+
             EditorGUILayout.HelpBox(
                 "\nPlayMaker 1.8.5 moved LateUpdate handling to an optional component automatically added as needed.\n" +
                 "\nIf you have custom actions that use LateUpdate you must add this to OnPreprocess:\n" +
@@ -483,14 +518,20 @@ namespace HutongGames.PlayMakerEditor
                 "\n",
                 MessageType.Warning);
 
+            // Version 1.8.2
+
             GUILayout.Label("Version 1.8.2", EditorStyles.boldLabel);
+
             EditorGUILayout.HelpBox("\nPlayMaker 1.8.2 added the following system events:\n" +
                                     "\nMOUSE UP AS BUTTON, JOINT BREAK, JOINT BREAK 2D, PARTICLE COLLISION." +
                                     "\n\nPlease remove any custom proxy components you used before to send these events." +
                                     "\n",
                                     MessageType.Warning);
 
+            // Version 1.8.1
+
             GUILayout.Label("Version 1.8.1", EditorStyles.boldLabel);
+
             EditorGUILayout.HelpBox("\nPlayMaker 1.8.1 integrated the following add-ons and actions:\n"+
                                     "\n- Physics2D Add-on" +
                                     "\n- Mecanim Animator Add-on" +
@@ -500,6 +541,8 @@ namespace HutongGames.PlayMakerEditor
                                     "If you get errors from duplicate files after updating please delete the old files!" +
                                     "\n", 
                                     MessageType.Warning);
+
+            // Unity 5 Upgrade
 
             GUILayout.Label("Unity 5 Upgrade Notes", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox(
@@ -515,13 +558,20 @@ namespace HutongGames.PlayMakerEditor
                                     "E.g., Drag the Component (NOT the GameObject) into the Target Object field." +
                                     "\n", MessageType.Warning);
 
-            GUILayout.Label("Unity 4.6 Upgrade Notes", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("\nFind support for the new Unity GUI online in our Addons page.\n", MessageType.Info);
             EditorGUILayout.HelpBox("\nPlayMakerGUI is only needed if you use OnGUI Actions. " +
                                     "If you don't use OnGUI actions un-check Auto-Add PlayMakerGUI in PlayMaker Preferences.\n", MessageType.Info);
 
+        }
+
+        private void DoUpgradeGuidePage()
+        {
+            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
+
+            DoBackupHelpBox();
+
+            DoReleaseNotes();
+
             EditorGUILayout.EndScrollView();
-            //FsmEditorGUILayout.Divider();
         }
 
         private static void DoAddonsPage()
@@ -529,11 +579,13 @@ namespace HutongGames.PlayMakerEditor
             PlayMakerAddonManager.OnGUI();
         }
 
-        private static void ShowBackupHelpBox()
+        public static void DoBackupHelpBox()
         {
             HelpBox("Always BACKUP projects before updating!\nUse Version Control to manage changes!", MessageType.Error);
-            //HelpBox("Unity 5.3: Upgrade to 1.8.0 to address compatibility issues!", MessageType.Error);
-            //HelpBox("Unity 5.4 Beta: Use 1.8.1 Beta to address compatibility issues!", MessageType.Error);
+ 
+            HelpBox("New versions of PlayMaker may include files previously available on the Ecosystem or the forums. " +
+                    "Use the Pre-Update Check before installing to check for duplicate files. " + 
+                    "You may need to delete files that are now in the main install.", MessageType.Info);
         }
 
         private static void HelpBox(string text, MessageType messageType)
@@ -548,12 +600,15 @@ namespace HutongGames.PlayMakerEditor
         {
             GUILayout.BeginHorizontal();
 
+            var guiColor = GUI.color;
+            GUI.color = EditorGUIUtility.isProSkin ? EditorStyles.label.normal.textColor : new Color(0.3f, 0.3f, 0.3f) ;
             GUILayout.Space(64);
-            GUILayout.Box(texture, GUIStyle.none, GUILayout.MaxWidth(48));
+            GUILayout.Box(texture, linkIcon);
             GUILayout.Space(10);
+            GUI.color = guiColor;
 
             GUILayout.BeginVertical();
-            GUILayout.Space(1);
+            GUILayout.Space(4);
             GUILayout.Label(heading, EditorStyles.boldLabel);
             GUILayout.Label(body, labelWithWordWrap);
             GUILayout.EndVertical();
@@ -612,7 +667,8 @@ namespace HutongGames.PlayMakerEditor
         private static bool DisplayInstallDialog(string versionInfo, string notes)
         {
             return EditorUtility.DisplayDialog("PlayMaker", "Install PlayMaker " + versionInfo + "\n" + 
-                notes + "\n\nAlways backup projects before updating Unity or PlayMaker!",
+                notes + "\nAlways backup projects before updating Unity or PlayMaker!" + 
+                "\n\nNOTE: Please close the main PlayMaker Editor while updating.",
                 "I Made a Backup. Go Ahead!", "Cancel");
         }
 
@@ -631,8 +687,7 @@ namespace HutongGames.PlayMakerEditor
         {
             if (!DoUnityVersionCheck()) return;
 
-            if (DisplayInstallDialog(InstallAssemblyVersion, "The latest release version of PlayMaker." +
-                                                        "\n\nNOTE: Projects saved with PlayMaker 1.8+ cannot be opened in older versions of PlayMaker!"))
+            if (DisplayInstallDialog(InstallAssemblyVersion, ""))
             {
                 EditorStartupPrefs.ShowUpgradeGuide = true; // show upgrade guide after importing
                 ImportPackage(AssetDatabase.GUIDToAssetPath(AssetGUIDs.LatestInstall));
@@ -641,8 +696,8 @@ namespace HutongGames.PlayMakerEditor
 
         private static void InstallLatestStudent(object userData)
         {
-            if (DisplayInstallDialog("Student Version " + InstallAssemblyVersion, "The latest student version of PlayMaker." +
-                                                            "\n\nNOTE: The Student Version is limited to built in actions only."))
+            if (DisplayInstallDialog("Student Version " + InstallAssemblyVersion, 
+                "NOTE: The Student Version is limited to built-in actions only."))
             {
                 EditorStartupPrefs.ShowUpgradeGuide = true; // show upgrade guide after importing
                 ImportPackage(AssetDatabase.GUIDToAssetPath(AssetGUIDs.LatestStudentInstall));
@@ -698,7 +753,7 @@ namespace HutongGames.PlayMakerEditor
             {
                 PreUpdateChecker.Open();
             }*/
-                
+
             // next page slides in from the right
             // welcome screen slides offscreen left
             // reversed if returning to the welcome screen

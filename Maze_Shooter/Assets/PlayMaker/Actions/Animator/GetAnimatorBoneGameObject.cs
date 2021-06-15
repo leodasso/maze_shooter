@@ -7,11 +7,11 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
 	[Tooltip("Gets the GameObject mapped to this human bone id")]
-	public class GetAnimatorBoneGameObject : FsmStateAction
+	public class GetAnimatorBoneGameObject : ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The target. An Animator component is required")]
+        [Tooltip("The GameObject with an Animator Component.")]
 		public FsmOwnerDefault gameObject;
 
 		[Tooltip("The bone reference")]
@@ -24,8 +24,6 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The Bone's GameObject")]
 		public FsmGameObject boneGameObject;
 
-		Animator _animator;
-
 		public override void Reset()
 		{
 			gameObject = null;
@@ -33,37 +31,15 @@ namespace HutongGames.PlayMaker.Actions
 			boneGameObject = null;
 		}
 
-		
-		public override void OnEnter()
+        public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                boneGameObject.Value = cachedComponent.GetBoneTransform((HumanBodyBones)bone.Value).gameObject;
+            }
 
-			GetBoneTransform();
+            Finish();
+        }
 
-			Finish();
-
-		}
-
-		void GetBoneTransform()
-		{
-			boneGameObject.Value = _animator.GetBoneTransform((HumanBodyBones)bone.Value).gameObject;
-		}
-		
-
-	}
+    }
 }

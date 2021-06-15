@@ -11,7 +11,7 @@ namespace HutongGames.PlayMaker.Actions
     #if UNITY_2019_3_OR_NEWER
     [Obsolete("GUIElement is part of the legacy UI system removed in 2019.3")]
     #elif UNITY_2017_2_OR_NEWER
-	#pragma warning disable CS0618  
+	#pragma warning disable 618  
 	[Obsolete("GUIElement is part of the legacy UI system and will be removed in a future release")]
 	#endif
 	public class TouchGUIEvent : FsmStateAction

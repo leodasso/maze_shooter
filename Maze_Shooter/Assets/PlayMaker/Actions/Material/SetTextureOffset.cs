@@ -10,15 +10,21 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Renderer))]
-		public FsmOwnerDefault gameObject;
-		public FsmInt materialIndex;
+        [Tooltip("The target Game Object.")]
+        public FsmOwnerDefault gameObject;
+        [Tooltip("The index of the material on the object.")]
+        public FsmInt materialIndex;
 		[RequiredField]
-		[UIHint(UIHint.NamedColor)]
+        [Tooltip("The named texture. See unity docs: <a href=\"http://unity3d.com/support/documentation/ScriptReference/Material.SetTextureOffset.html\" rel=\"nofollow\">SetTextureOffset</a>")]
+        [UIHint(UIHint.NamedColor)]
 		public FsmString namedTexture;
 		[RequiredField]
-		public FsmFloat offsetX;
+        [Tooltip("The amount to offset in X axis. 1 = full width of texture.")]
+        public FsmFloat offsetX;
 		[RequiredField]
-		public FsmFloat offsetY;
+        [Tooltip("The amount to offset in Y axis. 1 = full height of texture.")]
+        public FsmFloat offsetY;
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 
 		public override void Reset()

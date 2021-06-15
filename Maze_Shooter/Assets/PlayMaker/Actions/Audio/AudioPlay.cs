@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2021. All rights reserved.
 
 using UnityEngine;
 
@@ -7,8 +7,8 @@ namespace HutongGames.PlayMaker.Actions
 	[ActionCategory(ActionCategory.Audio)]
     [ActionTarget(typeof(AudioSource), "gameObject")]
     [ActionTarget(typeof(AudioClip), "oneShotClip")]
-	[Tooltip("Plays the Audio Clip set with Set Audio Clip or in the Audio Source inspector on a Game Object. Optionally plays a one shot Audio Clip.")]
-	public class AudioPlay : FsmStateAction
+	[Tooltip("Plays the AudioClip defined in an Audio Source component on a GameObject. Set the clip using {{Set Audio Clip}}. Optionally plays a one shot Audio Clip.")]
+	public class AudioPlay : ComponentAction<AudioSource>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(AudioSource))]
@@ -16,7 +16,7 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmOwnerDefault gameObject;
 		
 		[HasFloatSlider(0,1)]
-        [Tooltip("Set the volume.")]
+        [Tooltip("Volume to play the sound at. Can be modified with {{Set Audio Volume}}.")]
 		public FsmFloat volume;
 		
 		[ObjectType(typeof(AudioClip))]
@@ -26,11 +26,9 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("Wait until the end of the clip to send the Finish Event. Set to false to send the finish event immediately.")]
         public FsmBool WaitForEndOfClip;
 
-        [Tooltip("Event to send when the action finishes.")]
+        [Tooltip("Send this event when the sound is finished playing. NOTE: currently also sent when the sound is paused...")]
 		public FsmEvent finishedEvent;
 
-		private AudioSource audio;
-				
 		public override void Reset()
 		{
 			gameObject = null;
@@ -41,51 +39,50 @@ namespace HutongGames.PlayMaker.Actions
         }
 
 		public override void OnEnter()
-		{
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			if (go != null)
-			{
-				// cache the AudioSource component
+        {
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
 
-			    audio = go.GetComponent<AudioSource>();
-				if (audio != null)
-				{
-					var audioClip = oneShotClip.Value as AudioClip;
+            if (audio == null) return;
 
-					if (audioClip == null)
-					{
-						audio.Play();
-						
-						if (!volume.IsNone)
-						{
-							audio.volume = volume.Value;
-						}
-						
-						return;
-					}
+            var audioClip = oneShotClip.Value as AudioClip;
+
+            if (audioClip == null)
+            {
+                audio.Play();
 					
-					if (!volume.IsNone)
-					{
-						audio.PlayOneShot(audioClip, volume.Value);
-					}
-					else
-					{
-						audio.PlayOneShot(audioClip);
-					}
-                    if (WaitForEndOfClip.Value == false)
-                    {
-                        Fsm.Event(finishedEvent);
-                        Finish();
-                    }
+                if (!volume.IsNone)
+                {
+                    audio.volume = volume.Value;
+                }
+					
+                if (WaitForEndOfClip.Value == false)
+                {
+                    Fsm.Event(finishedEvent);
+                    Finish();
+                }
+					
+                return;
+            }
+					
+            if (!volume.IsNone)
+            {
+                audio.PlayOneShot(audioClip, volume.Value);
+            }
+            else
+            {
+                audio.PlayOneShot(audioClip);
+            }
 
-                    return;
-				}
-			}
-			
-			// Finish if failed to play sound	
-		
-			Finish();
-		}
+            if (WaitForEndOfClip.Value == false)
+            {
+                Fsm.Event(finishedEvent);
+                Finish();
+            }
+        }
 		
 		public override void OnUpdate ()
 		{

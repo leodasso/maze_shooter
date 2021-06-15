@@ -8,9 +8,12 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmVector3 vector3Variable;
+        [Tooltip("Vector3 variable to set.")]
+        public FsmVector3 vector3Variable;
 		[RequiredField]
-		public FsmVector3 vector3Value;
+        [Tooltip("Value to set variable to.")]
+        public FsmVector3 vector3Value;
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 
 		public override void Reset()

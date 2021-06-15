@@ -1,12 +1,12 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2021. All rights reserved.
 
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Audio)]
-	[Tooltip("Mute/unmute the Audio Clip played by an Audio Source component on a Game Object.")]
-	public class AudioMute : FsmStateAction
+	[Tooltip("Mute/un-mute the Audio Clip played by an Audio Source component on a Game Object.")]
+	public class AudioMute : ComponentAction<AudioSource>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(AudioSource))]
@@ -14,7 +14,7 @@ namespace HutongGames.PlayMaker.Actions
         public FsmOwnerDefault gameObject;
 		
         [RequiredField]
-        [Tooltip("Check to mute, uncheck to unmute.")]
+        [Tooltip("Check to mute, uncheck to un-mute.")]
 		public FsmBool mute;
 
 		public override void Reset()
@@ -25,16 +25,11 @@ namespace HutongGames.PlayMaker.Actions
 
 		public override void OnEnter()
 		{
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			if (go != null)
-			{
-			    var audio = go.GetComponent<AudioSource>();
-				if (audio != null)
-				{
-					audio.mute = mute.Value;
-				}
-			}
-			
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                audio.mute = mute.Value;
+            }
+
 			Finish();
 		}
 

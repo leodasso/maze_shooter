@@ -25,10 +25,12 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmVector2 anchor;
 		
 		[HasFloatSlider(0f,1f)]
+        [Tooltip("Anchor X position.")]
 		public FsmFloat x;
 
 		[HasFloatSlider(0f,1f)]
-		public FsmFloat y;
+        [Tooltip("Anchor Y position.")]
+        public FsmFloat y;
 		
 		RectTransform _rt;
 

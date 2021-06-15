@@ -1,10 +1,6 @@
 ﻿using System.ComponentModel;
-using System.Globalization;
-using HutongGames.PlayMaker.Actions;
-using HutongGames.PlayMakerEditor;
 using UnityEditor;
 using UnityEngine;
-using System.Collections;
 
 namespace HutongGames.PlayMakerEditor
 {
@@ -19,7 +15,11 @@ namespace HutongGames.PlayMakerEditor
         [Localizable(false)]
         public override void OnSceneGUI()
         {
-            var action = (HutongGames.PlayMaker.Actions.GetDistance)target;
+            var action = target as HutongGames.PlayMaker.Actions.GetDistance;
+            if (action == null) // shouldn't happen!
+            {
+                return;
+            }
 
             var fromObject = action.Fsm.GetOwnerDefaultTarget(action.gameObject);
             var toObject = action.target;

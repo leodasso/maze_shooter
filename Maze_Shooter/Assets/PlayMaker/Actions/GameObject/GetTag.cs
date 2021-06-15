@@ -9,11 +9,16 @@ namespace HutongGames.PlayMaker.Actions
 	public class GetTag : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("The Game Object.")]
 		public FsmGameObject gameObject;
+
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmString storeResult;
-		public bool everyFrame;
+        [Tooltip("Store the Tag in a String Variable.")]
+        public FsmString storeResult;
+
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 		
 		public override void Reset()
 		{

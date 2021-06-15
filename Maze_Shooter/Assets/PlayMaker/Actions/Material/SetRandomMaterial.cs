@@ -10,9 +10,14 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Renderer))]
+        [Tooltip("The GameObject that the material is applied to.")]
 		public FsmOwnerDefault gameObject;
-		public FsmInt materialIndex;
-		public FsmMaterial[] materials;
+
+        [Tooltip("The index of the material on the object.")]
+        public FsmInt materialIndex;
+
+        [Tooltip("Array of materials to randomly select from.")]
+        public FsmMaterial[] materials;
 		
 		public override void Reset()
 		{

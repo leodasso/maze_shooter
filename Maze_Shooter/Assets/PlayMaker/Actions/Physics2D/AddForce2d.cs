@@ -6,6 +6,7 @@ namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory(ActionCategory.Physics2D)]
 	[Tooltip("Adds a 2d force to a Game Object. Use Vector2 variable and/or Float variables for each axis.")]
+    [SeeAlso("To add a force in local space use {{Add Relative Force 2d}}")]
     public class AddForce2d : ComponentAction<Rigidbody2D>
 	{
 		[RequiredField]

@@ -9,7 +9,10 @@ namespace HutongGames.PlayMaker.Actions
 	public class SetGUIAlpha : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("Set the transparency of the GUI. 1 = opaque, 0 = transparent.")]
 		public FsmFloat alpha;
+
+        [Tooltip("Apply this setting to all GUI calls, even in other scripts.")]
 		public FsmBool applyGlobally;
 		
 		public override void Reset()

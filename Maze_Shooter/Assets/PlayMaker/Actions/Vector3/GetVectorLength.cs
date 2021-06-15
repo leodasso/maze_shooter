@@ -8,21 +8,36 @@ namespace HutongGames.PlayMaker.Actions
 	[Tooltip("Get Vector3 Length.")]
 	public class GetVectorLength : FsmStateAction
 	{
+        [Tooltip("The Vector3")]
 		public FsmVector3 vector3;
-		[RequiredField]
+
+        [RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the length (magnitude) of the Vector3 value in a float variable.")]
 		public FsmFloat storeLength;
 		
+        [Tooltip("Repeat every frame")]
+        public bool everyFrame;
+        		
 		public override void Reset()
 		{
 			vector3 = null;
 			storeLength = null;
+			everyFrame = false;
 		}
 
 		public override void OnEnter()
 		{
 			DoVectorLength();
-			Finish();
+			if (!everyFrame)
+			{
+				Finish();
+			}
+		}
+		
+		public override void OnUpdate()
+		{
+			DoVectorLength();
 		}
 		
 		void DoVectorLength()

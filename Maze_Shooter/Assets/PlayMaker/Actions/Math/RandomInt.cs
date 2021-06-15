@@ -14,7 +14,7 @@ namespace HutongGames.PlayMaker.Actions
         public FsmInt min;
 
         [RequiredField]
-        [Tooltip("Maximim value for the random number.")]
+        [Tooltip("Maximum value for the random number.")]
         public FsmInt max;
 
         [RequiredField]
@@ -70,5 +70,12 @@ namespace HutongGames.PlayMaker.Actions
                 storeResult.Value = randomIndex;
             }
         }
+
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName(this, storeResult, min, max);
+        }
+#endif
     }
 }

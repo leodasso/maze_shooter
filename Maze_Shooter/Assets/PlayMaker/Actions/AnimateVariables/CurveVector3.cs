@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -10,22 +10,36 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("The Vector3 variable to animate.")]
 		public FsmVector3 vectorVariable;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("Animate from this value.")]
 		public FsmVector3 fromValue;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("Animate to this value.")]
 		public FsmVector3 toValue;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("Curve that controls the X value.")]
 		public FsmAnimationCurve curveX;
-		[Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.x and toValue.x.")]
+
+        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.x and toValue.x.")]
 		public Calculation calculationX;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("Curve that controls the Y value.")]
 		public FsmAnimationCurve curveY;
-		[Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.y and toValue.y.")]
+
+        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.y and toValue.y.")]
 		public Calculation calculationY;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("Curve that controls the Z value.")]
 		public FsmAnimationCurve curveZ;
-		[Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.z and toValue.z.")]
+
+        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.z and toValue.z.")]
 		public Calculation calculationZ;
 				
 		Vector3 vct;

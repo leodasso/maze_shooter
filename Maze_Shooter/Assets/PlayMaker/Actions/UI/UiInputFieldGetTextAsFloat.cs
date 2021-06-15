@@ -26,7 +26,8 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Event sent if text does not resolves to a float")]
 		public FsmEvent isNotFloatEvent;
 
-		public bool everyFrame;
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 		
 		private UnityEngine.UI.InputField inputField;
 

@@ -13,12 +13,14 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The GameObject to enable or disable Canvas Raycasting on.")]
 		public FsmOwnerDefault gameObject;
 
-		public FsmBool enableRaycasting;
+        [Tooltip("Enable/disable raycasting. Uncheck to disable.")]
+        public FsmBool enableRaycasting;
 
 		[Tooltip("Reset when exiting this state.")]
 		public FsmBool resetOnExit;
 
-		public bool everyFrame;
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 
         [SerializeField]
 		private PlayMakerCanvasRaycastFilterProxy raycastFilterProxy;

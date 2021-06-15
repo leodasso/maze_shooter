@@ -9,22 +9,22 @@ namespace HutongGames.PlayMaker.Actions
 	[Tooltip("Gets the name of the specified FSMs current state. Either reference the fsm component directly, or find it on a game object.")]
 	public class GetFsmState : FsmStateAction
 	{
-        [Tooltip("Drag a PlayMakerFSM component here.")]
+        [Tooltip("Choose a PlayMakerFSM component. If you set a component here it overrides the Game Object and Fsm Name settings.")]
 		public PlayMakerFSM fsmComponent;
 
-        [Tooltip("If not specifying the component above, specify the GameObject that owns the FSM")]
+        [Tooltip("If not specifying the component above, specify the GameObject that owns the FSM.")]
 		public FsmOwnerDefault gameObject;
 
 		[UIHint(UIHint.FsmName)]
-		[Tooltip("Optional name of Fsm on Game Object. If left blank it will find the first PlayMakerFSM on the GameObject.")]
+		[Tooltip("Optional name of FSM on Game Object. If left blank it will find the first PlayMakerFSM on the GameObject.")]
 		public FsmString fsmName;
 
         [RequiredField]
         [UIHint(UIHint.Variable)]
-        [Tooltip("Store the state name in a string variable.")]
+        [Tooltip("Store the FSM's current State in a string variable.")]
 		public FsmString storeResult;
 		
-        [Tooltip("Repeat every frame. E.g.,  useful if you're waiting for the state to change.")]
+        [Tooltip("Repeat every frame. E.g.,  useful if you're waiting for the State to change.")]
         public bool everyFrame;
 		
 		private PlayMakerFSM fsm;

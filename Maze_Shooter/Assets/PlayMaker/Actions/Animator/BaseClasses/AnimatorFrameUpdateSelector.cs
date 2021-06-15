@@ -6,7 +6,7 @@ namespace HutongGames.PlayMaker.Actions
 {
 	#pragma warning disable 414
 
-	public abstract class FsmStateActionAnimatorBase : FsmStateAction
+	public abstract class FsmStateActionAnimatorBase : ComponentAction<Animator>
 	{
 		public enum AnimatorFrameUpdateSelector {OnUpdate,OnAnimatorMove,OnAnimatorIK};
 

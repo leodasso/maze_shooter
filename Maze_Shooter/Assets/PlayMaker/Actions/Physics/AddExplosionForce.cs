@@ -25,7 +25,7 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("The radius of the explosion. Force falls off linearly with distance.")]
 		public FsmFloat radius;
 
-        [Tooltip("Applies the force as if it was applied from beneath the object. This is useful since explosions that throw things up instead of pushing things to the side look cooler. A value of 2 will apply a force as if it is applied from 2 meters below while not changing the actual explosion position.")]
+        [Tooltip("Applies the force as if it was applied from beneath the object. This is useful because explosions that throw things up instead of pushing things to the side look cooler. A value of 2 will apply a force as if it is applied from 2 meters below while not changing the actual explosion position.")]
 		public FsmFloat upwardsModifier;
 		
         [Tooltip("The type of force to apply. See Unity Physics docs.")]

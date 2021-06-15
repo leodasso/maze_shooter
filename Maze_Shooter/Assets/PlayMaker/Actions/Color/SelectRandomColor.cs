@@ -9,11 +9,15 @@ namespace HutongGames.PlayMaker.Actions
 	public class SelectRandomColor : FsmStateAction
 	{
 		[CompoundArray("Colors", "Color", "Weight")]
-		public FsmColor[] colors;
+        [Tooltip("A possible Color choice.")]
+        public FsmColor[] colors;
 		[HasFloatSlider(0, 1)]
-		public FsmFloat[] weights;
+        [Tooltip("The relative probability of this color being picked. " +
+                 "E.g. a weight of 0.5 is half as likely to be picked as a weight of 1.")]
+        public FsmFloat[] weights;
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the selected Color in a Color Variable.")]
 		public FsmColor storeColor;
 
 		public override void Reset()

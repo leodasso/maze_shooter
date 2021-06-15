@@ -5,15 +5,15 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
-	[Tooltip("Interrupts the automatic target matching. CompleteMatch will make the gameobject match the target completely at the next frame.")]
-	public class AnimatorInterruptMatchTarget : FsmStateAction
+	[Tooltip("Interrupts the automatic target matching. CompleteMatch will make the GameObject match the target completely at the next frame.")]
+	public class AnimatorInterruptMatchTarget : ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The target. An Animator component is required")]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("The GameObject with an Animator Component.")]
+        public FsmOwnerDefault gameObject;
 
-		[Tooltip("Will make the gameobject match the target completely at the next frame")]
+		[Tooltip("Will make the GameObject match the target completely at the next frame")]
 		public FsmBool completeMatch;
 		
 		public override void Reset()
@@ -24,26 +24,12 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			Animator _animator = go.GetComponent<Animator>();
-			
-			if (_animator!=null)
-			{
-				_animator.InterruptMatchTarget(completeMatch.Value);
-			}
-			
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                cachedComponent.InterruptMatchTarget(completeMatch.Value);
+            }
+
 			Finish();
-			
-		}
-		
-		
-	}
+        }
+    }
 }

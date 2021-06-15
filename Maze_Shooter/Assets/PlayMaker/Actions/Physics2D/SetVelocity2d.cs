@@ -1,4 +1,4 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2016. All rights reserved.
+﻿// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -13,14 +13,17 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The GameObject with the Rigidbody2D attached")]
 		public FsmOwnerDefault gameObject;
 
-		[Tooltip("A Vector2 value for the velocity")]
+		[Tooltip("Use a Vector2 value for the velocity and/or set individual axis below. If set to None, keeps current velocity.")]
 		public FsmVector2 vector;
 
-		[Tooltip("The y value of the velocity. Overrides 'Vector' x value if set")]
+		[Tooltip("Set the x value of the velocity. If None keep current x velocity.")]
 		public FsmFloat x;
 
-		[Tooltip("The y value of the velocity. Overrides 'Vector' y value if set")]
+		[Tooltip("Set the y value of the velocity. If None keep current y velocity.")]
 		public FsmFloat y;
+
+        [Tooltip("Set velocity in local or word space.")]
+        public Space space;
 
 		[Tooltip("Repeat every frame.")]
 		public bool everyFrame;
@@ -29,11 +32,10 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			gameObject = null;
 			vector = null;
-			// default axis to variable dropdown with None selected.
+            // default axis to variable dropdown with None selected.
 			x = new FsmFloat { UseVariable = true };
 			y = new FsmFloat { UseVariable = true };
-
-
+            space = Space.World;
 			everyFrame = false;
 		}
 		
@@ -62,37 +64,51 @@ namespace HutongGames.PlayMaker.Actions
 		        Finish();
 		    }
 		}
-		
-		void DoSetVelocity()
+
+        private void DoSetVelocity()
 		{
             var go = Fsm.GetOwnerDefaultTarget(gameObject);
-            if (!UpdateCache(go))
+            if (!UpdateCacheAndTransform(go))
             {
                 return;
             }
-			
-			// init position
-			
-			Vector2 velocity;
-			
-			if (vector.IsNone)
-			{
-                velocity = rigidbody2d.velocity;
 
-			}
-			else
-			{
-				velocity = vector.Value;
-			}
-			
+            // setup velocity
+
+            Vector2 velocity;
+
+            if (vector.IsNone)
+            {
+                if (space == Space.World)
+                {
+                    velocity = rigidbody2d.velocity;
+                }
+                else
+                {
+                    var localVelocity = cachedTransform.InverseTransformDirection(rigidbody2d.velocity);
+                    velocity.x = localVelocity.x;
+                    velocity.y = localVelocity.y;
+                }
+            }
+            else
+            {
+                velocity = vector.Value;
+            }
+
 			// override any axis
 			
 			if (!x.IsNone) velocity.x = x.Value;
 			if (!y.IsNone) velocity.y = y.Value;
-			
-			// apply
+
+            // apply
+
+            if (space == Space.Self)
+            {
+                var v = cachedTransform.TransformDirection(velocity);
+                velocity.Set(v.x, v.y);
+            }
 
             rigidbody2d.velocity = velocity;
-		}
+        }
 	}
 }

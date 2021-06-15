@@ -25,9 +25,12 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Event send if automatic matching is not active")]
 		public FsmEvent matchingDeactivedEvent;
 
-		private Animator _animator;
-		
-		public override void Reset()
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
+
+        public override void Reset()
 		{
 			base.Reset();
 
@@ -39,55 +42,32 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-
-			DoCheckIsMatchingActive();
+            DoCheckIsMatchingActive();
 			
 			if (!everyFrame)
 			{
 				Finish();
 			}
 		}
-	
-		
+        
 		public override void OnActionUpdate() 
 		{
 			DoCheckIsMatchingActive();
+        }
 
-		}
+        private void DoCheckIsMatchingActive()
+        {
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
 
-		void DoCheckIsMatchingActive()
-		{		
-			if (_animator==null)
-			{
-				return;
-			}
-			
-			bool _isMatchingActive = _animator.isMatchingTarget;
+            var _isMatchingActive = animator.isMatchingTarget;
 			isMatchingActive.Value = _isMatchingActive;
-			
-			if (_isMatchingActive)
-			{
-				Fsm.Event(matchingActivatedEvent);
-			}else{
-				Fsm.Event(matchingDeactivedEvent);
-			}
-		}
+
+            Fsm.Event(_isMatchingActive ? matchingActivatedEvent : matchingDeactivedEvent);
+        }
 		
 	}
 }

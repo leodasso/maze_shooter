@@ -7,13 +7,20 @@ namespace HutongGames.PlayMaker.Actions
 	public class InverseTransformDirection : FsmStateAction
 	{
 		[RequiredField]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("The game object that defines local space.")]
+        public FsmOwnerDefault gameObject;
+
 		[RequiredField]
-		public FsmVector3 worldDirection;
+        [Tooltip("The direction in world space.")]
+        public FsmVector3 worldDirection;
+
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmVector3 storeResult;
-		public bool everyFrame;
+        [Tooltip("Store the result in a Vector3 Variable.")]
+        public FsmVector3 storeResult;
+
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

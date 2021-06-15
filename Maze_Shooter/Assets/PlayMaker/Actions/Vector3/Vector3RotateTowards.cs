@@ -9,15 +9,22 @@ namespace HutongGames.PlayMaker.Actions
     public class Vector3RotateTowards : FsmStateAction
     {
         [RequiredField]
+        [Tooltip("The current direction vector.")]
         public FsmVector3 currentDirection;
+
         [RequiredField]
+        [Tooltip("The target direction vector.")]
         public FsmVector3 targetDirection;
+
         [RequiredField]
-        [Tooltip("Rotation speed in degrees per second")]
+        [Tooltip("Rotation speed in degrees per second.")]
         public FsmFloat rotateSpeed;
+
         [RequiredField]
         [Tooltip("Max Magnitude per second")]
         public FsmFloat maxMagnitude;
+
+
         public override void Reset()
         {
             currentDirection = new FsmVector3 { UseVariable = true };

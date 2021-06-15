@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames. All rights reserved.
 
 using UnityEngine;
 
@@ -10,10 +10,15 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("The Color Variable to set.")]
 		public FsmColor colorVariable;
+
 		[RequiredField]
-		public FsmColor color;
-		public bool everyFrame;
+        [Tooltip("The color to set the variable to.")]
+        public FsmColor color;
+
+	    [Tooltip("Repeat every frame.")]
+	    public bool everyFrame;
 
 		public override void Reset()
 		{
@@ -40,5 +45,12 @@ namespace HutongGames.PlayMaker.Actions
 			if (colorVariable != null)
 				colorVariable.Value = color.Value;
 		}
+        
+#if UNITY_EDITOR
+	    public override string AutoName()
+	    {
+	        return ActionHelpers.AutoNameSetVar("SetColor", colorVariable, color);
+	    }
+#endif
 	}
 }

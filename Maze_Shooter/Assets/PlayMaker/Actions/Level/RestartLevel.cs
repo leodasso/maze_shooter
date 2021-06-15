@@ -14,7 +14,8 @@ using UnityEngine.SceneManagement;
 namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory(ActionCategory.Level)]
-    [Tooltip("Restarts current level.")]
+    [Note("Reloads the current scene.")]
+    [Tooltip("Reloads the current scene.")]
     public class RestartLevel : FsmStateAction
     {
         public override void OnEnter()

@@ -12,7 +12,7 @@ namespace HutongGames.PlayMaker.Actions
 	#pragma warning disable 162
 
 	#if UNITY_5_5_OR_NEWER
-	[Obsolete("Use UnloadSceneAsynch Instead")]
+	[Obsolete("Use UnloadSceneAsynch Instead.")]
 	#endif
 	[ActionCategory(ActionCategory.Scene)]
 	[Tooltip("Unload Scene. Note that assets are currently not unloaded, in order to free up asset memory call Resources.UnloadUnusedAssets.")]

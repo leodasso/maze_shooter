@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.UI)]
-	[Tooltip("Gets pointer data on the last System event.")]
+	[Tooltip("Gets pointer data on the last System Event.\nHINT: Use {{Hide Unused}} in the {{State Inspector}} to hide the unused parameters after selecting the ones you need.")]
 	public class UiGetLastPointerDataInfo : FsmStateAction
 	{
 		public static PointerEventData lastPointerEventData;

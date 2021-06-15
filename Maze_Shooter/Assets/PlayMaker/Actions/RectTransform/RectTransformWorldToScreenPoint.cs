@@ -5,7 +5,7 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("RectTransform")]
-	[Tooltip("RectTransforms position from world space into screen space. Leave the camera to none for default behavior")]
+	[Tooltip("RectTransforms position from world space into screen space. Leave the camera to none for default behavior.")]
 	public class RectTransformWorldToScreenPoint : BaseUpdateAction
 	{
 		[RequiredField]
@@ -14,7 +14,7 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmOwnerDefault gameObject;
 
 		[CheckForComponent(typeof(Camera))]
-		[Tooltip("The camera to perform the calculation. Leave to none for default behavior")]
+		[Tooltip("The camera to perform the calculation. Leave as None for default behavior.")]
 		public FsmOwnerDefault camera;
 
 		[UIHint(UIHint.Variable)]

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.ScriptControl)]
-	[Tooltip("Enables/Disables a Behaviour on a GameObject. Optionally reset the Behaviour on exit - useful if you want the Behaviour to be active only while this state is active.")]
+	[Tooltip("Enables/Disables a Behaviour on a GameObject. Optionally reset the Behaviour on exiting the state. E.g., if you want the Behaviour to be active only while this state is active.")]
 	public class EnableBehaviour : FsmStateAction
 	{
 		[RequiredField]
@@ -23,6 +23,7 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("Set to True to enable, False to disable.")]
 		public FsmBool enable;
 		
+        [Tooltip("Reset the enabled state of the Behaviour when leaving this state.")]
 		public FsmBool resetOnExit;
 
 		public override void Reset()
@@ -35,7 +36,6 @@ namespace HutongGames.PlayMaker.Actions
 		}
 
 		Behaviour componentTarget;
-		Collider colliderComponent;
 
 		public override void OnEnter()
 		{
@@ -52,24 +52,21 @@ namespace HutongGames.PlayMaker.Actions
 			}
 
 			if (component != null)
-				ProcessComponent(component, go);
-
+			{
+				componentTarget = component as Behaviour;
+			}
 			else
-				ProcessComponent(go.GetComponent(ReflectionUtils.GetGlobalType(behaviour.Value)), go);
-		}
+			{
+				componentTarget = go.GetComponent(ReflectionUtils.GetGlobalType(behaviour.Value)) as Behaviour;
+			}
 
-		void ProcessComponent(Component component, GameObject go)
-		{
-			colliderComponent = component as Collider;
-			componentTarget = component as Behaviour;
+			if (componentTarget == null)
+			{
+				LogWarning(" " + go.name + " missing behaviour: " + behaviour.Value);
+				return;
+			}
 
-			if (colliderComponent != null)
-				colliderComponent.enabled = enable.Value;
-
-			else if (componentTarget != null)
-				componentTarget.enabled = enable.Value;
-
-			else LogWarning(" " + go.name + " missing behaviour: " + behaviour.Value);
+			componentTarget.enabled = enable.Value;
 		}
 
 		public override void OnExit()
@@ -97,10 +94,5 @@ namespace HutongGames.PlayMaker.Actions
 	        var comp = go.GetComponent(ReflectionUtils.GetGlobalType(behaviour.Value)) as Behaviour;
 	        return comp != null ? null : "Behaviour missing";
 	    }
-
-		public override string AutoName()
-		{
-			return enable.Value ? "Enable Behavior" : "Disable Behavior";
-		}
 	}
 }

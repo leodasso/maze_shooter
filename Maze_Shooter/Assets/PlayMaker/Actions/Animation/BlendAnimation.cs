@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -25,7 +25,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[RequiredField]
 		[HasFloatSlider(0f, 5f)]
-		[Tooltip("How long should the blend take.")]
+		[Tooltip("Time it should take to reach the target weight (seconds).")]
 		public FsmFloat time;
 		
 		[Tooltip("Event to send when the blend has finished.")]

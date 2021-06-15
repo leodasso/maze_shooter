@@ -5,7 +5,7 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Logic)]
-	[Tooltip("Sends Events based on the sign of a Float.")]
+	[Tooltip("Sends Events based on the sign of a Float (positive or negative).")]
 	public class FloatSignTest : FsmStateAction
 	{
 		[RequiredField]
@@ -19,7 +19,7 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("Event to send if the float variable is negative.")]
 		public FsmEvent isNegative;
 
-        [Tooltip("Repeat every frame. Useful if the variable is changing and you're waiting for a particular result.")]
+        [Tooltip("Repeat every frame. Useful if you want to wait until a float is positive/negative.")]
 		public bool everyFrame;
 
 		public override void Reset()

@@ -10,11 +10,22 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Link the button state to this Bool Variable.")]
 		public FsmBool storeButtonState;
+
+        [Tooltip("Texture to display.")]
 		public FsmTexture image;
+
+        [Tooltip("Text to display.")]
 		public FsmString text;
-		public FsmString tooltip;
-		public FsmString style;
+
+        [Tooltip("Optional tooltip. Accessed by {{GUI Tooltip}}")]
+        public FsmString tooltip;
+
+        [Tooltip("Optional named style in the current GUISkin")]
+        public FsmString style;
+
+        [Tooltip("Optional Event to send when the toggle changes.")]
 		public FsmEvent changedEvent;
 
 		public override void Reset()

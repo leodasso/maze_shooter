@@ -9,7 +9,8 @@ namespace HutongGames.PlayMaker.Actions
 	public class RandomBool : FsmStateAction
 	{
 		[UIHint(UIHint.Variable)]
-		public FsmBool storeResult;
+        [Tooltip("Store the result in a bool variable. Hint: Use a {{Bool Test}} action to branch based on this \"coin toss\"")]
+        public FsmBool storeResult;
 
 		public override void Reset()
 		{

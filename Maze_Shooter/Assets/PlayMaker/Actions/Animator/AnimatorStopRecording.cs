@@ -6,7 +6,7 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
 	[Tooltip("Stops the animator record mode. It will lock the recording buffer's contents in its current state. The data get saved for subsequent playback with StartPlayback.")]
-	public class AnimatorStopRecording : FsmStateAction
+	public class AnimatorStopRecording : ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
@@ -33,28 +33,14 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			Animator _animator = go.GetComponent<Animator>();
-			
-			if (_animator!=null)
-			{
-				_animator.StopRecording();
-				recorderStartTime.Value = _animator.recorderStartTime;
-				recorderStopTime.Value = _animator.recorderStopTime;
-			}
-			
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                cachedComponent.StopRecording();
+                recorderStartTime.Value = cachedComponent.recorderStartTime;
+                recorderStopTime.Value = cachedComponent.recorderStopTime;
+            }
+
 			Finish();
-			
-		}
-		
-		
-	}
+        }
+    }
 }

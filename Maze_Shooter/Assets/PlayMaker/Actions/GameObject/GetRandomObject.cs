@@ -9,11 +9,13 @@ namespace HutongGames.PlayMaker.Actions
 	public class GetRandomObject : FsmStateAction
 	{
 		[UIHint(UIHint.Tag)]
+        [Tooltip("Only select from Game Objects with this Tag.")]
 		public FsmString withTag;
 		
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmGameObject storeResult;
+        [Tooltip("Store the result in a GameObject Variable.")]
+        public FsmGameObject storeResult;
 
 		[Tooltip("Repeat every frame.")]
 		public bool everyFrame;

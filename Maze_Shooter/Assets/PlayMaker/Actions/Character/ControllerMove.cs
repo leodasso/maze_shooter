@@ -1,16 +1,17 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Character)]
-	[Tooltip("Moves a Game Object with a Character Controller. See also Controller Simple Move. NOTE: It is recommended that you make only one call to Move or SimpleMove per frame.")]
+	[Tooltip("Moves a Game Object with a Character Controller. See also {{Controller Simple Move}}. " +
+             "NOTE: It is recommended that you make only one call to Move or SimpleMove per frame.")]
 	public class ControllerMove : FsmStateAction
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(CharacterController))]
-		[Tooltip("The GameObject to move.")]
+		[Tooltip("The Game Object that owns the Character Controller component.")]
 		public FsmOwnerDefault gameObject;
 		
 		[RequiredField]
@@ -20,7 +21,7 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Move in local or word space.")]
 		public Space space;
 		
-		[Tooltip("Movement vector is defined in units per second. Makes movement frame rate independent.")]
+		[Tooltip("Apply the move over one second. Makes movement frame rate independent.")]
 		public FsmBool perSecond;
 		
 		private GameObject previousGo; // remember so we can get new controller only when it changes.

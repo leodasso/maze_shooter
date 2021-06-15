@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -10,30 +10,47 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("The Rect Variable to animate.")]
 		public FsmRect rectVariable;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("The Rect to animate from.")]
 		public FsmRect fromValue;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("The Rect to animate to.")]
 		public FsmRect toValue;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("Curve that controls the X value.")]
 		public FsmAnimationCurve curveX;
-		[Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.x and toValue.x.")]
+
+        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.x and toValue.x.")]
 		public Calculation calculationX;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("Curve that controls the Y value.")]
 		public FsmAnimationCurve curveY;
-		[Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.y and toValue.y.")]
+
+        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.y and toValue.y.")]
 		public Calculation calculationY;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("Curve that controls the Width.")]
 		public FsmAnimationCurve curveW;
-		[Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.width and toValue.width.")]
+
+        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.width and toValue.width.")]
 		public Calculation calculationW;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("Curve that controls the Height.")]
 		public FsmAnimationCurve curveH;
-		[Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.height and toValue.height.")]
+
+        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to otherwise linear move between fromValue.height and toValue.height.")]
 		public Calculation calculationH;
 		
 		
-		Rect rct;
+		private Rect rct;
 		
 		private bool finishInNextStep = false;
 				

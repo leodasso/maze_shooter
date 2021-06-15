@@ -20,7 +20,7 @@ namespace HutongGames.PlayMaker.Actions
 
         [ActionSection("Result")] 
 
-        [Tooltip("The event to trigger if the index is out of range")] 
+        [Tooltip("The event to trigger if the index is out of range.")] 
         public FsmEvent indexOutOfRangeEvent;
 
         public override void Reset()

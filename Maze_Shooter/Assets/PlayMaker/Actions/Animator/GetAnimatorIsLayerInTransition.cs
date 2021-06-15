@@ -10,7 +10,7 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The target. An Animator component is required")]
+        [Tooltip("The GameObject with an Animator Component.")]
 		public FsmOwnerDefault gameObject;
 		
 		[RequiredField]
@@ -29,9 +29,12 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Event send if automatic matching is not active")]
 		public FsmEvent isNotInTransitionEvent;
 
-		private Animator _animator;
-		
-		public override void Reset()
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
+
+        public override void Reset()
 		{
 			base.Reset();
 
@@ -43,24 +46,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-
-			DoCheckIsInTransition();
+            DoCheckIsInTransition();
 			
 			if(!everyFrame)
 			{
@@ -72,28 +58,24 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			DoCheckIsInTransition();
 		}
-		
-		
-		void DoCheckIsInTransition()
-		{		
-			if (_animator==null)
-			{
-				return;
-			}
-			
-			bool _isInTransition = _animator.IsInTransition(layerIndex.Value);
+
+
+        private void DoCheckIsInTransition()
+        {
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
+
+            var _isInTransition = animator.IsInTransition(layerIndex.Value);
 
 			if (!isInTransition.IsNone)
 			{
 				isInTransition.Value = _isInTransition;
 			}
 
-			if (_isInTransition)
-			{
-				Fsm.Event(isInTransitionEvent);
-			}else{
-				Fsm.Event(isNotInTransitionEvent);
-			}
-		}
+            Fsm.Event(_isInTransition ? isInTransitionEvent : isNotInTransitionEvent);
+        }
 	}
 }

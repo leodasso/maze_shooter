@@ -10,8 +10,11 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmVector3 vector3Variable;
-		public bool everyFrame;
+        [Tooltip("The Vector3 variable to multiply by Time.deltaTime.")]
+        public FsmVector3 vector3Variable;
+
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

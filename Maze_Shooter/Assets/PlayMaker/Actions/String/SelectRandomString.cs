@@ -9,12 +9,16 @@ namespace HutongGames.PlayMaker.Actions
 	public class SelectRandomString : FsmStateAction
 	{
 		[CompoundArray("Strings", "String", "Weight")]
-		public FsmString[] strings;
+        [Tooltip("A possible String choice.")]
+        public FsmString[] strings;
 		[HasFloatSlider(0, 1)]
-		public FsmFloat[] weights;
+        [Tooltip("The relative probability of this string being picked. " +
+                 "E.g. a weight of 0.5 is half as likely to be picked as a weight of 1.")]
+        public FsmFloat[] weights;
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmString storeString;
+        [Tooltip("Store the chosen String in a String Variable.")]
+        public FsmString storeString;
 		
 		public override void Reset()
 		{

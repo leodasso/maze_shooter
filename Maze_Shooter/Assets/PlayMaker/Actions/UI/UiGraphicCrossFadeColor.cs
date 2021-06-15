@@ -14,16 +14,16 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The Color target of the UI component. Leave to none and set the individual color values, for example to affect just the alpha channel")]
 		public FsmColor color;
 		
-		[Tooltip("The red channel Color target of the UI component. Leave to none for no effect, else it overrides the color property")]
+		[Tooltip("The red channel Color target of the UI component. Leave as None for no effect, else it overrides the color property")]
 		public FsmFloat red;
 		
-		[Tooltip("The green channel Color target of the UI component. Leave to none for no effect, else it overrides the color property")]
+		[Tooltip("The green channel Color target of the UI component. Leave as None for no effect, else it overrides the color property")]
 		public FsmFloat green;
 		
-		[Tooltip("The blue channel Color target of the UI component. Leave to none for no effect, else it overrides the color property")]
+		[Tooltip("The blue channel Color target of the UI component. Leave as None for no effect, else it overrides the color property")]
 		public FsmFloat blue;
 		
-		[Tooltip("The alpha channel Color target of the UI component. Leave to none for no effect, else it overrides the color property")]
+		[Tooltip("The alpha channel Color target of the UI component. Leave as None for no effect, else it overrides the color property")]
 		public FsmFloat alpha;
 	
 		[Tooltip("The duration of the tween")]

@@ -9,7 +9,8 @@ namespace HutongGames.PlayMaker.Actions
 		[CompoundArray("Count", "Key", "Variable")]
 		[Tooltip("Case sensitive key.")]
 		public FsmString[] keys;
-		[UIHint(UIHint.Variable)]
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Store the float in a Float Variable.")]
 		public FsmFloat[] variables;
 
 		public override void Reset()

@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 namespace HutongGames.PlayMaker.Actions
 {
@@ -18,7 +18,7 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("Store the result in a Bool variable.")]
 		public FsmBool storeResult;
 
-        [Tooltip("Repeat every frame while the state is active.")]
+        [Tooltip("Repeat every frame while the state is active. Useful if you're waiting for all to be true.")]
         public bool everyFrame;
 
 		public override void Reset()

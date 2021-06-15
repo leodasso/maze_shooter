@@ -9,10 +9,13 @@ namespace HutongGames.PlayMaker.Actions
 	public class PerSecond : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("The float value to multiply be Time.deltaTime.")]
 		public FsmFloat floatValue;
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the result in a float variable.")]
 		public FsmFloat storeResult;
+        [Tooltip("Do it every frame.")]
 		public bool everyFrame;
 
 		public override void Reset()

@@ -10,9 +10,14 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Light))]
+        [Tooltip("The Game Object with the Light Component.")]
 		public FsmOwnerDefault gameObject;
-		public FsmFloat lightIntensity;
-		public bool everyFrame;
+
+        [Tooltip("The intensity of the light.")]
+        public FsmFloat lightIntensity;
+
+        [Tooltip("Update every frame. Useful if the intensity is animated.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

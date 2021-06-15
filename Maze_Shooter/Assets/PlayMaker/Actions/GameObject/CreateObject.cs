@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC. All rights reserved.
 
 using UnityEngine;
 
@@ -12,6 +12,9 @@ namespace HutongGames.PlayMaker.Actions
 		[RequiredField]
 		[Tooltip("GameObject to create. Usually a Prefab.")]
 		public FsmGameObject gameObject;
+
+        [Tooltip("Optional Parent.")]
+        public FsmGameObject parent;
 
 		[Tooltip("Optional Spawn Point.")]
 		public FsmGameObject spawnPoint;
@@ -37,6 +40,7 @@ namespace HutongGames.PlayMaker.Actions
 		public override void Reset()
 		{
 			gameObject = null;
+            parent = null;
 			spawnPoint = null;
 			position = new FsmVector3 { UseVariable = true };
 			rotation = new FsmVector3 { UseVariable = true };
@@ -92,16 +96,28 @@ namespace HutongGames.PlayMaker.Actions
 					newObject = (GameObject)Network.Instantiate(go, spawnPosition, Quaternion.Euler(spawnRotation), networkGroup.Value);
 				}
 #else
-                var newObject = (GameObject)Object.Instantiate(go, spawnPosition, Quaternion.Euler(spawnRotation));
+                var newObject = Object.Instantiate(go, spawnPosition, Quaternion.Euler(spawnRotation));
 #endif
                 storeObject.Value = newObject;
-				
-				//newObject.transform.position = spawnPosition;
-				//newObject.transform.eulerAngles = spawnRotation;
-			}
+
+                if (parent.Value != null)
+                {
+                    // Keeps the world position of newObject
+                    // Use parent as spawn point if you want an offset position from the parent.
+
+                    newObject.transform.SetParent(parent.Value.transform, true);
+                }
+            }
 			
 			Finish();
 		}
+
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return "Create: " + ActionHelpers.GetValueLabel(gameObject);
+        }
+#endif
 
 	}
 }

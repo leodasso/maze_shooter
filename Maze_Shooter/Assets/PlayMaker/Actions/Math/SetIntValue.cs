@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames. All rights reserved.
 
 namespace HutongGames.PlayMaker.Actions
 {
@@ -43,7 +43,7 @@ namespace HutongGames.PlayMaker.Actions
 #if UNITY_EDITOR
 	    public override string AutoName()
 	    {
-	        return ActionHelpers.AutoNameSetVar(this, intVariable, intValue);
+	        return ActionHelpers.AutoNameSetVar("SetInt", intVariable, intValue);
 	    }
 #endif
 	}

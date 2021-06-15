@@ -4,7 +4,7 @@ namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory(ActionCategory.StateMachine)]
     [ActionTarget(typeof(PlayMakerFSM), "gameObject,fsmName")]
-    [Tooltip("Set the value of a String Variable in another FSM.")]
+    [Tooltip("Set the value of an Enum Variable in another FSM.")]
     public class SetFsmEnum : FsmStateAction
     {
         [RequiredField]
@@ -22,6 +22,7 @@ namespace HutongGames.PlayMaker.Actions
 
         [RequiredField]
         //[MatchFieldType("variableName")]
+        [Tooltip("Set the value of the Enum Variable.")]
         public FsmEnum setValue;
 
         [Tooltip("Repeat every frame. Useful if the value is changing.")]

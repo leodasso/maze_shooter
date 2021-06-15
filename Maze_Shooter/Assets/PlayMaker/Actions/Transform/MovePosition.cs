@@ -1,24 +1,36 @@
 // (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
 
-/*
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
-	[ActionCategory(ActionCategory.Transform)]
-	[Tooltip("Moves a Game Object's Rigid Body to a new position. To leave any axis unchanged, set variable to 'None'.")]
-	public class MovePosition : FsmStateAction
+	[ActionCategory(ActionCategory.Physics)]
+	[Tooltip("Moves a Game Object's Rigid Body to a new position. Unlike Set Position this will respect physics collisions.")]
+	public class MovePosition : ComponentAction<Rigidbody>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Rigidbody))]
+        [Tooltip("The GameObject to move.")]
 		public FsmOwnerDefault gameObject;
-		[UIHint(UIHint.Variable)]
+
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Movement vector.")]
 		public FsmVector3 vector;
-		public FsmFloat x;
-		public FsmFloat y;
-		public FsmFloat z;
-		public Space space;
-		public bool everyFrame;
+
+        [Tooltip("Movement in x axis.")]
+        public FsmFloat x;
+
+        [Tooltip("Movement in y axis.")]
+        public FsmFloat y;
+
+        [Tooltip("Movement in z axis.")]
+        public FsmFloat z;
+
+        [Tooltip("Coordinate space to move in.")]
+        public Space space;
+
+        [Tooltip("Keep running every frame.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{
@@ -32,17 +44,12 @@ namespace HutongGames.PlayMaker.Actions
 			everyFrame = false;
 		}
 
-		/* Transform scale doesn't stick in OnEnter
-		 * TODO: figure out why...
-		public override void OnEnter()
-		{
-			DoSetPosition();
-			
-			if (!everyFrame)
-				Finish();		
-		}
+        public override void OnPreprocess()
+        {
+            Fsm.HandleFixedUpdate = true;
+        }
 
-		public override void OnUpdate()
+        public override void OnFixedUpdate()
 		{
 			DoMovePosition();
 			
@@ -52,21 +59,22 @@ namespace HutongGames.PlayMaker.Actions
 
 		void DoMovePosition()
 		{
-			GameObject go = Fsm.GetOwnerDefaultTarget(gameObject);
-			if (go == null) return;
-			if (go.rigidbody == null) return;
-			
+            var go = Fsm.GetOwnerDefaultTarget(gameObject);
+            if (!UpdateCache(go))
+            {
+                return;
+            }
+
 			// init position
 			
 			Vector3 position;
 
 			if (vector.IsNone)
-			{
-				if (space == Space.World)
-					position = go.rigidbody.position;
-				else
-					position = go.transform.TransformPoint(go.rigidbody.position);
-			}
+            {
+                position = space == Space.World ? 
+                    rigidbody.position : 
+                    go.transform.TransformPoint(rigidbody.position);
+            }
 			else
 			{
 				position = vector.Value;
@@ -79,14 +87,11 @@ namespace HutongGames.PlayMaker.Actions
 			if (!z.IsNone) position.z = z.Value;
 
 			// apply
-			
-			if (space == Space.World)
-				go.rigidbody.MovePosition(position);
-			else
-				go.rigidbody.MovePosition(go.transform.InverseTransformPoint(position))
-		}
+
+            rigidbody.MovePosition(space == Space.World ? 
+                position : go.transform.InverseTransformPoint(position));
+        }
 
 
 	}
 }
-*/

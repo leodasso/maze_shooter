@@ -9,13 +9,16 @@ namespace HutongGames.PlayMaker.Actions
 	public class GetTransform : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("The Game Object.")]
 		public FsmGameObject gameObject;
 		
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
 		[ObjectType(typeof(Transform))]
+        [Tooltip("Store the GameObject's Transform in an Object variable of type UnityEngine.Transform.")]
 		public FsmObject storeTransform;
 		
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 
 		public override void Reset()

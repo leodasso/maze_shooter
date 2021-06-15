@@ -7,7 +7,7 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory(ActionCategory.Time)]
-    [Tooltip("Delays a State from finishing by a random time. NOTE: Other actions continue, but FINISHED can't happen before Time.")]
+    [Tooltip("Delays a State from finishing by a random time. NOTE: Other actions continue running during this time.\nAfter the random time the specified Finish Event or FINISHED is sent.")]
     public class RandomWait : FsmStateAction
     {
         

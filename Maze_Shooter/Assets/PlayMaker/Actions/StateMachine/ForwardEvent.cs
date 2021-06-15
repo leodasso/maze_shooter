@@ -24,6 +24,11 @@ namespace HutongGames.PlayMaker.Actions
             eatEvents = true;
         }
 
+        public override void Awake()
+        {
+            HandlesOnEvent = true;
+        }
+
         /// <summary>
         /// Return true to eat the event
         /// </summary>

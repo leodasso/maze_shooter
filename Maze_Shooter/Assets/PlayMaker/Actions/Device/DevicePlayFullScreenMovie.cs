@@ -1,4 +1,4 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+﻿// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 #if (UNITY_EDITOR || UNITY_IPHONE || UNITY_IOS || UNITY_ANDROID)
 
@@ -7,8 +7,11 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Device)]
-	[Tooltip("Plays a full-screen movie on a handheld device. Please consult the Unity docs for Handheld.PlayFullScreenMovie for proper usage.")]
-	public class DevicePlayFullScreenMovie : FsmStateAction
+	[Tooltip("Plays a full-screen movie on a handheld device. " +
+             "Please consult the Unity docs for <a href=\"http://docs.unity3d.com/Documentation/ScriptReference/Handheld.PlayFullScreenMovie.html\">Handheld.PlayFullScreenMovie</a> for proper usage." +
+             "\nNOTE: The action will warn you about platform requirements.")]
+
+    public class DevicePlayFullScreenMovie : FsmStateAction
 	{
         [RequiredField]
 		[Tooltip("Note that player will stream movie directly from the iPhone disc, therefore you have to provide movie as a separate files and not as an usual asset.\nYou will have to create a folder named StreamingAssets inside your Unity project (inside your Assets folder). Store your movies inside that folder. Unity will automatically copy contents of that folder into the iPhone application bundle.")]

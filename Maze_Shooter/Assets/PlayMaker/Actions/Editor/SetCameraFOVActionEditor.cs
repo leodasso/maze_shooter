@@ -1,8 +1,5 @@
-﻿using HutongGames.PlayMaker.Actions;
-using HutongGames.PlayMakerEditor;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
-using System.Collections;
 
 namespace HutongGames.PlayMakerEditor
 {
@@ -19,7 +16,12 @@ namespace HutongGames.PlayMakerEditor
 
         public override void OnSceneGUI()
         {
-            var setCameraFOVAction = (HutongGames.PlayMaker.Actions.SetCameraFOV)target;
+            var setCameraFOVAction = target as HutongGames.PlayMaker.Actions.SetCameraFOV;
+            if (setCameraFOVAction == null) // shouldn't happen!
+            {
+                return;
+            }
+
             if (setCameraFOVAction.fieldOfView.IsNone)
             {
                 return;

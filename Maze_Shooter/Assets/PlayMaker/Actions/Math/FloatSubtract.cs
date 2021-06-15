@@ -58,5 +58,14 @@ namespace HutongGames.PlayMaker.Actions
 				floatVariable.Value -= subtract.Value * Time.deltaTime;
 			}
 		}
-	}
+
+#if UNITY_EDITOR
+
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName(this, floatVariable, subtract);
+        }
+
+#endif
+    }
 }

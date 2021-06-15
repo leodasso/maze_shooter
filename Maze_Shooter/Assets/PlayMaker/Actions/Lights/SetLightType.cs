@@ -10,9 +10,11 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Light))]
+        [Tooltip("The Game Object with the Light Component.")]
 		public FsmOwnerDefault gameObject;
 		
         [ObjectType(typeof(LightType))]
+        [Tooltip("Spot, directional, or point light.")]
         public FsmEnum lightType;
 
 		public override void Reset()

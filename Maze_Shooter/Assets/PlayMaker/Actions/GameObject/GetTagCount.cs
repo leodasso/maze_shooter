@@ -9,9 +9,12 @@ namespace HutongGames.PlayMaker.Actions
 	public class GetTagCount : FsmStateAction
 	{
 		[UIHint(UIHint.Tag)]
+        [Tooltip("The Tag to search for.")]
 		public FsmString tag;
-		[RequiredField]
+
+        [RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the number found in an int variable.")]
 		public FsmInt storeResult;
 		
 		public override void Reset()

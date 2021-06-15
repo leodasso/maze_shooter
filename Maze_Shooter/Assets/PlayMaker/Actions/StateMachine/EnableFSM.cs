@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -14,7 +14,8 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmOwnerDefault gameObject;
 		
         [UIHint(UIHint.FsmName)]
-        [Tooltip("Optional name of FSM on GameObject. Useful if you have more than one FSM on a GameObject.")]
+        [Tooltip("Optional name of FSM on GameObject. Useful if you have more than one FSM on a GameObject. " +
+                 "Leave blank to use the first FSM on the game object.")]
 		public FsmString fsmName;
 
         [Tooltip("Set to True to enable, False to disable.")]

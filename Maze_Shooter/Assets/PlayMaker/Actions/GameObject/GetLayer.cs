@@ -9,10 +9,15 @@ namespace HutongGames.PlayMaker.Actions
 	public class GetLayer : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("The Game Object to examine.")]
 		public FsmGameObject gameObject;
-		[RequiredField]
+
+        [RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the Layer in an Int Variable.")]
 		public FsmInt storeResult;
+
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 		
 		public override void Reset()

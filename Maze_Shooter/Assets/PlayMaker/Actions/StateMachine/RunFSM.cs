@@ -1,26 +1,41 @@
-// (c) copyright Hutong Games, LLC 2010-2012. All rights reserved.
+// (c) copyright Hutong Games, LLC. All rights reserved.
 
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory(ActionCategory.StateMachine)]
-    [Tooltip("Creates an FSM from a saved FSM Template.")]
+    [Tooltip("Creates an FSM at runtime from a saved {{Template}}. The FSM is only active while the state is active. " +
+             "This lets you nest FSMs inside states.\nThis is a very powerful action! " +
+             "It allows you to create a library of FSM Templates that can be re-used in your project. " +
+             "You can edit the template in one place and the changes are reflected everywhere." +
+             "\nNOTE: You can also specify a template in the {{FSM Inspector}}.")]
     public class RunFSM : RunFSMAction
     {
+        [Tooltip("The Template to use. You can drag and drop, use the Unity object browser, or the categorized popup browser to select a template.")]
         public FsmTemplateControl fsmTemplateControl = new FsmTemplateControl();
 
-        [UIHint(UIHint.Variable)]
-        public FsmInt storeID;
-
-        [Tooltip("Event to send when the FSM has finished (usually because it ran a Finish FSM action).")]
+        [Tooltip("Event to send when the FSM has finished (usually because it ran a {{Finish FSM}} action).")]
         public FsmEvent finishEvent;
+
+        [ActionSection]
+
+        //[UIHint(UIHint.Variable)]
+        //[Tooltip("This allows other actions to reference the created FSM (not widely used yet).")]
+        //public FsmInt storeID;
+
+        [Tooltip("Repeat every frame. Waits for the sub Fsm to finish before calling it again.")]
+        public bool everyFrame;
+
+        // Restart FSM if Finished and everyFrame == true
+        private bool restart;
 
         public override void Reset()
         {
             fsmTemplateControl = new FsmTemplateControl();
-            storeID = null;
+            //storeID = null;
             runFsm = null;
+            everyFrame = false;
         }
 
         /// <summary>
@@ -28,6 +43,10 @@ namespace HutongGames.PlayMaker.Actions
         /// </summary>
         public override void Awake()
         {
+            HandlesOnEvent = true;
+
+            fsmTemplateControl.Init();
+
             if (fsmTemplateControl.fsmTemplate != null && Application.isPlaying)
             {
                 runFsm = Fsm.CreateSubFsm(fsmTemplateControl);
@@ -55,20 +74,102 @@ namespace HutongGames.PlayMaker.Actions
                 runFsm.Start();
             }
 
-            storeID.Value = fsmTemplateControl.ID;
+            //storeID.Value = fsmTemplateControl.ID;
+
+            fsmTemplateControl.UpdateOutput(Fsm);
+
+            runFsm.OnOutputEvent += OnOutputEvent;
 
             CheckIfFinished();
+        }
+
+
+        public override void OnExit()
+        {
+            if (runFsm == null) return;
+
+            runFsm.OnOutputEvent -= OnOutputEvent;
+        }
+
+        private void OnOutputEvent(FsmEvent fsmEvent)
+        {
+            // grab output variables again before processing the event
+            fsmTemplateControl.UpdateOutput(Fsm);
+
+            var outEvent = fsmTemplateControl.MapEvent(fsmEvent);
+            if (outEvent == null) return;
+            Fsm.Event(outEvent);
+        }
+
+        // Update Output variables in both Update and LateUpdate
+        // May want to expose this as an option for performance
+        // But right now it's the safest option...
+
+        public override void OnUpdate()
+        {
+            if (restart)
+            {
+                OnEnter();
+                restart = false;
+            }
+            else if (runFsm != null)
+            {
+                runFsm.Update();
+                fsmTemplateControl.UpdateOutput(Fsm);
+                CheckIfFinished();
+            }
+            else
+            {
+                Finish();
+            }
+        }
+
+        public override void OnLateUpdate()
+        {
+            if (runFsm != null)
+            {
+                runFsm.LateUpdate();
+                fsmTemplateControl.UpdateOutput(Fsm);
+                CheckIfFinished();
+            }
+            else
+            {
+                Finish();
+            }
         }
 
         // Other functionality covered in RunFSMAction base class
 
         protected override void CheckIfFinished()
         {
-            if (runFsm == null || runFsm.Finished)
+            if (runFsm == null)
             {
                 Finish();
-                Fsm.Event(finishEvent);
+                return;
+            }
+
+            if (runFsm.Finished)
+            {
+                if (!everyFrame)
+                {
+                    Finish();
+                    Fsm.Event(finishEvent);
+                }
+                else
+                {
+                    restart = true;
+                }
             }
         }
+
+#if UNITY_EDITOR
+
+        public override string AutoName()
+        {
+            var template = fsmTemplateControl != null ? fsmTemplateControl.fsmTemplate : null;
+            return "Run: " + (template != null ? template.name : "[none]");
+        }
+
+#endif
     }
 }

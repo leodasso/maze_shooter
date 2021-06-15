@@ -11,30 +11,35 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("The Color Variable to animate.")]
 		public FsmColor colorVariable;
 		
         [RequiredField]
+        [Tooltip("The curve used to animate the red value.")]
 		public FsmAnimationCurve curveR;
 		
-        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to colorVariable.r.")]
+        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to the red channel.")]
 		public Calculation calculationR;
 		
         [RequiredField]
+        [Tooltip("The curve used to animate the green value.")]
 		public FsmAnimationCurve curveG;
 		
-        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to colorVariable.g.")]
+        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to the green channel.")]
 		public Calculation calculationG;
 		
         [RequiredField]
+        [Tooltip("The curve used to animate the blue value.")]
 		public FsmAnimationCurve curveB;
 		
-        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to colorVariable.b.")]
+        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to the blue channel.")]
 		public Calculation calculationB;
 		
         [RequiredField]
+        [Tooltip("The curve used to animate the alpha value.")]
 		public FsmAnimationCurve curveA;
 		
-        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to colorVariable.a.")]
+        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to the alpha channel.")]
 		public Calculation calculationA;
 				
 		private bool finishInNextStep;

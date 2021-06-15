@@ -10,14 +10,20 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Renderer))]
-		public FsmOwnerDefault gameObject;
-		public FsmInt materialIndex;
+        [Tooltip("The target Game Object.")]
+        public FsmOwnerDefault gameObject;
+        [Tooltip("The index of the material on the object.")]
+        public FsmInt materialIndex;
 		[UIHint(UIHint.NamedColor)]
-		public FsmString namedTexture;
+        [Tooltip("The named texture. See unity docs: <a href=\"http://unity3d.com/support/documentation/ScriptReference/Material.SetTextureScale.html\" rel=\"nofollow\">SetTextureScale</a>")]
+        public FsmString namedTexture;
 		[RequiredField]
-		public FsmFloat scaleX;
+        [Tooltip("Scale in X axis. 2 = double the texture's width.")]
+        public FsmFloat scaleX;
 		[RequiredField]
-		public FsmFloat scaleY;
+        [Tooltip("Scale in Y axis. 2 = double the texture's height.")]
+        public FsmFloat scaleY;
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 
 		public override void Reset()

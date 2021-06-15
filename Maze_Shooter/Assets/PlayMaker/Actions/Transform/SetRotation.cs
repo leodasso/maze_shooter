@@ -20,10 +20,13 @@ namespace HutongGames.PlayMaker.Actions
 		[Title("Euler Angles")]
 		[Tooltip("Use euler angles stored in a Vector3 variable, and/or set each axis below.")]
 		public FsmVector3 vector;
-		
-		public FsmFloat xAngle;
-		public FsmFloat yAngle;
-		public FsmFloat zAngle;
+
+        [Tooltip("Angle around the X axis in degrees.")]
+        public FsmFloat xAngle;
+        [Tooltip("Angle around the Y axis in degrees.")]
+        public FsmFloat yAngle;
+        [Tooltip("Angle around the Z axis in degrees.")]
+        public FsmFloat zAngle;
 
 		[Tooltip("Use local or world space.")]
 		public Space space;

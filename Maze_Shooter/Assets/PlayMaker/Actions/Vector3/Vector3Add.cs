@@ -10,10 +10,17 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmVector3 vector3Variable;
+        [Tooltip("Vector3 variable to add to.")]
+        public FsmVector3 vector3Variable;
+
 		[RequiredField]
-		public FsmVector3 addVector;
-		public bool everyFrame;
+        [Tooltip("Vector3 to add.")]
+        public FsmVector3 addVector;
+
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
+
+        [Tooltip("Add over one second (multiplies values by Time.deltaTime). Note: Needs Every Frame checked.")]
 		public bool perSecond;
 
 		public override void Reset()

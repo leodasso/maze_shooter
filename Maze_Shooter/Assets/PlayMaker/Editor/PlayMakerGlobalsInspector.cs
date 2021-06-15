@@ -1,13 +1,9 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="PlayMakerGlobalsInspector.cs" company="Hutong Games LLC">
-// Copyright (c) Hutong Games LLC. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
+﻿// (c) Copyright HutongGames, LLC 2020. All rights reserved.
 
-using System.Collections.Generic;
-using HutongGames.PlayMaker;
 using UnityEditor;
 using UnityEngine;
+using System.Collections.Generic;
+using HutongGames.PlayMaker;
 
 namespace HutongGames.PlayMakerEditor
 {
@@ -15,64 +11,154 @@ namespace HutongGames.PlayMakerEditor
     internal class PlayMakerGlobalsInspector : UnityEditor.Editor
     {
 	    private PlayMakerGlobals globals;
-	    private List<FsmVariable> variableList;
+
+        private List<FsmVariable> variables;
 
         public void OnEnable()
 	    {
 		    globals = target as PlayMakerGlobals;
-		    BuildVariableList();
+
+            Init();
 	    }
+
+        private void Init()
+        {
+            //Debug.Log("PlayMakerGlobalsInspector.Init");
+
+            FsmEditorSettings.LoadSettings();
+
+            if (globals != null)
+            {
+                variables = FsmVariable.GetFsmVariableList(globals);
+
+                foreach (var fsmVariable in variables)
+                {
+                    fsmVariable.NamedVar.Init();
+                }
+            }
+
+            Repaint();
+        }
 
 	    public override void OnInspectorGUI()
 	    {
+	        EditorGUIUtility.hierarchyMode = false;
+	        FsmVariableEditor.UnityInspectorMode = true;
+
             FsmEditorStyles.Init();
 
             DoGlobalVariablesGUI();
+
+            GUILayout.Space(20);
+
 	        DoGlobalEventsGUI();
-
-	        GUILayout.Space(5);
-
-	        if (GUILayout.Button("Refresh"))
-	            Refresh();
 
             GUILayout.Space(10);
 
-            DoImportExportGUI();
+            //DoImportExportGUI();
 	    }
+
+        private const float EditButtonWidth = 160;
 
         private void DoGlobalVariablesGUI()
         {
-            EditorGUILayout.HelpBox(Strings.Hint_GlobalsInspector_Shows_DEFAULT_Values, MessageType.Info);
+            DoSectionTitle(Strings.Command_Global_Variables);
 
-            GUILayout.Label(Strings.Command_Global_Variables, EditorStyles.boldLabel);
+            //EditorGUILayout.HelpBox(Strings.Hint_GlobalsInspector_Shows_DEFAULT_Values, MessageType.None);
+            EditorGUILayout.HelpBox("NOTE: This inspector shows the default values of variables. " +
+                                    "\nTo see current values while playing use the PlayMaker Editor: " +
+                                    "\nGlobals Variables Window, State Inspector Debug etc.", MessageType.None);
 
-            if (variableList.Count > 0)
+            if (variables.Count > 0)
             {
-                FsmVariable.DoVariableListGUI(variableList);
+                var listSerializedObject = variables[0].SerializedObject;
+                listSerializedObject.Update();
+
+                EditorGUI.BeginChangeCheck();
+
+                FsmVariable.DoVariableListGUI(variables);
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    listSerializedObject.ApplyModifiedProperties();
+                }
             }
-            else
+
+            GUILayout.Space(10);
+
+            GUILayout.BeginHorizontal();
+
+            GUILayout.FlexibleSpace();
+
+            if (GUILayout.Button("Refresh"))
             {
-                GUILayout.Label(Strings.Label_None_In_Table);
+                Init();
             }
+
+            if (GUILayout.Button("Open Globals Window", GUILayout.Width(EditButtonWidth)))
+            {
+                if (FsmEditor.Instance == null) FsmEditor.Open();
+                FsmEditor.OpenGlobalVariablesWindow();
+            }
+
+            GUILayout.EndHorizontal();
         }
+
+        private static Rect sendIcon = new Rect();
 
         private void DoGlobalEventsGUI()
         {
-            GUILayout.Label(Strings.Label_Global_Events, EditorStyles.boldLabel);
+            // TODO:
+            // Context menu to find usages
+            // Usages count
 
-            if (globals.Events.Count > 0)
+            DoSectionTitle(Strings.Label_Global_Events);
+
+            foreach (var eventName in globals.Events)
             {
-                foreach (var eventName in globals.Events)
+                var rect = GUILayoutUtility.GetRect(GUIContent.none, FsmEditorStyles.EventGlobalButton);
+                sendIcon.Set(rect.x + 4, rect.y + 3, 12, rect.height - 4);
+ 
+                FsmEditorContent.EventSendGlobalButton.text = eventName;
+                if (GUI.Button(rect, FsmEditorContent.EventSendGlobalButton, FsmEditorStyles.EventGlobalButton))
                 {
-                    GUILayout.Label(eventName);
+                    PlayMakerFSM.BroadcastEvent(eventName);
+                }
+
+                if (Event.current.type == EventType.Repaint)
+                {
+                    GUIStyle.none.Draw(sendIcon, FsmEditorStyles.BroadcastIcon);
                 }
             }
-            else
+
+            GUILayout.Space(10);
+
+            GUILayout.BeginHorizontal();
+
+            GUILayout.FlexibleSpace();
+
+            if (GUILayout.Button("Refresh"))
             {
-                GUILayout.Label(Strings.Label_None_In_Table);
+                Init();
             }
+
+            if (GUILayout.Button("Open Events Browser", GUILayout.Width(EditButtonWidth)))
+            {
+                if (FsmEditor.Instance == null) FsmEditor.Open();
+                FsmEditor.OpenGlobalEventsWindow();
+            }
+
+            GUILayout.EndHorizontal();
         }
 
+        private void DoSectionTitle(string title)
+        {
+            GUILayout.Label(title, FsmEditorStyles.LargeLabel);
+            FsmEditorGUILayout.Divider();
+            GUILayout.Space(10);
+        }
+
+        /*
         private static void DoImportExportGUI()
         {
             if (GUILayout.Button(Strings.Command_Export_Globals))
@@ -86,18 +172,8 @@ namespace HutongGames.PlayMakerEditor
             }
 
             EditorGUILayout.HelpBox(Strings.Hint_Export_Globals_Notes, MessageType.None);
-        }
+        }*/
 
-        private void Refresh()
-	    {
-		    BuildVariableList();
-		    Repaint();
-	    }
-
-        private void BuildVariableList()
-	    {
-		    variableList = FsmVariable.GetFsmVariableList(globals);
-	    }
     }
 }
 

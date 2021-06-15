@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 
 using System;
+using HutongGames.Editor;
 using UnityEditor;
 using UnityEngine;
 using HutongGames.PlayMaker;
@@ -19,44 +20,83 @@ namespace HutongGames.PlayMakerEditor
     {
         private PlayMakerFSM fsmComponent;
         private FsmInspector fsmInspector;
+        private EditorWindow inspectorWindow;
 
         public void OnEnable()
         {
             fsmComponent = (PlayMakerFSM) target;
-            fsmInspector = new FsmInspector(fsmComponent.Fsm) {UnityInspectorMode = true};
-            fsmInspector.EditButtonAction += () => { FsmEditorWindow.OpenInEditor(fsmComponent); };
 
-            FsmEditor.OnFsmChanged += CheckRefresh;
+            Init();
         }
 
-        public void OnDisable()
+        private void OnDisable()
         {
-            FsmEditor.OnFsmChanged -= CheckRefresh;
+            PlayMakerFSM.OnSettingChanged -= DoSettingsChanged;
+        }
+
+        private void Init()
+        {
+            //Debug.Log("FsmComponentInspector.Init()");
+
+            fsmInspector = new FsmInspector(fsmComponent.Fsm, true);
+            fsmInspector.OnEditButtonPressed += () => { FsmEditorWindow.OpenInEditor(fsmComponent); };
+            FsmEditor.OnFsmControlsChanged += (fsm) => Repaint();
+
+            FsmEditorSettings.LoadSettings();
+            PlayMakerFSM.OnSettingChanged = DoSettingsChanged;
+        }
+
+        private void DoSettingsChanged(string setting)
+        {
+            switch (setting)
+            {
+                case "ShowFullFsmInspector":
+                    FsmEditorSettings.ShowFullFsmInspector = !FsmEditorSettings.ShowFullFsmInspector;
+                    break;
+            }
+
+            FsmEditorSettings.SaveSettings();
         }
 
         public override void OnInspectorGUI()
         {
-            fsmInspector.OnGUI();
-        }
+            GUILayout.BeginVertical();
 
-        private void CheckRefresh(Fsm fsm)
-        {
-            if (fsm == fsmComponent.Fsm)
+            try
             {
+                fsmInspector.OnGUI();
+            }
+            catch(Exception e)
+            {
+                if (e is ExitGUIException) throw;
+
+                //TODO: detect if stuck in loop here
+                // E.g., set a "triedToRecover" flag that is cleared when OnGUI succeeds.
+                // If triedToRecover is true here it means we failed twice!
+
                 fsmInspector.Reset();
+                Repaint();
+
+                GUIUtility.ExitGUI();
+            }
+
+            GUILayout.EndVertical();
+
+            if (Event.current.type == EventType.Repaint)
+            {
+                if (inspectorWindow == null)
+                    inspectorWindow = EditorHacks.GetUnityInspectorWindow();
+                HighlighterHelper.Init(inspectorWindow);
+                HighlighterHelper.FromGUILayout("PlayMakerFSM_" + fsmComponent.GetInstanceID());
+
+                HighlighterHelper.OnGUI();
             }
         }
 
-        /// <summary>
-        /// Actions can use OnSceneGUI to display interactive gizmos
-        /// </summary>
-        public void OnSceneGUI()
-        {
-            FsmEditor.OnSceneGUI();
-        }
+        #region Obsolete
 
-        // These should be in FsmEditor, but keeping here for backward compatibility
-        // Some third party tools may be using them...
+        // These should be in FsmEditor,
+        // but keeping here since they were public API
 
         /// <summary>
         /// Open the specified FSM in the Playmaker Editor
@@ -84,6 +124,8 @@ namespace HutongGames.PlayMakerEditor
         {
             FsmEditorWindow.OpenInEditor(FsmSelection.FindFsmOnGameObject(go));
         }
+
+        #endregion
 
     }
 }

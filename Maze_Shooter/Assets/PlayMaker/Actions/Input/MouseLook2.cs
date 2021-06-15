@@ -22,26 +22,32 @@ namespace HutongGames.PlayMaker.Actions
 		public RotationAxes axes = RotationAxes.MouseXAndY;
 
 		[RequiredField]
+        [Tooltip("Speed around X axis. Higher = faster.")]
 		public FsmFloat sensitivityX;
 
 		[RequiredField]
-		public FsmFloat sensitivityY;
+        [Tooltip("Speed around Y axis. Higher = faster.")]
+        public FsmFloat sensitivityY;
 
 		[RequiredField]
 		[HasFloatSlider(-360,360)]
+        [Tooltip("Minimum angle around X axis.")]
 		public FsmFloat minimumX;
 
 		[RequiredField]
 		[HasFloatSlider(-360, 360)]
-		public FsmFloat maximumX;
+        [Tooltip("Maximum angle around X axis.")]
+        public FsmFloat maximumX;
 
 		[RequiredField]
 		[HasFloatSlider(-360, 360)]
-		public FsmFloat minimumY;
+        [Tooltip("Minimum angle around Y axis.")]
+        public FsmFloat minimumY;
 
 		[RequiredField]
 		[HasFloatSlider(-360, 360)]
-		public FsmFloat maximumY;
+        [Tooltip("Maximum angle around X axis.")]
+        public FsmFloat maximumY;
 
 		[Tooltip("Repeat every frame.")]
 		public bool everyFrame;

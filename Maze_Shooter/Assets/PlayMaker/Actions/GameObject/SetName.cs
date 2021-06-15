@@ -9,9 +9,12 @@ namespace HutongGames.PlayMaker.Actions
 	public class SetName : FsmStateAction
 	{
 		[RequiredField]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("The Game Object to name.")]
+        public FsmOwnerDefault gameObject;
+
 		[RequiredField]
-		public FsmString name;
+        [Tooltip("The new name.")]
+        public FsmString name;
 
 		public override void Reset()
 		{

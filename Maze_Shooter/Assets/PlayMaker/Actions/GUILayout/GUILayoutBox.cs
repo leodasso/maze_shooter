@@ -14,11 +14,11 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Text to display in the Box.")]
 		public FsmString text;
 
-		[Tooltip("Optional Tooltip string.")]
-		public FsmString tooltip;
+        [Tooltip("The tooltip associated with this control. See {{GUI Tooltip}}")]
+        public FsmString tooltip;
 
-		[Tooltip("Optional GUIStyle in the active GUISkin.")]
-		public FsmString style;
+        [Tooltip("Optional named style in the current GUISkin")]
+        public FsmString style;
 
 		public override void Reset()
 		{

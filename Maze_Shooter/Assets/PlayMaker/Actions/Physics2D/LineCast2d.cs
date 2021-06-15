@@ -49,7 +49,7 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmVector2 storeHitPoint;
 		
 		[UIHint(UIHint.Variable)]
-		[Tooltip("Get the 2d normal at the hit point and store it in a variable.")]
+		[Tooltip("Get the 2d normal at the hit point and store it in a variable.\nNote, this is a direction vector not a rotation.")]
 		public FsmVector2 storeHitNormal;
 		
 		[UIHint(UIHint.Variable)]
@@ -58,7 +58,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[ActionSection("Filter")] 
 		
-		[Tooltip("Set how often to cast a ray. 0 = once, don't repeat; 1 = everyFrame; 2 = every other frame... \nSince raycasts can get expensive use the highest repeat interval you can get away with.")]
+		[Tooltip("Set how often to cast a ray. 0 = once, don't repeat; 1 = everyFrame; 2 = every other frame... \nBecause raycasts can get expensive use the highest repeat interval you can get away with.")]
 		public FsmInt repeatInterval;
 		
 		[UIHint(UIHint.Layer)]

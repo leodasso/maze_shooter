@@ -47,6 +47,13 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			storeResult.Value = Input.GetKey(key);
 		}
-		
-	}
+
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName(this, key.ToString(), ActionHelpers.GetValueLabel(storeResult));
+        }
+#endif
+
+    }
 }

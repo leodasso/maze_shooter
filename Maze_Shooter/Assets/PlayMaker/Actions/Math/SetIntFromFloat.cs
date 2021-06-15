@@ -8,9 +8,12 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmInt intVariable;
-		public FsmFloat floatValue;
-		public bool everyFrame;
+        [Tooltip("The int variable to set.")]
+        public FsmInt intVariable;
+        [Tooltip("The float value.")]
+        public FsmFloat floatValue;
+        [Tooltip("Do it every frame.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

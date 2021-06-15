@@ -10,16 +10,27 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Rigidbody))]
+        [Tooltip("The Game Object.")]
 		public FsmOwnerDefault gameObject;
+
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the velocity in a Vector3 Variable.")]
 		public FsmVector3 vector;
+
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the X component of the velocity in a Float Variable.")]
 		public FsmFloat x;
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the Y component of the velocity in a Float Variable.")]
 		public FsmFloat y;
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the Z component of the velocity in a Float Variable.")]
 		public FsmFloat z;
-		public Space space;
+
+        [Tooltip("The coordinate space to get the velocity in.")]
+        public Space space;
+
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 
 		public override void Reset()

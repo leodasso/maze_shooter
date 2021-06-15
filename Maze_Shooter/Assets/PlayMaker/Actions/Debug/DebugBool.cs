@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 namespace HutongGames.PlayMaker.Actions
 {
@@ -33,5 +33,12 @@ namespace HutongGames.PlayMaker.Actions
 						
 			Finish();
 		}
-	}
+
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName("Debug", boolVariable);
+        }
+#endif
+    }
 }

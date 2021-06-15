@@ -10,7 +10,7 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The target. An Animator component is required")]
+        [Tooltip("The GameObject with an Animator Component.")]
 		public FsmOwnerDefault gameObject;
 		
 		[ActionSection("Results")]
@@ -23,9 +23,12 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The pivot is the most stable point between the avatar's left and right foot.\n For a value of 0, the left foot is the most stable point For a value of 1, the right foot is the most stable point")]
 		public FsmVector3 pivotPosition;
 
-		private Animator _animator;
-		
-		public override void Reset()
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
+
+        public override void Reset()
 		{
 			base.Reset();
 
@@ -36,23 +39,6 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-
 			DoCheckPivot();
 			
 			if (!everyFrame)
@@ -65,22 +51,23 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			DoCheckPivot();
 		}
-		
-	
-		void DoCheckPivot()
-		{		
-			if (_animator==null)
-			{
-				return;
-			}
 
-			if (!pivotWeight.IsNone)
+
+        private void DoCheckPivot()
+		{
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
+
+            if (!pivotWeight.IsNone)
 			{
-				pivotWeight.Value = _animator.pivotWeight;
+				pivotWeight.Value = animator.pivotWeight;
 			}
 			if (!pivotPosition.IsNone)
 			{
-				pivotPosition.Value = _animator.pivotPosition;
+				pivotPosition.Value = animator.pivotPosition;
 			}
 
 		}

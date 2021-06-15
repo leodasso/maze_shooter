@@ -8,7 +8,7 @@ namespace HutongGames.PlayMaker.Actions
 	[ActionCategory(ActionCategory.StateMachine)]
     [ActionTarget(typeof(PlayMakerFSM), "eventTarget")]
     [ActionTarget(typeof(GameObject), "eventTarget")]
-	[Tooltip("Sends an Event after an optional delay. NOTE: To send events between FSMs they must be marked as Global in the Events Browser.")]
+	[Tooltip("Sends an Event after an optional delay. NOTE: To send events between FSMs they must be marked as Global in the {{Event Browser}}.")]
 	public class SendEvent : FsmStateAction
 	{
 		[Tooltip("Where to send the event.")]
@@ -70,9 +70,9 @@ namespace HutongGames.PlayMaker.Actions
 
 	    public override string AutoName()
 	    {
-	        return "SendEvent : " + (eventTarget.target != FsmEventTarget.EventTarget.Self ? " " + eventTarget.target + " ": "")
-	                              + (sendEvent != null ? sendEvent.Name : "None")
-	                              + (delay.Value > 0f ? " " + delay.Value + "s" : "");
+	        return "SendEvent: " + (eventTarget.target != FsmEventTarget.EventTarget.Self ? " " + eventTarget.target + " ": "")
+                                 + (sendEvent != null ? sendEvent.Name : "None")
+                                 + (delay.Value > 0f ? " " + delay.Value + "s" : "");
 	    }
 
 	    public override float GetProgress()

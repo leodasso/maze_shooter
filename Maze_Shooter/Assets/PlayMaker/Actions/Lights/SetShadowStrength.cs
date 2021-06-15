@@ -10,9 +10,14 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Light))]
-		public FsmOwnerDefault gameObject;
-		public FsmFloat shadowStrength;
-		public bool everyFrame;
+        [Tooltip("The Game Object with the Light Component.")]
+        public FsmOwnerDefault gameObject;
+
+        [Tooltip("The strength of the shadows. 1 = opaque, 0 = transparent.")]
+        public FsmFloat shadowStrength;
+
+        [Tooltip("Update every frame. Useful if the shadow strength is animated.")]
+        public bool everyFrame;
 		
 		public override void Reset()
 		{

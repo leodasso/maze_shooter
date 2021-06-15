@@ -1,9 +1,5 @@
 // (c) Copyright HutongGames, LLC 2010-2016. All rights reserved.
 
-#if UNITY_5_3_OR_NEWER || UNITY_5
-#define UNITY_5_OR_NEWER
-#endif
-
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
@@ -31,16 +27,13 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("The layer's name Hash. Obsolete in Unity 5, use fullPathHash or shortPathHash instead, nameHash will be the same as shortNameHash for legacy")]
         public FsmInt nameHash;
 
-#if UNITY_5_OR_NEWER
 		[UIHint(UIHint.Variable)]
 		[Tooltip("The full path hash for this state.")]
 		public FsmInt fullPathHash;
 		
 		[UIHint(UIHint.Variable)]
-		[Tooltip("The name Hash. Doest not include the parent layer's name")]
+		[Tooltip("The name Hash. Does not include the parent layer's name")]
 		public FsmInt shortPathHash;
-#endif
-
 
         [UIHint(UIHint.Variable)]
         [Tooltip("The layer's tag hash")]
@@ -66,7 +59,10 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("The progress in the current loop. This is extracted from the normalizedTime")]
         public FsmFloat currentLoopProgress;
 
-        private Animator _animator;
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
 
         public override void Reset()
         {
@@ -77,40 +73,18 @@ namespace HutongGames.PlayMaker.Actions
 
             name = null;
             nameHash = null;
-
-#if UNITY_5_OR_NEWER
 			fullPathHash = null;
 			shortPathHash = null;
-#endif
-
             tagHash = null;
             length = null;
             normalizedTime = null;
             isStateLooping = null;
             loopCount = null;
             currentLoopProgress = null;
-
         }
 
         public override void OnEnter()
         {
-            // get the animator component
-            var go = Fsm.GetOwnerDefaultTarget(gameObject);
-
-            if (go == null)
-            {
-                Finish();
-                return;
-            }
-
-            _animator = go.GetComponent<Animator>();
-
-            if (_animator == null)
-            {
-                Finish();
-                return;
-            }
-
             GetLayerInfo();
 
             if (!everyFrame)
@@ -124,63 +98,55 @@ namespace HutongGames.PlayMaker.Actions
             GetLayerInfo();
         }
 
-        void GetLayerInfo()
+        private void GetLayerInfo()
         {
-            if (_animator != null)
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
             {
-                AnimatorStateInfo _info = _animator.GetNextAnimatorStateInfo(layerIndex.Value);
+                Finish();
+                return;
+            }
 
-#if UNITY_5_OR_NEWER
-				if (!fullPathHash.IsNone)
-				{
-					fullPathHash.Value = _info.fullPathHash;
-				}
-				if (!shortPathHash.IsNone)
-				{
-					shortPathHash.Value = _info.shortNameHash;
-				}
-				if (!nameHash.IsNone)
-				{
-					nameHash.Value = _info.shortNameHash;
-				}
-#else
-                if (!nameHash.IsNone)
-                {
-#if UNITY_5_OR_NEWER
-				    nameHash.Value = _info.fullPathHash;
-#else
-                    nameHash.Value = _info.nameHash;
-#endif
-                }
-#endif
+            var _info = animator.GetNextAnimatorStateInfo(layerIndex.Value);
 
-                if (!name.IsNone)
-                {
-                    name.Value = _animator.GetLayerName(layerIndex.Value);
-                }
+            if (!fullPathHash.IsNone)
+            {
+                fullPathHash.Value = _info.fullPathHash;
+            }
+            if (!shortPathHash.IsNone)
+            {
+                shortPathHash.Value = _info.shortNameHash;
+            }
+            if (!nameHash.IsNone)
+            {
+                nameHash.Value = _info.shortNameHash;
+            }
 
-                if (!tagHash.IsNone)
-                {
-                    tagHash.Value = _info.tagHash;
-                }
-                if (!length.IsNone)
-                {
-                    length.Value = _info.length;
-                }
-                if (!isStateLooping.IsNone)
-                {
-                    isStateLooping.Value = _info.loop;
-                }
-                if (!normalizedTime.IsNone)
-                {
-                    normalizedTime.Value = _info.normalizedTime;
-                }
+            if (!name.IsNone)
+            {
+                name.Value = animator.GetLayerName(layerIndex.Value);
+            }
 
-                if (!loopCount.IsNone || !currentLoopProgress.IsNone)
-                {
-                    loopCount.Value = (int)System.Math.Truncate(_info.normalizedTime);
-                    currentLoopProgress.Value = _info.normalizedTime - loopCount.Value;
-                }
+            if (!tagHash.IsNone)
+            {
+                tagHash.Value = _info.tagHash;
+            }
+            if (!length.IsNone)
+            {
+                length.Value = _info.length;
+            }
+            if (!isStateLooping.IsNone)
+            {
+                isStateLooping.Value = _info.loop;
+            }
+            if (!normalizedTime.IsNone)
+            {
+                normalizedTime.Value = _info.normalizedTime;
+            }
+
+            if (!loopCount.IsNone || !currentLoopProgress.IsNone)
+            {
+                loopCount.Value = (int)System.Math.Truncate(_info.normalizedTime);
+                currentLoopProgress.Value = _info.normalizedTime - loopCount.Value;
             }
         }
 

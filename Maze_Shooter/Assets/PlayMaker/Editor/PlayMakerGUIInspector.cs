@@ -20,26 +20,27 @@ public class PlayMakerGUIInspector : Editor
 
     public void OnEnable()
 	{
-		guiComponent = (PlayMakerGUI) target;
+		guiComponent = target as PlayMakerGUI;
 
-		guiComponent.drawStateLabels = EditorPrefs.GetBool(EditorPrefStrings.ShowStateLabelsInGameView);
-        guiComponent.enableStateLabelsInBuilds = EditorPrefs.GetBool(EditorPrefStrings.ShowStateLabelsInBuild);
+        if (guiComponent != null) // can happen on rebuild?
+        {
+            guiComponent.drawStateLabels = EditorPrefs.GetBool(EditorPrefStrings.ShowStateLabelsInGameView);
+            guiComponent.enableStateLabelsInBuilds = EditorPrefs.GetBool(EditorPrefStrings.ShowStateLabelsInBuild);
+        }
 
 		CheckForDuplicateComponents();
 	}
 
 	public override void OnInspectorGUI()
 	{
-#if UNITY_3_5 || UNITY_4_0 || UNITY_4_0_1 || UNITY_4_2
-        EditorGUIUtility.LookLikeInspector();
-#else
         EditorGUIUtility.labelWidth = 210;
-#endif
-        GUILayout.Label(Strings.Label_NOTES, EditorStyles.boldLabel);
-		GUILayout.Label(Strings.Hint_PlayMakerGUI_Notes);
-		GUILayout.Label(Strings.Label_General, EditorStyles.boldLabel);
 
-		EditorGUI.indentLevel = 1;
+        FsmEditorStyles.Init();
+
+        GUILayout.Label(Strings.Label_NOTES, FsmEditorStyles.InspectorHeader);
+		GUILayout.Label(Strings.Hint_PlayMakerGUI_Notes);
+		
+        GUILayout.Label(Strings.Label_General, FsmEditorStyles.InspectorHeader);
 
 		guiComponent.enableGUILayout = EditorGUILayout.Toggle(new GUIContent(Strings.Label_Enable_GUILayout,
 		                                                               Strings.Tooltip_Enable_GUILayout),
@@ -50,9 +51,7 @@ public class PlayMakerGUIInspector : Editor
 
 		guiComponent.previewOnGUI = EditorGUILayout.Toggle(new GUIContent(Strings.Label_Preview_GUI_Actions_While_Editing, Strings.Tooltip_Preview_GUI_Actions_While_Editing), guiComponent.previewOnGUI);
 
-		EditorGUI.indentLevel = 0;
-		GUILayout.Label(Strings.Label_Debugging, EditorStyles.boldLabel);
-		EditorGUI.indentLevel = 1;
+		GUILayout.Label(Strings.Label_Debugging, FsmEditorStyles.InspectorHeader);
 
 		var drawStateLabels = EditorGUILayout.Toggle(new GUIContent(Strings.Label_Draw_Active_State_Labels, Strings.Tooltip_Draw_Active_State_Labels), guiComponent.drawStateLabels);
 		if (drawStateLabels != guiComponent.drawStateLabels)
@@ -63,7 +62,6 @@ public class PlayMakerGUIInspector : Editor
 		}
 
         GUI.enabled = guiComponent.drawStateLabels;
-        //EditorGUI.indentLevel = 2;
 
         var enableStateLabelsInBuilds = EditorGUILayout.Toggle(new GUIContent(Strings.Label_Enable_State_Labels_in_Builds, Strings.Tooltip_Show_State_Labels_in_Standalone_Builds), guiComponent.enableStateLabelsInBuilds);
         if (enableStateLabelsInBuilds != guiComponent.enableStateLabelsInBuilds)
@@ -72,14 +70,16 @@ public class PlayMakerGUIInspector : Editor
             FsmEditorSettings.ShowStateLabelsInBuild = enableStateLabelsInBuilds;
             FsmEditorSettings.SaveSettings();
         }
+
+#if !UNITY_2019_3_OR_NEWER
         
         guiComponent.GUITextureStateLabels = EditorGUILayout.Toggle(new GUIContent(Strings.Label_GUITexture_State_Labels, Strings.Tooltip_GUITexture_State_Labels), guiComponent.GUITextureStateLabels);
 		guiComponent.GUITextStateLabels = EditorGUILayout.Toggle(new GUIContent(Strings.Label_GUIText_State_Labels, Strings.Tooltip_GUIText_State_Labels), guiComponent.GUITextStateLabels);
 
-		GUI.enabled = true;
-		//EditorGUI.indentLevel = 1;
+#endif
+        GUI.enabled = true;
 
-		guiComponent.filterLabelsWithDistance = EditorGUILayout.Toggle(new GUIContent(Strings.Label_Filter_State_Labels_With_Distance, Strings.Tooltip_Filter_State_Labels_With_Distance), guiComponent.filterLabelsWithDistance);
+        guiComponent.filterLabelsWithDistance = EditorGUILayout.Toggle(new GUIContent(Strings.Label_Filter_State_Labels_With_Distance, Strings.Tooltip_Filter_State_Labels_With_Distance), guiComponent.filterLabelsWithDistance);
 
 		GUI.enabled = guiComponent.filterLabelsWithDistance;
 

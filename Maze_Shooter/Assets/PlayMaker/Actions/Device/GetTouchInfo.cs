@@ -13,22 +13,31 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("If true, all screen coordinates are returned normalized (0-1), otherwise in pixels.")]
 		public FsmBool normalize;
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the position of the touch in a Vector3 Variable.")]
 		public FsmVector3 storePosition;
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the X position  in a Float Variable.")]
 		public FsmFloat storeX;
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the Y position  in a Float Variable.")]
 		public FsmFloat storeY;
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the movement of the touch in a Vector3 Variable.")]
 		public FsmVector3 storeDeltaPosition;
 		[UIHint(UIHint.Variable)]
-		public FsmFloat storeDeltaX;
+        [Tooltip("Store the X movement in a Float Variable.")]
+        public FsmFloat storeDeltaX;
 		[UIHint(UIHint.Variable)]
-		public FsmFloat storeDeltaY;
+        [Tooltip("Store the Y movement in a Float Variable.")]
+        public FsmFloat storeDeltaY;
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the time between touch events in a Float Variable.")]
 		public FsmFloat storeDeltaTime;
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the number of tap count of the touch (e.g. 2 = double tap).")]
 		public FsmInt storeTapCount;
 
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame = true;
 		
 		float screenWidth;

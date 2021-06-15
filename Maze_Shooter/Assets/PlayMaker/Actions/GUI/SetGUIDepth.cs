@@ -9,7 +9,9 @@ namespace HutongGames.PlayMaker.Actions
 	public class SetGUIDepth : FsmStateAction
 	{
 		[RequiredField]
-		public FsmInt depth;
+        [Tooltip("See unity docs: <a href=\"http://unity3d.com/support/documentation/ScriptReference/GUI-depth.html\">GUI.Depth</a>.")]
+
+        public FsmInt depth;
 
 		public override void Reset()
 		{

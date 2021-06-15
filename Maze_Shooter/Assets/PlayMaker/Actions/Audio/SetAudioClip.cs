@@ -10,11 +10,11 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(AudioSource))]
-		[Tooltip("The GameObject with the AudioSource component.")]
+		[Tooltip("A GameObject with an AudioSource component.")]
 		public FsmOwnerDefault gameObject;
 
 		[ObjectType(typeof(AudioClip))]
-		[Tooltip("The AudioClip to set.")]
+		[Tooltip("The AudioClip to assign to the AudioSource.")]
 		public FsmObject audioClip;
 
 		public override void Reset()
@@ -25,8 +25,7 @@ namespace HutongGames.PlayMaker.Actions
 
 		public override void OnEnter()
 		{
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			if (UpdateCache(go))
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
 			{
 	            audio.clip = audioClip.Value as AudioClip;
 			}

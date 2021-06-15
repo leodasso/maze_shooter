@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -6,7 +6,7 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Character)]
 	[Tooltip("Tests if a Character Controller on a Game Object was touching the ground during the last move.")]
-	public class ControllerIsGrounded : FsmStateAction
+	public class ControllerIsGrounded : ComponentAction<CharacterController>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(CharacterController))]
@@ -25,11 +25,13 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[Tooltip("Repeat every frame while the state is active.")]
 		public bool everyFrame;
-		
-		private GameObject previousGo; // remember so we can get new controller only when it changes.
-		private CharacterController controller;
-		
-		public override void Reset()
+
+        private CharacterController controller
+        {
+            get { return cachedComponent; }
+        }
+
+        public override void Reset()
 		{
 			gameObject = null;
 			trueEvent = null;
@@ -55,20 +57,9 @@ namespace HutongGames.PlayMaker.Actions
 		
 		void DoControllerIsGrounded()
 		{
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			if (go == null)
-			{
-				return;
-			}
-		
-			if (go != previousGo)
-			{
-				controller = go.GetComponent<CharacterController>();
-				previousGo = go;
-			}
-			
-			if (controller == null)	return;
-	
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+                return;
+
 			var isGrounded = controller.isGrounded;
 
 			storeResult.Value = isGrounded;

@@ -6,7 +6,7 @@ using HutongGames.PlayMaker;
 namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory(ActionCategory.Array)]
-    [Tooltip("Iterate through the items in an Array and run an FSM on each item. NOTE: The FSM has to Finish before being run on the next item.")]
+    [Tooltip("Loop through all items in an {{Array}} and run an FSM Template on each item.\\nNOTE: This is an advanced/experimental action, still in beta. Please report any issues you run into.")]
     public class ArrayForEach : RunFSMAction
     {
         [RequiredField]
@@ -15,13 +15,19 @@ namespace HutongGames.PlayMaker.Actions
         public FsmArray array;
 
         [HideTypeFilter]
-        [MatchElementType("array")] 
+        [MatchElementType("array")]
         [UIHint(UIHint.Variable)] 
         [Tooltip("Store the item in a variable")]
         public FsmVar storeItem;
 
         [ActionSection("Run FSM")]
 
+        [Tooltip("The Template to run on each item in the array." +
+                 "<ul>" +
+                 "<li>The Template should expose a variable in the Inspector.</li>" +
+                 "<li>Use this Input variable to input the stored item.</li>" +
+                 "<li>The Template should use {{Finish FSM}} when finished.</li>" +
+                 "</ul>")]
         public FsmTemplateControl fsmTemplateControl = new FsmTemplateControl();
 
         [Tooltip("Event to send after iterating through all items in the Array.")]

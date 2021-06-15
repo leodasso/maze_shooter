@@ -1,28 +1,32 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Physics)]
-	[Tooltip("Detect collisions between Game Objects that have RigidBody/Collider components.")]
+	[Tooltip("Sends the specified event when the owner collides with a tagged object. " +
+             "Optionally store the collider and collision force in variables for later use. " +
+             "NOTE: Collisions are processed after other actions, so this action should be ordered last in the action list.")]
 	public class CollisionEvent : FsmStateAction
 	{
-	    [Tooltip("The GameObject to detect collisions on.")]
+	    [Tooltip("The GameObject to detect collisions on. " +
+                 "Unlike regular MonoBehaviour scripts, PlayMaker lets you easily detect collisions on other objects. " +
+                 "This lets you organize your behaviours the way you want.")]
 	    public FsmOwnerDefault gameObject;
 
         [Tooltip("The type of collision to detect.")]
 		public CollisionType collision;
 		
         [UIHint(UIHint.TagMenu)]
-		[Tooltip("Filter by Tag.")]
+		[Tooltip("Tags to collide with.")]
         public FsmString collideTag;
 		
         [Tooltip("Event to send if a collision is detected.")]
         public FsmEvent sendEvent;
 
 		[UIHint(UIHint.Variable)]
-        [Tooltip("Store the GameObject that collided with the Owner of this FSM.")]
+        [Tooltip("Store the Game Object collided with in a {{Game Object Variable}}.")]
 		public FsmGameObject storeCollider;
 
 		[UIHint(UIHint.Variable)]

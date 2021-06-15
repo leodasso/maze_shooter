@@ -1,35 +1,50 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010. All rights reserved.
 
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Camera)]
-	[Tooltip("Transforms position from world space into screen space. NOTE: Uses the MainCamera!")]
+	[Tooltip("Transforms a position from world space into screen space. " + 
+             "\nNote: Uses the Main Camera unless you specify a camera to use.")]
 	public class WorldToScreenPoint : FsmStateAction
-	{
+    {
+        [Tooltip("Camera GameObject to use. Defaults to MainCamera if not defined.")]
+        public FsmGameObject camera;
+
 		[UIHint(UIHint.Variable)]
 		[Tooltip("World position to transform into screen coordinates.")]
 		public FsmVector3 worldPosition;
-		[Tooltip("World X position.")]
+		
+        [Tooltip("Override X coordinate.")]
 		public FsmFloat worldX;
-		[Tooltip("World Y position.")]
+		
+        [Tooltip("Override Y coordinate.")]
 		public FsmFloat worldY;
-		[Tooltip("World Z position.")]
+		
+        [Tooltip("Override Z coordinate.")]
 		public FsmFloat worldZ;
-		[UIHint(UIHint.Variable)]
+		
+        [UIHint(UIHint.Variable)]
 		[Tooltip("Store the screen position in a Vector3 Variable. Z will equal zero.")]
 		public FsmVector3 storeScreenPoint;
-		[UIHint(UIHint.Variable)]
+		
+        [UIHint(UIHint.Variable)]
 		[Tooltip("Store the screen X position in a Float Variable.")]
-		public FsmFloat storeScreenX;
-		[UIHint(UIHint.Variable)]
+        public FsmFloat storeScreenX;
+		
+        [UIHint(UIHint.Variable)]
 		[Tooltip("Store the screen Y position in a Float Variable.")]
 		public FsmFloat storeScreenY;
-		[Tooltip("Normalize screen coordinates (0-1). Otherwise coordinates are in pixels.")]
+		
+        [Tooltip("Normalize screen coordinates (0-1). Otherwise coordinates are in pixels.")]
 		public FsmBool normalize;
-		[Tooltip("Repeat every frame")]
+		
+        [Tooltip("Repeat every frame")]
 		public bool everyFrame;
+
+        private GameObject cameraGameObject;
+        private Camera screenCamera;
 
 		public override void Reset()
 		{
@@ -43,6 +58,26 @@ namespace HutongGames.PlayMaker.Actions
 			storeScreenY = null;
 			everyFrame = false;
 		}
+
+        private void InitCamera()
+        {
+            if (screenCamera == null || cameraGameObject != camera.Value) // camera value might change!
+            {
+                cameraGameObject = camera.Value;
+                if (cameraGameObject != null)
+                {
+                    screenCamera = camera.Value.GetComponent<Camera>();
+                }
+                else
+                {
+                    screenCamera = Camera.main;
+                    if (screenCamera != null)
+                    {
+                        cameraGameObject = screenCamera.gameObject;
+                    }
+                }
+            }
+        }
 
 		public override void OnEnter()
 		{
@@ -60,12 +95,17 @@ namespace HutongGames.PlayMaker.Actions
 		}
 
 		void DoWorldToScreenPoint()
-		{
-			if (Camera.main == null)
+        {
+            // Avoid errors with missing main camera
+            if (PlayMakerFSM.ApplicationIsQuitting) return;
+
+            InitCamera();
+
+			if (screenCamera == null)
 			{
-				LogError("No MainCamera defined!");
-				Finish();
-				return;
+				LogError("No camera defined!");
+                Finish();
+                return;
 			}
 
 			var position = Vector3.zero;
@@ -89,6 +129,23 @@ namespace HutongGames.PlayMaker.Actions
 			storeScreenY.Value = position.y;
 		}
 
+        public override string ErrorCheck()
+        {
+            InitCamera();
 
-	}
+            if (screenCamera != null) return null;
+
+            if (camera.Value == null) 
+            {
+                if (Camera.main == null)
+                    return "@camera:No MainCamera Defined!";
+            }
+            else
+            {
+                return "@camera:GameObject has no Camera!";
+            }
+
+            return null;
+        }
+    }
 }

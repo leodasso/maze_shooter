@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.GUILayout)]
-	[Tooltip("Close a group started with BeginHorizontal.")]
+	[Tooltip("Close a group started with {{GUILayoutBeginHorizontal}}.")]
 	public class GUILayoutEndHorizontal : FsmStateAction
 	{
 		public override void Reset()

@@ -32,9 +32,12 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Event send if name doesn't match")]
 		public FsmEvent nameDoNotMatchEvent;
 
-		private Animator _animator;
-		
-		public override void Reset()
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
+
+        public override void Reset()
 		{
 			base.Reset();
 
@@ -51,24 +54,7 @@ namespace HutongGames.PlayMaker.Actions
 
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-
-			IsName();
+            IsName();
 			
 			if (!everyFrame)
 			{
@@ -80,25 +66,23 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			IsName();
 		}
-		
-		void IsName()
-		{		
-			if (_animator!=null)
-			{
-				AnimatorStateInfo _info = _animator.GetCurrentAnimatorStateInfo(layerIndex.Value);
 
-				if (!isMatching.IsNone)
-				{
-					isMatching.Value = _info.IsName(name.Value);
-				}
+        private void IsName()
+        {
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
 
-				if (_info.IsName(name.Value))
-				{
-					Fsm.Event(nameMatchEvent);
-				}else{
-					Fsm.Event(nameDoNotMatchEvent);
-				}
-			}
-		}
+            var info = animator.GetCurrentAnimatorStateInfo(layerIndex.Value);
+
+            if (!isMatching.IsNone)
+            {
+                isMatching.Value = info.IsName(name.Value);
+            }
+
+            Fsm.Event(info.IsName(name.Value) ? nameMatchEvent : nameDoNotMatchEvent);
+        }
 	}
 }

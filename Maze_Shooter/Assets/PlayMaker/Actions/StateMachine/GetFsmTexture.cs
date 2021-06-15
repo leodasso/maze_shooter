@@ -19,13 +19,15 @@ namespace HutongGames.PlayMaker.Actions
 
 		[RequiredField]
 		[UIHint(UIHint.FsmTexture)]
+        [Tooltip("The name of the FSM variable to get.")]
 		public FsmString variableName;
 
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the value in a Texture variable in this FSM.")]
 		public FsmTexture storeValue;
 
-		[Tooltip("Repeat every frame.")]
+        [Tooltip("Repeat every frame. Useful if the value is changing.")]
 		public bool everyFrame;
 
         private GameObject goLastFrame;
@@ -85,5 +87,13 @@ namespace HutongGames.PlayMaker.Actions
 			}
 		}
 
-	}
+#if UNITY_EDITOR
+
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName(this, variableName);
+        }
+
+#endif
+    }
 }

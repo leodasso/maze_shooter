@@ -19,14 +19,23 @@ namespace HutongGames.PlayMaker.Actions
 		}
 
 		[RequiredField]
-		public FsmInt integer1;
+        [Tooltip("The first integer.")]
+        public FsmInt integer1;
+
 		[RequiredField]
-		public FsmInt integer2;
-		public Operation operation = Operation.Add;
+        [Tooltip("The second integer.")]
+        public FsmInt integer2;
+
+        [Tooltip("The operation to perform on the 2 integers.")]
+        public Operation operation = Operation.Add;
+
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmInt storeResult;
-		public bool everyFrame;
+        [Tooltip("Store the result in an Integer Variable.")]
+        public FsmInt storeResult;
+
+        [Tooltip("Perform this action every frame. Useful if you're using variables that are changing.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

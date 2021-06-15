@@ -14,20 +14,24 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmOwnerDefault gameObject;
 		
 		[UIHint(UIHint.Variable)]
-		[Tooltip("The rect")]
-		public FsmRect rect;
+        [Tooltip("Store the Rect in a Rect variable.")]
+        public FsmRect rect;
 
 		[UIHint(UIHint.Variable)]
-		public FsmFloat x;
+        [Tooltip("Store the x coordinate in a float variable.")]
+        public FsmFloat x;
 
 		[UIHint(UIHint.Variable)]
-		public FsmFloat y;
+        [Tooltip("Store the y coordinate in a float variable.")]
+        public FsmFloat y;
 
 		[UIHint(UIHint.Variable)]
-		public FsmFloat width;
+        [Tooltip("Store the width in a float variable.")]
+        public FsmFloat width;
 
 		[UIHint(UIHint.Variable)]
-		public FsmFloat height;
+        [Tooltip("Store the height in a float variable.")]
+        public FsmFloat height;
 		
 		RectTransform _rt;
 		

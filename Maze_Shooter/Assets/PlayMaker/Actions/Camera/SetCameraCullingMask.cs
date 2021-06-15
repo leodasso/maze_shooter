@@ -10,7 +10,8 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Camera))]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("The Game Object with the Camera component.")]
+        public FsmOwnerDefault gameObject;
 		
 		[Tooltip("Cull these layers.")]
 		[UIHint(UIHint.Layer)]
@@ -19,6 +20,7 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Invert the mask, so you cull all layers except those defined above.")]
 		public FsmBool invertMask;
 
+        [Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 
 		public override void Reset()

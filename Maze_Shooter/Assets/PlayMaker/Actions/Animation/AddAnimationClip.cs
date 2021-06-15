@@ -5,12 +5,12 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animation)]
-	[Tooltip("Adds a named Animation Clip to a Game Object. Optionally trims the Animation.")]
+	[Tooltip("Adds an Animation Clip to a Game Object. Optionally trim the clip.")]
 	public class AddAnimationClip : FsmStateAction
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animation))]
-        [Tooltip("The GameObject to add the Animation Clip to.")]
+        [Tooltip("The Game Object to add the Animation Clip to.")]
 		public FsmOwnerDefault gameObject;
 		
 		[RequiredField]
@@ -19,16 +19,18 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmObject animationClip;
 		
 		[RequiredField]
-		[Tooltip("Name the animation. Used by other actions to reference this animation.")]
+		[Tooltip("Optionally give the animation a new name. Can be used by other Animation actions.")]
 		public FsmString animationName;
 		
+        [ActionSection("Trimming")]
+
 		[Tooltip("Optionally trim the animation by specifying a first and last frame.")]
 		public FsmInt firstFrame;
 		
-		[Tooltip("Optionally trim the animation by specifying a first and last frame.")]
+		[Tooltip("Set the last frame of the trimmed animation. 0 means no trimming.")]
 		public FsmInt lastFrame;
 		
-		[Tooltip("Add an extra looping frame that matches the first frame.")]
+		[Tooltip("Add a frame at the end of the trimmed clip that's the same as the first frame so it loops nicely.")]
 		public FsmBool addLoopFrame;
 
 		public override void Reset()

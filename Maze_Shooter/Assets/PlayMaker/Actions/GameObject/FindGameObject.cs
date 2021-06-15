@@ -76,5 +76,13 @@ namespace HutongGames.PlayMaker.Actions
 			return null;
 		}
 
-	}
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName(this, objectName, store);
+        }
+#endif
+
+
+    }
 }

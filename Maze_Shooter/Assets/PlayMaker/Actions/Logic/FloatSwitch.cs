@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -14,7 +14,9 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmFloat floatVariable;
 
 		[CompoundArray("Float Switches", "Less Than", "Send Event")]
+        [Tooltip("Test if the float is less than a value. Each entry in the array defines a range between it and the previous entry.")]
 		public FsmFloat[] lessThan;
+        [Tooltip("Event to send if true.")]
 		public FsmEvent[] sendEvent;
 		
         [Tooltip("Repeat every frame. Useful if the variable is changing.")]

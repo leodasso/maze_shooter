@@ -16,11 +16,16 @@ namespace HutongGames.PlayMaker.Actions
 
 		[CompoundArray("Audio Clips", "Audio Clip", "Weight")]
 		[ObjectType(typeof(AudioClip))]
-		public FsmObject[] audioClips;
+        [Tooltip("A possible Audio Clip choice.")]
+        public FsmObject[] audioClips;
 		[HasFloatSlider(0, 1)]
-		public FsmFloat[] weights;
+        [Tooltip("The relative probability of this sound being picked. " +
+                 "E.g. a weight of 0.5 is half as likely to be picked as a weight of 1.")]
+        public FsmFloat[] weights;
+
 		[HasFloatSlider(0, 1)]
-		public FsmFloat volume = 1f;
+        [Tooltip("Volume to play the sound at.")]
+        public FsmFloat volume = 1f;
 
         [Tooltip("Don't play the same sound twice in a row")]
         public FsmBool noRepeat;

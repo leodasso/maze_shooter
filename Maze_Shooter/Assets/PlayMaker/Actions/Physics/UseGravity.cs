@@ -10,9 +10,12 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Rigidbody))]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("A Game Object with a RigidBody component.")]
+        public FsmOwnerDefault gameObject;
+
 		[RequiredField]
-		public FsmBool useGravity;
+        [Tooltip("Enable/disable gravity for the Game Object.")]
+        public FsmBool useGravity;
 
 		public override void Reset()
 		{

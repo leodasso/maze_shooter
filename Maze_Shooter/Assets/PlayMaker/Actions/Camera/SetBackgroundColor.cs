@@ -10,10 +10,14 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Camera))]
+        [Tooltip("The game object that owns the Camera component.")]
 		public FsmOwnerDefault gameObject;
 		[RequiredField]
+        [Tooltip("The background color.")]
 		public FsmColor backgroundColor;
-		public bool everyFrame;
+
+        [Tooltip("Repeat every frame. Useful if the color is animated.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

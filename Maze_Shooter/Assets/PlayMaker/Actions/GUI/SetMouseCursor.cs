@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames. All rights reserved.
 
 using UnityEngine;
 
@@ -8,52 +8,73 @@ namespace HutongGames.PlayMaker.Actions
 	[Tooltip("Controls the appearance of Mouse Cursor.")]
 	public class SetMouseCursor : FsmStateAction
 	{
+        [Tooltip("The texture to use for the cursor.")]
 		public FsmTexture cursorTexture;
+
+        [Tooltip("Hide the cursor.")]
 		public FsmBool hideCursor;
+
+        [Tooltip("Lock the cursor to the center of the screen. Useful in first person controllers.")]
 		public FsmBool lockCursor;
-		
+
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
+
 		public override void Reset()
 		{
 			cursorTexture = null;
 			hideCursor = false;
 			lockCursor = false;
-		}
+            everyFrame = false;
+        }
 		
 		public override void OnEnter()
 		{
 			PlayMakerGUI.LockCursor = lockCursor.Value;
 			PlayMakerGUI.HideCursor = hideCursor.Value;
 			PlayMakerGUI.MouseCursor = cursorTexture.Value;
-			
-			Finish();
+
+            // Don't rely on PlayMakerGUI to update the cursor since it may not be in the scene.
+            // If it is in the scene, this is redundant, but that's fine...
+
+            UpdateCursorState();
+
+            if (!everyFrame)
+            {
+                Finish();
+            }
 		}
-		
-/*		
+
+        private void UpdateCursorState()
+        {
+            Cursor.lockState = lockCursor.Value ? CursorLockMode.Locked : CursorLockMode.None;
+            Cursor.visible = !hideCursor.Value;
+        }
+
 		public override void OnUpdate()
 		{
-			// not sure if there is a performance impact to setting these ever frame,
-			// so only do it if it's changed.
-			
-			if (Screen.lockCursor != lockCursor.Value)
-				Screen.lockCursor = lockCursor.Value;
-			
-			if (Screen.showCursor == hideCursor.Value)
-				Screen.showCursor = !hideCursor.Value;
+			UpdateCursorState();
 		}
 		
 		public override void OnGUI()
-		{
+        {
+            // Handled by PlayMakerGUI?
+            
+            if (PlayMakerGUI.Exists) return;
+
 			// draw custom cursor
-			
-			if (cursorTexture != null)
+
+            var texture = cursorTexture.Value;
+
+			if (texture != null)
 			{
 				var mousePos = Input.mousePosition;
-				var pos =  new Rect(mousePos.x - cursorTexture.width * 0.5f, 
-					Screen.height - mousePos.y - cursorTexture.height * 0.5f, 
-					cursorTexture.width, cursorTexture.height);
+				var pos =  new Rect(mousePos.x - texture.width * 0.5f, 
+					Screen.height - mousePos.y - texture.height * 0.5f, 
+                    texture.width, texture.height);
 				
-				GUI.DrawTexture(pos, cursorTexture);
+				GUI.DrawTexture(pos, texture);
 			}
-		}*/
+		}
 	}
 }

@@ -13,7 +13,7 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmOwnerDefault gameObject;
 		
 		[RequiredField]
-        [Tooltip("The index of the child to find.")]
+        [Tooltip("The index of the child to find (0 = first child).")]
 		public FsmInt childIndex;
 		
 		[RequiredField]
@@ -40,5 +40,13 @@ namespace HutongGames.PlayMaker.Actions
 		    if (go == null || go.transform.childCount == 0 || childIndex.Value < 0) return null;
 			return go.transform.GetChild(childIndex.Value % go.transform.childCount).gameObject;
 		}
-	}
+
+
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName(this, childIndex, store);
+        }
+#endif
+    }
 }

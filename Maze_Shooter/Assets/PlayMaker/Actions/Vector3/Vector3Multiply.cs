@@ -8,10 +8,15 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmVector3 vector3Variable;
+        [Tooltip("The vector3 variable to multiply.")]
+        public FsmVector3 vector3Variable;
+
 		[RequiredField]
-		public FsmFloat multiplyBy;
-		public bool everyFrame;
+        [Tooltip("The float to multiply each axis of the Vector3 variable by.")]
+        public FsmFloat multiplyBy;
+
+        [Tooltip("Repeat every frame")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

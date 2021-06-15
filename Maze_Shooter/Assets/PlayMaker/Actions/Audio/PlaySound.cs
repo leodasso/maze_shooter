@@ -8,17 +8,21 @@ namespace HutongGames.PlayMaker.Actions
 	[Tooltip("Plays an Audio Clip at a position defined by a Game Object or Vector3. If a position is defined, it takes priority over the game object. This action doesn't require an Audio Source component, but offers less control than Audio actions.")]
 	public class PlaySound : FsmStateAction
 	{
+        [Tooltip("A Game Object that defines a position.")]
 		public FsmOwnerDefault gameObject;
-		
+
+        [Tooltip("A Vector3 value that defines a world position (overrides Game Object).")]
 		public FsmVector3 position;
 		
 		[RequiredField]
 		[Title("Audio Clip")]
 		[ObjectType(typeof(AudioClip))]
-		public FsmObject clip;
+        [Tooltip("The audio clip to play.")]
+        public FsmObject clip;
 		
 		[HasFloatSlider(0, 1)]
-		public FsmFloat volume = 1f;
+        [Tooltip("Volume to play sound at.")]
+        public FsmFloat volume = 1f;
 
 		public override void Reset()
 		{

@@ -56,7 +56,7 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Get the 2d position of the next ray hit point and store it in a variable.")]
 		public FsmVector2 storeNextHitPoint;
 		
-		[Tooltip("Get the 2d normal at the next hit point and store it in a variable.")]
+		[Tooltip("Get the 2d normal at the next hit point and store it in a variable.\nNote, this is a direction vector not a rotation.")]
 		public FsmVector2 storeNextHitNormal;
 		
 		[Tooltip("Get the distance along the ray to the next hit point and store it in a variable.")]

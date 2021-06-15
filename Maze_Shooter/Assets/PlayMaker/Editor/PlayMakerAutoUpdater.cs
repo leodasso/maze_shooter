@@ -31,10 +31,10 @@ namespace HutongGames.PlayMakerEditor
         public const string PlaymakerMetroPluginPath = PlaymakerPluginDirectory + "/Metro/PlayMaker.dll";
 
         // list of updates the updater would like to perform
-        static List<string> updateList = new List<string>();
+        static readonly List<string> updateList = new List<string>();
 
         // list of changes the updater made
-        static List<string> changeList = new List<string>();
+        static readonly List<string> changeList = new List<string>();
 
         private static readonly BuildTarget[] standardPlatforms =
         {
@@ -67,7 +67,7 @@ namespace HutongGames.PlayMakerEditor
         {
             if (EditorStartupPrefs.AutoUpdateProject)
             {
-                // Can't call asset database here, so use update callback
+                // Can't call assetdatabase here, so use update callback
                 EditorApplication.update -= RunAutoUpdate;
                 EditorApplication.update += RunAutoUpdate;
             }

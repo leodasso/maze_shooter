@@ -10,16 +10,24 @@ namespace HutongGames.PlayMaker.Actions
 	public class GetFsmVector3 : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("The GameObject that owns the FSM.")]
 		public FsmOwnerDefault gameObject;
-		[UIHint(UIHint.FsmName)]
+		
+        [UIHint(UIHint.FsmName)]
 		[Tooltip("Optional name of FSM on Game Object")]
 		public FsmString fsmName;
-		[RequiredField]
+		
+        [RequiredField]
 		[UIHint(UIHint.FsmVector3)]
+        [Tooltip("The name of the FSM variable to get.")]
 		public FsmString variableName;
-		[RequiredField]
+		
+        [RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the value in a Vector3 variable in this FSM.")]
 		public FsmVector3 storeValue;
+
+        [Tooltip("Repeat every frame. Useful if the value is changing.")]
 		public bool everyFrame;
 
         private GameObject goLastFrame;
@@ -70,5 +78,13 @@ namespace HutongGames.PlayMaker.Actions
 			storeValue.Value = fsmVector3.Value;
 		}
 
-	}
+#if UNITY_EDITOR
+
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName(this, variableName);
+        }
+
+#endif
+    }
 }

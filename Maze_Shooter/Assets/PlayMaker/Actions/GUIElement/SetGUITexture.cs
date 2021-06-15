@@ -8,10 +8,10 @@ namespace HutongGames.PlayMaker.Actions
 #if !UNITY_2019_3_OR_NEWER
 
 	[ActionCategory(ActionCategory.GUIElement)]
-	[Tooltip("Sets the Texture used by the GUITexture attached to a Game Object.")]
-	#if UNITY_2017_2_OR_NEWER
-	#pragma warning disable CS0618  
-	[Obsolete("GUITexture is part of the legacy UI system and will be removed in a future release")]
+    [Tooltip("Sets the texture used by the <a href=\"http://unity3d.com/support/documentation/Components/class-GuiTexture.html\">GUI Texture</a> attached to a Game Object.")]
+    #if UNITY_2017_2_OR_NEWER
+#pragma warning disable 618
+    [Obsolete("GUITexture is part of the legacy UI system and will be removed in a future release")]
 	#endif
 	public class SetGUITexture : ComponentAction<GUITexture>
 	{

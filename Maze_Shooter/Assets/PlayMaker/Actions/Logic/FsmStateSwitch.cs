@@ -18,7 +18,9 @@ namespace HutongGames.PlayMaker.Actions
         public FsmString fsmName;
 
         [CompoundArray("State Switches", "Compare State", "Send Event")]
+        [Tooltip("Compare the current State to this State.")]
 		public FsmString[] compareTo;
+        [Tooltip("Send this event if the same.")]
 		public FsmEvent[] sendEvent;
 		
         [Tooltip("Repeat every frame. Useful if you're waiting for a particular result.")]

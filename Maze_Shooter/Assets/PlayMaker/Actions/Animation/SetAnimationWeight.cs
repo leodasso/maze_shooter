@@ -10,12 +10,16 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animation))]
+        [Tooltip("The Game Object playing the animation.")]
 		public FsmOwnerDefault gameObject;
 		[RequiredField]
-		[UIHint(UIHint.Animation)]
+        [Tooltip("The name of the animation.")]
+        [UIHint(UIHint.Animation)]
 		public FsmString animName;
-		public FsmFloat weight = 1f;
-		public bool everyFrame;
+        [Tooltip("The weight to set the animation to.")]
+        public FsmFloat weight = 1f;
+        [Tooltip("Perform this action every frame. Useful if Weight is a variable.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

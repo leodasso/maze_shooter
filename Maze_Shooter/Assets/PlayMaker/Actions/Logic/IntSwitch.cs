@@ -10,11 +10,18 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmInt intVariable;
+        [Tooltip("The integer variable to test.")]
+        public FsmInt intVariable;
+
 		[CompoundArray("Int Switches", "Compare Int", "Send Event")]
-		public FsmInt[] compareTo;
-		public FsmEvent[] sendEvent;
-		public bool everyFrame;
+        [Tooltip("The integer variable to test.")]
+        public FsmInt[] compareTo;
+
+        [Tooltip("Event to send if true.")]
+        public FsmEvent[] sendEvent;
+
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

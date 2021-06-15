@@ -1,4 +1,4 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+﻿// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -10,13 +10,18 @@ namespace HutongGames.PlayMaker.Actions
     {
         [RequiredField] 
         [UIHint(UIHint.Variable)] 
+        [Tooltip("The Enum Variable to use.")]
         public FsmEnum enumVariable;
 
-        [CompoundArray("Enum Switches", "Compare Enum Values", "Send")] 
-        [MatchFieldType("enumVariable")] 
-        public FsmEnum[] compareTo;      
+        [CompoundArray("Enum Switches", "Compare Enum Value", "Send Event")] 
+        [MatchFieldType("enumVariable")]
+        [Tooltip("Compare Enum Values")]
+        public FsmEnum[] compareTo;
+
+        [Tooltip("Event to send if the Enum Variable value is equal.")]
         public FsmEvent[] sendEvent;
 
+        [Tooltip("Repeat every frame.")]
         public bool everyFrame;
 
         public override void Reset()

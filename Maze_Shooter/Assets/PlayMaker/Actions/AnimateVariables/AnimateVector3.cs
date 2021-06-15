@@ -1,4 +1,4 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+﻿// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using System;
 using UnityEngine;
@@ -11,22 +11,26 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmVector3 vectorVariable;
+        [Tooltip("The Vector3 Variable to animate.")]
+        public FsmVector3 vectorVariable;
 		
         [RequiredField]
-		public FsmAnimationCurve curveX;
+        [Tooltip("Curve to use for the X value.")]
+        public FsmAnimationCurve curveX;
 		
         [Tooltip("Calculation lets you set a type of curve deformation that will be applied to vectorVariable.x.")]
 		public Calculation calculationX;
 		
         [RequiredField]
-		public FsmAnimationCurve curveY;
+        [Tooltip("Curve to use for the Y value.")]
+        public FsmAnimationCurve curveY;
 		
         [Tooltip("Calculation lets you set a type of curve deformation that will be applied to vectorVariable.y.")]
 		public Calculation calculationY;
 		
         [RequiredField]
-		public FsmAnimationCurve curveZ;
+        [Tooltip("Curve to use for the Z value.")]
+        public FsmAnimationCurve curveZ;
 		
         [Tooltip("Calculation lets you set a type of curve deformation that will be applied to vectorVariable.z.")]
 		public Calculation calculationZ;

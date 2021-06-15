@@ -7,13 +7,20 @@ namespace HutongGames.PlayMaker.Actions
 	public class InverseTransformPoint : FsmStateAction
 	{
 		[RequiredField]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("The game object that defines local space.")]
+        public FsmOwnerDefault gameObject;
+
 		[RequiredField]
-		public FsmVector3 worldPosition;
+        [Tooltip("The world position vector.")]
+        public FsmVector3 worldPosition;
+
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmVector3 storeResult;
-		public bool everyFrame;
+        [Tooltip("Store the transformed vector in a Vector3 Variable.")]
+        public FsmVector3 storeResult;
+
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

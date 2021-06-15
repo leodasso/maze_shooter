@@ -9,7 +9,8 @@ namespace HutongGames.PlayMaker.Actions
 	public class UseGUILayout : FsmStateAction
 	{
 		[RequiredField]
-		public bool turnOffGUIlayout;
+        [Tooltip("Enable/disable GUILayout.")]
+        public bool turnOffGUIlayout;
 
 		public override void Reset()
 		{

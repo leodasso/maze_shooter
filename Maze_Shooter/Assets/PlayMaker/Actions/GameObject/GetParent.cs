@@ -7,8 +7,11 @@ namespace HutongGames.PlayMaker.Actions
 	public class GetParent : FsmStateAction
 	{
 		[RequiredField]
+        [Tooltip("The Game Object to find the parent of.")]
 		public FsmOwnerDefault gameObject;
-		[UIHint(UIHint.Variable)]
+
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Store the parent object (or null if no parent) in a variable.")]
 		public FsmGameObject storeResult;
 
 		public override void Reset()

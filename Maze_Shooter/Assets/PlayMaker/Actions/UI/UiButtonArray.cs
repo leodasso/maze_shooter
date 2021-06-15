@@ -15,12 +15,16 @@ namespace HutongGames.PlayMaker.Actions
 
         [CompoundArray("Buttons", "Button", "Click Event")]
 		[CheckForComponent(typeof(UnityEngine.UI.Button))]
-		[Tooltip("The GameObject with the UI button component.")]
+		[Tooltip("The GameObject with the UI Button component.")]
 		public FsmGameObject[] gameObjects;
 
 	    [Tooltip("Send this event when the button is Clicked.")]
 	    public FsmEvent[] clickEvents;
 
+	    [UIHint(UIHint.Variable)] 
+	    [Tooltip("The index of the last button clicked. (0 = first button, 1 = second, etc.)")]
+	    public FsmInt clickIndex;
+	    
         [SerializeField]
 	    private UnityEngine.UI.Button[] buttons;
 
@@ -29,12 +33,11 @@ namespace HutongGames.PlayMaker.Actions
 
 	    private UnityAction[] actions;
 
-	    private int clickedButton;
-
 		public override void Reset()
 		{
 			gameObjects = new FsmGameObject[3];
 			clickEvents = new FsmEvent[3];
+			clickIndex = null;
 		}
 
         /// <summary>
@@ -97,7 +100,8 @@ namespace HutongGames.PlayMaker.Actions
 		}
 
 		public void OnClick(int index)
-		{   
+		{
+			clickIndex.Value = index;
 			Fsm.Event(gameObjects[index].Value, eventTarget, clickEvents[index]);
 		}
 	}

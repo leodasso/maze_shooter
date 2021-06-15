@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
@@ -10,11 +10,11 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
         [Tooltip("The name of the button. Set in the Unity Input Manager.")]
-		public FsmString buttonName;		
+        public FsmString buttonName;		
 
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-        [Tooltip("Store the result in a bool variable.")]
+        [Tooltip("Store the button state in a Bool Variable.")]
 		public FsmBool storeResult;
 
         [Tooltip("Repeat every frame.")]
@@ -46,6 +46,13 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			storeResult.Value = Input.GetButton(buttonName.Value);
 		}
-	}
+
+#if UNITY_EDITOR
+        public override string AutoName()
+        {
+            return ActionHelpers.AutoName(this, buttonName);
+        }
+#endif
+    }
 }
 

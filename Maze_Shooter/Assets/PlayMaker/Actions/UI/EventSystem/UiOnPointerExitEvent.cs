@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.UI)]
-	[Tooltip("Sends event when OnPointerExit is called on the GameObject." +
-		"\n Use GetLastPointerDataInfo action to get info from the event")]
+	[Tooltip("Sends event when OnPointerExit is called on the GameObject. " +
+		"\nUse GetLastPointerDataInfo action to get info from the event")]
 	public class UiOnPointerExitEvent : EventTriggerActionBase
 	{
 		[UIHint(UIHint.Variable)]

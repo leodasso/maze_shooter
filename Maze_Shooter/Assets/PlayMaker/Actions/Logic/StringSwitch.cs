@@ -10,11 +10,15 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmString stringVariable;
+        [Tooltip("The String Variable to test.")]
+        public FsmString stringVariable;
 		[CompoundArray("String Switches", "Compare String", "Send Event")]
-		public FsmString[] compareTo;
-		public FsmEvent[] sendEvent;
-		public bool everyFrame;
+        [Tooltip("Compare to a string value.")]
+        public FsmString[] compareTo;
+        [Tooltip("Send this event if string matches.")]
+        public FsmEvent[] sendEvent;
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

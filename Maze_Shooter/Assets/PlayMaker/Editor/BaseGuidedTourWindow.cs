@@ -18,6 +18,9 @@ namespace HutongGames.PlayMakerEditor
     /// </summary>
     public abstract class BaseGuidedTourWindow : BaseEditorWindow
     {
+        public const string NewTag = "<size=8><color=#fd9604><b>NEW</b></color></size>";
+        public const int NewVersion = 191;
+
         protected GuidedTour guidedTour = new GuidedTour();
         
         // Main scroll view
@@ -30,7 +33,6 @@ namespace HutongGames.PlayMakerEditor
         // Help panel
 
         private Vector2 helpScrollPosition;     
-        private GUIStyle helpStyle;
 
         // Splitter between topics and help panel
 
@@ -65,18 +67,6 @@ namespace HutongGames.PlayMakerEditor
             FsmEditor.RepaintAll();
         }
 
-        private void InitStyles()
-        {
-            if (helpStyle == null)
-            {
-                helpStyle = new GUIStyle(EditorStyles.label)
-                {
-                    richText = true,
-                    wordWrap = true
-                };
-            }
-        }
-
         public GuidedTour.Topic AddWindow(Type window,
             string label,
             string tooltip = "",
@@ -102,7 +92,7 @@ namespace HutongGames.PlayMakerEditor
         /// </summary>
         protected void DoGuidedTourGUI()
         {
-            InitStyles();
+            FsmEditorStyles.Init();
 
             HandleKeyboardInput();
             DoSplitter();
@@ -161,11 +151,7 @@ namespace HutongGames.PlayMakerEditor
         // Help panel for selected topic
         private void DoBottomPanel()
         {
-            GUILayout.BeginVertical(FsmEditorStyles.BottomBarBG);
-
-            FsmEditorGUILayout.Divider();
-
-            GUILayout.BeginVertical(EditorStyles.inspectorDefaultMargins, GUILayout.Height(helpHeight));
+            GUILayout.BeginVertical(FsmEditorStyles.BottomBarBG, GUILayout.Height(helpHeight));
 
             helpScrollPosition = EditorGUILayout.BeginScrollView(helpScrollPosition);
 
@@ -189,17 +175,18 @@ namespace HutongGames.PlayMakerEditor
                 if (!string.IsNullOrEmpty(topic.Label.tooltip))
                 {
                     EditorGUILayout.Space();
-                    GUILayout.Label(topic.Label.tooltip, helpStyle);
+                    GUILayout.Label(topic.Label.tooltip, FsmEditorStyles.RichTextLabelWithWordWrap);
                 }
 
                 EditorGUILayout.Space();
-                topic.HelpText.DoGUILayout(position.width);
+
+                GUILayout.BeginVertical(FsmEditorStyles.StandardMargins);
+                topic.HelpText.DoGUILayout(position.width-40);
+                GUILayout.EndVertical();
             }
 
             EditorGUILayout.EndScrollView();
             GUILayout.Space(5);
-            GUILayout.EndVertical();
-
             GUILayout.EndVertical();
         }
 
@@ -219,6 +206,8 @@ namespace HutongGames.PlayMakerEditor
             {
                 return;
             }
+
+            var isRepaint = Event.current.type == EventType.Repaint;
 
             // setup selected styles
             var isSelected = guidedTour.IsHighlighted(topic);
@@ -254,11 +243,20 @@ namespace HutongGames.PlayMakerEditor
 
             // Store selectedRect for auto scroll
 
-            if (isSelected && Event.current.type == EventType.Repaint)
+            if (isRepaint)
             {
-                selectedRect = GUILayoutUtility.GetLastRect();
-                selectedRect.y -= scrollPosition.y + 20;
-                selectedRect.height += 20; // pad to scroll a little further
+                if (isSelected)
+                {
+                    selectedRect = GUILayoutUtility.GetLastRect();
+                    selectedRect.y -= scrollPosition.y + 20;
+                    selectedRect.height += 20; // pad to scroll a little further
+                }
+
+                if (topic.IsNew(NewVersion))
+                {
+                    var rect = GUILayoutUtility.GetLastRect();
+                    GUI.Label(rect, NewTag, FsmEditorStyles.NewTag);
+                }
             }
         }
 

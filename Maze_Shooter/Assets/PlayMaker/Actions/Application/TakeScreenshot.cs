@@ -25,7 +25,8 @@ namespace HutongGames.PlayMaker.Actions
 	    public FsmString customPath;
 
 		[RequiredField]
-		public FsmString filename;
+        [Tooltip("The filename for the screenshot.")]
+        public FsmString filename;
 
         [Tooltip("Add an auto-incremented number to the filename.")]
 		public FsmBool autoNumber;

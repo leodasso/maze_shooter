@@ -1,12 +1,13 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.GUI)]
-	[Tooltip("Draws a GUI Texture. NOTE: Uses OnGUI so you need a PlayMakerGUI component in the scene.")]
-	public class DrawTexture : FsmStateAction
+	[Tooltip("Draws a GUI Texture. NOTE: Uses OnGUI so you need a PlayMakerGUI component in the scene. See unity docs: <a href=\"http://unity3d.com/support/documentation/ScriptReference/GUI.DrawTexture.html\">DrawTexture</a>.")]
+
+    public class DrawTexture : FsmStateAction
 	{
 		[RequiredField]
         [Tooltip("Texture to draw.")]

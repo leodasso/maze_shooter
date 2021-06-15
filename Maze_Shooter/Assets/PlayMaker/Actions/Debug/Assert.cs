@@ -6,9 +6,10 @@ using PlayMaker.ConditionalExpression;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Debug)]
-	[Tooltip("Checks if the conditional expression Is True or Is False. Breaks the execution of the game if the assertion fails.\n" +
+	[Tooltip("Checks if the conditional expression Is True or Is False. Stops execution of the game if the assertion fails.\n" +
 	         "This is a useful way to check your assumptions. If you expect a certain value use an Assert to make sure!\n" +
 	         "Only runs in Editor.")]
+    [SeeAlso("{{Debugging}}")]
 	public class Assert : FsmStateAction, IEvaluatorContext 
     {
         public enum AssertType
@@ -23,7 +24,7 @@ namespace HutongGames.PlayMaker.Actions
 		public string LastErrorMessage { get; set; }
 
         [UIHint(UIHint.TextArea)]
-        [Tooltip("Enter an expression to evaluate.\nExample: (a < b) && c\n$(variable name with spaces)")]
+        [Tooltip("Enter an expression to evaluate.\n\nExamples:\nhealth <= maxHealth\nlives < 100\n\nHint:Use $(for variable names with spaces)")]
 		public FsmString expression;
 
         [Tooltip("Expected result of the expression.")]

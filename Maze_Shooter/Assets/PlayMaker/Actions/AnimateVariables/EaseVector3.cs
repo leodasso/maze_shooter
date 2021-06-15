@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 using System.Collections.Generic;
@@ -10,10 +10,15 @@ namespace HutongGames.PlayMaker.Actions
 	public class EaseVector3 : EaseFsmAction
 	{
 		[RequiredField]
+        [Tooltip("The Vector3 value to ease from.")]
 		public FsmVector3 fromValue;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("The Vector3 value to ease to.")]
 		public FsmVector3 toValue;
-		[UIHint(UIHint.Variable)]
+
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Store the result in a Vector3 Variable.")]
 		public FsmVector3 vector3Variable;
 		
 		private bool finishInNextStep = false;
@@ -40,7 +45,7 @@ namespace HutongGames.PlayMaker.Actions
 			toFloats[2] = toValue.Value.z;
 			resultFloats = new float[3];
 			finishInNextStep = false;
-		    vector3Variable.Value = fromValue.Value;
+		    vector3Variable.Value = reverse.IsNone ? fromValue.Value : reverse.Value ? toValue.Value : fromValue.Value;
 		}
 		
 		public override void OnExit (){

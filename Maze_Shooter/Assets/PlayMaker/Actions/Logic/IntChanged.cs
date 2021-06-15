@@ -10,10 +10,15 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmInt intVariable;
-		public FsmEvent changedEvent;
+        [Tooltip("The int variable to test.")]
+        public FsmInt intVariable;
+
+        [Tooltip("Event to send if changed.")]
+        public FsmEvent changedEvent;
+
 		[UIHint(UIHint.Variable)]
-		public FsmBool storeResult;
+        [Tooltip("Set to true if changed, otherwise False.")]
+        public FsmBool storeResult;
 		
 		int previousValue;
 

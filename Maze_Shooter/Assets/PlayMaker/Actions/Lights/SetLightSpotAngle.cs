@@ -10,9 +10,14 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Light))]
+        [Tooltip("The Game Object with the Light Component.")]
 		public FsmOwnerDefault gameObject;
-		public FsmFloat lightSpotAngle;
-		public bool everyFrame;
+
+        [Tooltip("The angle of the spot light beam.")]
+        public FsmFloat lightSpotAngle;
+
+        [Tooltip("Update every frame. Useful if the spot angle is changing.")]
+        public bool everyFrame;
 
 		public override void Reset()
 		{

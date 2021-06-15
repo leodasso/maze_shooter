@@ -17,10 +17,13 @@ namespace HutongGames.PlayMaker.Actions
 		[CompoundArray("Animations", "Animation", "Weight")]
 		
 		[UIHint(UIHint.Animation)]
-		public FsmString[] animations;
+        [Tooltip("An array of animations to pick randomly from.")]
+        public FsmString[] animations;
 		
 		[HasFloatSlider(0, 1)]
-		public FsmFloat[] weights;
+        [Tooltip("The relative probability of each animation being picked. " +
+                 "E.g. a weight of 2 is twice a likely to be picked as a weight of 1.")]
+        public FsmFloat[] weights;
 		
 		[Tooltip("How to treat previously playing animations.")]
 		public PlayMode playMode;
@@ -144,6 +147,15 @@ namespace HutongGames.PlayMaker.Actions
 				animation.Stop(anim.name);
 			}
 		}
+
+		#if UNITY_EDITOR
+
+		public override float GetProgress()
+		{
+		return Mathf.Min((anim.time%anim.length)/anim.length , 1f);
+		}
+
+		#endif
 
 	}
 }

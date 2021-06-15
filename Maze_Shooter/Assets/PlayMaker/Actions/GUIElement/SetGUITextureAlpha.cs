@@ -8,19 +8,22 @@ namespace HutongGames.PlayMaker.Actions
 #if !UNITY_2019_3_OR_NEWER
 
 	[ActionCategory(ActionCategory.GUIElement)]
-	[Tooltip("Sets the Alpha of the GUITexture attached to a Game Object. Useful for fading GUI elements in/out.")]
-	#if UNITY_2017_2_OR_NEWER
-	#pragma warning disable CS0618  
-	[Obsolete("GUITexture is part of the legacy UI system and will be removed in a future release")]
+    [Tooltip("Sets the alpha of the <a href=\"http://unity3d.com/support/documentation/Components/class-GuiTexture.html\">GUI Texture</a> attached to a game object. Useful for fading gui elements in/out.")]
+    #if UNITY_2017_2_OR_NEWER
+#pragma warning disable 618
+    [Obsolete("GUITexture is part of the legacy UI system and will be removed in a future release")]
 	#endif
 	public class SetGUITextureAlpha : ComponentAction<GUITexture>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(GUITexture))]
+        [Tooltip("The Game Object that has the GUITexture component.")]
 		public FsmOwnerDefault gameObject;
 		[RequiredField]
-		public FsmFloat alpha;
-		public bool everyFrame;
+        [Tooltip("The alpha to use. HINT: Use {{Animate Float}} for cool effects!")]
+        public FsmFloat alpha;
+        [Tooltip("Update the alpha every frame.")]
+        public bool everyFrame;
 		
 		public override void Reset()
 		{

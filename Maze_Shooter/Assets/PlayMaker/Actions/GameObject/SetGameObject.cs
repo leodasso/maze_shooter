@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames. All rights reserved.
 
 using UnityEngine;
 
@@ -10,9 +10,15 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("The GameObject Variable to set.")]
 		public FsmGameObject variable;
+
+        // Note: NOT a required field since can set to null
+        [Tooltip("Set the variable value. NOTE: leave empty to set to null.")]
 		public FsmGameObject gameObject;
-		public bool everyFrame;
+
+	    [Tooltip("Repeat every frame.")]
+	    public bool everyFrame;
 
 		public override void Reset()
 		{
@@ -35,5 +41,12 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			variable.Value = gameObject.Value;
 		}
+                
+#if UNITY_EDITOR
+	    public override string AutoName()
+	    {
+	        return ActionHelpers.AutoNameSetVar("SetGameObject", variable, gameObject);
+	    }
+#endif
 	}
 }

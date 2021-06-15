@@ -10,11 +10,18 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmFloat floatVariable;
+        [Tooltip("The Float Variable linked to the slider value.")]
+        public FsmFloat floatVariable;
+
 		[RequiredField]
+        [Tooltip("The value of the variable at the top of the slider.")]
 		public FsmFloat topValue;
+
 		[RequiredField]
-		public FsmFloat bottomValue;
+        [Tooltip("The value of the variable at the bottom of the slider.")]
+        public FsmFloat bottomValue;
+
+        [Tooltip("Optional Event to send when the slider value changes.")]
 		public FsmEvent changedEvent;
 		
 		public override void Reset()

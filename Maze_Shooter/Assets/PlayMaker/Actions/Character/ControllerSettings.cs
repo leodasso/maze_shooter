@@ -6,8 +6,8 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Character)]
 	[Tooltip("Modify various character controller settings.\n'None' leaves the setting unchanged.")]
-	public class ControllerSettings : FsmStateAction
-	{
+	public class ControllerSettings : ComponentAction<CharacterController>
+    {
 		[RequiredField]
 		[CheckForComponent(typeof(CharacterController))]
         [Tooltip("The GameObject that owns the CharacterController.")]
@@ -28,18 +28,18 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The center of the character's capsule relative to the transform's position")]
 		public FsmVector3 center;
 
-		[Tooltip("Should other rigidbodies or character controllers collide with this character controller (By default always enabled).")]
+		[Tooltip("Should other RigidBodies or CharacterControllers collide with this character controller (By default always enabled).")]
 		public FsmBool detectCollisions;
 
         [Tooltip("Repeat every frame while the state is active.")]
 		public bool everyFrame;
 
-		// cache so we can get new controller only when it changes.
-		
-		GameObject previousGo; 
-		CharacterController controller;
+        private CharacterController controller
+        {
+            get { return cachedComponent; }
+        }
 
-		public override void Reset()
+        public override void Reset()
 		{
 			gameObject = null;
 			height = new FsmFloat { UseVariable = true };
@@ -66,30 +66,17 @@ namespace HutongGames.PlayMaker.Actions
 			DoControllerSettings();
 		}
 
-
-		void DoControllerSettings()
+        private void DoControllerSettings()
 		{
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			if (go == null)
-			{
-				return;
-			}
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+                return;
 
-			if (go != previousGo)
-			{
-				controller = go.GetComponent<CharacterController>();
-				previousGo = go;
-			}
-
-			if (controller != null)
-			{
-				if (!height.IsNone) controller.height = height.Value;
-				if (!radius.IsNone) controller.radius = radius.Value;
-				if (!slopeLimit.IsNone) controller.slopeLimit = slopeLimit.Value;
-				if (!stepOffset.IsNone) controller.stepOffset = stepOffset.Value;
-				if (!center.IsNone) controller.center = center.Value;
-				if (!detectCollisions.IsNone) controller.detectCollisions = detectCollisions.Value;
-			}
+			if (!height.IsNone) controller.height = height.Value;
+			if (!radius.IsNone) controller.radius = radius.Value;
+			if (!slopeLimit.IsNone) controller.slopeLimit = slopeLimit.Value;
+			if (!stepOffset.IsNone) controller.stepOffset = stepOffset.Value;
+			if (!center.IsNone) controller.center = center.Value;
+			if (!detectCollisions.IsNone) controller.detectCollisions = detectCollisions.Value;
 		}
 	}
 }

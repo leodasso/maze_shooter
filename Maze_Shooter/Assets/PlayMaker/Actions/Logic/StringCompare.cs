@@ -10,10 +10,14 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		public FsmString stringVariable;
-		public FsmString compareTo;
-		public FsmEvent equalEvent;
-		public FsmEvent notEqualEvent;
+        [Tooltip("The String Variable to compare.")]
+        public FsmString stringVariable;
+        [Tooltip("Compare to this text.")]
+        public FsmString compareTo;
+        [Tooltip("Event to send if strings are equal.")]
+        public FsmEvent equalEvent;
+        [Tooltip("Event to send if strings are not equal.")]
+        public FsmEvent notEqualEvent;
 		[UIHint(UIHint.Variable)]
 		[Tooltip("Store the true/false result in a bool variable.")]
 		public FsmBool storeResult;

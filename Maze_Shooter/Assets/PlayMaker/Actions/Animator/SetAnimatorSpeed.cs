@@ -6,22 +6,20 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
 	[Tooltip("Sets the playback speed of the Animator. 1 is normal playback speed")]
-	public class SetAnimatorSpeed: FsmStateAction
+	public class SetAnimatorSpeed: ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The Target. An Animator component is required")]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("The GameObject with an Animator Component.")]
+        public FsmOwnerDefault gameObject;
 		
-		[Tooltip("The playBack speed")]
+		[Tooltip("The playback speed.")]
 		public FsmFloat speed;
 		
 		[Tooltip("Repeat every frame. Useful for changing over time.")]
 		public bool everyFrame;
-		
-		private Animator _animator;
-		
-		public override void Reset()
+
+        public override void Reset()
 		{
 			gameObject = null;
 			speed= null;
@@ -30,24 +28,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-			
-			DoPlaybackSpeed();
+            DoPlaybackSpeed();
 			
 			if (!everyFrame) 
 			{
@@ -59,18 +40,13 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			DoPlaybackSpeed();
 		}
-		
-	
+        
 		void DoPlaybackSpeed()
-		{		
-			if (_animator==null)
-			{
-				return;
-			}
-			
-			_animator.speed = speed.Value;
-			
+		{
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                cachedComponent.speed = speed.Value;
+            }
 		}
-		
 	}
 }

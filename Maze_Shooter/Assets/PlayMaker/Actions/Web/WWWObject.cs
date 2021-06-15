@@ -1,7 +1,10 @@
 ﻿// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
 
-#if !(UNITY_SWITCH || UNITY_TVOS || UNITY_IPHONE || UNITY_IOS || UNITY_ANDROID || UNITY_FLASH || UNITY_PS3 || UNITY_PS4 || UNITY_XBOXONE || UNITY_BLACKBERRY || UNITY_WP8 || UNITY_PSM || UNITY_WEBGL)
+#if UNITY_2018_2_OR_NEWER
+#pragma warning disable 618  
+#endif
 
+#if !(UNITY_SWITCH || UNITY_TVOS || UNITY_IPHONE || UNITY_IOS || UNITY_ANDROID || UNITY_FLASH || UNITY_PS3 || UNITY_PS4 || UNITY_XBOXONE || UNITY_BLACKBERRY || UNITY_WP8 || UNITY_PSM || UNITY_WEBGL || UNITY_SWITCH)
 
 using UnityEngine;
 
@@ -11,45 +14,45 @@ using UnityEngine.Networking;
 
 namespace HutongGames.PlayMaker.Actions
 {
-	[ActionCategory ("WWW")]
-	[Tooltip ("Gets data from a url and store it in variables. See Unity WWW docs for more details.")]
+	[ActionCategory("WWW")]
+	[Tooltip("Gets data from a url and store it in variables. See Unity WWW docs for more details.")]
 	public class WWWObject : FsmStateAction
 	{
 		[RequiredField]
-		[Tooltip ("Url to download data from.")]
+		[Tooltip("Url to download data from.")]
 		public FsmString url;
 
-		[ActionSection ("Results")]
+		[ActionSection("Results")]
 
-		[UIHint (UIHint.Variable)]
-		[Tooltip ("Gets text from the url.")]
+		[UIHint(UIHint.Variable)]
+		[Tooltip("Gets text from the url.")]
 		public FsmString storeText;
 		
-		[UIHint (UIHint.Variable)]
-		[Tooltip ("Gets a Texture from the url.")]
+		[UIHint(UIHint.Variable)]
+		[Tooltip("Gets a Texture from the url.")]
 		public FsmTexture storeTexture;
 
 		#if ! UNITY_2018_3_OR_NEWER
-		[UIHint (UIHint.Variable)]
-		[ObjectType (typeof(MovieTexture))]
-		[Tooltip ("Gets a Texture from the url.")]
+        [UIHint(UIHint.Variable)]
+		[ObjectType(typeof(MovieTexture))]
+		[Tooltip("Gets a Texture from the url.")]
 		public FsmObject storeMovieTexture;
 		#endif
-		
-		[UIHint (UIHint.Variable)]
-		[Tooltip ("Error message if there was an error during the download.")]
+
+		[UIHint(UIHint.Variable)]
+		[Tooltip("Error message if there was an error during the download.")]
 		public FsmString errorString;
 
-		[UIHint (UIHint.Variable)] 
-		[Tooltip ("How far the download progressed (0-1).")]
+		[UIHint(UIHint.Variable)] 
+		[Tooltip("How far the download progressed (0-1).")]
 		public FsmFloat progress;
 
-		[ActionSection ("Events")] 
+		[ActionSection("Events")] 
 		
-		[Tooltip ("Event to send when the data has finished loading (progress = 1).")]
+		[Tooltip("Event to send when the data has finished loading (progress = 1).")]
 		public FsmEvent isDone;
 		
-		[Tooltip ("Event to send if there was an error.")]
+		[Tooltip("Event to send if there was an error.")]
 		public FsmEvent isError;
 
 #if ! UNITY_2018_3_OR_NEWER
@@ -71,9 +74,9 @@ namespace HutongGames.PlayMaker.Actions
 
 		public override void OnEnter()
 		{
-			if (string.IsNullOrEmpty (url.Value))
+			if (string.IsNullOrEmpty(url.Value))
 			{
-				Finish ();
+				Finish();
 				return;
 			}
 
@@ -90,7 +93,7 @@ namespace HutongGames.PlayMaker.Actions
 			uwr.SendWebRequest();
 
 #else
-			wwwObject = new WWW (url.Value);
+			wwwObject = new WWW(url.Value);
 #endif
 		}
 
@@ -110,6 +113,7 @@ namespace HutongGames.PlayMaker.Actions
 
 			if (!string.IsNullOrEmpty(uwr.error))
 			{
+				uwr.Dispose();
 				Finish();
 				Fsm.Event(isError);
 				return;
@@ -117,7 +121,7 @@ namespace HutongGames.PlayMaker.Actions
 
 			progress.Value = uwr.downloadProgress;
 
-			if (progress.Value.Equals(1f))
+			if (progress.Value.Equals(1f) && uwr.isDone)
 			{
 				if (!storeText.IsNone)
 				{
@@ -130,6 +134,8 @@ namespace HutongGames.PlayMaker.Actions
 				}
 
 				errorString.Value = uwr.error;
+
+				uwr.Dispose();
 
 				Fsm.Event(string.IsNullOrEmpty(errorString.Value) ? isDone : isError);
 
@@ -144,40 +150,65 @@ namespace HutongGames.PlayMaker.Actions
 			if (wwwObject == null)
 			{
 				errorString.Value = "WWW Object is Null!";
-				Finish ();
+				Finish();
 				return;
 			}
 
 			errorString.Value = wwwObject.error;
 
-			if (!string.IsNullOrEmpty (wwwObject.error))
+			if (!string.IsNullOrEmpty(wwwObject.error))
 			{
-				Finish ();
-				Fsm.Event (isError);
+				wwwObject.Dispose();
+				Finish();
+				Fsm.Event(isError);
 				return;
 			}
 
 			progress.Value = wwwObject.progress;
 
-			if (progress.Value.Equals (1f))
+			if (progress.Value.Equals (1f) && wwwObject.isDone)
 			{
 				storeText.Value = wwwObject.text;
 				storeTexture.Value = wwwObject.texture;
 
 #if UNITY_2018_2_OR_NEWER
-				#if UNITY_5_6_OR_NEWER
+#if UNITY_5_6_OR_NEWER
                 storeMovieTexture.Value = wwwObject.GetMovieTexture();
-				#else
-				storeMovieTexture.Value = wwwObject.movie;
-				#endif
+#else
+                storeMovieTexture.Value = wwwObject.movie;
 #endif
+#endif
+				
+				
 				errorString.Value = wwwObject.error;
 
-				Fsm.Event (string.IsNullOrEmpty (errorString.Value) ? isDone : isError);
+				wwwObject.Dispose();
+				
+				Fsm.Event(string.IsNullOrEmpty(errorString.Value) ? isDone : isError);
 
-				Finish ();
+				Finish();
 			}
 		}
+#endif
+
+		#if UNITY_EDITOR
+
+		public override float GetProgress()
+		{
+#if !UNITY_2018_3_OR_NEWER
+			if (wwwObject!=null)
+			{
+				return wwwObject.progress;
+			}
+#else
+		    if (uwr != null)
+		    {
+		        return uwr.downloadProgress;
+		    }
+#endif
+			return 0f;
+		}
+
 		#endif
 		
 	}

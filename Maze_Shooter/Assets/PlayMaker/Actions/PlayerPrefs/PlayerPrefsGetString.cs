@@ -10,6 +10,7 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Case sensitive key.")]
 		public FsmString[] keys;
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the string in a String Variable.")]
 		public FsmString[] variables;
 
 		public override void Reset()

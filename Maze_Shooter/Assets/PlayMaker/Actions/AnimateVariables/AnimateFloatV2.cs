@@ -10,10 +10,14 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
+        [Tooltip("The float variable to animate.")]
 		public FsmFloat floatVariable;
-		[RequiredField]
-		public FsmAnimationCurve animCurve;
-		[Tooltip("Calculation lets you set a type of curve deformation that will be applied to floatVariable")]
+
+        [RequiredField]
+        [Tooltip("The animation curve to use.")]
+        public FsmAnimationCurve animCurve;
+
+        [Tooltip("Calculation lets you set a type of curve deformation that will be applied to floatVariable")]
 		public Calculation calculation;
 		
 		

@@ -16,6 +16,7 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The GameObject target.")]
 		public FsmOwnerDefault gameObject;
 
+        [Tooltip("Get local position relative to Anchor or Center.")]
 		public LocalPositionReference reference;
 
 		[Tooltip("The position")]

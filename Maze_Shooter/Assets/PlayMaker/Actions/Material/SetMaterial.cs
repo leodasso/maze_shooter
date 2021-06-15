@@ -5,17 +5,20 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Material)]
-	[Tooltip("Sets the material on a game object.")]
+	[Tooltip("Sets the material on a Game Object.")]
 	public class SetMaterial : ComponentAction<Renderer>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Renderer))]
-		public FsmOwnerDefault gameObject;
-		
+        [Tooltip("A Game Object with a Renderer component.")]
+        public FsmOwnerDefault gameObject;
+
+        [Tooltip("The index of the material on the object.")]
         public FsmInt materialIndex;
 		
         [RequiredField]
-		public FsmMaterial material;
+        [Tooltip("The material to apply.")]
+        public FsmMaterial material;
 
 		public override void Reset()
 		{

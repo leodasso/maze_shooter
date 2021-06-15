@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2020. All rights reserved.
 
 using UnityEngine;
 using System.Collections.Generic;
@@ -10,10 +10,15 @@ namespace HutongGames.PlayMaker.Actions
 	public class EaseRect : EaseFsmAction
 	{
 		[RequiredField]
+        [Tooltip("Ease from this Rect value.")]
 		public FsmRect fromValue;
-		[RequiredField]
+
+        [RequiredField]
+        [Tooltip("Ease to this Rect value.")]
 		public FsmRect toValue;
-		[UIHint(UIHint.Variable)]
+
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Store the current value in a Rect Variable.")]
 		public FsmRect rectVariable;
 		
 		private bool finishInNextStep = false;
@@ -42,7 +47,7 @@ namespace HutongGames.PlayMaker.Actions
 			toFloats[3] = toValue.Value.height;
 			resultFloats = new float[4];
 			finishInNextStep = false;
-		    rectVariable.Value = fromValue.Value;
+		    rectVariable.Value = reverse.IsNone ? fromValue.Value : reverse.Value ? toValue.Value : fromValue.Value;
 		}
 		
 		public override void OnExit (){

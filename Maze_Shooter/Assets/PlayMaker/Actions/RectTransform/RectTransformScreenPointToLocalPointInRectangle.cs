@@ -14,13 +14,13 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The GameObject target.")]
 		public FsmOwnerDefault gameObject;
 
-		[Tooltip("The screenPoint as a Vector2. Leave to none if you want to use the Vector3 alternative")]
+		[Tooltip("The screenPoint as a Vector2. Leave as none if you want to use the Vector3 alternative")]
 		public FsmVector2 screenPointVector2;
 
-		[Tooltip("The screenPoint as a Vector3. Leave to none if you want to use the Vector2 alternative")]
+		[Tooltip("The screenPoint as a Vector3. Leave as none if you want to use the Vector2 alternative")]
 		public FsmVector3 orScreenPointVector3;
 
-		[Tooltip("Define if screenPoint are expressed as normalized screen coordinates (0-1). Otherwise coordinates are in pixels.")]
+		[Tooltip("Define if screenPoint are normalized screen coordinates (0-1). Otherwise coordinates are in pixels.")]
 		public bool normalizedScreenPoint;
 		
 		[Tooltip("The Camera. For a RectTransform in a Canvas set to Screen Space - Overlay mode, the cam parameter should be set to null explicitly (default).\n" +
@@ -51,7 +51,8 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Event sent if the plane of the RectTransform is NOT hit, regardless of whether the point is inside the rectangle.")]
 		public FsmEvent noHitEvent;
 
-		RectTransform _rt;
+        private GameObject cachedGameObject;
+        RectTransform _rt;
 		Camera _camera;
 
 		public override void Reset()
@@ -74,17 +75,15 @@ namespace HutongGames.PlayMaker.Actions
 		public override void OnEnter()
 		{
 			GameObject go = Fsm.GetOwnerDefaultTarget(gameObject);
-			if (go != null)
-			{
+			if (go != cachedGameObject)
+            {
+                cachedGameObject = go;
 				_rt = go.GetComponent<RectTransform>();
 			}
 
-			if (!camera.IsNone)
-			{
-				_camera = camera.Value.GetComponent<Camera>();
-			}else{
-				_camera = EventSystem.current.GetComponent<Camera>();
-			}
+			_camera = !camera.IsNone ? 
+                camera.Value.GetComponent<Camera>() : 
+                EventSystem.current.GetComponent<Camera>();
 
 			DoCheck();
 
@@ -99,7 +98,7 @@ namespace HutongGames.PlayMaker.Actions
 			DoCheck();
 		}
 
-		void DoCheck()
+        private void DoCheck()
 		{
 			if (_rt==null)
 			{

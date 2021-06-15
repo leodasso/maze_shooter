@@ -7,7 +7,7 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("Substance")]
 	[Tooltip("Set a named bool property in a Substance material. NOTE: Use Rebuild Textures after setting Substance properties.")]
-#if UNITY_2017_3
+#if UNITY_2017_3_OR_NEWER
 #pragma warning disable 0618
 	[Obsolete("Built-in support for Substance Designer materials has been deprecated and will be removed in Unity 2018.1. " +
 	          "To continue using Substance Designer materials in Unity 2018.1, you will need to install a suitable " +

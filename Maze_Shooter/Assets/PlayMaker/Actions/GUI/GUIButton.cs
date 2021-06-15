@@ -9,8 +9,11 @@ namespace HutongGames.PlayMaker.Actions
 	[Tooltip("GUI button. Sends an Event when pressed. Optionally store the button state in a Bool Variable.")]
 	public class GUIButton : GUIContentAction
 	{
+        [Tooltip("The Event to send when the button is pressed.")]
 		public FsmEvent sendEvent;
+
 		[UIHint(UIHint.Variable)]
+        [Tooltip("Store the button state in a bool variable.")]
 		public FsmBool storeButtonState;
 	
 		public override void Reset()

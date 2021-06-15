@@ -6,12 +6,12 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
 	[Tooltip("Plays a state. This could be used to synchronize your animation with audio or synchronize an Animator over the network.")]
-	public class AnimatorPlay : FsmStateAction
+	public class AnimatorPlay : ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The target. An Animator component is required")]
-		public FsmOwnerDefault gameObject;
+        [Tooltip("The GameObject with an Animator Component.")]
+        public FsmOwnerDefault gameObject;
 
 		[Tooltip("The name of the state that will be played.")]
 		public FsmString stateName;
@@ -25,9 +25,12 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Repeat every frame. Useful when using normalizedTime to manually control the animation.")]
 		public bool everyFrame;
 
-		Animator _animator;
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
 
-		public override void Reset()
+        public override void Reset()
 		{
 			gameObject = null;
 			stateName = null;
@@ -38,19 +41,9 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			DoAnimatorPlay();
-			if (!everyFrame)
+            DoAnimatorPlay();
+
+            if (!everyFrame)
 			{
 				Finish();
 			}
@@ -63,16 +56,18 @@ namespace HutongGames.PlayMaker.Actions
 
 		void DoAnimatorPlay()
 		{
-			if (_animator!=null)
-			{
-				int _layer = layer.IsNone?-1:layer.Value;
-				
-				float _normalizedTime = normalizedTime.IsNone?Mathf.NegativeInfinity:normalizedTime.Value;
-				
-				_animator.Play(stateName.Value,_layer,_normalizedTime);
-			}
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
 
-		}
+            int _layer = layer.IsNone?-1:layer.Value;
+				
+            float _normalizedTime = normalizedTime.IsNone?Mathf.NegativeInfinity:normalizedTime.Value;
+				
+            animator.Play(stateName.Value,_layer,_normalizedTime);
+        }
 
 #if UNITY_EDITOR
 	    public override string AutoName()

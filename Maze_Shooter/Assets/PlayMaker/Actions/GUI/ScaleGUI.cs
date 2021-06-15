@@ -11,21 +11,26 @@ namespace HutongGames.PlayMaker.Actions
 	public class ScaleGUI : FsmStateAction
 	{
 		[RequiredField]
-		public FsmFloat scaleX;
+        [Tooltip("Scale in x (1 = 100%)")]
+        public FsmFloat scaleX;
 		
 		[RequiredField]
-		public FsmFloat scaleY;
+        [Tooltip("Scale in y (1 = 100%)")]
+        public FsmFloat scaleY;
 		
 		[RequiredField]
-		public FsmFloat pivotX;
+        [Tooltip("Scale around this x screen coordinate.")]
+        public FsmFloat pivotX;
 		
 		[RequiredField]
-		public FsmFloat pivotY;
+        [Tooltip("Scale around this y screen coordinate.")]
+        public FsmFloat pivotY;
 		
-		[Tooltip("Pivot point uses normalized coordinates. E.g. 0.5 is the center of the screen.")]
+		[Tooltip("Pivot point uses normalized coordinates (0-1). E.g. 0.5 is the center of the screen.")]
 		public bool normalized;
-		
-		public bool applyGlobally;
+
+        [Tooltip("Apply to all GUI actions in all FSMs.")]
+        public bool applyGlobally;
 
 		bool applied;
 		

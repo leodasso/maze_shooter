@@ -16,16 +16,17 @@ namespace HutongGames.PlayMaker.Actions
 		}
 
 		[RequiredField]
-        [Tooltip("GameObject that sends the message.")]		
+        [Tooltip("The Game Object to send a message to.")]
         public FsmOwnerDefault gameObject;
-		
-        [Tooltip("Where to send the message.\nSee Unity docs.")]
+
+        [Tooltip("Pick between <a href=\"http://unity3d.com/support/documentation/ScriptReference/GameObject.SendMessage.html\" rel=\"nofollow\">SendMessage</a>, <a href=\"http://unity3d.com/support/documentation/ScriptReference/GameObject.SendMessageUpwards.html\" rel=\"nofollow\">SendMessageUpwards</a>, or <a href=\"http://unity3d.com/support/documentation/ScriptReference/GameObject.BroadcastMessage.html\" rel=\"nofollow\">BroadcastMessage</a>.")]
         public MessageType delivery;
 
-        [Tooltip("Send options.\nSee Unity docs.")]
-		public SendMessageOptions options;
+        [Tooltip("Message delivery options. See <a href=\"http://unity3d.com/support/documentation/ScriptReference/SendMessageOptions.html\" rel=\"nofollow\">SendMessageOptions</a> in Unity Docs.")]
+        public SendMessageOptions options;
 		
         [RequiredField]
+        [Tooltip("Select a Method Name first then Parameters.")]
 		public FunctionCall functionCall;
 
 		public override void Reset()

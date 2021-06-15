@@ -10,7 +10,7 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The target. An Animator component is required")]
+        [Tooltip("The GameObject with an Animator Component.")]
 		public FsmOwnerDefault gameObject;
 		
 		[ActionSection("Results")]
@@ -19,9 +19,12 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The current gravity weight based on current animations that are played")]
 		public FsmFloat gravityWeight;
 
-		private Animator _animator;
-		
-		public override void Reset()
+        private Animator animator
+        {
+            get { return cachedComponent; }
+        }
+
+        public override void Reset()
 		{
 			base.Reset();
 
@@ -32,24 +35,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-
-			DoGetGravityWeight();
+            DoGetGravityWeight();
 			
 			if (!everyFrame) 
 			{
@@ -61,15 +47,16 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			DoGetGravityWeight();
 		}
-	
-		void DoGetGravityWeight()
-		{		
-			if (_animator==null)
-			{
-				return;
-			}
-			
-			gravityWeight.Value = _animator.gravityWeight;
+
+        private void DoGetGravityWeight()
+        {
+            if (!UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                Finish();
+                return;
+            }
+
+            gravityWeight.Value = animator.gravityWeight;
 		}
 	}
 }

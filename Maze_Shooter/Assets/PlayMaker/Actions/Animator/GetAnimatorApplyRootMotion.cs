@@ -6,11 +6,11 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
 	[Tooltip("Gets the value of ApplyRootMotion of an avatar. If true, root is controlled by animations")]
-	public class GetAnimatorApplyRootMotion : FsmStateAction
+	public class GetAnimatorApplyRootMotion : ComponentAction<Animator>
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(Animator))]
-		[Tooltip("The Target. An Animator component is required")]
+        [Tooltip("The GameObject with an Animator Component.")]
 		public FsmOwnerDefault gameObject;
 		
 		[ActionSection("Results")]
@@ -25,59 +25,25 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[Tooltip("Event send if the root motion is not applied")]
 		public FsmEvent rootMotionIsNotAppliedEvent;
-		
-		private Animator _animator;
 
-		
-		public override void Reset()
+        public override void Reset()
 		{
 			gameObject = null;
 			rootMotionApplied = null;
 			rootMotionIsAppliedEvent = null;
 			rootMotionIsNotAppliedEvent = null;
 		}
-		
-		
-		// Code that runs on entering the state.
+        
 		public override void OnEnter()
 		{
-			// get the animator component
-			var go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			if (go==null)
-			{
-				Finish();
-				return;
-			}
-			
-			_animator = go.GetComponent<Animator>();
-			
-			if (_animator==null)
-			{
-				Finish();
-				return;
-			}
-			
-			GetApplyMotionRoot();
-			
-			Finish();
-			
-		}
-	
-		void GetApplyMotionRoot()
-		{		
-			if (_animator!=null)
-			{
-				bool _applyRootMotion = _animator.applyRootMotion;
-			
-				rootMotionApplied.Value = _applyRootMotion;
-				if (_applyRootMotion)
-				{
-					Fsm.Event(rootMotionIsAppliedEvent);
-				}else{
-					Fsm.Event(rootMotionIsNotAppliedEvent);
-				}
-			}
-		}
-	}
+            if (UpdateCache(Fsm.GetOwnerDefaultTarget(gameObject)))
+            {
+                var _applyRootMotion = cachedComponent.applyRootMotion;
+                rootMotionApplied.Value = _applyRootMotion;
+                Fsm.Event(_applyRootMotion ? rootMotionIsAppliedEvent : rootMotionIsNotAppliedEvent);
+            }
+
+            Finish();
+        }
+    }
 }

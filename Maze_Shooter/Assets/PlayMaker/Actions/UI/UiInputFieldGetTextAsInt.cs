@@ -26,7 +26,8 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Event to send if text does NOT resolve to an int")]
 		public FsmEvent isNotIntEvent;
 
-		public bool everyFrame;
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 		
 		private UnityEngine.UI.InputField inputField;
 
