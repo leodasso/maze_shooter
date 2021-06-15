@@ -136,8 +136,6 @@ namespace ShootyGhost
         public void OnUnHaunted()
         {
             onUnHaunted.Invoke();
-			UnlinkHealth();
-			haunter = null;
         }
 
 		public void OnHaunterDestroyed()
@@ -147,23 +145,33 @@ namespace ShootyGhost
 
 		}
 
+		void Reset()
+		{
+			UnlinkHealth();
+			haunter = null;
+			gameObject.layer = initLayer;
+		}
+
 		/// <summary>
 		/// Forces haunter to un-haunt this instance.
 		/// </summary>
-		public void EndHaunt() {
+		public void EndHaunt() 
+		{
 			if (!haunter) return;
-
+			
 			if (customTransitionTime)
 				haunter.EndHaunt(transitionDuration: transitionTime);
 			else
 				haunter.EndHaunt();
 
-			gameObject.layer = initLayer;
+			Reset();
 		}
 
-		public void EndHauntWithNoTransition() {
+		public void EndHauntWithNoTransition() 
+		{
 			if (!haunter) return;
 			haunter.EndHaunt(null, false);
+			Reset();
 		}
 
 		void OnDisable()
