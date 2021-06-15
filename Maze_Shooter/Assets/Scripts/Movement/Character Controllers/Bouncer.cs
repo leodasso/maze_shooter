@@ -71,8 +71,14 @@ public class Bouncer : MonoBehaviour
 
 		onBounceCollision.Invoke();
 
-		if (autoBounce) 
-			Bounce(-bounceDirectionSource.GetMovementVector());
+		if (autoBounce) {
+			// rigidbody velocity might not be correct, so get the velocity from the collision info
+			if (bounceDirectionSource.source == DirectionSourceType.Rigidbody)
+				Bounce(other.relativeVelocity);
+
+			else
+				Bounce(-bounceDirectionSource.GetMovementVector());
+		}
     }
 
 	Vector3 BounceVelocity(Vector3 input)
@@ -86,7 +92,8 @@ public class Bouncer : MonoBehaviour
 
 	public void Bounce(Vector3 dir) 
 	{
-		dir.Normalize();
+		// dir.Normalize();
+		Debug.Log(name + " given a bounce with " + dir);
 		BounceInternal(BounceVelocity(dir));
 	}
 
