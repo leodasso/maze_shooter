@@ -726,7 +726,6 @@ MonoBehaviour:
   onUnGrounded:
     m_PersistentCalls:
       m_Calls: []
-  target: {fileID: 0}
   useTargetFinder: 0
   updateTargetDirectionEveryFrame: 1
   targetFinder: {fileID: 0}
@@ -3411,6 +3410,30 @@ MonoBehaviour:
   shadowPrefab: {fileID: 2418172932704104243, guid: b15b9acb510b9464eaa4e93d2a3c1963,
     type: 3}
   shadowScale: 0.68
+  shadowScaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: -0.1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 10
+      value: 0
+      inSlope: -0.1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   castCameraDown: 0
   castingMask:
     serializedVersion: 2

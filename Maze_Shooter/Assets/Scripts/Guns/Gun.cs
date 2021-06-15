@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Math = Arachnid.Math;
+using Arachnid;
 
 [TypeInfoBox("Fires things in the local Z forward axis")]
 public class Gun : GunBase
 {
 	public bool limitAmmo;
 	[ShowIf("limitAmmo")]
-	public int maxAmmo;
+	public IntReference maxAmmo;
 
 	int currentAmmo;
 
@@ -32,7 +33,7 @@ public class Gun : GunBase
 	{
 		base.Start();
 		_cooldownTimer = 0;
-		currentAmmo = maxAmmo;
+		currentAmmo = maxAmmo.Value;
 	}
 	
 	// Update is called once per frame
@@ -74,7 +75,7 @@ public class Gun : GunBase
 	public override void Reload()
 	{
 		base.Reload();
-		currentAmmo = maxAmmo;
+		currentAmmo = maxAmmo.Value;
 		audioAction.audioCollection = gunData.reloadSound;
 		audioAction.Play();
 	}
