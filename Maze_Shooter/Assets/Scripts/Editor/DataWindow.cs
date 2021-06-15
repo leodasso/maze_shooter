@@ -27,18 +27,19 @@ namespace ShootyGhost
 
         protected override OdinMenuTree BuildMenuTree()
         {
-            OdinMenuTree tree = new OdinMenuTree(true)
-            {
-                { "Home",                           GameMaster.Get(),                           EditorIcons.House                       }, // Draws the this.someData field in this case.
-            };  
+            OdinMenuTree tree = new OdinMenuTree(true);
 
 			tree.DefaultMenuStyle = OdinMenuStyle.TreeViewStyle;
-        	tree.Add("Menu Style", tree.DefaultMenuStyle);
+        	tree.Add("Menu Style", 		tree.DefaultMenuStyle, 	EditorIcons.SettingsCog);
+			tree.Add("Game Master", 	GameMaster.Get(), 		EditorIcons.PacmanGhost);
 
 			tree.AddAllAssetsAtPath("Data", "Assets/Data", typeof(IntValue), true);
 			tree.AddAllAssetsAtPath("Data", "Assets/Data", typeof(FloatValue), true);
 			tree.AddAllAssetsAtPath("Data", "Assets/Data", typeof(HeartsValue), true);
 			tree.AddAllAssetsAtPath("Data", "Assets/Data", typeof(DynamicsProfile), true);
+
+			tree.Add("Audio", 	null, 		EditorIcons.Sound);
+			tree.AddAllAssetsAtPath("Audio", "Assets/Audio/Audio Collections", typeof(AudioCollection), true);
 
             return tree;
         }
