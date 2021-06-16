@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HauntStarSlot : MonoBehaviour
+public class HauntCandleHolder : MonoBehaviour
 {
 	public SpaceMovement mover;
 	public LerpMovement lerpMovement;

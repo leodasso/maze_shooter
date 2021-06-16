@@ -14,10 +14,9 @@ GameObject:
   - component: {fileID: 723045281312600565}
   - component: {fileID: 1169796356247809748}
   - component: {fileID: 1686765685}
-  - component: {fileID: 8024714188743357312}
   - component: {fileID: 7475268244326793169}
   m_Layer: 0
-  m_Name: haunt star
+  m_Name: haunt candle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +78,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 8
-  m_Sprite: {fileID: 21300000, guid: 45a5fa17338fc81448b95417511c0c39, type: 3}
+  m_Sprite: {fileID: 6624385515741535453, guid: 37959fb5ad9cb9f45a757036861ca18c,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -263,44 +263,8 @@ MonoBehaviour:
   usePosition: 0
   positionFrequency: 1
   noiseSpeed: 1.3
-  noise: {x: 0.1328206, y: -0.034726918, z: -0.085695684}
-  normalizedOutput: 0.6328206
---- !u!114 &8024714188743357312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3876930543173970433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7a05506e86408f4bae29a22b776d5d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  progress: 0.17870294
-  spriteRenderer: {fileID: 1565771051167146989}
-  sprites:
-  - {fileID: 21300000, guid: f3c03ac78bc251f4a9b043d922ff8975, type: 3}
-  - {fileID: 21300000, guid: 45a5fa17338fc81448b95417511c0c39, type: 3}
-  - {fileID: 21300000, guid: 39a4fcd00ed479c41a8787cbec7a73ff, type: 3}
-  - {fileID: 21300000, guid: d41cbcf0444cd8d44bbeff0540a437ca, type: 3}
-  - {fileID: 21300000, guid: f3405e96f4944e142ac7596fba6572e6, type: 3}
-  - {fileID: 21300000, guid: 15c8a85362336114799f35e9e4b7cc5d, type: 3}
-  - {fileID: 21300000, guid: 539bcdb280a16ce48a966fe8455b22e6, type: 3}
-  - {fileID: 21300000, guid: 4535221633fd63a40af469a9db840e4c, type: 3}
-  - {fileID: 21300000, guid: f4dc3570cc3974d4099730df25d24eaa, type: 3}
-  - {fileID: 21300000, guid: f2dd4767da3846b48b0e5680ecc7dfbd, type: 3}
-  - {fileID: 21300000, guid: dca52f5dcac1c8f49af8bc28718eb4fb, type: 3}
-  - {fileID: 21300000, guid: 93526caa1a81be941aacfa1d5a8fdc9c, type: 3}
-  unscaledTime: 1
-  playSelf: 1
-  pingPong: 0
-  loop: 1
-  frameRate: 8
-  resetOnEnable: 0
-  setProgressOnStart: 0
-  startProgress: 0
-  spriteAnimEvents: []
+  noise: {x: -0.10519531, y: -0.00995636, z: -0.09484446}
+  normalizedOutput: 0.3948047
 --- !u!114 &7475268244326793169
 MonoBehaviour:
   m_ObjectHideFlags: 0

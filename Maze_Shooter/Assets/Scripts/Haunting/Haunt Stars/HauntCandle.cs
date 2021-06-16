@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class HauntStar : MonoBehaviour
+public class HauntCandle : MonoBehaviour
 {
 	public SpriteRenderer spriteRenderer;
 	public SpaceMovement mover;
-	public HauntStarSlot slot;
+	public HauntCandleHolder slot;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +16,7 @@ public class HauntStar : MonoBehaviour
     }
 
 	[Button]
-	public void GotoSlot(HauntStarSlot newSlot, float duration) 
+	public void GotoSlot(HauntCandleHolder newSlot, float duration) 
 	{
 		slot = newSlot;
 		mover.SetDestinationObject(slot.transform);

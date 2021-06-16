@@ -15,6 +15,7 @@ public class GameMaster : ScriptableObject
 	public GameEvent saveFileAccessedEvent;
 	public IntReference hpPerHeart;
 	public UnityEvent onBeginLoadSavedGame;
+	public GameObject hauntConstellationPrefab;
 
 	[Space, Title("Player")]
     public GameObject defaultPlayerShip;

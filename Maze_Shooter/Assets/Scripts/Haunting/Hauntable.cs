@@ -30,8 +30,10 @@ namespace ShootyGhost
 
 		public Collection hauntableType;
 
-		[AssetsOnly]
-		public GameObject hauntConstellationPrefab;
+		[MinValue(0)]
+		public int hauntCost = 1;
+
+		GameObject hauntConstellationPrefab => GameMaster.Get().hauntConstellationPrefab;
 
 		[ReadOnly]
 		public Haunter haunter;
@@ -84,7 +86,7 @@ namespace ShootyGhost
 				Instantiate(hauntConstellationPrefab, transform.position, Quaternion.identity)
 				.GetComponent<HauntConstellation>();
 
-			hauntConstellation.hauntable = this;
+			hauntConstellation.Init(this, hauntCost);
 
 			// show a shorter sequence if this isn't the first time haunting this thing
 			if (BeenHauntedThisSession()) 

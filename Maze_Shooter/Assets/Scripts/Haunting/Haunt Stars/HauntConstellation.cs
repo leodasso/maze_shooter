@@ -4,35 +4,76 @@ using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 using ShootyGhost;
+using Arachnid;
 
 public class HauntConstellation : MonoBehaviour
 {
-	public Hauntable hauntable;
+	[SerializeField]
+	Hauntable hauntable;
 
-	[BoxGroup("star slots")]
+	[SerializeField]
+	int cost;
+
+	[SerializeField]
+	FloatValue availableCandles;
+
+	[SerializeField]
+	Vector3 candleHoldersOffset = Vector3.up * 10;
+
+	[BoxGroup("candle holders")]
 	[Tooltip("How long to wait (in seconds) between showing each haunt star slot")]
 	public float delayBetweenSlots = .1f;
 
-	[BoxGroup("star slots")]
+	[BoxGroup("candle holders")]
 	public float slotAnimDuration = .5f;
 
-	[BoxGroup("star slots")]
-	public List<HauntStarSlot> hauntStarSlots = new List<HauntStarSlot>();
+	[BoxGroup("candle holders"), SerializeField]
+	GameObject candleHolderPrefab;
 
-	[BoxGroup("stars")]
-	[Tooltip("Delay between spawning each star (the star itself, not the slot)")]
-	public float delayBetweenStars = .1f;
+	[BoxGroup("candles"), SerializeField]
+	GameObject candlePrefab;
 
-	[BoxGroup("stars")]
-	public float starAnimDuration = 1.5f;
+	[BoxGroup("candles"), SerializeField]
+	GameObject flameSpiritPrefab;
 
-	[Tooltip("'start', 'quick', 'pass', and 'fail' events will be sent to the playmaker fsm.")]
+	[BoxGroup("candles")]
+	[Tooltip("Delay between spawning each candle")]
+	public float delayBetweenCandles = .1f;
+
+	[BoxGroup("candles")]
+	public float candleAnimDuration = 1.5f;
+
+	[Tooltip("'candles', 'quick', 'pass', and 'fail' events will be sent to the playmaker fsm.")]
 	public PlayMakerFSM playMaker;
+
+	List<HauntCandleHolder> candleHolders = new List<HauntCandleHolder>();
+
+	void OnDrawGizmosSelected()
+	{
+		for (int i = 0; i < cost; i ++)
+		{
+			Gizmos.color = Color.Lerp(Color.red, Color.blue, (float)i / cost);
+			Gizmos.DrawWireSphere(transform.TransformPoint(SlotLocalPos(i)), .3f);
+		}
+	}
+
+	public void Init(Hauntable newHauntable, int hauntCost)
+	{
+		// TODO
+		hauntable = newHauntable;
+		cost = hauntCost;
+	}
+
+	Vector3 SlotLocalPos(int index)
+	{
+		// TODO actually nice positions
+		return Vector3.right * index + candleHoldersOffset;
+	}
 
 	[Button]
 	public void PlayFullSequence() 
 	{
-		if (hauntStarSlots.Count < 1) 
+		if (cost < 1) 
 			PlayQuickSequence();
 		else
 			playMaker.SendEvent("start");
@@ -45,13 +86,7 @@ public class HauntConstellation : MonoBehaviour
 
 	public void SetShortStarAnim() 
 	{
-		starAnimDuration = .3f;
-	}
-
-	[Button]
-	void GetHauntStarSlots() {
-		hauntStarSlots.Clear();
-		hauntStarSlots.AddRange(GetComponentsInChildren<HauntStarSlot>());
+		candleAnimDuration = .3f;
 	}
 
 	public void AcceptHaunt() 
@@ -77,29 +112,18 @@ public class HauntConstellation : MonoBehaviour
 	}
 
 	[ButtonGroup]
-	void SpawnStars() 
+	void SpawnCandles() 
 	{
-		List<GameObject> starPrefabs = new List<GameObject>();
-
-		// get available stars from the current stage
-		var stage = GameMaster.Get().currentStage;
-		if (stage) starPrefabs.AddRange(stage.GetHauntStarPrefabs());
-
-		// TODO get available shatterstars from the haunter
-		if (hauntable) {
-
-		}
-		
 		// sequence for spawning stars, matching them to slots
-		if (starPrefabs.Count > 0)
-			StartCoroutine(SpawnStarsSequence(starPrefabs));
+		if (Mathf.Ceil(availableCandles.Value) > 0)
+			StartCoroutine(SpawnCandlesSequence());
 	}
 
 	[ButtonGroup]
 	void CheckIfSlotsFilled() 
 	{
 		bool pass = true;
-		foreach(var slot in hauntStarSlots) 
+		foreach(var slot in candleHolders) 
 			if (!slot.CheckIfFilled()) pass = false;
 
 		if (pass)
@@ -111,24 +135,34 @@ public class HauntConstellation : MonoBehaviour
 	[ButtonGroup]
 	void RecallSlots() 
 	{
-		foreach (var starSlot in hauntStarSlots) starSlot.Recall();
+		foreach (var candleHolder in candleHolders) 
+			candleHolder.Recall();
 	}
 
-	IEnumerator SpawnStarsSequence(List<GameObject> prefabs) 
+	IEnumerator SpawnCandlesSequence() 
 	{
-		int starIndex = 0;
+		int candleIndex = 0;
 
-		while (starIndex < hauntStarSlots.Count) {
+		// number of candles the player has available. we use ceiling because 
+		// fractions of a candle are still usable, they will just burn down quicker
+		int candles = Mathf.CeilToInt(availableCandles.Value);
+
+		while (candleIndex < candleHolders.Count) {
+
+			// do a delay between spawning each candle
 			yield return new WaitForSecondsRealtime(delayBetweenSlots);
 
-			if (prefabs.Count <= starIndex) continue;
+			// make sure there are candles available
+			if (candles < 1) continue;
 
-			HauntStar newStar = 
-				Instantiate( prefabs[starIndex], transform.position, Quaternion.identity, transform)
-				.GetComponent<HauntStar>();
+			// consume a candle and instantiate it
+			candles--;
+			HauntCandle newCandleInstance = 
+				Instantiate( candlePrefab, candleHolders[candleIndex].transform.position, Quaternion.identity, transform)
+				.GetComponent<HauntCandle>();
 
-			newStar.GotoSlot(hauntStarSlots[starIndex], starAnimDuration);
-			starIndex++;
+			newCandleInstance.GotoSlot(candleHolders[candleIndex], candleAnimDuration);
+			candleIndex++;
 		}
 	}
 
@@ -136,9 +170,9 @@ public class HauntConstellation : MonoBehaviour
 	{
 		int slotIndex = 0;
 
-		while (slotIndex < hauntStarSlots.Count) {
+		while (slotIndex < candleHolders.Count) {
 			yield return new WaitForSecondsRealtime(delayBetweenSlots);
-			hauntStarSlots[slotIndex].PlayAnimation(0, 1, slotAnimDuration);
+			candleHolders[slotIndex].PlayAnimation(0, 1, slotAnimDuration);
 			slotIndex++;
 		}
 	}

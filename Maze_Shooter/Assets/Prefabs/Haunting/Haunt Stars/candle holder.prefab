@@ -45,6 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioCollection: {fileID: 11400000, guid: c882791cb7b6be44c8de945ab615b562, type: 2}
   volume: 1
+  playDelay: 0
   playOnAwake: 0
   playOnEnable: 0
 --- !u!1 &657538785201262722
@@ -90,6 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de6c16f983620a4da43f9e72b293064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   effectPrefab: {fileID: 1388326714027936, guid: 3a54c4e88b19c6a43939dd58735c7c9b,
     type: 3}
   lifetime: 5
@@ -109,9 +111,8 @@ GameObject:
   - component: {fileID: 404404736786188299}
   - component: {fileID: 8169852565500389020}
   - component: {fileID: 8701860527777510321}
-  - component: {fileID: 6741585803193941410}
   m_Layer: 0
-  m_Name: star slot
+  m_Name: candle holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,7 +126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2754394556623825065}
   m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
-  m_LocalPosition: {x: 1.94, y: 7.69, z: 0}
+  m_LocalPosition: {x: 1.94, y: 7.26, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8762750743219448228}
@@ -146,6 +147,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -175,7 +177,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: ec46db3563efca541bad0ab7cf08aa63, type: 3}
+  m_Sprite: {fileID: 973213903526357449, guid: 37959fb5ad9cb9f45a757036861ca18c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -198,6 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateDuringGameplay: 0
 --- !u!114 &1692737357632643753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,18 +218,6 @@ MonoBehaviour:
   onFilled:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6741585803193941410}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: fill
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2901469886879342092}
         m_TargetAssemblyTypeName: AudioAction, Assembly-CSharp
         m_MethodName: Play
@@ -242,18 +233,6 @@ MonoBehaviour:
   onFailedToFill:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6741585803193941410}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: break
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 8202217333850416713}
         m_TargetAssemblyTypeName: AudioAction, Assembly-CSharp
         m_MethodName: Play
@@ -292,8 +271,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.08929623
     - serializedVersion: 3
-      time: 0.2976473
-      value: 1.2553146
+      time: 0.29664254
+      value: 1.0985185
       inSlope: -0.056469478
       outSlope: -0.056469478
       tangentMode: 0
@@ -301,8 +280,8 @@ MonoBehaviour:
       inWeight: 0.14349443
       outWeight: 0.27764717
     - serializedVersion: 3
-      time: 0.5014063
-      value: 0.9005999
+      time: 0.55028147
+      value: 0.9874406
       inSlope: 0.03516222
       outSlope: 0.03516222
       tangentMode: 0
@@ -310,8 +289,8 @@ MonoBehaviour:
       inWeight: 0.4037425
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.636711
-      value: 1.048738
+      time: 0.7187085
+      value: 1.0338297
       inSlope: -0.12044548
       outSlope: -0.12044548
       tangentMode: 0
@@ -319,8 +298,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.6346704
     - serializedVersion: 3
-      time: 0.7420519
-      value: 0.97469765
+      time: 0.84983677
+      value: 1.0106441
       inSlope: -0.03440921
       outSlope: -0.03440921
       tangentMode: 0
@@ -328,7 +307,7 @@ MonoBehaviour:
       inWeight: 0.5317701
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
+      time: 1.1721809
       value: 1
       inSlope: -0.10870636
       outSlope: -0.10870636
@@ -416,9 +395,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f3084e5d9ec8f4d90c66310de7c9f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noiseSpeed: 0.6
-  noise: {x: 0, y: 0, z: 0}
   realTime: 1
+  usePosition: 0
+  positionFrequency: 1
+  noiseSpeed: 0.6
+  noise: {x: 0.23120248, y: -0.082221776, z: 0.09026331}
+  normalizedOutput: 0.7312025
 --- !u!114 &8701860527777510321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,25 +416,6 @@ MonoBehaviour:
   target: {fileID: 0}
   lerpSpeed: 10
   useRealtime: 1
---- !u!95 &6741585803193941410
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2754394556623825065}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e2716b1d09e507c4f9a3c8f7ac010ea2, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 2
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3807583522128628395
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,6 +461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioCollection: {fileID: 11400000, guid: efd1e2b68d9280e41b28f4c2cc52c0b2, type: 2}
   volume: 1
+  playDelay: 0
   playOnAwake: 0
   playOnEnable: 0
 --- !u!1 &8495617636540053187
@@ -543,6 +507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de6c16f983620a4da43f9e72b293064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   effectPrefab: {fileID: 6055410014917391117, guid: a55d474928c2cbf4e8e2a18716873a1f,
     type: 3}
   lifetime: 5
