@@ -16,6 +16,7 @@ public class PlayerHealth : HealthPlugin
 
 	[Space]
     public SavedInt savedPlayerHealth;
+	public SavedInt savedPlayerMaxHealth;
 
 	[SerializeField, Space]
     UnityEvent onHealthCritical;
@@ -25,6 +26,7 @@ public class PlayerHealth : HealthPlugin
 	protected override void Start()
 	{
 		base.Start();
+		health.maxHearts.Value = savedPlayerMaxHealth.GetValue();
 		CheckForCritical();
 	}
 
