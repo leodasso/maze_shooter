@@ -148,5 +148,23 @@ namespace Arachnid
 
 			return (a * Cube) + (b * Square) + (c * t) + startPoint;
 		}
+
+
+
+		// thank you http://csharphelper.com/blog/2018/10/draw-an-archimedes-spiral-in-c/ for the below 2 functions!
+
+		static Vector2 PolarToCartesian(float r, float theta)
+		{
+			return new Vector2(r * Mathf.Cos(theta), r * Mathf.Sin(theta));
+		}
+
+
+		public static Vector2 PointOnSpiral(float theta, float A, float angleOffset = 0)
+		{
+			float r = A * theta;
+
+			// Convert to Cartesian coordinates.
+			return PolarToCartesian(r, theta + angleOffset);
+		}
 	}
 }
