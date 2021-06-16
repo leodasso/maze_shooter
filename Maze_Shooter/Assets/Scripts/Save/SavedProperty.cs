@@ -76,6 +76,13 @@ public abstract class SavedProperty<T> : ScriptableObject
         Debug.Log(name + " value in save file: " + Load());
     }
 
+	[ButtonGroup("saveFile/btn")]
+	protected virtual void ResetToDefault()
+	{
+		Save(defaultValue);
+		LogSaveStatus();
+	}
+
 
     public virtual void Save(T value)   
     {

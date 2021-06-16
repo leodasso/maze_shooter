@@ -10,8 +10,8 @@ public class Wallet : PickupGulper
 	[SerializeField]
 	IntValue _money;
 
-	[SerializeField]
-	IntValue maxMoney;
+	[SerializeField, Space]
+	SavedInt savedMaxMoney;
     
     void Awake()
     {
@@ -38,6 +38,6 @@ public class Wallet : PickupGulper
 
 	protected override bool IsFull()
 	{
-		return _money.Value >= maxMoney.Value;
+		return _money.Value >= savedMaxMoney.GetValue();
 	}
 }

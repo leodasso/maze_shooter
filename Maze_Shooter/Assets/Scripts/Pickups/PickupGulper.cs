@@ -9,7 +9,7 @@ public abstract class PickupGulper : MonoBehaviour
 	protected abstract void OnTriggerEnter(Collider other);
 
 	// Failsafe to prevent from saving to file when no value loaded
-	bool savedValueLoaded = false;
+	protected bool savedValueLoaded = false;
 
 	[SerializeField, PropertyOrder(300)]
 	UnityEvent onTooFullToGulp;
@@ -57,7 +57,7 @@ public abstract class PickupGulper : MonoBehaviour
 	protected void LoadSavedValue<T>(ValueAsset<T> valueAsset, SavedProperty<T> valueSaveFile) 
 	{
 		valueAsset.Value = valueSaveFile.GetValue();
-        savedValueLoaded = true;
+		savedValueLoaded = true;
 	}
 
 	protected void TrySave<T>(ValueAsset<T> valueAsset, SavedProperty<T> valueSaveFile)
