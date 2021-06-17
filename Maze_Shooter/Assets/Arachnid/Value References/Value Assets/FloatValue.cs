@@ -5,6 +5,16 @@ namespace Arachnid
     [CreateAssetMenu(menuName ="Arachnid/Float Value")]
     public class FloatValue : ValueAsset<float>
     {
+		protected override string Prefix()
+		{
+			return "float_";
+		}
+
+		protected override bool CanSave()
+		{
+			return true;
+		}
+
 		protected override void ProcessValueChange(float newValue)
 		{
 			
