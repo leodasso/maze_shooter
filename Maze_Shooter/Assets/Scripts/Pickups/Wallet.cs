@@ -38,6 +38,6 @@ public class Wallet : PickupGulper
 
 	protected override bool IsFull()
 	{
-		return _money.Value >= savedMaxMoney.GetValue();
+		return _money.Value >= savedMaxMoney.runtimeValue;
 	}
 }

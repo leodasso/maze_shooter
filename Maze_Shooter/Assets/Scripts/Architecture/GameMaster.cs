@@ -64,7 +64,7 @@ public class GameMaster : ScriptableObject
     {
         onBeginLoadSavedGame.Invoke();
         // find the stage to load from list
-        Stage stageToLoad = GetStage(savedStage.GetValue());
+        Stage stageToLoad = GetStage(savedStage.runtimeValue);
 
         // Load with a delay so there's time for the transition to fade in
         stageToLoad.Load(1);
@@ -112,7 +112,7 @@ public class GameMaster : ScriptableObject
 
     public static bool IsCurrentCheckpoint(string checkpointName)
     {
-        return checkpointName == Get().savedCheckpoint.GetValue();
+        return checkpointName == Get().savedCheckpoint.runtimeValue;
     }
 
     public static void SetGateLink(GateLink newGateLink)

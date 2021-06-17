@@ -19,7 +19,7 @@ public class CheckSavedBool : MonoBehaviour
 
 	public void Check() 
 	{
-		if (savedBool.GetValue()) isTrue.Invoke();
+		if (savedBool.runtimeValue) isTrue.Invoke();
 		else isFalse.Invoke();
 	}
 }

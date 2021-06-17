@@ -56,7 +56,7 @@ public abstract class PickupGulper : MonoBehaviour
 
 	protected void LoadSavedValue<T>(ValueAsset<T> valueAsset, SavedProperty<T> valueSaveFile) 
 	{
-		valueAsset.Value = valueSaveFile.GetValue();
+		valueAsset.Value = valueSaveFile.runtimeValue;
 		savedValueLoaded = true;
 	}
 
@@ -67,7 +67,8 @@ public abstract class PickupGulper : MonoBehaviour
 			return;
 		}
 
-		valueSaveFile.Save(valueAsset.Value);
+		valueSaveFile.runtimeValue = valueAsset.Value;
+		//valueSaveFile.Save(valueAsset.Value);
     }
 
 	protected abstract bool IsFull();

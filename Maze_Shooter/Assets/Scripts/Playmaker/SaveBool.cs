@@ -13,7 +13,7 @@ public class SaveBool : FsmStateAction
 	public override void OnEnter()
     {
 		if (savedBool) {
-			savedBool.Save(newSavedValue);
+			savedBool.runtimeValue = newSavedValue;
 		}
 		Finish();
     }

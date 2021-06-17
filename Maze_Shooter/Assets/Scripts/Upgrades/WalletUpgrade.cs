@@ -13,8 +13,8 @@ public class WalletUpgrade : ScriptableObject
 	[Button]
 	public void DoUpgrade()
 	{
-		int max = Mathf.Max(maxMoneySavedValue.GetValue(), newMaxValue);
+		int max = Mathf.Max(maxMoneySavedValue.runtimeValue, newMaxValue);
 		Debug.Log("Upgrading wallet to the value of " + max);
-		maxMoneySavedValue.Save(max);
+		maxMoneySavedValue.runtimeValue = max;
 	}
 }

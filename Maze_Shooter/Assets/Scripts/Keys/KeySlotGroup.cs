@@ -25,7 +25,7 @@ public class KeySlotGroup : MonoBehaviour
 
     void Start()
     {
-        if (keySlotsFilled && keySlotsFilled.GetValue())
+        if (keySlotsFilled && keySlotsFilled.runtimeValue)
         {
             onLoadAsActivated.Invoke();
             _alreadyActivated = true;
@@ -54,6 +54,6 @@ public class KeySlotGroup : MonoBehaviour
     {
         _alreadyActivated = true;
         onFirstTimeActivated.Invoke();
-        if (keySlotsFilled) keySlotsFilled.Save(true);
+        if (keySlotsFilled) keySlotsFilled.runtimeValue = true;
     }
 }

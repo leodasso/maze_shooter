@@ -10,6 +10,6 @@ public class ConstellationData : SavedBool
 
     public bool HasBeenCollected()
     {
-        return GetValue();
+        return runtimeValue;
     }
 }

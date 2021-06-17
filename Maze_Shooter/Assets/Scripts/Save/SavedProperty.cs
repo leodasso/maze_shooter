@@ -21,7 +21,7 @@ public abstract class SavedProperty<T> : ScriptableObject
     protected virtual string Prefix => "";
 
     [ButtonGroup("saveFile/btn")]
-    void LogSaveStatus()
+    protected void LogSaveStatus()
     {
         Debug.Log(name + " value in save file: " + Load());
     }
