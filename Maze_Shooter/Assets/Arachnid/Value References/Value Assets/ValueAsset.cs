@@ -21,9 +21,9 @@ namespace Arachnid {
         bool readOnly;
 
 		[TableColumnWidth(100, false)]
-		[ PropertyOrder(-45), Space, SerializeField, ShowIf("CanSave"), ToggleLeft]
+		[ PropertyOrder(-45), Space, ShowIf("CanSave"), ToggleLeft]
 		[Tooltip("This value will be saved / loaded from save file on the gameMaster save() and load()")]
-		bool useSaveFile;
+		public bool useSaveFile;
 
 		[SerializeField]
 		protected T myValue;
@@ -82,7 +82,7 @@ namespace Arachnid {
 		[ButtonGroup(), PropertyOrder(200), ShowIf("useSaveFile")]
 		protected void LogSaveStatus()
 		{
-			Debug.Log(name + " value in save file: " + Load());
+			Debug.Log(name + " value in save file: " + GameMaster.LoadFromCurrentFile(Prefix() + name, defaultValue, this));
 		}
 
 		[ButtonGroup(), PropertyOrder(200), ShowIf("useSaveFile")]

@@ -43,13 +43,33 @@ namespace ShootyGhost
 			tree.AddAllAssetsAtPath("Audio", "Assets/Audio/Audio Collections", typeof(AudioCollection), true).AddThumbnailIcons();
 
 			tree.Add("Save Data", null, EditorIcons.GridBlocks);
-			tree.AddAllAssetsAtPath("Save Data", "Assets/Save File Data", typeof(SavedInt), true).AddThumbnailIcons();
-			tree.AddAllAssetsAtPath("Save Data", "Assets/Save File Data", typeof(SavedFloat), true).AddThumbnailIcons();
-			tree.AddAllAssetsAtPath("Save Data", "Assets/Save File Data", typeof(SavedBool), true).AddThumbnailIcons();
-			tree.AddAllAssetsAtPath("Save Data", "Assets/Save File Data", typeof(SavedString), true).AddThumbnailIcons();
+
+			BuildSaveDataTree<string>(tree, "StringValue");
+			BuildSaveDataTree<int>(tree, "IntValue");
+			BuildSaveDataTree<float>(tree, "FloatValue");
+			BuildSaveDataTree<bool>(tree, "BoolValue");
 
             return tree;
         }
+
+		void BuildSaveDataTree<T>(OdinMenuTree tree, string typeName)
+		{
+			var guids = AssetDatabase.FindAssets("t:" + typeName, new[] {"Assets/Data"});
+			foreach (var guid in guids)
+			{
+				var assetPath = AssetDatabase.GUIDToAssetPath(guid);
+				var asset = AssetDatabase.LoadAssetAtPath(assetPath, typeof(ValueAsset<T>)) as ValueAsset<T>;
+				if (!asset.useSaveFile) continue;
+
+				// remove 'assets/data/'
+				string trimmedPath = assetPath.Substring(12);
+
+				// remove '.asset'
+				int length = trimmedPath.Length - 6;
+				trimmedPath = trimmedPath.Substring(0, length);
+				tree.AddObjectAtPath("Save Data/" + trimmedPath, asset).AddThumbnailIcons();
+			}
+		}
     }
 }
 #endif
