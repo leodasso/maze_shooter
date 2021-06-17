@@ -5,24 +5,14 @@ using Arachnid;
 public class Wallet : PickupGulper
 {
 	[SerializeField]
-    SavedInt savedMoneyValue;
-    
-	[SerializeField]
 	IntValue _money;
 
-	[SerializeField, Space]
-	SavedInt savedMaxMoney;
+	[SerializeField]
+	IntValue maxMoney;
     
     void Awake()
     {
-		if (!ConfirmValueExistence(_money)) return;
-		LoadSavedValue(_money, savedMoneyValue);
-    }
-
-    void OnDestroy()
-    {
-        // save money value
-        TrySave(_money, savedMoneyValue);
+		ConfirmValueExistence(_money);
     }
 
 	protected override void OnTriggerEnter(Collider other)
@@ -38,6 +28,6 @@ public class Wallet : PickupGulper
 
 	protected override bool IsFull()
 	{
-		return _money.Value >= savedMaxMoney.runtimeValue;
+		return _money.Value >= maxMoney.Value;
 	}
 }

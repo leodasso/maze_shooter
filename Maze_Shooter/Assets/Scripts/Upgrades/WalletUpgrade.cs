@@ -8,13 +8,13 @@ using Sirenix.OdinInspector;
 public class WalletUpgrade : ScriptableObject
 {
 	public int newMaxValue = 500;
-	public SavedInt maxMoneySavedValue;
+	public IntValue maxMoneyValue;
  
 	[Button]
 	public void DoUpgrade()
 	{
-		int max = Mathf.Max(maxMoneySavedValue.runtimeValue, newMaxValue);
+		int max = Mathf.Max(maxMoneyValue.Value, newMaxValue);
 		Debug.Log("Upgrading wallet to the value of " + max);
-		maxMoneySavedValue.runtimeValue = max;
+		maxMoneyValue.Value = max;
 	}
 }

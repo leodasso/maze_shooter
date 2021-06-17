@@ -16,12 +16,7 @@ namespace ShootyGhost
     {
         Rewired.Player _player;
 
-		public int hauntStars = 1;
-
         public GameObject hauntTrigger;
-        
-        [Tooltip("On Start(), haunt stars value is pulled from save file using this. On Destroy(), it's saved.")]
-        public SavedInt savedHauntStars;
 
 		[Tooltip("The max distance you can haunt")]
         public FloatReference hauntDistance;

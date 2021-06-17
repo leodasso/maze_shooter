@@ -5,9 +5,6 @@ using Arachnid;
 public class CandleGulper : PickupGulper
 {
 	[SerializeField]
-    SavedFloat savedCandles;
-    
-	[SerializeField]
 	FloatValue candles;
 
 	[SerializeField]
@@ -15,13 +12,7 @@ public class CandleGulper : PickupGulper
     
     void Awake()
     {
-		if (!ConfirmValueExistence(candles)) return;
-		LoadSavedValue(candles, savedCandles);
-    }
-
-    void OnDestroy()
-    {
-        TrySave(candles, savedCandles);
+		ConfirmValueExistence(candles);
     }
 
 	protected override void OnTriggerEnter(Collider other)

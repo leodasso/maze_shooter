@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.Events;
+using Arachnid;
 
 public class KeySlotGroup : MonoBehaviour
 {
     public List<KeySlot> keySlots = new List<KeySlot>();
 
-    public SavedBool keySlotsFilled;
+    public BoolValue keySlotsFilled;
     public UnityEvent onFirstTimeActivated;
     public UnityEvent onLoadAsActivated;
 
@@ -25,7 +26,7 @@ public class KeySlotGroup : MonoBehaviour
 
     void Start()
     {
-        if (keySlotsFilled && keySlotsFilled.runtimeValue)
+        if (keySlotsFilled && keySlotsFilled.Value)
         {
             onLoadAsActivated.Invoke();
             _alreadyActivated = true;
@@ -54,6 +55,6 @@ public class KeySlotGroup : MonoBehaviour
     {
         _alreadyActivated = true;
         onFirstTimeActivated.Invoke();
-        if (keySlotsFilled) keySlotsFilled.runtimeValue = true;
+        if (keySlotsFilled) keySlotsFilled.Value = true;
     }
 }
