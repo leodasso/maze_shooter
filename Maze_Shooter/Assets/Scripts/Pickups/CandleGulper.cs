@@ -33,6 +33,7 @@ public class CandleGulper : PickupGulper
 	{
 		CandlePickup candle = pickup as CandlePickup;
 		candles.Value += candle.value;
+		candles.Value = Mathf.Clamp(candles.Value, 0, maxCandles.Value);
 	}
 
 	protected override bool IsFull()
