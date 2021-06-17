@@ -16,7 +16,7 @@ public class HauntCandleHolder : MonoBehaviour
 	UnityEvent onRecall;
 
 	[SerializeField]
-	Transform candlePosition;
+	public Transform candlePosition;
 
 	[Space, SerializeField]
 	float floatAwaySpeed = 1;

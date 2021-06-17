@@ -200,7 +200,7 @@ namespace ShootyGhost
 
 				transform.position = GhostTools.GroundPoint(returnPos);
 
-                if (useTransition) {
+                if (useTransition && GhostTools.SafeToInstantiate(gameObject)) {
 					GameObject hauntedObject = overrideHauntedObject ? overrideHauntedObject : haunted.gameObject;
 					SpawnTransitionObject(HauntTransition.Out, transform.position, hauntedObject, transitionDuration);
 				}

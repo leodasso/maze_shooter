@@ -29,14 +29,15 @@ public class SpaceMovement : MonoBehaviour
 	// randomly assigned at start - determines the direction of movement of the sample point along the perlin plane
     Vector2 _noiseSampleDirection;
 
-	Vector3 ActualFinalPos => _finalPosTransform ? _finalPosTransform.localPosition : _finalPos; 
+	Vector3 ActualFinalPos => _finalPosTransform ? _finalPosTransform.position : _finalPos; 
+	Vector3 StartPos => transform.parent ? transform.parent.position : Vector3.zero; 
 
 	bool UseNoise => noise != null;
 
     // Start is called before the first frame update
     void Start()
     {
-        _finalPos = transform.localPosition;
+        _finalPos = transform.position;
 		CalculateProgress(0);
     }
 
@@ -52,7 +53,7 @@ public class SpaceMovement : MonoBehaviour
 			r.color = progressGradient.Evaluate(newProgress);
 
 		float curvedProgress = progressCurve.Evaluate(newProgress);
-        transform.localPosition = Vector3.LerpUnclamped(Vector3.zero, ActualFinalPos, curvedProgress);
+        transform.position = Vector3.LerpUnclamped(StartPos, ActualFinalPos, curvedProgress);
 
 		if (UseNoise) 
 			transform.Translate(noise.noise * noiseIntensity.Evaluate(newProgress));

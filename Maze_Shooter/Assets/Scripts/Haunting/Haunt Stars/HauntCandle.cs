@@ -11,7 +11,7 @@ public class HauntCandle : MonoBehaviour
 	public void GotoSlot(HauntCandleHolder newSlot, float duration) 
 	{
 		slot = newSlot;
-		mover.SetDestinationObject(slot.transform);
+		mover.SetDestinationObject(slot.candlePosition);
 		mover.PlayAnimation(0, 1, duration, FillSlot);
 	}
 

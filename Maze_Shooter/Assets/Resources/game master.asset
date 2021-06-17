@@ -15,28 +15,10 @@ MonoBehaviour:
   currentAvatar: {fileID: 11400000, guid: 1d447c7288706094390871ecd1fb0d52, type: 2}
   saveFileAccessedEvent: {fileID: 11400000, guid: 7d07b5dc8edda004ba5d5b69b5bdbfcf,
     type: 2}
-  defaultPlayerShip: {fileID: 3594317241385997719, guid: 0b7bc270b67169f42a1babf7f6748058,
-    type: 3}
-  currentStage: {fileID: 11400000, guid: f5c980591a70d5f428dee6f26d95d2d4, type: 2}
-  justCompletedStage: {fileID: 0}
-  gateLink: {fileID: 0}
-  playerInstancesCollection: {fileID: 11400000, guid: 35831a8bfbcf71f4fb702f50d0ec7816,
-    type: 2}
-  audioListenerPrefab: {fileID: 8094742872100786263, guid: ee100a5dbe821a640b781a2a66c104d3,
-    type: 3}
-  musicPlayerPrefab: {fileID: 6657162521998955197, guid: b9d2c6f8eaafaad478cc8d34f51d2926,
-    type: 3}
-  savedStage: {fileID: 11400000, guid: 361a58afbc8e3cc40892a453c2425f85, type: 2}
-  savedCheckpoint: {fileID: 11400000, guid: 5739792f1e5bf4d459c62c2a71f32a55, type: 2}
-  allStages:
-  - {fileID: 11400000, guid: e12e125dd28688f4880aebfa891be005, type: 2}
-  - {fileID: 11400000, guid: 6d40778dc7a41a04cb5808e0a4c334ae, type: 2}
-  - {fileID: 11400000, guid: 401b20484f593404f9fa3f15dd65b3a9, type: 2}
-  - {fileID: 11400000, guid: f5c980591a70d5f428dee6f26d95d2d4, type: 2}
-  - {fileID: 11400000, guid: cf2e4e2b8a2c4c649a3ad6a9e595535b, type: 2}
-  - {fileID: 11400000, guid: 36102544198d6144081078805889c7a9, type: 2}
-  - {fileID: 11400000, guid: d455b5034f4bcc0409ab6d0aeb72d185, type: 2}
-  - {fileID: 11400000, guid: b2e86f20921399945bc24d9745d508f4, type: 2}
+  hpPerHeart:
+    useConstant: 1
+    constantValue: 0
+    valueObject: {fileID: 11400000, guid: cda62425192c61f4992253805d217e89, type: 2}
   onBeginLoadSavedGame:
     m_PersistentCalls:
       m_Calls:
@@ -52,7 +34,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  hpPerHeart:
-    useConstant: 1
-    constantValue: 0
-    valueObject: {fileID: 11400000, guid: cda62425192c61f4992253805d217e89, type: 2}
+  hauntConstellationPrefab: {fileID: 6313422710192330927, guid: 0ca1384b8a177f94894e101ed3c62293,
+    type: 3}
+  defaultPlayerShip: {fileID: 3594317241385997719, guid: 0b7bc270b67169f42a1babf7f6748058,
+    type: 3}
+  playerInstancesCollection: {fileID: 11400000, guid: 35831a8bfbcf71f4fb702f50d0ec7816,
+    type: 2}
+  allStages:
+  - {fileID: 11400000, guid: e12e125dd28688f4880aebfa891be005, type: 2}
+  - {fileID: 11400000, guid: 6d40778dc7a41a04cb5808e0a4c334ae, type: 2}
+  - {fileID: 11400000, guid: 401b20484f593404f9fa3f15dd65b3a9, type: 2}
+  - {fileID: 11400000, guid: f5c980591a70d5f428dee6f26d95d2d4, type: 2}
+  - {fileID: 11400000, guid: cf2e4e2b8a2c4c649a3ad6a9e595535b, type: 2}
+  - {fileID: 11400000, guid: 36102544198d6144081078805889c7a9, type: 2}
+  - {fileID: 11400000, guid: d455b5034f4bcc0409ab6d0aeb72d185, type: 2}
+  - {fileID: 11400000, guid: b2e86f20921399945bc24d9745d508f4, type: 2}
+  currentStage: {fileID: 11400000, guid: 36102544198d6144081078805889c7a9, type: 2}
+  justCompletedStage: {fileID: 0}
+  savedStage: {fileID: 11400000, guid: 361a58afbc8e3cc40892a453c2425f85, type: 2}
+  savedCheckpoint: {fileID: 11400000, guid: 5739792f1e5bf4d459c62c2a71f32a55, type: 2}
+  gateLink: {fileID: 0}
+  audioListenerPrefab: {fileID: 8094742872100786263, guid: ee100a5dbe821a640b781a2a66c104d3,
+    type: 3}
+  musicPlayerPrefab: {fileID: 6657162521998955197, guid: b9d2c6f8eaafaad478cc8d34f51d2926,
+    type: 3}
