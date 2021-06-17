@@ -18,7 +18,8 @@ public class HauntConstellation : MonoBehaviour
 	FloatValue availableCandles;
 
 	[BoxGroup("candle holders")]
-	public float timePerCandle = .1f;
+	[Tooltip("X axis is the number of candles being spawned, and y axis is the total time of the spawn sequence.")]
+	public AnimationCurve spawnCandlesTime = AnimationCurve.Linear(0, 1, 100, 3);
 
 	[BoxGroup("candle holders")]
 	public float slotAnimDuration = .5f;
@@ -139,8 +140,8 @@ public class HauntConstellation : MonoBehaviour
 	[Button]
 	public void PlayFullSequence() 
 	{		
-		float timeForCandleHolders = cost * timePerCandle + .5f;
-		float timeForCandles = Mathf.Min(candles, cost) * timePerCandle + .5f;
+		float timeForCandleHolders = spawnCandlesTime.Evaluate(cost) + .5f;
+		float timeForCandles = spawnCandlesTime.Evaluate(Mathf.Min(candles, cost)) + .5f;
 
 		playMaker.FsmVariables.GetFsmFloat("showCandleHoldersTime").Value = timeForCandleHolders;
 		playMaker.FsmVariables.GetFsmFloat("showCandlesTime").Value = timeForCandles;
@@ -220,24 +221,18 @@ public class HauntConstellation : MonoBehaviour
 
 	IEnumerator SpawnCandlesSequence() 
 	{
-		int candleIndex = 0;
-		int candlesToSpawn = candles;
+		int candlesToSpawn = Mathf.Min(candles, cost);
 
-		while (candleIndex < candleHolders.Count) {
+		float timePerCandle = spawnCandlesTime.Evaluate(candlesToSpawn) / candlesToSpawn;
 
-			// make sure there are candles available
-			if (candlesToSpawn < 1) continue;
+		for (int i = 0; i < candlesToSpawn; i++) {
 
-			
 			// consume a candle and instantiate it
-			candlesToSpawn--;
 			HauntCandle newCandleInstance = 
-				Instantiate( candlePrefab, transform.position + SlotLocalPos(candleIndex), Quaternion.identity, transform)
+				Instantiate( candlePrefab, transform.position + SlotLocalPos(i), Quaternion.identity, transform)
 				.GetComponent<HauntCandle>();
 
-			//newCandleInstance.GotoSlot(candleHolders[candleIndex], candleAnimDuration);
-			candleIndex++;
-			
+			newCandleInstance.GotoSlot(candleHolders[i], candleAnimDuration);			
 
 			// do a delay between spawning each candle
 			yield return new WaitForSecondsRealtime(timePerCandle);
@@ -247,12 +242,13 @@ public class HauntConstellation : MonoBehaviour
 
 	IEnumerator ShowSlotsSequence() 
 	{
-		int slotIndex = 0;
+		float timePerSlot = spawnCandlesTime.Evaluate(cost) / cost;
 
-		while (slotIndex < cost) {
+
+		for (int i = 0; i < cost; i++) {
 
 			// Instantiate candle holder
-			HauntCandleHolder newHolder = Instantiate(candleHolderPrefab, transform.position + SlotLocalPos(slotIndex), Quaternion.identity)
+			HauntCandleHolder newHolder = Instantiate(candleHolderPrefab, transform.position + SlotLocalPos(i), Quaternion.identity)
 				.GetComponent<HauntCandleHolder>();
 
 			newHolder.transform.parent = transform;
@@ -265,14 +261,13 @@ public class HauntConstellation : MonoBehaviour
 			line.endPoint = newHolder.transform;
 
 			// instantiate line to prev candle
-			if (slotIndex > 1) {
+			if (i > 1) {
 				LineRendererStraight line2 = Instantiate(stringPrefab, transform).GetComponent<LineRendererStraight>();
-				line2.startPoint = candleHolders[slotIndex-1].transform;
+				line2.startPoint = candleHolders[i-1].transform;
 				line2.endPoint = newHolder.transform;
 			}
-			slotIndex++;
 
-			yield return new WaitForSecondsRealtime(timePerCandle);
+			yield return new WaitForSecondsRealtime(timePerSlot);
 		}
 	}
 }

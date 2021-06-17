@@ -4955,7 +4955,7 @@ GameObject:
   - component: {fileID: 6313422710192330924}
   - component: {fileID: 8567907631477964633}
   m_Layer: 0
-  m_Name: haunt constellation base
+  m_Name: haunt constellation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4996,7 +4996,30 @@ MonoBehaviour:
   hauntable: {fileID: 0}
   cost: 5
   availableCandles: {fileID: 11400000, guid: 12f28796f297b6f49b3746e1603ea9d0, type: 2}
-  timePerCandle: 0.08
+  spawnCandlesTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.8064778
+      inSlope: 0.023363795
+      outSlope: 0.023363795
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.041415006
+    - serializedVersion: 3
+      time: 100
+      value: 5.2276764
+      inSlope: 0.035208054
+      outSlope: 0.035208054
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.049538955
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   slotAnimDuration: 1.2
   candleHolderPrefab: {fileID: 2754394556623825065, guid: aed530cd029a287419ff8fdcd09fb484,
     type: 3}
@@ -6940,7 +6963,7 @@ PrefabInstance:
     - target: {fileID: 6967298198241235844, guid: b1952762e8ad06544a4be25b1a4023e1,
         type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.9175824
+      value: 1.5416666
       objectReference: {fileID: 0}
     - target: {fileID: 6970951804585245902, guid: b1952762e8ad06544a4be25b1a4023e1,
         type: 3}
