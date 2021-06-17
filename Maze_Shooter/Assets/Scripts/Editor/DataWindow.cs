@@ -20,15 +20,18 @@ namespace ShootyGhost
         {
             var window = GetWindow<DataWindow>();
             window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 600);
+			window.titleContent = new GUIContent("Hauntii Data", EditorIcons.PacmanGhost.Raw);
         }
 
         protected override OdinMenuTree BuildMenuTree()
         {
             OdinMenuTree tree = new OdinMenuTree(true);
-			tree.DrawSearchToolbar();
 
 			tree.DefaultMenuStyle = OdinMenuStyle.TreeViewStyle;
-        	tree.Add("Menu Style", 		tree.DefaultMenuStyle, 	EditorIcons.SettingsCog);
+
+			tree.Config.DrawSearchToolbar = true;
+
+        	//tree.Add("Menu Style", 		tree.DefaultMenuStyle, 	EditorIcons.SettingsCog);
 			tree.Add("Game Master", 	GameMaster.Get(), 		EditorIcons.PacmanGhost);
 
 			tree.AddAllAssetsAtPath("Data", "Assets/Data", typeof(IntValue), true).AddThumbnailIcons();
