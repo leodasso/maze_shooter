@@ -5,19 +5,11 @@ namespace Arachnid
 	[CreateAssetMenu(menuName ="Arachnid/Int Value")]
 	public class IntValue : ValueAsset<int>
 	{
-		protected override string Prefix()
-		{
-			return "int_";
-		}
-
-		protected override bool CanSave()
-		{
-			return true;
-		}
+		protected override string Prefix() => "int_";
+		protected override bool CanSave() => true;
 
 		protected override void ProcessValueChange(int newValue)
-		{
-		}
+		{		}
 
 		protected override bool ValueHasChanged(int newValue) 
 		{
