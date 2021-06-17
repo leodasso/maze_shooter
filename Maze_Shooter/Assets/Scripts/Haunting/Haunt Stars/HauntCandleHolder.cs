@@ -1,26 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 public class HauntCandleHolder : MonoBehaviour
 {
-	public SpaceMovement mover;
-	public LerpMovement lerpMovement;
-	public UnityEvent onFilled;
-	public UnityEvent onFailedToFill;
+	[SerializeField]
+	SpaceMovement mover;
+
+	[SerializeField]
+	UnityEvent onFilled;
+
+	[SerializeField]
+	UnityEvent onFailedToFill;
+
+	[SerializeField]
+	UnityEvent onRecall;
+
+	[SerializeField]
+	Transform candlePosition;
+
+	[Space, SerializeField]
+	float floatAwaySpeed = 1;
 
 	bool _filled;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
-	public void FillSlot() 
+	public void FillSlot(GameObject candle) 
 	{
 		_filled = true;
 		onFilled.Invoke();
+
+		candle.transform.parent = candlePosition;
+		candle.transform.localPosition = Vector3.zero;
 	}
 
 	public bool CheckIfFilled() 
@@ -36,7 +46,6 @@ public class HauntCandleHolder : MonoBehaviour
 
 	public void Recall() 
 	{
-		mover.enabled = false;
-		lerpMovement.target = transform.parent;
+		onRecall.Invoke();
 	}
 }

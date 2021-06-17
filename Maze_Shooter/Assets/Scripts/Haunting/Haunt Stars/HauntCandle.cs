@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class HauntCandle : MonoBehaviour
@@ -8,12 +6,6 @@ public class HauntCandle : MonoBehaviour
 	public SpriteRenderer spriteRenderer;
 	public SpaceMovement mover;
 	public HauntCandleHolder slot;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
 	[Button]
 	public void GotoSlot(HauntCandleHolder newSlot, float duration) 
@@ -25,7 +17,9 @@ public class HauntCandle : MonoBehaviour
 
 	void FillSlot() 
 	{
-		if (slot) slot.FillSlot();
-		spriteRenderer.enabled = false;
+		if (slot) {
+			mover.enabled = false;
+			slot.FillSlot(gameObject);
+		}
 	}
 }

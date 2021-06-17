@@ -37,20 +37,27 @@ public class SpaceMovement : MonoBehaviour
     void Start()
     {
         _finalPos = transform.localPosition;
+		CalculateProgress(0);
     }
 
     // Update is called once per frame
     void Update()
     {
-		foreach( SpriteRenderer r in renderersToColor) 
-			r.color = progressGradient.Evaluate(progress);
+		CalculateProgress(progress);
+    }
 
-		float curvedProgress = progressCurve.Evaluate(progress);
+	void CalculateProgress(float newProgress)
+	{
+		foreach( SpriteRenderer r in renderersToColor) 
+			r.color = progressGradient.Evaluate(newProgress);
+
+		float curvedProgress = progressCurve.Evaluate(newProgress);
         transform.localPosition = Vector3.LerpUnclamped(Vector3.zero, ActualFinalPos, curvedProgress);
 
 		if (UseNoise) 
-			transform.Translate(noise.noise * noiseIntensity.Evaluate(progress));
-    }
+			transform.Translate(noise.noise * noiseIntensity.Evaluate(newProgress));
+	}
+
 
 	public void SetDestinationObject(Transform t) {
 		_finalPosTransform = t;

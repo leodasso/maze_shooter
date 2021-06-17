@@ -17,18 +17,44 @@ public class HauntConstellation : MonoBehaviour
 	[SerializeField]
 	FloatValue availableCandles;
 
-	[SerializeField]
-	Vector3 candleHoldersOffset = Vector3.up * 10;
-
 	[BoxGroup("candle holders")]
-	[Tooltip("How long to wait (in seconds) between showing each haunt star slot")]
-	public float delayBetweenSlots = .1f;
+	public float timePerCandle = .1f;
 
 	[BoxGroup("candle holders")]
 	public float slotAnimDuration = .5f;
 
 	[BoxGroup("candle holders"), SerializeField]
 	GameObject candleHolderPrefab;
+
+	[BoxGroup("candle holders"), SerializeField]
+	GameObject stringPrefab;
+
+	[BoxGroup("candle holders"), SerializeField]
+	Vector3 candleHoldersOffset = Vector3.up * 10;
+
+	[BoxGroup("candle holders"), SerializeField]
+	float spiralHeight = 1;
+
+	[BoxGroup("candle holders"), SerializeField, Tooltip("Sets the position of each candle holder on every update frame.")]
+	bool controlCandleHolderPositions;
+
+	[BoxGroup("candle holders/spiral")]
+	public float theta = .1f;
+
+	[BoxGroup("candle holders/spiral")]
+	public float thetaVelocity;
+
+	[BoxGroup("candle holders/spiral")]
+	public float thetaAcceleration;
+
+	[BoxGroup("candle holders/spiral")]
+	public float archimedes = 1;
+
+	[BoxGroup("candle holders/spiral")]
+	public int spiralStartOffset = 2;
+
+	[BoxGroup("candle holders/spiral")]
+	public float angleOffset;
 
 	[BoxGroup("candles"), SerializeField]
 	GameObject candlePrefab;
@@ -48,31 +74,77 @@ public class HauntConstellation : MonoBehaviour
 
 	List<HauntCandleHolder> candleHolders = new List<HauntCandleHolder>();
 
+	// number of candles the player has available. we use ceiling because 
+	// fractions of a candle are still usable, they will just burn down quicker
+	int candles => Mathf.CeilToInt(availableCandles.Value);
+
+
 	void OnDrawGizmosSelected()
 	{
+		Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.localScale);
 		for (int i = 0; i < cost; i ++)
 		{
-			Gizmos.color = Color.Lerp(Color.red, Color.blue, (float)i / cost);
-			Gizmos.DrawWireSphere(transform.TransformPoint(SlotLocalPos(i)), .3f);
+			var color = Color.Lerp(Color.red, Color.blue, (float)i / cost);
+			Gizmos.color = color;
+			var pos = SlotLocalPos(i);
+			Gizmos.DrawWireSphere(pos, .3f);
+
+			if (i > 0)
+				Gizmos.DrawLine(pos, SlotLocalPos(i-1));
+
+			Gizmos.color = new Color(color.r, color.g, color.b, .3f);
+			Gizmos.DrawLine(pos, Vector3.zero);
+		}
+
+		// draw line from start to end 
+		Gizmos.DrawLine(SlotLocalPos(0), SlotLocalPos(cost - 1));
+	}
+
+	void Update()
+	{
+		thetaVelocity += thetaAcceleration * Time.unscaledDeltaTime;
+		theta += thetaVelocity * Time.unscaledDeltaTime;
+
+		if (controlCandleHolderPositions)
+		{
+			for (int i = 0; i < candleHolders.Count; i++)
+			{
+				var h = candleHolders[i];
+				if (!h) continue;
+				h.transform.localPosition = Vector3.Lerp(h.transform.localPosition, SlotLocalPos(i), Time.unscaledDeltaTime * 10);
+			}
 		}
 	}
 
+
 	public void Init(Hauntable newHauntable, int hauntCost)
 	{
-		// TODO
 		hauntable = newHauntable;
 		cost = hauntCost;
+
+		PlayFullSequence();
 	}
 
+
+	/// <summary>
+	/// Uses a spiral calculation to return a nice looking placement for any index
+	/// </summary>
 	Vector3 SlotLocalPos(int index)
 	{
-		// TODO actually nice positions
-		return Vector3.right * index + candleHoldersOffset;
+		Vector2 coords = Math.PointOnSpiral((float)(index + spiralStartOffset) * theta, archimedes, angleOffset);
+		return Math.Project2Dto3D(coords) + candleHoldersOffset + Vector3.up * spiralHeight * index;
 	}
+
 
 	[Button]
 	public void PlayFullSequence() 
-	{
+	{		
+		float timeForCandleHolders = cost * timePerCandle + .5f;
+		float timeForCandles = Mathf.Min(candles, cost) * timePerCandle + .5f;
+
+		playMaker.FsmVariables.GetFsmFloat("showCandleHoldersTime").Value = timeForCandleHolders;
+		playMaker.FsmVariables.GetFsmFloat("showCandlesTime").Value = timeForCandles;
+
 		if (cost < 1) 
 			PlayQuickSequence();
 		else
@@ -97,6 +169,7 @@ public class HauntConstellation : MonoBehaviour
 		Destroy(gameObject);
 	}
 
+
 	public void RejectHaunt() 
 	{
 		if (hauntable) 
@@ -105,11 +178,13 @@ public class HauntConstellation : MonoBehaviour
 		Destroy(gameObject);
 	}
 
+
 	[ButtonGroup]
 	void ShowSlots() 
 	{
 		StartCoroutine(ShowSlotsSequence());
 	}
+
 
 	[ButtonGroup]
 	void SpawnCandles() 
@@ -118,6 +193,7 @@ public class HauntConstellation : MonoBehaviour
 		if (Mathf.Ceil(availableCandles.Value) > 0)
 			StartCoroutine(SpawnCandlesSequence());
 	}
+
 
 	[ButtonGroup]
 	void CheckIfSlotsFilled() 
@@ -132,48 +208,71 @@ public class HauntConstellation : MonoBehaviour
 			playMaker.SendEvent("fail");
 	}
 
+
 	[ButtonGroup]
 	void RecallSlots() 
 	{
+		controlCandleHolderPositions = true;
 		foreach (var candleHolder in candleHolders) 
 			candleHolder.Recall();
 	}
 
+
 	IEnumerator SpawnCandlesSequence() 
 	{
 		int candleIndex = 0;
-
-		// number of candles the player has available. we use ceiling because 
-		// fractions of a candle are still usable, they will just burn down quicker
-		int candles = Mathf.CeilToInt(availableCandles.Value);
+		int candlesToSpawn = candles;
 
 		while (candleIndex < candleHolders.Count) {
 
-			// do a delay between spawning each candle
-			yield return new WaitForSecondsRealtime(delayBetweenSlots);
-
 			// make sure there are candles available
-			if (candles < 1) continue;
+			if (candlesToSpawn < 1) continue;
 
+			
 			// consume a candle and instantiate it
-			candles--;
+			candlesToSpawn--;
 			HauntCandle newCandleInstance = 
-				Instantiate( candlePrefab, candleHolders[candleIndex].transform.position, Quaternion.identity, transform)
+				Instantiate( candlePrefab, transform.position + SlotLocalPos(candleIndex), Quaternion.identity, transform)
 				.GetComponent<HauntCandle>();
 
-			newCandleInstance.GotoSlot(candleHolders[candleIndex], candleAnimDuration);
+			//newCandleInstance.GotoSlot(candleHolders[candleIndex], candleAnimDuration);
 			candleIndex++;
+			
+
+			// do a delay between spawning each candle
+			yield return new WaitForSecondsRealtime(timePerCandle);
 		}
 	}
+
 
 	IEnumerator ShowSlotsSequence() 
 	{
 		int slotIndex = 0;
 
-		while (slotIndex < candleHolders.Count) {
-			yield return new WaitForSecondsRealtime(delayBetweenSlots);
-			candleHolders[slotIndex].PlayAnimation(0, 1, slotAnimDuration);
+		while (slotIndex < cost) {
+
+			// Instantiate candle holder
+			HauntCandleHolder newHolder = Instantiate(candleHolderPrefab, transform.position + SlotLocalPos(slotIndex), Quaternion.identity)
+				.GetComponent<HauntCandleHolder>();
+
+			newHolder.transform.parent = transform;
+			newHolder.PlayAnimation(0, 1, slotAnimDuration);
+			candleHolders.Add(newHolder);
+
+			// instantiate line to center
+			LineRendererStraight line = Instantiate(stringPrefab, transform).GetComponent<LineRendererStraight>();
+			line.startPoint = transform;
+			line.endPoint = newHolder.transform;
+
+			// instantiate line to prev candle
+			if (slotIndex > 1) {
+				LineRendererStraight line2 = Instantiate(stringPrefab, transform).GetComponent<LineRendererStraight>();
+				line2.startPoint = candleHolders[slotIndex-1].transform;
+				line2.endPoint = newHolder.transform;
+			}
 			slotIndex++;
+
+			yield return new WaitForSecondsRealtime(timePerCandle);
 		}
 	}
 }

@@ -376,17 +376,22 @@ PrefabInstance:
     - target: {fileID: 5638522731537600005, guid: 0ca1384b8a177f94894e101ed3c62293,
         type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.6892489
+      value: 1.9175824
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754460842314034257, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5754460842314034257, guid: 0ca1384b8a177f94894e101ed3c62293,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 187.67044
+      value: 236.93967
       objectReference: {fileID: 0}
     - target: {fileID: 5754460842314034257, guid: 0ca1384b8a177f94894e101ed3c62293,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -259.23962
+      value: -327.29794
       objectReference: {fileID: 0}
     - target: {fileID: 5795127621059162235, guid: 0ca1384b8a177f94894e101ed3c62293,
         type: 3}
@@ -658,22 +663,75 @@ PrefabInstance:
       propertyPath: m_Positions.Array.data[2].z
       value: 1.8075867
       objectReference: {fileID: 0}
+    - target: {fileID: 6313422710192330924, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: fsm.states.Array.data[4].actionData.fsmPropertyParams.Array.data[0].FloatParameter.value
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313422710192330924, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: fsm.states.Array.data[5].actionData.fsmPropertyParams.Array.data[0].FloatParameter.value
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313422710192330924, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: fsm.states.Array.data[4].actionData.fsmPropertyParams.Array.data[0].FloatParameter.tooltip
+      value: how quickly the candles spin around in the ending part
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313422710192330924, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: fsm.states.Array.data[5].actionData.fsmPropertyParams.Array.data[0].FloatParameter.tooltip
+      value: how quickly the candles spin around in the ending part
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313422710192330924, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: fsm.states.Array.data[4].actionData.fsmPropertyParams.Array.data[0].FloatParameter.showInInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313422710192330924, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: fsm.states.Array.data[5].actionData.fsmPropertyParams.Array.data[0].FloatParameter.showInInspector
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6313422710192330925, guid: 0ca1384b8a177f94894e101ed3c62293,
         type: 3}
-      propertyPath: candlePrefab
-      value: 
-      objectReference: {fileID: 3876930543173970433, guid: b1702bd70fb484443b07cacb79f95185,
-        type: 3}
+      propertyPath: cost
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 6313422710192330925, guid: 0ca1384b8a177f94894e101ed3c62293,
         type: 3}
-      propertyPath: availableCandles
-      value: 
-      objectReference: {fileID: 11400000, guid: 12f28796f297b6f49b3746e1603ea9d0,
-        type: 2}
+      propertyPath: theta
+      value: 11.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313422710192330925, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: archimedes
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313422710192330925, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: spawnSlotsDuration
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6313422710192330926, guid: 0ca1384b8a177f94894e101ed3c62293,
         type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313422710192330926, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.79206
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313422710192330926, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.79206
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313422710192330926, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.79206
       objectReference: {fileID: 0}
     - target: {fileID: 6313422710192330926, guid: 0ca1384b8a177f94894e101ed3c62293,
         type: 3}
@@ -729,6 +787,81 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: haunt constellation base
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479816090040675610, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: scalingCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479816090040675610, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: scalingCurve.m_Curve.Array.data[1].time
+      value: 0.7772675
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479816090040675610, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: scalingCurve.m_Curve.Array.data[2].time
+      value: 0.9762462
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479816090040675610, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: scalingCurve.m_Curve.Array.data[0].value
+      value: -0.05247627
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479816090040675610, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: scalingCurve.m_Curve.Array.data[1].value
+      value: 14.852416
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479816090040675610, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: scalingCurve.m_Curve.Array.data[2].value
+      value: 14.525165
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479816090040675610, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: scalingCurve.m_Curve.Array.data[0].inSlope
+      value: 15.470687
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479816090040675610, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: scalingCurve.m_Curve.Array.data[1].inSlope
+      value: 1.4504173
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479816090040675610, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: scalingCurve.m_Curve.Array.data[2].inSlope
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479816090040675610, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: scalingCurve.m_Curve.Array.data[0].outSlope
+      value: 15.470687
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479816090040675610, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: scalingCurve.m_Curve.Array.data[1].inWeight
+      value: 0.055990953
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479816090040675610, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: scalingCurve.m_Curve.Array.data[1].outSlope
+      value: 1.4504173
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479816090040675610, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: scalingCurve.m_Curve.Array.data[2].outSlope
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479816090040675610, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: scalingCurve.m_Curve.Array.data[0].outWeight
+      value: 0.065436535
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479816090040675610, guid: 0ca1384b8a177f94894e101ed3c62293,
+        type: 3}
+      propertyPath: scalingCurve.m_Curve.Array.data[1].outWeight
+      value: 0.23454419
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca1384b8a177f94894e101ed3c62293, type: 3}
@@ -847,7 +980,7 @@ PrefabInstance:
     - target: {fileID: 7001740507737305552, guid: b1952762e8ad06544a4be25b1a4023e1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -37.314186
+      value: -38.617504
       objectReference: {fileID: 0}
     - target: {fileID: 7001740507737305552, guid: b1952762e8ad06544a4be25b1a4023e1,
         type: 3}
@@ -1292,6 +1425,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 523822261}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2033458562
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2033458564}
+  - component: {fileID: 2033458563}
+  m_Layer: 0
+  m_Name: PlayMakerGUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2033458563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033458562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -73581967, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  previewOnGUI: 1
+  enableGUILayout: 0
+  drawStateLabels: 1
+  enableStateLabelsInBuilds: 0
+  GUITextureStateLabels: 0
+  GUITextStateLabels: 0
+  filterLabelsWithDistance: 0
+  maxLabelDistance: 10
+  controlMouseCursor: 1
+  labelScale: 1
+--- !u!4 &2033458564
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033458562}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2082282131
 PrefabInstance:

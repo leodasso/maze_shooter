@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 1692737357632643753}
   - component: {fileID: 404404736786188299}
   - component: {fileID: 8169852565500389020}
-  - component: {fileID: 8701860527777510321}
+  - component: {fileID: 7455454662648695799}
   m_Layer: 0
   m_Name: candle holder
   m_TagString: Untagged
@@ -125,7 +125,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2754394556623825065}
-  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
+  m_LocalRotation: {x: 0.3007058, y: 0, z: 0, w: 0.953717}
   m_LocalPosition: {x: 1.94, y: 7.26, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -133,6 +133,7 @@ Transform:
   - {fileID: 1949029609823031673}
   - {fileID: 7171205157740727732}
   - {fileID: 526801385709199882}
+  - {fileID: 3054171774022104441}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
@@ -214,13 +215,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mover: {fileID: 404404736786188299}
-  lerpMovement: {fileID: 8701860527777510321}
   onFilled:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2901469886879342092}
-        m_TargetAssemblyTypeName: AudioAction, Assembly-CSharp
-        m_MethodName: Play
+      - m_Target: {fileID: 9095879462743464519}
+        m_TargetAssemblyTypeName: OnTriggerEffect, Assembly-CSharp
+        m_MethodName: InvokeEffect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -245,6 +245,47 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 536311984923262468}
+        m_TargetAssemblyTypeName: OnTriggerEffect, Assembly-CSharp
+        m_MethodName: InvokeEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onRecall:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 404404736786188299}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7455454662648695799}
+        m_TargetAssemblyTypeName: Scaler, Assembly-CSharp
+        m_MethodName: ScaleToSmall
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  candlePosition: {fileID: 3054171774022104441}
+  floatAwaySpeed: 1
 --- !u!114 &404404736786188299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,9 +440,9 @@ MonoBehaviour:
   usePosition: 0
   positionFrequency: 1
   noiseSpeed: 0.6
-  noise: {x: 0.23120248, y: -0.082221776, z: 0.09026331}
-  normalizedOutput: 0.7312025
---- !u!114 &8701860527777510321
+  noise: {x: -0.028232098, y: 0.108118236, z: 0.102214396}
+  normalizedOutput: 0.4717679
+--- !u!114 &7455454662648695799
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -410,12 +451,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 2754394556623825065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1cadac10ebbadb438aa02602ad495de, type: 3}
+  m_Script: {fileID: 11500000, guid: c72d1491fb9efc747aaedd0f1b32a968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  lerpSpeed: 10
-  useRealtime: 1
+  startScale: 0
+  scalingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.06954695
+      outSlope: 0.06954695
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.047454704
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.43302786
+      outSlope: 0.43302786
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.0457291
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3807583522128628395
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,7 +571,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  effectPrefab: {fileID: 6055410014917391117, guid: a55d474928c2cbf4e8e2a18716873a1f,
+  effectPrefab: {fileID: 3450800051835712121, guid: 6c8f41eed99effa48ba354031ca7689b,
     type: 3}
   lifetime: 5
   delay: 0
+--- !u!1 &9131059565856889600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3054171774022104441}
+  m_Layer: 0
+  m_Name: candle area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3054171774022104441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9131059565856889600}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.32, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1353928431225158679}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -2,6 +2,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+[TypeInfoBox("Tools for animating scale. The scaling curve should always be small on left / big on right. \n Scale to small moves from the right end of curve to left, and scale to big goes left to right. ")]
 public class Scaler : MonoBehaviour
 {
 	public enum StartScale {
@@ -38,7 +39,7 @@ public class Scaler : MonoBehaviour
 		float duration = Mathf.Abs(startTime - endTime);
 		float scale = 0;
 		while (progress <= 1) {
-			progress += Time.deltaTime / duration;
+			progress += Time.unscaledDeltaTime / duration;
 			float t = Mathf.Lerp(startTime, endTime, progress);
 			scale = scalingCurve.Evaluate(t);
 			transform.localScale = Vector3.one * scale; 
