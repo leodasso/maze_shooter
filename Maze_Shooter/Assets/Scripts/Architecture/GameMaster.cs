@@ -103,8 +103,11 @@ public class GameMaster : ScriptableObject
 
     public static void SetCheckpoint(string checkpointName)
     {
+		/*
         Get().savedStage.Save(Get().currentStage.name);
         Get().savedCheckpoint.Save(checkpointName);
+		*/
+		// TODO save with given checkpoint name
     }
 
     public static bool IsCurrentCheckpoint(string checkpointName)
@@ -139,6 +142,22 @@ public class GameMaster : ScriptableObject
     }
 
     #region Load-Save
+
+	/// <summary>
+	/// Calls for ALL saved properties on the current file to get their value from the persistent save data
+	/// </summary>
+	public static void LoadData()
+	{
+
+	}
+
+	/// <summary>
+	/// Calls for ALL saved properties to write their value to the persistent save data for the current file
+	/// </summary>
+	public static void SaveData()
+	{
+
+	}
 
 	public static void OnSaveFileAccessed()
 	{
@@ -206,6 +225,7 @@ public class GameMaster : ScriptableObject
     /// <param name="requester">The object that is requesting for a value to be saved.</param>
     public static void SaveToCurrentFile<T>(string saveKey, T value, Object requester)
     {
+		Debug.Log(requester.name + " is saving " + saveKey + " at " + System.DateTime.Now);
 
         string saveDir;
         if (Get().TryGetSaveFileDirectory(out saveDir)) 
