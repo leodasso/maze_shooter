@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1259660481531899950}
   - component: {fileID: 1259660481531899946}
   - component: {fileID: 1259660481531899947}
-  - component: {fileID: 4479572380558497406}
   m_Layer: 13
   m_Name: candle pickup
   m_TagString: Untagged
@@ -74,6 +73,33 @@ MonoBehaviour:
       - m_Target: {fileID: 1259660481531899947}
         m_TargetAssemblyTypeName: AudioAction, Assembly-CSharp
         m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onTriedToGrabButFull:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1259660481531899952}
+        m_TargetAssemblyTypeName: Pickup, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 6db86dd50a5ffdc4dba80f0928a37e3a, type: 2}
+        m_TargetAssemblyTypeName: Arachnid.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -173,25 +199,6 @@ MonoBehaviour:
   playDelay: 0
   playOnAwake: 0
   playOnEnable: 0
---- !u!114 &4479572380558497406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1259660481531899949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3bb9c03bdbf8764d921ab721de37d9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rewardAmount:
-    useConstant: 0
-    constantValue: 2
-    valueObject: {fileID: 0}
-  spawnDelay: 0.25
-  rewards: {fileID: 11400000, guid: e28302198e45de4439bc188f1eb1c750, type: 2}
-  spawnOnDestroy: 0
 --- !u!1 &1259660481705663283
 GameObject:
   m_ObjectHideFlags: 0
