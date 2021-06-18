@@ -48,6 +48,8 @@ namespace ShootyGhost
 			BuildSaveDataTree<int>(tree, "IntValue");
 			BuildSaveDataTree<float>(tree, "FloatValue");
 			BuildSaveDataTree<bool>(tree, "BoolValue");
+			BuildSaveDataTree<Hearts>(tree, "HeartsValue");
+			BuildSaveDataTree<bool>(tree, "ConstellationData");
 
             return tree;
         }

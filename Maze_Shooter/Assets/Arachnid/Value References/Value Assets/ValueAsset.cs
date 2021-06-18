@@ -5,13 +5,17 @@ using Sirenix.OdinInspector;
 
 namespace Arachnid {
 
+	
 	/// <summary>
 	/// Base class for any scriptable objects that hold a value.
 	/// For a more concrete example, think of a scriptable object that sits in asset folder 
 	/// and holds the value for HP (value:5) which is then referenced by components.
 	/// </summary>
 	/// <typeparam name="T">Type of the value this holds</typeparam>
-	public abstract class ValueAsset<T> : ScriptableObject
+	#if UNITY_EDITOR
+	[UnityEditor.InitializeOnLoad]
+	#endif
+	public abstract class ValueAsset<T> : ScriptableObject, ISaveable
 	{
 		[ToggleLeft, SerializeField, PropertyOrder(-100)] 
     	protected bool debug;
@@ -35,6 +39,18 @@ namespace Arachnid {
 		protected abstract string Prefix();
 
 		protected abstract bool CanSave();
+
+		void OnEnable()
+		{
+			if (CanSave() && useSaveFile)
+				PrepForSaveLoad();
+		}
+
+		void PrepForSaveLoad()
+		{
+			Debug.Log("Prepping for save/load " + name);
+			GameMaster.allSaveables.Add(this);
+		}
 
 		[TableColumnWidth(150)]
 		public T Value
@@ -94,10 +110,10 @@ namespace Arachnid {
 		}
 
 
-		void Save()   
+		public void Save()   
 		{
 			if (debug)
-				Debug.Log(name + " is being saved as value: " + myValue);
+				Debug.Log(name + " is being saved as value: " + myValue, this);
 
 				SaveInternal();
 
@@ -105,13 +121,11 @@ namespace Arachnid {
 				LogSaveStatus();
 		}
 		
-		T Load()
+		public void Load()
 		{
 			LoadInternal();
 			if (debug)
-				Debug.Log(name + "'s value was loaded as " + myValue );
-
-			return myValue;
+				Debug.Log(name + "'s value was loaded as " + myValue, this );
 		}
 
 		/// <summary>

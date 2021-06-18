@@ -17,16 +17,6 @@ public class HeartsValue : ValueAsset<Hearts>
 		return true;
 	}
 
-	protected override void SaveInternal()
-	{
-		GameMaster.SaveToCurrentFile(Prefix() + name, myValue.TotalPoints, this);
-	}
-
-	protected override void LoadInternal()
-	{
-		myValue.SetTotalPoints(GameMaster.LoadFromCurrentFile(Prefix() + name, defaultValue.TotalPoints, this));
-	}
-
 	protected override bool ValueHasChanged(Hearts newValue)
 	{
 		return newValue != myValue;

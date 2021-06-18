@@ -50,6 +50,8 @@ public class GameMaster : ScriptableObject
     /// </summary>
     public static bool transitioning;
 
+	public static HashSet<ISaveable> allSaveables = new HashSet<ISaveable>();
+
     public static GameMaster Get()
     {
         if (_gameMaster) return _gameMaster;
@@ -103,11 +105,7 @@ public class GameMaster : ScriptableObject
 
     public static void SetCheckpoint(string checkpointName)
     {
-		/*
-        Get().savedStage.Save(Get().currentStage.name);
-        Get().savedCheckpoint.Save(checkpointName);
-		*/
-		// TODO save with given checkpoint name
+		Get().savedCheckpoint.Value = checkpointName;
     }
 
     public static bool IsCurrentCheckpoint(string checkpointName)
@@ -146,17 +144,23 @@ public class GameMaster : ScriptableObject
 	/// <summary>
 	/// Calls for ALL saved properties on the current file to get their value from the persistent save data
 	/// </summary>
+	[ButtonGroup]
 	public static void LoadData()
 	{
-
+		Debug.Log("There are " + allSaveables.Count + " variables which will be loaded.");
+		foreach (var s in allSaveables)
+			s.Load();
 	}
 
 	/// <summary>
 	/// Calls for ALL saved properties to write their value to the persistent save data for the current file
 	/// </summary>
+	[ButtonGroup]
 	public static void SaveData()
 	{
-
+		Debug.Log("There are " + allSaveables.Count + " variables which will be saved.");
+		foreach (var s in allSaveables)
+			s.Save();
 	}
 
 	public static void OnSaveFileAccessed()
@@ -266,6 +270,21 @@ public class GameMaster : ScriptableObject
         throw new FileLoadException();
     }
 
+	[Button]
+	void LoadEntireFile()
+	{
+
+		string saveDir;
+        if (Get().TryGetSaveFileDirectory(out saveDir)) {
+
+			Debug.Log("Directory: " + saveDir);
+
+			foreach(var key in ES3.GetKeys(saveDir)) {
+    			Debug.Log(key);
+			}
+		}
+	}
+
     /// <summary>
     /// Returns true if the directory was found. 
     /// </summary>
@@ -279,4 +298,13 @@ public class GameMaster : ScriptableObject
         return true;
     }
     #endregion
+
+	[System.Serializable]
+	public class GameFile 
+	{
+		public string directory;
+
+
+
+	}
 }
