@@ -21,8 +21,7 @@ namespace Synthii {
 		[MinValue(0.01)]
 		public float fadeOutTime = 6;
 
-		// Start is called before the first frame update
-		void Start()
+		void OnEnable()
 		{
 			if (isGlobal) 
 				MusicPlayer.EnterZone(this);

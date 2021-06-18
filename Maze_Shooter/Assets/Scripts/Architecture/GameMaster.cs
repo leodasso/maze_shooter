@@ -64,6 +64,9 @@ public class GameMaster : ScriptableObject
     [Button, DisableInEditorMode]
     public void BeginGame()
     {
+		// load data from the disk
+		LoadData();
+
         onBeginLoadSavedGame.Invoke();
         // find the stage to load from list
         Stage stageToLoad = GetStage(savedStage.Value);
@@ -105,6 +108,7 @@ public class GameMaster : ScriptableObject
 
     public static void SetCheckpoint(string checkpointName)
     {
+		Get().savedStage.Value = Get().currentStage.name;
 		Get().savedCheckpoint.Value = checkpointName;
     }
 
