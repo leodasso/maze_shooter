@@ -459,6 +459,7 @@ MonoBehaviour:
         toState: main menu
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
@@ -519,6 +520,7 @@ MonoBehaviour:
         toState: load game menu
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: newGame
@@ -527,6 +529,7 @@ MonoBehaviour:
         toState: new game menu
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -722,6 +725,7 @@ MonoBehaviour:
         toState: main menu
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 6
       - fsmEvent:
           name: newGame
@@ -730,6 +734,7 @@ MonoBehaviour:
         toState: confirm new game
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -844,6 +849,7 @@ MonoBehaviour:
         toState: main menu
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 6
       - fsmEvent:
           name: loadGame
@@ -852,6 +858,7 @@ MonoBehaviour:
         toState: confirm load game
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -966,6 +973,7 @@ MonoBehaviour:
         toState: load game menu
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 6
       - fsmEvent:
           name: loadGame
@@ -974,6 +982,7 @@ MonoBehaviour:
         toState: begin game transition
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1088,6 +1097,7 @@ MonoBehaviour:
         toState: new game menu
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 6
       - fsmEvent:
           name: newGame
@@ -1096,6 +1106,7 @@ MonoBehaviour:
         toState: begin game transition
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1210,6 +1221,7 @@ MonoBehaviour:
         toState: begin game
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1359,10 +1371,13 @@ MonoBehaviour:
     password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 0
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 1
@@ -3068,6 +3083,50 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 572393792}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &580345836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 580345837}
+  - component: {fileID: 580345838}
+  m_Layer: 0
+  m_Name: debug tools
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &580345837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580345836}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 32.858833, y: -0.032577515, z: 46.466858}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &580345838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580345836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110c12fb5e078ec489158ad9eeb32560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveableGuiHeight: 30
 --- !u!1 &632082334
 GameObject:
   m_ObjectHideFlags: 0
@@ -3118,7 +3177,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 0
-    m_SensorSize: {x: 1.3333334, y: 1}
+    m_SensorSize: {x: 1.7776141, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

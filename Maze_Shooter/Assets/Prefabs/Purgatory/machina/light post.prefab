@@ -5020,6 +5020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progress: 0
   spriteRenderer: {fileID: 4205867246969136578}
+  image: {fileID: 0}
   sprites:
   - {fileID: 21300000, guid: 609aac5db557d0b41bc751e0cb0ac9ea, type: 3}
   - {fileID: 21300000, guid: b40783d1c6857164c9766833e4d8e5db, type: 3}
@@ -5237,6 +5238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progress: 0
   spriteRenderer: {fileID: 4205867247336144195}
+  image: {fileID: 0}
   sprites:
   - {fileID: 21300000, guid: fadaff15f35d1044ea12f10bed4e9387, type: 3}
   - {fileID: 21300000, guid: 703cc9270a798a445b21b73080c10542, type: 3}
@@ -5400,6 +5402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progress: 0.28609988
   spriteRenderer: {fileID: 4205867246969136578}
+  image: {fileID: 0}
   sprites:
   - {fileID: 21300000, guid: 55db2897cddb62b4baafe5e26094ec52, type: 3}
   - {fileID: 21300000, guid: fb392c236b2116149a80e4c793961b95, type: 3}
@@ -5459,6 +5462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progress: 0
   spriteRenderer: {fileID: 4205867246969136578}
+  image: {fileID: 0}
   sprites:
   - {fileID: 21300000, guid: aad3074414e306d4fa043e7912bed712, type: 3}
   - {fileID: 21300000, guid: 4fd5ede8e0fb42345bb36786084e4e84, type: 3}
@@ -5589,8 +5593,7 @@ MonoBehaviour:
   customReturnPos: 1
   returnPos: {fileID: 4205867247538461108}
   hauntableType: {fileID: 11400000, guid: 777d1a64c428f1d47abb8fc5dd2b7828, type: 2}
-  hauntConstellationPrefab: {fileID: 6312336650189920229, guid: 324a1b01a48fd064b97a70b344a58712,
-    type: 3}
+  hauntCost: 1
   haunter: {fileID: 0}
   onHaunted:
     m_PersistentCalls:
@@ -6648,7 +6651,7 @@ MonoBehaviour:
     manualUpdate: 0
     outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     OutputEvents: []
     RestartOnEnable: 1
@@ -6865,7 +6868,7 @@ PrefabInstance:
     - target: {fileID: 6967298198241235844, guid: b1952762e8ad06544a4be25b1a4023e1,
         type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.8416667
+      value: 1.7791411
       objectReference: {fileID: 0}
     - target: {fileID: 7000542364666795280, guid: b1952762e8ad06544a4be25b1a4023e1,
         type: 3}

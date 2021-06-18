@@ -1750,7 +1750,7 @@ MonoBehaviour:
     manualUpdate: 0
     outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     OutputEvents: []
     RestartOnEnable: 1
@@ -1778,7 +1778,7 @@ MonoBehaviour:
     handleJointBreak: 0
     handleJointBreak2D: 0
     handleOnGUI: 0
-    handleFixedUpdate: 0
+    handleFixedUpdate: 1
     handleLateUpdate: 0
     handleApplicationEvents: 0
     handleUiEvents: 0
@@ -1786,7 +1786,7 @@ MonoBehaviour:
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
+  eventHandlerComponentsAdded: 1
 --- !u!114 &709230675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1823,8 +1823,7 @@ MonoBehaviour:
   customReturnPos: 0
   returnPos: {fileID: 0}
   hauntableType: {fileID: 0}
-  hauntConstellationPrefab: {fileID: 6312336650189920229, guid: 324a1b01a48fd064b97a70b344a58712,
-    type: 3}
+  hauntCost: 1
   haunter: {fileID: 0}
   onHaunted:
     m_PersistentCalls:
@@ -1876,6 +1875,20 @@ MonoBehaviour:
     valueObject: {fileID: 0}
   fireInput: {x: 0, y: 0}
   aim: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7002716645353881184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486390346046434253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -664232604, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetFSMs:
+  - {fileID: 709230674}
 --- !u!210 &606408675
 SortingGroup:
   m_ObjectHideFlags: 0

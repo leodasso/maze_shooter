@@ -252,21 +252,6 @@ MonoBehaviour:
           m_StringArgument: breakApart
           m_BoolArgument: 0
         m_CallState: 2
-  onBreakApart:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3477992813397074420}
-        m_TargetAssemblyTypeName: PlayMakerFSM, PlayMaker
-        m_MethodName: SendEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: breakApart
-          m_BoolArgument: 0
-        m_CallState: 2
   amount:
     fractions: 0
     hearts: 1
@@ -1060,7 +1045,7 @@ MonoBehaviour:
     manualUpdate: 0
     outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     OutputEvents: []
     RestartOnEnable: 1

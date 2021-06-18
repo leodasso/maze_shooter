@@ -40,10 +40,25 @@ namespace Arachnid {
 
 		protected abstract bool CanSave();
 
+		int enableCount;
+
+		bool DoesSave => CanSave() && useSaveFile;
+
 		void OnEnable()
 		{
-			if (CanSave() && useSaveFile)
+			if (DoesSave) {
 				PrepForSaveLoad();
+
+				#if UNITY_EDITOR
+				return;
+				#endif
+
+				// Scriptable objects are only loaded when the scene they are referenced in is loaded.
+				// That means they need to load their value right when onEnable is called (unless it's running in Unity Editor)
+				Load();
+			}
+
+			enableCount++;
 		}
 
 		void PrepForSaveLoad()
@@ -112,6 +127,9 @@ namespace Arachnid {
 
 		public void Save()   
 		{
+			if (!CanSave() || !useSaveFile)
+				return;
+
 			if (debug)
 				Debug.Log(name + " is being saved as value: " + myValue, this);
 
@@ -123,6 +141,9 @@ namespace Arachnid {
 		
 		public void Load()
 		{
+			if (!CanSave() || !useSaveFile)
+				return;
+				
 			LoadInternal();
 			if (debug)
 				Debug.Log(name + "'s value was loaded as " + myValue, this );
@@ -150,6 +171,11 @@ namespace Arachnid {
 		public bool HasSavedValue()
 		{
 			return GameMaster.DoesKeyExist(Prefix() + name);
+		}
+
+		public string Info()
+		{
+			return name + ": " + myValue.ToString() + "    enabled " + enableCount + " times.";
 		}
 	}
 }
