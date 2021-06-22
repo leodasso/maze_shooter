@@ -31,6 +31,7 @@ namespace ShootyGhost
 		public Collection hauntableType;
 
 		[MinValue(0)]
+		[ValidateInput("HauntCostValid", "If there is a cost to haunting, manual exit should always be allowed")]
 		public int hauntCost = 1;
 
 		GameObject hauntConstellationPrefab => GameMaster.Get().hauntConstellationPrefab;
@@ -44,12 +45,19 @@ namespace ShootyGhost
 
 		Health health;
 
+
 		int initLayer;
 
 		void Start() 
 		{
 			initLayer = gameObject.layer;
 			health = GetComponent<Health>();
+		}
+
+		bool HauntCostValid() 
+		{
+			if (!allowManualExit) return hauntCost == 0;
+			return true;
 		}
 
         /// <summary>

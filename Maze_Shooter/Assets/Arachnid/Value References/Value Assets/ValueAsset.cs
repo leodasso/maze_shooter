@@ -29,7 +29,7 @@ namespace Arachnid {
 		[Tooltip("This value will be saved / loaded from save file on the gameMaster save() and load()")]
 		public bool useSaveFile;
 
-		[SerializeField]
+		[SerializeField, OnValueChanged("EditorRaiseEvents")]
 		protected T myValue;
 
 		[ SerializeField, Indent, ShowIf("useSaveFile")]
@@ -96,6 +96,11 @@ namespace Arachnid {
         public string comments;
 
 		protected abstract void ProcessValueChange(T newValue);
+
+		protected virtual void EditorRaiseEvents()
+		{
+			RaiseEvents();
+		}
 
 		protected void RaiseEvents() 
 		{

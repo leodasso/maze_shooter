@@ -254,7 +254,7 @@ public class HauntConstellation : MonoBehaviour
 			yield return new WaitForSecondsRealtime(waitTime);
 
 			// tell the playmaker when to progress to next stage
-			if (((float)i / candlesToSpawn) > progressThreshhold && !eventSent) {
+			if (CalculateProgress(i, candlesToSpawn) > progressThreshhold && !eventSent) {
 				eventSent = true;
 				playMaker.SendEvent("next");
 			}
@@ -292,10 +292,14 @@ public class HauntConstellation : MonoBehaviour
 			yield return new WaitForSecondsRealtime(waitTime);
 
 			// tell the playmaker when to progress to next stage
-			if (((float)i / cost) > progressThreshhold && !eventSent) {
+			float progress = CalculateProgress(i, cost);
+			Debug.Log("Spawn candle holders progress: " + progress);
+			if ( progress > progressThreshhold && !eventSent) {
 				eventSent = true;
 				playMaker.SendEvent("next");
 			}
 		}
 	}
+
+	float CalculateProgress (int index, float max) => (float)(index + 1) / max;
 }
