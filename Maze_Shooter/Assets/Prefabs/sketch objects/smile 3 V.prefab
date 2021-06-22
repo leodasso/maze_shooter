@@ -43,6 +43,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -95,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateDuringGameplay: 0
 --- !u!1 &1695240918934383057
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,6 +140,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -190,6 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateDuringGameplay: 0
 --- !u!114 &-6513900640447953302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +209,8 @@ MonoBehaviour:
   instantiateStagePlayer: 0
   allowMultipleInstances: 0
   applyScale: 0
+  randomScale: 0
+  randomScaleRange: {x: 1, y: 1}
   prefabToInstantiate: {fileID: 2696511698298227158, guid: cba5cd4f6e41386488b6c6ae2b81399c,
     type: 3}
   createInstance: 2
@@ -254,6 +260,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -306,6 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateDuringGameplay: 0
 --- !u!1 &7339989096166072607
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,6 +357,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -401,6 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateDuringGameplay: 0
 --- !u!1 &8544857247463295603
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +454,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -496,6 +507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50158129b19daf34a8311a7ad24b9c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateDuringGameplay: 0
 --- !u!1001 &2106075763610883757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -515,6 +527,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3124278901976216999, guid: 67ae55142d32ed44ea2dd01760930d93,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124278901976216999, guid: 67ae55142d32ed44ea2dd01760930d93,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.4806995
       objectReference: {fileID: 0}
@@ -530,6 +547,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3124278901976216999, guid: 67ae55142d32ed44ea2dd01760930d93,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124278901976216999, guid: 67ae55142d32ed44ea2dd01760930d93,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -541,16 +563,6 @@ PrefabInstance:
     - target: {fileID: 3124278901976216999, guid: 67ae55142d32ed44ea2dd01760930d93,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3124278901976216999, guid: 67ae55142d32ed44ea2dd01760930d93,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3124278901976216999, guid: 67ae55142d32ed44ea2dd01760930d93,
-        type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3124278901976216999, guid: 67ae55142d32ed44ea2dd01760930d93,

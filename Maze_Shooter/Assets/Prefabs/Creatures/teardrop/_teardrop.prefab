@@ -412,6 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f88644049d5ad449976ca12a853ef88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   placeholderPrefab: {fileID: 7276623351531485110, guid: 3038f4405f5499e4685eb480b364a719,
     type: 3}
   culled: 0
@@ -664,6 +665,7 @@ MonoBehaviour:
         toState: patrol
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -857,6 +859,7 @@ MonoBehaviour:
         toState: waiting
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1038,6 +1041,7 @@ MonoBehaviour:
         toState: patrol
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1159,10 +1163,13 @@ MonoBehaviour:
     password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 1
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 1

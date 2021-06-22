@@ -1,8 +1,9 @@
 ﻿using HutongGames.PlayMaker;
+using Arachnid;
 
 public class SaveBool : FsmStateAction
 {
-	public SavedBool savedBool;
+	public BoolValue savedBool;
 	public bool newSavedValue;
 
 	public override void Reset()
@@ -13,7 +14,7 @@ public class SaveBool : FsmStateAction
 	public override void OnEnter()
     {
 		if (savedBool) {
-			savedBool.Save(newSavedValue);
+			savedBool.Value = newSavedValue;
 		}
 		Finish();
     }

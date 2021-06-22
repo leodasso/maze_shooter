@@ -8,9 +8,6 @@ public abstract class PickupGulper : MonoBehaviour
 {
 	protected abstract void OnTriggerEnter(Collider other);
 
-	// Failsafe to prevent from saving to file when no value loaded
-	protected bool savedValueLoaded = false;
-
 	[SerializeField, PropertyOrder(300)]
 	UnityEvent onTooFullToGulp;
 
@@ -53,22 +50,6 @@ public abstract class PickupGulper : MonoBehaviour
 		}
 		return true;
 	}
-
-	protected void LoadSavedValue<T>(ValueAsset<T> valueAsset, SavedProperty<T> valueSaveFile) 
-	{
-		valueAsset.Value = valueSaveFile.GetValue();
-		savedValueLoaded = true;
-	}
-
-	protected void TrySave<T>(ValueAsset<T> valueAsset, SavedProperty<T> valueSaveFile)
-    {
-        if (!savedValueLoaded || ! valueAsset || !valueSaveFile) {
-			Debug.LogError(name + " failed to save because it was missing the value asset or save file asset.");
-			return;
-		}
-
-		valueSaveFile.Save(valueAsset.Value);
-    }
 
 	protected abstract bool IsFull();
 }

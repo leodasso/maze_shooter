@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 553f472bfcfde6d44bce03160845e4cd, type: 3}
+  m_Name: Money Max
+  m_EditorClassIdentifier: 
+  debug: 0
+  readOnly: 0
+  useSaveFile: 1
+  myValue: 250
+  defaultValue: 250
+  onValueChange:
+  - {fileID: 11400000, guid: c6f00f6f402fcba4995ff6710b8b2d11, type: 2}
+  comments: max number of coins the player can hold at the start of the game. This
+    value can be changed with upgrades.

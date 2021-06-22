@@ -327,6 +327,7 @@ MonoBehaviour:
         toState: animate off
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -523,6 +524,7 @@ MonoBehaviour:
         toState: animate on
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -719,6 +721,7 @@ MonoBehaviour:
         toState: on
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -845,6 +848,7 @@ MonoBehaviour:
         toState: off
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -995,10 +999,13 @@ MonoBehaviour:
     password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 1
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 3
@@ -1401,6 +1408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progress: 0
   spriteRenderer: {fileID: 8510282916324210644}
+  image: {fileID: 0}
   sprites:
   - {fileID: 21300000, guid: bb7363d68bf0c7d4fb74e6cc05774d71, type: 3}
   - {fileID: 21300000, guid: edf98c7f1400b2943889a077e746a0ae, type: 3}
@@ -1495,6 +1503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progress: 0
   spriteRenderer: {fileID: 8510282916324210644}
+  image: {fileID: 0}
   sprites:
   - {fileID: 21300000, guid: fdf55e71749e5334b92443f15cce5dbd, type: 3}
   - {fileID: 21300000, guid: 4b35c66060b4c5d4f8de49b95e7c2cb7, type: 3}

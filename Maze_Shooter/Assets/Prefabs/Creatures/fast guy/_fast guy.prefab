@@ -657,6 +657,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7240a95320bc4f8a98e3f5cdfd3a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customTransitionTime: 0
+  linkHealth: 1
+  transitionTime: 0
+  allowManualExit: 1
+  customReturnPos: 0
+  returnPos: {fileID: 0}
+  hauntableType: {fileID: 11400000, guid: a0cd012af2541804eaed73bc5eaa78df, type: 2}
+  hauntCost: 1
+  haunter: {fileID: 0}
   onHaunted:
     m_PersistentCalls:
       m_Calls:
@@ -711,17 +720,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  linkHealth: 1
-  customTransitionTime: 0
-  transitionTime: 0
-  allowManualExit: 1
-  customReturnPos: 0
-  returnPos: {fileID: 0}
-  hauntableType: {fileID: 11400000, guid: a0cd012af2541804eaed73bc5eaa78df, type: 2}
-  health: {fileID: 2053979096284153871}
-  hauntConstellationPrefab: {fileID: 7346983384601703694, guid: 1523824622d49d742babc4ca79311c7c,
-    type: 3}
-  haunter: {fileID: 0}
 --- !u!114 &737290452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -760,6 +758,7 @@ MonoBehaviour:
         toState: dashing
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -888,6 +887,7 @@ MonoBehaviour:
         toState: cooldown
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: dashBump
@@ -896,6 +896,7 @@ MonoBehaviour:
         toState: bouncing
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1134,6 +1135,7 @@ MonoBehaviour:
         toState: normal
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1247,6 +1249,7 @@ MonoBehaviour:
         toState: landing and recover
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1576,6 +1579,7 @@ MonoBehaviour:
         toState: normal
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1943,10 +1947,13 @@ MonoBehaviour:
     password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 1
@@ -1970,7 +1977,7 @@ MonoBehaviour:
     handleJointBreak: 0
     handleJointBreak2D: 0
     handleOnGUI: 0
-    handleFixedUpdate: 0
+    handleFixedUpdate: 1
     handleLateUpdate: 0
     handleApplicationEvents: 0
     handleUiEvents: 0

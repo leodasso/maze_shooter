@@ -99,9 +99,8 @@ MonoBehaviour:
   onTooFullToGulp:
     m_PersistentCalls:
       m_Calls: []
-  savedMoneyValue: {fileID: 11400000, guid: 6fa10a28faa7e1245a0e629911c6bf44, type: 2}
   _money: {fileID: 11400000, guid: d37cb474f6b272043941496126fa7f86, type: 2}
-  savedMaxMoney: {fileID: 11400000, guid: 715d6ce7b9cb700409db5b25ef3ed547, type: 2}
+  maxMoney: {fileID: 11400000, guid: bddb02b4ac0236c4d925e12c2cf896c1, type: 2}
 --- !u!114 &930976860793093677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +132,6 @@ MonoBehaviour:
   onTooFullToGulp:
     m_PersistentCalls:
       m_Calls: []
-  savedCandles: {fileID: 11400000, guid: be62200f5ac02974fb020a221ec8ad85, type: 2}
   candles: {fileID: 11400000, guid: 12f28796f297b6f49b3746e1603ea9d0, type: 2}
   maxCandles: {fileID: 11400000, guid: d0f04f2030df2b447b9af0b2c3f76c56, type: 2}
 --- !u!1 &492080902267716462
@@ -906,12 +904,9 @@ MonoBehaviour:
   criticalHealth:
     useConstant: 0
     constantValue:
-      fractions: 0
-      hearts: 2
+      fractions: 2
+      hearts: 1
     valueObject: {fileID: 0}
-  savedPlayerHealth: {fileID: 11400000, guid: 14a750c95c1de944c97f34de6465b075, type: 2}
-  savedPlayerMaxHealth: {fileID: 11400000, guid: 42bf9239077076546b90544057fd4467,
-    type: 2}
   onHealthCritical:
     m_PersistentCalls:
       m_Calls:
@@ -1021,9 +1016,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4144dd2ea20ee43b6cb91fbbb74a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hauntStars: 1
-  hauntTrigger: {fileID: 326339311406208307}
-  savedHauntStars: {fileID: 0}
   hauntDistance:
     useConstant: 0
     constantValue: 10
@@ -1032,11 +1024,14 @@ MonoBehaviour:
     useConstant: 0
     constantValue: 0.5
     valueObject: {fileID: 0}
+  candleBurnDuration:
+    useConstant: 1
+    constantValue: 0
+    valueObject: {fileID: 11400000, guid: 731413bb2da0cbc46ae01ed2d5b493b0, type: 2}
+  candleBag: {fileID: 11400000, guid: 12f28796f297b6f49b3746e1603ea9d0, type: 2}
   hauntReturnColliders:
     serializedVersion: 2
     m_Bits: 33025
-  collider: {fileID: 3594317241385997712}
-  haunted: {fileID: 0}
   hauntBurstIntensity: 0
   hauntBurstIntensityRef: {fileID: 11400000, guid: a47f501d351525c46bb4c6976b6573c4,
     type: 2}
@@ -1046,6 +1041,9 @@ MonoBehaviour:
     type: 3}
   hauntDashPrefab: {fileID: 4453624240689233998, guid: 80b47d5b17c043a489d04501ebc8fedb,
     type: 3}
+  collider: {fileID: 3594317241385997712}
+  haunted: {fileID: 0}
+  hauntTrigger: {fileID: 326339311406208307}
   playMaker: {fileID: 6539296253958561908}
 --- !u!54 &3594317241385997713
 Rigidbody:
@@ -2899,7 +2897,7 @@ MonoBehaviour:
     manualUpdate: 0
     outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     OutputEvents: []
     RestartOnEnable: 1

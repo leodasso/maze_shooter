@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Arachnid;
 
 public class CheckSavedBool : MonoBehaviour
 {
-	public SavedBool savedBool;
+	public BoolValue savedBool;
 	public bool checkOnStart = true;
 
 	public UnityEvent isTrue;
@@ -19,7 +20,7 @@ public class CheckSavedBool : MonoBehaviour
 
 	public void Check() 
 	{
-		if (savedBool.GetValue()) isTrue.Invoke();
+		if (savedBool.Value) isTrue.Invoke();
 		else isFalse.Invoke();
 	}
 }

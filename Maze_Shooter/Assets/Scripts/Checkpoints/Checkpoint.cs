@@ -47,6 +47,11 @@ public class Checkpoint : MonoBehaviour
         GameMaster.SetCheckpoint(uniqueId);
     }
 
+	public void SaveGame()
+	{
+		GameMaster.SaveData();
+	}
+
     
     /// <summary>
     /// Call this when another checkpoint was activated. Intended to be called via UnityEvent or other editor thing.

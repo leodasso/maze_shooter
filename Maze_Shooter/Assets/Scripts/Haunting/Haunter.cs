@@ -16,13 +16,6 @@ namespace ShootyGhost
     {
         Rewired.Player _player;
 
-		public int hauntStars = 1;
-
-        public GameObject hauntTrigger;
-        
-        [Tooltip("On Start(), haunt stars value is pulled from save file using this. On Destroy(), it's saved.")]
-        public SavedInt savedHauntStars;
-
 		[Tooltip("The max distance you can haunt")]
         public FloatReference hauntDistance;
 
@@ -30,17 +23,16 @@ namespace ShootyGhost
         public FloatReference hauntAnimDuration;
 
 		[Space]
+		[SerializeField, Tooltip("How long in seconds it takes for one candle to burn.")]
+		FloatReference candleBurnDuration;
+
+		[SerializeField, Tooltip("Ref to the player's candle bag (how many candles they have)")]
+		FloatValue candleBag;
+
+		[Space]
 		[SerializeField, Tooltip("Layers that I will collide with when returning from a haunted object")]
 		LayerMask hauntReturnColliders;
 
-		[SerializeField, Tooltip("Ref to my capsule collider. Used when casting to return from haunt")]
-		new CapsuleCollider collider;
-
-        /// <summary> The actual hauntable currently being controlled/haunted </summary>
-        [Tooltip("The actual hauntable currently being controlled/haunted")]
-        [ReadOnly]
-        public Hauntable haunted;
-        
         [Range(0, 1), Space]
         [Tooltip("When 'exiting' a haunted thing, the haunted object blows up like a balloon, about to pop. The amount it's" +
                  " blown up is the haunt burst intensity. When it reaches 1, this will exit the haunted and return to normal.")]
@@ -50,11 +42,22 @@ namespace ShootyGhost
                                    "and particles to change based on haunt burst value")] 
         public FloatValue hauntBurstIntensityRef;
 
-        public GameObject transitionEffect;
 
+		[Title("Prefabs"), Space]
+        public GameObject transitionEffect;
         public GameObject hauntIndicatorPrefab;
 		public GameObject hauntDashPrefab;
 
+		[Title("Scene Refs"), Space]
+		[SerializeField, Tooltip("Ref to my capsule collider. Used when casting to return from haunt")]
+		new CapsuleCollider collider;
+		/// <summary> The actual hauntable currently being controlled/haunted </summary>
+        [Tooltip("The actual hauntable currently being controlled/haunted")]
+        [ReadOnly]
+        public Hauntable haunted;
+		public GameObject hauntTrigger;
+
+		[Space]
 		[Tooltip("This component calls events: beginHauntTargeting, endHauntTargeting, haunt, endHaunt")]
 		public PlayMakerFSM playMaker;
 
@@ -96,6 +99,17 @@ namespace ShootyGhost
 			RefreshInput();
             if (_player.GetButton("haunt") || _fireInput.magnitude > .25f)
 				playMaker.SendEvent("beginHauntTargeting");
+
+			if (haunted) 
+			{
+				float actualBurnDuration = candleBurnDuration.Value / haunted.hauntCost;
+				float burnRate = 1 / actualBurnDuration;
+				float burnThisFrame = burnRate * Time.deltaTime;
+				candleBag.Value -= burnThisFrame;
+
+				if (candleBag.Value < haunted.hauntCost) 
+					EndHaunt();
+			}
         }
 
 		public void ClearHauntBurstEffect()

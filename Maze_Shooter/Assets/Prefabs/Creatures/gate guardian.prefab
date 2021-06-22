@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f88644049d5ad449976ca12a853ef88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   placeholderPrefab: {fileID: 7276623351531485110, guid: 3038f4405f5499e4685eb480b364a719,
     type: 3}
   culled: 0
@@ -219,6 +220,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f7240a95320bc4f8a98e3f5cdfd3a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customTransitionTime: 0
+  linkHealth: 0
+  transitionTime: 0
+  allowManualExit: 1
+  customReturnPos: 0
+  returnPos: {fileID: 0}
+  hauntableType: {fileID: 11400000, guid: 20611d043fb455746b166c8120e55d41, type: 2}
+  hauntCost: 1
+  haunter: {fileID: 0}
   onHaunted:
     m_PersistentCalls:
       m_Calls:
@@ -249,17 +259,6 @@ MonoBehaviour:
           m_StringArgument: endHaunt
           m_BoolArgument: 0
         m_CallState: 2
-  linkHealth: 0
-  customTransitionTime: 0
-  transitionTime: 0
-  allowManualExit: 1
-  customReturnPos: 0
-  returnPos: {fileID: 0}
-  hauntableType: {fileID: 11400000, guid: 20611d043fb455746b166c8120e55d41, type: 2}
-  health: {fileID: 0}
-  hauntConstellationPrefab: {fileID: 6312336650189920229, guid: 324a1b01a48fd064b97a70b344a58712,
-    type: 3}
-  haunter: {fileID: 0}
 --- !u!114 &4402182470673772090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,6 +297,7 @@ MonoBehaviour:
         toState: haunted
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -491,6 +491,7 @@ MonoBehaviour:
         toState: idle
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: slotFit
@@ -499,6 +500,7 @@ MonoBehaviour:
         toState: fit in slot
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -639,6 +641,7 @@ MonoBehaviour:
         toState: idle
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -939,10 +942,13 @@ MonoBehaviour:
     password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 1
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 1
@@ -1144,6 +1150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progress: 1
   spriteRenderer: {fileID: 2346832611299250036}
+  image: {fileID: 0}
   sprites:
   - {fileID: 21300000, guid: 7ec8fe91c7c6b9642b4d5a9c6a2a7525, type: 3}
   - {fileID: 21300000, guid: ac9cbd31f0e17d940aea32c8360dfc79, type: 3}

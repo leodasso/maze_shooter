@@ -27,8 +27,8 @@ public class GameMaster : ScriptableObject
     [ReadOnly]
     public Stage justCompletedStage;
 
-	public SavedString savedStage;
-    public SavedString savedCheckpoint;
+	public StringValue savedStage;
+    public StringValue savedCheckpoint;
 
 	[ReadOnly]
     public GateLink gateLink;
@@ -50,6 +50,8 @@ public class GameMaster : ScriptableObject
     /// </summary>
     public static bool transitioning;
 
+	public static HashSet<ISaveable> allSaveables = new HashSet<ISaveable>();
+
     public static GameMaster Get()
     {
         if (_gameMaster) return _gameMaster;
@@ -62,9 +64,12 @@ public class GameMaster : ScriptableObject
     [Button, DisableInEditorMode]
     public void BeginGame()
     {
+		// load data from the disk
+		LoadData();
+
         onBeginLoadSavedGame.Invoke();
         // find the stage to load from list
-        Stage stageToLoad = GetStage(savedStage.GetValue());
+        Stage stageToLoad = GetStage(savedStage.Value);
 
         // Load with a delay so there's time for the transition to fade in
         stageToLoad.Load(1);
@@ -103,13 +108,13 @@ public class GameMaster : ScriptableObject
 
     public static void SetCheckpoint(string checkpointName)
     {
-        Get().savedStage.Save(Get().currentStage.name);
-        Get().savedCheckpoint.Save(checkpointName);
+		Get().savedStage.Value = Get().currentStage.name;
+		Get().savedCheckpoint.Value = checkpointName;
     }
 
     public static bool IsCurrentCheckpoint(string checkpointName)
     {
-        return checkpointName == Get().savedCheckpoint.GetValue();
+        return checkpointName == Get().savedCheckpoint.Value;
     }
 
     public static void SetGateLink(GateLink newGateLink)
@@ -139,6 +144,28 @@ public class GameMaster : ScriptableObject
     }
 
     #region Load-Save
+
+	/// <summary>
+	/// Calls for ALL saved properties on the current file to get their value from the persistent save data
+	/// </summary>
+	[ButtonGroup]
+	public static void LoadData()
+	{
+		Debug.Log("There are " + allSaveables.Count + " variables which will be loaded.");
+		foreach (var s in allSaveables)
+			s.Load();
+	}
+
+	/// <summary>
+	/// Calls for ALL saved properties to write their value to the persistent save data for the current file
+	/// </summary>
+	[ButtonGroup]
+	public static void SaveData()
+	{
+		Debug.Log("There are " + allSaveables.Count + " variables which will be saved.");
+		foreach (var s in allSaveables)
+			s.Save();
+	}
 
 	public static void OnSaveFileAccessed()
 	{
@@ -206,6 +233,7 @@ public class GameMaster : ScriptableObject
     /// <param name="requester">The object that is requesting for a value to be saved.</param>
     public static void SaveToCurrentFile<T>(string saveKey, T value, Object requester)
     {
+		Debug.Log(requester.name + " is saving " + saveKey + " at " + System.DateTime.Now);
 
         string saveDir;
         if (Get().TryGetSaveFileDirectory(out saveDir)) 
@@ -246,6 +274,21 @@ public class GameMaster : ScriptableObject
         throw new FileLoadException();
     }
 
+	[Button]
+	void LoadEntireFile()
+	{
+
+		string saveDir;
+        if (Get().TryGetSaveFileDirectory(out saveDir)) {
+
+			Debug.Log("Directory: " + saveDir);
+
+			foreach(var key in ES3.GetKeys(saveDir)) {
+    			Debug.Log(key);
+			}
+		}
+	}
+
     /// <summary>
     /// Returns true if the directory was found. 
     /// </summary>
@@ -259,4 +302,13 @@ public class GameMaster : ScriptableObject
         return true;
     }
     #endregion
+
+	[System.Serializable]
+	public class GameFile 
+	{
+		public string directory;
+
+
+
+	}
 }

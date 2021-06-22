@@ -366,6 +366,7 @@ GameObject:
   - component: {fileID: 4987365024292354297}
   - component: {fileID: 3360390797053014378}
   - component: {fileID: 3225567085643957784}
+  - component: {fileID: 1674410566110422952}
   m_Layer: 11
   m_Name: _squire
   m_TagString: Small
@@ -3421,7 +3422,7 @@ MonoBehaviour:
     manualUpdate: 0
     outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     OutputEvents: []
     RestartOnEnable: 1
@@ -3449,7 +3450,7 @@ MonoBehaviour:
     handleJointBreak: 0
     handleJointBreak2D: 0
     handleOnGUI: 0
-    handleFixedUpdate: 0
+    handleFixedUpdate: 1
     handleLateUpdate: 0
     handleApplicationEvents: 0
     handleUiEvents: 0
@@ -3457,7 +3458,7 @@ MonoBehaviour:
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
+  eventHandlerComponentsAdded: 1
 --- !u!54 &4987365024292354274
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3868,8 +3869,7 @@ MonoBehaviour:
   customReturnPos: 1
   returnPos: {fileID: 7751873294112406638}
   hauntableType: {fileID: 0}
-  hauntConstellationPrefab: {fileID: 6312336650189920229, guid: 324a1b01a48fd064b97a70b344a58712,
-    type: 3}
+  hauntCost: 1
   haunter: {fileID: 0}
   onHaunted:
     m_PersistentCalls:
@@ -3930,6 +3930,20 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &1674410566110422952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4987365024292354303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -664232604, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetFSMs:
+  - {fileID: 4987365024292354301}
 --- !u!1 &5547154358733092765
 GameObject:
   m_ObjectHideFlags: 0
@@ -5081,12 +5095,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeee7e368b191364fae438d8d219f4c0, type: 3}
---- !u!1 &744526210601528099 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7043974050966847712, guid: aeee7e368b191364fae438d8d219f4c0,
-    type: 3}
-  m_PrefabInstance: {fileID: 7751873295836638147}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &744526210601528108 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7043974050966847727, guid: aeee7e368b191364fae438d8d219f4c0,
@@ -5102,6 +5110,12 @@ MonoBehaviour:
 --- !u!4 &744526210601528098 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7043974050966847713, guid: aeee7e368b191364fae438d8d219f4c0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7751873295836638147}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &744526210601528099 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7043974050966847712, guid: aeee7e368b191364fae438d8d219f4c0,
     type: 3}
   m_PrefabInstance: {fileID: 7751873295836638147}
   m_PrefabAsset: {fileID: 0}
