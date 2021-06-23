@@ -82,6 +82,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: c98959fa509646f4d951696e45e98d99, type: 2}
+        m_TargetAssemblyTypeName: Arachnid.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onTriedToGrabButFull:
     m_PersistentCalls:
       m_Calls:
@@ -274,7 +286,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: af81ffc2ffe872549be5348fee04ad9d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3ed5e46327833c745a3ed0383ff7bc99, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -328,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a05506e86408f4bae29a22b776d5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progress: 0.862
+  progress: 1
   spriteRenderer: {fileID: 1259660481705663294}
   image: {fileID: 0}
   sprites:
@@ -354,8 +366,9 @@ MonoBehaviour:
   loop: 1
   frameRate: 12
   resetOnEnable: 0
+  resetOnStart: 0
   setProgressOnStart: 0
-  startProgress: 0
+  startProgress: 1
   spriteAnimEvents: []
 --- !u!1001 &7280554354205433632
 PrefabInstance:

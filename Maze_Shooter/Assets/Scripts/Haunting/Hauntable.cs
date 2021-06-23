@@ -111,8 +111,11 @@ namespace ShootyGhost
 				haunted.Add(hauntableType);
 
 			onHaunted.Invoke();
+
 			if (linkHealth)
 				LinkHealth();
+
+			haunter.SetBurningCandlesValue(hauntCost);
 
 			gameObject.layer = LayerMask.NameToLayer("Player");
 		}

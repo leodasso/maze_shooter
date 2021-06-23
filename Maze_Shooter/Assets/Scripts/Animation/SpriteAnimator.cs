@@ -27,7 +27,11 @@ public class SpriteAnimator : MonoBehaviour
 	[ShowIf("playSelf")]
 	public float frameRate = 12;
 
-	public bool resetOnEnable;
+	[SerializeField]
+	bool resetOnEnable;
+	
+	[SerializeField]
+	bool resetOnStart = true;
 
 	public bool setProgressOnStart;
 	[Range(0, 1), ShowIf("setProgressOnStart")]
@@ -42,9 +46,13 @@ public class SpriteAnimator : MonoBehaviour
 
 	float DeltaTime => unscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
 
-	void Start() {
-		Reset();
-		if (setProgressOnStart) progress = startProgress;
+	void Start() 
+	{
+		if (resetOnStart)
+			Reset();
+
+		if (setProgressOnStart) 
+			progress = startProgress;
 	}
 
 	public void Play(float duration) {
@@ -121,10 +129,17 @@ public class SpriteAnimator : MonoBehaviour
 			Reset();
 	}
 
-	[Button]
-	public void Reset() {  
+	[ButtonGroup]
+	public void Reset() 
+	{  
 		_plays = 0;
 		progress = 0;
+	}
+
+	[ButtonGroup]
+	void InvertAnimation()
+	{
+		sprites.Reverse();
 	}
 
 	[System.Serializable]

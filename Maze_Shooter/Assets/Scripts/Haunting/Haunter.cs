@@ -194,9 +194,13 @@ namespace ShootyGhost
 
 			newHaunted.haunter = this;
 			newHaunted.AttemptHaunt(this);
-
-			burningCandles.Value = haunted.hauntCost;
         }
+
+		// Intended to be called from the haunted when the haunt is actually fully accepted
+		public void SetBurningCandlesValue(int cost)
+		{
+			burningCandles.Value = cost;
+		}
 
         /// <summary>
         /// Returns the ghost from posessing whatever it is currently haunting to its true form.
