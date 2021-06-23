@@ -38,6 +38,12 @@ public class CandlesGui : MonoBehaviour
 	CanvasGroupHelper smallQtyGroup;
 	[SerializeField]
 	CanvasGroupHelper largeQtyGroup;
+	[SerializeField]
+	RectTransform burningCandlesBg;
+	[SerializeField]
+	float bgBaseWidth = 50;
+	[SerializeField]
+	float bgWidthPerCandle = 50;
 
 	float fractionCandleProgress;
 
@@ -91,6 +97,9 @@ public class CandlesGui : MonoBehaviour
 		largeQtyGroup.SetAlpha(useSmallQtyGroup ? 0 : 1);
 
 		burningCandlesCount.text = burningCandles.Value.ToString();
+
+		// adjust the bg size based on how many candles
+		burningCandlesBg.sizeDelta = new Vector2(bgBaseWidth + burningCandles.Value * bgWidthPerCandle , burningCandlesBg.sizeDelta.y);
 	}
 
 

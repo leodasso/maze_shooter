@@ -31,7 +31,6 @@ namespace ShootyGhost
 		public Collection hauntableType;
 
 		[MinValue(0)]
-		[ValidateInput("HauntCostValid", "If there is a cost to haunting, manual exit should always be allowed")]
 		public int hauntCost = 1;
 
 		GameObject hauntConstellationPrefab => GameMaster.Get().hauntConstellationPrefab;
