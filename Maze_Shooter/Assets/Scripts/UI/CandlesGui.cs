@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Arachnid;
 using TMPro;
+using Sirenix.OdinInspector;
 
 public class CandlesGui : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class CandlesGui : MonoBehaviour
 	[SerializeField]
 	SpriteAnimator candleFractions;
 
+	[SerializeField]
+	CanvasGroupHelper fractionCandleGroup;
+
 	[SerializeField, Space]
 	CanvasGroupHelper burningCandlesGroup;
 	[SerializeField]
@@ -24,7 +28,7 @@ public class CandlesGui : MonoBehaviour
 	CanvasGroupHelper largeQtyGroup;
 
 	[SerializeField]
-	CanvasGroupHelper fractionCandleGroup;
+	List<CandleBurningGui> burningCandleGuis = new List<CandleBurningGui>();
 
 	// if the number of burning candles is bigger than this, we use just a normal counter
 	const int smallQty = 10;
@@ -37,11 +41,24 @@ public class CandlesGui : MonoBehaviour
 		largeQtyGroup.SnapAlpha(0);
     }
 
+	[Button]
+	void GetBurningCandleGuis()
+	{
+		burningCandleGuis.Clear();
+		burningCandleGuis.AddRange(GetComponentsInChildren<CandleBurningGui>());
+	}
+
 	public void RecalculateBurningCandles()
 	{
 		burningCandlesGroup.SetAlpha(burningCandles.Value > 0 ? 1 : 0);
 		
 		bool useSmallQtyGroup = burningCandles.Value <= smallQty;
+
+		// Turn on or off the individual burning candles
+		if (useSmallQtyGroup) {
+			for (int i = 0; i < burningCandleGuis.Count; i++)
+				burningCandleGuis[i].SetVisible(i < burningCandles.Value);
+		}
 
 		smallQtyGroup.SetAlpha(useSmallQtyGroup ? 1 : 0);
 		largeQtyGroup.SetAlpha(useSmallQtyGroup ? 0 : 1);

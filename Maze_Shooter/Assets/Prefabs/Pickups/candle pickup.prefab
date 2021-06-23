@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 1259660481705663294}
   - component: {fileID: 1259660481705663293}
   - component: {fileID: 5702245493681445099}
+  - component: {fileID: 4930728312378627473}
   m_Layer: 0
   m_Name: sprite
   m_TagString: Untagged
@@ -273,8 +274,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5214779204077354867, guid: 37959fb5ad9cb9f45a757036861ca18c,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: af81ffc2ffe872549be5348fee04ad9d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -316,6 +316,47 @@ MonoBehaviour:
   lifetime: 5
   delay: 0
   ignoreMinLifetime: 0
+--- !u!114 &4930728312378627473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259660481705663283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7a05506e86408f4bae29a22b776d5d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progress: 0.862
+  spriteRenderer: {fileID: 1259660481705663294}
+  image: {fileID: 0}
+  sprites:
+  - {fileID: 21300000, guid: 8858de5d95dc67e43a77a584c41676d4, type: 3}
+  - {fileID: 21300000, guid: ad547c57fb591dd498649cd093a13e81, type: 3}
+  - {fileID: 21300000, guid: cfd8fa5a225fc19469032986774b031a, type: 3}
+  - {fileID: 21300000, guid: 2d8da34ec01959345abd85e4e7bd82d6, type: 3}
+  - {fileID: 21300000, guid: b26fd129b709cd642bf7cd42bbb7e00f, type: 3}
+  - {fileID: 21300000, guid: 547745d621eec724389e5839120a661a, type: 3}
+  - {fileID: 21300000, guid: e5e4873c342b67a4bbfd2e35a4ce548b, type: 3}
+  - {fileID: 21300000, guid: 66a70312125c5324aabd29a24f5ce7c8, type: 3}
+  - {fileID: 21300000, guid: c6b7d36cecab25944a8a60d07e2a6ee3, type: 3}
+  - {fileID: 21300000, guid: d443acef08ca9864a968d84ba33ef429, type: 3}
+  - {fileID: 21300000, guid: 83e440aed5103dd4db769c76d3323025, type: 3}
+  - {fileID: 21300000, guid: 0a9ef88b90e6367469af5d0337e4c010, type: 3}
+  - {fileID: 21300000, guid: 4be6247115f948d4d839f566160f5f84, type: 3}
+  - {fileID: 21300000, guid: af81ffc2ffe872549be5348fee04ad9d, type: 3}
+  - {fileID: 21300000, guid: cef915a690c45234f99ce6ea01e992c6, type: 3}
+  - {fileID: 21300000, guid: 3ed5e46327833c745a3ed0383ff7bc99, type: 3}
+  unscaledTime: 0
+  playSelf: 0
+  pingPong: 0
+  loop: 1
+  frameRate: 12
+  resetOnEnable: 0
+  setProgressOnStart: 0
+  startProgress: 0
+  spriteAnimEvents: []
 --- !u!1001 &7280554354205433632
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -29,6 +29,9 @@ namespace ShootyGhost
 		[SerializeField, Tooltip("Ref to the player's candle bag (how many candles they have)")]
 		FloatValue candleBag;
 
+		[SerializeField, Tooltip("Ref to the number of candles currently burning (in use for haunting)")]
+		IntValue burningCandles;
+
 		[Space]
 		[SerializeField, Tooltip("Layers that I will collide with when returning from a haunted object")]
 		LayerMask hauntReturnColliders;
@@ -78,11 +81,12 @@ namespace ShootyGhost
 			return _hauntDirection;
 		}
         
-        // Start is called before the first frame update
         void Start()
         {
             _player = ReInput.players.GetPlayer(0);
 			ResetHauntTrigger();
+
+			burningCandles.Value = 0;
         }
 
 		void RefreshInput() 
@@ -92,7 +96,6 @@ namespace ShootyGhost
 		}
 
 
-        // Update is called once per frame
         void Update()
         {
             if (_player == null) return;
@@ -100,15 +103,17 @@ namespace ShootyGhost
             if (_player.GetButton("haunt") || _fireInput.magnitude > .25f)
 				playMaker.SendEvent("beginHauntTargeting");
 
-			if (haunted) 
+			if (haunted && Time.timeScale > Mathf.Epsilon) 
 			{
 				float actualBurnDuration = candleBurnDuration.Value / haunted.hauntCost;
 				float burnRate = 1 / actualBurnDuration;
 				float burnThisFrame = burnRate * Time.deltaTime;
 				candleBag.Value -= burnThisFrame;
 
-				if (candleBag.Value < haunted.hauntCost) 
+				if (candleBag.Value < haunted.hauntCost) {
+					candleBag.Value = haunted.hauntCost;
 					EndHaunt();
+				}
 			}
         }
 
@@ -189,6 +194,8 @@ namespace ShootyGhost
 
 			newHaunted.haunter = this;
 			newHaunted.AttemptHaunt(this);
+
+			burningCandles.Value = haunted.hauntCost;
         }
 
         /// <summary>
@@ -224,6 +231,8 @@ namespace ShootyGhost
 			playMaker.FsmVariables.GetFsmFloat("transitionDuration").Value = transitionDuration + .05f;
 			playMaker.SendEvent("endHaunt");
             haunted = null;
+
+			burningCandles.Value = 0;
         }
 
 		/// <summary>
