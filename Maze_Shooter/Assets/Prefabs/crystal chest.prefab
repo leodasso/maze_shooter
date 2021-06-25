@@ -124,8 +124,7 @@ MonoBehaviour:
   customReturnPos: 0
   returnPos: {fileID: 0}
   hauntableType: {fileID: 0}
-  hauntConstellationPrefab: {fileID: 6312336650189920229, guid: 324a1b01a48fd064b97a70b344a58712,
-    type: 3}
+  hauntCost: 0
   haunter: {fileID: 0}
   onHaunted:
     m_PersistentCalls:
@@ -402,8 +401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a05506e86408f4bae29a22b776d5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progress: 0.9713688
+  progress: 0.3181952
   spriteRenderer: {fileID: 8329381953610170948}
+  image: {fileID: 0}
   sprites:
   - {fileID: 21300000, guid: 1313bfdb52ce8fb45a2ef4d50062b25a, type: 3}
   - {fileID: 21300000, guid: e46eeb820aa15d44c8a22f6a98e78610, type: 3}
@@ -417,6 +417,7 @@ MonoBehaviour:
   loop: 1
   frameRate: 8
   resetOnEnable: 0
+  resetOnStart: 1
   setProgressOnStart: 0
   startProgress: 0
   spriteAnimEvents: []
@@ -498,6 +499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progress: 0
   spriteRenderer: {fileID: 8329381953610170948}
+  image: {fileID: 0}
   sprites:
   - {fileID: 21300000, guid: 3ee6970e8dd08f94bb08417de835c1a6, type: 3}
   - {fileID: 21300000, guid: 330ce4c27faf92842beed37dc312d1de, type: 3}
@@ -509,6 +511,7 @@ MonoBehaviour:
   loop: 0
   frameRate: 12
   resetOnEnable: 1
+  resetOnStart: 1
   setProgressOnStart: 0
   startProgress: 0
   spriteAnimEvents:
@@ -574,6 +577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progress: 0
   spriteRenderer: {fileID: 8329381953610170948}
+  image: {fileID: 0}
   sprites:
   - {fileID: 21300000, guid: 81f65ed16338b5d46aa737cea5044ab8, type: 3}
   - {fileID: 21300000, guid: c34039a2e5eef5344b0f9b77a82cdf28, type: 3}
@@ -585,6 +589,7 @@ MonoBehaviour:
   loop: 0
   frameRate: 12
   resetOnEnable: 1
+  resetOnStart: 1
   setProgressOnStart: 0
   startProgress: 0
   spriteAnimEvents:
@@ -705,6 +710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progress: 0
   spriteRenderer: {fileID: 8329381953589799848}
+  image: {fileID: 0}
   sprites:
   - {fileID: 21300000, guid: 2ceea3ec89ff1cb44a25a275a2eeccf2, type: 3}
   - {fileID: 21300000, guid: e98e9d1546e1f0f4982e3c05a38b2fdb, type: 3}
@@ -717,6 +723,7 @@ MonoBehaviour:
   loop: 1
   frameRate: 12
   resetOnEnable: 0
+  resetOnStart: 1
   setProgressOnStart: 0
   startProgress: 0
   spriteAnimEvents: []
@@ -811,7 +818,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1f5fb4aa2c046e2469a86849afea92a3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e46eeb820aa15d44c8a22f6a98e78610, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
