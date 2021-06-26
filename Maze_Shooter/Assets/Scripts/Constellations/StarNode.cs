@@ -7,17 +7,29 @@ using Sirenix.OdinInspector;
 
 public class StarNode : MonoBehaviour
 {
-	[FormerlySerializedAs("linkedConstellation")]
-    public StarData linkedStar;
-    
-	public UnityEvent onSlotFilled;
+	
+	[SerializeField]
+	UnityEvent onSlotFilled;
 
-	public void Fill() {
-		onSlotFilled.Invoke();
+	void Start()
+	{
+		// check if I have a saved star
+
+		// if so, put in the filled visuals
+
+
 	}
 
-	[Button]
-	void NameMe() {
-		gameObject.name = "Node " + linkedStar.title;
+	public StarData MyStar() 
+	{
+		// TODO
+		return null;
+	}
+
+	public void Fill(StarData star) 
+	{
+		// TODO fill with this star data
+
+		onSlotFilled.Invoke();
 	}
 }

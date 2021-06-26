@@ -76,8 +76,8 @@ public class Star : MonoBehaviour
     public void OpenGalaxy()
     {
         Galaxy newGalaxy = Instantiate(galaxyPrefab, galaxySpawnPoint.position, quaternion.identity).GetComponent<Galaxy>();
-        newGalaxy.constellationToFocus = starData;
-        newGalaxy.constellationInstance = this;
+        newGalaxy.starToFocus = starData;
+        newGalaxy.StarInstance = this;
         newGalaxy.showConstellationAcquire.Invoke();
     }
 

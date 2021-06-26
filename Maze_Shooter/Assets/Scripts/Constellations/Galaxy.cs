@@ -11,14 +11,14 @@ public class Galaxy : MonoBehaviour
     [Tooltip("Where to show the focused node (in relation to this object's pivot point)")]
     public Vector3 focusOffset;
     public FloatReference focusSpeed;
-    public List<StarNode> constellationNodes = new List<StarNode>();
+    public List<StarNode> starNodes = new List<StarNode>();
     [Tooltip("If this isn't null, it will be shown at the center of the portal")]
     public GameObject focusObject;
     [Tooltip("The parent object of the backdrop and constellations. Is moved around to bring certain" +
              " constellations into view.")]
     public GameObject galaxyMain;
-    public StarData constellationToFocus;
-    public Star constellationInstance;
+    public StarData starToFocus;
+    public Star StarInstance;
     public UnityEvent showConstellationAcquire;
 	public StarPath starPath;
 
@@ -40,46 +40,47 @@ public class Galaxy : MonoBehaviour
 
     public void ShowConstellation(StarData starData)
     {
-        focusNode = NodeForConstellation(starData);
+        focusNode = NodeForStar(starData);
 		starPath.starSlot = focusNode.transform;
         focusObject = focusNode.gameObject;
     }
 
     public void ShowMyConstellation()
     {
-        ShowConstellation(constellationToFocus);
+        ShowConstellation(starToFocus);
     }
 
     public void MergeConstellationToNode()
     {
-        if (!constellationInstance) return;
-        constellationInstance.transform.parent = transform;
-		starPath.setStartPosition(constellationInstance.transform);
-		starPath.objectOnPath = constellationInstance.transform;
+        if (!StarInstance) return;
+        StarInstance.transform.parent = transform;
+		starPath.setStartPosition(StarInstance.transform);
+		starPath.objectOnPath = StarInstance.transform;
 		starPath.MoveAlongPath();
     }
 
-    StarNode NodeForConstellation(StarData constellation)
+    StarNode NodeForStar(StarData starData)
     {
-        foreach (var node in constellationNodes)
+        foreach (var node in starNodes)
         {
-            if (node.linkedStar == constellation)
+            if (node.MyStar() == starData)
                 return node;
         }
         
-        throw new Exception("The constellation " + constellation.name + " was not found in the galaxy.");
+        throw new Exception("The star " + starData.name + " was not found in the galaxy.");
     }
 
 	public void FillNode() 
 	{
-		constellationInstance.onAddToGalaxy.Invoke();
-		if (focusNode) focusNode.Fill();
+		StarInstance.onAddToGalaxy.Invoke();
+		// TODO
+		// if (focusNode) focusNode.Fill();
 	}
 
     [Button]
-    void GetConstellationNodes()
+    void GetStarNodes()
     {
-        constellationNodes.Clear();
-        constellationNodes.AddRange(GetComponentsInChildren<StarNode>());
+        starNodes.Clear();
+        starNodes.AddRange(GetComponentsInChildren<StarNode>());
     }
 }
