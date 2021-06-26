@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 300668605635392863}
+  - component: {fileID: 309119828}
   - component: {fileID: 300668605635392857}
   - component: {fileID: 300668605635392856}
   m_Layer: 0
-  m_Name: star line
+  m_Name: star link
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,6 +33,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &309119828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300668605635392862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab20008ab6fa67f47926eec98fc3712a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeA: {fileID: 0}
+  nodeB: {fileID: 0}
+  inactiveAlpha: 0.02
+  activeAlpha: 1
+  lineRendererController: {fileID: 300668605635392857}
+  lineRenderer: {fileID: 300668605635392856}
 --- !u!114 &300668605635392857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,6 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 300668605635392856}
+  vertices: 10
   startPoint: {fileID: 0}
   endPoint: {fileID: 0}
 --- !u!120 &300668605635392856
@@ -58,13 +78,16 @@ LineRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 339a87849f203054ab08b49fc88fed5c, type: 2}
+  - {fileID: 2100000, guid: d4e9192007b5ac44086029232c989fd6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -72,6 +95,7 @@ LineRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -85,11 +109,19 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 11.37, y: 0.84000003, z: 5.33}
-  - {x: 12.05, y: 1.6500001, z: 5.33}
+  - {x: -265.90002, y: 232.21, z: 4.604973}
+  - {x: -266.6956, y: 232.40556, z: 4.604973}
+  - {x: -267.49112, y: 232.60112, z: 4.604973}
+  - {x: -268.28668, y: 232.79668, z: 4.604973}
+  - {x: -269.08224, y: 232.99223, z: 4.604973}
+  - {x: -269.87778, y: 233.18777, z: 4.604973}
+  - {x: -270.67334, y: 233.38333, z: 4.604973}
+  - {x: -271.4689, y: 233.57889, z: 4.604973}
+  - {x: -272.26443, y: 233.77444, z: 4.604973}
+  - {x: -273.06, y: 233.97, z: 4.604973}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.062468212
+    widthMultiplier: 0.18015833
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -108,8 +140,8 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 0.02}
+      key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -123,9 +155,9 @@ LineRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 0
-      atime1: 65535
-      atime2: 65535
+      atime0: 13107
+      atime1: 52428
+      atime2: 0
       atime3: 0
       atime4: 0
       atime5: 0
@@ -137,7 +169,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1
