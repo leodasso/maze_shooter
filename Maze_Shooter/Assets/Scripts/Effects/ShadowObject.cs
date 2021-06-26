@@ -8,10 +8,25 @@ public class ShadowObject : MonoBehaviour
     [Tooltip("When calculating shadow color, the distance between caster and shadow will be clamped to this value.")]
     public float maxDistance = 10;
 	public Transform mask;
+
+	[ReadOnly]
+	public float scale = 1;
+
+	[ReadOnly]
+	public bool isVisible = true;
     
     List<ShadowObjectPlugin> _plugins = new List<ShadowObjectPlugin>();
     float _dist;
     float _normalizedDist;
+	float _actualScale;
+
+	void Update()
+	{
+		float visibleScale = isVisible ? 1 : 0;
+
+		_actualScale = Mathf.Lerp(_actualScale, visibleScale * scale, Time.unscaledDeltaTime * 12);
+		mask.transform.localScale = Vector3.one * _actualScale;
+	}
 
     public void SetDistance(float y)
     {
@@ -29,9 +44,4 @@ public class ShadowObject : MonoBehaviour
     {
         _plugins.Add(newPlugin);
     }
-
-	public void SetScale(float scale)
-	{
-		mask.transform.localScale = Vector3.one * scale;
-	}
 }

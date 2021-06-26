@@ -1,60 +1,47 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using PlayMaker;
+using Cinemachine;
 
 [ExecuteAlways]
 public class ArcMover : MonoBehaviour
 {
-    [Range(0, 1)]
-    public float progress = 0;
-    public Vector3 startPosition;
-    public GameObject end;
+    public GameObject haunted;
+
 	[SerializeField]
-    AnimationCurve heightCurve;
+	List<Transform> ghostChunks = new List<Transform>();
+
 	[SerializeField]
 	PlayMakerFSM playMaker;
 
-    public UnityEvent transitionIn;
-    public UnityEvent transitionOut;
-
-    public TrailRenderer trailRenderer;
-
-    public Action onTransitionComplete;
-
-    float _y;
-
-	Vector3 endPos;
+	[SerializeField, Tooltip("Calls event 'doTransition'")]
+	CinemachinePath path;
 
     // Update is called once per frame
     void Update()
     {
-        if (end) 
-			endPos = end.transform.position;
-        _y = heightCurve.Evaluate(progress);
-        transform.position = Vector3.Lerp(startPosition, endPos, progress) + Vector3.up * _y;
     }
 
-	public void SetTransitionDuration(float duration) 
+	public void DoTransition(GameObject newHaunted, Vector3 newReturnPos, float duration = .5f)
 	{
-		playMaker.FsmVariables.GetFsmFloat("transitionDuration").Value = duration;
+		SetTransitionDuration(duration);
 
+		PlaceGhostChunks(newHaunted.transform.position);
+
+		path.m_Waypoints[0].position = transform.InverseTransformPoint(newHaunted.transform.position);
+		path.m_Waypoints[1].position = transform.InverseTransformPoint(newReturnPos);
+		playMaker.SendEvent("doTransition");
 	}
 
-    // Below functions are for easy interfacing with PlayMaker
-    public void BeginTrailEmit()
-    {
-        trailRenderer.emitting = true;
-    }
+	void PlaceGhostChunks(Vector3 pos)
+	{
+		foreach (var chunk in ghostChunks) 
+			chunk.position = pos;
+	}
 
-    public void StopTrailEmit()
-    {
-        trailRenderer.emitting = false;
-    }
-
-    public void TransitionComplete()
-    {
-        if (onTransitionComplete != null)
-            onTransitionComplete.Invoke();
-    }
+	void SetTransitionDuration(float duration) 
+	{
+		playMaker.FsmVariables.GetFsmFloat("transitionDuration").Value = duration;
+	}
 }

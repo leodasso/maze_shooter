@@ -1223,6 +1223,7 @@ MonoBehaviour:
         - SetMoveSpeedMultiplier
         - HutongGames.PlayMaker.Actions.InvokeMethod
         - HutongGames.PlayMaker.Actions.Wait
+        - HutongGames.PlayMaker.Actions.EnableBehaviour
         customNames:
         - 
         - 
@@ -1230,13 +1231,15 @@ MonoBehaviour:
         - 
         - hide main ghost sprite
         - 
-        actionEnabled: 010101010101
-        actionIsOpen: 010101000101
-        actionStartIndex: 0000000001000000030000000a0000000d00000014000000
-        actionHashCodes: 7f1a71032f72900059f9a0047d042b0459f9a00448c01101
+        - Disable Shadow
+        actionEnabled: 01010101010101
+        actionIsOpen: 01010100010101
+        actionStartIndex: 0000000001000000030000000a0000000d0000001400000017000000
+        actionHashCodes: 7f1a71032f72900059f9a0047d042b0459f9a00448c011013a4cad05
         unityObjectParams:
         - {fileID: 11400000, guid: ed93eef6b07c8f541a90564924082ee8, type: 2}
         - {fileID: 3196075495648318836}
+        - {fileID: 0}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
         - ownerOption: 0
@@ -1255,6 +1258,14 @@ MonoBehaviour:
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
+        - ownerOption: 1
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 3594942849639997181}
         - ownerOption: 1
           gameObject:
             useVariable: 0
@@ -1294,6 +1305,12 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: Hide
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: Shadow
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -1355,6 +1372,18 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
@@ -1367,7 +1396,7 @@ MonoBehaviour:
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 0500000014000000000000001400000012000000120000000f000000110000000f000000110000000500000002000000010000001400000012000000120000000f000000110000000f000000110000000f0000001700000001000000
+        paramDataType: 0500000014000000000000001400000012000000120000000f000000110000000f000000110000000500000002000000010000001400000012000000120000000f000000110000000f000000110000000f00000017000000010000001400000012000000050000001100000011000000
         paramName:
         - gameEvent
         - gameObject
@@ -1392,8 +1421,13 @@ MonoBehaviour:
         - time
         - finishEvent
         - realTime
-        paramDataPos: 0000000000000000000000000100000000000000010000000000000000000000010000000100000001000000040000000800000002000000020000000300000002000000020000000300000003000000040000000000000009000000
-        paramByteDataSize: 0000000000000000040000000000000000000000000000000000000000000000000000000000000000000000040000000100000000000000000000000000000000000000000000000000000000000000000000000000000001000000
+        - gameObject
+        - behaviour
+        - component
+        - enable
+        - resetOnExit
+        paramDataPos: 00000000000000000000000001000000000000000100000000000000000000000100000001000000010000000400000008000000020000000200000003000000020000000200000003000000030000000400000000000000090000000300000004000000020000000400000005000000
+        paramByteDataSize: 00000000000000000400000000000000000000000000000000000000000000000000000000000000000000000400000001000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000
     - name: reform
       description: 'play animation of ghost coming out of ground
 
@@ -2200,17 +2234,20 @@ MonoBehaviour:
         - SetMoveSpeedMultiplier
         - HutongGames.PlayMaker.Actions.Wait
         - HutongGames.PlayMaker.Actions.CallMethod
+        - HutongGames.PlayMaker.Actions.EnableBehaviour
         customNames:
         - 
         - 
         - 
         - 
-        actionEnabled: 01010101
-        actionIsOpen: 01010101
-        actionStartIndex: 00000000020000000500000008000000
-        actionHashCodes: 2f7290007d042b0448c01101ca51e900
+        - Enable Shadow
+        actionEnabled: 0101010101
+        actionIsOpen: 0101010101
+        actionStartIndex: 000000000200000005000000080000000e000000
+        actionHashCodes: 2f7290007d042b0448c01101ca51e9003a4cad05
         unityObjectParams:
         - {fileID: 3196075495648318836}
+        - {fileID: 0}
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
         - ownerOption: 0
@@ -2221,6 +2258,14 @@ MonoBehaviour:
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
+        - ownerOption: 1
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 3594942849639997181}
         animationCurveParams: []
         functionCallParams: []
         fsmTemplateControlParams: []
@@ -2234,6 +2279,12 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: ClearOverride
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: Shadow
         fsmObjectParams:
         - useVariable: 0
           name: 
@@ -2277,7 +2328,19 @@ MonoBehaviour:
           networkSync: 0
           value: 0.4
         fsmIntParams: []
-        fsmBoolParams: []
+        fsmBoolParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
@@ -2291,7 +2354,7 @@ MonoBehaviour:
         - HutongGames.PlayMaker.FsmVar
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 14000000000000000500000002000000010000000f000000170000000100000018000000120000000c000000270000000100000001000000
+        paramDataType: 14000000000000000500000002000000010000000f000000170000000100000018000000120000000c0000002700000001000000010000001400000012000000050000001100000011000000
         paramName:
         - gameObject
         - layer
@@ -2307,8 +2370,13 @@ MonoBehaviour:
         - storeResult
         - everyFrame
         - manualUI
-        paramDataPos: 0000000000000000000000000400000008000000000000000000000009000000000000000000000000000000000000000a0000000b000000
-        paramByteDataSize: 0000000004000000000000000400000001000000000000000000000001000000000000000000000000000000000000000100000001000000
+        - gameObject
+        - behaviour
+        - component
+        - enable
+        - resetOnExit
+        paramDataPos: 0000000000000000000000000400000008000000000000000000000009000000000000000000000000000000000000000a0000000b0000000100000001000000010000000000000001000000
+        paramByteDataSize: 00000000040000000000000004000000010000000000000000000000010000000000000000000000000000000000000001000000010000000000000000000000000000000000000000000000
     - name: reset
       description: return from haunt
       colorIndex: 0
@@ -2898,7 +2966,7 @@ MonoBehaviour:
     manualUpdate: 0
     outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 1
+    preprocessed: 0
     ExposedEvents: []
     OutputEvents: []
     RestartOnEnable: 1

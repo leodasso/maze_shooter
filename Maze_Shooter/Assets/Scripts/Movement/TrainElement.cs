@@ -8,13 +8,7 @@ using Sirenix.OdinInspector;
 /// </summary>
 [ExecuteAlways]
 public class TrainElement : MonoBehaviour
-{
-    [SerializeField, ShowInInspector, TabGroup("Events")]
-    UnityEvent _onEnterTrain;
-    
-    [SerializeField, ShowInInspector, TabGroup("Events")]
-    UnityEvent _onExitTrain;
-    
+{    
     [Tooltip("Determines how much space is left before and after this element.")]
     [TabGroup("Main"), ShowInInspector, SerializeField]
     float radius = 1;
@@ -29,6 +23,12 @@ public class TrainElement : MonoBehaviour
     [Tooltip("Optional - if an Animator is added, this component will send inTrain and trainIndex info to the animator.")]
     [TabGroup("Main")]
     public Animator animator;
+
+	[SerializeField, TabGroup("Events")]
+    UnityEvent _onEnterTrain;
+    
+    [SerializeField, TabGroup("Events")]
+    UnityEvent _onExitTrain;
 
     // The ray cast from the leader toward this
     Ray _leaderRay;

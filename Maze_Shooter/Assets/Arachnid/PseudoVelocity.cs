@@ -3,7 +3,9 @@ using UnityEngine;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 
-public class PseudoVelocity : MonoBehaviour {
+[ExecuteAlways]
+public class PseudoVelocity : MonoBehaviour 
+{
 
     [Range(1, 10)]
     [Tooltip("Number of consecutive frames to sample positions from when calculating velocity. Increasing this can smooth out" +

@@ -5,13 +5,7 @@ using Arachnid;
 using Sirenix.OdinInspector;
 
 namespace ShootyGhost
-{
-    public enum HauntTransition
-    {
-        In,    // Moving into the haunted thing
-        Out,   // Coming out from the haunted thing
-    }
-    
+{    
     public class Haunter : MonoBehaviour
     {
         Rewired.Player _player;
@@ -205,7 +199,7 @@ namespace ShootyGhost
         /// <summary>
         /// Returns the ghost from posessing whatever it is currently haunting to its true form.
         /// </summary>
-        public void EndHaunt(GameObject overrideHauntedObject = null, bool useTransition = true, float transitionDuration = .35f)
+        public void EndHaunt(GameObject overrideHauntedObject = null, bool useTransition = true, float transitionDuration = .55f)
         {
             if (haunted)
             {
@@ -227,7 +221,7 @@ namespace ShootyGhost
 
                 if (useTransition && GhostTools.SafeToInstantiate(gameObject)) {
 					GameObject hauntedObject = overrideHauntedObject ? overrideHauntedObject : haunted.gameObject;
-					SpawnTransitionObject(HauntTransition.Out, transform.position, hauntedObject, transitionDuration);
+					SpawnTransitionObject( transform.position, hauntedObject, transitionDuration);
 				}
                 haunted.OnUnHaunted();
             }
@@ -247,18 +241,12 @@ namespace ShootyGhost
 			if (haunted) haunted.OnUnHaunted();
 		}
         
-        ArcMover SpawnTransitionObject(HauntTransition transitionType, Vector3 start, GameObject destination, float duration = .45f)
+        ArcMover SpawnTransitionObject( Vector3 returnPos, GameObject haunted, float duration = .45f)
         {
             GameObject transition = Instantiate(transitionEffect, transform.position, transform.rotation);
-            ArcMover arcMover = transition.GetComponent<ArcMover>();
-            arcMover.startPosition = start;
-            arcMover.end = destination;
-			arcMover.SetTransitionDuration(duration);
-            
-            if (transitionType == HauntTransition.In)
-                arcMover.transitionIn.Invoke();
-            else 
-                arcMover.transitionOut.Invoke();
+
+            ArcMover arcMover = transition.GetComponent<ArcMover>();            
+            arcMover.DoTransition(haunted, returnPos, duration);
 
             return arcMover;
         }

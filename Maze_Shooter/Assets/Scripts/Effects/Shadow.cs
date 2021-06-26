@@ -19,9 +19,8 @@ public class Shadow : MonoBehaviour
 
     [Tooltip("Shadow is placed by raycasting down from this object. Which layers do you want to cast to?")]
     public LayerMask castingMask;
-    GameObject shadowInstance;
+    ShadowObject shadowInstance;
     RaycastHit hit;
-    ShadowObject _shadowObject;
 	Transform _camera;
 
 	static GameObject shadowParent;
@@ -54,10 +53,13 @@ public class Shadow : MonoBehaviour
 		if (shadowParent == null) 
 			shadowParent = new GameObject("Shadows");
 
-        shadowInstance = Instantiate(shadowPrefab, transform.position, shadowPrefab.transform.rotation);
-		shadowInstance.transform.parent = shadowParent.transform;
-        _shadowObject = shadowInstance.GetComponent<ShadowObject>();
-		_shadowObject.SetScale(shadowScale);
+		if (!shadowInstance) {
+			shadowInstance = Instantiate(shadowPrefab, transform.position, shadowPrefab.transform.rotation).GetComponent<ShadowObject>();
+			shadowInstance.transform.parent = shadowParent.transform;
+		}
+
+		shadowInstance.scale = shadowScale;
+		shadowInstance.isVisible = true;
     }
     
     // Update is called once per frame
@@ -72,17 +74,13 @@ public class Shadow : MonoBehaviour
         }
         
         shadowInstance.transform.position = shadowPos;
-        if (_shadowObject) {
-            _shadowObject.SetDistance(distanceToShadow);
-
-			float scale = shadowScale * shadowScaleCurve.Evaluate(distanceToShadow);
-			_shadowObject.SetScale(scale);
-		}
+		shadowInstance.SetDistance(distanceToShadow);
+		shadowInstance.scale = shadowScale * shadowScaleCurve.Evaluate(distanceToShadow);
     }
 
     void OnDisable()
     {
         if (shadowInstance)
-            Destroy(shadowInstance);
+            shadowInstance.isVisible = false;
     }
 }
