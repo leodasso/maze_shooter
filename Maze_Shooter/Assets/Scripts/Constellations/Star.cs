@@ -1,11 +1,13 @@
 ﻿using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Sirenix.OdinInspector;
 
-public class Constellation : MonoBehaviour
+public class Star : MonoBehaviour
 {
-    public ConstellationData myConstellation;
+	[FormerlySerializedAs("myConstellation")]
+    public StarData starData;
     public GameObject galaxyPrefab;
     [Tooltip("If the star has already been collected in the past, this is what will show")]
     public GameObject collectedVisuals;
@@ -23,7 +25,7 @@ public class Constellation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        IndicateIfCollected(myConstellation.HasBeenCollected());
+        IndicateIfCollected(starData.HasBeenCollected());
     }
 
     /// <summary>
@@ -57,9 +59,9 @@ public class Constellation : MonoBehaviour
         _touched = true;
 
         // Remember if it had been collected before saving the new value
-        bool beenCollected = myConstellation.HasBeenCollected();
+        bool beenCollected = starData.HasBeenCollected();
         
-        myConstellation.Value = true;
+        starData.Value = true;
         
         // Different behaviors depending on if it's already been collected.
         // Constellations that have been collected before can still appear in the scene, but we don't want to do
@@ -74,15 +76,15 @@ public class Constellation : MonoBehaviour
     public void OpenGalaxy()
     {
         Galaxy newGalaxy = Instantiate(galaxyPrefab, galaxySpawnPoint.position, quaternion.identity).GetComponent<Galaxy>();
-        newGalaxy.constellationToFocus = myConstellation;
+        newGalaxy.constellationToFocus = starData;
         newGalaxy.constellationInstance = this;
         newGalaxy.showConstellationAcquire.Invoke();
     }
 
     public void ShowTitleGui()
     {
-        var titleBox = titleGuiPrefab.CreateInstance() as ConstellationTitle;
-        titleBox.constellationData = myConstellation;
+        var titleBox = titleGuiPrefab.CreateInstance() as StarTitle;
+        titleBox.starData = starData;
         titleBox.ShowPanel();
     }
 }

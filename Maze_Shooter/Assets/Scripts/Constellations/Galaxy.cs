@@ -11,18 +11,18 @@ public class Galaxy : MonoBehaviour
     [Tooltip("Where to show the focused node (in relation to this object's pivot point)")]
     public Vector3 focusOffset;
     public FloatReference focusSpeed;
-    public List<ConstellationNode> constellationNodes = new List<ConstellationNode>();
+    public List<StarNode> constellationNodes = new List<StarNode>();
     [Tooltip("If this isn't null, it will be shown at the center of the portal")]
     public GameObject focusObject;
     [Tooltip("The parent object of the backdrop and constellations. Is moved around to bring certain" +
              " constellations into view.")]
     public GameObject galaxyMain;
-    public ConstellationData constellationToFocus;
-    public Constellation constellationInstance;
+    public StarData constellationToFocus;
+    public Star constellationInstance;
     public UnityEvent showConstellationAcquire;
 	public StarPath starPath;
 
-	public ConstellationNode focusNode;
+	public StarNode focusNode;
 
     Vector3 _difference;
 
@@ -38,9 +38,9 @@ public class Galaxy : MonoBehaviour
         }
     }
 
-    public void ShowConstellation(ConstellationData constellation)
+    public void ShowConstellation(StarData starData)
     {
-        focusNode = NodeForConstellation(constellation);
+        focusNode = NodeForConstellation(starData);
 		starPath.starSlot = focusNode.transform;
         focusObject = focusNode.gameObject;
     }
@@ -59,11 +59,11 @@ public class Galaxy : MonoBehaviour
 		starPath.MoveAlongPath();
     }
 
-    ConstellationNode NodeForConstellation(ConstellationData constellation)
+    StarNode NodeForConstellation(StarData constellation)
     {
         foreach (var node in constellationNodes)
         {
-            if (node.linkedConstellation == constellation)
+            if (node.linkedStar == constellation)
                 return node;
         }
         
@@ -80,6 +80,6 @@ public class Galaxy : MonoBehaviour
     void GetConstellationNodes()
     {
         constellationNodes.Clear();
-        constellationNodes.AddRange(GetComponentsInChildren<ConstellationNode>());
+        constellationNodes.AddRange(GetComponentsInChildren<StarNode>());
     }
 }

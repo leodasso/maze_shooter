@@ -4,5 +4,5 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class UnityEventConstellationParam : UnityEvent<ConstellationData>
+public class UnityEventConstellationParam : UnityEvent<StarData>
 {}

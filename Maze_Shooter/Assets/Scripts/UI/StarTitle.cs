@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ConstellationTitle : InteractivePanel
+public class StarTitle : InteractivePanel
 {
-    public ConstellationData constellationData;
+
+    public StarData starData;
     public TextMeshProUGUI textBox;
 
     public override void ShowPanel()
     {
-        textBox.text = constellationData.title;
+        textBox.text = starData.title;
         base.ShowPanel();
     }
 

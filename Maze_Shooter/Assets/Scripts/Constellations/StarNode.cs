@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Sirenix.OdinInspector;
 
-public class ConstellationNode : MonoBehaviour
+public class StarNode : MonoBehaviour
 {
-    public ConstellationData linkedConstellation;
+	[FormerlySerializedAs("linkedConstellation")]
+    public StarData linkedStar;
     
 	public UnityEvent onSlotFilled;
 
@@ -16,6 +18,6 @@ public class ConstellationNode : MonoBehaviour
 
 	[Button]
 	void NameMe() {
-		gameObject.name = "Node " + linkedConstellation.title;
+		gameObject.name = "Node " + linkedStar.title;
 	}
 }

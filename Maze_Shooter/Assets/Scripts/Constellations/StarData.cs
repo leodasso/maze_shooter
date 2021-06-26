@@ -4,7 +4,7 @@ using Arachnid;
 
 [CreateAssetMenu(menuName ="Ghost/Constellation Data")]
 [TypeInfoBox("Handles info and saving for constellations. The bool value here is 'has been collected'")]
-public class ConstellationData : ValueAsset<bool>
+public class StarData : ValueAsset<bool>
 {
     public string title = "Please name me";
     protected override string Prefix() => "constellation_";
