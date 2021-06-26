@@ -31,7 +31,6 @@ public class ArcMover : MonoBehaviour
 
 		path.m_Waypoints[0].position = transform.InverseTransformPoint(newHaunted.transform.position);
 		path.m_Waypoints[1].position = transform.InverseTransformPoint(newReturnPos);
-		path.m_Waypoints[1].position = transform.InverseTransformPoint(newReturnPos) + Vector3.down * 8;
 		playMaker.SendEvent("doTransition");
 	}
 

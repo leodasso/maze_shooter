@@ -70,11 +70,11 @@ namespace ShootyGhost
 			Vector3 dir = Vector3.left;
 			Player player = GetComponent<Player>();
 			if (player) {
-				if (player.moveInput.magnitude > .5f)
-					dir = (Vector3)player.moveInput;
+				if (player.moveInput.magnitude > .4f)
+					dir = Arachnid.Math.Project2Dto3D(player.moveInput);
 			}
 
-			Vector3 dirtyPos = transform.position + dir * 5;
+			Vector3 dirtyPos = transform.position + dir * 10;
 
             // TODO lol this prob needs better options
             return new Vector3(dirtyPos.x, 0, dirtyPos.z);

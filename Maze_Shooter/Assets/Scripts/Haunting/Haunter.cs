@@ -211,6 +211,8 @@ namespace ShootyGhost
 				Vector3 returnPos = destination;
 				Vector3 destinationVector = destination - transform.position;
 
+				Debug.DrawRay(returnPos, Vector3.up * 3, Color.green, 60);
+
 				RaycastHit hit;
 				if (Physics.CapsuleCast(
 					transform.position, 
@@ -218,6 +220,8 @@ namespace ShootyGhost
 					collider.radius,
 					destinationVector, out hit, destinationVector.magnitude, hauntReturnColliders)) {
 					returnPos = hit.point - destinationVector.normalized * collider.radius * 1.1f;
+
+					Debug.DrawRay(returnPos, Vector3.up * 3, Color.red, 60);
 				}
 
 				transform.position = GhostTools.GroundPoint(returnPos);
