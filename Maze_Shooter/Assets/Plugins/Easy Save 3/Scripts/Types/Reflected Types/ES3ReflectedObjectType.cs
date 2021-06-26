@@ -6,6 +6,7 @@ using ES3Internal;
 
 namespace ES3Types
 {
+	[UnityEngine.Scripting.Preserve]
 	internal class ES3ReflectedObjectType : ES3ObjectType
 	{
 		public ES3ReflectedObjectType(Type type) : base(type)
@@ -17,7 +18,8 @@ namespace ES3Types
 		protected override void WriteObject(object obj, ES3Writer writer)
 		{
 			WriteProperties(obj, writer);
-		}
+
+        }
 
 		protected override object ReadObject<T>(ES3Reader reader)
 		{

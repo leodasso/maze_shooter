@@ -12,6 +12,8 @@ public abstract class ES3Reader : System.IDisposable
 	/// <summary>The settings used to create this reader.</summary>
 	public ES3Settings settings;
 
+    protected int serializationDepth = 0;
+
 	#region ES3Reader Abstract Methods
 
 	internal abstract int 		Read_int();
@@ -29,18 +31,44 @@ public abstract class ES3Reader : System.IDisposable
 	internal abstract uint 		Read_uint();
 	internal abstract string 	Read_string();
 	internal abstract byte[]	Read_byteArray();
+    internal abstract long      Read_ref();
 
-	[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-	public abstract string ReadPropertyName();
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    public abstract string ReadPropertyName();
+
 	protected abstract Type ReadKeyPrefix(bool ignore = false);
 	protected abstract void ReadKeySuffix();
 	internal abstract byte[] ReadElement(bool skip=false);
-	internal abstract bool Goto(string key);
+
 	/// <summary>Disposes of the reader and it's underlying stream.</summary>
 	public abstract void Dispose();
 
-	internal abstract bool StartReadObject();
-	internal abstract void EndReadObject();
+	// Seeks to the given key. Note that the stream position will not be reset.
+    internal virtual bool Goto(string key)
+    {
+        if (key == null)
+            throw new ArgumentNullException("Key cannot be NULL when loading data.");
+
+        string currentKey;
+        while ((currentKey = ReadPropertyName()) != key)
+        {
+            if (currentKey == null)
+                return false;
+            Skip();
+        }
+        return true;
+    }
+
+    internal virtual bool StartReadObject()
+    {
+        serializationDepth++;
+        return false;
+    }
+
+	internal virtual void EndReadObject()
+    {
+        serializationDepth--;
+    }
 
 	internal abstract bool StartReadDictionary();
 	internal abstract void EndReadDictionary();
@@ -119,9 +147,16 @@ public abstract class ES3Reader : System.IDisposable
 		return Read<T>(type);
 	}
 
-	internal Type ReadType()
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    public long ReadRefProperty()
+    {
+        ReadPropertyName();
+        return Read_ref();
+    }
+
+    internal Type ReadType()
 	{
-		return Type.GetType(Read<string>(ES3Type_string.Instance));
+		return ES3Reflection.GetType(Read<string>(ES3Type_string.Instance));
 	}
 
 	/// <summary>Sets the value of a private property on an object.</summary>
@@ -161,7 +196,7 @@ public abstract class ES3Reader : System.IDisposable
 
 		T obj = Read<T>(ES3TypeMgr.GetOrCreateES3Type(type));
 
-		ReadKeySuffix();
+		//ReadKeySuffix(); //No need to read key suffix as we're returning. Doing so would throw an error at this point for BinaryReaders.
 		return obj;
 	}
 
@@ -174,11 +209,10 @@ public abstract class ES3Reader : System.IDisposable
 			return defaultValue;
 
 		Type type = ReadTypeFromHeader<T>();
-
 		T obj = Read<T>(ES3TypeMgr.GetOrCreateES3Type(type));
 
-		ReadKeySuffix();
-		return obj;
+        //ReadKeySuffix(); //No need to read key suffix as we're returning. Doing so would throw an error at this point for BinaryReaders.
+        return obj;
 	}
 
 	/// <summary>Reads a value from the reader with the given key into the provided object.</summary>
@@ -193,10 +227,10 @@ public abstract class ES3Reader : System.IDisposable
 
 		ReadInto<T>(obj, ES3TypeMgr.GetOrCreateES3Type(type));
 
-		ReadKeySuffix();
-	}
+        //ReadKeySuffix(); //No need to read key suffix as we're returning. Doing so would throw an error at this point for BinaryReaders.
+    }
 
-	protected virtual void ReadObject<T>(object obj, ES3Type type)
+    protected virtual void ReadObject<T>(object obj, ES3Type type)
 	{
 		// Check for null.
 		if(StartReadObject())
@@ -257,11 +291,11 @@ public abstract class ES3Reader : System.IDisposable
 		else
 			ReadObject<T>(obj, type);
 	}
-		
 
-	#endregion
 
-	private Type ReadTypeFromHeader<T>()
+    #endregion
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    internal Type ReadTypeFromHeader<T>()
 	{
 		// Check whether we need to determine the type by reading the header.
 		if(typeof(T) == typeof(object))
@@ -309,9 +343,9 @@ public abstract class ES3Reader : System.IDisposable
 		if(stream == null)
 			return null;
 
-		// Get the baseWriter using the given Stream.
-		if(settings.format == ES3.Format.JSON)
-			return new ES3JSONReader(stream, settings);
+        // Get the baseWriter using the given Stream.
+        if (settings.format == ES3.Format.JSON)
+            return new ES3JSONReader(stream, settings);
 		return null;
 	}
 
@@ -325,32 +359,24 @@ public abstract class ES3Reader : System.IDisposable
 	/// <param name="settings">The settings we want to use to override the default settings.</param>
 	public static ES3Reader Create(byte[] bytes, ES3Settings settings)
 	{
-		Stream stream = new MemoryStream(bytes);
+		Stream stream = ES3Stream.CreateStream(new MemoryStream(bytes), settings, ES3FileMode.Read);
 		if(stream == null)
 			return null;
 
 		// Get the baseWriter using the given Stream.
 		if(settings.format == ES3.Format.JSON)
 			return new ES3JSONReader(stream, settings);
-		/*else if(settings.format == ES3.Format.XML)
-			return new ES3XMLWriter(stream, settings);*/
-		/*else // if(settings.format == ES3.Format.BSON)
-		return new  new ES3BSONWriter(stream, settings);*/
-
-		return null;
+        return null;
 	}
 
 	internal static ES3Reader Create(Stream stream, ES3Settings settings)
 	{
+		stream = ES3Stream.CreateStream(stream, settings, ES3FileMode.Read);
+
 		// Get the baseWriter using the given Stream.
 		if(settings.format == ES3.Format.JSON)
 			return new ES3JSONReader(stream, settings);
-		/*else if(settings.format == ES3.Format.XML)
-			return new ES3XMLWriter(stream, settings);*/
-		/*else // if(settings.format == ES3.Format.BSON)
-		return new  new ES3BSONWriter(stream, settings);*/
-
-		return null;
+        return null;
 	}
 
 	internal static ES3Reader Create(Stream stream, ES3Settings settings, bool readHeaderAndFooter)
@@ -358,12 +384,7 @@ public abstract class ES3Reader : System.IDisposable
 		// Get the baseWriter using the given Stream.
 		if(settings.format == ES3.Format.JSON)
 			return new ES3JSONReader(stream, settings, readHeaderAndFooter);
-		/*else if(settings.format == ES3.Format.XML)
-			return new ES3XMLWriter(stream, settings);*/
-		/*else // if(settings.format == ES3.Format.BSON)
-		return new  new ES3BSONWriter(stream, settings);*/
-
-		return null;
+        return null;
 	}
 
 	[EditorBrowsable(EditorBrowsableState.Never)]
@@ -415,12 +436,15 @@ public abstract class ES3Reader : System.IDisposable
 				string key = reader.ReadPropertyName();
 				if(key == null)
 					yield break;
-				Type type = reader.ReadKeyPrefix();
+
+                Type type = reader.ReadTypeFromHeader<object>();
 
 				byte[] bytes = reader.ReadElement();
 
-				reader.ReadKeySuffix();
-				yield return new KeyValuePair<string,ES3Data>(key, new ES3Data(type, bytes));
+                reader.ReadKeySuffix();
+
+                if(type != null)
+				    yield return new KeyValuePair<string,ES3Data>(key, new ES3Data(type, bytes));
 			}
 		}
 	}

@@ -5,8 +5,11 @@ using Sirenix.OdinInspector;
 
 public class EasySaveTester : MonoBehaviour
 {
+	public string fileName = "name me";
 	public int myInt = 123;
 	public List<string> funStrings = new List<string>();
+
+	string filePath => "tests/" + fileName + ".es3";
 
 	[ButtonGroup]
 	void SaveToCache()
@@ -24,11 +27,24 @@ public class EasySaveTester : MonoBehaviour
 		funStrings = ES3.Load<List<string>>("test strings", settings);
 	}
 
+	[ButtonGroup("file")]
+	void SaveCacheToFile()
+	{
+		ES3.StoreCachedFile(filePath);
+	}
+
+	[ButtonGroup("file")]
+	void LoadFromFile()
+	{
+		ES3.CacheFile(filePath);
+		LoadFromCache();
+	}
+
 	ES3Settings GetSettings() 
 	{
-		ES3Settings settings = new ES3Settings();
-		settings.location = ES3.Location.Memory;
-		settings.path = "cache.es3";
+		ES3Settings settings = new ES3Settings(true);
+		settings.location = ES3.Location.Cache;
+		settings.path = filePath;
 		return settings;
 	}
 }

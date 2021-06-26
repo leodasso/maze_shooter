@@ -6,6 +6,7 @@ using ES3Internal;
 
 namespace ES3Types
 {
+	[UnityEngine.Scripting.Preserve]
 	internal class ES3ReflectedValueType : ES3Type
 	{
 		public ES3ReflectedValueType(Type type) : base(type)

@@ -5,6 +5,7 @@ using ES3Internal;
 
 namespace ES3Types
 {
+	[UnityEngine.Scripting.Preserve]
 	public class ES3ArrayType : ES3CollectionType
 	{
 		public ES3ArrayType(Type type) : base(type){}
@@ -17,7 +18,7 @@ namespace ES3Types
 			if(elementType == null)
 				throw new ArgumentNullException("ES3Type argument cannot be null.");
 
-			writer.StartWriteCollection(array.Length);
+			//writer.StartWriteCollection();
 
 			for(int i=0; i<array.Length; i++)
 			{
@@ -26,25 +27,26 @@ namespace ES3Types
 				writer.EndWriteCollectionItem(i);
 			}
 
-			writer.EndWriteCollection();
+			//writer.EndWriteCollection();
 		}
 
-		public override object Read<T>(ES3Reader reader)
-		{
-			var list = new List<T>();
-			if(!ReadICollection(reader, list, elementType))
-				return null;
-			return list.ToArray();
-		}
+        public override object Read(ES3Reader reader)
+        {
+            var list = new List<object>();
+            if (!ReadICollection(reader, list, elementType))
+                return null;
 
-		public override void ReadInto<T>(ES3Reader reader, object obj)
-		{
-			ReadICollectionInto(reader, (T[])obj, elementType);
-		}
+            var array = ES3Reflection.ArrayCreateInstance(elementType.type, list.Count);
+            int i = 0;
+            foreach (var item in list)
+            {
+                array.SetValue(item, i);
+                i++;
+            }
 
-		public override object Read(ES3Reader reader)
-		{
-			var instance = new List<object>();
+            return array;
+
+            /*var instance = new List<object>();
 
 			if(reader.StartReadCollection())
 				return null;
@@ -70,12 +72,38 @@ namespace ES3Types
 				i++;
 			}
 
-			return array;
+			return array;*/
+        }
+
+        public override object Read<T>(ES3Reader reader)
+		{
+            return Read(reader);
+            /*var list = new List<object>();
+			if(!ReadICollection(reader, list, elementType))
+				return null;
+
+            var array = ES3Reflection.ArrayCreateInstance(elementType.type, list.Count);
+            int i = 0;
+            foreach (var item in list)
+            {
+                array.SetValue(item, i);
+                i++;
+            }
+
+            return array;*/
+		}
+
+		public override void ReadInto<T>(ES3Reader reader, object obj)
+		{
+			ReadICollectionInto(reader, (ICollection)obj, elementType);
 		}
 
 		public override void ReadInto(ES3Reader reader, object obj)
 		{
-			var collection = (IList)obj;
+            var collection = (IList)obj;
+
+            if (collection.Count == 0)
+                ES3Debug.LogWarning("LoadInto/ReadInto expects a collection containing instances to load data in to, but the collection is empty.");
 
 			if(reader.StartReadCollection())
 				throw new NullReferenceException("The Collection we are trying to load is stored as null, which is not allowed when using ReadInto methods.");

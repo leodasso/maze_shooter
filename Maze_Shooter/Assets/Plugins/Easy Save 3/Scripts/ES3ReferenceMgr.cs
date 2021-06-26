@@ -2,140 +2,117 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ES3Internal;
+using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using System.Reflection;
+using System;
 #endif
 
-public class ES3ReferenceMgr : ES3ReferenceMgrBase, ISerializationCallbackReceiver 
+public class ES3ReferenceMgr : ES3ReferenceMgrBase
 {
-	public void OnBeforeSerialize()
-	{
-		#if UNITY_EDITOR
-		if(BuildPipeline.isBuildingPlayer)
-		{
-			GenerateReferences();
-			GeneratePrefabReferences();
-		}
-		#endif
+#if UNITY_EDITOR
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    public void RefreshDependencies(bool isEnteringPlayMode = false)
+    {
+        ES3ReferenceMgrBase.isEnteringPlayMode = isEnteringPlayMode;
 
-	}
+        // If we're not adding all prefabs to the manager, clear the prefabs array each time we refresh the dependencies.
+        if (!ES3Settings.defaultSettingsScriptableObject.addAllPrefabsToManager)
+            prefabs.Clear();
 
-	public void OnAfterDeserialize(){}
+        // This will get the dependencies for all GameObjects and Components from the active scene.
+        AddDependencies(this.gameObject.scene.GetRootGameObjects());
+        AddPrefabsToManager();
+        RemoveNullOrInvalidValues();
 
-	#if UNITY_EDITOR
+        ES3ReferenceMgrBase.isEnteringPlayMode = false;
+    }
 
-	public void GenerateReferences()
-	{
-		bool undoRecorded = false;
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    public void Optimize()
+    {
+        var dependencies = CollectDependencies(this.gameObject.scene.GetRootGameObjects());
+        var notDependenciesOfScene = new HashSet<UnityEngine.Object>();
 
-		// Remove NULL values from Dictionary.
-		if(idRef.RemoveNullValues() > 0)
-		{
-			//Undo.RecordObject(this, "Update Easy Save 3 Reference List");
-			undoRecorded = true;
-		}
-			
-		var sceneObjects = this.gameObject.scene.GetRootGameObjects();
+        foreach (var kvp in idRef)
+            if (!dependencies.Contains(kvp.Value))
+                notDependenciesOfScene.Add(kvp.Value);
 
-		// Remove the manager object.
-		ArrayUtility.Remove(ref sceneObjects, this.gameObject);
+        foreach (var obj in notDependenciesOfScene)
+        {
+            Remove(obj);
+        }
+    }
 
-		var dependencies = EditorUtility.CollectDependencies(sceneObjects);
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    public void AddDependencies(UnityEngine.Object[] objs)
+    {
+        for (int i = 0; i < objs.Length; i++)
+        {
+            var obj = objs[i];
 
-		for(int i=0; i<dependencies.Length; i++)
-		{
-			var obj = (UnityEngine.Object)dependencies[i];
+            if (obj.name == "Easy Save 3 Manager")
+                continue;
 
-			if(obj == null || !CanBeSaved(obj))
-				continue;
+            var dependencies = CollectDependencies(obj);
 
-			// If we're adding a new item to the type list, make sure we've recorded an undo for the object.
-			if(Get(obj) == -1)
-			{
-				if(!undoRecorded)
-				{
-					//Undo.RecordObject(this, "Update Easy Save 3 Reference List");
-					undoRecorded = true;
-				}
-				Add(obj);
-			}
-		}
-	}
+            foreach (var dependency in dependencies)
+            {
+                if (dependency != null)
+                {
+                    Add(dependency);
 
-	public void GeneratePrefabReferences()
-	{
-		bool undoRecorded = false;
+                    // Add the prefab if it's referenced by this scene.
+                    if (dependency.GetType() == typeof(ES3Prefab))
+                        AddPrefabToManager((ES3Prefab)dependency);
+                }
+            }
+        }
 
-		if(this.prefabs.RemoveAll(item => item == null) > 0)
-		{
-			Undo.RecordObject(this, "Update Easy Save 3 Reference List");
-			undoRecorded = true;
-		}
+        Undo.RecordObject(this, "Update Easy Save 3 Reference List");
+    }
 
-		var es3Prefabs = Resources.FindObjectsOfTypeAll<ES3Prefab>();
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    public void AddDependencies(UnityEngine.Object obj)
+    {
+        AddDependencies(new UnityEngine.Object[] { obj });
+    }
 
-		if(es3Prefabs.Length == 0)
-			return;
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    public void GeneratePrefabReferences()
+    {
+        AddPrefabsToManager();
+        foreach (var es3Prefab in prefabs)
+            es3Prefab.GeneratePrefabReferences();
+    }
 
-		foreach(var es3Prefab in es3Prefabs)
-		{
-			var prefabType = PrefabUtility.GetPrefabType(es3Prefab.gameObject);
-			if(prefabType != PrefabType.Prefab && prefabType != PrefabType.MissingPrefabInstance)
-				continue;
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    public void AddPrefabsToManager()
+    {
+        if (ES3Settings.defaultSettingsScriptableObject.addAllPrefabsToManager)
+        {
+            // Clear any null values. This isn't necessary if we're not adding all prefabs to manager as the list is cleared each time.
+            if (this.prefabs.RemoveAll(item => item == null) > 0)
+                Undo.RecordObject(this, "Update Easy Save 3 Reference List");
 
-			if(GetPrefab(es3Prefab) == -1)
-			{
-				AddPrefab(es3Prefab);
-				if(!undoRecorded)
-				{
-					Undo.RecordObject(this, "Update Easy Save 3 Reference List");
-					undoRecorded = true;
-				}
-			}
+            foreach (var es3Prefab in Resources.FindObjectsOfTypeAll<ES3Prefab>())
+                AddPrefabToManager(es3Prefab);
+        }
+    }
 
-			bool prefabUndoRecorded = false;
-
-			if(es3Prefab.localRefs.RemoveNullKeys() > 0)
-			{
-				Undo.RecordObject(es3Prefab, "Update Easy Save 3 Prefab");
-				prefabUndoRecorded = true;
-			}
-
-			// Get GameObject and it's children and add them to the reference list.
-			foreach(var obj in EditorUtility.CollectDependencies(new UnityEngine.Object[]{es3Prefab}))
-			{
-				if(obj == null || !CanBeSaved(obj))
-					continue;
-				
-				if(es3Prefab.Get(obj) == -1)
-				{
-					es3Prefab.Add(obj);
-					if(!prefabUndoRecorded)
-					{
-						Undo.RecordObject(es3Prefab, "Update Easy Save 3 Prefab");
-						prefabUndoRecorded = true;
-					}
-				}
-			}
-		}
-	}
-
-	public static bool CanBeSaved(UnityEngine.Object obj)
-	{
-		// Check if any of the hide flags determine that it should not be saved.
-		if(	(((obj.hideFlags & HideFlags.DontSave) == HideFlags.DontSave) || 
-		     ((obj.hideFlags & HideFlags.DontSaveInBuild) == HideFlags.DontSaveInBuild) ||
-		     ((obj.hideFlags & HideFlags.DontSaveInEditor) == HideFlags.DontSaveInEditor) ||
-		     ((obj.hideFlags & HideFlags.HideAndDontSave) == HideFlags.HideAndDontSave)))
-		{
-			var type = obj.GetType();
-			// Meshes are marked with HideAndDontSave, but shouldn't be ignored.
-			if(type != typeof(Mesh) && type != typeof(Material))
-				return false;
-		}
-		return true;
-	}
-
-	#endif
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    private void AddPrefabToManager(ES3Prefab es3Prefab)
+    {
+            try
+            {
+                if (es3Prefab != null && EditorUtility.IsPersistent(es3Prefab))
+                    if(AddPrefab(es3Prefab))
+                        Undo.RecordObject(this, "Update Easy Save 3 Reference List");
+                es3Prefab.GeneratePrefabReferences();
+            }
+            catch { }
+    }
+#endif
 }
