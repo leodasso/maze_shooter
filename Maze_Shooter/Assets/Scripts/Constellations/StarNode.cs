@@ -2,22 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using Sirenix.OdinInspector;
+using Arachnid;
 
 public class StarNode : MonoBehaviour
 {
-	
+	[SerializeField]
+	StarDataDictionary starDatas;
+
 	[SerializeField]
 	UnityEvent onSlotFilled;
 
+	[SerializeField]
+	GuidGenerator guidGenerator;
+
+
 	void Start()
 	{
-		// check if I have a saved star
+		if (!guidGenerator) {
+			Debug.LogError(name + " has no GUID generator! This will cause a critical failure with loading save data.", gameObject);
+			enabled = false;
+			return;
+		}
 
 		// if so, put in the filled visuals
-
-
 	}
 
 	public StarData MyStar() 

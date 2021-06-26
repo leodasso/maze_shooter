@@ -42,4 +42,17 @@ public class StarDataDictionary : SerializedScriptableObject
 		}
 		#endif
 	}
+
+	[Button]
+	void PruneDictionary() 
+	{
+		List<string> keysToPrune = new List<string>();
+		foreach (KeyValuePair<string, StarData> kvp in starDatas) {
+			if (kvp.Value == null) 
+				keysToPrune.Add(kvp.Key);
+		}
+
+		foreach( var key in keysToPrune) 
+			starDatas.Remove(key);
+	}
 }
