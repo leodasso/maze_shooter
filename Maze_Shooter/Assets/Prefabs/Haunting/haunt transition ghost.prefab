@@ -51,11 +51,96 @@ MonoBehaviour:
   m_Looped: 0
   m_Waypoints:
   - position: {x: -4.5661488, y: 0, z: 0}
-    tangent: {x: 2.7266617, y: 15, z: 0}
+    tangent: {x: 0, y: 17.94361, z: 0}
     roll: 0
   - position: {x: 5, y: 0, z: 0}
-    tangent: {x: 2.8883247, y: -15, z: 0}
+    tangent: {x: -0.0061388016, y: -9.787848, z: 0}
     roll: 0
+  - position: {x: 5.219839, y: -5, z: 0}
+    tangent: {x: 0, y: 0, z: 0}
+    roll: 0
+--- !u!1 &457526430538866564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1231932582148180143}
+  - component: {fileID: 5158420009025943523}
+  m_Layer: 0
+  m_Name: Mask
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1231932582148180143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457526430538866564}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.4964, y: 5.8096, z: 0}
+  m_LocalScale: {x: 2.3957834, y: 2.2559814, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4991704436452651572}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!331 &5158420009025943523
+SpriteMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457526430538866564}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: ed73db8c7dd30524983535d7bc3cfdde, type: 3}
+  m_MaskAlphaCutoff: 0.2
+  m_FrontSortingLayerID: 0
+  m_BackSortingLayerID: 0
+  m_FrontSortingLayer: 0
+  m_BackSortingLayer: 0
+  m_FrontSortingOrder: 2
+  m_BackSortingOrder: 0
+  m_IsCustomRangeActive: 1
+  m_SpriteSortPoint: 0
 --- !u!1 &4991704436452651575
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,6 +172,7 @@ Transform:
   m_Children:
   - {fileID: 1037099679}
   - {fileID: 5857030515254990043}
+  - {fileID: 1231932582148180143}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -165,8 +251,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 408
-        y: 100
+        x: 405
+        y: 105
         width: 139
         height: 32
       isBreakpoint: 0
@@ -184,15 +270,13 @@ MonoBehaviour:
         colorIndex: 0
       actionData:
         actionNames:
-        - HutongGames.PlayMaker.Actions.Wait
         - InvokeGameEvent
         customNames:
         - 
-        - 
-        actionEnabled: 0101
-        actionIsOpen: 0101
-        actionStartIndex: 0000000003000000
-        actionHashCodes: 48c011017f1a7103
+        actionEnabled: 01
+        actionIsOpen: 01
+        actionStartIndex: 00000000
+        actionHashCodes: 7f1a7103
         unityObjectParams:
         - {fileID: 11400000, guid: 93da0c8645abd2846911e25cab9a50c1, type: 2}
         fsmGameObjectParams: []
@@ -208,13 +292,7 @@ MonoBehaviour:
         fsmVarParams: []
         fsmArrayParams: []
         fsmEnumParams: []
-        fsmFloatParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0.11
+        fsmFloatParams: []
         fsmIntParams: []
         fsmBoolParams: []
         fsmVector2Params: []
@@ -222,28 +300,24 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams:
-        - FINISHED
-        byteData: 01
+        stringParams: []
+        byteData: 
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 0f000000170000000100000005000000
+        paramDataType: 05000000
         paramName:
-        - time
-        - finishEvent
-        - realTime
         - gameEvent
-        paramDataPos: 00000000000000000000000000000000
-        paramByteDataSize: 00000000000000000100000000000000
+        paramDataPos: 00000000
+        paramByteDataSize: 00000000
     - name: destroy
       description: 
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 608
-        y: 115
+        x: 604
+        y: 113
         width: 100
         height: 16
       isBreakpoint: 0
@@ -336,18 +410,28 @@ MonoBehaviour:
         colorIndex: 0
       actionData:
         actionNames:
-        - HutongGames.PlayMaker.Actions.SetProperty
         - HutongGames.PlayMaker.Actions.CurveFloat
+        - HutongGames.PlayMaker.Actions.SetProperty
+        - HutongGames.PlayMaker.Actions.ActivateGameObject
         customNames:
         - 
         - 
-        actionEnabled: 0101
-        actionIsOpen: 0101
-        actionStartIndex: 0000000002000000
-        actionHashCodes: 5ac852049399b604
+        - 
+        actionEnabled: 010101
+        actionIsOpen: 010101
+        actionStartIndex: 000000000b0000000d000000
+        actionHashCodes: 9399b6045ac85204b2cf1000
         unityObjectParams: []
         fsmGameObjectParams: []
-        fsmOwnerDefaultParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 1
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 5857030515254990022}
         animationCurveParams:
         - curve:
             serializedVersion: 2
@@ -492,7 +576,7 @@ MonoBehaviour:
             tooltip: 
             showInInspector: 0
             networkSync: 0
-            enumName: 
+            enumName: HutongGames.PlayMaker.None
             intValue: 0
           ArrayParameter:
             useVariable: 0
@@ -501,7 +585,7 @@ MonoBehaviour:
             showInInspector: 0
             networkSync: 0
             type: -1
-            objectTypeName: 
+            objectTypeName: UnityEngine.Object
             floatValues: []
             intValues: 
             boolValues: 
@@ -533,7 +617,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: 1
+          value: 0.75
         - useVariable: 1
           name: transitionDuration
           tooltip: time it takes to transition
@@ -560,6 +644,18 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 1
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
@@ -567,15 +663,13 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - FINISHED
-        byteData: 010000000000
+        byteData: 0000000000010000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 24000000010000000f0000000f0000000f00000016000000070000000f0000000f0000000f000000110000001700000001000000
+        paramDataType: 0f0000000f0000000f00000016000000070000000f0000000f0000000f00000011000000170000000100000024000000010000001400000011000000110000000100000001000000
         paramName:
-        - targetProperty
-        - everyFrame
         - floatVariable
         - fromValue
         - toValue
@@ -587,8 +681,15 @@ MonoBehaviour:
         - ignoreCurveOffset
         - finishEvent
         - realTime
-        paramDataPos: 00000000000000000000000001000000020000000000000001000000030000000400000005000000000000000000000005000000
-        paramByteDataSize: 00000000010000000000000000000000000000000000000004000000000000000000000000000000000000000000000001000000
+        - targetProperty
+        - everyFrame
+        - gameObject
+        - activate
+        - recursive
+        - resetOnExit
+        - everyFrame
+        paramDataPos: 000000000100000002000000000000000000000003000000040000000500000000000000000000000400000000000000050000000000000001000000020000000600000007000000
+        paramByteDataSize: 000000000000000000000000000000000400000000000000000000000000000000000000000000000100000000000000010000000000000000000000000000000100000001000000
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -721,7 +822,7 @@ MonoBehaviour:
   effectPrefab: {fileID: 3544718563541051073, guid: 3a1f191ff3e021a4bae0aa6ca73450df,
     type: 3}
   lifetime: 5
-  delay: 0.1
+  delay: 0
 --- !u!114 &1343316240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,7 +836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: {fileID: 1037099678}
-  position: 0.05
+  position: 0.152
   orientToPath: 0
   offsetRotation: {x: -90.52, y: 0, z: 0}
 --- !u!114 &1343316241
@@ -782,7 +883,7 @@ MonoBehaviour:
   effectPrefab: {fileID: 3544718563541051073, guid: 3a1f191ff3e021a4bae0aa6ca73450df,
     type: 3}
   lifetime: 5
-  delay: 0.1
+  delay: 0
 --- !u!114 &7515387366425474290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -799,7 +900,7 @@ MonoBehaviour:
   effectPrefab: {fileID: 3544718563541051073, guid: 3a1f191ff3e021a4bae0aa6ca73450df,
     type: 3}
   lifetime: 5
-  delay: 0.1
+  delay: 0
 --- !u!114 &2439850531801093378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,7 +917,7 @@ MonoBehaviour:
   effectPrefab: {fileID: 3544718563541051073, guid: 3a1f191ff3e021a4bae0aa6ca73450df,
     type: 3}
   lifetime: 5
-  delay: 0.1
+  delay: 0
 --- !u!114 &6663645524467969412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -833,7 +934,7 @@ MonoBehaviour:
   effectPrefab: {fileID: 3544718563541051073, guid: 3a1f191ff3e021a4bae0aa6ca73450df,
     type: 3}
   lifetime: 5
-  delay: 0.1
+  delay: 0
 --- !u!1001 &466461097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -859,12 +960,12 @@ PrefabInstance:
     - target: {fileID: 5857030514533168788, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.2819977
+      value: -3.2443933
       objectReference: {fileID: 0}
     - target: {fileID: 5857030514533168788, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.89776325
+      value: 4.467058
       objectReference: {fileID: 0}
     - target: {fileID: 5857030514533168788, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
@@ -874,12 +975,12 @@ PrefabInstance:
     - target: {fileID: 5857030514533168788, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.70295185
+      value: 0.708046
       objectReference: {fileID: 0}
     - target: {fileID: 5857030514533168788, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.7112375
+      value: 0.7061663
       objectReference: {fileID: 0}
     - target: {fileID: 5857030514799296960, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
@@ -899,12 +1000,12 @@ PrefabInstance:
     - target: {fileID: 5857030514799296964, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.6303196
+      value: -1.5056343
       objectReference: {fileID: 0}
     - target: {fileID: 5857030514799296964, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.37924004
+      value: 2.983907
       objectReference: {fileID: 0}
     - target: {fileID: 5857030514799296964, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
@@ -914,12 +1015,12 @@ PrefabInstance:
     - target: {fileID: 5857030514799296964, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7984872
+      value: 0.1966823
       objectReference: {fileID: 0}
     - target: {fileID: 5857030514799296964, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.6020118
+      value: 0.98046726
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515041873552, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
@@ -929,17 +1030,17 @@ PrefabInstance:
     - target: {fileID: 5857030515041873556, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.3269835
+      value: -3.0025554
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515041873556, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2616565
+      value: 6.5969176
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515041873556, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.77014506
+      value: 0.8071445
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515041873556, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
@@ -954,7 +1055,7 @@ PrefabInstance:
     - target: {fileID: 5857030515041873556, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.6378688
+      value: 0.5903539
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515041873556, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
@@ -974,12 +1075,12 @@ PrefabInstance:
     - target: {fileID: 5857030515490589461, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.300123
+      value: -2.612793
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515490589461, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.532917
+      value: 3.4467244
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515490589461, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
@@ -989,12 +1090,12 @@ PrefabInstance:
     - target: {fileID: 5857030515490589461, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9613631
+      value: 0.4866551
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515490589461, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.27528352
+      value: 0.8735942
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515490589462, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
@@ -1014,27 +1115,42 @@ PrefabInstance:
     - target: {fileID: 5857030515712341356, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_Bounds.m_Center.x
-      value: -4.792989
+      value: -2.7230177
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515712341356, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 0.0018305779
+      value: 5.048712
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515712341356, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_Bounds.m_Extent.x
-      value: 1.6723206
+      value: 2.045074
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515712341356, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_Bounds.m_Extent.y
-      value: 2.3551757
+      value: 2.7033615
+      objectReference: {fileID: 0}
+    - target: {fileID: 5857030515712341357, guid: 063090211729eb849be06d4c0a979dc7,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5857030515712341357, guid: 063090211729eb849be06d4c0a979dc7,
+        type: 3}
+      propertyPath: m_MaskInteraction
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515712341359, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_Name
       value: hood ghost flying
+      objectReference: {fileID: 0}
+    - target: {fileID: 5857030515712341359, guid: 063090211729eb849be06d4c0a979dc7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515712341362, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
@@ -1094,12 +1210,12 @@ PrefabInstance:
     - target: {fileID: 5857030515740964689, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.2960587
+      value: -3.2412033
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515740964689, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.30215454
+      value: 5.6670537
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515740964689, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
@@ -1109,12 +1225,12 @@ PrefabInstance:
     - target: {fileID: 5857030515740964689, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6956245
+      value: 0.79012394
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515740964689, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.71840566
+      value: 0.6129471
       objectReference: {fileID: 0}
     - target: {fileID: 5857030515740964690, guid: 063090211729eb849be06d4c0a979dc7,
         type: 3}
@@ -1133,6 +1249,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 063090211729eb849be06d4c0a979dc7, type: 3}
+--- !u!1 &5857030515254990022 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5857030515712341359, guid: 063090211729eb849be06d4c0a979dc7,
+    type: 3}
+  m_PrefabInstance: {fileID: 466461097}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5857030515254990043 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5857030515712341362, guid: 063090211729eb849be06d4c0a979dc7,

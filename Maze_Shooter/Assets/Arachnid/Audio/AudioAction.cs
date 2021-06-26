@@ -53,7 +53,7 @@ public class AudioAction : MonoBehaviour
 
 	void ActualPlay() 
 	{
-		if (!Application.isPlaying)
+		if (!GhostTools.SafeToInstantiate(gameObject))
 		{
 			Debug.LogWarning("Audio playing is only supporting while game is running.");
 			return;

@@ -16,6 +16,9 @@ namespace ShootyGhost
 		[Tooltip("The time it takes to move the haunt trigger through the full animation")]
         public FloatReference hauntAnimDuration;
 
+		[Tooltip("Offset of time between haunt transition hitting the ground and playing the 'reforming' animation")]
+		public FloatReference hauntTransitionOffset;
+
 		[Space]
 		[SerializeField, Tooltip("How long in seconds it takes for one candle to burn.")]
 		FloatReference candleBurnDuration;
@@ -226,7 +229,7 @@ namespace ShootyGhost
                 haunted.OnUnHaunted();
             }
             
-			playMaker.FsmVariables.GetFsmFloat("transitionDuration").Value = transitionDuration + .05f;
+			playMaker.FsmVariables.GetFsmFloat("transitionDuration").Value = transitionDuration + hauntTransitionOffset.Value;
 			playMaker.SendEvent("endHaunt");
             haunted = null;
 

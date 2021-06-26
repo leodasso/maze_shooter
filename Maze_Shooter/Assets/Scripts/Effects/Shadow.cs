@@ -67,10 +67,11 @@ public class Shadow : MonoBehaviour
     {
         Vector3 shadowPos = transform.position;
 		float distanceToShadow = 0;
-        if (Physics.Raycast(transform.position, CastingDir(), out hit, 100, castingMask))
+		float extraCastingDist = 15;
+        if (Physics.Raycast(transform.position - CastingDir() * extraCastingDist, CastingDir(), out hit, 100, castingMask))
         {
             shadowPos = hit.point;
-			distanceToShadow = hit.distance;
+			distanceToShadow = hit.distance - extraCastingDist;
         }
         
         shadowInstance.transform.position = shadowPos;

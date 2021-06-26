@@ -31,6 +31,10 @@ public static class GhostTools
 			Debug.Log("Tried to instantiate but editor was about to exit playmode, so ignoring instantiate.", caller);
 			return false;
 		}
+		if (!UnityEditor.EditorApplication.isPlaying) {
+			Debug.Log("Tried to instantiate but editor isn't in playmode, so ignoring instantiate.", caller);
+			return false;
+		}
 		#endif
 		return true;
 	}
