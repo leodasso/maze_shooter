@@ -63,7 +63,7 @@ public class Galaxy : MonoBehaviour
     {
         foreach (var node in starNodes)
         {
-            if (node.MyStar() == starData)
+            if (node.myStar == starData)
                 return node;
         }
         

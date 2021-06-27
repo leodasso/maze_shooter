@@ -43,6 +43,27 @@ public class StarDataDictionary : SerializedScriptableObject
 		#endif
 	}
 
+	public string GetGuid(StarData starData) 
+	{
+		foreach (KeyValuePair<string, StarData> kvp in starDatas) {
+			if (kvp.Value == starData) 
+				return kvp.Key;
+		}
+
+		Debug.Log("No GUID was found for the data " + starData.name, starData);
+		return "";
+	}
+
+	public StarData GetStar(string guid)
+	{
+		StarData data = null;
+		if (starDatas.TryGetValue(guid, out data))
+			return data;
+
+		Debug.LogError("No star was found for guid " + guid, this);
+		return null;
+	}
+
 	[Button]
 	void PruneDictionary() 
 	{

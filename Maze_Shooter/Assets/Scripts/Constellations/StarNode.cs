@@ -16,8 +16,14 @@ public class StarNode : MonoBehaviour
 	[SerializeField]
 	GuidGenerator guidGenerator;
 
+	[ReadOnly, Tooltip("For nodes where the player has placed a star in them, it will appear here upon load.")]
+	public StarData myStar;
 
-	void Start()
+	const string prefix = "starNodes.node_";
+
+	string mySaveKey => prefix + guidGenerator.uniqueId;
+
+	void Awake()
 	{
 		if (!guidGenerator) {
 			Debug.LogError(name + " has no GUID generator! This will cause a critical failure with loading save data.", gameObject);
@@ -25,19 +31,20 @@ public class StarNode : MonoBehaviour
 			return;
 		}
 
-		// if so, put in the filled visuals
+		Load();
 	}
 
-	public StarData MyStar() 
+	[Button]
+	void Load()
 	{
-		// TODO
-		return null;
+		string guidForStarData = GameMaster.LoadFromCurrentFileCache(mySaveKey, "", this);
+		myStar = starDatas.GetStar(guidForStarData);
 	}
 
+	[Button]
 	public void Fill(StarData star) 
 	{
-		// TODO fill with this star data
-
+		GameMaster.SaveToCurrentFileCache(mySaveKey, starDatas.GetGuid(star), this);
 		onSlotFilled.Invoke();
 	}
 }
