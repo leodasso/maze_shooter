@@ -78,7 +78,7 @@ public class Key : MonoBehaviour
     string LoadSlot()
     {
         if (!guidGenerator) return "none";
-        return GameMaster.LoadFromCurrentFile(
+        return GameMaster.LoadFromCurrentFileCache(
             saveDataPrefix + guidGenerator.uniqueId + slotNameSaveDataSuffix, "none", this);
     }
 
@@ -94,7 +94,7 @@ public class Key : MonoBehaviour
             return;
         }
         
-        GameMaster.SaveToCurrentFile(
+        GameMaster.SaveToCurrentFileCache(
             saveDataPrefix + guidGenerator.uniqueId + slotNameSaveDataSuffix, slotGuid, this);
     }
     

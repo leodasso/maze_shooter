@@ -36,7 +36,7 @@ public class EasySaveTester : MonoBehaviour
 	[ButtonGroup("file")]
 	void LoadFromFile()
 	{
-		ES3.CacheFile(filePath);
+		ES3.CacheFile();
 		LoadFromCache();
 	}
 

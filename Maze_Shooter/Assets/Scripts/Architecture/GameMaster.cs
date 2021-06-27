@@ -151,9 +151,20 @@ public class GameMaster : ScriptableObject
 	[ButtonGroup]
 	public static void LoadData()
 	{
+		string saveDir;
+        if (Get().TryGetSaveFileDirectory(out saveDir)) 
+		{
+			ES3.CacheFile(saveDir);
+		} else 
+		{
+			Debug.LogError("Critical! Save directory not found when trying to load.");
+		}
+
 		Debug.Log("There are " + allSaveables.Count + " variables which will be loaded.");
 		foreach (var s in allSaveables)
 			s.Load();
+
+		OnSaveFileAccessed();
 	}
 
 	/// <summary>
@@ -165,6 +176,18 @@ public class GameMaster : ScriptableObject
 		Debug.Log("There are " + allSaveables.Count + " variables which will be saved.");
 		foreach (var s in allSaveables)
 			s.Save();
+
+
+		string saveDir;
+        if (Get().TryGetSaveFileDirectory(out saveDir)) 
+		{
+			ES3.StoreCachedFile(saveDir);
+		}else 
+		{
+			Debug.LogError("Critical! Save directory not found when trying to save.");
+		}
+
+		OnSaveFileAccessed();
 	}
 
 	public static void OnSaveFileAccessed()
@@ -223,26 +246,36 @@ public class GameMaster : ScriptableObject
         
         ES3.DeleteFile(saveFilesDirectory + avatar.name + ".es3");
     }
+
+	static ES3Settings SettingsForCache(string filePath) 
+	{
+		ES3Settings settings = new ES3Settings(true);
+		settings.location = ES3.Location.Cache;
+		settings.path = filePath;
+		return settings;
+	}
     
     
     /// <summary>
-    /// Saves the given value to the player's current save file.
+    /// Saves the given value to the current save file cache (doesn't write to disk)
     /// </summary>
     /// <param name="saveKey">The key to store the value under.</param>
     /// <param name="value">The value to save.</param>
     /// <param name="requester">The object that is requesting for a value to be saved.</param>
-    public static void SaveToCurrentFile<T>(string saveKey, T value, Object requester)
+    public static void SaveToCurrentFileCache<T>(string saveKey, T value, Object requester)
     {
-		Debug.Log(requester.name + " is saving " + saveKey + " at " + System.DateTime.Now);
+		Debug.Log(requester.name + " is saving " + saveKey + "to cache at " + System.DateTime.Now);
 
         string saveDir;
         if (Get().TryGetSaveFileDirectory(out saveDir)) 
-            ES3.Save<T>(saveKey, value, saveDir);
+		{
+			var settings = SettingsForCache(saveDir);
+            ES3.Save<T>(saveKey, value, settings);
+		}
         
         else 
             Debug.LogError("Error saving " + saveKey + " value from " + requester.name, requester);
 
-		OnSaveFileAccessed();
     }
     
 
@@ -253,13 +286,14 @@ public class GameMaster : ScriptableObject
     /// <param name="defaultValue">The default value. If no value has been saved to this key yet,
     /// this will be returned.</param>
     /// <param name="requester">The object requesting for the value.</param>
-    public static T LoadFromCurrentFile<T>(string saveKey, T defaultValue, Object requester)
+    public static T LoadFromCurrentFileCache<T>(string saveKey, T defaultValue, Object requester)
     {
-		OnSaveFileAccessed();
-
         string saveDir;
-        if (Get().TryGetSaveFileDirectory(out saveDir))
-            return ES3.Load<T>(saveKey, saveDir, defaultValue);
+        if (Get().TryGetSaveFileDirectory(out saveDir)) 
+		{
+			var settings = SettingsForCache(saveDir);
+            return ES3.Load<T>(saveKey, defaultValue, settings);
+		}
             
         throw new FileLoadException();
     }
@@ -275,15 +309,14 @@ public class GameMaster : ScriptableObject
     }
 
 	[Button]
-	void LoadEntireFile()
+	void LogCache()
 	{
-
 		string saveDir;
         if (Get().TryGetSaveFileDirectory(out saveDir)) {
 
 			Debug.Log("Directory: " + saveDir);
-
-			foreach(var key in ES3.GetKeys(saveDir)) {
+			var settings = SettingsForCache(saveDir);
+			foreach(var key in ES3.GetKeys(settings)) {
     			Debug.Log(key);
 			}
 		}

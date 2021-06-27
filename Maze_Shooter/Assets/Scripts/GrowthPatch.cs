@@ -26,14 +26,14 @@ public class GrowthPatch : MonoBehaviour
 
     int GetSavedQty()
     {
-        return GameMaster.LoadFromCurrentFile(saveDataPrefix + uniqueId, maxQty, this);
+        return GameMaster.LoadFromCurrentFileCache(saveDataPrefix + uniqueId, maxQty, this);
     }
 
     public void Save()
     {
         int currentInstances = GetInstanceCount();
         Debug.Log("Saved qty: " +  currentInstances);
-        GameMaster.SaveToCurrentFile(saveDataPrefix + uniqueId, currentInstances, this);
+        GameMaster.SaveToCurrentFileCache(saveDataPrefix + uniqueId, currentInstances, this);
     }
 
     int GetInstanceCount()

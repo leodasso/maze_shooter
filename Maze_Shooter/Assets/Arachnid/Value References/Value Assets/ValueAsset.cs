@@ -118,7 +118,7 @@ namespace Arachnid {
 		[ButtonGroup(), PropertyOrder(200), ShowIf("useSaveFile")]
 		protected void LogSaveStatus()
 		{
-			Debug.Log(name + " value in save file: " + GameMaster.LoadFromCurrentFile(Prefix() + name, defaultValue, this));
+			Debug.Log(name + " value in save file: " + GameMaster.LoadFromCurrentFileCache(Prefix() + name, defaultValue, this));
 		}
 
 		[ButtonGroup(), PropertyOrder(200), ShowIf("useSaveFile")]
@@ -138,7 +138,7 @@ namespace Arachnid {
 			if (debug)
 				Debug.Log(name + " is being saved as value: " + myValue, this);
 
-				SaveInternal();
+			GameMaster.SaveToCurrentFileCache(Prefix() + name, myValue, this);
 
 			if (debug) 
 				LogSaveStatus();
@@ -149,33 +149,9 @@ namespace Arachnid {
 			if (!CanSave() || !useSaveFile)
 				return;
 				
-			LoadInternal();
+			myValue = GameMaster.LoadFromCurrentFileCache(Prefix() + name, defaultValue, this);
 			if (debug)
 				Debug.Log(name + "'s value was loaded as " + myValue, this );
-		}
-
-		/// <summary>
-		/// Processes myValue to save to file
-		/// </summary>
-		protected virtual void SaveInternal()
-		{
-			GameMaster.SaveToCurrentFile(Prefix() + name, myValue, this);
-		}
-
-		/// <summary>
-		/// Process the raw save data into myValue
-		/// </summary>
-		protected virtual void LoadInternal()
-		{
-			myValue = GameMaster.LoadFromCurrentFile(Prefix() + name, defaultValue, this);
-		}
-
-		/// <summary>
-		/// Checks if there's any data in the current save file for this value.
-		/// </summary>
-		public bool HasSavedValue()
-		{
-			return GameMaster.DoesKeyExist(Prefix() + name);
 		}
 
 		public string Info()
