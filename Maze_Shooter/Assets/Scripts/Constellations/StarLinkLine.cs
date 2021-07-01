@@ -25,10 +25,7 @@ public class StarLinkLine : MonoBehaviour
 	float alphaB;
 	GradientColorKey[] colorKeys = new GradientColorKey[1] {new GradientColorKey(Color.white, 0)};
 
-	float AlphaForStar(StarNode node) {
-		if (!node.myStar) return inactiveAlpha;
-		return node.myStar.Value ? activeAlpha : inactiveAlpha;
-	}
+	float AlphaForStar(StarNode node) => node.isActive ? activeAlpha : inactiveAlpha;
 
     // Update is called once per frame
     void Update()

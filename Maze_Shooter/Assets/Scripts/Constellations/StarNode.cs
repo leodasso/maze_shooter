@@ -7,11 +7,14 @@ using Arachnid;
 
 public class StarNode : MonoBehaviour
 {
+	[ToggleLeft]
+	public bool isActive;
+
 	[SerializeField]
 	StarDataDictionary starDatas;
 
-	[SerializeField]
-	UnityEvent onSlotFilled;
+	[SerializeField, Tooltip("Sends events 'loadEmpty', 'loadFull', 'onFill'")]
+	PlayMakerFSM playMaker;
 
 	[SerializeField]
 	GuidGenerator guidGenerator;
@@ -19,7 +22,7 @@ public class StarNode : MonoBehaviour
 	[ReadOnly, Tooltip("For nodes where the player has placed a star in them, it will appear here upon load.")]
 	public StarData myStar;
 
-	const string prefix = "starNodes.node_";
+	const string prefix = "starNode_";
 
 	string mySaveKey => prefix + guidGenerator.uniqueId;
 
@@ -32,19 +35,29 @@ public class StarNode : MonoBehaviour
 		}
 
 		Load();
+
+		isActive = myStar != null;
+		playMaker.SendEvent( isActive ? "loadFull" : "loadEmpty");
 	}
 
 	[Button]
 	void Load()
 	{
 		string guidForStarData = GameMaster.LoadFromCurrentFileCache(mySaveKey, "", this);
-		myStar = starDatas.GetStar(guidForStarData);
+		if (guidForStarData.Length > 0)
+			myStar = starDatas.GetStar(guidForStarData);
+	}
+
+	public void AskToBeFilled()
+	{
+		
 	}
 
 	[Button]
 	public void Fill(StarData star) 
 	{
 		GameMaster.SaveToCurrentFileCache(mySaveKey, starDatas.GetGuid(star), this);
-		onSlotFilled.Invoke();
+		isActive = true;
+		playMaker.SendEvent("onFill");
 	}
 }

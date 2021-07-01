@@ -2,7 +2,7 @@
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
-public class ConstellationBubble : MonoBehaviour
+public class StarBubble : MonoBehaviour
 {
 	public UnityEvent onUnlock;
 	public GameObject constellation;

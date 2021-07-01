@@ -110,14 +110,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8bd1c538ba89604fb7cdc12ae3c8058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myConstellation: {fileID: 11400000, guid: 16f4b753b55b63d41baad5ec5872ef23, type: 2}
+  starData: {fileID: 11400000, guid: 16f4b753b55b63d41baad5ec5872ef23, type: 2}
+  galaxyHeight: 200
   galaxyPrefab: {fileID: 4551044670301905174, guid: 24c47512b28b7424187df8dccaf1189f,
     type: 3}
   collectedVisuals: {fileID: 6981320648446856508}
   notCollectedVisuals: {fileID: 7045471664528676312}
   titleGuiPrefab: {fileID: 1049290964913403614, guid: 1e55b41a634be3446b44444ae4a9aab8,
     type: 3}
-  galaxySpawnPoint: {fileID: 4328640685090186599}
   onNewlyCollected:
     m_PersistentCalls:
       m_Calls:
@@ -338,7 +338,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: Constellation
+          value: Star
         - useVariable: 0
           name: 
           tooltip: 
@@ -453,7 +453,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: Constellation
+          value: Star
         - useVariable: 0
           name: 
           tooltip: 
@@ -873,7 +873,7 @@ MonoBehaviour:
     manualUpdate: 0
     outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 1
+    preprocessed: 0
     ExposedEvents: []
     OutputEvents: []
     RestartOnEnable: 1
@@ -1546,7 +1546,7 @@ PrefabInstance:
     - target: {fileID: 4565226874308345575, guid: 7ec38b000c49bd848a013c7087318f0a,
         type: 3}
       propertyPath: progress
-      value: 0.03036944
+      value: 0.091767035
       objectReference: {fileID: 0}
     - target: {fileID: 7411268682716360205, guid: 7ec38b000c49bd848a013c7087318f0a,
         type: 3}
@@ -1861,7 +1861,7 @@ PrefabInstance:
     - target: {fileID: 114168614141766698, guid: fde8f66d53e4214438069d431895986a,
         type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.9362364
+      value: 1.9010655
       objectReference: {fileID: 0}
     - target: {fileID: 114983388701754208, guid: fde8f66d53e4214438069d431895986a,
         type: 3}

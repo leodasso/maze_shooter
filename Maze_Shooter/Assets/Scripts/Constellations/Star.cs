@@ -8,13 +8,13 @@ public class Star : MonoBehaviour
 {
 	[FormerlySerializedAs("myConstellation")]
     public StarData starData;
+	public float galaxyHeight;
     public GameObject galaxyPrefab;
     [Tooltip("If the star has already been collected in the past, this is what will show")]
     public GameObject collectedVisuals;
     [Tooltip("If the star is new, this is what will show")]
     public GameObject notCollectedVisuals;
     public InteractivePanel titleGuiPrefab;
-    public Transform galaxySpawnPoint;
 
     public UnityEvent onNewlyCollected;
     public UnityEvent onReCollected;
@@ -75,8 +75,7 @@ public class Star : MonoBehaviour
 
     public void OpenGalaxy()
     {
-        Galaxy newGalaxy = Instantiate(galaxyPrefab, galaxySpawnPoint.position, quaternion.identity).GetComponent<Galaxy>();
-        newGalaxy.starToFocus = starData;
+        Galaxy newGalaxy = Instantiate(galaxyPrefab, transform.position + Vector3.up * galaxyHeight, quaternion.identity).GetComponent<Galaxy>();
         newGalaxy.StarInstance = this;
         newGalaxy.showConstellationAcquire.Invoke();
     }

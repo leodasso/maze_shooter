@@ -45,6 +45,11 @@ public class StarDataDictionary : SerializedScriptableObject
 
 	public string GetGuid(StarData starData) 
 	{
+		if (!starData) {
+			Debug.Log("A null star data was given, can't give a guid.");
+			return "";
+		}
+
 		foreach (KeyValuePair<string, StarData> kvp in starDatas) {
 			if (kvp.Value == starData) 
 				return kvp.Key;
