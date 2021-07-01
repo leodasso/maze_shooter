@@ -244,7 +244,9 @@ public class GameMaster : ScriptableObject
 
 		OnSaveFileAccessed();
         
-        ES3.DeleteFile(saveFilesDirectory + avatar.name + ".es3");
+		string filePath = saveFilesDirectory + avatar.name + ".es3";
+        ES3.DeleteFile(filePath);
+		ES3.DeleteFile(SettingsForCache(filePath));
     }
 
 	static ES3Settings SettingsForCache(string filePath) 
