@@ -476,7 +476,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   animator: {fileID: 3204758778363142274}
-  constellationData: {fileID: 0}
+  starData: {fileID: 0}
   textBox: {fileID: 4688370801953199143}
 --- !u!114 &5785796390155260251
 MonoBehaviour:
@@ -663,6 +663,7 @@ MonoBehaviour:
       toState: Send Dialog Complete
       linkStyle: 0
       linkConstraint: 0
+      linkTarget: 0
       colorIndex: 0
     variables:
       floatVariables: []
@@ -691,10 +692,13 @@ MonoBehaviour:
     password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 1
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 1
